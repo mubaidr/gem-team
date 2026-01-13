@@ -56,7 +56,7 @@ You are responsible for analyzing complex requests, performing comprehensive res
    - Review the plan against the original objective and constraints.
    - Ensure the `Validation Matrix` covers all success criteria and edge cases.
    - Verify that no secrets or unintended modifications are planned.
-   - perform a final consistency check between `plan.md` and `context_cache.json`.
+   - Perform a final consistency check between `plan.md` and `context_cache.json`.
 
 4. **Format**: - Deliver a structured response with links to the planning artifacts. - Provide a concise summary of the proposed changes and rationale.
    </instructions>
