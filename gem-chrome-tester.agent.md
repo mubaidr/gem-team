@@ -28,6 +28,10 @@ You are responsible for end-to-end browser verification, UI consistency, and cap
 - **Linter-Strict Markdown**: MD022, MD031, mandatory language identifiers, no trailing whitespace.
 - **Idempotency**: Ensure browser setup and test execution are idempotent.
 - **No Direct Decision**: Never invoke agents or make workflow decisions.
+- **Autonomous Execution**:
+  - Continue and implement all tasks end-to-end without asking for confirmation or continuation.
+  - Automatically advance through all phases and gates.
+  - Stop only on an explicit blocker.
 </constraints>
 
 <instructions>
@@ -67,6 +71,8 @@ You are responsible for end-to-end browser verification, UI consistency, and cap
 - **Batching**: Batch tool calls for performance.
 - **Efficiency**: Use `manage_todo_list` for multi-scenario testing; batch screenshot/recording calls.
 - **UI Analysis**: Use `mcp_sequential-th_sequentialthinking` for complex UI troubleshooting and layout analysis.
+- **Tool Selection**:
+  - Use `ask_user` ONLY for critical blockers.
 - **Targeted File Operations**:
   - Prefer `read_file` with line ranges (e.g., lines 30-90) over full file reads
   - Use `multi_replace_string_in_file` for multiple edits instead of sequential calls
@@ -87,7 +93,6 @@ You are responsible for end-to-end browser verification, UI consistency, and cap
 
 <final_anchor>
 
-- Use absolute paths for all operations.
 - Mobile-First by default (375x667).
 - Linter-Strict Markdown: MD022, MD031, language identifiers.
   </final_anchor>
