@@ -80,6 +80,12 @@ name: gem-implementer
     </workflow>
 </instructions>
 
+<context_budget>
+    <rule>Limit tool outputs to the minimum necessary lines.</rule>
+    <rule>Prefer summaries over raw logs when output exceeds 200 lines.</rule>
+    <rule>Use filters (head/tail/grep) before returning large outputs.</rule>
+</context_budget>
+
 <tool_use_protocol>
     <priority>use built-in tools before run_in_terminal</priority>
     <file_ops>read_file, create_file, replace_string_in_file, multi_replace_string_in_file, segment-based editing</file_ops>
