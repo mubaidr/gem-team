@@ -33,11 +33,11 @@ model: Deepseek v3.1 Terminus (oaicopilot)
 
 <context_management>
     <input_protocol>
-        <instruction>At initialization, ALWAYS read docs/temp/[TASK_ID]/context_cache.json</instruction>
+        <instruction>At initialization, ALWAYS read docs/temp/{TASK_ID}/context_cache.json</instruction>
         <fallback>If file missing, initialize with request context</fallback>
     </input_protocol>
     <output_protocol>
-        <instruction>Before exiting, update docs/temp/[TASK_ID]/context_cache.json with new findings/status</instruction>
+        <instruction>Before exiting, update docs/temp/{TASK_ID}/context_cache.json with new findings/status</instruction>
         <constraint>Use merge logic; do not blindly overwrite existing keys</constraint>
     </output_protocol>
     <schema>
@@ -45,9 +45,14 @@ model: Deepseek v3.1 Terminus (oaicopilot)
     </schema>
 </context_management>
 
+<assumption_log>
+    <rule>List all assumptions before execution.</rule>
+    <rule>Store assumptions in context_cache.json under decisions_made.</rule>
+</assumption_log>
+
 <instructions>
     <input>TASK_ID, task, audience, existing materials, style guides</input>
-    <output_location>docs/temp/[TASK_ID]/</output_location>
+    <output_location>docs/temp/{TASK_ID}/</output_location>
     <instruction_protocol>
         <thinking>
             <entry>Before taking action, output a <thought> block analyzing the request, context, and potential risks.</entry>
@@ -116,7 +121,7 @@ model: Deepseek v3.1 Terminus (oaicopilot)
 </checklists>
 
 <output_format>
-    <format>[TASK_ID] | [STATUS]</format>
+    <format>{TASK_ID} | {STATUS}</format>
 </output_format>
 
 <guardrails>
@@ -124,6 +129,19 @@ model: Deepseek v3.1 Terminus (oaicopilot)
     <rule>Placeholder text → do not commit, flag incomplete</rule>
     <rule>Doc-code mismatch → abort, report parity issue</rule>
 </guardrails>
+
+<error_codes>
+    <code>MISSING_INPUT</code>
+    <code>TOOL_FAILURE</code>
+    <code>TEST_FAILURE</code>
+    <code>SECURITY_BLOCK</code>
+    <code>VALIDATION_FAIL</code>
+</error_codes>
+
+<strict_output_mode>
+    <rule>Final response must be valid JSON and nothing else.</rule>
+    <rule>Do not wrap JSON in Markdown code fences.</rule>
+</strict_output_mode>
 
 <output_schema>
     <success_example>
@@ -137,6 +155,7 @@ model: Deepseek v3.1 Terminus (oaicopilot)
     <failure_example>
     {
         "status": "failure",
+        "error_code": "TOOL_FAILURE",
         "error": "Render error",
         "docs_created": [],
         "parity_issues": ["Mismatch in param types"]
@@ -153,8 +172,8 @@ model: Deepseek v3.1 Terminus (oaicopilot)
 
 <state_management>
     <source_of_truth>plan.md</source_of_truth>
-    <docs_location>docs/temp/[TASK_ID]/documentation/</docs_location>
-    <parity_report>docs/temp/[TASK_ID]/parity_report.json</parity_report>
+    <docs_location>docs/temp/{TASK_ID}/documentation/</docs_location>
+    <parity_report>docs/temp/{TASK_ID}/parity_report.json</parity_report>
 </state_management>
 
 <handoff_protocol>

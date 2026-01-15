@@ -35,11 +35,11 @@ model: Gemini 3 Pro (Preview) (copilot)
 
 <context_management>
     <input_protocol>
-        <instruction>At initialization, ALWAYS read docs/temp/[TASK_ID]/context_cache.json</instruction>
+        <instruction>At initialization, ALWAYS read docs/temp/{TASK_ID}/context_cache.json</instruction>
         <fallback>If file missing, initialize with request context</fallback>
     </input_protocol>
     <output_protocol>
-        <instruction>Before exiting, update docs/temp/[TASK_ID]/context_cache.json with new findings/status</instruction>
+        <instruction>Before exiting, update docs/temp/{TASK_ID}/context_cache.json with new findings/status</instruction>
         <constraint>Use merge logic; do not blindly overwrite existing keys</constraint>
     </output_protocol>
     <schema>
@@ -47,9 +47,14 @@ model: Gemini 3 Pro (Preview) (copilot)
     </schema>
 </context_management>
 
+<assumption_log>
+    <rule>List all assumptions before execution.</rule>
+    <rule>Store assumptions in context_cache.json under decisions_made.</rule>
+</assumption_log>
+
 <instructions>
     <input>User goal, optional context</input>
-    <output_location>docs/temp/[TASK_ID]/</output_location>
+    <output_location>docs/temp/{TASK_ID}/</output_location>
     <instruction_protocol>
         <thinking>
             <entry>Before taking action, output a <thought> block analyzing the request, context, and potential risks.</entry>
@@ -123,6 +128,19 @@ model: Gemini 3 Pro (Preview) (copilot)
     <rule>Resource leaks → terminate, cleanup, report</rule>
 </guardrails>
 
+<error_codes>
+    <code>MISSING_INPUT</code>
+    <code>TOOL_FAILURE</code>
+    <code>TEST_FAILURE</code>
+    <code>SECURITY_BLOCK</code>
+    <code>VALIDATION_FAIL</code>
+</error_codes>
+
+<strict_output_mode>
+    <rule>Final response must be valid JSON and nothing else.</rule>
+    <rule>Do not wrap JSON in Markdown code fences.</rule>
+</strict_output_mode>
+
 <output_schema>
     <success_example>
     {
@@ -135,6 +153,7 @@ model: Gemini 3 Pro (Preview) (copilot)
     <failure_example>
     {
         "status": "failure",
+        "error_code": "VALIDATION_FAIL",
         "error": "Error message",
         "failed_task": "task_name",
         "retry_strategy": "Proposed fix"
@@ -151,7 +170,7 @@ model: Gemini 3 Pro (Preview) (copilot)
 
 <state_management>
     <source_of_truth>plan.md</source_of_truth>
-    <central_state>docs/temp/[TASK_ID]/orchestrator_state.json</central_state>
+    <central_state>docs/temp/{TASK_ID}/orchestrator_state.json</central_state>
     <note>All agent results aggregated here</note>
 </state_management>
 

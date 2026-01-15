@@ -30,11 +30,11 @@ model: Deepseek v3.1 Terminus (oaicopilot)
 
 <context_management>
     <input_protocol>
-        <instruction>At initialization, ALWAYS read docs/temp/[TASK_ID]/context_cache.json</instruction>
+        <instruction>At initialization, ALWAYS read docs/temp/{TASK_ID}/context_cache.json</instruction>
         <fallback>If file missing, initialize with request context</fallback>
     </input_protocol>
     <output_protocol>
-        <instruction>Before exiting, update docs/temp/[TASK_ID]/context_cache.json with new findings/status</instruction>
+        <instruction>Before exiting, update docs/temp/{TASK_ID}/context_cache.json with new findings/status</instruction>
         <constraint>Use merge logic; do not blindly overwrite existing keys</constraint>
     </output_protocol>
     <schema>
@@ -42,9 +42,14 @@ model: Deepseek v3.1 Terminus (oaicopilot)
     </schema>
 </context_management>
 
+<assumption_log>
+    <rule>List all assumptions before execution.</rule>
+    <rule>Store assumptions in context_cache.json under decisions_made.</rule>
+</assumption_log>
+
 <instructions>
     <input>TASK_ID, plan.md, context_cache.json, Validation Matrix, DoD</input>
-    <output_location>docs/temp/[TASK_ID]/</output_location>
+    <output_location>docs/temp/{TASK_ID}/</output_location>
     <instruction_protocol>
         <thinking>
             <entry>Before taking action, output a <thought> block analyzing the request, context, and potential risks.</entry>
@@ -130,7 +135,7 @@ model: Deepseek v3.1 Terminus (oaicopilot)
 </scoring_matrix>
 
 <output_format>
-    <format>[TASK_ID] | [STATUS]</format>
+    <format>{TASK_ID} | {STATUS}</format>
 </output_format>
 
 <guardrails>
@@ -138,6 +143,19 @@ model: Deepseek v3.1 Terminus (oaicopilot)
     <rule>Secrets/PII detected → abort, report to Orchestrator</rule>
     <rule>Confidence < 0.75 → do not approve, escalate with rationale</rule>
 </guardrails>
+
+<error_codes>
+    <code>MISSING_INPUT</code>
+    <code>TOOL_FAILURE</code>
+    <code>TEST_FAILURE</code>
+    <code>SECURITY_BLOCK</code>
+    <code>VALIDATION_FAIL</code>
+</error_codes>
+
+<strict_output_mode>
+    <rule>Final response must be valid JSON and nothing else.</rule>
+    <rule>Do not wrap JSON in Markdown code fences.</rule>
+</strict_output_mode>
 
 <output_schema>
     <success_example>
@@ -151,6 +169,7 @@ model: Deepseek v3.1 Terminus (oaicopilot)
     <failure_example>
     {
         "status": "fail",
+        "error_code": "SECURITY_BLOCK",
         "error": "Security check failed",
         "partial_audit": ["Completed 3 checks..."],
         "security_issue": true
@@ -167,7 +186,7 @@ model: Deepseek v3.1 Terminus (oaicopilot)
 
 <state_management>
     <source_of_truth>plan.md</source_of_truth>
-    <audit_results>docs/temp/[TASK_ID]/audit.json</audit_results>
+    <audit_results>docs/temp/{TASK_ID}/audit.json</audit_results>
     <note>Confidence score updates plan.md status</note>
 </state_management>
 

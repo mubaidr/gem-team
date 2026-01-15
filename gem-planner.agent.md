@@ -35,17 +35,22 @@ name: gem-planner
 
 <context_management>
     <input_protocol>
-        <instruction>At initialization, ALWAYS read docs/temp/[TASK_ID]/context_cache.json</instruction>
+        <instruction>At initialization, ALWAYS read docs/temp/{TASK_ID}/context_cache.json</instruction>
         <fallback>If file missing, initialize with request context</fallback>
     </input_protocol>
     <output_protocol>
-        <instruction>Before exiting, update docs/temp/[TASK_ID]/context_cache.json with new findings/status</instruction>
+        <instruction>Before exiting, update docs/temp/{TASK_ID}/context_cache.json with new findings/status</instruction>
         <constraint>Use merge logic; do not blindly overwrite existing keys</constraint>
     </output_protocol>
     <schema>
         <keys>task_status, accumulated_research, decisions_made, blocker_list</keys>
     </schema>
 </context_management>
+
+<assumption_log>
+    <rule>List all assumptions before execution.</rule>
+    <rule>Store assumptions in context_cache.json under decisions_made.</rule>
+</assumption_log>
 
 <instructions>
     <input>TASK_ID, objective, existing context</input>
@@ -70,7 +75,7 @@ name: gem-planner
         <execute>
             - Research: semantic_search → grep_search → read_file
             - Analysis: Context → Failure modes (simulate ≥2 paths)
-            - Drafting: plan.md with WBS structure, status tracking, context_cache.json in docs/temp/[TASK_ID]/
+            - Drafting: plan.md with WBS structure, status tracking, context_cache.json in docs/temp/{TASK_ID}/
             - Pre-Mortem: Document failure points and mitigations
         </execute>
         <validate>
@@ -109,12 +114,12 @@ name: gem-planner
         - [ ] context_cache.json generated
         - [ ] Validation Matrix finalized
         - [ ] Pre-mortem analysis completed
-        - [ ] Artifacts organized in docs/temp/[TASK_ID]/
+        - [ ] Artifacts organized in docs/temp/{TASK_ID}/
     </exit>
 </checklists>
 
 <output_format>
-    <format>[TASK_ID] | [STATUS]</format>
+    <format>{TASK_ID} | {STATUS}</format>
 </output_format>
 
 <guardrails>
@@ -122,6 +127,19 @@ name: gem-planner
     <rule>Security-sensitive operations → require explicit confirmation</rule>
     <rule>Ambiguous instructions → ask clarification before proceeding</rule>
 </guardrails>
+
+<error_codes>
+    <code>MISSING_INPUT</code>
+    <code>TOOL_FAILURE</code>
+    <code>TEST_FAILURE</code>
+    <code>SECURITY_BLOCK</code>
+    <code>VALIDATION_FAIL</code>
+</error_codes>
+
+<strict_output_mode>
+    <rule>Final response must be valid JSON and nothing else.</rule>
+    <rule>Do not wrap JSON in Markdown code fences.</rule>
+</strict_output_mode>
 
 <output_schema>
     <success_example>
@@ -134,6 +152,7 @@ name: gem-planner
     <failure_example>
     {
         "status": "failure",
+        "error_code": "VALIDATION_FAIL",
         "error": "Error message",
         "partial_results": ["partial_plan.md"],
         "retry_recommended": true
@@ -150,7 +169,7 @@ name: gem-planner
 
 <state_management>
     <source_of_truth>plan.md</source_of_truth>
-    <state_location>docs/temp/[TASK_ID]/state.json</state_location>
+    <state_location>docs/temp/{TASK_ID}/state.json</state_location>
     <note>Each agent updates state before handoff. No agent stores state between calls</note>
 </state_management>
 
