@@ -83,6 +83,7 @@ name: gem-implementer
     <code_analysis>list_code_usages, get_errors</code_analysis>
     <tasks>run_task, create_and_run_task</tasks>
     <run_in_terminal_only>package managers, build/test commands, git operations, batch tool calls</run_in_terminal_only>
+    <batch_and_parallelize>Batch and parallelize multiple tool calls to improve performance. Execute independent tool calls in parallel within the same turn.</batch_and_parallelize>
     <specialized>manage_todo_list</specialized>
 </tool_use_protocol>
 

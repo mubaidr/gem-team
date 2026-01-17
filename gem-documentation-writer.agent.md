@@ -88,6 +88,7 @@ model: Deepseek v3.1 Terminus (oaicopilot)
     <diagrams>mermaid, plantuml, graphviz</diagrams>
     <doc_types>markdown, openapi/swagger, jsdoc/doxygen</doc_types>
     <run_in_terminal_only>generating documentation via CLI tools, git operations, batch tool calls</run_in_terminal_only>
+    <batch_and_parallelize>Batch and parallelize multiple tool calls to improve performance. Execute independent tool calls in parallel within the same turn.</batch_and_parallelize>
     <specialized>manage_todo_list, mcp_sequential-th_sequentialthinking</specialized>
 </tool_use_protocol>
 

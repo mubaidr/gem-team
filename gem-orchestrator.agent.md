@@ -137,6 +137,7 @@ model: Gemini 3 Pro (Preview) (copilot)
         <rule>Example: runSubagent(agentName="gem-implementer", task=...)</rule>
     </delegation>
     <run_in_terminal_only>package managers, build/test commands, git operations, batch tool calls</run_in_terminal_only>
+    <batch_and_parallelize>Batch and parallelize multiple tool calls to improve performance. Execute independent tool calls in parallel within the same turn.</batch_and_parallelize>
     <specialized>manage_todo_list, walkthrough_review</specialized>
 </tool_use_protocol>
 

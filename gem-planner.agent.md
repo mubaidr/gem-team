@@ -59,7 +59,7 @@ name: gem-planner
             4. Create TODO with shard boundaries for complex objectives
         </plan>
         <execute>
-            - Research: semantic_search → grep_search → read_file
+            - Research: semantic_search, grep_search, read_file (parallelize)
             - Analysis: Context → Failure modes (simulate ≥2 paths)
             - Drafting: plan.md with WBS structure, status creation
             - Pre-Mortem: Document failure points and mitigations
@@ -181,6 +181,7 @@ Run security checklist, calculate confidence score.
     <code_analysis>list_code_usages, get_errors</code_analysis>
     <tasks>run_task, create_and_run_task</tasks>
     <run_in_terminal_only>package managers, build/test commands, git operations, batch tool calls</run_in_terminal_only>
+    <batch_and_parallelize>Batch and parallelize multiple tool calls to improve performance. Execute independent tool calls in parallel within the same turn.</batch_and_parallelize>
     <specialized>manage_todo_list, mcp_sequential-th_sequentialthinking</specialized>
 </tool_use_protocol>
 

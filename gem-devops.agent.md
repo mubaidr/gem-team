@@ -92,6 +92,7 @@ name: gem-devops
     </kubernetes>
     <ci_cd>github-actions workflows, gitlab-ci pipelines</ci_cd>
     <run_in_terminal_only>package managers, docker/podman/kubectl commands, infrastructure commands, git operations, batch tool calls</run_in_terminal_only>
+    <batch_and_parallelize>Batch and parallelize multiple tool calls to improve performance. Execute independent tool calls in parallel within the same turn.</batch_and_parallelize>
     <specialized>manage_todo_list, mcp_sequential-th_sequentialthinking</specialized>
 </tool_use_protocol>
 
