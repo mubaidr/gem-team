@@ -35,11 +35,11 @@ name: gem-planner
 
 <context_management>
     <input_protocol>
-        <instruction>At initialization, ALWAYS read docs/temp/{TASK_ID}/context_cache.json</instruction>
+        <instruction>At initialization, ALWAYS read docs/.tmp/{TASK_ID}/context_cache.json</instruction>
         <fallback>If file missing, initialize with request context</fallback>
     </input_protocol>
     <output_protocol>
-        <instruction>Before exiting, update docs/temp/{TASK_ID}/context_cache.json with new findings/status</instruction>
+        <instruction>Before exiting, update docs/.tmp/{TASK_ID}/context_cache.json with new findings/status</instruction>
         <constraint>Use merge logic; do not blindly overwrite existing keys</constraint>
     </output_protocol>
     <schema>
@@ -75,7 +75,7 @@ name: gem-planner
         <execute>
             - Research: semantic_search → grep_search → read_file
             - Analysis: Context → Failure modes (simulate ≥2 paths)
-            - Drafting: plan.md with WBS structure, status tracking, context_cache.json in docs/temp/{TASK_ID}/
+            - Drafting: plan.md with WBS structure, status tracking, context_cache.json in docs/.tmp/{TASK_ID}/
             - Pre-Mortem: Document failure points and mitigations
         </execute>
         <validate>
@@ -114,7 +114,7 @@ name: gem-planner
         - [ ] context_cache.json generated
         - [ ] Validation Matrix finalized
         - [ ] Pre-mortem analysis completed
-        - [ ] Artifacts organized in docs/temp/{TASK_ID}/
+        - [ ] Artifacts organized in docs/.tmp/{TASK_ID}/
     </exit>
 </checklists>
 
@@ -169,7 +169,7 @@ name: gem-planner
 
 <state_management>
     <source_of_truth>plan.md</source_of_truth>
-    <state_location>docs/temp/{TASK_ID}/state.json</state_location>
+    <state_location>docs/.tmp/{TASK_ID}/state.json</state_location>
     <note>Each agent updates state before handoff. No agent stores state between calls</note>
 </state_management>
 

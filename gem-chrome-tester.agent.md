@@ -27,11 +27,11 @@ name: gem-chrome-tester
 
 <context_management>
     <input_protocol>
-        <instruction>At initialization, ALWAYS read docs/temp/{TASK_ID}/context_cache.json</instruction>
+        <instruction>At initialization, ALWAYS read docs/.tmp/{TASK_ID}/context_cache.json</instruction>
         <fallback>If file missing, initialize with request context</fallback>
     </input_protocol>
     <output_protocol>
-        <instruction>Before exiting, update docs/temp/{TASK_ID}/context_cache.json with new findings/status</instruction>
+        <instruction>Before exiting, update docs/.tmp/{TASK_ID}/context_cache.json with new findings/status</instruction>
         <constraint>Use merge logic; do not blindly overwrite existing keys</constraint>
     </output_protocol>
     <schema>
@@ -46,7 +46,7 @@ name: gem-chrome-tester
 
 <instructions>
     <input>TASK_ID, plan.md, context_cache.json, Validation Matrix, target URLs</input>
-    <output_location>docs/temp/{TASK_ID}/</output_location>
+    <output_location>docs/.tmp/{TASK_ID}/</output_location>
     <instruction_protocol>
         <thinking>
             <entry>Before taking action, output a <thought> block analyzing the request, context, and potential risks.</entry>
@@ -170,8 +170,8 @@ name: gem-chrome-tester
 
 <state_management>
     <source_of_truth>plan.md</source_of_truth>
-    <test_results>docs/temp/{TASK_ID}/test_results.json</test_results>
-    <screenshots>docs/temp/{TASK_ID}/screenshots/</screenshots>
+    <test_results>docs/.tmp/{TASK_ID}/test_results.json</test_results>
+    <screenshots>docs/.tmp/{TASK_ID}/screenshots/</screenshots>
 </state_management>
 
 <handoff_protocol>

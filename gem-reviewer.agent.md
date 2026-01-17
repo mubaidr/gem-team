@@ -30,11 +30,11 @@ model: Deepseek v3.1 Terminus (oaicopilot)
 
 <context_management>
     <input_protocol>
-        <instruction>At initialization, ALWAYS read docs/temp/{TASK_ID}/context_cache.json</instruction>
+        <instruction>At initialization, ALWAYS read docs/.tmp/{TASK_ID}/context_cache.json</instruction>
         <fallback>If file missing, initialize with request context</fallback>
     </input_protocol>
     <output_protocol>
-        <instruction>Before exiting, update docs/temp/{TASK_ID}/context_cache.json with new findings/status</instruction>
+        <instruction>Before exiting, update docs/.tmp/{TASK_ID}/context_cache.json with new findings/status</instruction>
         <constraint>Use merge logic; do not blindly overwrite existing keys</constraint>
     </output_protocol>
     <schema>
@@ -49,7 +49,7 @@ model: Deepseek v3.1 Terminus (oaicopilot)
 
 <instructions>
     <input>TASK_ID, plan.md, context_cache.json, Validation Matrix, DoD</input>
-    <output_location>docs/temp/{TASK_ID}/</output_location>
+    <output_location>docs/.tmp/{TASK_ID}/</output_location>
     <instruction_protocol>
         <thinking>
             <entry>Before taking action, output a <thought> block analyzing the request, context, and potential risks.</entry>
@@ -186,7 +186,7 @@ model: Deepseek v3.1 Terminus (oaicopilot)
 
 <state_management>
     <source_of_truth>plan.md</source_of_truth>
-    <audit_results>docs/temp/{TASK_ID}/audit.json</audit_results>
+    <audit_results>docs/.tmp/{TASK_ID}/audit.json</audit_results>
     <note>Confidence score returned to Orchestrator for status update</note>
     <input>{ TASK_ID, plan.md, context_cache.json, Validation Matrix }</input>
     <output>{ status, confidence, issues, aar, security_issue }</output>

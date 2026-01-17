@@ -33,11 +33,11 @@ model: Deepseek v3.1 Terminus (oaicopilot)
 
 <context_management>
     <input_protocol>
-        <instruction>At initialization, ALWAYS read docs/temp/{TASK_ID}/context_cache.json</instruction>
+        <instruction>At initialization, ALWAYS read docs/.tmp/{TASK_ID}/context_cache.json</instruction>
         <fallback>If file missing, initialize with request context</fallback>
     </input_protocol>
     <output_protocol>
-        <instruction>Before exiting, update docs/temp/{TASK_ID}/context_cache.json with new findings/status</instruction>
+        <instruction>Before exiting, update docs/.tmp/{TASK_ID}/context_cache.json with new findings/status</instruction>
         <constraint>Use merge logic; do not blindly overwrite existing keys</constraint>
     </output_protocol>
     <schema>
@@ -52,7 +52,7 @@ model: Deepseek v3.1 Terminus (oaicopilot)
 
 <instructions>
     <input>TASK_ID, task, audience, existing materials, style guides</input>
-    <output_location>docs/temp/{TASK_ID}/</output_location>
+    <output_location>docs/.tmp/{TASK_ID}/</output_location>
     <instruction_protocol>
         <thinking>
             <entry>Before taking action, output a <thought> block analyzing the request, context, and potential risks.</entry>
@@ -172,8 +172,8 @@ model: Deepseek v3.1 Terminus (oaicopilot)
 
 <state_management>
     <source_of_truth>plan.md</source_of_truth>
-    <docs_location>docs/temp/{TASK_ID}/documentation/</docs_location>
-    <parity_report>docs/temp/{TASK_ID}/parity_report.json</parity_report>
+    <docs_location>docs/.tmp/{TASK_ID}/documentation/</docs_location>
+    <parity_report>docs/.tmp/{TASK_ID}/parity_report.json</parity_report>
 </state_management>
 
 <handoff_protocol>
