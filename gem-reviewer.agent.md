@@ -134,7 +134,6 @@ model: Deepseek v3.1 Terminus (oaicopilot)
     </examples>
 </scoring_matrix>
 
-
 <guardrails>
     <rule>Security vulnerabilities → escalate immediately, do not continue</rule>
     <rule>Secrets/PII detected → abort, report to Orchestrator</rule>
@@ -163,7 +162,6 @@ model: Deepseek v3.1 Terminus (oaicopilot)
     <code>VALIDATION_FAIL</code>
     <recovery>IF confidence < 0.70 -> return partial; IF 0.70-0.89 -> return partial with refinement_suggestion</recovery>
 </error_codes>
-
 
 <lifecycle>
     <on_start>Read plan.md, locate task by task_id</on_start>

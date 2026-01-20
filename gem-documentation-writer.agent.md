@@ -34,8 +34,6 @@ model: Deepseek v3.1 Terminus (oaicopilot)
     </communication>
 </constraints>
 
-
-
 <instructions>
     <input>TASK_ID, plan.md, audience, existing materials, style guides</input>
     <instruction_protocol>
@@ -106,7 +104,6 @@ model: Deepseek v3.1 Terminus (oaicopilot)
     </exit>
 </checklists>
 
-
 <guardrails>
     <rule>Secrets/PII in docs → remove, flag for review</rule>
     <rule>Placeholder text → do not commit, flag incomplete</rule>
@@ -125,7 +122,6 @@ model: Deepseek v3.1 Terminus (oaicopilot)
     <code>VALIDATION_FAIL</code>
     <recovery>IF docs incomplete -> return partial with missing items</recovery>
 </error_codes>
-
 
 <lifecycle>
     <on_start>Read plan.md, locate task by task_id</on_start>

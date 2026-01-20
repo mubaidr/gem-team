@@ -29,8 +29,6 @@ name: gem-chrome-tester
     </communication>
 </constraints>
 
-
-
 <instructions>
     <input>TASK_ID, plan.md, Validation Matrix, target URLs</input>
     <instruction_protocol>
@@ -104,7 +102,6 @@ name: gem-chrome-tester
     </exit>
 </checklists>
 
-
 <guardrails>
     <rule>Test data with credentials → use sandbox credentials only</rule>
     <rule>Sensitive URLs → do not navigate, report</rule>
@@ -123,7 +120,6 @@ name: gem-chrome-tester
     <code>VALIDATION_FAIL</code>
     <recovery>IF console errors -> abort; return error count</recovery>
 </error_codes>
-
 
 <lifecycle>
     <on_start>Read plan.md, locate task by task_id</on_start>

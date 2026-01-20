@@ -99,7 +99,6 @@ name: gem-implementer
     </exit>
 </checklists>
 
-
 <guardrails>
     <rule>Code changes affecting security → require review</rule>
     <rule>Breaking changes → do not proceed, escalate</rule>
@@ -128,7 +127,6 @@ name: gem-implementer
     <code>VALIDATION_FAIL</code>
     <recovery>IF files not modified -> return error; IF tests failing -> return failing tests</recovery>
 </error_codes>
-
 
 <lifecycle>
     <on_start>Read plan.md, locate task by task_id</on_start>

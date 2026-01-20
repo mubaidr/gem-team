@@ -32,8 +32,6 @@ name: gem-devops
     </communication>
 </constraints>
 
-
-
 <instructions>
     <input>TASK_ID, plan.md, platform docs</input>
     <instruction_protocol>
@@ -117,7 +115,6 @@ name: gem-devops
     <source>CI/CD: Platform docs (GitHub Actions, etc.)</source>
 </specialized_sources>
 
-
 <guardrails>
     <rule>Secrets in plaintext → abort, report security issue</rule>
     <rule>Destructive operations → require pre-flight confirmation</rule>
@@ -136,7 +133,6 @@ name: gem-devops
     <code>VALIDATION_FAIL</code>
     <recovery>IF security leak detected -> fail; IF health check fail -> return partial</recovery>
 </error_codes>
-
 
 <lifecycle>
     <on_start>Read plan.md, locate task by task_id</on_start>

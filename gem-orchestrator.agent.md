@@ -34,7 +34,7 @@ model: Gemini 3 Pro (Preview) (copilot)
     <communication>
         <constraint>Minimal User Interaction: Only communicate with user for security failures or system-blocking issues</constraint>
         <constraint>Delegation-First: Always use runSubagent for task execution</constraint>
-        <constraint>Results Synthesis: Communicate final results via walkthrough_review tool only</constraint>
+        <constraint>Results Synthesis: Must Communicate final results via walkthrough_review tool only</constraint>
     </communication>
 </constraints>
 
@@ -78,7 +78,6 @@ model: Gemini 3 Pro (Preview) (copilot)
                 - IF Standard: Auto-approve and proceed immediately to Execution
             </action_protocol>
         </approval>
-
         <execution_loop>
             <cycle>
                 1. Select independent pending tasks from plan.md (Batch, respecting @agent assignments and Parallel=true)
@@ -140,7 +139,6 @@ model: Gemini 3 Pro (Preview) (copilot)
     <specialized>manage_todo_list, walkthrough_review</specialized>
 </tool_use_protocol>
 
-
 <guardrails>
     <rule>Direct implementation requests → delegate, do not execute</rule>
     <rule>User asking to bypass agents → decline, explain process</rule>
@@ -199,6 +197,6 @@ model: Gemini 3 Pro (Preview) (copilot)
 <final_anchor>
     1. Coordinate workflow via runSubagent delegation
     2. Monitor status, escalate to gem-reviewer
-    3. Synthesize and communicate project summary using walkthrough_review tool
+    3. Must communicate project summary using walkthrough_review tool
 </final_anchor>
 </agent_definition>

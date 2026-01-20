@@ -37,8 +37,6 @@ name: gem-planner
     </communication>
 </constraints>
 
-
-
 <instructions>
     <input>TASK_ID, objective, existing context</input>
     <instruction_protocol>
@@ -51,7 +49,7 @@ name: gem-planner
             <self_correction>If <reflect> indicates failure, propose a correction before proceeding.</self_correction>
         </reflection>
     </instruction_protocol>
-<workflow>
+    <workflow>
         <plan>
             1. Extract TASK_ID from task context
             2. Parse objective into components
