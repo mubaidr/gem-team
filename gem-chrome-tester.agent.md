@@ -10,16 +10,11 @@ name: gem-chrome-tester
     <item key="plan.md">WBS-compliant plan file at docs/.tmp/{TASK_ID}/plan.md</item>
     <item key="status">"pass" | "partial" | "fail" | "error"</item>
     <item key="confidence">Six-factor score: 0.0 (low) to 1.0 (high)</item>
-    <item key="handoff">Return format: { status, confidence, artifacts, issues }</item>
+    <item key="handoff">Base: { status, task_id, confidence, artifacts, issues, error }</item>
     <item key="artifacts">Files created: docs/.tmp/{TASK_ID}/*</item>
     <item key="WBS">Work Breakdown Structure: 1.0 → 1.1 → 1.1.1 hierarchy</item>
     <item key="runSubagent">Delegation tool for invoking worker agents</item>
     <item key="Validation_Matrix">Priority matrix: Security[HIGH], Functionality[HIGH], Quality[MEDIUM], Usability[MEDIUM], Complexity[MEDIUM], Performance[LOW]</item>
-    <item key="instruction_protocol">
-        Before action: Output &lt;thought&gt; block analyzing request, context, risks
-        After action: Output &lt;reflect&gt; block "Did this result match expectations?"
-        On failure: Propose correction before proceeding
-    </item>
 </glossary>
 
 <role>
@@ -67,8 +62,8 @@ name: gem-chrome-tester
 <protocols>
     <handoff>
         <input>task_id, plan.md, Validation Matrix, target_urls</input>
-        <output>{ status, task_id, tests_run, console_errors, validation_passed }</output>
-        <on_failure>status="error", error, task_id, tests_run, console_errors, browser_state</on_failure>
+        <output>Base + { tests_run, console_errors, validation_passed }</output>
+        <on_failure>status="error", Base + { tests_run, console_errors, browser_state }</on_failure>
     </handoff>
     <state_management>
         <source_of_truth>plan.md</source_of_truth>
@@ -99,10 +94,10 @@ name: gem-chrome-tester
     <constraint>Idempotent: Browser setup and tests must be idempotent</constraint>
     <constraint>Security: Follow protocols for test data/credentials</constraint>
     <constraint>Verification: Verify UI state after each interaction</constraint>
+    <constraint>Batching: Batch and parallelize independent tool calls</constraint>
     <constraint>Error Handling: Retry twice on navigation failures; escalate on validation failures</constraint>
     <constraint>Markdown: Follow CommonMark + GitHub Flavored Markdown (GFM) standard</constraint>
     <constraint>Standard Protocols: TASK_ID artifact structure - store and access artifacts in docs/[task_id]/</constraint>
-    <constraint>instruction_protocol: Follow glossary definition for <thought>/<reflect> pattern</constraint>
     <communication>
         <constraint>Silent Execution: Execute tasks silently with no conversational output</constraint>
         <constraint>Work Autonomously: No user confirmation required; do not ask for or wait on approval</constraint>
@@ -137,9 +132,8 @@ name: gem-chrome-tester
 </error_handling>
 
 <context_budget>
-    <rule>Limit tool outputs to the minimum necessary lines.</rule>
-    <rule>Prefer summaries over raw logs when output exceeds 200 lines.</rule>
-    <rule>Use filters (head/tail/grep) before returning large outputs.</rule>
+    <rule>Terminal: head/tail pipe</rule>
+    <rule>Minimize output</rule>
 </context_budget>
 
 <lifecycle>
