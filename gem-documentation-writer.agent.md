@@ -68,6 +68,13 @@ model: Deepseek v3.1 Terminus (oaicopilot)
             - Check for secrets/PII leaks
             - Completion: Docs complete, diagrams rendered, all criteria met
         </validate>
+        <handoff>
+            - Return handoff output to Orchestrator
+            - Include: status, task_id, docs, diagrams, parity_verified, parity_issues
+            - On success: status="pass", parity_verified=true
+            - On partial: status="partial", include parity_issues
+            - On failure: status="fail", include docs_created and error details
+        </handoff>
     </workflow>
 </instructions>
 
@@ -127,11 +134,11 @@ model: Deepseek v3.1 Terminus (oaicopilot)
 <lifecycle>
     <on_start>Read docs/.tmp/{TASK_ID}/plan.md, locate task by task_id</on_start>
     <on_progress>Draft each section, verify parity</on_progress>
-    <on_complete>Final review + parity check complete</on_complete>
-    <on_error>Return error + docs_created + parity_issues + task_id</on_error>
+    <on_complete>Final review + parity check complete, return parity_verified status</on_complete>
+    <on_error>Return { error, task_id, docs_created, parity_issues }</on_error>
     <specialization>
         <verification_method>parity_check_and_documentation_review</verification_method>
-        <confidence_contribution>0.20</confidence_contribution>
+        <confidence_contribution>N/A - reviewer provides confidence</confidence_contribution>
         <quality_gate>false</quality_gate>
     </specialization>
 </lifecycle>
@@ -142,14 +149,14 @@ model: Deepseek v3.1 Terminus (oaicopilot)
 </state_management>
 
 <handoff_protocol>
-    <input>{ task_id, plan_file, audience, existing_materials, style_guides }</input>
+    <input>{ task_id, docs/.tmp/{TASK_ID}/plan.md, audience, existing_materials, style_guides }</input>
     <output>{ status, task_id, docs, diagrams, parity_verified, parity_issues }</output>
-    <on_failure>return error + task_id + docs_created + parity_issues</on_failure>
+    <on_failure>return status="error", error, task_id, docs_created, parity_issues</on_failure>
 </handoff_protocol>
 
 <final_anchor>
-    1. Generate docs with snippets and diagrams
-    2. Maintain documentation parity
+    1. Generate documentation with code snippets and diagrams
+    2. Maintain documentation parity with codebase
     3. Ensure clarity and security compliance
 </final_anchor>
 </agent_definition>

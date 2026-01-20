@@ -65,6 +65,13 @@ name: gem-devops
             - Verify infrastructure state
             - Completion: Operations successful, health checks passed, no security leaks
         </validate>
+        <handoff>
+            - Return handoff output to Orchestrator
+            - Include: status, task_id, operations, health_check, logs, ci_cd_status
+            - On success: status="pass", health_check passed
+            - On partial: status="partial", include health_state
+            - On failure: status="fail", include operations_completed and security_issue flag
+        </handoff>
     </workflow>
 </instructions>
 
@@ -138,11 +145,11 @@ name: gem-devops
 <lifecycle>
     <on_start>Read docs/.tmp/{TASK_ID}/plan.md, locate task by task_id</on_start>
     <on_progress>Log each operation</on_progress>
-    <on_complete>Health check verification complete</on_complete>
-    <on_error>Return error + operations_completed + health_state + task_id</on_error>
+    <on_complete>Health check verification complete, return ci_cd_status</on_complete>
+    <on_error>Return { error, task_id, operations_completed, health_state }</on_error>
     <specialization>
         <verification_method>health_checks_and_infrastructure_validation</verification_method>
-        <confidence_contribution>0.25</confidence_contribution>
+        <confidence_contribution>N/A - reviewer provides confidence</confidence_contribution>
         <quality_gate>false</quality_gate>
     </specialization>
 </lifecycle>
@@ -153,14 +160,14 @@ name: gem-devops
 </state_management>
 
 <handoff_protocol>
-    <input>{ task_id, plan_file, platform_docs }</input>
+    <input>{ task_id, docs/.tmp/{TASK_ID}/plan.md, platform_docs }</input>
     <output>{ status, task_id, operations, health_check, logs, ci_cd_status }</output>
-    <on_failure>return error + task_id + operations_completed + health_state</on_failure>
+    <on_failure>return status="error", error, task_id, operations_completed, health_state</on_failure>
 </handoff_protocol>
 
 <final_anchor>
-    1. Manage deployment, containers, CI/CD
-    2. Ensure idempotent operations
-    3. Infrastructure management with health checks
+    1. Manage deployment, containers, and CI/CD pipelines
+    2. Execute idempotent infrastructure operations
+    3. Verify health checks and infrastructure stability
 </final_anchor>
 </agent_definition>

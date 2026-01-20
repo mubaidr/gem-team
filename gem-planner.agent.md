@@ -61,6 +61,7 @@ name: gem-planner
             - Analysis: Context → Failure modes (simulate ≥2 paths)
             - Decomposition: Break each task into 3-7 minute-level sub-tasks with WBS codes
             - Drafting: plan.md with WBS structure, status creation
+            - Output: Create docs/.tmp/{TASK_ID}/ directory, write plan.md to file
             - Pre-Mortem: Document failure points and mitigations
         </execute>
         <validate>
@@ -69,8 +70,16 @@ name: gem-planner
             - Granularity Check: 3-7 sub-tasks per parent task, effort estimates assigned
             - Validation Matrix: Security[HIGH], Functionality[HIGH], Quality[MEDIUM], Usability[MEDIUM], Complexity[MEDIUM], Performance[LOW]
             - Security Check: No secrets/unintended modifications
-            - Completion: Tasks actionable, Validation Matrix complete
+            - File Check: Verify docs/.tmp/{TASK_ID}/plan.md was created successfully
+            - Completion: Tasks actionable, Validation Matrix complete, plan file written
         </validate>
+        <handoff>
+            - Return handoff output to Orchestrator
+            - Include: status, artifacts, state_updates
+            - On success: status="pass", artifacts={plan_path: docs/.tmp/{TASK_ID}/plan.md}
+            - On partial: status="partial", include missing items list
+            - On failure: status="fail", include error and retry_suggestion
+        </handoff>
     </workflow>
 </instructions>
 
@@ -87,7 +96,6 @@ name: gem-planner
     </structure>
     <task_block>
         <header_format>### TASK-ID</header_format>
-        <file_location>docs/.tmp/{TASK_ID}/plan.md</file_location>
         <metadata>
             <field name="WBS-Code">WBS code (e.g., 1.0, 1.1, 1.1.1) for hierarchical tracking</field>
             <field name="Agent">gem-implementer | gem-chrome-tester | gem-devops | gem-documentation-writer | gem-reviewer | gem-planner</field>
@@ -212,7 +220,7 @@ Run security checklist, calculate confidence score.
         - [ ] WBS template ready
     </entry>
     <exit>
-        - [ ] plan.md with WBS structure and frontmatter
+        - [ ] docs/.tmp/{TASK_ID}/plan.md with WBS structure and frontmatter
         - [ ] All tasks have WBS-Codes and nested sub-task codes
         - [ ] Dependencies reference WBS-CODEs
         - [ ] Each task has 3-7 minute-level sub-tasks
@@ -246,11 +254,11 @@ Run security checklist, calculate confidence score.
 <lifecycle>
     <on_start>Validate TASK_ID, acknowledge request</on_start>
     <on_progress>Report progress to Orchestrator via handoff</on_progress>
-    <on_complete>Return confidence score + artifacts</on_complete>
-    <on_error>Return error + partial plan + retry suggestion</on_error>
+    <on_complete>Return plan artifacts</on_complete>
+    <on_error>Return { error, task_id, partial_plan, retry_suggestion }</on_error>
     <specialization>
         <verification_method>research_and_analysis</verification_method>
-        <confidence_contribution>0.50</confidence_contribution>
+        <confidence_contribution>N/A - reviewer provides confidence</confidence_contribution>
         <quality_gate>false</quality_gate>
     </specialization>
 </lifecycle>
@@ -262,12 +270,12 @@ Run security checklist, calculate confidence score.
 <handoff_protocol>
     <input>{ TASK_ID, objective, existing_plan }</input>
     <output>{ status, confidence, artifacts, state_updates }</output>
-    <on_failure>return error + partial_results + confidence score</on_failure>
+    <on_failure>return status="error", error, partial_results</on_failure>
 </handoff_protocol>
 
 <final_anchor>
-    1. Research before planning
-    2. Pre-Mortem: identify failure modes
-    3. Generate plan.md with actionable tasks
+    1. Research and analyze requirements
+    2. Identify failure modes via Pre-Mortem
+    3. Generate WBS-compliant plan.md with actionable tasks
 </final_anchor>
 </agent_definition>

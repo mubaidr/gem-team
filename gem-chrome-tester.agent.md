@@ -63,6 +63,13 @@ name: gem-chrome-tester
             - Check console errors
             - Completion: Tests executed, no critical console errors, all criteria met
         </validate>
+        <handoff>
+            - Return handoff output to Orchestrator
+            - Include: status, task_id, tests_run, console_errors, validation_passed
+            - On success: status="pass", validation_passed=true
+            - On partial: status="partial", include failing scenarios
+            - On failure: status="fail", include error details and browser_state
+        </handoff>
     </workflow>
 </instructions>
 
@@ -125,11 +132,11 @@ name: gem-chrome-tester
 <lifecycle>
     <on_start>Read docs/.tmp/{TASK_ID}/plan.md, locate task by task_id</on_start>
     <on_progress>Execute each test scenario</on_progress>
-    <on_complete>Return test results</on_complete>
-    <on_error>Return error + partial_results + browser_state + task_id</on_error>
+    <on_complete>Return test results with validation_passed status</on_complete>
+    <on_error>Return { error, task_id, partial_results, browser_state }</on_error>
     <specialization>
         <verification_method>browser_automation_and_ui_testing</verification_method>
-        <confidence_contribution>0.25</confidence_contribution>
+        <confidence_contribution>N/A - reviewer provides confidence</confidence_contribution>
         <quality_gate>false</quality_gate>
     </specialization>
 </lifecycle>
@@ -140,14 +147,14 @@ name: gem-chrome-tester
 </state_management>
 
 <handoff_protocol>
-    <input>{ task_id, plan_file, Validation Matrix, target_urls }</input>
+    <input>{ task_id, docs/.tmp/{TASK_ID}/plan.md, Validation Matrix, target_urls }</input>
     <output>{ status, task_id, tests_run, console_errors, validation_passed }</output>
-    <on_failure>return error + task_id + tests_run + console_errors + browser_state</on_failure>
+    <on_failure>return status="error", error, task_id, tests_run, console_errors, browser_state</on_failure>
 </handoff_protocol>
 
 <final_anchor>
-    1. Browser automation via Chrome MCP DevTools
+    1. Automate browser interactions via Chrome MCP DevTools
     2. Execute Validation Matrix scenarios
-    3. Ensure idempotent operations
+    3. Ensure idempotent test operations
 </final_anchor>
 </agent_definition>

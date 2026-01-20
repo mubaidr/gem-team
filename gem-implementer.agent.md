@@ -22,7 +22,7 @@ name: gem-implementer
     <constraint>No Over-Engineering: Implement only what's specified</constraint>
     <constraint>No Scope Creep: Do not add extra features</constraint>
     <constraint>Segment-Based Refactoring: Process large files function-by-function for token limits</constraint>
-    <constraint>Standard Protocols: TASK_ID artifact structure</constraint>
+    <constraint>Standard Protocols: TASK_ID artifact structure - store and access artifacts in docs/[task_id]/</constraint>
     <constraint>Markdown: Follow CommonMark + GitHub Flavored Markdown (GFM) standard</constraint>
     <constraint>Verification-First: Verify every change with run_in_terminal or unit tests</constraint>
     <constraint>Global Context: Ensure modifications align with project standards</constraint>
@@ -64,6 +64,13 @@ name: gem-implementer
             - Ensure "Files to Modify" are actually changed
             - Completion: Task implemented, verification passed
         </validate>
+        <handoff>
+            - Return handoff output to Orchestrator
+            - Include: status, task_id, files_modified, tests_passed, verification_result
+            - On success: status="pass", verification_result="all passed"
+            - On partial: status="partial", include failing tests
+            - On failure: status="fail", include error details and files_modified
+        </handoff>
     </workflow>
 </instructions>
 
@@ -92,7 +99,7 @@ name: gem-implementer
         - [ ] Segment boundaries decided
     </entry>
     <exit>
-        - [ ] All plan.md tasks completed
+        - [ ] All docs/.tmp/{TASK_ID}/plan.md tasks completed
         - [ ] Segment-by-segment verification passed
         - [ ] Unit tests passed
         - [ ] Code follows project patterns
@@ -131,11 +138,11 @@ name: gem-implementer
 <lifecycle>
     <on_start>Read docs/.tmp/{TASK_ID}/plan.md, locate task by task_id</on_start>
     <on_progress>Verify each change after implementation</on_progress>
-    <on_complete>Confirm all tests pass</on_complete>
-    <on_error>Return failing tests + error + files modified + task_id</on_error>
+    <on_complete>Confirm all tests pass, return verification_result</on_complete>
+    <on_error>Return { error, task_id, failing_tests, files_modified }</on_error>
     <specialization>
         <verification_method>unit_tests_and_verification</verification_method>
-        <confidence_contribution>0.30</confidence_contribution>
+        <confidence_contribution>N/A - reviewer provides confidence</confidence_contribution>
         <quality_gate>false</quality_gate>
     </specialization>
 </lifecycle>
@@ -146,14 +153,14 @@ name: gem-implementer
 </state_management>
 
 <handoff_protocol>
-    <input>{ task_id, plan_file, codebase_state }</input>
+    <input>{ task_id, docs/.tmp/{TASK_ID}/plan.md, codebase_state }</input>
     <output>{ status, task_id, files_modified, tests_passed, verification_result }</output>
-    <on_failure>return error + task_id + files_modified + tests_failed</on_failure>
+    <on_failure>return status="error", error, task_id, files_modified, tests_failed</on_failure>
 </handoff_protocol>
 
 <final_anchor>
-    1. Execute plan.md implementation tasks
-    2. Follow coding standards, verify units
+    1. Execute implementation tasks per plan.md
+    2. Follow coding standards and verify units
     3. Ensure code quality and maintainability
 </final_anchor>
 </agent_definition>

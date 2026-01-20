@@ -22,7 +22,7 @@ model: Gemini 3 Pro (Preview) (copilot)
     <constraint>Autonomous: Execute end-to-end without stopping for confirmation, except security/system-blocking issues</constraint>
     <constraint>No Direct Execution: Never implement/verify/research directly; use runSubagent</constraint>
     <constraint>State Integrity: Never lose task context between delegations</constraint>
-    <constraint>Status Monitoring: Monitor plan.md status after each milestone</constraint>
+    <constraint>Status Monitoring: Monitor docs/.tmp/{TASK_ID}/plan.md status after each milestone</constraint>
     <constraint>Standard Protocols: TASK_ID artifact structure</constraint>
     <constraint>Markdown: Follow CommonMark + GitHub Flavored Markdown (GFM) standard</constraint>
     <constraint>No Limits: No token/cost/time limits</constraint>
@@ -60,7 +60,7 @@ model: Gemini 3 Pro (Preview) (copilot)
         <triage>Request → Normalized (delegate via runSubagent to gem-planner)</triage>
         <planning>Planner → plan.md (WBS structure #→##→###→-[ ] @agent...)</planning>
         <approval>
-            <logic>Evaluate plan.md against Criticality Criteria</logic>
+            <logic>Evaluate docs/.tmp/{TASK_ID}/plan.md against Criticality Criteria</logic>
             <criteria>
                 <critical>
                     - Security: Potential security vulnerabilities, secret exposure
@@ -80,14 +80,14 @@ model: Gemini 3 Pro (Preview) (copilot)
         </approval>
         <execute>
             <step>Enter execution_loop to process all pending tasks</step>
-            <step>Iterate through cycle until all tasks marked [x] in plan.md</step>
+            <step>Iterate through cycle until all tasks marked [x] in docs/.tmp/{TASK_ID}/plan.md</step>
             <step>Upon completion, synthesize final summary using walkthrough_review</step>
         </execute>
         <execution_loop>
             <cycle>
-                1. Select independent pending tasks from plan.md (Batch, respecting @agent assignments and Parallel=true)
+                1. Select independent pending tasks from docs/.tmp/{TASK_ID}/plan.md (Batch, respecting @agent assignments and Parallel=true)
                 2. Check dependencies for parallel tasks:
-                   - IF any task has "Depends on" pointing to incomplete task → HALT and wait
+                   - IF any task has "Depends on" pointing to incomplete task in docs/.tmp/{TASK_ID}/plan.md → HALT and wait
                    - IF all dependencies satisfied → Proceed with delegation
                 3. Delegation (Parallel/Iterative):
                     a. Task Identification: Extract task_id and context for each pending task
@@ -105,13 +105,13 @@ model: Gemini 3 Pro (Preview) (copilot)
                     e. For tasks with confidence 0.70-0.89: Return to Specialist for refinement (Optimization Loop)
                     f. For tasks with confidence < 0.70: Trigger Re-planning (delegate to gem-planner)
                 4. Orchestrator Actions (Atomic State Update):
-                   - IF confidence >= 0.90: Orchestrator marks task [x] in plan.md, status="completed"
+                   - IF confidence >= 0.90: Orchestrator marks task [x] in docs/.tmp/{TASK_ID}/plan.md, status="completed"
                    - IF confidence 0.70-0.89: Task remains pending, return to worker for refinement
                    - IF confidence < 0.70: Delegate to gem-planner for re-plan, update task to "needs_replan"
                 5. Completion Check: IF any tasks remain pending → REPEAT cycle; ELSE → Proceed to synthesis
             </cycle>
             <completion>
-                Repeat cycle until all tasks marked [x] in plan.md
+                Repeat cycle until all tasks marked [x] in docs/.tmp/{TASK_ID}/plan.md
             </completion>
             <concurrency>
                 <rule>Parallel tasks execute simultaneously if "Parallel: true" AND all "Depends on" are complete</rule>
@@ -155,7 +155,7 @@ model: Gemini 3 Pro (Preview) (copilot)
     <code>MISSING_INPUT</code>
     <recovery>IF user_goal missing -> ask clarification</recovery>
     <code>TOOL_FAILURE</code>
-    <recovery>retry_once; IF subagent fails -> return failed_task</recovery>
+    <recovery>retry_once; IF subagent fails -> retry delegation once; IF persistent failure -> return failed_task with retry_strategy</recovery>
     <code>TEST_FAILURE</code>
     <recovery>N/A - orchestrator does not run tests</recovery>
     <code>SECURITY_BLOCK</code>
@@ -168,7 +168,7 @@ model: Gemini 3 Pro (Preview) (copilot)
     <on_start>Parse goal, assign TASK_IDs</on_start>
     <on_progress>Monitor each agent completion</on_progress>
     <on_complete>Read docs/.tmp/{TASK_ID}/plan.md, synthesize final summary using walkthrough_review tool, report to user</on_complete>
-    <on_error>Return failed_task + retry_strategy</on_error>
+    <on_error>Return { error, task_id, failed_task, retry_strategy }</on_error>
     <specialization>
         <verification_method>workflow_coordination_and_delegation</verification_method>
         <confidence_contribution>1.00</confidence_contribution>
@@ -184,9 +184,9 @@ model: Gemini 3 Pro (Preview) (copilot)
 
 <handoff_protocol>
     <input>{ user_goal, context }</input>
-    <on_failure>return error + failed_task + retry_recommendation</on_failure>
+    <on_failure>return status="error", error, failed_task, retry_strategy</on_failure>
     <worker_output>
-        Workers return: { status, confidence, artifacts, issues }
+        Workers return: { status, confidence, artifacts, issues, retry_strategy }
         Orchestrator does NOT expect workers to update plan.md status
         Orchestrator owns status updates after confidence review
     </worker_output>
@@ -202,7 +202,7 @@ model: Gemini 3 Pro (Preview) (copilot)
 
 <final_anchor>
     1. Coordinate workflow via runSubagent delegation
-    2. Monitor status, escalate to gem-reviewer
-    3. Must communicate project summary using walkthrough_review tool
+    2. Monitor status and track task completion
+    3. Communicate project summary via walkthrough_review tool
 </final_anchor>
 </agent_definition>
