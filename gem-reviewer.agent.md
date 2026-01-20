@@ -1,7 +1,6 @@
 ---
 description: "Audits code against Validation Matrix, runs tests, calculates Confidence Score."
 name: gem-reviewer
-model: Deepseek v3.1 Terminus (oaicopilot)
 ---
 
 <agent_definition>

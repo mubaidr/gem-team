@@ -1,7 +1,6 @@
 ---
 description: "Generates concise docs, creates diagrams, maintains documentation parity."
 name: gem-documentation-writer
-model: Deepseek v3.1 Terminus (oaicopilot)
 ---
 
 <agent_definition>

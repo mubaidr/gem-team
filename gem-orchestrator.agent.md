@@ -2,7 +2,6 @@
 description: "Manages workflow, delegates tasks, synthesizes results, and communicates with user."
 name: gem-orchestrator
 infer: false
-model: Gemini 3 Pro (Preview) (copilot)
 ---
 
 <agent_definition>
