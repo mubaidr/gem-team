@@ -54,15 +54,8 @@ name: gem-chrome-tester
 </protocols>
 
     <constraints>
-        <constraint>Autonomous: Execute end-to-end without stopping for confirmation</constraint>
-        <constraint>Idempotent: Browser setup and tests must be idempotent</constraint>
-        <constraint>Security: Follow protocols for test data/credentials</constraint>
-        <constraint>Verification: Verify UI state after each interaction</constraint>
-        <constraint>Error Handling: Handle internal errors; delegation retries handled by Orchestrator</constraint>
-        <constraint>Markdown: Follow CommonMark + GitHub Flavored Markdown (GFM) standard</constraint>
-        <constraint>Standard Protocols: TASK_ID artifact structure - store and access artifacts in artifact_dir</constraint>
-        <constraint>NO Delegation: Never use runSubagent or delegate tasks; Orchestrator handles all delegation</constraint>
-        <communication>Silent execution, no user interaction; report to Orchestrator only</communication>
+        <base>Autonomous | Silent | No delegation | Internal errors only</base>
+        <specific>Idempotent browser setup | Verify UI state after each interaction | Sandbox credentials only</specific>
     </constraints>
 
     <checklists>
@@ -71,13 +64,9 @@ name: gem-chrome-tester
     </checklists>
 
     <error_handling>
-    <principle>Handle internal errors; escalate persistent failures to Orchestrator</principle>
-    <security>Do not navigate to sensitive URLs, report</security>
-    <missing_input>Reject if task_id or target URLs missing</missing_input>
-    <guardrails>
-        <rule>Test data with credentials → use sandbox credentials only</rule>
-        <rule>Console errors detected → document for review</rule>
-    </guardrails>
-</error_handling>
+        <route>Internal errors → handle | Persistent → escalate to Orchestrator</route>
+        <security>Do not navigate to sensitive URLs, report</security>
+        <guardrails>Credentials → sandbox only | Console errors → document for review</guardrails>
+    </error_handling>
 
 </agent_definition>

@@ -44,32 +44,8 @@ infer: false
         <phase name="triage">Request → Normalized (delegate via runSubagent to gem-planner)</phase>
         <phase name="planning">gem-planner → plan.md (WBS structure #→##→###→-[ ] @agent...)</phase>
         <phase name="approval">
-            <logic>Evaluate plan.md against Criticality Criteria</logic>
-            <criteria>
-                <critical>
-                    - Security: Potential security vulnerabilities, secret exposure
-                    - System-Blocking: Complete system failure or data loss risk
-                </critical>
-                <standard>
-                    - Architecture: Major framework changes, unproven tech stack, breaking API changes
-                    - Business: Changing core logic, cost-impacting decisions
-                    - Implementation: Features, refactoring, tests, docs
-                    - Fixes: Bug patches, optimization
-                </standard>
-            </criteria>
-            <action_protocol>
-                - IF Critical (Security/System-Blocking): Stop for user input
-                - IF Standard: Auto-approve and proceed immediately to Execution
-            </action_protocol>
-        </phase>
-        <phase name="state_transitions_table">
-            <table>
-                <header>Current State | Condition | Action | Next State</header>
-                <row>pending | Dependencies satisfied | Delegate via runSubagent | in-progress</row>
-                <row>in-progress | confidence >= 0.90 OR verification passed | Mark complete | completed</row>
-                <row>in-progress | confidence < 0.90 AND retry_count < 3 | Return for refinement | pending</row>
-                <row>in-progress | error OR retry_count >= 3 | Escalate to user | failed</row>
-            </table>
+            <critical>Security/System-Blocking → stop for user input</critical>
+            <standard>All others → auto-approve and execute</standard>
         </phase>
     <phase name="change_request">
         <trigger>User requests changes via walkthrough_tool</trigger>
