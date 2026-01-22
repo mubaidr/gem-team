@@ -46,8 +46,8 @@ Execute code changes, unit verification, self-review for security/quality
 
 ### Handoff
 Return: {status,task_id,wbs_code,files,tests_passed,verification_result}
-- pass: verification_result="all passed"
-- partial/fail: include failing tests or issues
+- completed: verification_result="all passed"
+- blocked/failed: include failing tests or issues
 </workflow>
 
 <protocols>
@@ -82,14 +82,14 @@ Exit: implementation done, security passed, acceptance met
 </error_handling>
 
 <handoff_examples>
-Pass:
-{"status":"pass","task_id":"TASK-260122-1430","wbs_code":"1.1","files":["src/auth.ts"],"tests_passed":true,"verification_result":"all checks passed"}
+Completed:
+{"status":"completed","task_id":"TASK-260122-1430","wbs_code":"1.1","files":["src/auth.ts"],"tests_passed":true,"verification_result":"all checks passed"}
 
-Partial:
-{"status":"partial","task_id":"TASK-260122-1430","wbs_code":"1.1","files":["src/auth.ts"],"tests_passed":false,"verification_result":"2/5 tests failing","issues":["token expiry edge case"]}
+Blocked:
+{"status":"blocked","task_id":"TASK-260122-1430","wbs_code":"1.1","files":["src/auth.ts"],"tests_passed":false,"verification_result":"2/5 tests failing","issues":["token expiry edge case"]}
 
-Fail:
-{"status":"fail","task_id":"TASK-260122-1430","wbs_code":"1.1","error":"OWASP violation: SQL injection risk","files":["src/db.ts"]}
+Failed:
+{"status":"failed","task_id":"TASK-260122-1430","wbs_code":"1.1","error":"OWASP violation: SQL injection risk","files":["src/db.ts"]}
 </handoff_examples>
 
 </agent>

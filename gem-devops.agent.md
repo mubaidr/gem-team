@@ -77,11 +77,11 @@ Exit: operations successful, resources cleaned, health passed
 </error_handling>
 
 <handoff_examples>
-Pass:
-{"status":"pass","task_id":"TASK-260122-1430","wbs_code":"3.0","operations":["docker build","push to registry"],"health_check":"passed","ci_cd_status":"pipeline green"}
+Completed:
+{"status":"completed","task_id":"TASK-260122-1430","wbs_code":"3.0","operations":["docker build","push to registry"],"health_check":"passed","ci_cd_status":"pipeline green"}
 
-Fail:
-{"status":"fail","task_id":"TASK-260122-1430","wbs_code":"3.0","operations":["docker build"],"error":"preflight failed: missing SECRET_KEY","health_check":"skipped"}
+Failed:
+{"status":"failed","task_id":"TASK-260122-1430","wbs_code":"3.0","operations":["docker build"],"error":"preflight failed: missing SECRET_KEY","health_check":"skipped"}
 </handoff_examples>
 
 </agent>

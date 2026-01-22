@@ -42,7 +42,7 @@ Create WBS-compliant plan.md, re-plan failed tasks, pre-mortem analysis
 1. Research: semantic_search, grep_search, read_file (parallelize)
 2. Analysis: Context → Failure modes (simulate ≥2 paths)
 3. Decomposition: Break tasks into 3-7 atomic subtasks with WBS codes
-4. IF replan: Modify only affected tasks, keep completed [x]
+4. IF replan: Modify only affected tasks, keep completed tasks
 5. IF initial: Create full plan.md with WBS structure
 6. Output: docs/.tmp/{TASK_ID}/plan.md
 7. Pre-Mortem: Document failure points and mitigations
@@ -55,9 +55,9 @@ Create WBS-compliant plan.md, re-plan failed tasks, pre-mortem analysis
 
 ### Handoff
 Return: {status,artifacts,state_updates}
-- pass: artifacts={plan_path}
-- partial: include missing items list
-- fail: include error and retry_suggestion
+- completed: artifacts={plan_path}
+- blocked: include missing items list
+- failed: include error and retry_suggestion
 </workflow>
 
 <protocols>
@@ -117,14 +117,14 @@ Location: docs/.tmp/{TASK_ID}/plan.md
 </plan_format>
 
 <handoff_examples>
-Success:
-{"status":"pass","task_id":"TASK-260122-1430","mode":"initial","artifacts":{"plan_path":"docs/.tmp/TASK-260122-1430/plan.md"},"state_updates":{"1.0":"pending"}}
+Completed:
+{"status":"completed","task_id":"TASK-260122-1430","mode":"initial","artifacts":{"plan_path":"docs/.tmp/TASK-260122-1430/plan.md"},"state_updates":{"1.0":"pending"}}
 
-Partial:
-{"status":"partial","task_id":"TASK-260122-1430","mode":"replan","missing":["dep clarity for 2.1"],"artifacts":{"plan_path":"docs/.tmp/TASK-260122-1430/plan.md"}}
+Blocked:
+{"status":"blocked","task_id":"TASK-260122-1430","mode":"replan","missing":["dep clarity for 2.1"],"artifacts":{"plan_path":"docs/.tmp/TASK-260122-1430/plan.md"}}
 
-Fail:
-{"status":"fail","task_id":"TASK-260122-1430","error":"circular dependency detected","retry_suggestion":"flatten WBS 1.2-1.4"}
+Failed:
+{"status":"failed","task_id":"TASK-260122-1430","error":"circular dependency detected","retry_suggestion":"flatten WBS 1.2-1.4"}
 </handoff_examples>
 
 </agent>

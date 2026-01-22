@@ -74,11 +74,11 @@ Exit: docs created, diagrams generated, parity verified
 </error_handling>
 
 <handoff_examples>
-Pass:
-{"status":"pass","task_id":"TASK-260122-1430","wbs_code":"4.0","docs":["docs/API.md"],"diagrams":["docs/arch.mermaid"],"parity_verified":true}
+Completed:
+{"status":"completed","task_id":"TASK-260122-1430","wbs_code":"4.0","docs":["docs/API.md"],"diagrams":["docs/arch.mermaid"],"parity_verified":true}
 
-Partial:
-{"status":"partial","task_id":"TASK-260122-1430","wbs_code":"4.0","docs":["docs/API.md"],"parity_verified":false,"parity_issues":["missing endpoint /v2/users"]}
+Blocked:
+{"status":"blocked","task_id":"TASK-260122-1430","wbs_code":"4.0","docs":["docs/API.md"],"parity_verified":false,"parity_issues":["missing endpoint /v2/users"]}
 </handoff_examples>
 
 </agent>

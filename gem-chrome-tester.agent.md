@@ -74,11 +74,11 @@ Exit: scenarios executed, console errors reviewed, matrix met
 </error_handling>
 
 <handoff_examples>
-Pass:
-{"status":"pass","task_id":"TASK-260122-1430","wbs_code":"2.0","tests_run":5,"console_errors":[],"validation_passed":true}
+Completed:
+{"status":"completed","task_id":"TASK-260122-1430","wbs_code":"2.0","tests_run":5,"console_errors":[],"validation_passed":true}
 
-Fail:
-{"status":"fail","task_id":"TASK-260122-1430","wbs_code":"2.0","tests_run":3,"console_errors":["TypeError: undefined"],"validation_passed":false,"issues":["login button unresponsive"]}
+Failed:
+{"status":"failed","task_id":"TASK-260122-1430","wbs_code":"2.0","tests_run":3,"console_errors":["TypeError: undefined"],"validation_passed":false,"issues":["login button unresponsive"]}
 </handoff_examples>
 
 </agent>
