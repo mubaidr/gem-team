@@ -60,13 +60,15 @@ Trigger: gem-planner returns re-plan OR max_retries exceeded
 - Enter execution_loop → process pending tasks → mark completed → synthesize summary
 
 ### Execution Loop
-1. Select next pending task by WBS order (after replan, continues from first pending)
+1. Select next pending task (task_block) by WBS order from plan.md
 2. Check deps (topological order)
-3. Set state: pending → in-progress
-4. Delegate: runSubagent(agent,{task_id,wbs_code,task_block,context,retry_count})
-5. Route: completed→mark done | blocked+retry<3→retry | failed/retry≥3→escalate
-6. Update task_states in plan.md
-7. Loop until all completed OR max_retries exceeded
+3. Extract: agent from task_block; IF null → infer from task description
+4. Validate: agent is in [gem-implementer, gem-chrome-tester, gem-devops, gem-documentation-writer, gem-planner]
+5. Set state: pending → in-progress
+6. Delegate: runSubagent(agent,{task_id,wbs_code,task_block,context,retry_count})
+7. Route: completed→mark done | blocked+retry<3→retry | failed/retry≥3→escalate
+8. Update task_states in plan.md
+9. Loop until all completed OR max_retries exceeded
 Rules: Sequential, WBS order, one task at a time
 
 ### Escalation Protocol
