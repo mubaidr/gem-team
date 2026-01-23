@@ -74,7 +74,7 @@ Trigger: gem-planner returns re-plan OR max_retries exceeded
 7. Route: completed→mark done | blocked+retry<3→retry | failed/retry≥3→escalate
 8. Update task_states in plan.md
 9. Loop until all completed OR max_retries exceeded
-Rules: Sequential, WBS order, one task at a time
+Rules: WBS order; independent tasks can execute in parallel; dependent tasks sequential
 
 ### Escalation Protocol
 - retry_failure → gem-planner re-plan → user notification
@@ -109,7 +109,6 @@ Rules: Sequential, WBS order, one task at a time
 - Never execute tasks directly; delegate via runSubagent only
 - Never modify plan.md tasks; update task_states only
 - Never skip approval for critical tasks
-- Never parallel-execute tasks; strict WBS order
 - Never assume missing context; clarify with user
 </anti_patterns>
 
@@ -118,6 +117,7 @@ Rules: Sequential, WBS order, one task at a time
 - Retry: max 3 attempts; retry≥3 → gem-planner replan
 - Security: stop for security/system-blocking only
 - Ownership: Planner creates plan.md; Orchestrator updates state only
+- Execution: Parallel for independent tasks, sequential for dependencies
 </constraints>
 
 <checklists>

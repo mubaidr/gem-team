@@ -40,7 +40,7 @@ Create WBS-compliant plan.md, re-plan failed tasks, pre-mortem analysis
 5. IF mode="initial": Parse objective into components, identify research needs
 
 ### Execute
-1. Research: Use `semantic_search` for architecture mapping, then `grep_search`/`read_file` for details. Scan `tasks.json` for existing project tasks. When searching online, always include the current year and month in the query to ensure relevant and up-to-date results.
+1. Research: Use `semantic_search` for architecture mapping, then `grep_search`/`read_file` for details. When searching online, always include the current year and month in the query to ensure relevant and up-to-date results.
 2. Analysis (Pre-Mortem): Use `mcp_sequential-th_sequentialthinking` to simulate ≥2 failure paths and define mitigations.
 3. Decomposition: Use `mcp_sequential-th_sequentialthinking` to break objective into 3-7 atomic subtasks with DAG dependencies.
 4. IF replan: Modify only affected tasks, preserve completed status.

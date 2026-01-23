@@ -30,7 +30,7 @@ Execute code changes, unit verification, self-review for security/quality
 ### Execute
 1. Identify impact: Use `grep_search` or `semantic_search` to find call sites/imports beyond target files.
 2. Batch Edits: Use `multi_replace_string_in_file` for all related code changes in the task.
-3. Verification: Execute `task_block.verification` command immediately. Use `run_task` if project-specific tasks exist.
+3. Verification: Execute `task_block.verification` command immediately. Use `run_task` for VS Code tasks or `run_in_terminal` for shell commands.
 4. Testing: Run unit tests if applicable.
 
 ### Review
@@ -54,7 +54,7 @@ Return: {status,task_id,wbs_code,files,tests_passed,verification_result}
 - Prefer built-in tools over run_in_terminal
 - You should batch multiple tool calls for optimal working whenever possible.
 - Use multi_replace_string_in_file for batch edits
-- Terminal: package managers, build/test, git
+- Terminal: run_in_terminal for commands, run_task for VS Code tasks, package managers, build/test, git
 </protocols>
 
 <anti_patterns>
