@@ -14,8 +14,8 @@ infer: false
 </glossary>
 
 <context_requirements>
-Required: task_id, wbs_code, environment, task_block.operations
-Optional: secrets_ref, rollback_target, approval_flag (prod only), retry_count, previous_errors
+Required: task_id, wbs_code, task_block.operations
+Optional: environment, secrets_ref, rollback_target, approval_flag (prod only), retry_count, previous_errors
 Derived: preflight_checks (from environment)
 </context_requirements>
 
@@ -86,13 +86,13 @@ Exit: operations successful, resources cleaned, health passed
 
 <handoff_examples>
 Completed:
-{"status":"completed","task_id":"TASK-260122-1430","wbs_code":"3.0","operations":["docker build","push to registry"],"health_check":"passed","ci_cd_status":"pipeline green"}
+{"status": "completed", "task_id": "TASK-260122-1430", "wbs_code": "3.0", "operations": ["docker build", "push to registry"], "health_check": "passed", "ci_cd_status": "pipeline green"}
 
 Blocked:
-{"status":"blocked","task_id":"TASK-260122-1430","wbs_code":"3.0","operations":["docker build"],"health_check":"pending","issues":["registry auth failed"]}
+{"status": "blocked", "task_id": "TASK-260122-1430", "wbs_code": "3.0", "operations": ["docker build"], "health_check": "pending", "issues": ["registry auth failed"]}
 
 Failed:
-{"status":"failed","task_id":"TASK-260122-1430","wbs_code":"3.0","operations":["docker build"],"error":"preflight failed: missing SECRET_KEY","health_check":"skipped"}
+{"status": "failed", "task_id": "TASK-260122-1430", "wbs_code": "3.0", "operations": ["docker build"], "error": "preflight failed: missing SECRET_KEY", "health_check": "skipped"}
 </handoff_examples>
 
 </agent>

@@ -10,7 +10,7 @@ infer: false
 - wbs_code: Task identifier (1.0, 1.1)
 - artifact_dir: docs/.tmp/{TASK_ID}/
 - handoff: {status,task_id,wbs_code,tests_run,console_errors,validation_passed}
-- Validation_Matrix: Security[HIGH],Functionality[HIGH],Usability[MED]
+- validation_matrix: Security[HIGH],Functionality[HIGH],Usability[MED]
 </glossary>
 
 <context_requirements>
@@ -77,13 +77,13 @@ Exit: scenarios executed, console errors reviewed, matrix met
 
 <handoff_examples>
 Completed:
-{"status":"completed","task_id":"TASK-260122-1430","wbs_code":"2.0","tests_run":5,"console_errors":[],"validation_passed":true}
+{"status": "completed", "task_id": "TASK-260122-1430", "wbs_code": "2.0", "tests_run": 5, "console_errors": [], "validation_passed": true}
 
 Blocked:
-{"status":"blocked","task_id":"TASK-260122-1430","wbs_code":"2.0","tests_run":2,"console_errors":[],"validation_passed":false,"issues":["server unreachable"]}
+{"status": "blocked", "task_id": "TASK-260122-1430", "wbs_code": "2.0", "tests_run": 2, "console_errors": [], "validation_passed": false, "issues": ["server unreachable"]}
 
 Failed:
-{"status":"failed","task_id":"TASK-260122-1430","wbs_code":"2.0","tests_run":3,"console_errors":["TypeError: undefined"],"validation_passed":false,"issues":["login button unresponsive"]}
+{"status": "failed", "task_id": "TASK-260122-1430", "wbs_code": "2.0", "tests_run": 3, "console_errors": ["TypeError: undefined"], "validation_passed": false, "issues": ["login button unresponsive"]}
 </handoff_examples>
 
 </agent>

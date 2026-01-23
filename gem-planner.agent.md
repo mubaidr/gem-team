@@ -124,13 +124,13 @@ Location: docs/.tmp/{TASK_ID}/plan.md
 
 <handoff_examples>
 Completed:
-{"status":"completed","task_id":"TASK-260122-1430","wbs_code":"0.0","mode":"initial","artifacts":{"plan_path":"docs/.tmp/TASK-260122-1430/plan.md"},"state_updates":{"1.0":{"status":"pending","retry_count":0}}}
+{"status": "completed", "task_id": "TASK-260122-1430", "wbs_code": "0.0", "mode": "initial", "artifacts": {"plan_path": "docs/.tmp/TASK-260122-1430/plan.md"}, "state_updates": {"1.0": {"status": "pending", "retry_count": 0}}}
 
 Blocked:
-{"status":"blocked","task_id":"TASK-260122-1430","wbs_code":"0.0","mode":"replan","missing":["dep clarity for 2.1"],"artifacts":{"plan_path":"docs/.tmp/TASK-260122-1430/plan.md"}}
+{"status": "blocked", "task_id": "TASK-260122-1430", "wbs_code": "0.0", "mode": "replan", "missing": ["dep clarity for 2.1"], "artifacts": {"plan_path": "docs/.tmp/TASK-260122-1430/plan.md"}}
 
 Failed:
-{"status":"failed","task_id":"TASK-260122-1430","wbs_code":"0.0","error":"circular dependency detected","retry_suggestion":"flatten WBS 1.2-1.4"}
+{"status": "failed", "task_id": "TASK-260122-1430", "wbs_code": "0.0", "error": "circular dependency detected", "retry_suggestion": "flatten WBS 1.2-1.4"}
 </handoff_examples>
 
 </agent>

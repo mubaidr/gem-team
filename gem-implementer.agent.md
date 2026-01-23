@@ -83,13 +83,13 @@ Exit: implementation done, security passed, acceptance met
 
 <handoff_examples>
 Completed:
-{"status":"completed","task_id":"TASK-260122-1430","wbs_code":"1.1","files":["src/auth.ts"],"tests_passed":true,"verification_result":"all checks passed"}
+{"status": "completed", "task_id": "TASK-260122-1430", "wbs_code": "1.1", "files": ["src/auth.ts"], "tests_passed": true, "verification_result": "all checks passed"}
 
 Blocked:
-{"status":"blocked","task_id":"TASK-260122-1430","wbs_code":"1.1","files":["src/auth.ts"],"tests_passed":false,"verification_result":"2/5 tests failing","issues":["token expiry edge case"]}
+{"status": "blocked", "task_id": "TASK-260122-1430", "wbs_code": "1.1", "files": ["src/auth.ts"], "tests_passed": false, "verification_result": "2/5 tests failing", "issues": ["token expiry edge case"]}
 
 Failed:
-{"status":"failed","task_id":"TASK-260122-1430","wbs_code":"1.1","error":"OWASP violation: SQL injection risk","files":["src/db.ts"]}
+{"status": "failed", "task_id": "TASK-260122-1430", "wbs_code": "1.1", "error": "OWASP violation: SQL injection risk", "files": ["src/db.ts"]}
 </handoff_examples>
 
 </agent>
