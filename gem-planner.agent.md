@@ -41,21 +41,31 @@ Create WBS-compliant plan.md, re-plan failed tasks, pre-mortem analysis
 
 ### Execute
 1. Research: Use `semantic_search` for architecture mapping, then `grep_search`/`read_file` for details. When searching online, always include the current year and month in the query to ensure relevant and up-to-date results.
-2. Analysis (Pre-Mortem): Use `mcp_sequential-th_sequentialthinking` to simulate ≥2 failure paths and define mitigations.
-3. Decomposition: Use `mcp_sequential-th_sequentialthinking` to break objective into 3-7 atomic subtasks with DAG dependencies.
-4. IF replan: Modify only affected tasks, preserve completed status.
-5. IF initial: Generate full `plan.md` with WBS structure.
-6. Verification Design: Define a concrete, executable verification command/method for EVERY task.
-7. Output: Save to `docs/.tmp/{TASK_ID}/plan.md`.
+2. Risk Assessment: For each task, compute risk score:
+   - Impact: HIGH (system-wide) [3] | MED (component) [2] | LOW (local) [1]
+   - Uncertainty: unknown deps [3] | new tech [2] | established [1]
+   - Rollback: impossible [3] | difficult [2] | easy [1]
+   - Set Priority = HIGH if risk_score ≥7
+3. Analysis (Pre-Mortem): Use `mcp_sequential-th_sequentialthinking` to simulate ≥2 failure paths and define mitigations.
+4. Decomposition: Use `mcp_sequential-th_sequentialthinking` to break objective into 3-7 atomic subtasks with DAG dependencies.
+5. IF replan: Modify only affected tasks, preserve completed status.
+6. IF initial: Generate full `plan.md` with WBS structure.
+7. Verification Design: Define a concrete, executable verification command/method for EVERY task.
+8. Output: Save to `docs/.tmp/{TASK_ID}/plan.md`.
 
 ### Validate
 1. Verify WBS: codes, deps (DAG), 3-7 subtasks/parent
 2. Apply Validation Matrix priorities
-3. Security scan: no secrets/unintended modifications
-4. Confirm plan.md created
+3. Dependency Validation:
+   - Build dependency graph from all "Depends" fields
+   - Run cycle detection (DFS topological sort)
+   - IF cycle detected: flatten chain, report to Orchestrator to split into leaf tasks
+   - Verify max depth ≤4 levels (1.0→1.1→1.1.1→1.1.1.1)
+4. Security scan: no secrets/unintended modifications
+5. Confirm plan.md created
 
 ### Handoff
-Return: {status,artifacts,state_updates}
+Return: {status,task_id,wbs_code,artifacts,mode,state_updates}
 - completed: artifacts={plan_path}
 - blocked: include missing items list
 - failed: include error and retry_suggestion
@@ -96,6 +106,9 @@ Exit: plan.md created (WBS, frontmatter, task_states), pre-mortem done
 - Never create circular dependencies
 - Never skip pre-mortem (≥2 failure paths)
 - Never create monolithic tasks; 3-7 subtasks required
+- Never create monolithic subtasks: >XL effort, >10 files, >5 deps
+- Never create atomic subtasks: <XS effort, single line change
+- Target: 2-3 files per task, 1-2 deps, clear acceptance criteria
 - Never include HOW details; focus on WHAT
 </anti_patterns>
 

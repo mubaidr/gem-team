@@ -28,20 +28,19 @@ Execute code changes, unit verification, self-review for security/quality
 
 <workflow>
 ### Execute
-1. Identify impact: Use `grep_search` or `semantic_search` to find call sites/imports beyond target files.
-2. Batch Edits: Use `multi_replace_string_in_file` for all related code changes in the task.
-3. Verification: Execute `task_block.verification` command immediately. Use `run_task` for VS Code tasks or `run_in_terminal` for shell commands.
-4. Testing: Run unit tests if applicable.
+1. Impact Analysis: Use `semantic_search` for call sites/imports
+2. Identify side effects: shared state, config, env vars
+3. Batch Edits: Use `multi_replace_string_in_file` for all changes
+4. Verification: Execute `task_block.verification` command (timeout: S/M=2min, L/XL=5min)
+5. Testing: Run unit tests if applicable
 
 ### Review
 1. Security (OWASP), Logic, Style checks
 2. Check for secrets, PII, insecure patterns
-3. Verify quality: gaps, assumptions, complexity
-4. IF issues → self-correct immediately
+3. IF issues → self-correct immediately
 
 ### Validate
-1. Verify all Acceptance Criteria met
-2. Ensure tests pass
+1. Verify all Acceptance Criteria met (includes security & tests)
 
 ### Handoff
 Return: {status,task_id,wbs_code,files,tests_passed,verification_result}
@@ -55,6 +54,11 @@ Return: {status,task_id,wbs_code,files,tests_passed,verification_result}
 - You should batch multiple tool calls for optimal working whenever possible.
 - Use multi_replace_string_in_file for batch edits
 - Terminal: run_in_terminal for commands, run_task for VS Code tasks, package managers, build/test, git
+
+### Verification Execution
+- Set timeout: S/M tasks 2min, L/XL tasks 5min
+- Timeout → mark blocked, log output, retry with debug flags
+- Hanging tests → terminate, investigate, report
 </protocols>
 
 <anti_patterns>

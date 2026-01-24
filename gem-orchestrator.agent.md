@@ -57,7 +57,7 @@ Trigger: User comments via walkthrough_review
 ### Replan Merge
 Trigger: gem-planner returns re-plan OR max_retries exceeded
 1. Preserve completed tasks, replace failed/blocked with new pending tasks
-2. Validate dependency consistency and no circular deps; fail → escalate to user
+2. Validate no circular deps (Planner already validated; Orchestrator skips if plan fresh)
 3. Reset retry_count=0 for new pending tasks
 
 ### Execute
@@ -65,16 +65,17 @@ Trigger: gem-planner returns re-plan OR max_retries exceeded
 - Update `manage_todo_list` as tasks progress.
 
 ### Execution Loop
-1. Select next pending task (task_block) by WBS order from plan.md
-2. Check deps (topological order)
+1. Select next pending task (task_block) using Task Selection priority
+   - Sort pending: Priority (HIGH→MED→LOW) → WBS order
+   - Prioritize HIGH priority regardless of WBS position
+2. Validate dependencies are met (Planner ensured no cycles; check only if parent complete)
 3. Extract: agent from task_block; IF null → infer from task description
-4. Validate: agent is in [gem-implementer, gem-chrome-tester, gem-devops, gem-documentation-writer, gem-planner]
+4. Validate: agent in [gem-implementer, gem-chrome-tester, gem-devops, gem-documentation-writer]
 5. Set state: pending → in-progress
 6. Delegate: runSubagent(agent,{task_id,wbs_code,task_block,context,retry_count})
 7. Route: completed→mark done | blocked+retry<3→retry | failed/retry≥3→escalate
 8. Update task_states in plan.md
 9. Loop until all completed OR max_retries exceeded
-Rules: WBS order; independent tasks can execute in parallel; dependent tasks sequential
 
 ### Escalation Protocol
 - retry_failure → gem-planner re-plan → user notification
@@ -102,7 +103,7 @@ Rules: WBS order; independent tasks can execute in parallel; dependent tasks seq
 - Prefer built-in tools over run_in_terminal
 - Batch independent calls
 - You should batch multiple tool calls for optimal working whenever possible.
-- runSubagent REQUIRED for all worker tasks (sequential only)
+- runSubagent REQUIRED for all worker tasks
 </protocols>
 
 <anti_patterns>
@@ -117,7 +118,7 @@ Rules: WBS order; independent tasks can execute in parallel; dependent tasks seq
 - Retry: max 3 attempts; retry≥3 → gem-planner replan
 - Security: stop for security/system-blocking only
 - Ownership: Planner creates plan.md; Orchestrator updates state only
-- Execution: Parallel for independent tasks, sequential for dependencies
+- Execution: sequential only (runSubagent waits for completion)
 </constraints>
 
 <checklists>

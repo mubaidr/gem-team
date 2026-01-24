@@ -9,7 +9,7 @@ infer: false
 <glossary>
 - wbs_code: Task identifier (1.0, 1.1)
 - artifact_dir: docs/.tmp/{TASK_ID}/
-- handoff: {status,task_id,wbs_code,tests_run,console_errors,validation_passed}
+- handoff: {status,task_id,wbs_code,tests_run,console_errors,validation_passed,issues?}
 - validation_matrix: Security[HIGH],Functionality[HIGH],Usability[MED]
 </glossary>
 
@@ -28,6 +28,13 @@ Browser automation, Validation Matrix scenarios, visual verification via screens
 </mission>
 
 <workflow>
+### Test Case Design (Pre-Execute)
+1. Map Validation Matrix → test scenarios:
+   - Security[HIGH]: XSS, auth bypass, input sanitization
+   - Functionality[HIGH]: happy path, edge cases, error states
+   - Usability[MED]: accessibility, responsive, navigation flow
+2. Generate test cases with: {scenario, steps, expected, evidence_type}
+
 ### Execute
 1. Extract test scenarios and URLs from context.task_block
 2. Initialize browser with required viewport
@@ -40,7 +47,10 @@ Browser automation, Validation Matrix scenarios, visual verification via screens
 2. Check console for errors
 
 ### Handoff
-Return: {status,task_id,wbs_code,tests_run,console_errors,validation_passed}
+Return: {status,task_id,wbs_code,tests_run,console_errors,validation_passed,issues?}
+- completed: validation_passed=true, issues=[]
+- blocked: validation_passed=false, issues=["reason"]
+- failed: validation_passed=false, issues=["error details"]
 </workflow>
 
 <protocols>
@@ -49,6 +59,12 @@ Return: {status,task_id,wbs_code,tests_run,console_errors,validation_passed}
 - You should batch multiple tool calls for optimal working whenever possible.
 - Browser: Chrome MCP DevTools (mcp_chromedevtool_* tools)
 - Terminal: local servers for testing
+
+### Screenshot Management (when screenshots requested)
+- Naming: {TASK_ID}_{WBS}_{scenario}_{status}.png
+- Metadata: {timestamp, viewport, test_step, expected}
+- Store in artifact_dir/screenshots/
+- Include in handoff validation_report
 </protocols>
 
 <anti_patterns>
@@ -70,6 +86,9 @@ Exit: scenarios executed, console errors reviewed, matrix met
 </checklists>
 
 <error_handling>
+- Validation failed → document issues, continue
+- Subsequent Implementer task fixing same component → flag for Orchestrator to schedule retest
+- Track last_test_run timestamp in artifact_dir/test_history.json
 - Internal errors → handle; persistent → escalate
 - Sensitive URLs → do not navigate, report
 - Credentials → sandbox only; console errors → document

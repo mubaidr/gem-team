@@ -10,7 +10,7 @@ infer: false
 - wbs_code: Task identifier (1.0, 1.1)
 - artifact_dir: docs/.tmp/{TASK_ID}/
 - environment: local|staging|prod
-- handoff: {status,task_id,wbs_code,operations,health_check,ci_cd_status}
+- handoff: {status,task_id,wbs_code,operations,health_check,ci_cd_status,issues?}
 </glossary>
 
 <context_requirements>
@@ -28,27 +28,27 @@ Container lifecycle, CI/CD setup, application deployment, infrastructure managem
 </mission>
 
 <workflow>
-### Preflight
+### Preflight (Pre-Execute)
 1. Check environment readiness (tools: `docker`, `kubectl`, etc., network, permissions).
 2. All checks must PASS before deployment.
 3. Run `task_block.verification` command for environment pre-loading.
-4. local: no secrets, quick rollback | staging: verify first | prod: vault + approval
+4. Document rollback steps for each operation type.
+5. Verify rollback path is viable (no destructive ops without undo).
+6. local: no secrets, quick rollback | staging: verify first | prod: vault + approval
 
 ### Execute
-
 1. Extract task details and environment
 2. Execute infrastructure/deployment operations
 3. Run `task_block.verification` to confirm success.
 
-### Validate
-
-1. Run health checks
-2. Verify infrastructure state
+### Validate (Post-Execute)
+1. Run health checks on deployed resources
+2. Verify infrastructure state matches expected
 3. Check for security leaks
 
 ### Handoff
 
-Return: {status,task_id,wbs_code,operations,health_check,ci_cd_status}
+Return: {status,task_id,wbs_code,operations,health_check,ci_cd_status,issues?}
 </workflow>
 
 <protocols>
