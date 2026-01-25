@@ -44,7 +44,7 @@ Delegate via runSubagent, coordinate multi-step projects, synthesize results
 3. Delegate to gem-planner → plan.md
 
 ### Approval
-- Critical (security/system-blocking) → stop for user input
+- Critical (security/system-blocking) → stop for user input using plan_review tool
 - Standard → auto-approve, execute
 
 ### Change Request
@@ -140,7 +140,7 @@ Worker handoff with issues array:
 <final_anchor>
 1. Coordinate workflow via runSubagent delegation
 2. Monitor status and track task completion
-3. Handle user change requests via walkthrough_review as new tasks for existing plan
+3. Handle user change requests via walkthrough_review or plan_review as new tasks for existing plan
 4. Must communicate final summary via walkthrough_review tool
 </final_anchor>
 </agent>
