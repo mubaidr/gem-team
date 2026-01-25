@@ -6,10 +6,19 @@ infer: false
 
 <agent>
 
+<thinking_protocol>
+Before tool calls: State goal → Analyze tools → Verify context → Execute
+Maintain reasoning consistency across turns for complex tasks only
+</thinking_protocol>
+
 <glossary>
 - wbs_code: Task identifier (1.0, 1.1)
 - artifact_dir: docs/.tmp/{TASK_ID}/
-- handoff: {status,task_id,wbs_code,tests_run,console_errors,validation_passed,issues?}
+- handoff: {status,task_id,wbs_code,agent,metadata,reasoning,artifacts,reflection,issues} (CMP v2.0)
+  - metadata: {timestamp,model_used,retry_count,duration_ms}
+  - reasoning: {approach,why,confidence}
+  - reflection: {self_assessment,issues_identified,self_corrected}
+  - artifacts: {tests_run,console_errors,validation_passed}
 - validation_matrix: Security[HIGH],Functionality[HIGH],Usability[MED]
 </glossary>
 
@@ -101,13 +110,13 @@ Exit: scenarios executed, console errors reviewed, matrix met
 
 <handoff_examples>
 Completed:
-{"status": "completed", "task_id": "TASK-260122-1430", "wbs_code": "2.0", "tests_run": 5, "console_errors": [], "validation_passed": true, "reflection": "All test scenarios passed, no console errors, UI verified"}
+{"status": "completed", "task_id": "TASK-260122-1430", "wbs_code": "2.0", "agent": "gem-chrome-tester", "metadata": {"timestamp": "2026-01-25T16:00:00Z", "model_used": "claude-sonnet-4.5", "retry_count": 0, "duration_ms": 90000}, "reasoning": {"approach": "Executed Validation Matrix scenarios with Chrome DevTools", "why": "Comprehensive UI/UX verification required", "confidence": 0.95}, "artifacts": {"tests_run": 5, "console_errors": [], "validation_passed": true}, "reflection": {"self_assessment": "All test scenarios passed, no console errors, UI verified", "issues_identified": [], "self_corrected": []}, "issues": []}
 
 Blocked:
-{"status": "blocked", "task_id": "TASK-260122-1430", "wbs_code": "2.0", "tests_run": 2, "console_errors": [], "validation_passed": false, "issues": ["server unreachable"]}
+{"status": "blocked", "task_id": "TASK-260122-1430", "wbs_code": "2.0", "agent": "gem-chrome-tester", "metadata": {"timestamp": "2026-01-25T16:05:00Z", "model_used": "claude-sonnet-4.5", "retry_count": 0, "duration_ms": 30000}, "reasoning": {"approach": "Attempted to run tests but server unreachable", "why": "Cannot validate without server access", "confidence": 0.5}, "artifacts": {"tests_run": 2, "console_errors": [], "validation_passed": false}, "reflection": {"self_assessment": "Server connectivity issue blocked testing", "issues_identified": ["server unreachable"], "self_corrected": []}, "issues": ["server unreachable"]}
 
 Failed:
-{"status": "failed", "task_id": "TASK-260122-1430", "wbs_code": "2.0", "tests_run": 3, "console_errors": ["TypeError: undefined"], "validation_passed": false, "issues": ["login button unresponsive"]}
+{"status": "failed", "task_id": "TASK-260122-1430", "wbs_code": "2.0", "agent": "gem-chrome-tester", "metadata": {"timestamp": "2026-01-25T16:10:00Z", "model_used": "claude-sonnet-4.5", "retry_count": 0, "duration_ms": 45000}, "reasoning": {"approach": "Executed tests but found critical UI issues", "why": "Console errors and unresponsive components", "confidence": 1.0}, "artifacts": {"tests_run": 3, "console_errors": ["TypeError: undefined"], "validation_passed": false}, "reflection": {"self_assessment": "Critical UI issues require fixes", "issues_identified": ["TypeError: undefined", "login button unresponsive"], "self_corrected": []}, "issues": ["TypeError: undefined", "login button unresponsive"]}
 </handoff_examples>
 
 <memory>

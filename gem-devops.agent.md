@@ -6,11 +6,20 @@ infer: false
 
 <agent>
 
+<thinking_protocol>
+Before tool calls: State goal → Analyze tools → Verify context → Execute
+Maintain reasoning consistency across turns for complex tasks only
+</thinking_protocol>
+
 <glossary>
 - wbs_code: Task identifier (1.0, 1.1)
 - artifact_dir: docs/.tmp/{TASK_ID}/
 - environment: local|staging|prod
-- handoff: {status,task_id,wbs_code,operations,health_check,ci_cd_status,issues?}
+- handoff: {status,task_id,wbs_code,agent,metadata,reasoning,artifacts,reflection,issues} (CMP v2.0)
+  - metadata: {timestamp,model_used,retry_count,duration_ms}
+  - reasoning: {approach,why,confidence}
+  - reflection: {self_assessment,issues_identified,self_corrected}
+  - artifacts: {operations,health_check,ci_cd_status}
 </glossary>
 
 <context_requirements>
@@ -91,13 +100,13 @@ Exit: operations successful, resources cleaned, health passed
 
 <handoff_examples>
 Completed:
-{"status": "completed", "task_id": "TASK-260122-1430", "wbs_code": "3.0", "operations": ["docker build", "push to registry"], "health_check": "passed", "ci_cd_status": "pipeline green", "reflection": "All operations completed successfully, health checks passing, no resource leaks"}
+{"status": "completed", "task_id": "TASK-260122-1430", "wbs_code": "3.0", "agent": "gem-devops", "metadata": {"timestamp": "2026-01-25T18:00:00Z", "model_used": "glm-4.7", "retry_count": 0, "duration_ms": 180000}, "reasoning": {"approach": "Executed Docker build and push operations with preflight checks", "why": "Standard deployment workflow with health verification", "confidence": 0.95}, "artifacts": {"operations": ["docker build", "push to registry"], "health_check": "passed", "ci_cd_status": "pipeline green"}, "reflection": {"self_assessment": "All operations completed successfully, health checks passing, no resource leaks", "issues_identified": [], "self_corrected": []}, "issues": []}
 
 Blocked:
-{"status": "blocked", "task_id": "TASK-260122-1430", "wbs_code": "3.0", "operations": ["docker build"], "health_check": "pending", "issues": ["registry auth failed"]}
+{"status": "blocked", "task_id": "TASK-260122-1430", "wbs_code": "3.0", "agent": "gem-devops", "metadata": {"timestamp": "2026-01-25T18:05:00Z", "model_used": "glm-4.7", "retry_count": 0, "duration_ms": 45000}, "reasoning": {"approach": "Attempted docker build but registry auth failed", "why": "Cannot push to registry without authentication", "confidence": 0.6}, "artifacts": {"operations": ["docker build"], "health_check": "pending"}, "reflection": {"self_assessment": "Registry authentication issue blocking deployment", "issues_identified": ["registry auth failed"], "self_corrected": []}, "issues": ["registry auth failed"]}
 
 Failed:
-{"status": "failed", "task_id": "TASK-260122-1430", "wbs_code": "3.0", "operations": ["docker build"], "error": "preflight failed: missing SECRET_KEY", "health_check": "skipped"}
+{"status": "failed", "task_id": "TASK-260122-1430", "wbs_code": "3.0", "agent": "gem-devops", "metadata": {"timestamp": "2026-01-25T18:10:00Z", "model_used": "glm-4.7", "retry_count": 0, "duration_ms": 10000}, "reasoning": {"approach": "Attempted preflight checks", "why": "Missing required SECRET_KEY", "confidence": 1.0}, "artifacts": {"operations": ["docker build"], "health_check": "skipped"}, "reflection": {"self_assessment": "Preflight failed, missing required secret", "issues_identified": ["missing SECRET_KEY"], "self_corrected": []}, "issues": ["preflight failed: missing SECRET_KEY"]}
 </handoff_examples>
 
 <memory>

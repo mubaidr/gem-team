@@ -6,18 +6,28 @@ infer: false
 
 <agent>
 
+<thinking_protocol>
+Before tool calls: State goal → Analyze tools → Verify context → Execute
+Maintain reasoning consistency across turns for complex tasks only
+</thinking_protocol>
+
 <glossary>
 - TASK_ID: TASK-{YYMMDD-HHMM} format, orchestrator generates
 - wbs_code: Task identifier (1.0→1.1→1.1.1), delegates ONLY leaf level (tasks with no sub-tasks)
 - plan.md: docs/.tmp/{TASK_ID}/plan.md
 - task_states: plan.md frontmatter {"1.0":{"status":"pending","retry_count":0}}
 - status: pending|in-progress|completed|blocked|failed (unified across all agents)
-- handoff: {status,task_id,wbs_code} + agent-specific:
-  - Planner: +{artifacts,mode,state_updates}
-  - Implementer: +{files,tests_passed,verification_result}
-  - Tester: +{tests_run,console_errors,validation_passed}
-  - Writer: +{docs,diagrams,parity_verified}
-  - DevOps: +{operations,health_check,ci_cd_status}
+- handoff: {status,task_id,wbs_code,agent,metadata,reasoning,artifacts,reflection,issues} (CMP v2.0)
+  - metadata: {timestamp,model_used,retry_count,duration_ms}
+  - reasoning: {approach,why,confidence}
+  - reflection: {self_assessment,issues_identified,self_corrected}
+  - agent-specific artifacts:
+    - Planner: {plan_path,mode,state_updates}
+    - Implementer: {files,tests_passed,verification_result}
+    - Tester: {tests_run,console_errors,validation_passed}
+    - Writer: {docs,diagrams,parity_verified}
+    - DevOps: {operations,health_check,ci_cd_status}
+    - Reviewer: {review_score,critical_issues}
 - max_retries: 3
 - retry_increment: Orchestrator increments retry_count when receiving blocked status
 </glossary>
@@ -64,6 +74,13 @@ Trigger: gem-planner returns re-plan OR max_retries exceeded
 - Enter execution_loop → process pending tasks → mark completed → synthesize summary
 - Update `manage_todo_list` as tasks progress.
 
+### Critical Task Detection
+A task is critical if ANY of the following:
+- Priority = HIGH
+- Task involves security/PII (check task_block Context or Description)
+- Environment = prod
+- retry_count ≥ 2 (escalation)
+
 ### Reflect (Post-Execute)
 1. Self-assess: Did all tasks complete successfully?
 2. Identify: What could be improved in the workflow?
@@ -78,9 +95,15 @@ Trigger: gem-planner returns re-plan OR max_retries exceeded
 4. Validate: agent in [gem-implementer, gem-chrome-tester, gem-devops, gem-documentation-writer]
 5. Set state: pending → in-progress
 6. Delegate: runSubagent(agent,{task_id,wbs_code,task_block,context,retry_count})
-7. Route: completed→mark done | blocked→increment retry_count, retry | failed/retry≥3→escalate
-8. Update task_states in plan.md
-9. Loop until all completed OR max_retries exceeded
+7. Receive handoff from agent
+8. Check if task is critical (HIGH priority OR security/PII OR prod OR retry≥2)
+   - IF critical AND handoff.status=completed → delegate to gem-reviewer
+   - gem-reviewer receives {task_id,wbs_code,plan_path,previous_handoff}
+   - IF review rejected → increment retry_count, re-delegate to original agent
+   - IF review approved → continue
+9. Route: completed→mark done | blocked→increment retry_count, retry | failed/retry≥3→escalate
+10. Update task_states in plan.md
+11. Loop until all completed OR max_retries exceeded
 
 ### Escalation Protocol
 - retry_failure → gem-planner re-plan → user notification
@@ -90,6 +113,13 @@ Trigger: gem-planner returns re-plan OR max_retries exceeded
 ### Planner Delegation
 - Initial: runSubagent('gem-planner',{task_id,objective,constraints})
 - Replan: runSubagent('gem-planner',{task_id,objective,mode:'replan',failed_tasks,constraints})
+
+### Reviewer Delegation
+- Trigger: Critical task (HIGH priority OR security/PII OR prod OR retry≥2) with completed status
+- Delegate: runSubagent('gem-reviewer',{task_id,wbs_code,plan_path,previous_handoff})
+- Reviewer returns: {status,review_score,critical_issues}
+- IF review rejected → increment retry_count, re-delegate to original agent
+- IF review approved → mark task as completed
 
 ### User Protocol
 - Input: User goal, optional context

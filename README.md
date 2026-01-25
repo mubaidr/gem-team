@@ -14,6 +14,7 @@ The ecosystem consists of seven specialized roles:
 | gem-chrome-tester        | Browser automation & UI        | Visual verification |
 | gem-documentation-writer | Documentation & Diagrams       | Parity maintenance  |
 | gem-devops               | Infrastructure & CI/CD         | Idempotency first   |
+| gem-reviewer             | Security review for critical tasks | OWASP scanning     |
 
 ## 🛠 Usage
 
@@ -23,15 +24,18 @@ The ecosystem consists of seven specialized roles:
 
 ## 🧠 Design Principles
 
-This agent system follows best practices from 2025 research on agentic AI:
+This agent system follows best practices from 2025-2026 research on agentic AI:
 
 | Principle                 | Implementation                                                  |
 | ------------------------- | --------------------------------------------------------------- |
 | Clear Role Definition | Each agent has explicit `<role>`, `<mission>`, `<constraints>`  |
+| Interleaved Thinking | `<thinking_protocol>` for consistent reasoning quality          |
+| Spec-Driven Development | plan.md includes Specification section (Requirements, Design)  |
 | Explicit Tool Guidance | `<protocols>` section defines tool preferences                  |
 | Anti-Patterns         | `<anti_patterns>` specifies what NOT to do                      |
-| Structured Handoffs   | `<handoff_examples>` with JSON samples                          |
+| Structured Handoffs   | CMP v2.0 with reasoning, reflection, metadata                   |
 | Context Engineering   | `<context_requirements>` defines input contracts                |
+| Critical-Task Gating | gem-reviewer for security review of critical tasks              |
 | Safety Protocols      | `<error_handling>` with escalation routes                       |
 
 ## 📐 Agent Definition Structure
@@ -43,6 +47,7 @@ Each `.agent.md` file follows this structure:
 YAML frontmatter (name, description, infer)
 ---
 <agent>
+  <thinking_protocol>    - Interleaved thinking before tool calls
   <glossary>             - Key terms and definitions
   <context_requirements> - Input contract
   <role>                 - Title, skills, domain
@@ -53,8 +58,39 @@ YAML frontmatter (name, description, infer)
   <constraints>          - Operational limits
   <checklists>           - Entry/Exit criteria
   <error_handling>       - Failure routes
-  <handoff_examples>     - Concrete output samples
+  <handoff_examples>     - Concrete output samples (CMP v2.0)
 </agent>
+```
+
+### CMP v2.0 Handoff Format
+
+All agents use the standardized Concise Messaging Protocol v2.0:
+
+```json
+{
+  "status": "completed|blocked|failed",
+  "task_id": "TASK-YYMMDD-HHMM",
+  "wbs_code": "1.1",
+  "agent": "gem-implementer",
+  "metadata": {
+    "timestamp": "2026-01-25T14:30:00Z",
+    "model_used": "claude-sonnet-4.5",
+    "retry_count": 0,
+    "duration_ms": 45000
+  },
+  "reasoning": {
+    "approach": "Used multi_replace_string_in_file for batch edits",
+    "why": "Minimized tool calls, reduced context fragmentation",
+    "confidence": 0.9
+  },
+  "artifacts": { ... },
+  "reflection": {
+    "self_assessment": "All acceptance criteria met",
+    "issues_identified": [],
+    "self_corrected": []
+  },
+  "issues": []
+}
 ```
 
 ## 🔧 Customization

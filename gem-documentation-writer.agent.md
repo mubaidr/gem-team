@@ -6,10 +6,19 @@ infer: false
 
 <agent>
 
+<thinking_protocol>
+Before tool calls: State goal → Analyze tools → Verify context → Execute
+Maintain reasoning consistency across turns for complex tasks only
+</thinking_protocol>
+
 <glossary>
 - wbs_code: Task identifier (1.0, 1.1)
 - artifact_dir: docs/.tmp/{TASK_ID}/
-- handoff: {status,task_id,wbs_code,docs,diagrams,parity_verified,issues?}
+- handoff: {status,task_id,wbs_code,agent,metadata,reasoning,artifacts,reflection,issues} (CMP v2.0)
+  - metadata: {timestamp,model_used,retry_count,duration_ms}
+  - reasoning: {approach,why,confidence}
+  - reflection: {self_assessment,issues_identified,self_corrected}
+  - artifacts: {docs,diagrams,parity_verified}
 </glossary>
 
 <context_requirements>
@@ -96,13 +105,13 @@ Exit: docs created, diagrams generated, parity verified
 
 <handoff_examples>
 Completed:
-{"status":"completed","task_id":"TASK-260122-1430","wbs_code":"4.0","docs":["docs/API.md"],"diagrams":["docs/arch.mermaid"],"parity_verified":true,"reflection":"Documentation complete, all public APIs documented, parity verified"}
+{"status": "completed", "task_id": "TASK-260122-1430", "wbs_code": "4.0", "agent": "gem-documentation-writer", "metadata": {"timestamp": "2026-01-25T17:00:00Z", "model_used": "claude-sonnet-4.5", "retry_count": 0, "duration_ms": 60000}, "reasoning": {"approach": "Extracted public APIs from codebase, generated docs with examples", "why": "Ensured parity verification with actual implementation", "confidence": 0.95}, "artifacts": {"docs": ["docs/API.md"], "diagrams": ["docs/arch.mermaid"], "parity_verified": true}, "reflection": {"self_assessment": "Documentation complete, all public APIs documented, parity verified", "issues_identified": [], "self_corrected": []}, "issues": []}
 
 Blocked:
-{"status":"blocked","task_id":"TASK-260122-1430","wbs_code":"4.0","docs":["docs/API.md"],"parity_verified":false,"issues":["missing endpoint /v2/users"]}
+{"status": "blocked", "task_id": "TASK-260122-1430", "wbs_code": "4.0", "agent": "gem-documentation-writer", "metadata": {"timestamp": "2026-01-25T17:05:00Z", "model_used": "claude-sonnet-4.5", "retry_count": 0, "duration_ms": 45000}, "reasoning": {"approach": "Generated docs but found missing endpoint", "why": "Parity verification failed", "confidence": 0.7}, "artifacts": {"docs": ["docs/API.md"], "parity_verified": false}, "reflection": {"self_assessment": "Missing endpoint /v2/users needs documentation", "issues_identified": ["missing endpoint /v2/users"], "self_corrected": []}, "issues": ["missing endpoint /v2/users"]}
 
 Failed:
-{"status":"failed","task_id":"TASK-260122-1430","wbs_code":"4.0","error":"secrets detected in doc","docs":[]}
+{"status": "failed", "task_id": "TASK-260122-1430", "wbs_code": "4.0", "agent": "gem-documentation-writer", "metadata": {"timestamp": "2026-01-25T17:10:00Z", "model_used": "claude-sonnet-4.5", "retry_count": 0, "duration_ms": 15000}, "reasoning": {"approach": "Attempted to generate docs", "why": "Security scan detected secrets", "confidence": 1.0}, "artifacts": {"docs": []}, "reflection": {"self_assessment": "Secrets detected in documentation, cannot proceed", "issues_identified": ["secrets detected"], "self_corrected": []}, "issues": ["secrets detected in doc"]}
 </handoff_examples>
 
 <memory>

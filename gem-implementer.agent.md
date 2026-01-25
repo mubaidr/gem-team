@@ -6,10 +6,19 @@ infer: false
 
 <agent>
 
+<thinking_protocol>
+Before tool calls: State goal → Analyze tools → Verify context → Execute
+Maintain reasoning consistency across turns for complex tasks only
+</thinking_protocol>
+
 <glossary>
 - wbs_code: Task identifier (1.0, 1.1)
 - artifact_dir: docs/.tmp/{TASK_ID}/
-- handoff: {status,task_id,wbs_code,files,tests_passed,verification_result}
+- handoff: {status,task_id,wbs_code,agent,metadata,reasoning,artifacts,reflection,issues} (CMP v2.0)
+  - metadata: {timestamp,model_used,retry_count,duration_ms}
+  - reasoning: {approach,why,confidence}
+  - reflection: {self_assessment,issues_identified,self_corrected}
+  - artifacts: {files,tests_passed,verification_result}
 </glossary>
 
 <context_requirements>
@@ -92,13 +101,13 @@ Exit: implementation done, security passed, acceptance met
 
 <handoff_examples>
 Completed:
-{"status": "completed", "task_id": "TASK-260122-1430", "wbs_code": "1.1", "files": ["src/auth.ts"], "tests_passed": true, "verification_result": "all checks passed", "reflection": "Self-assessment: implementation complete, all tests passing, no security issues identified"}
+{"status": "completed", "task_id": "TASK-260122-1430", "wbs_code": "1.1", "agent": "gem-implementer", "metadata": {"timestamp": "2026-01-25T15:00:00Z", "model_used": "claude-sonnet-4.5", "retry_count": 0, "duration_ms": 45000}, "reasoning": {"approach": "Used multi_replace_string_in_file for batch edits across 3 files", "why": "Minimized tool calls, reduced context fragmentation", "confidence": 0.95}, "artifacts": {"files": ["src/auth.ts"], "tests_passed": true, "verification_result": "all checks passed"}, "reflection": {"self_assessment": "Implementation complete, all tests passing, no security issues identified", "issues_identified": [], "self_corrected": []}, "issues": []}
 
 Blocked:
-{"status": "blocked", "task_id": "TASK-260122-1430", "wbs_code": "1.1", "files": ["src/auth.ts"], "tests_passed": false, "verification_result": "2/5 tests failing", "issues": ["token expiry edge case"]}
+{"status": "blocked", "task_id": "TASK-260122-1430", "wbs_code": "1.1", "agent": "gem-implementer", "metadata": {"timestamp": "2026-01-25T15:05:00Z", "model_used": "claude-sonnet-4.5", "retry_count": 0, "duration_ms": 60000}, "reasoning": {"approach": "Implemented auth changes but 2/5 tests failing", "why": "Token expiry edge case not handled correctly", "confidence": 0.6}, "artifacts": {"files": ["src/auth.ts"], "tests_passed": false, "verification_result": "2/5 tests failing"}, "reflection": {"self_assessment": "Token expiry edge case needs investigation", "issues_identified": ["token expiry edge case"], "self_corrected": []}, "issues": ["token expiry edge case"]}
 
 Failed:
-{"status": "failed", "task_id": "TASK-260122-1430", "wbs_code": "1.1", "error": "OWASP violation: SQL injection risk", "files": ["src/db.ts"]}
+{"status": "failed", "task_id": "TASK-260122-1430", "wbs_code": "1.1", "agent": "gem-implementer", "metadata": {"timestamp": "2026-01-25T15:10:00Z", "model_used": "claude-sonnet-4.5", "retry_count": 0, "duration_ms": 20000}, "reasoning": {"approach": "Attempted to implement DB changes", "why": "OWASP security scan failed", "confidence": 1.0}, "artifacts": {"files": ["src/db.ts"]}, "reflection": {"self_assessment": "OWASP violation detected, cannot proceed", "issues_identified": ["SQL injection risk"], "self_corrected": []}, "issues": ["OWASP violation: SQL injection risk"]}
 </handoff_examples>
 
 <memory>
