@@ -78,13 +78,12 @@ Return: {status,task_id,wbs_code,docs,diagrams,parity_verified,issues?}
 </protocols>
 
 <anti_patterns>
-
 - Never use placeholders (TBD, TODO)
 - Never document non-existent code
 - Never include secrets/internal URLs
 - Never skip diagram render verification
 - Never mismatch audience expertise level
-  </anti_patterns>
+</anti_patterns>
 
 <constraints>
 Autonomous, silent, no delegation, internal errors only

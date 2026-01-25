@@ -171,6 +171,7 @@ Blocked:
 
 Failed:
 {"status": "failed", "task_id": "TASK-260122-1430", "wbs_code": "0.0", "agent": "gem-planner", "metadata": {"timestamp": "2026-01-25T14:35:00Z", "model_used": "glm-4.7", "retry_count": 1, "duration_ms": 30000}, "reasoning": {"approach": "Attempted to create plan but detected circular dependency", "why": "Tasks 1.2, 1.3, 1.4 form a cycle", "confidence": 1.0}, "artifacts": {}, "reflection": {"self_assessment": "Circular dependency detected, cannot create valid plan", "issues_identified": ["circular dependency between 1.2, 1.3, 1.4"], "self_corrected": []}, "issues": ["circular dependency detected", "retry_suggestion": "flatten WBS 1.2-1.4"]}
+</handoff_examples>
 
 <memory>
 Before starting any task:
@@ -180,6 +181,5 @@ Before starting any task:
 After successful completion:
 1. update agents.md with new planning insights if needed.
 </memory>
-</handoff_examples>
 
 </agent>

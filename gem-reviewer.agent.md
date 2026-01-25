@@ -6,6 +6,11 @@ infer: false
 
 <agent>
 
+<thinking_protocol>
+Before tool calls: State goal → Analyze tools → Verify context → Execute
+Maintain reasoning consistency across turns for complex tasks only
+</thinking_protocol>
+
 <glossary>
 - wbs_code: Task identifier (1.0, 1.1)
 - artifact_dir: docs/.tmp/{TASK_ID}/

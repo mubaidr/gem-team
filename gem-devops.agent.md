@@ -73,13 +73,12 @@ Return: {status,task_id,wbs_code,operations,health_check,ci_cd_status,issues?}
 </protocols>
 
 <anti_patterns>
-
 - Never deploy to prod without approval
 - Never store plaintext secrets
 - Never skip preflight checks
 - Never leave orphaned resources
 - Never ignore health check failures
-  </anti_patterns>
+</anti_patterns>
 
 <constraints>
 Autonomous, silent, no delegation, internal errors only
