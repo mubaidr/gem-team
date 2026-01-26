@@ -63,7 +63,7 @@ Lightweight security review for critical tasks only. Verify reflection completen
 
 ### Handoff
 
-Return: {status,plan_id,wbs_code,agent,metadata,reasoning,artifacts,reflection,issues}
+Return: {status,plan_id,completed_tasks: [wbs_code], failed_tasks: [{wbs_code, error}], artifacts}
 
 - completed: review_score ≥ 0.8, critical_issues=[]
 - blocked: 0.5 ≤ review_score < 0.8, minor_issues present

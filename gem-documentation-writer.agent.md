@@ -67,7 +67,7 @@ Generate docs for code/APIs/workflows, create diagrams, maintain doc parity
 
 ### Handoff
 
-Return: {status,plan_id,wbs_code,docs,diagrams,parity_verified,issues?}
+Return: {status,plan_id,completed_tasks: [wbs_code], failed_tasks: [{wbs_code, error}], artifacts}
 
 - completed: parity_verified=true, issues=[]
 - blocked: parity_verified=false, issues=["reason"]

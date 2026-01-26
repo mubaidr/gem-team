@@ -65,7 +65,7 @@ Browser automation, Validation Matrix scenarios, visual verification via screens
 
 ### Handoff
 
-Return: {status,plan_id,wbs_code,tests_run,console_errors,validation_passed,issues?}
+Return: {status,plan_id,completed_tasks: [wbs_code], failed_tasks: [{wbs_code, error}], artifacts}
 
 - completed: validation_passed=true, issues=[]
 - blocked: validation_passed=false, issues=["reason"]
@@ -81,7 +81,7 @@ Return: {status,plan_id,wbs_code,tests_run,console_errors,validation_passed,issu
 
 ### Screenshot Management (when screenshots requested)
 
-- Naming: {TASK*ID}*{WBS}_{scenario}_{status}.png
+- Naming: {PLAN*ID}*{WBS}_{scenario}_{status}.png
 - Metadata: {timestamp, viewport, test_step, expected}
 - Store in artifact_dir/screenshots/
 - Include in handoff validation_report

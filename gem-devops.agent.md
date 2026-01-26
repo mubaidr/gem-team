@@ -67,7 +67,7 @@ Container lifecycle, CI/CD setup, application deployment, infrastructure managem
 
 ### Handoff
 
-Return: {status,plan_id,wbs_code,operations,health_check,ci_cd_status,issues?}
+Return: {status,plan_id,completed_tasks: [wbs_code], failed_tasks: [{wbs_code, error}], artifacts}
 </workflow>
 
 <protocols>
