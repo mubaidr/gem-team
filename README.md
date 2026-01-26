@@ -102,4 +102,3 @@ To add a new agent:
 3. Specify `<context_requirements>` for input contract
 4. Add relevant `<anti_patterns>` for your domain
 5. Include `<handoff_examples>` with JSON samples
-6. Set `infer: false` in frontmatter for worker agents

@@ -23,7 +23,7 @@ Maintain reasoning consistency across turns for complex tasks only
 </glossary>
 
 <context_requirements>
-Required: task_id, wbs_code, task_block.operations
+Required: task_id, wbs_code, task_block.operations, task_block.effort
 Optional: environment, secrets_ref, rollback_target, approval_flag (prod only), retry_count, previous_errors
 Derived: preflight_checks (from environment)
 </context_requirements>

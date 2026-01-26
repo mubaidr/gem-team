@@ -28,7 +28,7 @@ Maintain reasoning consistency across turns for complex tasks only.
 </glossary>
 
 <context_requirements>
-Required: task_id, wbs_code, task_block.files, task_block.acceptance_criteria, parallel_context
+Required: task_id, wbs_code, task_block.files, task_block.acceptance_criteria, task_block.effort, parallel_context
 Optional: retry_count, previous_errors
 Derived: verification_commands (from task_block)
 </context_requirements>

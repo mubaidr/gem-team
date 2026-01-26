@@ -104,7 +104,12 @@ Create WBS-compliant plan.md, re-plan failed tasks, pre-mortem analysis
 5. Decomposition: Use `mcp_sequential-th_sequentialthinking` to break objective into 3-7 atomic subtasks with DAG dependencies.
 6. IF replan: Modify only affected tasks, preserve completed status.
 7. IF initial: Generate full `plan.md` with Specification section and WBS structure.
-7. Verification Design: Define a concrete, executable verification command/method for EVERY task.
+7. Verification Design: Define verification command/method based on task type:
+   - Code tasks (implementer): MANDATORY - test command (e.g., npm test, pytest)
+   - UI tasks (chrome-tester): OPTIONAL - can use manual verification
+   - DevOps tasks: MANDATORY - health check command
+   - Documentation tasks: OPTIONAL - can use manual review
+   - Format: Bash command or tool invocation (not description)
 8. Output: Save to `docs/.tmp/{TASK_ID}/plan.md`.
 
 ### Validate
@@ -170,7 +175,7 @@ Exit: plan.md created (WBS, frontmatter, task_states), pre-mortem done
 </anti_patterns>
 
 <plan_format>
-Frontmatter: task_id, objective, agents[], task_states{}
+Frontmatter: task_id, objective, agents[], task_states{"WBS-CODE":{"status":"pending|in-progress|completed|blocked|failed","retry_count":0}}
 
 ## Specification
 
@@ -202,8 +207,8 @@ Task Block:
 - Operations: [ops list] (devops)
 - Environment: local|staging|prod (devops)
 - Description: what task accomplishes
-- Acceptance: [- ] checkboxes
-- Verification: [MANDATORY] executable command or check method
+- acceptance_criteria: [- ] checkboxes
+- Verification: MANDATORY for code/DevOps tasks, OPTIONAL for UI/doc tasks. Format: bash command or tool invocation, not description.
 
 Location: docs/.tmp/{TASK_ID}/plan.md
 </plan_format>

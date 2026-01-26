@@ -103,11 +103,14 @@ A task is critical if ANY of the following:
    - IF review rejected → increment retry_count, re-delegate to original agent
    - IF review approved → continue
 9. Route: completed→mark done | blocked→increment retry_count, retry | failed/retry≥3→escalate
+   - Retry means: re-delegate to same agent with same parameters, updated retry_count, and previous errors for troubleshooting
 10. Update task_states in plan.md
 11. Loop until all completed OR max_retries exceeded
 
 ### Escalation Protocol
-- retry_failure → gem-planner re-plan → user notification
+All agents forward to Orchestrator. Orchestrator decides based on retry_count:
+- retry_count < 3: Retry the task (re-delegate to same agent with updated retry_count and previous errors)
+- retry_count ≥ 3: Delegate to gem-planner for re-plan, then notify user
 </workflow>
 
 <protocols>
@@ -119,8 +122,9 @@ A task is critical if ANY of the following:
 - Trigger: Critical task (HIGH priority OR security/PII OR prod OR retry≥2) with completed status
 - Delegate: runSubagent('gem-reviewer',{task_id,wbs_code,plan_path,previous_handoff,parallel_context})
 - Reviewer returns: {status,review_score,critical_issues}
-- IF review rejected → increment retry_count, re-delegate to original agent
+- IF review rejected → increment retry_count, re-delegate to original agent with review findings (critical_issues, review_score)
 - IF review approved → mark task as completed
+- Note: Agents cannot communicate directly. All feedback flows through Orchestrator.
 
 ### User Protocol
 - Input: User goal, optional context
