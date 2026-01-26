@@ -133,7 +133,7 @@ A task is critical if ANY of the following:
    b. Update task_states in plan.md for ALL returned codes (completed_tasks/failed_tasks).
    c. Process handoff:
    - For EACH wbs_code in completed_tasks: Check if critical (HIGH priority OR security/PII OR prod OR retry≥2)
-   - IF critical → delegate to gem-reviewer with {plan_id, wbs_codes: [critical_code], plan_path, previous_handoff}
+   - IF critical AND handoff.agent != 'gem-reviewer' → delegate to gem-reviewer with {plan_id, wbs_codes: [critical_code], plan_path, previous_handoff}
    - gem-reviewer returns: {status, review_score, critical_issues}
    - IF review rejected → increment retry_count, re-delegate to original agent with review findings
    - IF review approved → mark task as completed

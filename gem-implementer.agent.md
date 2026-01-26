@@ -63,8 +63,9 @@ Execute code changes, unit verification, self-review for security/quality
 
 Return: {status,plan_id,completed_tasks: [wbs_code], failed_tasks: [{wbs_code, error}], artifacts}
 
-- completed: verification_result="all passed"
-- blocked/failed: include failing tests or issues
+- completed: verification_result="all passed" (ALL tasks succeeded)
+- blocked: verification_result="partial success" (SOME tasks failed/blocked)
+- failed: verification_result="all failed" (ALL tasks failed) OR internal error
   </workflow>
 
 <protocols>
