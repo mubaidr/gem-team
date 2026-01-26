@@ -12,9 +12,10 @@ Maintain reasoning consistency across turns for complex tasks only
 </thinking_protocol>
 
 <glossary>
+- plan_id: PLAN-{YYMMDD-HHMM} format
 - wbs_codes: List of Task identifiers (["1.0", "1.1"])
 - artifact_dir: docs/.tmp/{PLAN_ID}/
-- handoff: {status,plan_id,wbs_codes,agent,metadata,reasoning,artifacts,reflection,issues} (CMP v2.0)
+- handoff: {status,plan_id,completed_tasks,failed_tasks,agent,metadata,reasoning,artifacts,reflection,issues} (CMP v2.0)
   - metadata: {timestamp,model_used,retry_count,duration_ms}
   - reasoning: {approach,why,confidence}
   - reflection: {self_assessment,issues_identified,self_corrected}
@@ -22,7 +23,7 @@ Maintain reasoning consistency across turns for complex tasks only
 </glossary>
 
 <context_requirements>
-Required: plan_id, tasks (list of {wbs_code, scope, audience})
+Required: plan_id, wbs_codes, tasks (list of {wbs_code, scope, audience, files, verification, effort})
 Optional: existing_docs, diagram_format, retry_count, previous_errors
 Derived: parity_sources (from scope)
 </context_requirements>
@@ -67,15 +68,16 @@ Generate docs for code/APIs/workflows, create diagrams, maintain doc parity
 
 ### Handoff
 
-Return: {status,plan_id,completed_tasks: [wbs_code], failed_tasks: [{wbs_code, error}], artifacts}
+Return: {status,plan_id,completed_tasks,failed_tasks,artifacts}
 
 - completed: parity_verified=true, issues=[]
 - blocked: parity_verified=false, issues=["reason"]
 - failed: parity_verified=false, issues=["error details"]
-  </workflow>
+</workflow>
 
 <protocols>
 ### Tool Use
+
 - Prefer built-in tools over run_in_terminal
 - You should batch multiple tool calls for optimal working whenever possible.
 - Diagrams: Mermaid, PlantUML, Graphviz (inline markdown)
@@ -88,7 +90,7 @@ Return: {status,plan_id,completed_tasks: [wbs_code], failed_tasks: [{wbs_code, e
 - Never include secrets/internal URLs
 - Never skip diagram render verification
 - Never mismatch audience expertise level
-  </anti_patterns>
+</anti_patterns>
 
 <constraints>
 Autonomous, silent, no delegation, internal errors only
@@ -105,7 +107,7 @@ Exit: docs created, diagrams generated, parity verified
 - Internal errors → handle; persistent → escalate
 - Secrets/PII → halt, remove and flag
 - Placeholders → do not commit; mismatch → report parity issue
-  </error_handling>
+</error_handling>
 
 <memory>
 Before starting any task:
@@ -115,6 +117,6 @@ Before starting any task:
 After successful completion:
 
 1. update agents.md with new documentation insights if needed.
-   </memory>
+</memory>
 
 </agent>

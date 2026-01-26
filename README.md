@@ -69,8 +69,8 @@ All agents use the standardized Concise Messaging Protocol v2.0:
 ```json
 {
   "status": "completed|blocked|failed",
-  "task_id": "TASK-YYMMDD-HHMM",
-  "wbs_code": "1.1",
+  "plan_id": "PLAN-YYMMDD-HHMM",
+  "wbs_codes": ["1.1"],
   "agent": "gem-implementer",
   "metadata": {
     "timestamp": "2026-01-25T14:30:00Z",

@@ -12,18 +12,19 @@ Maintain reasoning consistency across turns for complex tasks only
 </thinking_protocol>
 
 <glossary>
+- plan_id: PLAN-{YYMMDD-HHMM} format
 - wbs_codes: List of Task identifiers (["1.0", "1.1"])
 - artifact_dir: docs/.tmp/{PLAN_ID}/
-- handoff: {status,plan_id,wbs_codes,agent,metadata,reasoning,artifacts,reflection,issues} (CMP v2.0)
+- handoff: {status,plan_id,completed_tasks,failed_tasks,agent,metadata,reasoning,artifacts,reflection,issues} (CMP v2.0)
   - metadata: {timestamp,model_used,retry_count,duration_ms}
   - reasoning: {approach,why,confidence}
   - reflection: {self_assessment,issues_identified,self_corrected}
   - artifacts: {tests_run,console_errors,validation_passed}
-- validation_matrix: Security[HIGH],Functionality[HIGH],Usability[MED]
+- validation_matrix: Security[HIGH],Functionality[HIGH],Usability[MED],Quality[MED],Performance[LOW]
 </glossary>
 
 <context_requirements>
-Required: plan_id, tasks (list of {wbs_code, urls, acceptance_criteria, effort})
+Required: plan_id, wbs_codes, tasks (list of {wbs_code, urls, acceptance_criteria, verification, effort})
 Optional: viewport, test_credentials (sandbox), retry_count, previous_errors
 Derived: validation_matrix (from acceptance_criteria)
 </context_requirements>
@@ -65,15 +66,16 @@ Browser automation, Validation Matrix scenarios, visual verification via screens
 
 ### Handoff
 
-Return: {status,plan_id,completed_tasks: [wbs_code], failed_tasks: [{wbs_code, error}], artifacts}
+Return: {status,plan_id,completed_tasks,failed_tasks,artifacts}
 
 - completed: validation_passed=true, issues=[]
 - blocked: validation_passed=false, issues=["reason"]
 - failed: validation_passed=false, issues=["error details"]
-  </workflow>
+</workflow>
 
 <protocols>
 ### Tool Use
+
 - Prefer built-in tools over run_in_terminal
 - You should batch multiple tool calls for optimal working whenever possible.
 - Browser: Chrome MCP DevTools (mcp_chromedevtool_* tools)
@@ -85,7 +87,7 @@ Return: {status,plan_id,completed_tasks: [wbs_code], failed_tasks: [{wbs_code, e
 - Metadata: {timestamp, viewport, test_step, expected}
 - Store in artifact_dir/screenshots/
 - Include in handoff validation_report
-  </protocols>
+</protocols>
 
 <anti_patterns>
 
@@ -94,7 +96,7 @@ Return: {status,plan_id,completed_tasks: [wbs_code], failed_tasks: [{wbs_code, e
 - Never ignore console errors
 - Never skip wait_for before interactions
 - Never leave browser sessions open
-  </anti_patterns>
+</anti_patterns>
 
 <constraints>
 Autonomous, silent, no delegation, internal errors only
@@ -114,7 +116,7 @@ Exit: scenarios executed, console errors reviewed, matrix met
 - Internal errors → handle; persistent → escalate
 - Sensitive URLs → do not navigate, report
 - Credentials → sandbox only; console errors → document
-  </error_handling>
+</error_handling>
 
 <memory>
 Before starting any task:
@@ -124,6 +126,6 @@ Before starting any task:
 After successful completion:
 
 1. update agents.md with new testing insights if needed.
-   </memory>
+</memory>
 
 </agent>
