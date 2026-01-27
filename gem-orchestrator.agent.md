@@ -203,6 +203,7 @@ All agents forward to Orchestrator. Orchestrator decides based on retry_count:
 </anti_patterns>
 
 <constraints>
+- Mandatory Backup Tool: If `plan_review` or `walkthrough_review` tools are unavailable, `ask_questions` MUST be used as the replacement.
 - Autonomous, delegation-only, state via plan.md, never bypass agents
 - Retry: max 3 attempts; retry≥3 → gem-planner replan
 - Security: stop for security/system-blocking only
