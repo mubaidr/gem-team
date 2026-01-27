@@ -67,7 +67,7 @@ Delegate via runSubagent, coordinate multi-step projects, synthesize results
 ### Init
 1. Parse goal, check input completeness
 2. Generate PLAN_ID using timestamp: PLAN-{YYMMDD-HHMM}
-3. **Project Context:** Call `get_project_setup_info` to identify language, project type, and key configuration.
+3. **Project Context:** Use `get_project_setup_info` to identify language, project type, and key configuration.
 4. IF embedded_plan or plan_path provided:
    a. Load/parse plan
    b. Transform to standard format (wbs_code hierarchy, frontmatter task_states, task_blocks)

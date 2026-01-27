@@ -38,11 +38,11 @@ Execute code changes, unit verification, self-review for security/quality
 
 <workflow>
 ### Execute
-1. Impact Analysis: Use `semantic_search` for call sites/imports, `list_code_usages` for deep tracing.
+1. Impact Analysis: Use `semantic_search` for call sites/imports, `list_code_usages` for deep symbol tracing.
 2. Identify side effects: shared state, config, env vars
 3. Batch Edits: Iterate through `tasks`. Open files ONCE. Use `multi_replace_string_in_file` as PRIMARY edit method for batch changes.
 4. Validation: Use `get_errors` to check for compile/lint errors after edits.
-5. Verification: Use `get_changed_files` to verify modifications align with acceptance criteria, then execute verification commands.
+5. Verification: Use `get_changed_files` to review modifications, then execute verification commands.
 6. Testing: Run unit tests if applicable
 
 ### Review

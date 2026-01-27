@@ -101,7 +101,8 @@ Create WBS-compliant plan.md, re-plan failed tasks, pre-mortem analysis
 ### Execute
 
 1. Research:
-   - Use `get_project_setup_info` to identify high-level project type and key boundaries.
+   - Use `search_subagent` for complex multi-file codebase exploration.
+   - Use `get_project_setup_info` to identify project type and structure.
    - Use `semantic_search` for architecture mapping.
    - Use `grep_search`/`read_file` for specific details.
    - For complex mapping, use `mcp_sequential-th_sequentialthinking` to simulate failure paths and logic branches.
