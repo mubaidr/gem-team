@@ -40,11 +40,16 @@ Container lifecycle, CI/CD setup, application deployment, infrastructure managem
 <workflow>
 ### Preflight (Pre-Execute)
 1. Check environment readiness (tools: `docker`, `kubectl`, etc., network, permissions).
-2. All checks must PASS before deployment.
-3. Resource Check: Verify if resources already exist to ensure idempotency.
-4. Document rollback steps for each operation type.
-5. Verify rollback path is viable (no destructive ops without undo).
-6. local: no secrets, quick rollback | staging: verify first | prod: vault + approval
+2. Container Config: Use `container-tools_get-config` to inspect current container state.
+3. Research Phase: Use `vscode-websearchforcopilot_webSearch` and `fetch_webpage` for:
+   - Latest security advisories for base images
+   - Best practices for target infrastructure
+   - Known issues with specific versions
+4. All checks must PASS before deployment.
+5. Resource Check: Verify if resources already exist to ensure idempotency.
+6. Document rollback steps for each operation type.
+7. Verify rollback path is viable (no destructive ops without undo).
+8. local: no secrets, quick rollback | staging: verify first | prod: vault + approval
 
 ### Execute
 
@@ -78,9 +83,56 @@ Return: {status,plan_id,completed_tasks,failed_tasks,artifacts}
 - Parallel Execution: Batch independent tool calls in a SINGLE `<function_calls>` block for concurrent execution.
 - Use `get_errors` after configuration file edits to validate syntax
 - Use `file_search` to discover existing CI/CD configs, Dockerfiles, k8s manifests
-- Terminal: Docker/Podman, kubectl, CI/CD commands; timeout S/M=2min, L/XL=5min.
+- Container Tools: Use `container-tools_get-config` to inspect Docker/container configurations before operations
+- Terminal: Docker/Podman, kubectl, CI/CD commands
 - Parallel Safety: When running multiple builds/deployments, use unique names/tags or workspace isolation (Git worktrees) to avoid interference.
 - Idempotent Commands: Prefer commands that are safe to run multiple times (e.g., `mkdir -p`, `ln -sf`, `docker image inspect || docker pull`, `kubectl apply`).
+
+### Web Research for Infrastructure (CRITICAL)
+
+- Primary Tool: `vscode-websearchforcopilot_webSearch` for infrastructure docs
+- Secondary Tool: `fetch_webpage` for official documentation
+- ALWAYS use web search for:
+  - Cloud provider documentation (AWS, GCP, Azure)
+  - Kubernetes resource specifications and best practices
+  - Docker image security and optimization
+  - CI/CD pipeline patterns and examples
+  - Infrastructure security advisories
+  - Terraform/Helm chart references
+  - Service mesh configurations (Istio, Linkerd)
+- Query Format: Include tool version, cloud provider, current year
+- Example:
+  ```
+  // Before Kubernetes deployment
+  vscode-websearchforcopilot_webSearch("Kubernetes HPA best practices 2026")
+  fetch_webpage("https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/")
+
+  // Docker optimization
+  vscode-websearchforcopilot_webSearch("Docker multi-stage build security best practices 2026")
+  ```
+
+### Parallel Tool Batching Examples
+
+```
+// Preflight phase - batch these:
+container-tools_get-config()           // Container config
+file_search("/Dockerfile*")          // Find Dockerfiles
+file_search("/*.yaml")               // Find K8s manifests
+vscode-websearchforcopilot_webSearch("${tool} security best practices 2026")
+
+// Validation phase - batch these:
+run_in_terminal("docker images")       // List images
+run_in_terminal("kubectl get pods")    // Check pods
+get_errors()                           // Config validation
+```
+
+### Timeout Strategy
+
+- XS effort: 30s (config changes)
+- S effort: 1min (small deployments)
+- M effort: 2min (moderate builds)
+- L effort: 5min (large deployments)
+- XL effort: 10min (full infrastructure provisioning)
 
 ### Background Agent Isolation
 

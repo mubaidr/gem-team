@@ -40,10 +40,14 @@ Execute code changes, unit verification, self-review for security/quality
 ### Execute
 1. Impact Analysis: Use `semantic_search` for call sites/imports, `list_code_usages` for deep symbol tracing.
 2. Identify side effects: shared state, config, env vars
-3. Batch Edits: Iterate through `tasks`. Open files ONCE. Use `multi_replace_string_in_file` as PRIMARY edit method for batch changes.
-4. Validation: Use `get_errors` to check for compile/lint errors after edits.
-5. Verification: Use `get_changed_files` to review modifications, then execute verification commands.
-6. Testing: Run unit tests if applicable
+3. Research Phase (when needed):
+   - Use `vscode-websearchforcopilot_webSearch` for best practices, debugging errors, API docs
+   - Use `fetch_webpage` for specific documentation pages
+   - Cross-reference with codebase patterns
+4. Batch Edits: Iterate through `tasks`. Open files ONCE. Use `multi_replace_string_in_file` as PRIMARY edit method for batch changes.
+5. Validation: Use `get_errors` to check for compile/lint errors after edits.
+6. Verification: Use `get_changed_files` to review modifications, then execute verification commands.
+7. Testing: Run unit tests if applicable
 
 ### Review
 
@@ -77,9 +81,52 @@ Return: {status,plan_id,completed_tasks,failed_tasks,artifacts}
 - PRIMARY EDIT METHOD: Use `multi_replace_string_in_file` for all batch edits (multiple changes in single call)
 - Use `replace_string_in_file` only for single isolated changes
 - Use `get_errors` after edits to validate no compile/lint errors introduced
+- Impact Analysis: Use `list_code_usages` to trace symbol references across codebase (REQUIRED before refactoring)
 - Parallel Execution: Batch independent tool calls in a SINGLE `<function_calls>` block for concurrent execution
 - Concurrency & Atomicity: When working in parallel, using atomic file editing tools is critical. It ensures that complex file changes happen in a single operation, avoiding common issues like file locks, race conditions, or inconsistent state when multiple agents operate in the same workspace.
 - Terminal: run_in_terminal for commands, run_task for VS Code tasks, package managers, build/test, git
+
+### Web Research for Debugging (CRITICAL)
+
+- Primary Tool: `vscode-websearchforcopilot_webSearch` for error resolution
+- Secondary Tool: `fetch_webpage` for official documentation
+- ALWAYS use web search for:
+  - Error messages and stack traces (include exact error text)
+  - Library/framework API usage and examples
+  - Best practices for implementation patterns
+  - Security vulnerabilities and fixes (CVE lookups)
+  - Performance optimization techniques
+  - Deprecated APIs and migration guides
+- Query Format: Include error message, framework version, current year
+- Example:
+  ```
+  // When encountering "TypeError: Cannot read property 'map' of undefined"
+  vscode-websearchforcopilot_webSearch("TypeError Cannot read property map of undefined React 2026 fix")
+  fetch_webpage("https://react.dev/reference/react/useState")
+  ```
+
+### Parallel Tool Batching Examples
+
+```
+// Before implementation - batch analysis:
+list_code_usages(symbol)               // Find all usages
+semantic_search("related patterns")    // Find similar code
+get_project_setup_info()               // Project context
+vscode-websearchforcopilot_webSearch("best practices for ${pattern} 2026")
+
+// After implementation - batch validation:
+get_errors()                           // Lint/compile errors
+get_changed_files()                    // Review changes
+run_in_terminal("npm test")            // Run tests
+```
+
+### Timeout Strategy
+
+- XS effort: 30s (single line changes)
+- S effort: 1min (small edits, few files)
+- M effort: 2min (moderate changes)
+- L effort: 5min (large refactors, multiple files)
+- XL effort: 10min (major builds, full test suites)
 
 ### Concurrency Alignment
 

@@ -39,11 +39,16 @@ Browser automation, Validation Matrix scenarios, visual verification via screens
 
 <workflow>
 ### Test Case Design (Pre-Execute)
-1. Map Validation Matrix → test scenarios:
+1. Research Phase: Use `vscode-websearchforcopilot_webSearch` and `fetch_webpage` for:
+   - Current accessibility standards (WCAG 2.2)
+   - UI testing best practices for target framework
+   - Known browser compatibility issues
+2. Map Validation Matrix → test scenarios:
    - Security[HIGH]: XSS, auth bypass, input sanitization
    - Functionality[HIGH]: happy path, edge cases, error states
    - Usability[MED]: accessibility, responsive, navigation flow
-2. Generate test cases with: {scenario, steps, expected, evidence_type}
+   - Performance[MED]: Core Web Vitals, load times
+3. Generate test cases with: {scenario, steps, expected, evidence_type}
 
 ### Execute
 
@@ -79,16 +84,61 @@ Return: {status,plan_id,completed_tasks,failed_tasks,artifacts}
 - Prefer built-in tools over run_in_terminal
 - Parallel Execution: Batch independent tool calls in a SINGLE `<function_calls>` block for concurrent execution
 - Browser: Use MCP Chrome DevTools tools:
-  - `mcp_chromedevtool_navigate_page` - Navigate to URLs
-  - `mcp_chromedevtool_click` - Click elements
-  - `mcp_chromedevtool_fill` - Fill form inputs
-  - `mcp_chromedevtool_hover` - Hover interactions
-  - `mcp_chromedevtool_select_option` - Select dropdowns
-  - `mcp_chromedevtool_screenshot` - Capture screenshots
-  - `mcp_chromedevtool_list_console_messages` - Check console errors
-  - `mcp_chromedevtool_network_get_response_body` - Inspect network responses
-  - `mcp_chromedevtool_evaluate_javascript` - Execute JS in page context
-- Terminal: `run_in_terminal` for local servers; timeout S/M=2min, L/XL=5min
+  - Navigation: `mcp_chromedevtool_navigate_page` - Navigate to URLs
+  - Interaction: `mcp_chromedevtool_click`, `mcp_chromedevtool_fill`, `mcp_chromedevtool_hover`, `mcp_chromedevtool_select_option`
+  - Evidence: `mcp_chromedevtool_screenshot` - Capture screenshots
+  - Debugging: `mcp_chromedevtool_list_console_messages` - Check console errors
+  - Network: `mcp_chromedevtool_network_get_response_body` - Inspect network responses
+  - JavaScript: `mcp_chromedevtool_evaluate_javascript` - Execute JS in page context
+  - Performance: `mcp_chromedevtool_get_pagespeed_metrics` - Core Web Vitals and performance metrics
+  - Emulation: `mcp_chromedevtool_emulate` - Device/viewport emulation for responsive testing
+- Terminal: `run_in_terminal` for local servers
+
+### Web Research for UI Testing (CRITICAL)
+
+- Primary Tool: `vscode-websearchforcopilot_webSearch` for testing best practices
+- Secondary Tool: `fetch_webpage` for accessibility and UX documentation
+- ALWAYS use web search for:
+  - Accessibility standards (WCAG 2.2 guidelines)
+  - UI/UX testing best practices and patterns
+  - Browser compatibility issues and workarounds
+  - Performance testing benchmarks and thresholds
+  - Mobile-first design patterns
+  - Testing framework documentation (Playwright, Cypress patterns)
+  - Visual regression testing strategies
+- Query Format: Include browser version, framework, current year
+- Example:
+  ```
+  // Before accessibility testing
+  vscode-websearchforcopilot_webSearch("WCAG 2.2 accessibility testing checklist 2026")
+  fetch_webpage("https://www.w3.org/WAI/WCAG22/quickref/")
+
+  // Performance benchmarks
+  vscode-websearchforcopilot_webSearch("Core Web Vitals thresholds 2026 best practices")
+  ```
+
+### Parallel Tool Batching Examples
+
+```
+// Pre-test research - batch these:
+vscode-websearchforcopilot_webSearch("${component} accessibility best practices 2026")
+fetch_webpage("https://developer.chrome.com/docs/lighthouse/")
+get_project_setup_info()               // Understand app structure
+
+// During test - batch independent checks:
+mcp_chromedevtool_screenshot()         // Visual state
+mcp_chromedevtool_list_console_messages() // Console errors
+mcp_chromedevtool_get_pagespeed_metrics() // Performance
+mcp_chromedevtool_evaluate_javascript("document.querySelectorAll('[aria-label]').length")
+```
+
+### Timeout Strategy
+
+- XS effort: 30s (single page checks)
+- S effort: 1min (simple flows)
+- M effort: 2min (multi-page flows)
+- L effort: 5min (complex user journeys)
+- XL effort: 10min (full E2E suites)
 
 ### Screenshot Management (when screenshots requested)
 

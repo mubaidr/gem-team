@@ -37,6 +37,33 @@ This agent system follows best practices from 2025-2026 research on agentic AI:
 | Context Engineering   | `<context_requirements>` defines input contracts                |
 | Critical-Task Gating | gem-reviewer for security review of critical tasks              |
 | Safety Protocols      | `<error_handling>` with escalation routes                       |
+| Web Research Integration | All agents use `vscode-websearchforcopilot_webSearch` and `fetch_webpage` |
+| Parallel Execution | Batch independent tool calls for maximum throughput            |
+| Timeout Strategy | Effort-based timeouts (XS: 30s → XL: 10min)                    |
+
+## 🌐 Web Research Protocol
+
+All agents integrate web research for real-time knowledge:
+
+| Agent | Primary Research Use Cases |
+| ----- | -------------------------- |
+| gem-planner | Best practices, architecture patterns, tech decisions |
+| gem-implementer | Debugging errors, API docs, security fixes |
+| gem-devops | Cloud docs, K8s specs, CI/CD patterns |
+| gem-chrome-tester | WCAG standards, UI patterns, performance benchmarks |
+| gem-documentation-writer | Style guides, API doc standards, diagram syntax |
+| gem-reviewer | OWASP Top 10, CVE lookups, security advisories |
+
+Tools Used:
+
+- `vscode-websearchforcopilot_webSearch` - Primary search for current information
+- `fetch_webpage` - Retrieve specific documentation pages
+
+Query Best Practices:
+
+- Always include current year/month in queries
+- Include framework/library versions
+- Cross-reference web findings with codebase patterns
 
 ## 📐 Agent Definition Structure
 

@@ -67,7 +67,7 @@ Delegate via runSubagent, coordinate multi-step projects, synthesize results
 ### Init
 1. Parse goal, check input completeness
 2. Generate PLAN_ID using timestamp: PLAN-{YYMMDD-HHMM}
-3. **Project Context:** Use `get_project_setup_info` to identify language, project type, and key configuration.
+3. Project Context: Use `get_project_setup_info` to identify language, project type, and key configuration.
 4. IF embedded_plan or plan_path provided:
    a. Load/parse plan
    b. Transform to standard format (wbs_code hierarchy, frontmatter task_states, task_blocks)
@@ -216,6 +216,42 @@ All agents forward to Orchestrator. Orchestrator decides based on retry_count:
 - Use `get_errors` after implementation tasks to validate no compile/lint errors
 - runSubagent REQUIRED for all worker tasks. Orchestrator leverages parallel subagent capacity.
 - runSubagent signature: `runSubagent({ agentName: string, description: string, prompt: string })`
+
+### Web Research Coordination
+
+- Primary Tool: `vscode-websearchforcopilot_webSearch` for strategic research
+- Secondary Tool: `fetch_webpage` for specific documentation
+- Orchestrator uses web research for:
+  - Project architecture recommendations before planning
+  - Technology stack decisions and comparisons
+  - Best practices for delegation patterns
+  - Troubleshooting recurring failures across agents
+- Delegate specialized research to agents:
+  - Security: gem-reviewer handles OWASP, CVE lookups
+  - Implementation: gem-implementer handles debugging, API docs
+  - Infrastructure: gem-devops handles cloud/container docs
+  - Testing: gem-chrome-tester handles accessibility, UI patterns
+  - Documentation: gem-documentation-writer handles style guides
+
+### Parallel Tool Batching Examples
+
+```
+// Initial assessment - batch these:
+get_project_setup_info()               // Project context
+file_search("/plan.md")              // Find existing plans
+vscode-websearchforcopilot_webSearch("${project_type} architecture best practices 2026")
+
+// Pre-delegation - batch these:
+read_file("docs/.tmp/{PLAN_ID}/plan.md") // Load plan
+get_errors()                            // Check workspace health
+manage_todo_list([...])                 // Track progress
+```
+
+### Memory Integration (Future Enhancement)
+
+- Consider `memory` tool for persistent context across sessions
+- Store: Successful patterns, failed approaches, project-specific learnings
+- Retrieve: Before planning, after failures, for optimization
 </protocols>
 
 <anti_patterns>

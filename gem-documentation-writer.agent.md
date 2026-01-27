@@ -38,10 +38,14 @@ Generate docs for code/APIs/workflows, create diagrams, maintain doc parity
 
 <workflow>
 ### Parity Verification (Pre-Write)
-1. Extract all public APIs/functions from target files
-2. Cross-reference with existing docs (if any)
-3. Generate coverage matrix: {entity, documented?, in_scope?}
-4. Flag gaps before drafting
+1. Research Phase: Use `vscode-websearchforcopilot_webSearch` and `fetch_webpage` for:
+   - Current documentation standards for target framework
+   - Best practices for audience type (developer, user, admin)
+   - Diagram notation and rendering requirements
+2. Extract all public APIs/functions from target files
+3. Cross-reference with existing docs (if any)
+4. Generate coverage matrix: {entity, documented?, in_scope?}
+5. Flag gaps before drafting
 
 ### Execute
 
@@ -85,6 +89,57 @@ Return: {status,plan_id,completed_tasks,failed_tasks,artifacts}
 - Use `file_search` with glob patterns to discover all files in a module/package
 - Use `multi_replace_string_in_file` for batch documentation updates across multiple files
 - Diagrams: Mermaid, PlantUML, Graphviz (inline markdown)
+
+### Web Research for Documentation (CRITICAL)
+
+- Primary Tool: `vscode-websearchforcopilot_webSearch` for documentation standards
+- Secondary Tool: `fetch_webpage` for official style guides and references
+- ALWAYS use web search for:
+  - Documentation best practices and style guides (Google, Microsoft)
+  - API documentation standards (OpenAPI, JSDoc, TypeDoc)
+  - README structure and best practices
+  - Technical writing patterns and templates
+  - Diagram notation standards (Mermaid, PlantUML syntax)
+  - Accessibility in documentation (alt text, screen reader friendly)
+  - Changelog and versioning conventions (Keep a Changelog, SemVer)
+  - Framework-specific documentation patterns
+- Query Format: Include target audience, documentation type, current year
+- Example:
+  ```
+  // Before writing API docs
+  vscode-websearchforcopilot_webSearch("API documentation best practices 2026")
+  fetch_webpage("https://developers.google.com/style")
+
+  // Mermaid diagram syntax
+  vscode-websearchforcopilot_webSearch("Mermaid sequence diagram syntax examples 2026")
+  fetch_webpage("https://mermaid.js.org/syntax/sequenceDiagram.html")
+
+  // README structure
+  vscode-websearchforcopilot_webSearch("README best practices GitHub 2026")
+  ```
+
+### Parallel Tool Batching Examples
+
+```
+// Research phase - batch these:
+vscode-websearchforcopilot_webSearch("${framework} documentation conventions 2026")
+fetch_webpage("https://jsdoc.app/")    // JSDoc reference
+semantic_search("public API functions") // Find code to document
+file_search("/*.md")                 // Find existing docs
+
+// Parity check - batch these:
+grep_search("export function|export const") // Find exports
+grep_search("@param|@returns")          // Find existing JSDoc
+get_errors()                            // Lint markdown
+```
+
+### Timeout Strategy
+
+- XS effort: 30s (single file docs)
+- S effort: 1min (small documentation updates)
+- M effort: 2min (multiple files, diagrams)
+- L effort: 5min (comprehensive API docs)
+- XL effort: 10min (full documentation overhaul)
 </protocols>
 
 <anti_patterns>

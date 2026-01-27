@@ -106,7 +106,11 @@ Create WBS-compliant plan.md, re-plan failed tasks, pre-mortem analysis
    - Use `semantic_search` for architecture mapping.
    - Use `grep_search`/`read_file` for specific details.
    - For complex mapping, use `mcp_sequential-th_sequentialthinking` to simulate failure paths and logic branches.
-   - When searching online, always include the current year and month in the query.
+   - Web Research (MANDATORY for new tech/patterns):
+     - Use `vscode-websearchforcopilot_webSearch` with current year/month in query
+     - Use `fetch_webpage` to retrieve official documentation
+     - Research best practices, security advisories, and recommended approaches
+     - Cross-reference external findings with codebase patterns
 2. Specification Generation: Create Specification section with Requirements, Design Decisions, and Risk Assessment.
 3. Risk Assessment: For each task, compute risk score:
     - Impact: HIGH (system-wide) [3] | MED (component) [2] | LOW (local) [1]
@@ -157,6 +161,42 @@ Return: {status,plan_id,completed_tasks,failed_tasks,artifacts}
 - Parallel Execution: Batch independent tool calls in a SINGLE `<function_calls>` block for concurrent execution
 - Use `mcp_sequential-th_sequentialthinking` for complex analysis and pre-mortem simulation
 - Use `file_search` for discovering files by glob pattern before reading
+
+### Web Research Protocol (CRITICAL)
+
+- Primary Tool: `vscode-websearchforcopilot_webSearch` for all online research
+- Secondary Tool: `fetch_webpage` for retrieving specific documentation pages
+- ALWAYS use web search for:
+  - Best practices and recommended approaches
+  - Current library/framework documentation
+  - Security advisories and vulnerability databases
+  - Architecture patterns and design decisions
+  - Debugging known issues and error messages
+  - Performance optimization techniques
+- Query Format: Include current year/month (e.g., "React best practices 2026")
+- Cross-Reference: Combine web research with `semantic_search` for codebase alignment
+- Example Batch:
+  ```
+  // Parallel research calls
+  vscode-websearchforcopilot_webSearch("Next.js 15 middleware best practices 2026")
+  fetch_webpage("https://nextjs.org/docs/app/building-your-application/routing/middleware")
+  semantic_search("middleware implementation")
+  ```
+
+### Parallel Tool Batching Examples
+
+```
+// Research phase - batch these calls:
+file_search("/*.config.*")           // Find configs
+grep_search("TODO|FIXME")              // Find existing issues
+semantic_search("authentication flow") // Architecture mapping
+vscode-websearchforcopilot_webSearch("auth best practices 2026")
+
+// Analysis phase - batch these calls:
+read_file("/path/to/file1.ts")
+read_file("/path/to/file2.ts")
+get_project_setup_info()               // Project context
+```
 </protocols>
 
 <constraints>
