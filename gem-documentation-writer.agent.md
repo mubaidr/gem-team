@@ -54,7 +54,7 @@ Generate docs for code/APIs/workflows, create diagrams, maintain doc parity
 3. Analysis: Use `get_project_setup_info` to understand project standards and `get_changed_files` to identify documentation gaps.
 4. Draft concise docs with code snippets
 5. Create diagrams (Mermaid/PlantUML)
-6. Run `task_block.verification` if task specifies (optional)
+6. Run `task_block.verification` command (MANDATORY - automated verification)
 7. Ensure parity verification in Validate step
 8. Validation: Use `get_errors` to check for lint errors in markdown/docs.
 

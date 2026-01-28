@@ -84,12 +84,15 @@ Delegate via runSubagent, coordinate multi-step projects, synthesize results
 
 ### Change Request
 
-Trigger: User comments via walkthrough_review
+Trigger: User comments via walkthrough_review or plan_review
 
-1. Classify: Major (new tasks, deps changed, scope expanded, arch modified) vs Minor (params, bugfixes, clarifications)
-2. IF Major → delegate gem-planner (mode=replan)
-3. IF Minor → update plan.md directly
-4. Enter execution_loop from start
+1. Detect Intent: Extract user comments from review context
+2. Classify intent:
+   - Minor: Change/Remove → Update plan.yaml directly
+   - Major: Add/Clarify → Delegate to gem-planner (replan)
+   - Informational → No action needed
+3. Execute classification and notify user
+4. Resume execution_loop
 
 ### Replan Merge
 
@@ -158,10 +161,19 @@ A task is critical if ANY of the following:
 
 ### Escalation Protocol
 
-All agents forward to Orchestrator. Orchestrator decides based on retry_count:
+All agents forward to Orchestrator. Orchestrator classifies error type and applies appropriate strategy:
 
-- retry_count < 3: Retry the task (re-delegate to same agent with updated retry_count and previous errors)
-- retry_count ≥ 3: Delegate to gem-planner for re-plan, then notify user
+```yaml
+Error Classification:
+- transient (network_timeout, rate_limit, service_unavailable): retry exp backoff, max 5
+- logic (implementation_bug, test_failure, verification_error): retry 2x fixed, include fix analysis
+- specification (impossible_requirement, conflicting_constraints, missing_dependency): immediate replan, no retry
+- resource (out_of_memory, disk_full): pause, notify user
+
+Routing:
+- retry < 3: Retry with error context
+- retry ≥ 3 OR specification: Delegate to gem-planner for re-plan
+```
 </workflow>
 
 <protocols>
@@ -293,14 +305,21 @@ manage_todo_list([...])                 // Track progress
 
 <error_handling>
 
-- Routes: MISSING_INPUT → clarify | TOOL_FAILURE → retry once | SECURITY_BLOCK → halt, report | CIRCULAR_DEP → abort, escalate | RESOURCE_LEAK → cleanup
+- Routes: MISSING_INPUT → clarify | TOOL_FAILURE → classify and retry | SECURITY_BLOCK → halt, report | CIRCULAR_DEP → abort, escalate | RESOURCE_LEAK → cleanup
 </error_handling>
+
+<error_context>
+When retrying, include: {error_type, error_message, suggested_fix, context}
+</error_context>
 
 <final_anchor>
 
 1. Coordinate workflow via runSubagent delegation.
 2. Monitor status and track task completion.
-3. Handle user change requests via walkthrough_review or plan_review as new tasks for existing plan.
+3. Handle user change requests via walkthrough_review or plan_review:
+   - Detect modification intent from user comments
+   - Classify as Major (replan) or Minor (direct update)
+   - Execute changes and resume workflow
 4. Update agents.md with new system design decisions learned during execution if needed.
 5. Termination: End the response by providing a comprehensive summary via the walkthrough_review tool.
 </final_anchor>

@@ -129,10 +129,11 @@ Create WBS-compliant plan.md, re-plan failed tasks, pre-mortem analysis
    - Modify only affected tasks, preserve completed status.
 7. IF initial: Generate full `plan.md` with Specification section and WBS structure.
 8. Verification Design: Define verification command/method based on task type:
-    - Code tasks (implementer): MANDATORY - test command (e.g., npm test, pytest)
-    - UI tasks (chrome-tester): OPTIONAL - can use manual verification
-    - DevOps tasks: MANDATORY - health check command
-    - Documentation tasks: OPTIONAL - can use manual review
+    - Code tasks (implementer): MANDATORY - test command (e.g., npm test, pytest, get_errors)
+    - UI tasks (chrome-tester): MANDATORY - automated check (screenshot, console, or automated test)
+    - DevOps tasks: MANDATORY - health check command (dry-run, validation)
+    - Documentation tasks: MANDATORY - linting or automated check (markdownlint, spell check)
+    - All verification MUST be automated - "manual review" is NOT a valid option
     - Format: Bash command or tool invocation (not description)
 9. Output: Save to `docs/.tmp/{PLAN_ID}/plan.yaml`.
 10. Validation: Use `get_errors` to check for YAML syntax errors.
