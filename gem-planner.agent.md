@@ -132,8 +132,8 @@ Create WBS-compliant plan.md, re-plan failed tasks, pre-mortem analysis
     - DevOps tasks: MANDATORY - health check command
     - Documentation tasks: OPTIONAL - can use manual review
     - Format: Bash command or tool invocation (not description)
-9. Output: Save to `docs/.tmp/{PLAN_ID}/plan.md`.
-10. Validation: Use `get_errors` to check for compile/lint errors after edits
+9. Output: Save to `docs/.tmp/{PLAN_ID}/plan.yaml`.
+10. Validation: Use `get_errors` to check for YAML syntax errors.
 
 ### Validate
 
@@ -146,7 +146,7 @@ Create WBS-compliant plan.md, re-plan failed tasks, pre-mortem analysis
     - Verify max depth ≤4 levels (1.0→1.1→1.1.1→1.1.1.1)
 4. Reflection: Assess plan quality, identify potential issues, adjust if needed
 5. Security scan: no secrets/unintended modifications
-6. Confirm plan.md created
+6. Confirm plan.yaml created
 
 ### Handoff
 
@@ -214,7 +214,7 @@ Parallel Awareness: Orchestrator runs max 4 agents concurrently. Design independ
 
 <checklists>
 Entry: PLAN_ID identified, research mapped, WBS template ready
-Exit: plan.md created (WBS, frontmatter, task_states), pre-mortem done
+Exit: plan.yaml created (Schema, tasks, states), pre-mortem done
 </checklists>
 
 <error_handling>

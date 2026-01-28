@@ -101,9 +101,9 @@ Trigger: gem-planner returns re-plan OR max_retries exceeded
 
 - Enter DAG Scheduler Loop:
     1. Load `plan.yaml`.
-    2. **Calculate Ready Set:** Identify tasks where `status=pending` AND `ALL(dep.status == 'completed')`.
-    3. **Sort:** Prioritize HIGH priority, then by creation order.
-    4. **Schedule:**
+    2. Calculate Ready Set: Identify tasks where `status=pending` AND `ALL(dep.status == 'completed')`.
+    3. Sort: Prioritize HIGH priority, then by creation order.
+    4. Schedule:
        - While `running_agents < 4` AND `Ready Set` not empty:
          - Pop task from Ready Set.
          - Launch via `runSubagent`.

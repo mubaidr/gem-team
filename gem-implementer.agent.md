@@ -41,7 +41,8 @@ Execute code changes, unit verification, self-review for security/quality
 2. Impact Analysis: Use `semantic_search` for call sites/imports, `list_code_usages` for deep symbol tracing.
 3. Identify side effects: shared state, config, env vars
 3. Research Phase (when needed):
-   - Primary: Review `hints` and `context` provided by Planner for architectural decisions and resources.
+   - Primary: Review `hints` and `context` provided by Planner, BUT treat them as a "Design Snapshot".
+   - Verification: ALWAYS use `list_code_usages` to confirm valid symbols. If live code conflicts with Planner context, trust the Code (Reality).
    - Use `vscode-websearchforcopilot_webSearch` for "HOW" details (libraries, error resolution, specific API usage).
    - Use `fetch_webpage` for specific documentation pages.
    - Cross-reference with codebase patterns.
