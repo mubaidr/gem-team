@@ -137,12 +137,6 @@ A task is critical if ANY of the following:
 - Environment = prod
 - retry_count ≥ 2 (escalation)
 
-### Reflect (Post-Execute)
-
-1. Self-assess: Did all tasks complete successfully?
-2. Identify: What could be improved in the workflow?
-3. Document: Log reflections in artifact_dir/reflection.md
-
 ### Execution Loop (Parallel Support)
 
 1. Track running_agents count (starts at 0, max 4).

@@ -65,12 +65,6 @@ Container lifecycle, CI/CD setup, application deployment, infrastructure managem
 2. Verify infrastructure state matches expected
 3. Check for security leaks
 
-### Reflect (Post-Execute)
-
-1. Self-assess: Did all operations complete successfully?
-2. Identify: Any resource leaks or security concerns?
-3. Document: Log operations summary and improvements
-
 ### Handoff
 
 Return: {status,plan_id,completed_tasks,failed_tasks,artifacts}

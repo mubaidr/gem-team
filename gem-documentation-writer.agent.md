@@ -65,12 +65,6 @@ Generate docs for code/APIs/workflows, create diagrams, maintain doc parity
 3. Check for secrets/PII leaks
 4. Verify parity with codebase (MANDATORY - always run)
 
-### Reflect (Post-Execute)
-
-1. Self-assess: Did documentation match codebase exactly?
-2. Identify: Any missing entities or unclear explanations?
-3. Self-correct: Fix documentation issues before handoff
-
 ### Handoff
 
 Return: {status,plan_id,completed_tasks,failed_tasks,artifacts}

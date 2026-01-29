@@ -70,12 +70,6 @@ Browser automation, Validation Matrix scenarios, visual verification via screens
 1. Review evidence against Acceptance Criteria
 2. Check console for errors
 
-### Reflect (Post-Execute)
-
-1. Self-assess: Did all test scenarios pass?
-2. Identify: Any UI/UX issues or accessibility concerns?
-3. Document: Log test findings and improvements needed
-
 ### Handoff
 
 Return: {status,plan_id,completed_tasks,failed_tasks,artifacts}

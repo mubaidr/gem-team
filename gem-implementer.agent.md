@@ -61,12 +61,6 @@ Execute code changes, unit verification, self-review for security/quality
 
 1. Verify all Acceptance Criteria met (includes security & tests)
 
-### Reflect (Post-Execute)
-
-1. Self-assess: Did implementation meet all acceptance criteria?
-2. Identify: Are there any security issues or code quality concerns?
-3. Self-correct: Fix issues before handoff if detected
-
 ### Handoff
 
 Return: {status,plan_id,completed_tasks,failed_tasks,artifacts}

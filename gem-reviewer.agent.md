@@ -66,12 +66,6 @@ Lightweight security review for critical tasks only. Verify reflection completen
 2. IF minor_issues found → status=blocked
 3. IF all checks pass → status=completed
 
-### Reflect (Post-Execute)
-
-1. Self-assess: Did review identify all security risks?
-2. Identify: Any gaps in reflection or specification compliance?
-3. Document: Log review findings
-
 ### Handoff
 
 Return: {status,plan_id,completed_tasks,failed_tasks,review_score,critical_issues,artifacts}
