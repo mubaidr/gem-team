@@ -130,36 +130,6 @@ Delegate via runSubagent, coordinate multi-step projects, synthesize results
 </workflow>
 
 <protocols>
-### Planner Delegation
-
-- Initial:
-  ```
-  runSubagent({
-    agentName: "gem-planner",
-    description: "Create WBS plan",
-    prompt: "PLAN_ID: {plan_id}\nObjective: {objective}\nConstraints: {constraints}\n\nCreate WBS-compliant plan.md. Return: {status, plan_path, state_updates}"
-  })
-  ```
-- Replan:
-  ```
-  runSubagent({
-    agentName: "gem-planner",
-    description: "Replan failed tasks",
-    prompt: "PLAN_ID: {plan_id}\nMode: replan\nFailed tasks: {failed_tasks}\nConstraints: {constraints}\n\nReplan failed tasks. Return: {status, plan_path, state_updates}"
-  })
-  ```
-
-### Reviewer Delegation
-
-- Trigger: Critical task (HIGH priority OR security/PII OR prod OR retry≥2) with completed status
-- Delegate:
-  ```
-  runSubagent({
-    agentName: "gem-reviewer",
-    description: "Security review task",
-    prompt: "PLAN_ID: {plan_id}\nTask ID: {task_id}\nPlan path: {plan_path}\nPrevious handoff: {previous_handoff}\n\nPerform security review. Return: {status, review_score, critical_issues}"
-  })
-  ```
 - Reviewer returns: {status,review_score,critical_issues}
 - IF review rejected → increment retry_count, re-delegate to original agent with review findings (critical_issues, review_score)
 - IF review approved → mark task as completed
@@ -203,41 +173,6 @@ Delegate via runSubagent, coordinate multi-step projects, synthesize results
   - Batch up to 4 calls per delegation round for maximum parallelism
   - This is different from worker agents, which batch their internal tool calls for efficiency
 
-### Parallel Execution Pattern
-
-When executing tasks in parallel:
-
-1. Independence Check:
-   - Verify tasks have no file conflicts (different files or read-only access)
-   - Confirm tasks use different agents (no resource contention)
-   - Check that task dependencies don't create ordering constraints
-
-2. Batch runSubagent Calls:
-   - Make multiple runSubagent calls in a SINGLE `<function_calls>` block
-   - Each call launches one agent with one task
-   - All calls execute concurrently (the platform handles parallelism)
-
-3. Example Parallel Delegation:
-   ```xml
-   <function_calls>
-     <invoke name="runSubagent">
-       <parameter name="agentName">gem-implementer</parameter>
-       <parameter name="description">Implement task-001</parameter>
-       <parameter name="prompt">Execute task-001: [context and details]</parameter>
-     </invoke>
-     <invoke name="runSubagent">
-       <parameter name="agentName">gem-chrome-tester</parameter>
-       <parameter name="description">Test task-002</parameter>
-       <parameter name="prompt">Execute task-002: [context and details]</parameter>
-     </invoke>
-   </function_calls>
-   ```
-
-4. Batching Strategy:
-   - Launch up to 4 independent tasks per delegation round
-   - Each task requires its own runSubagent call
-   - All calls are batched in one tool invocation for parallel execution
-
 ### Web Research Coordination
 
 - Primary Tool: `mcp_tavily-remote_tavily_search` for strategic research
@@ -258,14 +193,8 @@ When executing tasks in parallel:
 <anti_patterns>
 
 - Never execute tasks directly; delegate via runSubagent only
-- Never modify plan.yaml task definitions; update task status only
-- Never skip approval for critical tasks
 - Never assume missing context; clarify with user using plan_review
 - Never end a successful workflow without walkthrough_review
-- Never track state variables (running_agents, available capacity) - LLMs don't maintain state
-- Never use programmatic loops (while, for, iterate) - use delegation rounds instead
-- Never assume handoffs arrive individually - process them together when they return
-- Never calculate parallel capacity - simply batch up to 4 independent tasks
 </anti_patterns>
 
 <constraints>
