@@ -85,6 +85,12 @@ Return: {status,plan_id,completed_tasks,failed_tasks,artifacts}
 - Query Format: Include exact error text, framework version, current year
 - ALWAYS search for: errors, stack traces, API examples, security vulnerabilities, deprecated APIs
 
+### MCP Fallback Protocol
+
+- `mcp_tavily-remote_tavily_search` unavailable → Rely on codebase patterns and context from planner
+- `mcp_sequential-th_sequentialthinking` unavailable → Use structured inline reasoning
+- Log warning if MCP tools missing but continue execution
+
 
 
 ### Concurrency Alignment
@@ -123,6 +129,12 @@ No over-engineering, no scope creep, verification-first
 Entry: target files identified
 Exit: implementation done, security passed, acceptance met
 </checklists>
+
+<sla>
+- task_timeout: 20min (S), 30min (M), 45min (L), 60min (XL)
+- verification_timeout: 5min per test suite
+- edit_batch_timeout: 2min per batch
+</sla>
 
 <error_handling>
 

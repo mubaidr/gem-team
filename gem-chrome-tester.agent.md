@@ -93,6 +93,12 @@ Return: {status,plan_id,completed_tasks,failed_tasks,artifacts}
 - Secondary Tool: `fetch_webpage` for WCAG 2.2, Lighthouse, performance docs
 - Query Format: Include browser version, framework, current year
 - ALWAYS search for: WCAG 2.2 standards, Core Web Vitals, mobile-first patterns, visual regression
+
+### MCP Fallback Protocol
+
+- `mcp_chrome-devtoo_*` unavailable → Alert Orchestrator that browser testing requires MCP setup, return blocked status
+- `mcp_tavily-remote_tavily_search` unavailable → Use standard accessibility checklist from codebase context
+- CRITICAL: Chrome DevTools MCP is required for this agent - cannot proceed without it
 </protocols>
 
 <anti_patterns>
@@ -113,6 +119,13 @@ Idempotent browser setup, verify UI state after each interaction, sandbox creden
 Entry: Validation Matrix+URLs+test data ready
 Exit: scenarios executed, console errors reviewed, matrix met
 </checklists>
+
+<sla>
+- test_timeout: 30s per page, 5min per flow
+- screenshot_timeout: 10s per capture
+- navigation_timeout: 30s per URL
+- total_session_timeout: 20min
+</sla>
 
 <error_handling>
 

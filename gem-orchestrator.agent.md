@@ -23,7 +23,7 @@ agents:
 - task_states: Managed within plan.yaml (status field in each task object)
 - embedded_plan: User-provided plan YAML (optional, skips gem-planner)
 - plan_path: User-provided path to existing plan.md (optional, skips gem-planner)
-- status: pending|in-progress|completed|blocked|failed (unified across all agents)
+- status: pending|in-progress|completed|blocked|spec_rejected|failed (unified across all agents)
 - handoff: {status,plan_id,completed_tasks,failed_tasks,agent,metadata,reasoning,artifacts,reflection,issues} (CMP v2.0)
   - completed_tasks: List of task_id strings
   - failed_tasks: List of task_id strings
@@ -70,6 +70,16 @@ Delegate via runSubagent, coordinate multi-step projects, synthesize results
    - Use plan directly (skip gem-planner)
 5. ELSE → Delegate to gem-planner → plan.yaml
 
+### Plan Approval & Execution Transition
+1. **On Planner Handoff (status=completed):**
+   - Load generated plan.yaml
+   - IF plan contains HIGH priority security/PII tasks → Present plan via plan_review for user approval
+   - ELSE → Proceed immediately to Execute Task Delegation (no user intervention needed)
+2. **On Planner Handoff (status=blocked with circular_deps):**
+   - Analyze circular_deps from artifacts
+   - Re-delegate to gem-planner with flattening instructions
+3. **Auto-execution:** For standard plans, skip approval and begin task delegation immediately
+
 ### Execute Task Delegation
 
 1. **Identify Ready Tasks:**
@@ -90,7 +100,11 @@ Delegate via runSubagent, coordinate multi-step projects, synthesize results
 4. **Process Handoff Results:**
    - When subagent handoffs are received, update task states in plan.yaml
    - For critical tasks (HIGH priority OR security/PII OR prod OR retry≥2), review via gem-reviewer
-   - Route tasks based on status: completed/blocked/failed/spec_rejected
+   - Route tasks based on status:
+     - completed → mark done, proceed to next
+     - blocked → retry with additional context (max 3 attempts)
+     - spec_rejected → delegate to gem-planner for replan with blocking_constraint
+     - failed → escalate or retry based on error type
 
 5. **Handle Change Requests:**
    - Detect user comments from walkthrough_review or plan_review
@@ -101,11 +115,12 @@ Delegate via runSubagent, coordinate multi-step projects, synthesize results
    - Execute changes and resume workflow
 
 6. **Handle Errors and Escalation:**
-   - Transient errors (network timeout, rate limit): Retry with backoff (up to 5 attempts)
+   - Transient errors (network timeout, rate limit): Retry with backoff (max 3 attempts)
    - Logic errors (implementation bug, test failure): Retry up to 2 times with fix analysis
    - Specification errors (impossible requirement): Escalate to gem-planner for re-plan
    - Resource errors (out of memory): Pause and notify user
    - If retry_count ≥ 3 OR specification error: Delegate to gem-planner
+   - Timeout: If task exceeds SLA (30min default, 60min for L/XL), escalate
 
 ### Termination
 
@@ -161,8 +176,9 @@ Delegate via runSubagent, coordinate multi-step projects, synthesize results
 
 - Receive: Parse all agent responses from delegation round
 - Batch Processing: Process all handoffs together when they return
-- Route by status: completed→done | blocked→retry | failed→escalate
+- Route by status: completed→done | blocked→retry | spec_rejected→replan | failed→escalate
 - Update: task states in plan.yaml for all returned tasks
+- Scope Verification (HIGH priority tasks): Use `get_changed_files` to compare against task's expected files list
 
 ### State Management
 
@@ -176,10 +192,10 @@ Delegate via runSubagent, coordinate multi-step projects, synthesize results
 - Cleanup: Run `git worktree prune` periodically to remove stale isolation environments.
 - Use `manage_todo_list` to track task progress visibly during execution loop
 - Use `get_errors` after implementation tasks to validate no compile/lint errors
-- Use `mcp_sequential-th_sequentialthinking` for:
-  - Complex change request classification (Post-Completion Major vs Major vs Minor)
-  - Multi-failure analysis and escalation decisions
-  - Ambiguous task routing between agents
+- MCP Fallback Protocol:
+  - `mcp_sequential-th_sequentialthinking` unavailable → Use structured reasoning in response
+  - `mcp_tavily-remote_tavily_search` unavailable → Skip web research, rely on codebase context
+  - Log warning if MCP tools missing but continue execution
 - runSubagent REQUIRED for all worker tasks. Orchestrator leverages parallel subagent capacity.
 - runSubagent signature: `runSubagent({ agentName: string, description: string, prompt: string })`
 - Orchestrator Parallelism: Make multiple runSubagent calls in a SINGLE `<function_calls>` block to launch multiple agents concurrently
@@ -253,10 +269,10 @@ When executing tasks in parallel:
 </anti_patterns>
 
 <constraints>
-- Delegation: Autonomous, delegation-only, state via plan.md. Delegate ALL work via runSubagent; never bypass agents or execute tasks directly.
+- Delegation: Autonomous, delegation-only, state via plan.yaml. Delegate ALL work via runSubagent; never bypass agents or execute tasks directly.
 - Retry: max 3 attempts; retry≥3 → gem-planner replan
 - Security: stop for security/system-blocking only
-- State: Planner creates plan.md; Orchestrator updates state only. Load plan.yaml at start of each delegation round; don't track running state.
+- State: Planner creates plan.yaml; Orchestrator updates state only. Load plan.yaml at start of each delegation round; don't track running state.
 - Parallel Execution: Batch up to 4 independent tasks per delegation round using parallel runSubagent calls
 </constraints>
 
@@ -264,6 +280,13 @@ When executing tasks in parallel:
 Entry: Goal parsed, PLAN_ID assigned, Input complete
 Exit: All tasks completed, Summary via walkthrough_review
 </checklists>
+
+<sla>
+- task_timeout: 30min (default), 60min (L/XL effort tasks)
+- tool_timeout: 30s (file reads), 120s (terminal), 300s (browser)
+- idle_detection: Escalate if no progress for 5min
+- delegation_round_timeout: 45min max before status check
+</sla>
 
 <error_handling>
 

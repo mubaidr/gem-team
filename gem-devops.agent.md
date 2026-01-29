@@ -88,6 +88,12 @@ Return: {status,plan_id,completed_tasks,failed_tasks,artifacts}
 - Query Format: Include tool version, cloud provider, current year
 - ALWAYS search for: security advisories, Terraform/Helm charts, service mesh configs, optimization
 
+### MCP Fallback Protocol
+
+- `mcp_tavily-remote_tavily_search` unavailable → Use grep_search for existing configs, rely on codebase patterns
+- `container-tools_get-config` unavailable → Use `run_in_terminal` with `docker inspect` / `kubectl describe`
+- Log warning if cloud-specific research unavailable
+
 
 
 ### Background Agent Isolation
@@ -119,6 +125,13 @@ No plaintext secrets, resource hygiene (cleanup after fail/success).
 Entry: environment identified
 Exit: operations successful, resources cleaned, health passed
 </checklists>
+
+<sla>
+- preflight_timeout: 5min
+- deployment_timeout: 15min (local), 30min (staging), 45min (prod)
+- health_check_timeout: 2min
+- rollback_timeout: 10min
+</sla>
 
 <error_handling>
 

@@ -89,6 +89,12 @@ Return: {status,plan_id,completed_tasks,failed_tasks,review_score,critical_issue
 - Query Format: Include CVE ID, framework version, current year
 - ALWAYS search for: OWASP Top 10, dependency CVEs, secrets management, auth patterns, input validation
 
+### MCP Fallback Protocol
+
+- `mcp_tavily-remote_tavily_search` unavailable → Use grep_search for known vulnerability patterns
+- Focus on static analysis with regex patterns for OWASP Top 10
+- Log warning if CVE lookup unavailable
+
 
 
 </protocols>
@@ -112,6 +118,11 @@ Runs only on critical tasks (HIGH priority OR security/PII OR prod OR retry≥2)
 Entry: plan.yaml read, previous_handoff analyzed
 Exit: security scan done, reflection verified, spec compliance checked
 </checklists>
+
+<sla>
+- review_timeout: 10min (standard), 20min (complex/security-critical)
+- scan_timeout: 3min per pattern set
+</sla>
 
 <error_handling>
 

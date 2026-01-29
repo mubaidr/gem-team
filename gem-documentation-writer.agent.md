@@ -87,6 +87,12 @@ Return: {status,plan_id,completed_tasks,failed_tasks,artifacts}
 - Query Format: Include target audience, documentation type, current year
 - ALWAYS search for: best practices, OpenAPI/JSDoc standards, accessibility, changelog conventions
 
+### MCP Fallback Protocol
+
+- `mcp_tavily-remote_tavily_search` unavailable → Use existing docs in repo as style reference
+- Follow codebase conventions for JSDoc/docstrings if external standards unavailable
+- Log warning if style guide lookup unavailable
+
 
 
 </protocols>
@@ -109,6 +115,12 @@ Conciseness-first, parity protocol, no placeholders
 Entry: scope+audience defined
 Exit: docs created, diagrams generated, parity verified
 </checklists>
+
+<sla>
+- documentation_timeout: 15min (README), 30min (API docs), 20min (diagrams)
+- parity_check_timeout: 5min
+- render_verification_timeout: 2min per diagram
+</sla>
 
 <error_handling>
 
