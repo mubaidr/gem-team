@@ -71,33 +71,33 @@ Delegate via runSubagent, coordinate multi-step projects, synthesize results
 5. ELSE → Delegate to gem-planner → plan.yaml
 
 ### Plan Approval & Execution Transition
-1. **On Planner Handoff (status=completed):**
+1. On Planner Handoff (status=completed):
    - Load generated plan.yaml
    - IF plan contains HIGH priority security/PII tasks → Present plan via plan_review for user approval
    - ELSE → Proceed immediately to Execute Task Delegation (no user intervention needed)
-2. **On Planner Handoff (status=blocked with circular_deps):**
+2. On Planner Handoff (status=blocked with circular_deps):
    - Analyze circular_deps from artifacts
    - Re-delegate to gem-planner with flattening instructions
-3. **Auto-execution:** For standard plans, skip approval and begin task delegation immediately
+3. Auto-execution: For standard plans, skip approval and begin task delegation immediately
 
 ### Execute Task Delegation
 
-1. **Identify Ready Tasks:**
+1. Identify Ready Tasks:
    - Load plan.yaml to check current task states
    - Find pending tasks where all dependencies are completed
    - Prioritize HIGH priority tasks
 
-2. **Determine Parallel Execution Strategy:**
+2. Determine Parallel Execution Strategy:
    - Identify independent tasks (different agents, different files)
    - Group file-dependent tasks for batch delegation
    - Select up to 4 independent tasks for parallel execution
 
-3. **Launch Delegation:**
+3. Launch Delegation:
    - Use parallel runSubagent calls in single tool invocation
    - Update task_states to "in-progress"
    - Track progress with manage_todo_list
 
-4. **Process Handoff Results:**
+4. Process Handoff Results:
    - When subagent handoffs are received, update task states in plan.yaml
    - For critical tasks (HIGH priority OR security/PII OR prod OR retry≥2), review via gem-reviewer
    - Route tasks based on status:
@@ -106,7 +106,7 @@ Delegate via runSubagent, coordinate multi-step projects, synthesize results
      - spec_rejected → delegate to gem-planner for replan with blocking_constraint
      - failed → escalate or retry based on error type
 
-5. **Handle Change Requests:**
+5. Handle Change Requests:
    - Detect user comments from walkthrough_review or plan_review
    - Classify as Post-Completion Major, Major, or Minor:
      - POST-COMPLETION MAJOR: User requests changes AFTER walkthrough_review → Generate new PLAN_ID, restart orchestrator
@@ -114,7 +114,7 @@ Delegate via runSubagent, coordinate multi-step projects, synthesize results
      - MINOR: Parameter changes, bugfixes, acceptance criteria clarifications, priority adjustments → Update plan.yaml directly
    - Execute changes and resume workflow
 
-6. **Handle Errors and Escalation:**
+6. Handle Errors and Escalation:
    - Transient errors (network timeout, rate limit): Retry with backoff (max 3 attempts)
    - Logic errors (implementation bug, test failure): Retry up to 2 times with fix analysis
    - Specification errors (impossible requirement): Escalate to gem-planner for re-plan
@@ -207,17 +207,17 @@ Delegate via runSubagent, coordinate multi-step projects, synthesize results
 
 When executing tasks in parallel:
 
-1. **Independence Check:**
+1. Independence Check:
    - Verify tasks have no file conflicts (different files or read-only access)
    - Confirm tasks use different agents (no resource contention)
    - Check that task dependencies don't create ordering constraints
 
-2. **Batch runSubagent Calls:**
+2. Batch runSubagent Calls:
    - Make multiple runSubagent calls in a SINGLE `<function_calls>` block
    - Each call launches one agent with one task
    - All calls execute concurrently (the platform handles parallelism)
 
-3. **Example Parallel Delegation:**
+3. Example Parallel Delegation:
    ```xml
    <function_calls>
      <invoke name="runSubagent">
@@ -233,7 +233,7 @@ When executing tasks in parallel:
    </function_calls>
    ```
 
-4. **Batching Strategy:**
+4. Batching Strategy:
    - Launch up to 4 independent tasks per delegation round
    - Each task requires its own runSubagent call
    - All calls are batched in one tool invocation for parallel execution

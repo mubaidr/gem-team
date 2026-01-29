@@ -61,11 +61,11 @@ Use ONLY these specialist agents when assigning tasks. Each agent has specific c
 
 ### Hybrid Task Rules
 
-1. **Code + Documentation:** Split into 2 tasks with dependency (impl task → docs task)
-2. **Test reveals bug:** Tester returns blocked with `issues`; Orchestrator creates new impl task
-3. **Infrastructure + Code:** DevOps first (setup), then Implementer (app code)
-4. **UI + Backend:** Can run in parallel if no shared state; else Backend → UI
-5. **Never combine:** Security review with implementation (always separate agents)
+1. Code + Documentation: Split into 2 tasks with dependency (impl task → docs task)
+2. Test reveals bug: Tester returns blocked with `issues`; Orchestrator creates new impl task
+3. Infrastructure + Code: DevOps first (setup), then Implementer (app code)
+4. UI + Backend: Can run in parallel if no shared state; else Backend → UI
+5. Never combine: Security review with implementation (always separate agents)
 </available_agents>
 
 <context_requirements>
@@ -172,8 +172,13 @@ Return: {status,plan_id,completed_tasks,failed_tasks,artifacts}
 
 - Primary Tool: `mcp_tavily-remote_tavily_search` for patterns, best practices, security advisories, architecture, debugging
 - Secondary Tool: `fetch_webpage` for official documentation pages
+- Tavily Crawling Tools (for comprehensive site research):
+  - `mcp_tavily-remote_tavily_map` - Discover website structure and all available URLs
+  - `mcp_tavily-remote_tavily_crawl` - Crawl multiple pages from documentation sites
+  - `mcp_tavily-remote_tavily_extract` - Extract full content from specific documentation pages
 - Query Format: Include current year/month (e.g., "React best practices 2026")
 - Cross-Reference: Combine with `semantic_search` for codebase alignment
+- Usage Pattern: Use `map` to discover docs structure, then `extract` for specific pages, or `crawl` for comprehensive coverage
 
 ### MCP Fallback Protocol
 

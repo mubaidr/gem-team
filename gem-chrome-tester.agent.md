@@ -94,6 +94,18 @@ Return: {status,plan_id,completed_tasks,failed_tasks,artifacts}
 - Query Format: Include browser version, framework, current year
 - ALWAYS search for: WCAG 2.2 standards, Core Web Vitals, mobile-first patterns, visual regression
 
+### Browser Tool Activation
+
+Before using Chrome DevTools MCP tools, activate the required tool category:
+- `activate_browser_navigation_tools` - Enable page navigation (navigate, wait_for_navigation)
+- `activate_element_interaction_tools` - Enable mouse interactions (drag, hover)
+- `activate_form_input_tools` - Enable form filling and keyboard input (type, keypress)
+- `activate_console_logging_tools` - Enable console message monitoring (get_console_logs)
+- `activate_performance_analysis_tools` - Enable performance trace recording (get_performance_metrics)
+- `activate_visual_snapshot_tools` - Enable screenshots and text snapshots (screenshot, get_content)
+
+Activation Pattern: Call activators at the start of Execute step, based on test scenario requirements. Multiple activators can be called in parallel.
+
 ### MCP Fallback Protocol
 
 - `mcp_chrome-devtoo_*` unavailable → Alert Orchestrator that browser testing requires MCP setup, return blocked status

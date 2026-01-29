@@ -129,11 +129,11 @@ All agents use the standardized Concise Messaging Protocol v2.0 (see detailed gl
 
 Tasks in the system use:
 
-- **Simple Sequential IDs**: task-001, task-002, task-003 (no hierarchical numbering)
-- **DAG Dependencies**: Tasks reference other tasks by ID via `dependencies` field
-- **Status Tracking**: pending | in-progress | completed | blocked | failed | spec_rejected
-- **Priority Levels**: HIGH | MEDIUM | LOW (affects scheduling order)
-- **Effort Estimation**: XS | S | M | L | XL (guides timeout strategies)
+- Simple Sequential IDs: task-001, task-002, task-003 (no hierarchical numbering)
+- DAG Dependencies: Tasks reference other tasks by ID via `dependencies` field
+- Status Tracking: pending | in-progress | completed | blocked | failed | spec_rejected
+- Priority Levels: HIGH | MEDIUM | LOW (affects scheduling order)
+- Effort Estimation: XS | S | M | L | XL (guides timeout strategies)
 
 Example plan.yaml:
 
