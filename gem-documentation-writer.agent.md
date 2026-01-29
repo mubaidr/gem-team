@@ -66,6 +66,7 @@ Return: {status,plan_id,completed_tasks,failed_tasks,artifacts}
 
 - completed: parity_verified=true, issues=[]
 - blocked: parity_verified=false, issues=["reason"]
+- spec_rejected: artifacts={blocking_constraint, suggested_fix} (documentation scope impossible)
 - failed: parity_verified=false, issues=["error details"]
 </workflow>
 

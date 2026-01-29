@@ -68,7 +68,7 @@ Delegate via runSubagent, coordinate multi-step projects, synthesize results
    - Load/parse plan and transform to standard format
    - Save to docs/.tmp/{PLAN_ID}/plan.yaml
    - Use plan directly (skip gem-planner)
-5. ELSE → Delegate to gem-planner → plan.md
+5. ELSE → Delegate to gem-planner → plan.yaml
 
 ### Execute Task Delegation
 
@@ -176,6 +176,10 @@ Delegate via runSubagent, coordinate multi-step projects, synthesize results
 - Cleanup: Run `git worktree prune` periodically to remove stale isolation environments.
 - Use `manage_todo_list` to track task progress visibly during execution loop
 - Use `get_errors` after implementation tasks to validate no compile/lint errors
+- Use `mcp_sequential-th_sequentialthinking` for:
+  - Complex change request classification (Post-Completion Major vs Major vs Minor)
+  - Multi-failure analysis and escalation decisions
+  - Ambiguous task routing between agents
 - runSubagent REQUIRED for all worker tasks. Orchestrator leverages parallel subagent capacity.
 - runSubagent signature: `runSubagent({ agentName: string, description: string, prompt: string })`
 - Orchestrator Parallelism: Make multiple runSubagent calls in a SINGLE `<function_calls>` block to launch multiple agents concurrently

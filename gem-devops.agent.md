@@ -65,6 +65,7 @@ Return: {status,plan_id,completed_tasks,failed_tasks,artifacts}
 
 - completed: operations successful, health passed
 - blocked: partial success or resource conflicts
+- spec_rejected: artifacts={blocking_constraint, suggested_fix} (infrastructure requirements impossible)
 - failed: all operations failed or internal error
 </workflow>
 

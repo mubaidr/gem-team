@@ -47,13 +47,7 @@ Browser automation, Validation Matrix scenarios, visual verification via screens
 
 ### Execute
 
-1. Activate required tools:
-   - activate_browser_navigation_tools()
-   - activate_element_interaction_tools()
-   - activate_form_input_tools()
-   - activate_visual_snapshot_tools()
-   - activate_console_logging_tools()
-   - activate_performance_analysis_tools()
+1. Initialize Chrome MCP DevTools connection
 2. Identify test scenarios and URLs from context.task_block
 3. Initialize browser with required viewport
 4. Navigate to URLs, verify with wait functionality
@@ -71,6 +65,7 @@ Return: {status,plan_id,completed_tasks,failed_tasks,artifacts}
 
 - completed: validation_passed=true, issues=[]
 - blocked: validation_passed=false, issues=["reason"]
+- spec_rejected: artifacts={blocking_constraint, suggested_fix} (test requirements impossible)
 - failed: validation_passed=false, issues=["error details"]
 </workflow>
 
@@ -79,14 +74,14 @@ Return: {status,plan_id,completed_tasks,failed_tasks,artifacts}
 
 - Prefer built-in tools over run_in_terminal
 - Parallel Execution: Batch multiple independent tool calls in a SINGLE `<function_calls>` block for concurrent execution
-- Browser: Use MCP Chrome DevTools tools (activate required tools first):
-  - Navigation: Use activate_browser_navigation_tools() for page navigation
-  - Interaction: Use activate_element_interaction_tools() for clicking, hovering, filling forms
-  - Evidence: Use activate_visual_snapshot_tools() for screenshots
-  - Debugging: Use activate_console_logging_tools() for console messages
+- Browser: Use MCP Chrome DevTools tools:
+  - Navigation: `mcp_chrome-devtoo_navigate`, `mcp_chrome-devtoo_wait_for_navigation`
+  - Interaction: `mcp_chrome-devtoo_click`, `mcp_chrome-devtoo_type`, `mcp_chrome-devtoo_hover`
+  - Evidence: `mcp_chrome-devtoo_screenshot` - Visual snapshots
+  - Debugging: `mcp_chrome-devtoo_get_console_logs` - Console messages
   - Network: `mcp_chrome-devtoo_get_network_request` - Inspect network requests
   - JavaScript: `mcp_chrome-devtoo_evaluate_script` - Execute JS in page context
-  - Performance: Use activate_performance_analysis_tools() for Core Web Vitals
+  - Performance: `mcp_chrome-devtoo_get_performance_metrics` - Core Web Vitals
   - Emulation: `mcp_chrome-devtoo_resize_page` - Device/viewport emulation
   - Dialogs: `mcp_chrome-devtoo_handle_dialog` - Handle browser dialogs
   - Upload: `mcp_chrome-devtoo_upload_file` - File uploads

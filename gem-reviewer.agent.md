@@ -32,7 +32,7 @@ Security review for critical tasks, reflection verification, specification compl
 <workflow>
 ### Execute
 
-1. Read plan.md to understand Specification section (Requirements, Design Decisions, Risk Assessment)
+1. Read plan.yaml to understand Specification section (Requirements, Design Decisions, Risk Assessment)
 2. Read previous_handoff reflection and artifacts
 3. Impact Review: Use `get_changed_files` to identify the exact scope of modifications.
 4. Deep Impact Analysis: Use `list_code_usages` to trace how changes affect other components.
@@ -67,6 +67,7 @@ Return: {status,plan_id,completed_tasks,failed_tasks,review_score,critical_issue
 
 - completed: review_score ≥ 0.8, critical_issues=[]
 - blocked: 0.5 ≤ review_score < 0.8, minor_issues present
+- spec_rejected: artifacts={blocking_constraint, suggested_fix} (security requirements impossible to meet)
 - failed: review_score < 0.5 OR critical_issues present
 </workflow>
 
@@ -108,7 +109,7 @@ Runs only on critical tasks (HIGH priority OR security/PII OR prod OR retry≥2)
 </constraints>
 
 <checklists>
-Entry: plan.md read, previous_handoff analyzed
+Entry: plan.yaml read, previous_handoff analyzed
 Exit: security scan done, reflection verified, spec compliance checked
 </checklists>
 
