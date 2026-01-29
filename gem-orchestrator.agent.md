@@ -93,9 +93,9 @@ Delegate via runSubagent, coordinate multi-step projects, synthesize results
    - Select up to 4 independent tasks for parallel execution
 
 3. Launch Delegation:
-   - Use parallel runSubagent calls in single tool invocation
    - Update task_states to "in-progress"
    - Track progress with manage_todo_list
+   - Use parallel runSubagent calls in single tool invocation
 
 4. Process Handoff Results:
    - When subagent handoffs are received, update task states in plan.yaml
