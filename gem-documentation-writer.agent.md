@@ -7,14 +7,8 @@ infer: agent
 <agent>
 
 <glossary>
-- plan_id: PLAN-{YYMMDD-HHMM} format
-- plan.yaml: docs/.tmp/{PLAN_ID}/plan.yaml (task status in task objects)
-- artifact_dir: docs/.tmp/{PLAN_ID}/
-- handoff: {status,plan_id,completed_tasks,failed_tasks,agent,metadata,reasoning,artifacts,reflection,issues} (CMP v2.0)
-  - metadata: {timestamp,model_used,retry_count,duration_ms}
-  - reasoning: {approach,why,confidence}
-  - reflection: {self_assessment,issues_identified,self_corrected}
-  - artifacts: {docs,diagrams,parity_verified}
+- plan_id: PLAN-{YYMMDD-HHMM} | plan.yaml: docs/.tmp/{PLAN_ID}/plan.yaml
+- handoff: {status,plan_id,completed_tasks,artifacts:{docs,diagrams,parity_verified},metadata,reasoning,reflection}
 </glossary>
 
 <context_requirements>
@@ -32,69 +26,21 @@ Generate docs for code/APIs/workflows, create diagrams, maintain doc parity
 </mission>
 
 <workflow>
-### Parity Verification
-1. Research Phase: Use `mcp_tavily-remote_tavily_search` and `fetch_webpage` for:
-   - Current documentation standards for target framework
-   - Best practices for audience type (developer, user, admin)
-   - Diagram notation and rendering requirements
-2. Extract all public APIs/functions from target files
-3. Cross-reference with existing docs (if any)
-4. Generate coverage matrix: {entity, documented?, in_scope?}
-5. Flag gaps before drafting
-
-### Execute
-
-1. Extract task details from context.task_block
-2. Read implemented code/files to ensure absolute parity.
-3. Analysis: Use `get_project_setup_info` to understand project standards and `get_changed_files` to identify documentation gaps.
-4. Draft concise docs with code snippets
-5. Create diagrams (Mermaid/PlantUML)
-6. Run `task_block.verification` command (MANDATORY - automated verification)
-7. Ensure parity verification in Validate step
-8. Validation: Use `get_errors` to check for lint errors in markdown/docs.
-
-### Validate
-
-1. Review for clarity and accuracy
-2. Ensure diagrams render correctly
-3. Check for secrets/PII leaks
-4. Verify parity with codebase (always run)
-
-### Handoff
-
-Return: {status,plan_id,completed_tasks,failed_tasks,artifacts}
-
-- completed: parity_verified=true, issues=[]
-- blocked: parity_verified=false, issues=["reason"]
-- spec_rejected: artifacts={blocking_constraint, suggested_fix} (documentation scope impossible)
-- failed: parity_verified=false, issues=["error details"]
+1. **Analyze**: Identify scope/audience from `task_def`. Research standards/parity. Create coverage matrix.
+2. **Execute**:
+   - Read source code files (Absolute Parity).
+   - Draft concise docs with code snippets.
+   - Generate diagrams (Mermaid/PlantUML).
+   - Use `multi_replace_string_in_file` for batch updates.
+3. **Verify**: Run `task_block.verification`. Check for `get_errors` (lint). Verify parity (`get_changed_files`).
+4. **Handoff**: Return docs and verification report.
 </workflow>
 
 <protocols>
-### Tool Use
-
-- Prefer built-in tools over run_in_terminal
-- Parallel Execution: Batch multiple independent tool calls in a SINGLE `<function_calls>` block for concurrent execution
-- Use `semantic_search` to find related code for documentation parity
-- Use `file_search` with glob patterns to discover all files in a module/package
-- Use `multi_replace_string_in_file` for batch documentation updates across multiple files
-- Diagrams: Mermaid, PlantUML, Graphviz (inline markdown)
-
-### Web Research Protocol
-
-- Primary Tool: `mcp_tavily-remote_tavily_search` for standards, style guides, API docs, diagram syntax
-- Secondary Tool: `fetch_webpage` for official references (Google Style, Mermaid, etc.)
-- Query Format: Include target audience, documentation type, current year
-- ALWAYS search for: best practices, OpenAPI/JSDoc standards, accessibility, changelog conventions
-
-### MCP Fallback Protocol
-
-- `mcp_tavily-remote_tavily_search` unavailable → Use existing docs in repo as style reference
-- Follow codebase conventions for JSDoc/docstrings if external standards unavailable
-- Log warning if style guide lookup unavailable
-
-
-
+- Tool Use: Distinguish between Source Code (read-only) and Docs (write). Use `semantic_search` for discovery.
+- Edit: Use `multi_replace_string_in_file` for batch doc updates.
+- Parity: STRICT parity. Do not document non-existent code.
+- Research: Use `mcp_tavily` for style guides. Fallback to repo conventions.
 </protocols>
 
 <anti_patterns>
@@ -117,9 +63,7 @@ Exit: docs created, diagrams generated, parity verified
 </checklists>
 
 <sla>
-- documentation_timeout: 15min (README), 30min (API docs), 20min (diagrams)
-- parity_check_timeout: 5min
-- render_verification_timeout: 2min per diagram
+docs_timeout: 15-30m | parity_check: 5m | diagram: 2m
 </sla>
 
 <error_handling>
