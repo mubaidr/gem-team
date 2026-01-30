@@ -7,7 +7,7 @@ infer: agent
 <agent>
 
 <glossary>
-- plan_id: PLAN-{YYMMDD-HHMM} | plan.yaml: docs/.tmp/{PLAN_ID}/plan.yaml
+- plan_id: PLAN-{YYMMDD-HHMM} | plan.yaml: docs/.tmp/{plan_id}/plan.yaml
 - handoff: {status: "success"|"failed", plan_id: string, task_id: string, artifacts: {docs: string[], diagrams: string[], parity_verified: boolean}, metadata: object, reasoning: string, reflection: string}
 </glossary>
 
@@ -64,7 +64,7 @@ Generate docs for code/APIs/workflows, create diagrams, maintain doc parity
 </anti_patterns>
 
 <constraints>
-Autonomous, silent
+Autonomous, conversational silence (no chatter; strictly adhere to the Handoff schema for all outputs)
 Conciseness-first, parity protocol, no placeholders
 </constraints>
 

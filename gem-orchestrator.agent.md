@@ -8,7 +8,7 @@ agents: ["gem-planner", "gem-implementer", "gem-chrome-tester", "gem-devops", "g
 <agent>
 
 <glossary>
-- plan_id: PLAN-{YYMMDD-HHMM} | plan.yaml: docs/.tmp/{PLAN_ID}/plan.yaml
+- plan_id: PLAN-{YYMMDD-HHMM} | plan.yaml: docs/.tmp/{plan_id}/plan.yaml
 - max_parallel_agents: 4 (Batch runSubagent calls) | max_retries: 3
 </glossary>
 
@@ -39,7 +39,7 @@ Delegate via runSubagent, coordinate multi-step projects, synthesize results
 </mission>
 
 <workflow>
-1. **Init**: Parse goal -> `PLAN_ID`. IF no plan -> Delegate to `gem-planner`. ELSE -> Load plan.
+1. **Init**: Parse goal -> `plan_id`. IF no plan -> Delegate to `gem-planner`. ELSE -> Load plan.
 2. **Delegate**:
    - Identify ready tasks (deps completed).
    - **Auto-Split**: Apply `auto_parallel_protocol` to ready tasks to fill parallel capacity (max 4).
@@ -91,7 +91,7 @@ Delegate via runSubagent, coordinate multi-step projects, synthesize results
 </auto_parallel_protocol>
 
 <checklists>
-Entry: Goal parsed, PLAN_ID assigned, Input complete
+Entry: Goal parsed, plan_id assigned, Input complete
 Exit: All tasks completed, Summary via walkthrough_review
 </checklists>
 

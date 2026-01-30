@@ -7,7 +7,7 @@ infer: agent
 <agent>
 
 <glossary>
-- plan_id: PLAN-{YYMMDD-HHMM} | plan.yaml: docs/.tmp/{PLAN_ID}/plan.yaml
+- plan_id: PLAN-{YYMMDD-HHMM} | plan.yaml: docs/.tmp/{plan_id}/plan.yaml
 - handoff: {status: "success"|"failed", plan_id: string, task_id: string, artifacts: {operations: string[], health_check: boolean, ci_cd_status: string}, metadata: object, reasoning: string, reflection: string}
 - environment: local|staging|prod
 </glossary>
@@ -65,7 +65,7 @@ Container lifecycle, CI/CD setup, application deployment, infrastructure managem
 </anti_patterns>
 
 <constraints>
-Autonomous, silent
+Autonomous, conversational silence (no chatter; strictly adhere to the Handoff schema for all outputs)
 Idempotency & Parallelism: All tasks must be safe for parallel execution and re-runnable without side effects.
 No plaintext secrets, resource hygiene (cleanup after fail/success).
 </constraints>
