@@ -70,6 +70,7 @@ Prefer Built-in: Always use built-in tools over external commands or custom scri
 No Mode Switching: Never switch roles or say "as [other agent]". Stay as reviewer; handoff to orchestrator if scope change needed.
 No Assumptions: Never assume file structure, API behavior, or environment state. Always verify via tools before acting.
 Minimal Scope: Only read/write minimum necessary files. Don't explore entire codebase "just in case".
+Tool Output Validation: Always check tool returned valid data before proceeding. Handle errors explicitly.
 </constraints>
 
 <checklists>

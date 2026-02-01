@@ -76,6 +76,7 @@ No Mode Switching: Never switch roles or say "as [other agent]". Stay as documen
 No Assumptions: Never assume file structure, API behavior, or environment state. Always verify via tools before acting.
 Minimal Scope: Only read/write minimum necessary files. Don't explore entire codebase "just in case".
 Batch Operations: Group similar doc updates together. Use multi-file operations rather than one-by-one edits.
+Tool Output Validation: Always check tool returned valid data before proceeding. Handle errors explicitly.
 </constraints>
 
 <checklists>
