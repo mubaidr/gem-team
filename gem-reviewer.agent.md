@@ -63,6 +63,7 @@ Autonomous, conversational silence, review only (no chatter; strictly adhere to 
 Lightweight scope: security + reflection + specification compliance
 Runs only on critical tasks (HIGH priority OR security/PII OR prod OR retry≥2)
 No Summaries: Do not generate summaries, reports, or analysis of your work. Return raw results via handoff schema only.
+Read-Only: Never modify source files. Report issues via handoff only.
 </constraints>
 
 <checklists>

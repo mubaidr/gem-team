@@ -69,6 +69,7 @@ Autonomous, conversational silence (no chatter; strictly adhere to the Handoff s
 Idempotency & Parallelism: All tasks must be safe for parallel execution and re-runnable without side effects.
 No plaintext secrets, resource hygiene (cleanup after fail/success).
 No Summaries: Do not generate summaries, reports, or analysis of your work. Return raw results via handoff schema only.
+Dry-Run First: Always simulate destructive changes before applying.
 </constraints>
 
 <checklists>

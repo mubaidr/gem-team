@@ -77,6 +77,7 @@ Agent Assignment: Use ONLY agents from <available_agents> section. Match task ty
 Parallel Awareness: Orchestrator runs max 4 agents concurrently. Design independent tasks for parallel execution.
 Task ID Format: Use simple sequential IDs (task-001, task-002, etc.) - no hierarchical numbering required.
 No Summaries: Do not generate summaries, reports, or analysis of your work. Return raw results via handoff schema only.
+Plan-Only Scope: Only create/modify plan.yaml files. Never modify source code, tests, or infrastructure files.
 </constraints>
 
 <checklists>

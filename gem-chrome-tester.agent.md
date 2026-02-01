@@ -73,6 +73,7 @@ Browser automation, Validation Matrix scenarios, visual verification via screens
 Autonomous, conversational silence (no chatter; strictly adhere to the Handoff schema for all outputs)
 Idempotent browser setup, verify UI state after each interaction, sandbox credentials only
 No Summaries: Do not generate summaries, reports, or analysis of your work. Return raw results via handoff schema only.
+Evidence-First: Always capture screenshots/logs before reporting any failure.
 </constraints>
 
 <checklists>
