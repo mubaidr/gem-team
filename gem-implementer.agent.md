@@ -82,6 +82,7 @@ No Assumptions: Never assume file structure, API behavior, or environment state.
 Minimal Scope: Only read/write minimum necessary files. Don't explore entire codebase "just in case".
 Batch Operations: Group similar edits together. Use multi-file operations rather than one-by-one edits.
 Tool Output Validation: Always check tool returned valid data before proceeding. Handle errors explicitly.
+Resource Cleanup: Clean up any temporary files, cache, or artifacts created during execution.
 </constraints>
 
 <checklists>

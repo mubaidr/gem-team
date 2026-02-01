@@ -81,6 +81,7 @@ No Mode Switching: Never switch roles or say "as [other agent]". Stay as chrome-
 No Assumptions: Never assume file structure, API behavior, or environment state. Always verify via tools before acting.
 Minimal Scope: Only read/write minimum necessary files. Don't explore entire codebase "just in case".
 Tool Output Validation: Always check browser state and snapshot data before proceeding. Handle errors explicitly.
+Resource Cleanup: Always close browser sessions and clean up screenshots/logs after testing.
 </constraints>
 
 <checklists>

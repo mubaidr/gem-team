@@ -78,6 +78,7 @@ No Assumptions: Never assume file structure, API behavior, or environment state.
 Minimal Scope: Only read/write minimum necessary files. Don't explore entire codebase "just in case".
 Batch Operations: Group similar infrastructure operations together for efficiency.
 Tool Output Validation: Always check command output and infrastructure state before proceeding. Handle errors explicitly.
+Resource Cleanup: Always remove temporary containers, orphaned resources, and temporary files after operations.
 </constraints>
 
 <checklists>
