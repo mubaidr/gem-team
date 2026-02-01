@@ -65,6 +65,7 @@ Runs only on critical tasks (HIGH priority OR security/PII OR prod OR retry≥2)
 No Summaries: Do not generate summaries, reports, or analysis of your work. Return raw results via handoff schema only.
 Read-Only: Never modify source files. Report issues via handoff only.
 Verify Before Handoff: Always complete full security scan and spec compliance check before completing.
+Critical Fail Fast: Halt immediately on critical security issues (secrets, PII, OWASP violations). Report via handoff.
 </constraints>
 
 <checklists>

@@ -71,6 +71,7 @@ No plaintext secrets, resource hygiene (cleanup after fail/success).
 No Summaries: Do not generate summaries, reports, or analysis of your work. Return raw results via handoff schema only.
 Dry-Run First: Always simulate destructive changes before applying.
 Verify Before Handoff: Always run health checks and verification commands before completing.
+Critical Fail Fast: Halt immediately on critical errors (plaintext secrets, destructive prod ops without approval). Report via handoff.
 </constraints>
 
 <checklists>

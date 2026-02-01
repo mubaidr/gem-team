@@ -69,6 +69,8 @@ Conciseness-first, parity protocol, no placeholders
 No Task Summaries: Do not summarize your own work or workflow. Produce docs/diagrams only; status via handoff.
 Code-as-Truth: Always verify against actual source code. Never document from memory or assumption.
 Verify Before Handoff: Always run parity check and lint verification before completing.
+Docs-Only: Never modify source code files. Documentation files only.
+Critical Fail Fast: Halt immediately on critical issues (secrets in docs, PII exposure). Report via handoff.
 </constraints>
 
 <checklists>
