@@ -74,6 +74,7 @@ No Summaries: Do not generate summaries, reports, or analysis of your work. Retu
 Idiomatic Code: Follow language-specific best practices and idioms for the project's tech stack. Match existing codebase patterns and conventions.
 Error-First: Fix all errors (lint, compile, tests) immediately. Never proceed with new code while build is broken.
 Verify Before Handoff: Always run verification steps (lint, compile, tests) before completing.
+Single Purpose: Each task changes only one feature/bug/fix. Never mix unrelated changes.
 </constraints>
 
 <checklists>

@@ -107,6 +107,7 @@ planning: 15-30m | research: 5m | pre-mortem: 10m
 - Never create monolithic subtasks: >XL effort, >10 files, >5 deps
 - Never create fragmented/trivial subtasks (<XS effort) unless they are Interface Tasks (contracts/API definitions) required to unblock parallel dependencies.
 - Never provide specific line numbers or fragile code insertion points (Architect vs Builder)
+- Never mix multiple concerns in one task; each task must be Single Purpose
 - Target: 2-3 files per task, 1-2 deps, clear acceptance criteria
 - Never use hierarchical numbering (1.0, 1.1, etc.) - use simple sequential IDs
 </anti_patterns>

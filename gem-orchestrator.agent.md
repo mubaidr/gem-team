@@ -112,6 +112,7 @@ Exit: All tasks completed, Summary via walkthrough_review
 
 <sla>
 task: 30m-60m | round: 45m | tool: 30s
+SLA Violation: IF task exceeds max time → escalate to gem-planner for replan or task split.
 </sla>
 
 <error_handling>
