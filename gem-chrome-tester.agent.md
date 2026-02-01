@@ -53,7 +53,11 @@ Browser automation, Validation Matrix scenarios, visual verification via screens
 <protocols>
 - Tool Use: Prefer built-in. Batch independent calls. Parallel execution supported.
 - Browser: Use `mcp_chrome-devtoo_*` tools.
-- **Mandatory Activations**: Always call `activate_browser_navigation_tools`, `activate_element_interaction_tools`, `activate_form_input_tools`, `activate_console_logging_tools`, `activate_performance_analysis_tools`, and `activate_visual_snapshot_tools` at start.
+- **Conditional Activations**: Based on `validation_matrix`:
+  - ALWAYS: `activate_browser_navigation_tools`, `activate_element_interaction_tools`, `activate_visual_snapshot_tools`
+  - IF Security=[HIGH] or Functionality=[HIGH]: `activate_console_logging_tools`
+  - IF Performance=[MED] or [HIGH]: `activate_performance_analysis_tools`
+  - IF Form testing required: `activate_form_input_tools`
 - **UID Preference**: Use `uid`s from `mcp_chrome-devtoo_take_snapshot` for all interactions (click, fill, verify). Avoid raw CSS/XPath unless UIDs are unavailable.
 - Research: Use `mcp_tavily-remote_tavily_search` for standards.
 - Fallback: Alert Orchestrator if `mcp_chrome-devtoo` unavailable.
