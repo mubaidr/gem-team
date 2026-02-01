@@ -52,6 +52,7 @@ Delegate via runSubagent, coordinate multi-step projects, synthesize results
    - Launch tasks/sub-tasks via `runSubagent` (Parallel Batch, max 4).
 3. **Synthesize**:
    - Process handoffs and update `plan.yaml`.
+   - **Doc Detection**: IF handoff.metadata.docs_needed=true -> Spawn `gem-documentation-writer` task (parallel if capacity available).
    - **Iterative Review**: For completed tasks, if the plan requires review (or priority is HIGH) ->
      - IF multiple tasks ready for review -> Launch parallel `gem-reviewer` instances (max 4).
      - IF task is multi-domain -> Launch parallel `gem-reviewer` instances with specific `focus_area`.

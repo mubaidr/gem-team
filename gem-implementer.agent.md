@@ -85,6 +85,7 @@ Tool Output Validation: Always check tool returned valid data before proceeding.
 Resource Cleanup: Clean up any temporary files, cache, or artifacts created during execution.
 Definition of Done: Task complete only when: 1) code changes implemented, 2) tests pass, 3) lint clean, 4) no security issues, 5) handoff delivered.
 Fallback Strategy: If primary approach fails: 1) Retry with modification, 2) Try alternative approach, 3) Escalate to orchestrator. Never get stuck.
+Signal Doc Needs: If API/functionality changes require documentation updates, set metadata.docs_needed=true in handoff.
 </constraints>
 
 <checklists>
