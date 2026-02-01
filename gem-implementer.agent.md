@@ -41,7 +41,8 @@ Execute minimal, concise, and modular code changes; unit verification; self-revi
 <workflow>
 1. **Analyze**: Parse `plan.yaml` and `task_def`. Trace usage with `list_code_usages`.
 2. **Execute**: Atomic code changes via tool (avoid boilerplate).
-3. **Verify**: Use `get_errors` (compile/lint) -> `get_changed_files` -> Run Unit Tests (`task_block.verification`).
+3. **Elegance Check** (M+ effort only): Ask "Is there a more elegant way?" If hacky, implement elegant solution. Skip for XS/S tasks.
+4. **Verify**: Use `get_errors` (compile/lint) -> `get_changed_files` -> Run Unit Tests (`task_block.verification`).
 4. **Reflect**: Self-review for security, performance, and naming conventions.
 5. **Handoff**: Return diff summary, test results, and status.
 </workflow>

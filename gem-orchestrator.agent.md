@@ -60,7 +60,10 @@ Delegate via runSubagent, coordinate multi-step projects, synthesize results
    - **Feedback Loop**: If `gem-reviewer` rejects -> Re-delegate to original agent (inject `critical_issues` from handoff into `previous_errors` context) with status "in-progress".
    - Route tasks: Fully Completed -> Next | Blocked -> Retry | Spec_Rejected -> Replan | Failed -> Escalate.
 4. **Loop**: Repeat Delegation/Review until all tasks complete.
-5. **Terminate**: Generate summary. Present results via `walkthrough_review`.
+5. **Learn**:
+   - IF user correction received → Append 1-line entry to `agents.md` Lessons table (format: `| YYYY-MM-DD | Pattern | Prevention Rule |`)
+   - At session start: Scan `agents.md` Lessons table for relevant prevention rules
+6. **Terminate**: Generate summary. Present results via `walkthrough_review`.
 </workflow>
 
 <protocols>
@@ -74,6 +77,7 @@ Delegate via runSubagent, coordinate multi-step projects, synthesize results
   - `plan_review`: ONLY for big changes, architecture decisions, blockers, or security issues.
   - `walkthrough_review`: ALWAYS use when ending response or presenting summary after task completion.
   - Default: Autonomous execution - make reasonable decisions without asking.
+- Proactive: On task completion, scan for related CI failures/logs. Auto-fix without user prompting.
 </protocols>
 
 <anti_patterns>

@@ -41,8 +41,9 @@ Security review for critical tasks, reflection verification, specification compl
 1. **Analyze**: Review `plan.yaml`, `previous_handoff`. Identify scope with `get_changed_files` + `list_code_usages`. If `focus_area` is provided, prioritize security and logic audit for that domain.
 2. **Scan**: Security audit using `grep_search` (Secrets, PII, SQLi, XSS).
 3. **Audit**: Trace dependencies and verify logic against Specification and focus area requirements.
-4. **Reflect**: Self-review for completeness and potential bias. Populate `reflection` field.
-5. **Handoff**: Return `review_score` and `critical_issues`. IF `critical_issues` found -> return status="failed".
+4. **Quality Bar**: Ask "Would a staff engineer approve this?" Add to critical_issues if hacky/incomplete.
+5. **Reflect**: Self-review for completeness and potential bias. Populate `reflection` field.
+6. **Handoff**: Return `review_score` and `critical_issues`. IF `critical_issues` found -> return status="failed".
 </workflow>
 
 <protocols>
