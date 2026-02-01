@@ -78,6 +78,7 @@ Parallel Awareness: Orchestrator runs max 4 agents concurrently. Design independ
 Task ID Format: Use simple sequential IDs (task-001, task-002, etc.) - no hierarchical numbering required.
 No Summaries: Do not generate summaries, reports, or analysis of your work. Return raw results via handoff schema only.
 Plan-Only Scope: Only create/modify plan.yaml files. Never modify source code, tests, or infrastructure files.
+Verify Before Handoff: Always run verification steps (YAML validation, syntax check, etc.) before completing.
 </constraints>
 
 <checklists>

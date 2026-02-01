@@ -70,6 +70,7 @@ Idempotency & Parallelism: All tasks must be safe for parallel execution and re-
 No plaintext secrets, resource hygiene (cleanup after fail/success).
 No Summaries: Do not generate summaries, reports, or analysis of your work. Return raw results via handoff schema only.
 Dry-Run First: Always simulate destructive changes before applying.
+Verify Before Handoff: Always run health checks and verification commands before completing.
 </constraints>
 
 <checklists>

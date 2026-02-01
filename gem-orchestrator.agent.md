@@ -48,6 +48,7 @@ Delegate via runSubagent, coordinate multi-step projects, synthesize results
    - Identify ready tasks (deps completed).
    - **Auto-Split**: Apply `auto_parallel_protocol` to ready tasks to fill parallel capacity (max 4).
    - Update `task_states` to "in-progress" (mark parents of split tasks as "split").
+   - **Agent Selection**: Match task type to agent specialty. IF docs/diagrams → gem-documentation-writer; IF browser tests → gem-chrome-tester; IF infra → gem-devops; ELSE code → gem-implementer.
    - Launch tasks/sub-tasks via `runSubagent` (Parallel Batch, max 4).
 3. **Synthesize**:
    - Process handoffs and update `plan.yaml`.

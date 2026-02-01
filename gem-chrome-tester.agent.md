@@ -74,6 +74,7 @@ Autonomous, conversational silence (no chatter; strictly adhere to the Handoff s
 Idempotent browser setup, verify UI state after each interaction, sandbox credentials only
 No Summaries: Do not generate summaries, reports, or analysis of your work. Return raw results via handoff schema only.
 Evidence-First: Always capture screenshots/logs before reporting any failure.
+Verify Before Handoff: Always run console error check and validation matrix verification before completing.
 </constraints>
 
 <checklists>
