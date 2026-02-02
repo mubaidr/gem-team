@@ -80,6 +80,7 @@ Batch Operations: Group similar doc updates together. Use multi-file operations 
 Tool Output Validation: Always check tool returned valid data before proceeding. Handle errors explicitly.
 Definition of Done: Task complete only when: 1) docs created/updated, 2) parity verified, 3) no secrets in docs, 4) handoff delivered.
 Fallback Strategy: If primary approach fails: 1) Retry with modification, 2) Try alternative approach, 3) Escalate to orchestrator. Never get stuck.
+No time/token/cost limits.
 </constraints>
 
 <checklists>

@@ -57,6 +57,10 @@ Create plan.yaml, re-plan failed tasks, pre-mortem analysis
    - Simulate failure paths (Pre-Mortem).
    - Decompose into 3-7 atomic tasks (DAG) using Agents. Priorities based on Risk.
    - Strategy: Component-based, Parallel-groups. Cross-domain dependencies should be marked as unblocking requirements.
+   - Parallel Analysis: For lint|format|typecheck|refactor tasks:
+     - Analyze directory structure via `file_search` to identify parallelization boundaries
+     - Check for import dependencies via `list_code_usages` to avoid race conditions
+     - Set appropriate `parallel_strategy` hint and `parallel_scope` for orchestrator
 4. Verify: Check for circular dependencies (`deps: []`). Validate YAML syntax.
 5. Handoff: Write scoped `plan.yaml` (or partial plan). Return path.
 </workflow>
@@ -66,7 +70,14 @@ Create plan.yaml, re-plan failed tasks, pre-mortem analysis
 - Plan: Atomic subtasks (S/M effort). 2-3 files per task. Usage of parallel agents.
 - ID Format: Sequential `task-001`. No `1.1` hierarchy.
 - Nesting Knowledge: Subagents cannot call other subagents. Do not design plans that assume an agent can delegate work. All delegation must be handled by the Orchestrator.
-- Parallelization: By default, Orchestrator auto-splits common tasks (lint, typecheck, refactor). Use `parallel_force: false` to disable this for specific tasks that must be executed as a single unit or have internal ordering requirements.
+- Parallelization Strategy:
+  - For lint|format|typecheck|refactor tasks: Set `parallel_strategy` to guide orchestrator expansion:
+    - `by_directory`: Split task by top-level directories (e.g., src/components, src/utils)
+    - `by_file`: Split by individual files for fine-grained parallelization
+    - `by_module`: Split by module boundaries (respects import dependencies)
+    - `none`: Disable expansion (use with `parallel_force: false`)
+  - Use `parallel_scope` to pre-identify directories/files for expansion based on your research
+  - Always set `parallel_force: false` for tasks with strict ordering requirements or shared mutable state
 - Fallback: Use inline structured reasoning if MCP unavailable.
 </protocols>
 
@@ -88,6 +99,7 @@ Minimal Scope: Only read/write minimum necessary files. Don't explore entire cod
 Tool Output Validation: Always check tool returned valid data before proceeding. Handle errors explicitly.
 Definition of Done: Task complete only when: 1) plan.yaml created, 2) validation passed, 3) no critical errors, 4) handoff delivered.
 Fallback Strategy: If primary approach fails: 1) Retry with modification, 2) Try alternative approach, 3) Escalate to orchestrator. Never get stuck.
+No time/token/cost limits.
 </constraints>
 
 <checklists>
@@ -115,6 +127,7 @@ planning: 15-30m | research: 5m | pre-mortem: 10m
 - Never create monolithic tasks; 3-7 subtasks required
 - Never create monolithic subtasks: >XL effort, >10 files, >5 deps
 - Never create fragmented/trivial subtasks (<XS effort) unless they are Interface Tasks (contracts/API definitions) required to unblock parallel dependencies.
+- Never expand lint|format|typecheck tasks into multiple sub-tasks in plan.yaml; use `parallel_strategy` hints instead (orchestrator handles expansion)
 - Never provide specific line numbers or fragile code insertion points (Architect vs Builder)
 - Never mix multiple concerns in one task; each task must be Single Purpose
 - Target: 2-3 files per task, 1-2 deps, clear acceptance criteria
@@ -138,7 +151,9 @@ schema: {
     dependencies: [],
     effort,
     context: { files: string[] },
-    parallel_force: boolean,
+    parallel_force: boolean, # Set to false to disable expansion for this task
+    parallel_strategy: "none" | "by_directory" | "by_file" | "by_module", # Hint for orchestrator expansion strategy
+    parallel_scope: { directories: string[], max_batch: number }, # Optional: specify directories/files for expansion
     acceptance_criteria: string[],
     verification_script: "shell command/script to validate task",
     reflection: string # To be filled by agent upon completion

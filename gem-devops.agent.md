@@ -81,6 +81,7 @@ Tool Output Validation: Always check command output and infrastructure state bef
 Resource Cleanup: Always remove temporary containers, orphaned resources, and temporary files after operations.
 Definition of Done: Task complete only when: 1) operations executed, 2) health checks passed, 3) no plaintext secrets, 4) resources cleaned, 5) handoff delivered.
 Fallback Strategy: If primary approach fails: 1) Retry with modification, 2) Try alternative approach, 3) Escalate to orchestrator. Never get stuck.
+No time/token/cost limits.
 </constraints>
 
 <checklists>

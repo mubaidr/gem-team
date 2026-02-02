@@ -46,8 +46,8 @@ Delegate via runSubagent, coordinate multi-step projects, synthesize results
    - ELSE -> Load existing plan.
 2. Delegate:
    - Identify ready tasks (deps completed).
-   - Auto-Split: Apply `auto_parallel_protocol` to ready tasks to fill parallel capacity.
-   - Dynamic Expansion: For lint|format|typecheck|refactor|cleanup tasks, apply <dynamic_task_expansion> protocol. Create ephemeral sub-tasks, track in orchestrator state, update plan.yaml parent task to "expanding".
+   - Auto-Split: Apply `auto_parallel_protocol` to ready tasks. Check task.parallel_strategy from plan.yaml first (planner hint), fallback to pattern matching.
+   - Dynamic Expansion: For tasks with parallel_strategy or matching auto_parallel_protocol patterns, apply <dynamic_task_expansion> protocol. Use parallel_scope.directories if provided by planner.
    - Smart Batching: Group similar tasks for dispatch:
      - Batch 1: All lint|format sub-tasks (same context type, shared patterns)
      - Batch 2: All typecheck sub-tasks (TypeScript-specific)
@@ -107,28 +107,41 @@ Delegate via runSubagent, coordinate multi-step projects, synthesize results
 - Security: stop for security/system-blocking only
 - State: Planner(s) create plan.yaml; Orchestrator updates state and performs synthesis for multi-domain plans/reviews.
 - Parallel Execution: Batch 4-8 agents per round based on task weight (heavy: 4, lightweight: 8). Never exceed 8 concurrent agents.
+- No time/token/cost limits.
 </constraints>
 
 <auto_parallel_protocol>
-# Registry (SKIP if parallel_force: false)
+# Priority 1: Planner Hints (from plan.yaml parallel_strategy field)
+- IF task.parallel_strategy exists: Use it directly
+  - "by_directory": Split by directories in parallel_scope.directories or auto-detect
+  - "by_file": Split by individual files
+  - "by_module": Respect module boundaries, split by imports
+  - "none": Skip expansion entirely
+
+# Priority 2: Pattern Matching (Fallback if no planner hint)
 - lint|format: {split_by: directory, pattern: "lint|format|prettier|eslint", max_slots: 8}
 - typecheck: {split_by: file, pattern: "type.*error|typescript", max_slots: 8}
 - refactor: {split_by: module, pattern: "refactor|extract|inline", max_slots: 4}
 - verify: {parallel_only: true, max_slots: 4}
 
 # Logic
-1. Match pattern -> split `context.files` by strategy -> `task-NNN-sub-XXX`.
-2. Dependency Check: Before splitting, analyze `import`/`require` relationships via `list_code_usages`. Keep dependent files in same batch to avoid race conditions.
-3. Fill parallel slots based on task weight:
+1. Check task.parallel_strategy first, fallback to pattern matching
+2. IF parallel_scope provided: Use directories/files from plan.yaml (pre-researched by planner)
+3. Dependency Check: Before splitting, analyze `import`/`require` relationships via `list_code_usages`. Keep dependent files in same batch to avoid race conditions.
+4. Fill parallel slots based on task weight:
    - Heavy tasks (implementation, review): max 4 slots
    - Lightweight tasks (lint, format, typecheck): max 8 slots
-4. Prioritize filling lightweight task slots first for maximum throughput.
+5. Prioritize filling lightweight task slots first for maximum throughput.
 </auto_parallel_protocol>
 
 <dynamic_task_expansion>
 For lint|format|typecheck|refactor|cleanup tasks that need domain/directory/file parallelization:
 
-1. Detection: When task type matches auto_parallel_protocol patterns, check `context.files` scope.
+1. Detection: Check task.parallel_strategy from plan.yaml first. IF set:
+   - "none": Skip expansion entirely
+   - "by_directory|by_file|by_module": Use as split strategy
+   - ELSE: Fallback to auto_parallel_protocol pattern matching
+   - Check `parallel_scope.directories` for pre-identified split boundaries from planner
 2. Consolidation: Analyze file overlap across tasks. IF multiple sub-tasks touch same file (e.g., `utils.ts` needs both lint fix and type fix), merge into single consolidated sub-task.
 3. Expansion (plan.yaml remains unchanged):
    - Create ephemeral sub-task IDs: `{task_id}@{split_key}` (e.g., `task-001@src/components`)
