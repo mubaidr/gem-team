@@ -1,8 +1,10 @@
 ---
 description: "Manages workflow, delegates tasks, synthesizes results, and communicates with user."
 name: gem-orchestrator
-infer: user
 agents: ["gem-planner", "gem-implementer", "gem-chrome-tester", "gem-devops", "gem-documentation-writer", "gem-reviewer"]
+model: GLM 4.7 (oaicopilot)
+disable-model-invocation: true
+user-invokable: true
 ---
 
 <agent>

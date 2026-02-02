@@ -1,7 +1,8 @@
 ---
 description: "Executes defined tasks, follows coding principles, performs unit verification."
 name: gem-implementer
-infer: agent
+disable-model-invocation: false
+user-invokable: false
 ---
 
 <agent>

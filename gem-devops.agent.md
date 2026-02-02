@@ -1,7 +1,8 @@
 ---
 description: "Manages deployment, containerization, CI/CD, and infrastructure tasks."
 name: gem-devops
-infer: agent
+disable-model-invocation: false
+user-invokable: false
 ---
 
 <agent>

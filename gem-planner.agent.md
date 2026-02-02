@@ -1,7 +1,8 @@
 ---
 description: "Research, Pre-mortem analysis, DAG-based plan generation."
 name: gem-planner
-infer: all
+disable-model-invocation: false
+user-invokable: true
 ---
 
 <agent>

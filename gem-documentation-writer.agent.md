@@ -1,7 +1,8 @@
 ---
 description: "Generates concise docs, creates diagrams, maintains documentation parity."
 name: gem-documentation-writer
-infer: agent
+disable-model-invocation: false
+user-invokable: false
 ---
 
 <agent>

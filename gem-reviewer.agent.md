@@ -1,7 +1,8 @@
 ---
 description: "Lightweight security gatekeeper for critical tasks. Runs only on HIGH priority, security/PII, production, or escalated tasks."
 name: gem-reviewer
-infer: agent
+disable-model-invocation: false
+user-invokable: false
 ---
 
 <agent>
