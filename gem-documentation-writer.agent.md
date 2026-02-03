@@ -73,7 +73,6 @@ Generate docs for code/APIs/workflows, create diagrams, maintain doc parity
    - Read source code files (Absolute Parity).
    - Draft concise docs with code snippets.
    - Generate diagrams (Mermaid/PlantUML).
-   - Use `multi_replace_string_in_file` for batch updates.
 3. Verify: Run `task_block.verification`. Check for `get_errors` (lint). Verify parity on delta only (`get_changed_files` since last doc update).
 4. Return handoff JSON
 </workflow>
