@@ -79,8 +79,8 @@ Generate docs for code/APIs/workflows, create diagrams, maintain doc parity
 </workflow>
 
 <protocols>
-- Tool Use: Treat Source Code as Read-Only Truth. Use `semantic_search` for discovery.
-- Edit: Use `multi_replace_string_in_file` for batch doc updates.
+- Tool Use: Prefer built-in. Batch multiple independent calls.
+- Truthness: Treat Source Code as Read-Only Truth. Use `semantic_search` for discovery.
 - Parity: STRICT parity. Do not document non-existent code.
 - Research: Use `semantic_search` (local codebase conventions) FIRST. Only use `mcp_tavily-remote_tavily_search` for unfamiliar patterns or new tech stacks. Use `fetch_webpage` for direct content from technical blogs/docs.
 </protocols>

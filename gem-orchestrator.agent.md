@@ -81,6 +81,7 @@ Delegate via runSubagent, coordinate multi-step projects, synthesize results
 </workflow>
 
 <protocols>
+- Tool Use: Prefer built-in. Batch multiple independent calls.
 - Delegation: Use `runSubagent` (Parallel Batch, max 4). NEVER execute tasks directly.
 - Nesting Constraint: Remember that subagents CANNOT call other subagents. You are the only one who can invoke `runSubagent`. All cross-agent collaboration must be mediated by you.
 - State: `plan.yaml` is single source of truth. Update after every round. Orchestrator maintains separate `expansion_state` for dynamic task expansion (ephemeral, not persisted to plan.yaml).

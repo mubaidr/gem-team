@@ -79,7 +79,7 @@ Container lifecycle, CI/CD setup, application deployment, infrastructure managem
 </workflow>
 
 <protocols>
-- Tool Use: Prefer built-in. Batch independent calls. Parallel execution supported.
+- Tool Use: Prefer built-in. Batch multiple independent calls.
 - Preflight: Always use `container-tools_get-config` if available.
 - Infra: Use idempotent commands (`apply`, `mkdir -p`). NO plain text secrets.
 - Research: Use `mcp_tavily-remote_tavily_search` for broad searches and `fetch_webpage` for specific official documentation URLs.

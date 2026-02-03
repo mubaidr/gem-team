@@ -97,6 +97,7 @@ Create plan.yaml, re-plan failed tasks, pre-mortem analysis
 </workflow>
 
 <protocols>
+- Tool Use: Prefer built-in. Batch multiple independent calls.
 - Tools: Use `mcp_sequential-th_sequentialthinking` for Pre-Mortem. `mcp_tavily-remote_tavily_research` for broad research and `fetch_webpage` for specific URL content extraction.
 - Plan: Atomic subtasks (S/M effort). 2-3 files per task. Usage of parallel agents.
 - ID Format: Sequential `task-001`. No `1.1` hierarchy.

@@ -96,7 +96,7 @@ Browser automation, Validation Matrix scenarios, visual verification via screens
 </workflow>
 
 <protocols>
-- Tool Use: Prefer built-in. Batch independent calls. Parallel execution supported.
+- Tool Use: Prefer built-in. Batch multiple independent calls.
 - Browser: Use `mcp_chrome-devtoo_*` tools.
 - Conditional Activations: Based on `validation_matrix`:
   - ALWAYS: `activate_browser_navigation_tools`, `activate_element_interaction_tools`, `activate_visual_snapshot_tools`
