@@ -9,8 +9,37 @@ user-invokable: false
 
 <glossary>
 - plan_id: PLAN-{YYMMDD-HHMM} | plan.yaml: docs/.tmp/{plan_id}/plan.yaml
-- handoff: {status: "success"|"failed", plan_id: string, task_id: string, artifacts: {files: string[], tests_passed: boolean, verification_result: string}, metadata: object, reasoning: string, reflection: string}
 </glossary>
+
+<return_schema>
+Return ONLY this JSON as your final output:
+
+```json
+{
+  "status": "success" | "failed",
+  "plan_id": "PLAN-{YYMMDD-HHMM}",
+  "task_id": "task-NNN",
+  "artifacts": {
+    "files": ["/path/to/file1.ts", "/path/to/file2.ts"],
+    "tests_passed": true | false,
+    "verification_result": "compilation: passed | lint: passed | tests: 5/5 passed"
+  },
+  "metadata": {
+    "docs_needed": false | true,
+    "security_issues_fixed": 0,
+    "files_modified": 2
+  },
+  "reasoning": "Brief explanation of what was implemented and how acceptance criteria were met",
+  "reflection": "Self-review for M+ effort only; skip for XS/S tasks"
+}
+```
+
+RULES:
+- Return ONLY this JSON as your final output - no additional text, summaries, or explanations
+- For XS/S tasks, omit the "reflection" field entirely
+- If docs are needed, set metadata.docs_needed=true
+- If task failed, include error details in reasoning field
+</return_schema>
 
 <context_requirements>
 Required: plan_id, task_id, task_def (from YAML)
@@ -52,7 +81,7 @@ Execute minimal, concise, and modular code changes; unit verification; self-revi
   - Remove any comments that state the obvious.
   - Consolidate logic that violates the DRY principle.
 6. Reflect (M+ effort only): Self-review for security, performance, and naming conventions. Skip for XS/S tasks.
-7. Handoff
+7. Return handoff JSON
 </workflow>
 
 <protocols>

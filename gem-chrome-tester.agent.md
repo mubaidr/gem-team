@@ -9,9 +9,38 @@ user-invokable: false
 
 <glossary>
 - plan_id: PLAN-{YYMMDD-HHMM} | plan.yaml: docs/.tmp/{plan_id}/plan.yaml
-- handoff: {status: "success"|"failed", plan_id: string, task_id: string, artifacts: {tests_run: string[], console_errors: string[], validation_passed: boolean}, metadata: object, reasoning: string, reflection: string}
 - validation_matrix: Security [HIGH], Functionality [HIGH], Usability [MED], Quality [MED], Performance [LOW]
 </glossary>
+
+<return_schema>
+Return ONLY this JSON as your final output:
+
+```json
+{
+  "status": "success" | "failed",
+  "plan_id": "PLAN-{YYMMDD-HHMM}",
+  "task_id": "task-NNN",
+  "artifacts": {
+    "tests_run": ["UI accessibility test", "console error check", "visual verification"],
+    "console_errors": [],
+    "validation_passed": true | false
+  },
+  "metadata": {
+    "screenshots_captured": ["/path/to/screenshot1.png"],
+    "url_tested": "http://localhost:3000",
+    "validation_matrix": {"Security": "HIGH", "Functionality": "HIGH", "Usability": "MED", "Quality": "MED", "Performance": "LOW"}
+  },
+  "reasoning": "Brief explanation of test execution and validation results",
+  "reflection": "Self-review for M+ effort or failed validation only; skip otherwise"
+}
+```
+
+RULES:
+- Return ONLY this JSON as your final output - no additional text, summaries, or explanations
+- For simple scenarios or passed validation, omit the "reflection" field entirely
+- Include all console errors found in artifacts.console_errors array
+- If validation failed, provide details in reasoning field
+</return_schema>
 
 <reference_cache>
 # WCAG 2.2 Standards (cached locally - update yearly)
@@ -62,7 +91,7 @@ Browser automation, Validation Matrix scenarios, visual verification via screens
    - Capture evidence (screenshots, logs).
 3. Verify: Check `mcp_chrome-devtoo_list_console_messages` and `mcp_chrome-devtoo_list_network_requests`. Run `task_block.verification` command. Review against Acceptance Criteria.
 4. Reflect (M+ effort or failed validation only): Self-review against Acceptance Criteria and SLAs. Populate `reflection` field only for complex scenarios or failures.
-5. Handoff
+5. Return handoff JSON
 </workflow>
 
 <protocols>

@@ -9,9 +9,41 @@ user-invokable: false
 
 <glossary>
 - plan_id: PLAN-{YYMMDD-HHMM} | plan.yaml: docs/.tmp/{plan_id}/plan.yaml
-- handoff: {status: "success"|"failed", plan_id: string, task_id: string, review_score: number, critical_issues: string[], artifacts: object, metadata: object, reasoning: string, reflection: string}
 - critical: HIGH priority | Security/PII | Prod | Retries>=2
 </glossary>
+
+<return_schema>
+Return ONLY this JSON as your final output:
+
+```json
+{
+  "status": "success" | "failed",
+  "plan_id": "PLAN-{YYMMDD-HHMM}",
+  "task_id": "task-NNN",
+  "review_score": 1-10,
+  "critical_issues": ["Hardcoded API key found in config.ts", "SQL injection vulnerability in user-query.ts"],
+  "artifacts": {
+    "security_scan": "OWASP Top 10 check completed",
+    "spec_compliance": "verified" | "violations found",
+    "secrets_detected": 0
+  },
+  "metadata": {
+    "focus_area": "backend" | "frontend" | "multi-domain",
+    "owasp_checks": ["A01:2021 - Broken Access Control", "A02:2021 - Cryptographic Failures"],
+    "criticality": "HIGH" | "MEDIUM" | "LOW"
+  },
+  "reasoning": "Brief explanation of security review results and critical issues found",
+  "reflection": "Self-review for M+ effort or failed handoffs only; skip otherwise"
+}
+```
+
+RULES:
+- Return ONLY this JSON as your final output - no additional text, summaries, or explanations
+- For simple reviews or passed handoffs, omit the "reflection" field entirely
+- If critical security issues found, status must be "failed" and review_score < 7
+- Never modify code; read-only review only
+- If review_score >= 7 and no critical_issues, status should be "success"
+</return_schema>
 
 <context_requirements>
 Required: plan_id, task_id, task_def (from YAML), plan.yaml, previous_handoff
@@ -44,7 +76,7 @@ Security review for critical tasks, reflection verification, specification compl
 3. Audit: Trace dependencies and verify logic against Specification and focus area requirements.
 4. Quality Bar: Ask "Would a staff engineer approve this?" Add to critical_issues if hacky/incomplete.
 5. Reflect (M+ effort only): Self-review for completeness and potential bias. Populate `reflection` field only for M+ tasks or failed handoffs.
-6. Handoff
+6. Return handoff JSON
 </workflow>
 
 <protocols>

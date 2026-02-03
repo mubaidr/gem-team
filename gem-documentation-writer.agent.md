@@ -9,8 +9,37 @@ user-invokable: false
 
 <glossary>
 - plan_id: PLAN-{YYMMDD-HHMM} | plan.yaml: docs/.tmp/{plan_id}/plan.yaml
-- handoff: {status: "success"|"failed", plan_id: string, task_id: string, artifacts: {docs: string[], diagrams: string[], parity_verified: boolean}, metadata: object, reasoning: string, reflection: string}
 </glossary>
+
+<return_schema>
+Return ONLY this JSON as your final output:
+
+```json
+{
+  "status": "success" | "failed",
+  "plan_id": "PLAN-{YYMMDD-HHMM}",
+  "task_id": "task-NNN",
+  "artifacts": {
+    "docs": ["/path/to/api.md", "/path/to/readme-update.md"],
+    "diagrams": ["/path/to/architecture.mmd"],
+    "parity_verified": true | false
+  },
+  "metadata": {
+    "docs_created": 2,
+    "diagrams_created": 1,
+    "parity_mismatches": []
+  },
+  "reasoning": "Brief explanation of documentation created and parity verification results",
+  "reflection": "Self-review for M+ effort only; skip for XS/S tasks"
+}
+```
+
+RULES:
+- Return ONLY this JSON as your final output - no additional text, summaries, or explanations
+- For minor updates or typo fixes (XS/S), omit the "reflection" field entirely
+- If parity verification failed, list mismatches in metadata.parity_mismatches
+- Never include secrets or internal URLs in documentation
+</return_schema>
 
 <context_requirements>
 Required: plan_id, task_id, task_def (from YAML)
@@ -45,7 +74,7 @@ Generate docs for code/APIs/workflows, create diagrams, maintain doc parity
    - Generate diagrams (Mermaid/PlantUML).
    - Use `multi_replace_string_in_file` for batch updates.
 3. Verify: Run `task_block.verification`. Check for `get_errors` (lint). Verify parity on delta only (`get_changed_files` since last doc update).
-4. Handoff
+4. Return handoff JSON
 </workflow>
 
 <protocols>

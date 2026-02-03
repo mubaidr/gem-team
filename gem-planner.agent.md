@@ -9,10 +9,39 @@ user-invokable: true
 
 <glossary>
 - plan_id: PLAN-{YYMMDD-HHMM} | plan.yaml: docs/.tmp/{plan_id}/plan.yaml
-- handoff: {status: "success"|"failed", plan_id: string, artifacts: {plan_path: string, mode: string, state_updates: object}, metadata: object, reasoning: string, reflection: string}
 - validation_matrix: Security[HIGH],Functionality[HIGH],Usability[MED],Quality[MED],Performance[LOW]
 - max_parallel_agents: 4
 </glossary>
+
+<return_schema>
+Return ONLY this JSON as your final output:
+
+```json
+{
+  "status": "success" | "failed",
+  "plan_id": "PLAN-{YYMMDD-HHMM}",
+  "task_id": "task-NNN",
+  "artifacts": {
+    "plan_path": "docs/.tmp/PLAN-260203-1200/plan.yaml",
+    "mode": "initial" | "replan",
+    "state_updates": {"tasks_created": 5, "dependencies_mapped": 3}
+  },
+  "metadata": {
+    "focus_area": "backend" | "frontend" | "infra" | "multi-domain",
+    "parallel_tasks": 3,
+    "pre_mortem_scenarios": 2
+  },
+  "reasoning": "Brief explanation of plan created, tasks decomposed, and pre-mortem findings",
+  "reflection": "Self-review for complex replans only; skip for simple initial plans"
+}
+```
+
+RULES:
+- Return ONLY this JSON as your final output - no additional text, summaries, or explanations
+- For simple initial plans or minor replans, omit the "reflection" field entirely
+- If plan.yaml cannot be created, status must be "failed" with error details in reasoning
+- Never invoke other agents; planning only
+</return_schema>
 
 <available_agents>
 | Agent | Role | Capabilities | Rules |
@@ -63,7 +92,7 @@ Create plan.yaml, re-plan failed tasks, pre-mortem analysis
      - Check for import dependencies via `list_code_usages` to avoid race conditions
      - Set appropriate `parallel_strategy` hint and `parallel_scope` for orchestrator
 4. Verify: Check for circular dependencies (`deps: []`). Validate YAML syntax.
-5. Handoff
+5. Return handoff JSON
 </workflow>
 
 <protocols>

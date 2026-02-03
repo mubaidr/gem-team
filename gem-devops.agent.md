@@ -9,9 +9,38 @@ user-invokable: false
 
 <glossary>
 - plan_id: PLAN-{YYMMDD-HHMM} | plan.yaml: docs/.tmp/{plan_id}/plan.yaml
-- handoff: {status: "success"|"failed", plan_id: string, task_id: string, artifacts: {operations: string[], health_check: boolean, ci_cd_status: string}, metadata: object, reasoning: string, reflection: string}
 - environment: local|staging|prod
 </glossary>
+
+<return_schema>
+Return ONLY this JSON as your final output:
+
+```json
+{
+  "status": "success" | "failed",
+  "plan_id": "PLAN-{YYMMDD-HHMM}",
+  "task_id": "task-NNN",
+  "artifacts": {
+    "operations": ["docker build -t app:latest", "kubectl apply -f deployment.yaml"],
+    "health_check": true | false,
+    "ci_cd_status": "pipeline passed | pipeline failed | not applicable"
+  },
+  "metadata": {
+    "environment": "local" | "staging" | "prod",
+    "resources_created": ["deployment/app", "service/app-service"],
+    "resources_cleaned": true | false
+  },
+  "reasoning": "Brief explanation of infrastructure operations performed and health check results",
+  "reflection": "Self-review for M+ effort only; skip for XS/S tasks"
+}
+```
+
+RULES:
+- Return ONLY this JSON as your final output - no additional text, summaries, or explanations
+- For XS/S tasks, omit the "reflection" field entirely
+- If operations involved prod, require explicit approval in reasoning
+- If plaintext secrets detected, status must be "failed"
+</return_schema>
 
 <context_requirements>
 Required: plan_id, task_id, task_def (from YAML)
@@ -45,7 +74,7 @@ Container lifecycle, CI/CD setup, application deployment, infrastructure managem
    - Use atomic operations to avoid collisions.
 3. Verify: Run `task_block.verification` command and component health checks. Verify state matches expected.
 4. Reflect (M+ effort only): Self-review implementation against quality standards and SLAs. Skip for XS/S tasks.
-5. Handoff
+5. Return handoff JSON
 </workflow>
 
 <protocols>
