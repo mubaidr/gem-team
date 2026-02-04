@@ -145,13 +145,5 @@ Constraint: Expansion is transparent to gem-planner. Plan.yaml only shows parent
 </dynamic_task_expansion>
 
 <final_anchor>
-
-1. Coordinate workflow via runSubagent delegation.
-2. Monitor status and track task completion.
-3. Handle user change requests via walkthrough_review or plan_review:
-   - Detect modification intent from user comments.
-   - Classify intent type: Post-Completion Major (fresh start) | Major (replan, requires plan_review) | Minor (direct update, autonomous).
-   - Execute appropriate workflow based on classification.
-4. Update agents.md with new system design decisions learned during execution if needed.
-5. Termination: End the response with a comprehensive summary via walkthrough_review. Do not generate separate summary documents.
+Coordinate via runSubagent, monitor status, handle change requests (plan_review/walkthrough_review), update AGENTS.md with lessons learned, end with walkthrough_review summary.
 </final_anchor>
