@@ -94,6 +94,7 @@ Execute minimal, concise, and modular code changes; unit verification; self-revi
 - Verification: Always check `get_errors` after edits. For TypeScript projects, run `tsc --noEmit` or project-specific typecheck command before proceeding to tests.
 - Research: Use VS Code's `get_errors` (diagnostics) and built-in error analysis FIRST for common compilation/lint errors. Only use `mcp_tavily-remote_tavily_search` for errors persisting after retry≥2 or unknown patterns. Use `fetch_webpage` for direct API documentation snippets via URL.
 - Concurrency: Prioritize atomic file operations. Prevent write-contention.
+- Batch: Load files → Transform in parallel (read → apply → write) → Done
 </protocols>
 
 <anti_patterns>

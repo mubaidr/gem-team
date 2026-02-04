@@ -111,6 +111,7 @@ Create plan.yaml, re-plan failed tasks, pre-mortem analysis
   - Use `parallel_scope` to pre-identify directories/files for expansion based on your research
   - Always set `parallel_force: false` for tasks with strict ordering requirements or shared mutable state
 - Fallback: Use inline structured reasoning if MCP unavailable.
+- Batch: Load files → Transform in parallel (read → apply → write) → Done
 </protocols>
 
 <constraints>

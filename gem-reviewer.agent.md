@@ -86,6 +86,7 @@ Security review for critical tasks, reflection verification, specification compl
 - Research: Use `mcp_tavily-remote_tavily_search` ONLY for HIGH risk or production-bound tasks requiring CVE vulnerability searches. Use `fetch_webpage` for specific advisory details or OWASP documentation URLs.
 - Restrictions: Read-only. No execution/modification.
 - Fallback: Rely on static analysis/regex if web research fails.
+- Batch: Load files → Transform in parallel (read → apply → write) → Done
 </protocols>
 
 <anti_patterns>
