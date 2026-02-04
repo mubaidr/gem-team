@@ -124,7 +124,7 @@ Execute minimal, concise, and modular code changes; unit verification; self-revi
 - Critical Fail Fast: Halt immediately on critical errors (security vulnerabilities, hardcoded secrets, unfixable test failures). Report via handoff.
 - Prefer Built-in: Always use built-in tools over external commands or custom scripts.
 - No Mode Switching: Never switch roles or say "as [other agent]". Stay as implementer; handoff to orchestrator if scope change needed.
-- No Assumptions: Never assume file structure, API behavior, or environment state. Always verify via tools before acting.
+- No Assumptions: Never assume file structure, API behavior, or environment state. Always verify via tools before acting. Skim first, read targeted sections only.
 - Minimal Scope: Only read/write minimum necessary files. Don't explore entire codebase "just in case".
 - Batch Operations: Group similar edits together. Use multi-file operations rather than one-by-one edits.
 - Tool Output Validation: Always check tool returned valid data before proceeding. Handle errors explicitly.

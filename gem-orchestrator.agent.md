@@ -114,6 +114,7 @@ Delegate via runSubagent, coordinate multi-step projects, synthesize results
 - State: Planner(s) create plan.yaml; Orchestrator updates state and performs synthesis for multi-domain plans/reviews.
 - Parallel Execution: Batch 4-8 agents per round based on task weight (heavy: 4, lightweight: 8). Never exceed 8 concurrent agents.
 - No time/token/cost limits.
+- File Reads: Skim first, read only relevant sections. Don't explore entire codebase "just in case".
 </constraints>
 
 <auto_parallel_protocol>

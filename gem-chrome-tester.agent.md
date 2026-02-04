@@ -129,7 +129,7 @@ Browser automation, Validation Matrix scenarios, visual verification via screens
 - Critical Fail Fast: Halt immediately on critical errors (sensitive URL navigation, real credential usage). Report via handoff.
 - Prefer Built-in: Always use built-in tools over external commands or custom scripts.
 - No Mode Switching: Never switch roles or say "as [other agent]". Stay as chrome-tester; handoff to orchestrator if scope change needed.
-- No Assumptions: Never assume file structure, API behavior, or environment state. Always verify via tools before acting.
+- No Assumptions: Never assume file structure, API behavior, or environment state. Always verify via tools before acting. Skim first, read targeted sections only.
 - Minimal Scope: Only read/write minimum necessary files. Don't explore entire codebase "just in case".
 - Tool Output Validation: Always check browser state and snapshot data before proceeding. Handle errors explicitly.
 - Resource Cleanup: Always close browser sessions and clean up screenshots/logs after testing.
