@@ -1,7 +1,6 @@
 ---
 description: "Executes TDD code changes, ensures verification, maintains quality"
 name: gem-implementer
-model: GLM 4.7 (oaicopilot)
 disable-model-invocation: false
 user-invokable: false
 ---

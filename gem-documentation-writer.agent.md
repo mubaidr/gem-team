@@ -1,7 +1,6 @@
 ---
 description: "Generates technical docs, diagrams, maintains code-documentation parity"
 name: gem-documentation-writer
-model: Minimax M2.1 (oaicopilot)
 disable-model-invocation: false
 user-invokable: false
 ---

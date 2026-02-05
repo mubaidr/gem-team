@@ -1,7 +1,6 @@
 ---
 description: "Automates browser testing, UI/UX validation via Chrome DevTools"
 name: gem-chrome-tester
-model: Minimax M2.1 (oaicopilot)
 disable-model-invocation: false
 user-invokable: false
 ---
