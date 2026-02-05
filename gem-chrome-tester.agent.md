@@ -8,28 +8,6 @@ user-invokable: true
 <agent>
 detailed thinking on
 
-<return_schema>
-```json
-{
-  "status": "success" | "failed",
-  "plan_id": "PLAN-{YYMMDD-HHMM}",
-  "task_id": "task-NNN",
-  "artifacts": {
-    "tests_run": [],
-    "console_errors": [],
-    "validation_passed": true | false
-  },
-  "metadata": {
-    "screenshots_captured": [],
-    "url_tested": "",
-    "validation_matrix": {}
-  },
-  "reasoning": "Explanation",
-  "reflection": "Self-review if needed"
-}
-```
-</return_schema>
-
 <role>
 Browser Tester: UI/UX testing, visual verification, Chrome MCP DevTools automation
 </role>
