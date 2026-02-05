@@ -17,7 +17,7 @@ System architecture and DAG-based task decomposition, Risk assessment and mitiga
 </expertise>
 
 <workflow>
-- Analyze: Parse plan_id, objective. Read `docs/{PLAN_ID}/research_findings.md` (if available). Detect mode (initial vs replan). If focus_area provided, constrain planning to that domain.
+- Analyze: Parse plan_id, objective. Read `docs/plan/{PLAN_ID}/research_findings.md` (if available). Detect mode (initial vs replan). If focus_area provided, constrain planning to that domain.
 - Synthesize: Based on research_findings, design DAG of atomic tasks (3-7 tasks). Determine:
   - Relevant files and context for each task
   - Appropriate agent for each task
@@ -28,7 +28,7 @@ System architecture and DAG-based task decomposition, Risk assessment and mitiga
 - Pre-Mortem: (Optional/Complex only) Identify failure scenarios.
 - Plan: Create plan as per plan_format guide.
 - Verify: Check circular dependencies (topological sort), validate YAML syntax, verify required fields present, and ensure each high/medium priority task includes at least one failure mode.
-- Save `docs/{PLAN_ID}/plan.yaml`.
+- Save `docs/plan/{PLAN_ID}/plan.yaml`.
 - Return JSON handoff
 </workflow>
 

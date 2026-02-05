@@ -47,7 +47,7 @@ No task is considered complete without passing its defined `verification` comman
 
 ### 📝 Plan Continuity
 
-State is persisted in `docs/{PLAN_ID}/plan.yaml`. This allows the team to recover from interruptions, handle complex retries, and provide a clear audit trail of the project's evolution.
+State is persisted in `docs/plan/{PLAN_ID}/plan.yaml`. This allows the team to recover from interruptions, handle complex retries, and provide a clear audit trail of the project's evolution.
 
 ### 🔒 Agent Hierarchy
 
