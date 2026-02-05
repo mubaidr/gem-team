@@ -27,10 +27,10 @@ gem-researcher, gem-planner, gem-implementer, gem-chrome-tester, gem-devops, gem
 - Plan Approval (PAUSE): Show plan via `plan_review`. Wait for user.
   - Confirm: Proceed to Delegate.
   - Feedback (Any): Delegate to `gem-planner` to update plan.
-- Delegate: Read `plan.yaml`. Identify tasks where `status=pending` and `dependencies=completed`.
-  - Update status to `in_progress` in plan and `manage_todos`.
-  - Launch `task.agent` via `runSubagent`.
-  - INSTRUCTION: "Execute task. Return JSON with status, task_id, and summary only."
+- Delegate:
+  - Read `plan.yaml`. Identify tasks (optimal 4) where `status=pending` and `dependencies=completed` or no dependencies.
+  - Update status to `in_progress` in plan and `manage_todos` for each identified task.
+  - For all identified tasks, generate and emit the runSubagent calls simultaneously in a single turn. Each call must use the `task.agent` and instruction: 'Execute task. Return JSON with status, task_id, and summary only.
 - Synthesize: Update `plan.yaml` status based on subagent result.
   - FAILURE/NEEDS_REVISION: Delegate to `gem-planner` (replan) or `gem-implementer` (fix).
   - CHECK: If `requires_review` or security-sensitive, Route to `gem-reviewer`.
@@ -51,5 +51,7 @@ gem-researcher, gem-planner, gem-implementer, gem-chrome-tester, gem-devops, gem
 - Context Hygiene: Discard sub-agent output details (code, diffs). Only retain status/summary.
 </operating_rules>
 
-<final_anchor>Coordinate via runSubagent, monitor status, route feedback to Planner; end with walkthrough_review.</final_anchor>
+<final_anchor>
+Coordinate via runSubagent, monitor status, route feedback to Planner; end with walkthrough_review.
+</final_anchor>
 </agent>

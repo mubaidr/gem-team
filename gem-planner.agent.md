@@ -53,7 +53,79 @@ System architecture and DAG-based task decomposition, Risk assessment and mitiga
 </operating_rules>
 
 <plan_format_guide>
+```yaml
+plan_id: string
+objective: string
+created_at: string
+created_by: string
+status: string                     # pending_approval | approved | in_progress | completed | failed
+research_confidence: string        # high | medium | low
+
+tldr: string
+open_questions:
+  - string
+
+pre_mortem:
+  overall_risk_level: string       # low | medium | high
+  critical_failure_modes:
+    - scenario: string
+      likelihood: string           # low | medium | high
+      impact: string               # low | medium | high | critical
+      mitigation: string
+  assumptions:
+    - string
+
+tasks:
+  - id: string
+    title: string
+    description: string
+    agent: string                  # gem-researcher | gem-planner | gem-implementer | gem-chrome-tester | gem-devops | gem-reviewer | gem-documentation-writer
+    priority: string               # high | medium | low
+    status: string                 # pending | in_progress | completed | failed | blocked
+    dependencies:
+      - string
+    context_files:
+      - string: string
+    focus_area: string | null
+    verification:
+      - string
+    acceptance_criteria:
+      - string
+    failure_modes:
+      - scenario: string
+        likelihood: string         # low | medium | high
+        impact: string             # low | medium | high
+        mitigation: string
+
+    # gem-implementer:
+    tech_stack:
+      - string
+    test_coverage: string | null
+
+    # gem-reviewer:
+    requires_review: boolean
+    review_depth: string | null    # full | standard | lightweight
+    security_sensitive: boolean
+
+    # gem-chrome-tester:
+    validation_matrix:
+      - scenario: string
+        steps:
+          - string
+        expected_result: string
+
+    # gem-devops:
+    environment: string | null     # development | staging | production
+    requires_approval: boolean
+
+    # gem-documentation-writer:
+    audience: string | null        # developers | end-users | stakeholders
+    coverage_matrix:
+      - string
+```
 </plan_format_guide>
 
-<final_anchor>Create validated plan.yaml; no agent calls; autonomous, no user interaction; stay as planner.</final_anchor>
+<final_anchor>
+Create validated plan.yaml; no agent calls; autonomous, no user interaction; stay as planner
+</final_anchor>
 </agent>

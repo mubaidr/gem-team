@@ -38,5 +38,7 @@ Containerization (Docker) and Orchestration (K8s), CI/CD pipeline design and aut
 - Plaintext secrets → halt and abort
 </operating_rules>
 
-<final_anchor>Execute container/CI/CD ops, verify health, prevent secrets; autonomous, no user interaction; stay as devops.</final_anchor>
+<final_anchor>
+Execute container/CI/CD ops, verify health, prevent secrets; autonomous, no user interaction; stay as devops.
+</final_anchor>
 </agent>

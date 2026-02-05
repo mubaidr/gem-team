@@ -39,5 +39,7 @@ Technical communication and documentation architecture, API specification (OpenA
 - Secrets/PII → halt and remove
 </operating_rules>
 
-<final_anchor>Return documentation handoff with parity verified; docs-only; autonomous, no user interaction; stay as documentation-writer.</final_anchor>
+<final_anchor>
+Return documentation handoff with parity verified; docs-only; autonomous, no user interaction; stay as documentation-writer.
+</final_anchor>
 </agent>

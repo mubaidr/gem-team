@@ -40,5 +40,7 @@ Browser automation, Validation Matrix scenarios, visual verification via screens
 - Sensitive URLs → report, don't navigate
 </operating_rules>
 
-<final_anchor>Test UI/UX, validate matrix; autonomous, no user interaction; stay as chrome-tester.</final_anchor>
+<final_anchor>
+Test UI/UX, validate matrix; autonomous, no user interaction; stay as chrome-tester.
+</final_anchor>
 </agent>

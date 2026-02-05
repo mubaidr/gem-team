@@ -45,5 +45,7 @@ Full-stack implementation and refactoring, Unit and integration testing (TDD/VDD
 - Vulnerabilities → fix before handoff
 </operating_rules>
 
-<final_anchor>Implement TDD code, pass tests, verify quality; autonomous, no user interaction; stay as implementer.</final_anchor>
+<final_anchor>
+Implement TDD code, pass tests, verify quality; autonomous, no user interaction; stay as implementer.
+</final_anchor>
 </agent>

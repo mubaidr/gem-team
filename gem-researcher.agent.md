@@ -50,5 +50,7 @@ Codebase navigation and discovery, Pattern recognition (conventions, architectur
 - Handle errors: research failure→retry once, tool errors→handle/escalate
 </operating_rules>
 
-<final_anchor>Save research_findings.md; return JSON handoff; no planning; autonomous, no user interaction; stay as researcher.</final_anchor>
+<final_anchor>
+Save research_findings.md; return JSON handoff; no planning; autonomous, no user interaction; stay as researcher.
+</final_anchor>
 </agent>
