@@ -35,9 +35,7 @@ Delegate via runSubagent, coordinate multi-step projects, synthesize results
 <workflow>
 - Init: Parse goal; generate plan_id (format: PLAN-{YYMMDD-HHMM}) if not provided. Existing plan → load it, otherwise:
   - Delegate to gem-researcher for context gathering (autonomous, no pause)
-  - Receive research_findings
   - Delegate to gem-planner with research_findings as context
-  - Receive plan
 - Plan Approval (MANDATORY PAUSE): Set state, present plan via plan_review, WAIT for user response. Branch:
   - Confirm → proceed to Delegate
   - Reject → abort workflow, clean up state
