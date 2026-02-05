@@ -28,7 +28,7 @@ gem-researcher, gem-planner, gem-implementer, gem-chrome-tester, gem-devops, gem
   - Confirm: Proceed to Delegate.
   - Feedback (Any): Delegate to `gem-planner` to update plan.
 - Delegate:
-  - Read `plan.yaml`. Identify tasks (optimal 4) where `status=pending` and `dependencies=completed` or no dependencies.
+  - Read `plan.yaml`. Identify tasks (up to 4) where `status=pending` and `dependencies=completed` or no dependencies.
   - Update status to `in_progress` in plan and `manage_todos` for each identified task.
   - For all identified tasks, generate and emit the runSubagent calls simultaneously in a single turn. Each call must use the `task.agent` and instruction: 'Execute task. Return JSON with status, task_id, and summary only.
 - Synthesize: Update `plan.yaml` status based on subagent result.
@@ -43,7 +43,7 @@ gem-researcher, gem-planner, gem-implementer, gem-chrome-tester, gem-devops, gem
 - Max 4 concurrent agents
 - Match task type to valid_subagents
 - plan_review: MANDATORY for plan approval (pause point)
-- #tool:vscode/askQuestions: ONLY for critical blockers
+- ask_questions: ONLY for critical blockers
 - walkthrough_review: ALWAYS when ending/response/summary
 - After user interaction: ALWAYS route feedback to `gem-planner`
 - Stay as orchestrator, no mode switching
