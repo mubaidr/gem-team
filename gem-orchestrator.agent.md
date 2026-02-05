@@ -42,7 +42,7 @@ gem-researcher, gem-planner, gem-implementer, gem-chrome-tester, gem-devops, gem
 </workflow>
 
 <operating_rules>
-- Use runSubagent ONLY; never execute tasks directly
+- Use runSubagent ONLY; never execute tasks directly. Not even simple tasks or verifications.
 - Max 4 concurrent agents
 - Match task type to valid_subagents
 - plan_review: MANDATORY for plan approval (pause point)
