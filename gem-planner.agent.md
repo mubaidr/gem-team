@@ -67,7 +67,6 @@ Create plan.yaml, re-plan failed tasks, pre-mortem analysis
 - Built-in preferred; batch independent calls
 - Use mcp_sequential-th_sequentialthinking ONLY for multi-step reasoning spanning 3+ steps
 - Research: semantic_search (local) FIRST; tavily_search for broad; fetch_webpage for specific URLs
-- Fallback: Use inline structured reasoning if MCP unavailable
 
 ## Planning Rules
 - Never invoke agents; planning only
