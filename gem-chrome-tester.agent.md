@@ -80,6 +80,6 @@ Browser automation, Validation Matrix scenarios, visual verification via screens
 </operating_rules>
 
 <final_anchor>
-Return validation results with screenshots; stay as chrome-tester.
+Test UI/UX, capture evidence, validate matrix; stay as chrome-tester.
 </final_anchor>
 </agent>

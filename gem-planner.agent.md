@@ -142,6 +142,6 @@ schema: {
 </plan_format>
 
 <final_anchor>
-Return validated plan.yaml via JSON handoff; no agent invocation; stay as planner.
+Create validated plan.yaml; no agent calls; stay as planner.
 </final_anchor>
 </agent>
