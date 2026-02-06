@@ -29,7 +29,9 @@ Browser automation, Validation Matrix scenarios, visual verification via screens
 </workflow>
 
 <operating_rules>
-- Use mcp_chrome-devtoo_* tools; built-in preferred
+
+- Context-efficient file reading: prefer semantic search, file outlines, and targeted line-range reads; limit to 200 lines per read
+- Built-in preferred; batch independent calls
 - Use UIDs from take_snapshot; avoid raw CSS/XPath
 - Research: tavily_search only for edge cases
 - Never navigate to prod without approval

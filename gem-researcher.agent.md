@@ -32,6 +32,8 @@ Codebase navigation and discovery, Pattern recognition (conventions, architectur
 </workflow>
 
 <operating_rules>
+
+- Context-efficient file reading: prefer semantic search, file outlines, and targeted line-range reads; limit to 200 lines per read
 - Built-in preferred; batch independent calls
 - semantic_search FIRST for broad discovery
 - file_search to verify file existence

@@ -33,6 +33,8 @@ System architecture and DAG-based task decomposition, Risk assessment and mitiga
 </workflow>
 
 <operating_rules>
+
+- Context-efficient file reading: prefer semantic search, file outlines, and targeted line-range reads; limit to 200 lines per read
 - Built-in preferred; batch independent calls
 - Use mcp_sequential-th_sequentialthinking ONLY for multi-step reasoning (3+ steps)
 - NO research tools - research by gem-researcher
@@ -54,24 +56,25 @@ System architecture and DAG-based task decomposition, Risk assessment and mitiga
 </operating_rules>
 
 <plan_format_guide>
+
 ```yaml
 plan_id: string
 objective: string
 created_at: string
 created_by: string
-status: string                     # pending_approval | approved | in_progress | completed | failed
-research_confidence: string        # high | medium | low
+status: string # pending_approval | approved | in_progress | completed | failed
+research_confidence: string # high | medium | low
 
 tldr: string
 open_questions:
   - string
 
 pre_mortem:
-  overall_risk_level: string       # low | medium | high
+  overall_risk_level: string # low | medium | high
   critical_failure_modes:
     - scenario: string
-      likelihood: string           # low | medium | high
-      impact: string               # low | medium | high | critical
+      likelihood: string # low | medium | high
+      impact: string # low | medium | high | critical
       mitigation: string
   assumptions:
     - string
@@ -80,9 +83,9 @@ tasks:
   - id: string
     title: string
     description: string
-    agent: string                  # gem-researcher | gem-planner | gem-implementer | gem-chrome-tester | gem-devops | gem-reviewer | gem-documentation-writer
-    priority: string               # high | medium | low
-    status: string                 # pending | in_progress | completed | failed | blocked
+    agent: string # gem-researcher | gem-planner | gem-implementer | gem-chrome-tester | gem-devops | gem-reviewer | gem-documentation-writer
+    priority: string # high | medium | low
+    status: string # pending | in_progress | completed | failed | blocked
     dependencies:
       - string
     context_files:
@@ -94,8 +97,8 @@ tasks:
       - string
     failure_modes:
       - scenario: string
-        likelihood: string         # low | medium | high
-        impact: string             # low | medium | high
+        likelihood: string # low | medium | high
+        impact: string # low | medium | high
         mitigation: string
 
     # gem-implementer:
@@ -105,7 +108,7 @@ tasks:
 
     # gem-reviewer:
     requires_review: boolean
-    review_depth: string | null    # full | standard | lightweight
+    review_depth: string | null # full | standard | lightweight
     security_sensitive: boolean
 
     # gem-chrome-tester:
@@ -116,14 +119,15 @@ tasks:
         expected_result: string
 
     # gem-devops:
-    environment: string | null     # development | staging | production
+    environment: string | null # development | staging | production
     requires_approval: boolean
 
     # gem-documentation-writer:
-    audience: string | null        # developers | end-users | stakeholders
+    audience: string | null # developers | end-users | stakeholders
     coverage_matrix:
       - string
 ```
+
 </plan_format_guide>
 
 <final_anchor>

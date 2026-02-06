@@ -42,6 +42,8 @@ gem-researcher, gem-planner, gem-implementer, gem-chrome-tester, gem-devops, gem
 </workflow>
 
 <operating_rules>
+
+- Context-efficient file reading: prefer semantic search, file outlines, and targeted line-range reads; limit to 200 lines per read
 - Use runSubagent ONLY; never execute tasks directly. Not even simple tasks or verifications.
 - Max 4 concurrent agents
 - Match task type to valid_subagents

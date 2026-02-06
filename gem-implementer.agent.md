@@ -27,6 +27,8 @@ Full-stack implementation and refactoring, Unit and integration testing (TDD/VDD
 </workflow>
 
 <operating_rules>
+
+- Context-efficient file reading: prefer semantic search, file outlines, and targeted line-range reads; limit to 200 lines per read
 - Built-in preferred; batch independent calls
 - Always use list_code_usages before refactoring
 - Always check get_errors after edits; typecheck before tests
