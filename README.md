@@ -8,16 +8,16 @@ Gem Team follows a Strategic Planner/Dynamic Orchestrator pattern. It decomposes
 
 ## 🤖 Agent Roles
 
-| Agent | Model | Specialty | Primary Responsibility |
-| :--- | :--- | :--- | :--- |
-| `gem-orchestrator` | GLM 4.7 | Coordination | Coordinates multi-agent workflows, delegates tasks, synthesizes results via runSubagent |
-| `gem-researcher` | Minimax M2.1 | Research | Gathers codebase context, identifies relevant files/patterns, returns structured findings |
-| `gem-planner` | Minimax M2.1 | Strategy | Creates DAG-based plans with pre-mortem analysis and task decomposition from research findings |
-| `gem-implementer` | GLM 4.7 | Execution | Executes TDD code changes, ensures verification, maintains quality |
-| `gem-chrome-tester` | Minimax M2.1 | Testing | Automates browser testing, UI/UX validation via Chrome DevTools |
-| `gem-devops` | Minimax M2.1 | Infrastructure | Manages containers, CI/CD pipelines, and infrastructure deployment |
-| `gem-reviewer` | Minimax M2.1 | Quality | Security gatekeeper for critical tasks—OWASP, secrets, compliance |
-| `gem-documentation-writer` | Minimax M2.1 | Knowledge | Generates technical docs, diagrams, maintains code-documentation parity |
+| Agent | Specialty | Primary Responsibility |
+| :--- | :--- | :--- |
+| `gem-orchestrator` | Coordination | Coordinates multi-agent workflows, delegates tasks, synthesizes results via runSubagent |
+| `gem-researcher` | Research | Gathers codebase context, identifies relevant files/patterns, returns structured findings |
+| `gem-planner` | Strategy | Creates DAG-based plans with pre-mortem analysis and task decomposition from research findings |
+| `gem-implementer` | Execution | Executes TDD code changes, ensures verification, maintains quality |
+| `gem-chrome-tester` | Testing | Automates browser testing, UI/UX validation via Chrome DevTools |
+| `gem-devops` | Infrastructure | Manages containers, CI/CD pipelines, and infrastructure deployment |
+| `gem-reviewer` | Quality | Security gatekeeper for critical tasks—OWASP, secrets, compliance |
+| `gem-documentation-writer` | Knowledge | Generates technical docs, diagrams, maintains code-documentation parity |
 
 ## 🔄 Core Workflow
 
