@@ -27,13 +27,13 @@ Traditional AI coding assistants hit walls when projects get complex:
 
 ### The Gem Team Solution
 
-| Challenge | Gem Team Approach |
-|:---|:---|
-| 🧠 **Context Overload** | Specialized agents with focused expertise — each holds only what it needs |
+| Challenge                     | Gem Team Approach                                                                                         |
+| :---------------------------- | :-------------------------------------------------------------------------------------------------------- |
+| 🧠 **Context Overload**       | Specialized agents with focused expertise — each holds only what it needs                                 |
 | 🎯 **Lack of Specialization** | 8 expert agents: researcher, planner, implementer, tester, reviewer, devops, and documentation specialist |
-| 🐢 **Sequential Bottlenecks** | DAG-based parallel execution — up to 4 agents work simultaneously |
-| ❌ **Missing Verification** | Verification-first: no task completes without passing its verification command |
-| 📜 **No Audit Trail** | Persistent `plan.yaml` state file tracks every decision, status, and outcome |
+| 🐢 **Sequential Bottlenecks** | DAG-based parallel execution — up to 4 agents work simultaneously                                         |
+| ❌ **Missing Verification**   | Verification-first: no task completes without passing its verification command                            |
+| 📜 **No Audit Trail**         | Persistent `plan.yaml` state file tracks every decision, status, and outcome                              |
 
 ### Key Benefits
 
@@ -84,16 +84,16 @@ Gem Team follows a **Strategic Planner/Dynamic Orchestrator** pattern. It decomp
 
 ## 🤖 Agent Roles
 
-| Agent | Specialty | Primary Responsibility |
-|:---|:---|:---|
-| `gem-orchestrator` | Coordination | Coordinates multi-agent workflows, delegates tasks, synthesizes results via `runSubagent` |
-| `gem-researcher` | Research | Gathers codebase context, identifies relevant files/patterns, returns structured findings |
-| `gem-planner` | Strategy | Creates DAG-based plans with pre-mortem analysis and task decomposition from research |
-| `gem-implementer` | Execution | Executes TDD code changes, ensures verification, maintains quality |
-| `gem-chrome-tester` | Testing | Automates browser testing, UI/UX validation via Chrome DevTools |
-| `gem-devops` | Infrastructure | Manages containers, CI/CD pipelines, and infrastructure deployment |
-| `gem-reviewer` | Quality | Security gatekeeper — OWASP scanning, secrets detection, compliance |
-| `gem-documentation-writer` | Knowledge | Generates technical docs, diagrams, maintains code-documentation parity |
+| Agent                      | Specialty      | Primary Responsibility                                                                        |
+| :------------------------- | :------------- | :-------------------------------------------------------------------------------------------- |
+| `gem-orchestrator`         | Coordination   | Coordinates multi-agent workflows, delegates tasks, synthesizes results via `runSubagent`     |
+| `gem-researcher`           | Research       | Gathers codebase context, identifies relevant files/patterns, returns structured findings     |
+| `gem-planner`              | Strategy       | Creates DAG-based plans with pre-mortem analysis, presents for approval, iterates on feedback |
+| `gem-implementer`          | Execution      | Executes TDD code changes, ensures verification, maintains quality                            |
+| `gem-chrome-tester`        | Testing        | Automates browser testing, UI/UX validation via Chrome DevTools                               |
+| `gem-devops`               | Infrastructure | Manages containers, CI/CD pipelines, and infrastructure deployment                            |
+| `gem-reviewer`             | Quality        | Security gatekeeper — OWASP scanning, secrets detection, compliance                           |
+| `gem-documentation-writer` | Knowledge      | Generates technical docs, diagrams, maintains code-documentation parity                       |
 
 ---
 
@@ -106,8 +106,8 @@ flowchart TD
     C --> D[📋 Planner]
     D --> E[📄 plan.yaml]
     E --> F{⏸️ Plan Approval}
+    F -->|Feedback| E
     F -->|Approved| G[🚀 Parallel Execution]
-    F -->|Feedback| D
     G --> H[💻 Implementer]
     G --> I[🌐 Chrome Tester]
     G --> J[⚙️ DevOps]
@@ -123,7 +123,7 @@ flowchart TD
 
 1. **Inception** — Orchestrator receives goal → invokes Researcher for context → Planner designs the DAG
 2. **Planning** — Planner synthesizes findings, creates 3-7 atomic tasks with dependencies, runs pre-mortem analysis, saves `plan.yaml`
-3. **Plan Approval** — Orchestrator presents plan via `plan_review` → **MANDATORY PAUSE** for user confirmation
+3. **Plan Approval** — Planner presents plan via `plan_review` → **MANDATORY PAUSE** → iterates on feedback until approved
 4. **Delegation** — Orchestrator identifies "ready" tasks (dependencies met) → launches up to 4 agents in parallel via `runSubagent`
 5. **Execution** — Workers execute changes and run verification commands before returning results
 6. **Synthesis** — Orchestrator processes handoffs, updates `plan.yaml`, routes failures for revision/retry
@@ -146,6 +146,7 @@ Up to **4 concurrent agents** execute independent tasks simultaneously, dramatic
 ### 🧪 Verification-First (TDD)
 
 No task completes without passing its defined `verification` command. Implementers follow strict **TDD discipline**:
+
 - Write tests FIRST
 - Confirm tests FAIL
 - Write MINIMAL code to pass
@@ -154,6 +155,7 @@ No task completes without passing its defined `verification` command. Implemente
 ### 🛡️ Security-First Review
 
 The Reviewer agent acts as a **security gatekeeper** for critical tasks:
+
 - OWASP Top 10 scanning
 - Secrets/PII detection
 - Compliance verification
@@ -166,6 +168,7 @@ For complex plans, the Planner runs **pre-mortem analysis** — identifying pote
 ### 📝 Plan Continuity & Audit Trail
 
 State persists in `docs/plan/{PLAN_ID}/plan.yaml`, providing:
+
 - Recovery from interruptions
 - Complex retry handling
 - Clear audit trail of project evolution
@@ -206,14 +209,14 @@ gem-team/
 
 ## 🎯 Use Cases
 
-| Scenario | How Gem Team Helps |
-|:---|:---|
+| Scenario                         | How Gem Team Helps                                                              |
+| :------------------------------- | :------------------------------------------------------------------------------ |
 | **Large Feature Implementation** | Decomposes into parallel subtasks, implements with TDD, verifies each component |
-| **Codebase Refactoring** | Researches patterns, plans migration, executes incrementally with tests |
-| **Security Audit** | Reviewer scans for OWASP issues, secrets, compliance gaps |
-| **Documentation Overhaul** | Doc Writer generates accurate docs maintaining code-documentation parity |
-| **CI/CD Pipeline Setup** | DevOps agent creates containers, pipelines, deploys with health checks |
-| **UI/UX Testing** | Chrome Tester automates validation matrix, captures visual evidence |
+| **Codebase Refactoring**         | Researches patterns, plans migration, executes incrementally with tests         |
+| **Security Audit**               | Reviewer scans for OWASP issues, secrets, compliance gaps                       |
+| **Documentation Overhaul**       | Doc Writer generates accurate docs maintaining code-documentation parity        |
+| **CI/CD Pipeline Setup**         | DevOps agent creates containers, pipelines, deploys with health checks          |
+| **UI/UX Testing**                | Chrome Tester automates validation matrix, captures visual evidence             |
 
 ---
 
