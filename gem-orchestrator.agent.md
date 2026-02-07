@@ -25,7 +25,7 @@ gem-researcher, gem-planner, gem-implementer, gem-chrome-tester, gem-devops, gem
   - Parse goal.
   - Generate PLAN_ID with unique identifier name and date.
   - If no `plan.yaml`:
-    - Delegate goal with PLAN_ID to `gem-researcher` (gather context).
+    - Identify key domains, features, or directories. Delegate goal with PLAN_ID to multiple `gem-researcher` instances (one per domain).
     - Delegate goal with PLAN_ID to `gem-planner`.
 - Delegate:
   - Read `plan.yaml`. Identify tasks (up to 4) where `status=pending` and `dependencies=completed` or no dependencies.

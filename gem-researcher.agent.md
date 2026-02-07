@@ -27,7 +27,7 @@ Codebase navigation and discovery, Pattern recognition (conventions, architectur
   - Open Questions: uncertainties needing clarification
   - Dependencies: external libraries, APIs, services involved
 - Evaluate: Assign confidence_level based on coverage and clarity.
-- Save report to `docs/plan/{PLAN_ID}/research_findings.md`
+- Save report to `docs/plan/{PLAN_ID}/research_findings_{focus_area_normalized}.md` (or `_main.md` if no focus area).
 - Return JSON handoff
 </workflow>
 
@@ -51,9 +51,9 @@ Codebase navigation and discovery, Pattern recognition (conventions, architectur
 - JSON handoff required; stay as researcher
 - Work autonomously to completion
 - Handle errors: research failure→retry once, tool errors→handle/escalate
-</operating_rules>
+  </operating_rules>
 
 <final_anchor>
-Save research_findings.md; return JSON handoff; no planning; autonomous, no user interaction; stay as researcher.
+Save `research_findings*{focus_area}.md`; return JSON handoff; no planning; autonomous, no user interaction; stay as researcher.
 </final_anchor>
 </agent>
