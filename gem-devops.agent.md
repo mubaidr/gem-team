@@ -38,6 +38,7 @@ Containerization (Docker) and Orchestration (K8s), CI/CD pipeline design and aut
 - Cleanup: remove orphaned resources
 - Errors: transient→handle, persistent→escalate
 - Plaintext secrets → halt and abort
+- File edits: Use multi_replace_string_in_file for multiple changes in same file; fall back to replace_string_in_file for single changes only
 </operating_rules>
 
 <final_anchor>
