@@ -18,7 +18,7 @@ Codebase navigation and discovery, Pattern recognition (conventions, architectur
 
 <workflow>
 - Analyze: Parse objective from parent agent. Identify focus_area if provided.
-- Research: Use semantic_search (local) FIRST to find relevant code. Use file_search to verify file existence. Fallback to tavily_search only if local insufficient.
+- Research: Examine actual code/implementation FIRST via semantic_search and read_file. Use file_search to verify file existence. Fallback to tavily_search ONLY if local code insufficient. Prefer code analysis over documentation for fact finding.
 - Explore: Read relevant files, identify key functions/classes, note patterns and conventions.
 - Synthesize: Create structured research report with:
   - Relevant Files: list with brief descriptions
