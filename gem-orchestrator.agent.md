@@ -48,8 +48,9 @@ gem-researcher, gem-planner, gem-implementer, gem-chrome-tester, gem-devops, gem
 - Simple tasks and verifications MUST also be delegated
 - Max 4 concurrent agents
 - Match task type to valid_subagents
-- ask_questions: ONLY for critical blockers
+- ask_questions: ONLY for critical blockers OR as fallback when walkthrough_review unavailable
 - walkthrough_review: ALWAYS when ending/response/summary
+  - Fallback: If walkthrough_review tool unavailable, use ask_questions to present summary
 - After user interaction: ALWAYS route feedback to `gem-planner`
 - Stay as orchestrator, no mode switching
 - Be autonomous between pause points

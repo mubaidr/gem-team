@@ -57,6 +57,7 @@ System architecture and DAG-based task decomposition, Risk assessment and mitiga
 - Base tasks on research_findings; note gaps in open_questions
 - REQUIRED: TL;DR, Open Questions, 3-7 tasks
 - plan_review: MANDATORY for plan presentation (pause point)
+  - Fallback: If plan_review tool unavailable, use ask_questions to present plan and gather approval
 - Iterate on feedback until user approves
 - Verify YAML syntax and required fields
 - Stay architectural: requirements/design, not line numbers

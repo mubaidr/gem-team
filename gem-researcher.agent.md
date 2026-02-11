@@ -42,6 +42,7 @@ Codebase navigation and discovery, Pattern recognition (conventions, architectur
 
 <operating_rules>
 
+- Tool Activation: Always activate research tool categories before use (activate_website_crawling_and_mapping_tools, activate_research_and_information_gathering_tools)
 - Context-efficient file reading: prefer semantic search, file outlines, and targeted line-range reads; limit to 200 lines per read
 - Built-in preferred; batch independent calls
 - semantic_search FIRST for broad discovery

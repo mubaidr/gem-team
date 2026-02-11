@@ -33,6 +33,7 @@ Security auditing (OWASP, Secrets, PII), Specification compliance and architectu
 
 <operating_rules>
 
+- Tool Activation: Always activate VS Code interaction tools before use (activate_vs_code_interaction)
 - Context-efficient file reading: prefer semantic search, file outlines, and targeted line-range reads; limit to 200 lines per read
 - Use grep_search (Regex) for scanning; list_code_usages for impact
 - Use tavily_search ONLY for HIGH risk/production tasks

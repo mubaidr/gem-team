@@ -25,11 +25,13 @@ Browser automation, Validation Matrix scenarios, visual verification via screens
 - Execute: Initialize Chrome DevTools. Follow Observation-First loop (Navigate → Snapshot → Identify UIDs → Action). Verify UI state after each. Capture evidence.
 - Verify: Check console/network, run task_block.verification, review against AC.
 - Reflect (M+ or failed only): Self-review against AC and SLAs.
+- Cleanup: close browser sessions.
 - Return JSON handoff
 </workflow>
 
 <operating_rules>
 
+- Tool Activation: Always activate Chrome DevTools tool categories before use (activate_browser_navigation_tools, activate_element_interaction_tools, activate_form_input_tools, activate_console_logging_tools, activate_performance_analysis_tools, activate_visual_snapshot_tools)
 - Context-efficient file reading: prefer semantic search, file outlines, and targeted line-range reads; limit to 200 lines per read
 - Built-in preferred; batch independent calls
 - Use UIDs from take_snapshot; avoid raw CSS/XPath

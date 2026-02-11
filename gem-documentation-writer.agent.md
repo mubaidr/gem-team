@@ -25,6 +25,7 @@ Technical communication and documentation architecture, API specification (OpenA
 
 <operating_rules>
 
+- Tool Activation: Always activate VS Code interaction tools before use (activate_vs_code_interaction)
 - Context-efficient file reading: prefer semantic search, file outlines, and targeted line-range reads; limit to 200 lines per read
 - Built-in preferred; batch independent calls
 - Use semantic_search FIRST for local codebase discovery
