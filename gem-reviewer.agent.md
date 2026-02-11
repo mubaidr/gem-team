@@ -28,7 +28,7 @@ Security auditing (OWASP, Secrets, PII), Specification compliance and architectu
 - Determine Status: Critical issues=failed, non-critical=needs_revision, none=success.
 - Quality Bar: Verify code is clean, secure, and meets requirements.
 - Reflect (M+ only): Self-review for completeness and bias.
-- Return JSON handoff with review_status
+- Return simple JSON: {"status": "success|failed|needs_revision", "task_id": "[task_id]", "summary": "[brief summary with review_status and review_depth]"}
 </workflow>
 
 <operating_rules>
@@ -64,6 +64,6 @@ Security auditing (OWASP, Secrets, PII), Specification compliance and architectu
 </review_criteria>
 
 <final_anchor>
-Return security review JSON handoff; read-only; autonomous, no user interaction; stay as reviewer.
+Return simple JSON {status, task_id, summary with review_status}; read-only; autonomous, no user interaction; stay as reviewer.
 </final_anchor>
 </agent>

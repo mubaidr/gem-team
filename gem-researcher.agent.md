@@ -26,7 +26,7 @@ Codebase navigation and discovery, Pattern recognition (conventions, architectur
   - Patterns/Conventions: what codebase follows
   - Open Questions: uncertainties needing clarification
   - Dependencies: external libraries, APIs, services involved
-- Handoff: Generate non-opinionated handoff prompt with:
+- Handoff: Generate non-opinionated research findings with:
   - clarified_instructions: Task refined with specifics
   - open_questions: Ambiguities needing clarification
   - file_relationships: How discovered files relate to each other
@@ -37,7 +37,7 @@ Codebase navigation and discovery, Pattern recognition (conventions, architectur
   - coverage: percentage of relevant files examined
   - gaps: list of missing information
 - Save report to `docs/plan/{PLAN_ID}/research_findings_{focus_area_normalized}.md` (or `_main.md` if no focus area).
-- Return JSON handoff
+- Return simple JSON: {"status": "success|failed|needs_revision", "task_id": "[task_id]", "summary": "[brief summary]"}
 </workflow>
 
 <operating_rules>
@@ -66,6 +66,6 @@ Codebase navigation and discovery, Pattern recognition (conventions, architectur
   </operating_rules>
 
 <final_anchor>
-Save `research_findings*{focus_area}.md`; return JSON handoff; no planning; autonomous, no user interaction; stay as researcher.
+Save `research_findings*{focus_area}.md`; return simple JSON {status, task_id, summary}; no planning; autonomous, no user interaction; stay as researcher.
 </final_anchor>
 </agent>

@@ -21,7 +21,7 @@ Containerization (Docker) and Orchestration (K8s), CI/CD pipeline design and aut
 - Execute: Run infrastructure operations using idempotent commands. Use atomic operations.
 - Verify: Run task_block.verification and health checks. Verify state matches expected.
 - Reflect (M+ only): Self-review against quality standards.
-- Return JSON handoff
+- Return simple JSON: {"status": "success|failed|needs_revision", "task_id": "[task_id]", "summary": "[brief summary]"}
 </workflow>
 
 <operating_rules>
@@ -47,6 +47,6 @@ Containerization (Docker) and Orchestration (K8s), CI/CD pipeline design and aut
 </approval_gates>
 
 <final_anchor>
-Execute container/CI/CD ops, verify health, prevent secrets; autonomous, no user interaction; stay as devops.
+Execute container/CI/CD ops, verify health, prevent secrets; return simple JSON {status, task_id, summary}; autonomous, no user interaction; stay as devops.
 </final_anchor>
 </agent>

@@ -26,7 +26,7 @@ Browser automation, Validation Matrix scenarios, visual verification via screens
 - Verify: Check console/network, run task_block.verification, review against AC.
 - Reflect (M+ or failed only): Self-review against AC and SLAs.
 - Cleanup: close browser sessions.
-- Return JSON handoff
+- Return simple JSON: {"status": "success|failed|needs_revision", "task_id": "[task_id]", "summary": "[brief summary]"}
 </workflow>
 
 <operating_rules>
@@ -44,6 +44,6 @@ Browser automation, Validation Matrix scenarios, visual verification via screens
 </operating_rules>
 
 <final_anchor>
-Test UI/UX, validate matrix; autonomous, no user interaction; stay as chrome-tester.
+Test UI/UX, validate matrix; return simple JSON {status, task_id, summary}; autonomous, no user interaction; stay as chrome-tester.
 </final_anchor>
 </agent>

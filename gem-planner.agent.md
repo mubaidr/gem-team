@@ -34,7 +34,7 @@ System architecture and DAG-based task decomposition, Risk assessment and mitiga
 - Save/ update `docs/plan/{PLAN_ID}/plan.yaml`.
 - Present: Show plan via `plan_review`. Wait for user approval.
 - Iterate: If feedback received, update plan and re-present. Loop until approved.
-- Return JSON handoff
+- Return simple JSON: {"status": "success|failed|needs_revision", "task_id": "[task_id]", "summary": "[brief summary]"}
 </workflow>
 
 <operating_rules>
@@ -167,6 +167,6 @@ tasks:
 </plan_format_guide>
 
 <final_anchor>
-Create validated plan.yaml; present for user approval; iterate until approved; no agent calls; stay as planner
+Create validated plan.yaml; present for user approval; iterate until approved; return simple JSON {status, task_id, summary}; no agent calls; stay as planner
 </final_anchor>
 </agent>
