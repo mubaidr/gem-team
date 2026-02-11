@@ -43,6 +43,8 @@ System architecture and DAG-based task decomposition, Risk assessment and mitiga
 - Built-in preferred; batch independent calls
 - Use mcp_sequential-th_sequentialthinking ONLY for multi-step reasoning (3+ steps)
 - Use memory create/update for architectural decisions during/review
+- Memory CREATE: Include citations (file:line) and follow /memories/memory-system-patterns.md format
+- Memory UPDATE: Refresh timestamp when verifying existing memories
 - Persist design patterns, tech stack decisions in memories
 - NO research tools - research by gem-researcher
 - Use file_search ONLY to verify file existence

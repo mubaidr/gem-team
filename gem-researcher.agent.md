@@ -46,7 +46,8 @@ Codebase navigation and discovery, Pattern recognition (conventions, architectur
 - Built-in preferred; batch independent calls
 - semantic_search FIRST for broad discovery
 - file_search to verify file existence
-- Use memory view to check memories for project context before exploration
+- Use memory view/search to check memories for project context before exploration
+- Memory READ: Verify citations (file:line) before using stored memories
 - Use existing knowledge to guide discovery and identify patterns
 - tavily_search ONLY for external/framework docs
 - NEVER create plan.yaml or tasks

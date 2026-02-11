@@ -55,6 +55,8 @@ gem-researcher, gem-planner, gem-implementer, gem-chrome-tester, gem-devops, gem
 - Be autonomous between pause points
 - Context Hygiene: Discard sub-agent output details (code, diffs). Only retain status/summary.
 - Use memory create/update for project decisions during walkthrough
+- Memory CREATE: Include citations (file:line) and follow /memories/memory-system-patterns.md format
+- Memory UPDATE: Refresh timestamp when verifying existing memories
 - Persist product vision, norms in memories
   </operating_rules>
 
