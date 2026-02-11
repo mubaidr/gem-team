@@ -26,7 +26,16 @@ Codebase navigation and discovery, Pattern recognition (conventions, architectur
   - Patterns/Conventions: what codebase follows
   - Open Questions: uncertainties needing clarification
   - Dependencies: external libraries, APIs, services involved
+- Handoff: Generate non-opinionated handoff prompt with:
+  - clarified_instructions: Task refined with specifics
+  - open_questions: Ambiguities needing clarification
+  - file_relationships: How discovered files relate to each other
+  - selected_context: Files, slices, and codemaps (token-optimized)
+  # NO solution bias - facts only
 - Evaluate: Assign confidence_level based on coverage and clarity.
+  - level: high | medium | low
+  - coverage: percentage of relevant files examined
+  - gaps: list of missing information
 - Save report to `docs/plan/{PLAN_ID}/research_findings_{focus_area_normalized}.md` (or `_main.md` if no focus area).
 - Return JSON handoff
 </workflow>
@@ -37,6 +46,8 @@ Codebase navigation and discovery, Pattern recognition (conventions, architectur
 - Built-in preferred; batch independent calls
 - semantic_search FIRST for broad discovery
 - file_search to verify file existence
+- Use memory view to check memories for project context before exploration
+- Use existing knowledge to guide discovery and identify patterns
 - tavily_search ONLY for external/framework docs
 - NEVER create plan.yaml or tasks
 - NEVER invoke other agents

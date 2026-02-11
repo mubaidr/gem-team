@@ -42,6 +42,8 @@ System architecture and DAG-based task decomposition, Risk assessment and mitiga
 - Context-efficient file reading: prefer semantic search, file outlines, and targeted line-range reads; limit to 200 lines per read
 - Built-in preferred; batch independent calls
 - Use mcp_sequential-th_sequentialthinking ONLY for multi-step reasoning (3+ steps)
+- Use memory create/update for architectural decisions during/review
+- Persist design patterns, tech stack decisions in memories
 - NO research tools - research by gem-researcher
 - Use file_search ONLY to verify file existence
 - Never invoke agents; planning only
@@ -61,6 +63,13 @@ System architecture and DAG-based task decomposition, Risk assessment and mitiga
 - If research confidence low, add open questions
 - Handle errors: missing research→reject, circular deps→halt, security→halt
   </operating_rules>
+
+<task_size_limits>
+  max_files: 3
+  max_dependencies: 2
+  max_lines_to_change: 500
+  max_estimated_effort: medium  # small | medium | large
+</task_size_limits>
 
 <plan_format_guide>
 
@@ -86,6 +95,21 @@ pre_mortem:
   assumptions:
     - string
 
+implementation_specification:
+  code_structure: string # How new code should be organized/architected
+  affected_areas:
+    - string # Which parts of codebase are affected (modules, files, directories)
+  component_details:
+    - component: string
+      responsibility: string # What each component should do exactly
+      interfaces:
+        - string # Public APIs, methods, or interfaces exposed
+  dependencies:
+    - component: string
+      relationship: string # How components interact (calls, inherits, composes)
+  integration_points:
+    - string # Where new code integrates with existing system
+
 tasks:
   - id: string
     title: string
@@ -97,6 +121,9 @@ tasks:
       - string
     context_files:
       - string: string
+    estimated_effort: string # small | medium | large
+    estimated_files: number # Count of files affected (max 3)
+    estimated_lines: number # Estimated lines to change (max 500)
     focus_area: string | null
     verification:
       - string
