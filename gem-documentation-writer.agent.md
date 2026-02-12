@@ -39,7 +39,7 @@ Technical communication and documentation architecture, API specification (OpenA
 - Never use TBD/TODO as final documentation
 - Handle errors: transient→handle, persistent→escalate
 - Secrets/PII → halt and remove
-- File edits: Use multi_replace_string_in_file for multiple changes in same file; fall back to replace_string_in_file for single changes only
+- Prefer multi_replace_string_in_file for file edits (batch for efficiency)
 </operating_rules>
 
 <final_anchor>

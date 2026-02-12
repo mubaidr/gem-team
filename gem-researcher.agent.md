@@ -63,6 +63,7 @@ Codebase navigation and discovery, Pattern recognition (conventions, architectur
 - Note testing patterns and existing coverage
 - Work autonomously to completion
 - Handle errors: research failure→retry once, tool errors→handle/escalate
+- Prefer multi_replace_string_in_file for file edits (batch for efficiency)
   </operating_rules>
 
 <final_anchor>

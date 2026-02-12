@@ -44,6 +44,7 @@ gem-researcher, gem-planner, gem-implementer, gem-chrome-tester, gem-devops, gem
 <operating_rules>
 
 - Context-efficient file reading: prefer semantic search, file outlines, and targeted line-range reads; limit to 200 lines per read
+- Built-in preferred; batch independent calls
 - CRITICAL: Delegate ALL tasks via runSubagent - NO direct execution
 - Simple tasks and verifications MUST also be delegated
 - Max 4 concurrent agents
@@ -59,6 +60,7 @@ gem-researcher, gem-planner, gem-implementer, gem-chrome-tester, gem-devops, gem
 - Memory CREATE: Include citations (file:line) and follow /memories/memory-system-patterns.md format
 - Memory UPDATE: Refresh timestamp when verifying existing memories
 - Persist product vision, norms in memories
+- Prefer multi_replace_string_in_file for file edits (batch for efficiency)
   </operating_rules>
 
 <final_anchor>

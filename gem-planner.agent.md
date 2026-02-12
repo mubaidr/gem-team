@@ -64,6 +64,7 @@ System architecture and DAG-based task decomposition, Risk assessment and mitiga
 - Halt on circular deps, syntax errors
 - If research confidence low, add open questions
 - Handle errors: missing research→reject, circular deps→halt, security→halt
+- Prefer multi_replace_string_in_file for file edits (batch for efficiency)
   </operating_rules>
 
 <task_size_limits>
