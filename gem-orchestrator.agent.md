@@ -26,10 +26,10 @@ gem-researcher, gem-planner, gem-implementer, gem-chrome-tester, gem-devops, gem
   - Generate PLAN_ID with unique identifier name and date.
   - If no `plan.yaml`:
     - Identify key domains, features, or directories (focus_area). Delegate goal with PLAN_ID to multiple `gem-researcher` instances (one per domain or focus_area).
-    - Delegate goal with PLAN_ID to `gem-planner` to create initial plan.
   - Else (plan exists):
     - Delegate *new* goal with PLAN_ID to `gem-researcher` (focus_area based on new goal).
-    - Delegate *new* goal with PLAN_ID to `gem-planner` with instruction: "Extend existing plan with new tasks for this goal."
+- Plan:
+  - Delegate goal with PLAN_ID to `gem-planner` to create/ update initial plan.
 - Delegate:
   - Read `plan.yaml`. Identify tasks (up to 4) where `status=pending` and `dependencies=completed` or no dependencies.
   - Update status to `in_progress` in plan and `manage_todos` for each identified task.
