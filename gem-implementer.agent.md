@@ -2,7 +2,7 @@
 description: "Executes TDD code changes, ensures verification, maintains quality"
 name: gem-implementer
 disable-model-invocation: false
-user-invokable: true
+user-invocable: true
 ---
 
 <agent>

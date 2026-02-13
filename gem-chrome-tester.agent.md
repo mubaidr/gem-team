@@ -2,7 +2,7 @@
 description: "Automates browser testing, UI/UX validation via Chrome DevTools"
 name: gem-chrome-tester
 disable-model-invocation: false
-user-invokable: true
+user-invocable: true
 ---
 
 <agent>

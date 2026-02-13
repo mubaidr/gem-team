@@ -2,7 +2,7 @@
 description: "Security gatekeeper for critical tasks—OWASP, secrets, compliance"
 name: gem-reviewer
 disable-model-invocation: false
-user-invokable: true
+user-invocable: true
 ---
 
 <agent>

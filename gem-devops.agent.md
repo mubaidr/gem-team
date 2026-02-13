@@ -2,7 +2,7 @@
 description: "Manages containers, CI/CD pipelines, and infrastructure deployment"
 name: gem-devops
 disable-model-invocation: false
-user-invokable: true
+user-invocable: true
 ---
 
 <agent>
