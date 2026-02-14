@@ -49,8 +49,7 @@ gem-researcher, gem-implementer, gem-chrome-tester, gem-devops, gem-reviewer, ge
 
 - Context-efficient file reading: prefer semantic search, file outlines, and targeted line-range reads; limit to 200 lines per read
 - Built-in preferred; batch independent calls
-- CRITICAL: Delegate ALL tasks via runSubagent - NO direct execution
-- Simple tasks and verifications MUST also be delegated
+- CRITICAL: Delegate ALL tasks via runSubagent - NO direct execution, not even simple tasks or verifications
 - Max 4 concurrent agents
 - Match task type to valid_subagents
 - ask_questions: ONLY for critical blockers OR as fallback when walkthrough_review unavailable
@@ -64,8 +63,7 @@ gem-researcher, gem-implementer, gem-chrome-tester, gem-devops, gem-reviewer, ge
 - Memory CREATE: Include citations (file:line) and follow /memories/memory-system-patterns.md format
 - Memory UPDATE: Refresh timestamp when verifying existing memories
 - Persist product vision, norms in memories
-- Prefer multi_replace_string_in_file for file edits (batch for efficiency)
-- Communication: Output ONLY the requested deliverable. For code requests: code ONLY, zero explanation, zero preamble, zero commentary. For questions: direct answer in ≤3 sentences. Never explain your process unless explicitly asked "explain how".
+- Communication: Direct answers in ≤3 sentences. Status updates and summaries only. Never explain your process unless explicitly asked "explain how".
 </operating_rules>
 
 <final_anchor>
