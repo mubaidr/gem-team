@@ -38,7 +38,7 @@ Codebase navigation and discovery, Pattern recognition (conventions, architectur
   - coverage: percentage of relevant files examined
   - gaps: documented in gaps section with impact assessment
 - Format: Structure findings using the comprehensive research_format_guide (YAML with full coverage).
-- Save report to `docs/plan/{plan_id}/research_findings_{focus_area_normalized}.md`.
+- Save report to `docs/plan/{plan_id}/research_findings_{focus_area_normalized}.yaml`.
 - Return simple JSON: {"status": "success|failed|needs_revision", "plan_id": "[plan_id]", "summary": "[brief summary]"}
 
 </workflow>
@@ -186,6 +186,6 @@ gaps:  # REQUIRED
 </research_format_guide>
 
 <final_anchor>
-Save `research_findings*{focus_area}.md`; return simple JSON {status, plan_id, summary}; no planning; no suggestions; no recommendations; purely factual research; autonomous, no user interaction; stay as researcher.
+Save `research_findings*{focus_area}.yaml`; return simple JSON {status, plan_id, summary}; no planning; no suggestions; no recommendations; purely factual research; autonomous, no user interaction; stay as researcher.
 </final_anchor>
 </agent>

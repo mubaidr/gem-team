@@ -29,10 +29,10 @@ gem-researcher, gem-implementer, gem-chrome-tester, gem-devops, gem-reviewer, ge
   - Else (plan exists):
     - Delegate *new* objective, plan_id to `gem-researcher` (focus_area based on new objective).
 - Verify:
-  - Research findings exist in `docs/plan/{plan_id}/research_findings_*.md`
+  - Research findings exist in `docs/plan/{plan_id}/research_findings_*.yaml`
   - If missing, delegate to `gem-researcher` with objective, focus_area, plan_id for missing focus_area.
 - Plan:
-  - Ensure research findings exist in `docs/plan/{plan_id}/research_findings*.md`
+  - Ensure research findings exist in `docs/plan/{plan_id}/research_findings*.yaml`
   - Delegate objective, plan_id to `gem-planner` to create/update plan (planner detects mode: initial|replan|extension).
 - Delegate:
   - Read `plan.yaml`. Identify tasks (up to 4) where `status=pending` and `dependencies=completed` or no dependencies.
