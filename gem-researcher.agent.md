@@ -80,7 +80,9 @@ Codebase navigation and discovery, Pattern recognition (conventions, architectur
   * Complex (3 passes): Pass 1 (broad) → Analyze gaps → Pass 2 (refined) → Analyze gaps → Pass 3 (deep dive) → Return findings
   * Each pass refines queries based on previous findings and gaps
   * Stateless: Each pass is independent, no state between passes (except findings)
-- Explore: Read relevant files within the focus_area only, identify key functions/classes, note patterns and conventions specific to this domain.
+- Explore:
+  * Read relevant files within the focus_area only, identify key functions/classes, note patterns and conventions specific to this domain.
+  * Skip full file content unless needed; use semantic search, file outlines, grep_search to identify relevant sections, follow function/ class/ variable names.
 - Use memory view/search to check memories for project context before exploration
 - Memory READ: Verify citations (file:line) before using stored memories
 - Use existing knowledge to guide discovery and identify patterns
