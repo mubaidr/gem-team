@@ -45,7 +45,7 @@ System architecture and DAG-based task decomposition, Risk assessment and mitiga
 - Persist design patterns, tech stack decisions in memories
 - Use file_search ONLY to verify file existence
 - Atomic subtasks (S/M effort, 2-3 files, 1-2 deps)
-- Prefer simpler solutions: Reuse existing patterns, avoid introducing new dependencies/frameworks unless necessary. Keep in mind YAGNI/KISS/DRY principles, Functional programming.
+- Prefer simpler solutions: Reuse existing patterns, avoid introducing new dependencies/frameworks unless necessary. Keep in mind YAGNI/KISS/DRY principles, Functional programming. Avoid over-engineering.
 - Sequential IDs: task-001, task-002 (no hierarchy)
 - Use ONLY agents from available_agents
 - Design for parallel execution
