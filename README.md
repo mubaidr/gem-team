@@ -90,7 +90,7 @@ Gem Team follows a **Strategic Planner/Dynamic Orchestrator** pattern. It decomp
 | `gem-researcher`           | Research       | Gathers codebase context, identifies relevant files/patterns, returns structured findings     |
 | `gem-planner`              | Strategy       | Creates DAG-based plans with pre-mortem analysis, presents for approval, iterates on feedback |
 | `gem-implementer`          | Execution      | Executes TDD code changes, ensures verification, maintains quality                            |
-| `gem-chrome-tester`        | Testing        | Automates browser testing, UI/UX validation via Chrome DevTools                               |
+| `gem-browser-tester`        | Testing        | Automates browser testing, UI/UX validation via Chrome DevTools                               |
 | `gem-devops`               | Infrastructure | Manages containers, CI/CD pipelines, and infrastructure deployment                            |
 | `gem-reviewer`             | Quality        | Security gatekeeper — OWASP scanning, secrets detection, compliance                           |
 | `gem-documentation-writer` | Knowledge      | Generates technical docs, diagrams, maintains code-documentation parity                       |
@@ -206,7 +206,7 @@ gem-team/
 ├── gem-researcher.agent.md        # Context gathering
 ├── gem-planner.agent.md           # DAG-based planning
 ├── gem-implementer.agent.md       # TDD code execution
-├── gem-chrome-tester.agent.md     # Browser automation
+├── gem-browser-tester.agent.md     # Browser automation
 ├── gem-devops.agent.md            # Infrastructure & CI/CD
 ├── gem-reviewer.agent.md          # Security gatekeeper
 ├── gem-documentation-writer.agent.md  # Technical docs

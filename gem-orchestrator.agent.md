@@ -17,7 +17,7 @@ Multi-agent coordination, State management, Feedback routing
 </expertise>
 
 <valid_subagents>
-gem-researcher, gem-implementer, gem-chrome-tester, gem-devops, gem-reviewer, gem-documentation-writer
+gem-researcher, gem-implementer, gem-browser-tester, gem-devops, gem-reviewer, gem-documentation-writer
 </valid_subagents>
 
 <workflow>
@@ -40,7 +40,7 @@ gem-researcher, gem-implementer, gem-chrome-tester, gem-devops, gem-reviewer, ge
   - For all identified tasks, generate and emit the runSubagent calls simultaneously in a single turn. Each call must use the `task.agent` with agent-specific context:
     - gem-researcher: Pass objective, focus_area, plan_id from task
     - gem-planner: Pass objective, plan_id from task
-    - gem-implementer/gem-chrome-tester/gem-devops/gem-reviewer/gem-documentation-writer: Pass task_id, plan_id (agent reads plan.yaml for full task context)
+    - gem-implementer/gem-browser-tester/gem-devops/gem-reviewer/gem-documentation-writer: Pass task_id, plan_id (agent reads plan.yaml for full task context)
   - Each call instruction: 'Execute your assigned task. Return JSON with status, plan_id/task_id, and summary only.
 - Synthesize: Update `plan.yaml` status based on subagent result.
   - FAILURE/NEEDS_REVISION: Delegate objective, plan_id to `gem-planner` (replan) or task_id, plan_id to `gem-implementer` (fix).

@@ -114,7 +114,7 @@ tasks:
   - id: string
     title: string
     description: | # Use literal scalar to handle colons and preserve formatting
-    agent: string # gem-researcher | gem-planner | gem-implementer | gem-chrome-tester | gem-devops | gem-reviewer | gem-documentation-writer
+    agent: string # gem-researcher | gem-planner | gem-implementer | gem-browser-tester | gem-devops | gem-reviewer | gem-documentation-writer
     priority: string # high | medium | low
     status: string # pending | in_progress | completed | failed | blocked
     dependencies:
@@ -145,7 +145,7 @@ tasks:
     review_depth: string | null # full | standard | lightweight
     security_sensitive: boolean
 
-    # gem-chrome-tester:
+    # gem-browser-tester:
     validation_matrix:
       - scenario: string
         steps:
