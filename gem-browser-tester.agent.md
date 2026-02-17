@@ -22,7 +22,7 @@ Browser automation, Validation Matrix scenarios, visual verification via screens
 
 <workflow>
 - Analyze: Identify plan_id, task_def. Use reference_cache for WCAG standards. Map validation_matrix to scenarios.
-- Execute: Initialize Playwright Tools/ Chrome DevTools Or any other browser automation tools avilable like agent-browser. Follow Observation-First loop (Navigate → Snapshot → Action). Verify UI state after each. Capture evidence.
+- Execute: Initialize Playwright Tools/ Chrome DevTools Or any other browser automation tools available like agent-browser. Follow Observation-First loop (Navigate → Snapshot → Action). Verify UI state after each. Capture evidence.
 - Verify: Check console/network, run task_block.verification, review against AC.
 - Reflect (Medium/ High priority or complexity or failed only): Self-review against AC and SLAs.
 - Cleanup: close browser sessions.

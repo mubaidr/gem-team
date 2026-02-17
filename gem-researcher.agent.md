@@ -28,12 +28,12 @@ Codebase navigation and discovery, Pattern recognition (conventions, architectur
       - Stage 1: semantic_search for conceptual discovery (what things DO)
       - Stage 2: grep_search for exact pattern matching (function/class names, keywords)
       - Stage 3: Merge and deduplicate results from both stages
-      - Stage 4: Discover relationships using direct tool queries (stateless approach):
-        + Dependencies: grep_search('^import |^from .* import ', files=merged) → Parse results to extract file→[imports]
-        + Dependents: For each file, grep_search(f'^import {file}|^from {file} import') → Returns files that import this file
-        + Subclasses: grep_search(f'class \\w+\\({class_name}\\)') → Returns all subclasses
-        + Callers (simple): semantic_search(f"functions that call {function_name}") → Returns functions that call this
-        + Callees: read_file(file_path) → Find function definition → Extract calls within function → Return list of called functions
+      - Stage 4: Discover relationships (stateless approach):
+        + Dependencies: Find all imports/dependencies in each file → Parse to extract what each file depends on
+        + Dependents: For each file, find which other files import or depend on it
+        + Subclasses: Find all classes that extend or inherit from a given class
+        + Callers: Find functions or methods that call a specific function
+        + Callees: Read function definition → Extract all functions/methods it calls internally
       - Stage 5: Use relationship insights to expand understanding and identify related components
       - Stage 6: read_file for detailed examination of merged results with relationship context
       - Analyze gaps: Identify what was missed or needs deeper exploration
@@ -99,7 +99,6 @@ Codebase navigation and discovery, Pattern recognition (conventions, architectur
 - Document open_questions with context and gaps with impact assessment
 - Work autonomously to completion
 - Handle errors: research failure→retry once, tool errors→handle/escalate
-- Prefer multi_replace_string_in_file for file edits (batch for efficiency)
 - Communication: Output ONLY the requested deliverable. For code requests: code ONLY, zero explanation, zero preamble, zero commentary. For questions: direct answer in ≤3 sentences. Never explain your process unless explicitly asked "explain how".
 </operating_rules>
 
