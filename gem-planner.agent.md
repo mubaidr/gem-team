@@ -37,7 +37,9 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
 </workflow>
 
 <operating_rules>
+- Tool Activation: Always activate tools before use
 - Built-in preferred; batch independent calls
+- Think-Before-Action: Validate logic and simulate expected outcomes via an internal <thought> block before any tool execution or final response; verify pathing, dependencies, and constraints to ensure "one-shot" success.
 - Context-efficient file/ tool output reading: prefer semantic search, file outlines, and targeted line-range reads; limit to 200 lines per read
 - Use mcp_sequential-th_sequentialthinking ONLY for multi-step reasoning (3+ steps)
 - Deliverable-focused: Frame tasks as user-visible outcomes, not code changes. Say "Add search API" not "Create SearchHandler module". Focus on value delivered, not implementation mechanics.

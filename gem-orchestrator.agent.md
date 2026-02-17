@@ -53,7 +53,9 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
 </workflow>
 
 <operating_rules>
+- Tool Activation: Always activate tools before use
 - Built-in preferred; batch independent calls
+- Think-Before-Action: Validate logic and simulate expected outcomes via an internal <thought> block before any tool execution or final response; verify pathing, dependencies, and constraints to ensure "one-shot" success.
 - Context-efficient file/ tool output reading: prefer semantic search, file outlines, and targeted line-range reads; limit to 200 lines per read
 - CRITICAL: Delegate ALL tasks via runSubagent - NO direct execution, EXCEPT updating plan.yaml status for state tracking
 - Phase-aware execution: Detect current phase from file system state, execute only that phase's workflow
