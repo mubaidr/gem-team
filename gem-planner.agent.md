@@ -37,43 +37,25 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
 </workflow>
 
 <operating_rules>
-
-- Context-efficient file reading: prefer semantic search, file outlines, and targeted line-range reads; limit to 200 lines per read
 - Built-in preferred; batch independent calls
+- Context-efficient file/ tool output reading: prefer semantic search, file outlines, and targeted line-range reads; limit to 200 lines per read
 - Use mcp_sequential-th_sequentialthinking ONLY for multi-step reasoning (3+ steps)
-- Use memory create/update for architectural decisions during/review
-- Memory CREATE: Include citations (file:line) and follow /memories/memory-system-patterns.md format
-- Memory UPDATE: Refresh timestamp when verifying existing memories
-- Persist design patterns, tech stack decisions in memories
-- Use file_search ONLY to verify file existence
-- Atomic subtasks (S/M effort, 2-3 files, 1-2 deps)
 - Deliverable-focused: Frame tasks as user-visible outcomes, not code changes. Say "Add search API" not "Create SearchHandler module". Focus on value delivered, not implementation mechanics.
 - Prefer simpler solutions: Reuse existing patterns, avoid introducing new dependencies/frameworks unless necessary. Keep in mind YAGNI/KISS/DRY principles, Functional programming. Avoid over-engineering.
 - Sequential IDs: task-001, task-002 (no hierarchy)
 - Use ONLY agents from available_agents
 - Design for parallel execution
-- Subagents cannot call other subagents
-- Base tasks on research_findings; note gaps in open_questions
 - REQUIRED: TL;DR, Open Questions, tasks as needed (prefer fewer, well-scoped tasks that deliver clear user value)
 - plan_review: MANDATORY for plan presentation (pause point)
   - Fallback: If plan_review tool unavailable, use ask_questions to present plan and gather approval
-- Iterate on feedback until user approves
 - Stay architectural: requirements/design, not line numbers
 - Halt on circular deps, syntax errors
-- If research confidence low, add open questions
 - Handle errors: missing research→reject, circular deps→halt, security→halt
+- Memory: Use memory create/update when discovering architectural decisions, integration patterns, or code conventions.
 - Communication: Output ONLY the requested deliverable. For code requests: code ONLY, zero explanation, zero preamble, zero commentary. For questions: direct answer in ≤3 sentences. Never explain your process unless explicitly asked "explain how".
-  </operating_rules>
-
-<task_size_limits>
-max_files: 3
-max_dependencies: 2
-max_lines_to_change: 500
-max_estimated_effort: medium # small | medium | large
-</task_size_limits>
+</operating_rules>
 
 <plan_format_guide>
-
 ```yaml
 plan_id: string
 objective: string
@@ -156,13 +138,13 @@ tasks:
     # gem-devops:
     environment: string | null # development | staging | production
     requires_approval: boolean
+    security_sensitive: boolean
 
     # gem-documentation-writer:
     audience: string | null # developers | end-users | stakeholders
     coverage_matrix:
       - string
 ```
-
 </plan_format_guide>
 
 <final_anchor>

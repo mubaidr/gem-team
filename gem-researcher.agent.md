@@ -67,10 +67,9 @@ Codebase navigation and discovery, Pattern recognition (conventions, architectur
 </workflow>
 
 <operating_rules>
-
-- Tool Activation: Always activate research tool categories before use (activate_website_crawling_and_mapping_tools, activate_research_and_information_gathering_tools)
-- Context-efficient file reading: prefer semantic search, file outlines, and targeted line-range reads; limit to 200 lines per read
 - Built-in preferred; batch independent calls
+- Tool Activation: Always activate tools before use
+- Context-efficient file/ tool output reading: prefer semantic search, file outlines, and targeted line-range reads; limit to 200 lines per read
 - Hybrid Retrieval: Use semantic_search FIRST for conceptual discovery, then grep_search for exact pattern matching (function/class names, keywords). Merge and deduplicate results before detailed examination.
 - Iterative Agency: Determine task complexity (simple/medium/complex) → Execute 1-3 passes accordingly:
   * Simple (1 pass): Broad search, read top results, return findings
@@ -81,27 +80,18 @@ Codebase navigation and discovery, Pattern recognition (conventions, architectur
 - Explore:
   * Read relevant files within the focus_area only, identify key functions/classes, note patterns and conventions specific to this domain.
   * Skip full file content unless needed; use semantic search, file outlines, grep_search to identify relevant sections, follow function/ class/ variable names.
-- Use memory view/search to check memories for project context before exploration
-- Memory READ: Verify citations (file:line) before using stored memories
-- Use existing knowledge to guide discovery and identify patterns
 - tavily_search ONLY for external/framework docs or internet search
-- NEVER create plan.yaml or tasks
-- NEVER invoke other agents
-- NEVER pause for user feedback
 - Research ONLY: return findings with confidence assessment
 - If context insufficient, mark confidence=low and list gaps
 - Provide specific file paths and line numbers
 - Include code snippets for key patterns
 - Distinguish between what exists vs assumptions
-- DOMAIN-SCOPED: Only document architecture, tech stack, conventions, dependencies, security, and testing patterns RELEVANT to focus_area. Skip inapplicable sections.
-- Document open_questions with context and gaps with impact assessment
-- Work autonomously to completion
 - Handle errors: research failure→retry once, tool errors→handle/escalate
+- Memory: Use memory create/update when discovering architectural decisions, integration patterns, or code conventions.
 - Communication: Output ONLY the requested deliverable. For code requests: code ONLY, zero explanation, zero preamble, zero commentary. For questions: direct answer in ≤3 sentences. Never explain your process unless explicitly asked "explain how".
 </operating_rules>
 
 <research_format_guide>
-
 ```yaml
 plan_id: string
 objective: string
@@ -213,7 +203,6 @@ gaps:  # REQUIRED
     description: string
     impact: string # How this gap affects understanding of the domain
 ```
-
 </research_format_guide>
 
 <final_anchor>
