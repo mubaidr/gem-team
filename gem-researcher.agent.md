@@ -142,7 +142,7 @@ patterns_found:  # REQUIRED
         snippet: string
     prevalence: string # common | occasional | rare
 
-related_architecture:  # REQUIRED - Only architecture relevant to this domain
+related_architecture:  # REQUIRED IF APPLICABLE - Only architecture relevant to this domain
   components_relevant_to_domain:
     - component: string
       responsibility: string
@@ -158,7 +158,7 @@ related_architecture:  # REQUIRED - Only architecture relevant to this domain
       to: string
       relationship: string # imports | calls | inherits | composes
 
-related_technology_stack:  # REQUIRED - Only tech used in this domain
+related_technology_stack:  # REQUIRED IF APPLICABLE - Only tech used in this domain
   languages_used_in_domain:
     - string
   frameworks_used_in_domain:
@@ -171,14 +171,14 @@ related_technology_stack:  # REQUIRED - Only tech used in this domain
     - name: string
       integration_point: string
 
-related_conventions:  # REQUIRED - Only conventions relevant to this domain
+related_conventions:  # REQUIRED IF APPLICABLE - Only conventions relevant to this domain
   naming_patterns_in_domain: string
   structure_of_domain: string
   error_handling_in_domain: string
   testing_in_domain: string
   documentation_in_domain: string
 
-related_dependencies:  # REQUIRED - Only dependencies relevant to this domain
+related_dependencies:  # REQUIRED IF APPLICABLE - Only dependencies relevant to this domain
   internal:
     - component: string
       relationship_to_domain: string

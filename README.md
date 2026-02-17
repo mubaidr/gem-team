@@ -103,7 +103,6 @@ Gem Team follows a Strategic Planner/Dynamic Orchestrator pattern. It decomposes
 flowchart TD
     A[🎯 User Goal] --> B[🎭 Orchestrator]
     B --> C[🔍 Researcher]
-    C --> D{⏸️ Findings Review}
     D -->|Feedback| C
     D -->|Approved| E[📋 Planner]
     E --> F[📄 plan.yaml]
@@ -124,14 +123,13 @@ flowchart TD
 ### Workflow Stages
 
 1. Inception — Orchestrator receives goal → delegates to multiple Researchers (by focus area)
-2. Findings Review — Orchestrator presents consolidated research findings via `plan_review`
-3. Planning — Planner synthesizes findings, creates 3-7 atomic tasks with dependencies, runs pre-mortem analysis, saves `plan.yaml`
-4. Plan Approval — Planner presents plan via `plan_review` → MANDATORY PAUSE → iterates on feedback until approved
-5. Delegation — Orchestrator identifies "ready" tasks (dependencies met) → launches up to 4 agents in parallel via `runSubagent`
-6. Execution — Workers execute changes and run verification commands before returning results
-7. Synthesis — Orchestrator processes handoffs, updates `plan.yaml`, routes failures for revision/retry
-8. Loop — Repeat delegation/synthesis until all tasks complete. Triggers replanning if stuck.
-9. Delivery — Final comprehensive `walkthrough_review` summary presented
+2. Planning — Planner synthesizes findings, creates 3-7 atomic tasks with dependencies, runs pre-mortem analysis, saves `plan.yaml`
+3. Plan Approval — Planner presents plan via `plan_review` → MANDATORY PAUSE → iterates on feedback until approved
+4. Delegation — Orchestrator identifies "ready" tasks (dependencies met) → launches up to 4 agents in parallel via `runSubagent`
+5. Execution — Workers execute changes and run verification commands before returning results
+6. Synthesis — Orchestrator processes handoffs, updates `plan.yaml`, routes failures for revision/retry
+7. Loop — Repeat delegation/synthesis until all tasks complete. Triggers replanning if stuck.
+8. Delivery — Final comprehensive `walkthrough_review` summary presented
 
 ---
 

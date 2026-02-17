@@ -21,8 +21,8 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
 <workflow>
 - Phase Detection: Determine current phase based on existing files:
   - NO plan.yaml → Phase 1: Research (new project)
-  - Plan exists with all tasks completed + new user goal → Phase 1: Research (new plan_id for extension)
-  - Plan exists, tasks pending → Phase 3: Execution (continue existing plan)
+  - Plan exists + user feedback → Phase 2: Planning (update existing plan)
+  - Plan exists + tasks pending → Phase 3: Execution (continue existing plan)
   - All tasks completed, no new goal → Phase 4: Completion
 
 - Phase 1: Research (if no research findings):
@@ -31,15 +31,14 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
   - Delegate to multiple `gem-researcher` instances concurrent (one per focus_area) with: objective, focus_area, plan_id
   - Wait for all researchers to complete
 
-- Phase 2: Planning (if research exists, no plan):
+- Phase 2: Planning:
   - Verify research findings exist in `docs/plan/{plan_id}/research_findings_*.yaml`
-  - Delegate to `gem-planner`: objective, plan_id (planner reads research findings)
-  - Wait for planner to create `docs/plan/{plan_id}/plan.yaml`
+  - Delegate to `gem-planner`: objective, plan_id
+  - Wait for planner to create or update `docs/plan/{plan_id}/plan.yaml`
 
-- Phase 3: Execution Loop (if plan exists with pending tasks):
-  - Read `plan.yaml`, identify tasks (up to 4) where `status=pending` AND (`dependencies=completed` OR no dependencies)
-  - Update task status to `in_progress` in `plan.yaml` (direct file edit for state tracking)
-  - Update `manage_todos` for each identified task
+- Phase 3: Execution Loop:
+  - Read `plan.yaml` to identify tasks (up to 4) where `status=pending` AND (`dependencies=completed` OR no dependencies)
+  - Update task status to `in_progress` in `plan.yaml` and update `manage_todos` for each identified task
   - Delegate to worker agents via `runSubagent` (up to 4 concurrent):
     * gem-implementer/gem-browser-tester/gem-devops/gem-documentation-writer: Pass task_id, plan_id
     * gem-reviewer: Pass task_id, plan_id (if requires_review=true or security-sensitive)
