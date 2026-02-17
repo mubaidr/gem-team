@@ -7,7 +7,7 @@
 
 # 💎 Gem Team: Multi-Agent Orchestration Framework
 
-> **Transform complex projects into coordinated, verified, production-ready deliverables** — with intelligent agents that research, plan, implement, test, and document autonomously.
+> Transform complex projects into coordinated, verified, production-ready deliverables — with intelligent agents that research, plan, implement, test, and document autonomously.
 
 A modular, high-performance multi-agent team designed for complex project execution, feature implementation, and automated verification.
 
@@ -19,35 +19,35 @@ A modular, high-performance multi-agent team designed for complex project execut
 
 Traditional AI coding assistants hit walls when projects get complex:
 
-- **Context overload** — One agent trying to hold everything leads to mistakes
-- **No specialization** — Jack of all trades, master of none
-- **Sequential bottlenecks** — Tasks execute one-by-one, wasting time
-- **Missing verification** — Changes ship without proper testing
-- **No audit trail** — What changed? Why? Who knows...
+- Context overload — One agent trying to hold everything leads to mistakes
+- No specialization — Jack of all trades, master of none
+- Sequential bottlenecks — Tasks execute one-by-one, wasting time
+- Missing verification — Changes ship without proper testing
+- No audit trail — What changed? Why? Who knows...
 
 ### The Gem Team Solution
 
 | Challenge                     | Gem Team Approach                                                                                         |
 | :---------------------------- | :-------------------------------------------------------------------------------------------------------- |
-| 🧠 **Context Overload**       | Specialized agents with focused expertise — each holds only what it needs                                 |
-| 🎯 **Lack of Specialization** | 8 expert agents: researcher, planner, implementer, tester, reviewer, devops, and documentation specialist |
-| 🐢 **Sequential Bottlenecks** | DAG-based parallel execution — up to 4 agents work simultaneously                                         |
-| ❌ **Missing Verification**   | Verification-first: no task completes without passing its verification command                            |
-| 📜 **No Audit Trail**         | Persistent `plan.yaml` state file tracks every decision, status, and outcome                              |
+| 🧠 Context Overload       | Specialized agents with focused expertise — each holds only what it needs                                 |
+| 🎯 Lack of Specialization | 8 expert agents: researcher, planner, implementer, tester, reviewer, devops, and documentation specialist |
+| 🐢 Sequential Bottlenecks | DAG-based parallel execution — up to 4 agents work simultaneously                                         |
+| ❌ Missing Verification   | Verification-first: no task completes without passing its verification command                            |
+| 📜 No Audit Trail         | Persistent `plan.yaml` state file tracks every decision, status, and outcome                              |
 
 ### Key Benefits
 
-- **🚀 10x Faster Execution** — Parallel agent execution eliminates bottlenecks
-- **🎯 Higher Quality Output** — Specialized agents + mandatory verification = fewer bugs
-- **🔒 Built-in Security** — Dedicated reviewer agent applies OWASP scanning on critical tasks
-- **📊 Full Visibility** — Real-time plan status, clear approval gates, comprehensive summaries
-- **🔄 Resilient Workflows** — Pre-mortem analysis, failure handling, and automatic replanning
+- 🚀 10x Faster Execution — Parallel agent execution eliminates bottlenecks
+- 🎯 Higher Quality Output — Specialized agents + mandatory verification = fewer bugs
+- 🔒 Built-in Security — Dedicated reviewer agent applies OWASP scanning on critical tasks
+- 📊 Full Visibility — Real-time plan status, clear approval gates, comprehensive summaries
+- 🔄 Resilient Workflows — Pre-mortem analysis, failure handling, and automatic replanning
 
 ---
 
 ## 🚀 Overview
 
-Gem Team follows a **Strategic Planner/Dynamic Orchestrator** pattern. It decomposes high-level user goals into a **Directed Acyclic Graph (DAG)** of tasks, executes them in parallel across specialized agents, and maintains a rigorous state-controlled workflow.
+Gem Team follows a Strategic Planner/Dynamic Orchestrator pattern. It decomposes high-level user goals into a Directed Acyclic Graph (DAG) of tasks, executes them in parallel across specialized agents, and maintains a rigorous state-controlled workflow.
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -123,16 +123,15 @@ flowchart TD
 
 ### Workflow Stages
 
-1. **Inception** — Orchestrator receives goal → delegates to multiple Researchers (by focus area)
-2. **Findings Review** — Orchestrator presents consolidated research findings via `plan_review` → **MANDATORY PAUSE** → iterates on feedback until findings are approved
-3. **Planning** — Planner synthesizes findings, creates 3-7 atomic tasks with dependencies, runs pre-mortem analysis, saves `plan.yaml`
-4. **Plan Approval** — Planner presents plan via `plan_review` → **MANDATORY PAUSE** → iterates on feedback until approved
-5. **Delegation** — Orchestrator identifies "ready" tasks (dependencies met) → launches up to 4 agents in parallel via `runSubagent`
-6. **Execution** — Workers execute changes and run verification commands before returning results
-7. **Synthesis** — Orchestrator processes handoffs, updates `plan.yaml`, routes failures for revision/retry
-8. **Batch Confirmation** — Orchestrator presents summary via `walkthrough_review` → **MANDATORY PAUSE**
-9. **Loop** — Repeat delegation/synthesis until all tasks complete. Triggers replanning if stuck.
-10. **Delivery** — Final comprehensive `walkthrough_review` summary presented
+1. Inception — Orchestrator receives goal → delegates to multiple Researchers (by focus area)
+2. Findings Review — Orchestrator presents consolidated research findings via `plan_review`
+3. Planning — Planner synthesizes findings, creates 3-7 atomic tasks with dependencies, runs pre-mortem analysis, saves `plan.yaml`
+4. Plan Approval — Planner presents plan via `plan_review` → MANDATORY PAUSE → iterates on feedback until approved
+5. Delegation — Orchestrator identifies "ready" tasks (dependencies met) → launches up to 4 agents in parallel via `runSubagent`
+6. Execution — Workers execute changes and run verification commands before returning results
+7. Synthesis — Orchestrator processes handoffs, updates `plan.yaml`, routes failures for revision/retry
+8. Loop — Repeat delegation/synthesis until all tasks complete. Triggers replanning if stuck.
+9. Delivery — Final comprehensive `walkthrough_review` summary presented
 
 ---
 
@@ -140,15 +139,15 @@ flowchart TD
 
 ### 🔍 Focus-Based Context Gathering
 
-The **Orchestrator** identifies key domains or features and launches multiple **Researcher agents** in parallel, each targeting a specific `focus_area`. This ensures deep, specific context is gathered for every part of the system before the **Planner** synthesizes it all into a unified `plan.yaml`.
+The Orchestrator identifies key domains or features and launches multiple Researcher agents in parallel, each targeting a specific `focus_area`. This ensures deep, specific context is gathered for every part of the system before the Planner synthesizes it all into a unified `plan.yaml`.
 
 ### ⚡ Parallel Execution Engine
 
-Up to **4 concurrent agents** execute independent tasks simultaneously, dramatically reducing total execution time while maintaining resource stability.
+Up to 4 concurrent agents execute independent tasks simultaneously, dramatically reducing total execution time while maintaining resource stability.
 
 ### 🧪 Verification-First (TDD)
 
-No task completes without passing its defined `verification` command. Implementers follow strict **TDD discipline**:
+No task completes without passing its defined `verification` command. Implementers follow strict TDD discipline:
 
 - Write tests FIRST
 - Confirm tests FAIL
@@ -157,7 +156,7 @@ No task completes without passing its defined `verification` command. Implemente
 
 ### 🛡️ Security-First Review
 
-The Reviewer agent acts as a **security gatekeeper** for critical tasks:
+The Reviewer agent acts as a security gatekeeper for critical tasks:
 
 - OWASP Top 10 scanning
 - Secrets/PII detection
@@ -166,7 +165,7 @@ The Reviewer agent acts as a **security gatekeeper** for critical tasks:
 
 ### 📊 Pre-Mortem Analysis
 
-For complex plans, the Planner runs **pre-mortem analysis** — identifying potential failure modes, their likelihood, impact, and mitigation strategies BEFORE execution begins.
+For complex plans, the Planner runs pre-mortem analysis — identifying potential failure modes, their likelihood, impact, and mitigation strategies BEFORE execution begins.
 
 ### 📝 Plan Continuity & Audit Trail
 
@@ -181,10 +180,10 @@ State persists in `docs/plan/{plan_id}/plan.yaml`, providing:
 
 Agents share knowledge via a memory system with citations:
 
-- **Researcher** reads memories to understand project context before exploration
-- **Planner** stores architectural decisions, design patterns, tech stack choices
-- **Orchestrator** stores project-level decisions, product vision, norms
-- **Just-in-time verification**: Citations (file:line) are checked before using memories
+- Researcher reads memories to understand project context before exploration
+- Planner stores architectural decisions, design patterns, tech stack choices
+- Orchestrator stores project-level decisions, product vision, norms
+- Just-in-time verification: Citations (file:line) are checked before using memories
 
 ### 🔒 Agent Hierarchy
 
@@ -192,9 +191,9 @@ Agents share knowledge via a memory system with citations:
 User → Orchestrator → Subagents (via runSubagent)
 ```
 
-- **Orchestrator**: `disable-model-invocation: true` — delegates only, never executes
-- **Subagents**: `disable-model-invocation: false` — execute tasks via tools
-- **Isolation**: Subagents cannot call other subagents — all collaboration mediated by Orchestrator
+- Orchestrator: `disable-model-invocation: true` — delegates only, never executes
+- Subagents: `disable-model-invocation: false` — execute tasks via tools
+- Isolation: Subagents cannot call other subagents — all collaboration mediated by Orchestrator
 
 ---
 
@@ -223,12 +222,12 @@ gem-team/
 
 | Scenario                         | How Gem Team Helps                                                              |
 | :------------------------------- | :------------------------------------------------------------------------------ |
-| **Large Feature Implementation** | Decomposes into parallel subtasks, implements with TDD, verifies each component |
-| **Codebase Refactoring**         | Researches patterns, plans migration, executes incrementally with tests         |
-| **Security Audit**               | Reviewer scans for OWASP issues, secrets, compliance gaps                       |
-| **Documentation Overhaul**       | Doc Writer generates accurate docs maintaining code-documentation parity        |
-| **CI/CD Pipeline Setup**         | DevOps agent creates containers, pipelines, deploys with health checks          |
-| **UI/UX Testing**                | Chrome Tester automates validation matrix, captures visual evidence             |
+| Large Feature Implementation | Decomposes into parallel subtasks, implements with TDD, verifies each component |
+| Codebase Refactoring         | Researches patterns, plans migration, executes incrementally with tests         |
+| Security Audit               | Reviewer scans for OWASP issues, secrets, compliance gaps                       |
+| Documentation Overhaul       | Doc Writer generates accurate docs maintaining code-documentation parity        |
+| CI/CD Pipeline Setup         | DevOps agent creates containers, pipelines, deploys with health checks          |
+| UI/UX Testing                | Chrome Tester automates validation matrix, captures visual evidence             |
 
 ---
 
@@ -238,6 +237,6 @@ This project is licensed under the Apache License 2.0 — see the [LICENSE](LICE
 
 ---
 
-**Built for Gem Team — Precision. Parallelism. Progress.**
+Built for Gem Team — Precision. Parallelism. Progress.
 
 *Transform complexity into coordinated execution.*

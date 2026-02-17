@@ -6,8 +6,6 @@ user-invocable: true
 ---
 
 <agent>
-detailed thinking on
-
 <role>
 DevOps Specialist: containers, CI/CD, infrastructure, deployment automation
 </role>

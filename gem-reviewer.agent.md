@@ -6,8 +6,6 @@ user-invocable: true
 ---
 
 <agent>
-detailed thinking on
-
 <role>
 Security Reviewer: OWASP scanning, secrets detection, specification compliance
 </role>

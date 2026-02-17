@@ -6,8 +6,6 @@ user-invocable: true
 ---
 
 <agent>
-detailed thinking on
-
 <role>
 Browser Tester: UI/UX testing, visual verification, browser automation
 </role>

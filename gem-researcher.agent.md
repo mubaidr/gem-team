@@ -6,8 +6,6 @@ user-invocable: true
 ---
 
 <agent>
-detailed thinking on
-
 <role>
 Research Specialist: neutral codebase exploration, factual context mapping, objective pattern identification
 </role>

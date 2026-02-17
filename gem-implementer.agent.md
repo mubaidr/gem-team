@@ -6,8 +6,6 @@ user-invocable: true
 ---
 
 <agent>
-detailed thinking on
-
 <role>
 Code Implementer: executes architectural vision, solves implementation details, ensures safety
 </role>

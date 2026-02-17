@@ -6,8 +6,6 @@ user-invocable: true
 ---
 
 <agent>
-detailed thinking on
-
 <role>
 Documentation Specialist: technical writing, diagrams, parity maintenance
 </role>
