@@ -209,7 +209,7 @@ gem-team/
 ├── gem-documentation-writer.agent.md  # Technical docs
 ├── docs/
 │   └── plan/{plan_id}/
-│       ├── research_findings.yaml   # Research output
+│       ├── research_findings_*.yaml   # Research output
 │       └── plan.yaml              # Task DAG state
 └── README.md
 ```

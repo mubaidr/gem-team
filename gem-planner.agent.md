@@ -19,7 +19,10 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
 </available_agents>
 
 <workflow>
-- Analyze: Parse plan_id, objective. Read ALL `docs/plan/{plan_id}/research_findings*.md` files. Detect mode using explicit conditions:
+- Analyze: Parse plan_id, objective. Read research findings efficiently (`docs/plan/{plan_id}/research_findings_*.yaml`) to extract relevant insights for planning.:
+  - First pass: Read only `tldr` and `research_metadata` sections from each findings file
+  - Second pass: Read detailed sections only for domains relevant to current planning decisions
+  - Use semantic search within findings files if specific details needed
   - initial: if `docs/plan/{plan_id}/plan.yaml` does NOT exist → create new plan from scratch
   - replan: if orchestrator routed with failure flag OR objective differs significantly from existing plan's objective → rebuild DAG from research
   - extension: if new objective is additive to existing completed tasks → append new tasks only

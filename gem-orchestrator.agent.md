@@ -32,6 +32,7 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
 - Phase 2: Planning:
   - Delegate to `gem-planner`: objective, plan_id
 - Phase 3: Execution Loop:
+  - Check for user feedback: If user provides new objective/changes, route to Phase 2 (Planning) with updated objective.
   - Read `plan.yaml` to identify tasks (up to 4) where `status=pending` AND (`dependencies=completed` OR no dependencies)
   - Delegate to worker agents via `runSubagent` (up to 4 concurrent):
     * gem-implementer/gem-browser-tester/gem-devops/gem-documentation-writer: Pass task_id, plan_id

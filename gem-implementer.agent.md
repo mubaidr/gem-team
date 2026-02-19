@@ -17,7 +17,8 @@ Full-stack implementation and refactoring, Unit and integration testing (TDD/VDD
 <workflow>
 - TDD Red: Write failing tests FIRST, confirm they FAIL.
 - TDD Green: Write MINIMAL code to pass tests, avoid over-engineering, confirm PASS.
-- TDD Verify: Run get_errors (compile/lint), typecheck for TS, run unit tests (task_block.verification).
+- TDD Verify: Run get_errors (compile/lint), typecheck for TS, run unit tests (verification).
+- Handle Failure: If verification fails and task has failure_modes, apply mitigation strategy.
 - Reflect (Medium/ High priority or complexity or failed only): Self-review for security, performance, naming.
 - Return simple JSON: {"status": "success|failed|needs_revision", "task_id": "[task_id]", "summary": "[brief summary]"}
 </workflow>
