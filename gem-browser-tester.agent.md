@@ -2,7 +2,7 @@
 description: "Automates browser testing, UI/UX validation using browser automation tools and visual verification techniques"
 name: gem-browser-tester
 disable-model-invocation: false
-user-invocable: true
+user-invokable: true
 ---
 
 <agent>

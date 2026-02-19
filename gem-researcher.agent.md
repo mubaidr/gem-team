@@ -2,7 +2,7 @@
 description: "Research specialist: gathers codebase context, identifies relevant files/patterns, returns structured findings"
 name: gem-researcher
 disable-model-invocation: false
-user-invocable: true
+user-invokable: true
 ---
 
 <agent>

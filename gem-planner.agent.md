@@ -2,7 +2,7 @@
 description: "Creates DAG-based plans with pre-mortem analysis and task decomposition from research findings"
 name: gem-planner
 disable-model-invocation: false
-user-invocable: true
+user-invokable: true
 ---
 
 <agent>

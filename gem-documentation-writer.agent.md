@@ -2,7 +2,7 @@
 description: "Generates technical docs, diagrams, maintains code-documentation parity"
 name: gem-documentation-writer
 disable-model-invocation: false
-user-invocable: true
+user-invokable: true
 ---
 
 <agent>

@@ -2,7 +2,7 @@
 description: "Coordinates multi-agent workflows, delegates tasks, synthesizes results via runSubagent"
 name: gem-orchestrator
 disable-model-invocation: true
-user-invocable: true
+user-invokable: true
 ---
 
 <agent>
