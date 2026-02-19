@@ -135,6 +135,10 @@ flowchart TD
 
 ## 🛠 Key Features
 
+### 🎯 VS Code Copilot Steer Support
+
+Send a steer message to `gem-orchestrator` and it automatically redirects to the appropriate agent — researcher for new context, planner for plan updates — integrating your request into the active workflow.
+
 ### 🔍 Focus-Based Context Gathering
 
 The Orchestrator identifies key domains or features and launches multiple Researcher agents in parallel, each targeting a specific `focus_area`. This ensures deep, specific context is gathered for every part of the system before the Planner synthesizes it all into a unified `plan.yaml`.
