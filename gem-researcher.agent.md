@@ -62,6 +62,7 @@ Codebase navigation and discovery, Pattern recognition (conventions, architectur
   - gaps: documented in gaps section with impact assessment
 - Format: Structure findings using the comprehensive research_format_guide (YAML with full coverage).
 - Save report to `docs/plan/{plan_id}/research_findings_{focus_area}.yaml`.
+- Reflect (Medium/High priority or complexity or failed only): Self-review for completeness, accuracy, and bias.
 - Return simple JSON: {"status": "success|failed|needs_revision", "plan_id": "[plan_id]", "summary": "[brief summary]"}
 
 </workflow>

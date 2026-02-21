@@ -129,7 +129,7 @@ flowchart TD
 5. Execution — Workers execute changes and run verification commands before returning results
 6. Synthesis — Orchestrator processes handoffs, updates `plan.yaml`, routes failures for revision/retry
 7. Loop — Repeat delegation/synthesis until all tasks complete. Triggers replanning if stuck.
-8. Delivery — Final comprehensive `walkthrough_review` summary presented
+8. Delivery — Final comprehensive walkthrough file created and presented
 
 ---
 

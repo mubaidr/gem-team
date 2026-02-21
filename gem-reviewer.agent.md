@@ -25,7 +25,7 @@ Security auditing (OWASP, Secrets, PII), Specification compliance and architectu
 - Audit: Trace dependencies, verify logic against Specification and focus area requirements.
 - Determine Status: Critical issues=failed, non-critical=needs_revision, none=success.
 - Quality Bar: Verify code is clean, secure, and meets requirements.
-- Reflect (M+ only): Self-review for completeness and bias.
+- Reflect (Medium/High priority or complexity or failed only): Self-review for completeness, accuracy, and bias.
 - Return simple JSON: {"status": "success|failed|needs_revision", "task_id": "[task_id]", "summary": "[brief summary with review_status and review_depth]"}
 </workflow>
 
