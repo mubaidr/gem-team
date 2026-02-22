@@ -27,17 +27,19 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
 - Phase 1: Research (if no research findings):
   - Parse user request, generate plan_id with unique identifier and date
   - Identify key domains/features/directories (focus_areas) from request
-  - Delegate to multiple `gem-researcher` instances concurrent (one per focus_area)
+  - Delegate to multiple `gem-researcher` instances concurrent (one per focus_area):
+    * Pass: plan_id, objective, focus_area per <delegation_protocol>
   - On researcher failure: retry same focus_area (max 2 retries), then proceed with available findings
 - Phase 2: Planning:
-  - Delegate to `gem-planner`: objective, plan_id
+  - Delegate to `gem-planner`: Pass plan_id, objective, research_findings_paths per <delegation_protocol>
 - Phase 3: Execution Loop:
   - Check for user feedback: If user provides new objective/changes, route to Phase 2 (Planning) with updated objective.
   - Read `plan.yaml` to identify tasks (up to 4) where `status=pending` AND (`dependencies=completed` OR no dependencies)
   - Delegate to worker agents via `runSubagent` (up to 4 concurrent):
-    * gem-implementer/gem-browser-tester/gem-devops/gem-documentation-writer: Pass task_id, plan_id
-    * gem-reviewer: Pass task_id, plan_id (if requires_review=true or security-sensitive)
-    * Instruction: "Execute your assigned task. Return JSON with status, task_id, and summary only."
+    * Prepare delegation params: base_params + agent_specific_params per <delegation_protocol>
+    * gem-implementer/gem-browser-tester/gem-devops/gem-documentation-writer: Pass full delegation params
+    * gem-reviewer: Pass full delegation params (if requires_review=true or security-sensitive)
+    * Instruction: "Execute your assigned task. Return JSON per your <output_format_guide>."
   - Synthesize: Update `plan.yaml` status based on results:
     * SUCCESS → Mark task completed
     * FAILURE/NEEDS_REVISION → If fixable: delegate to `gem-implementer` (task_id, plan_id); If requires replanning: delegate to `gem-planner` (objective, plan_id)
@@ -51,6 +53,58 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
     * If user feedback indicates changes needed → Route updated objective, plan_id to `gem-researcher` (for findings changes) or `gem-planner` (for plan changes)
 </workflow>
 
+<delegation_protocol>
+base_params:
+  - task_id: string
+  - plan_id: string
+  - plan_path: string  # "docs/plan/{plan_id}/plan.yaml"
+  - task_definition: object  # Full task from plan.yaml
+
+agent_specific_params:
+  gem-researcher:
+    - focus_area: string
+    - complexity: "simple|medium|complex"  # Optional, auto-detected
+
+  gem-planner:
+    - objective: string
+    - research_findings_paths: [string]  # Paths to research_findings_*.yaml files
+
+  gem-implementer:
+    - tech_stack: [string]
+    - test_coverage: string | null
+    - estimated_lines: number
+
+  gem-reviewer:
+    - review_depth: "full|standard|lightweight"
+    - security_sensitive: boolean
+    - review_criteria: object
+
+  gem-browser-tester:
+    - validation_matrix:
+      - scenario: string
+        steps:
+          - string
+        expected_result: string
+    - browser_tool_preference: "playwright|generic"
+
+  gem-devops:
+    - environment: "development|staging|production"
+    - requires_approval: boolean
+    - security_sensitive: boolean
+
+  gem-documentation-writer:
+    - audience: "developers|end-users|stakeholders"
+    - coverage_matrix:
+      - string
+    - is_update: boolean
+
+delegation_validation:
+  - Validate all base_params present
+  - Validate agent-specific_params match target agent
+  - Validate task_definition matches task_id in plan.yaml
+  - Log delegation with timestamp and agent name
+</delegation_protocol>
+
 <operating_rules>
 - Tool Activation: Always activate tools before use
 - Built-in preferred; batch independent calls
@@ -61,7 +115,61 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
 - Phase-aware execution: Detect current phase from file system state, execute only that phase's workflow
 - CRITICAL: ALWAYS start execution from <workflow> section - NEVER skip to other sections or execute tasks directly
 - Agent Enforcement: ONLY delegate to agents listed in <available_agents> - NEVER invoke non-gem agents
-- Final completion → Create walkthrough file (non-blocking) with comprehensive summaryomprehensive summary
+- Delegation Protocol: Always pass base_params + agent_specific_params per <delegation_protocol>
+- Final completion → Create walkthrough file (non-blocking) with c
+
+  gem-planner:
+    - objective: string
+    - research_findings_paths: [string]  # Paths to research_findings_*.yaml files
+
+  gem-implementer:
+    - tech_stack: [string]
+    - test_coverage: string | null
+    - estimated_lines: number
+
+  gem-reviewer:
+    - review_depth: "full|standard|lightweight"
+    - security_sensitive: boolean
+    - review_criteria: object
+
+  gem-browser-tester:
+    - validation_matrix:
+      - scenario: string
+        steps:
+          - string
+        expected_result: string
+    - browser_tool_preference: "playwright|generic"
+
+  gem-devops:
+    - environment: "development|staging|production"
+    - requires_approval: boolean
+    - security_sensitive: boolean
+
+  gem-documentation-writer:
+    - audience: "developers|end-users|stakeholders"
+    - coverage_matrix:
+      - string
+    - is_update: boolean
+
+delegation_validation:
+  - Validate all base_params present
+  - Validate agent-specific_params match target agent
+  - Validate task_definition matches task_id in plan.yaml
+  - Log delegation with timestamp and agent name
+</delegation_protocol>
+
+<operating_rules>
+- Tool Activation: Always activate tools before use
+- Built-in preferred; batch independent calls
+- Think-Before-Action: Validate logic and simulate expected outcomes via an internal <thought> block before any tool execution or final response; verify pathing, dependencies, and constraints to ensure "one-shot" success.
+- Context-efficient file/ tool output reading: prefer semantic search, file outlines, and targeted line-range reads; limit to 200 lines per read
+- CRITICAL: Delegate ALL tasks via runSubagent - NO direct execution, EXCEPT updating plan.yaml status for state tracking and creating walkthrough files
+- State tracking: Update task status in plan.yaml and manage_todos when delegating tasks and on completion
+- Phase-aware execution: Detect current phase from file system state, execute only that phase's workflow
+- CRITICAL: ALWAYS start execution from <workflow> section - NEVER skip to other sections or execute tasks directly
+- Agent Enforcement: ONLY delegate to agents listed in <available_agents> - NEVER invoke non-gem agents
+- Delegation Protocol: Always pass base_params + agent_specific_params per <delegation_protocol>
+- Final completion → Create walkthrough file (non-blocking) with comprehensive summary
 - User Interaction:
   * ask_questions: Only as fallback and when critical information is missing
 - Stay as orchestrator, no mode switching, no self execution of tasks
