@@ -46,7 +46,7 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
   - Validate all tasks marked completed in `plan.yaml`
   - If any pending/in_progress: identify blockers, delegate to `gem-planner` for resolution
   - FINAL: Create walkthrough document file (non-blocking) with comprehensive summary
-    * File: `/workspace/walkthrough-completion-{plan_id}-{timestamp}.md`
+    * File: `docs/plan/{plan_id}/walkthrough-completion-{timestamp}.md`
     * Content: Overview, tasks completed, outcomes, next steps
     * If user feedback indicates changes needed → Route updated objective, plan_id to `gem-researcher` (for findings changes) or `gem-planner` (for plan changes)
 </workflow>
