@@ -42,6 +42,10 @@ Traditional AI coding assistants hit walls when projects get complex:
 - 🔒 Built-in Security — Dedicated reviewer agent applies OWASP scanning on critical tasks
 - 📊 Full Visibility — Real-time plan status, clear approval gates, comprehensive summaries
 - 🔄 Resilient Workflows — Pre-mortem analysis, failure handling, and automatic replanning
+- 🧠 Persistent Memory System — Cross-agent knowledge sharing with structured citations and reflection learning
+- 📋 Strict Communication Protocol — Standardized input/output formats for reliable delegation and handoffs
+- 🎯 Autonomous Execution — Most agents work independently without user intervention (except approval gates)
+- 🔧 Context-Efficient Operations — Smart file reading (semantic search, 200-line limits) and batch operations for speed
 
 ---
 
@@ -49,7 +53,7 @@ Traditional AI coding assistants hit walls when projects get complex:
 
 Gem Team follows a Strategic Planner/Dynamic Orchestrator pattern. It decomposes high-level user goals into a Directed Acyclic Graph (DAG) of tasks, executes them in parallel across specialized agents, and maintains a rigorous state-controlled workflow.
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────┐
 │                         USER GOAL                               │
 └──────────────────────────────┬──────────────────────────────────┘
@@ -90,7 +94,7 @@ Gem Team follows a Strategic Planner/Dynamic Orchestrator pattern. It decomposes
 | `gem-researcher`           | Research       | Gathers codebase context, identifies relevant files/patterns, returns structured findings     |
 | `gem-planner`              | Strategy       | Creates DAG-based plans with pre-mortem analysis, presents for approval, iterates on feedback |
 | `gem-implementer`          | Execution      | Executes TDD code changes, ensures verification, maintains quality                            |
-| `gem-browser-tester`        | Testing        | Automates browser testing, UI/UX validation via Chrome DevTools                               |
+| `gem-browser-tester`       | Testing        | Automates browser testing, UI/UX validation via Chrome DevTools                               |
 | `gem-devops`               | Infrastructure | Manages containers, CI/CD pipelines, and infrastructure deployment                            |
 | `gem-reviewer`             | Quality        | Security gatekeeper — OWASP scanning, secrets detection, compliance                           |
 | `gem-documentation-writer` | Knowledge      | Generates technical docs, diagrams, maintains code-documentation parity                       |
@@ -143,10 +147,6 @@ Send a steer message to `gem-orchestrator` and it automatically redirects to the
 
 The Orchestrator identifies key domains or features and launches multiple Researcher agents in parallel, each targeting a specific `focus_area`. This ensures deep, specific context is gathered for every part of the system before the Planner synthesizes it all into a unified `plan.yaml`.
 
-### ⚡ Parallel Execution Engine
-
-Up to 4 concurrent agents execute independent tasks simultaneously, dramatically reducing total execution time while maintaining resource stability.
-
 ### 🧪 Verification-First (TDD)
 
 No task completes without passing its defined `verification` command. Implementers follow strict TDD discipline:
@@ -180,12 +180,28 @@ State persists in `docs/plan/{plan_id}/plan.yaml`, providing:
 
 ### 🧠 Cross-Agent Memory
 
-Agents share knowledge via a memory system with citations:
+Agents share knowledge via a persistent memory system with structured citations:
 
-- Researcher reads memories to understand project context before exploration
-- Planner stores architectural decisions, design patterns, tech stack choices
-- Orchestrator stores project-level decisions, product vision, norms
+- Researcher: Reads memories to understand project context before exploration
+- Planner: Stores architectural decisions, design patterns, tech stack choices
+- Orchestrator: Stores project-level decisions, product vision, code conventions
+- Reflection Memory: All agents learn from execution, user guidance, decisions, and patterns
 - Just-in-time verification: Citations (file:line) are checked before using memories
+
+Memory format follows structured pattern:
+
+```markdown
+## [Subject/Topic]
+
+Fact: [What you learned - concise, actionable]
+
+Citations:
+- `file:line` - Reference to code that supports this fact
+
+Reason: [Why this matters - impact, consequences, benefits]
+
+Last Updated: [Date]
+```
 
 ### 🔒 Agent Hierarchy
 
@@ -193,21 +209,22 @@ Agents share knowledge via a memory system with citations:
 User → Orchestrator → Subagents (via runSubagent)
 ```
 
-- Orchestrator: `disable-model-invocation: true` — delegates only, never executes
+- Orchestrator: `disable-model-invocation: true` — delegates only, never executes tasks
 - Subagents: `disable-model-invocation: false` — execute tasks via tools
 - Isolation: Subagents cannot call other subagents — all collaboration mediated by Orchestrator
+- Agent Enforcement: Orchestrator and Planner enforce using ONLY gem-* agents (never non-gem agents)
 
 ---
 
 ## 📁 Project Structure
 
-```
+```text
 gem-team/
 ├── gem-orchestrator.agent.md      # Coordination hub
 ├── gem-researcher.agent.md        # Context gathering
 ├── gem-planner.agent.md           # DAG-based planning
 ├── gem-implementer.agent.md       # TDD code execution
-├── gem-browser-tester.agent.md     # Browser automation
+├── gem-browser-tester.agent.md    # Browser automation
 ├── gem-devops.agent.md            # Infrastructure & CI/CD
 ├── gem-reviewer.agent.md          # Security gatekeeper
 ├── gem-documentation-writer.agent.md  # Technical docs
@@ -220,10 +237,85 @@ gem-team/
 
 ---
 
+## 📋 Agent Communication Protocol
+
+### Strict Input/Output Formats
+
+All agents follow strict input/output formats for reliable delegation and handoff:
+
+#### Input Format (Delegation)
+
+```yaml
+task_id: string
+plan_id: string
+plan_path: string  # "docs/plan/{plan_id}/plan.yaml"
+task_definition: object  # Full task from plan.yaml
+  # Agent-specific fields included here
+```
+
+#### Output Format (Completion)
+
+```json
+{
+  "status": "success|failed|needs_revision",
+  "task_id": "[task_id]",
+  "plan_id": "[plan_id]",
+  "summary": "[brief summary ≤3 sentences]",
+  "extra": {
+    "agent_specific_data": {}
+  }
+}
+```
+
+### Universal Operating Rules
+
+All agents follow these core operating rules:
+
+- Tool Activation: Always activate tools before use
+- Built-in preferred: Use built-in tools over external ones
+- Batch independent calls: Execute independent operations simultaneously
+- Think-Before-Action: Validate logic and simulate outcomes via internal `<thought>` block before any tool execution
+- Context-efficient reading: Prefer semantic search, file outlines, and targeted line-range reads (limit 200 lines per read)
+- Communication protocol:
+  - Output ONLY the requested deliverable
+  - For code requests: code ONLY (zero explanation, zero preamble, zero commentary)
+  - For questions: direct answer in ≤3 sentences
+  - Never explain process unless explicitly asked "explain how"
+
+### Verification Criteria
+
+Each agent defines verification criteria with pass/fail conditions:
+
+```yaml
+verification_criteria:
+  - step: "[verification step name]"
+    pass_condition: "[condition for success]"
+    fail_action: "[action to take on failure]"
+```
+
+Examples:
+
+- Implementer: Run get_errors → typecheck → unit tests
+- Browser Tester: Validate matrix → Check console errors → Check network requests → Accessibility audit
+- Reviewer: Security audit (OWASP) → Code quality review → Logic verification
+- DevOps: Infrastructure deployment → Health checks → CI/CD pipeline → Idempotency verification
+- Documentation Writer: Completeness → Accuracy (parity) → Formatting → get_errors
+
+### Autonomous Execution
+
+- Most agents: Fully autonomous, no user interaction
+- DevOps: Approval gates for production/security-sensitive tasks
+- Planner: Mandatory `plan_review` for user approval before execution
+- Orchestrator: Coordinating agent, delegates all work via `runSubagent`
+
+---
+
+---
+
 ## 🎯 Use Cases
 
-| Scenario                         | How Gem Team Helps                                                              |
-| :------------------------------- | :------------------------------------------------------------------------------ |
+| Scenario                     | How Gem Team Helps                                                              |
+| :--------------------------- | :------------------------------------------------------------------------------ |
 | Large Feature Implementation | Decomposes into parallel subtasks, implements with TDD, verifies each component |
 | Codebase Refactoring         | Researches patterns, plans migration, executes incrementally with tests         |
 | Security Audit               | Reviewer scans for OWASP issues, secrets, compliance gaps                       |
