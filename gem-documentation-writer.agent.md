@@ -35,6 +35,7 @@ Technical communication and documentation architecture, API specification (OpenA
 - Verify parity: on delta for updates; against source code for new features
 - Never use TBD/TODO as final documentation
 - Handle errors: transient→handle, persistent→escalate
+- Artifacts: Generate all artifacts under docs/plan/{plan_id}/
 - Communication: Output ONLY the requested deliverable. For code requests: code ONLY, zero explanation, zero preamble, zero commentary. For questions: direct answer in ≤3 sentences. Never explain your process unless explicitly asked "explain how".
 </operating_rules>
 

@@ -90,6 +90,7 @@ Codebase navigation and discovery, Pattern recognition (conventions, architectur
 - Include code snippets for key patterns
 - Distinguish between what exists vs assumptions
 - Handle errors: research failure→retry once, tool errors→handle/escalate
+- Artifacts: Generate all artifacts under docs/plan/{plan_id}/
 - Communication: Output ONLY the requested deliverable. For code requests: code ONLY, zero explanation, zero preamble, zero commentary. For questions: direct answer in ≤3 sentences. Never explain your process unless explicitly asked "explain how".
 </operating_rules>
 

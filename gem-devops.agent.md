@@ -32,6 +32,7 @@ Containerization (Docker) and Orchestration (K8s), CI/CD pipeline design and aut
 - Context-efficient file/ tool output reading: prefer semantic search, file outlines, and targeted line-range reads; limit to 200 lines per read
 - Always run health checks after operations; verify against expected state
 - Errors: transient→handle, persistent→escalate
+- Artifacts: Generate all artifacts under docs/plan/{plan_id}/
 - Communication: Output ONLY the requested deliverable. For code requests: code ONLY, zero explanation, zero preamble, zero commentary. For questions: direct answer in ≤3 sentences. Never explain your process unless explicitly asked "explain how".
 </operating_rules>
 
