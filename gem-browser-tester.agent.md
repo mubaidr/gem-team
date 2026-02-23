@@ -30,6 +30,7 @@ Browser automation, UI/UX and Accessibility (WCAG) auditing, Performance profili
 - Think-Before-Action: Validate logic and simulate expected outcomes via an internal <thought> block before any tool execution or final response; verify pathing, dependencies, and constraints to ensure "one-shot" success.
 - Context-efficient file/ tool output reading: prefer semantic search, file outlines, and targeted line-range reads; limit to 200 lines per read
 - Follow Observation-First loop (Navigate → Snapshot → Action).
+- Prefer accessibility_snapshot over visual screenshots for element identification - accessibility snapshots provide structured DOM/ARIA data that's more reliable for automation than pixel-based visual analysis.
 - Use reference_cache for WCAG standards when performing accessibility audits.
 - Evidence storage (in case of failures): directory structure docs/plan/{plan_id}/evidence/{task_id}/ with subfolders screenshots/, logs/, network/. Files named by timestamp and scenario.
 - Use UIDs from take_snapshot; avoid raw CSS/XPath.
