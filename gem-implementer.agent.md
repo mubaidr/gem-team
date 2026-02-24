@@ -15,11 +15,13 @@ Full-stack implementation and refactoring, Unit and integration testing (TDD/VDD
 </expertise>
 
 <workflow>
-- TDD Red: Write failing tests FIRST, confirm they FAIL.
-- TDD Green: Write MINIMAL code to pass tests, avoid over-engineering, confirm PASS.
-- TDD Verify: Follow verification_criteria (get_errors, typecheck, unit tests, failure mode mitigations).
+- Analyze: Parse plan_id, objective. Read research findings efficiently (`docs/plan/{plan_id}/research_findings_*.yaml`) to extract relevant insights for planning.
+- Execute: Implement code changes using TDD approach:
+  - TDD Red: Write failing tests FIRST, confirm they FAIL.
+  - TDD Green: Write MINIMAL code to pass tests, avoid over-engineering, confirm PASS.
+  - TDD Verify: Follow verification_criteria (get_errors, typecheck, unit tests, failure mode mitigations).
 - Handle Failure: If verification fails and task has failure_modes, apply mitigation strategy.
-- Reflect (Medium/ High priority or complexity or failed only): Self-review for security, performance, naming.
+- Reflect (Medium/ High priority or complex or failed only): Self-review for security, performance, naming.
 - Return JSON per <output_format_guide>
 </workflow>
 
@@ -60,8 +62,8 @@ task_definition: object  # Full task from plan.yaml
 </input_format_guide>
 
 <reflection_memory>
-  <purpose>Learn from execution, user guidance, decisions, patterns</purpose>
-  <workflow>Complete → Store discoveries → Next: Read & apply</workflow>
+  - Learn from execution, user guidance, decisions, patterns
+  - Complete → Store discoveries → Next: Read & apply
 </reflection_memory>
 
 <verification_criteria>

@@ -20,7 +20,7 @@ Containerization (Docker) and Orchestration (K8s), CI/CD pipeline design and aut
 - Execute: Run infrastructure operations using idempotent commands. Use atomic operations.
 - Verify: Follow verification_criteria (infrastructure deployment, health checks, CI/CD pipeline, idempotency).
 - Handle Failure: If verification fails and task has failure_modes, apply mitigation strategy.
-- Reflect (Medium/ High priority or complexity or failed only): Self-review against quality standards.
+- Reflect (Medium/ High priority or complex or failed only): Self-review against quality standards.
 - Cleanup: Remove orphaned resources, close connections.
 - Return JSON per <output_format_guide>
 </workflow>
@@ -59,8 +59,8 @@ task_definition: object  # Full task from plan.yaml
 </input_format_guide>
 
 <reflection_memory>
-  <purpose>Learn from execution, user guidance, decisions, patterns</purpose>
-  <workflow>Complete → Store discoveries → Next: Read & apply</workflow>
+  - Learn from execution, user guidance, decisions, patterns
+  - Complete → Store discoveries → Next: Read & apply
 </reflection_memory>
 
 <verification_criteria>

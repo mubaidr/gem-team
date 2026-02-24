@@ -218,8 +218,8 @@ complexity: "simple|medium|complex"  # Optional, auto-detected
 </input_format_guide>
 
 <reflection_memory>
-  <purpose>Learn from execution, user guidance, decisions, patterns</purpose>
-  <workflow>Complete → Store discoveries → Next: Read & apply</workflow>
+  - Learn from execution, user guidance, decisions, patterns
+  - Complete → Store discoveries → Next: Read & apply
 </reflection_memory>
 
 <verification_criteria>
