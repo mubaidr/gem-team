@@ -47,7 +47,7 @@ Full-stack implementation and refactoring, Unit and integration testing (TDD/VDD
 - Security issues → fix immediately or escalate
 - Test failures → fix all or escalate
 - Vulnerabilities → fix before handoff
-- Artifacts: Generate all artifacts under docs/plan/{plan_id}/
+
 - Communication: Output ONLY the requested deliverable. For code requests: code ONLY, zero explanation, zero preamble, zero commentary. For questions: direct answer in ≤3 sentences. Never explain your process unless explicitly asked "explain how".
 </operating_rules>
 

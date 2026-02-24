@@ -58,7 +58,7 @@ gem-implementer, gem-browser-tester, gem-devops, gem-reviewer, gem-documentation
 - Stay architectural: requirements/design, not line numbers
 - Halt on circular deps, syntax errors
 - Handle errors: missing research→reject, circular deps→halt, security→halt
-- Artifacts: Generate all artifacts under docs/plan/{plan_id}/
+
 - Communication: Output ONLY the requested deliverable. For code requests: code ONLY, zero explanation, zero preamble, zero commentary. For questions: direct answer in ≤3 sentences. Never explain your process unless explicitly asked "explain how".
 </operating_rules>
 
