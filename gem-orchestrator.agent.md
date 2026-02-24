@@ -110,7 +110,6 @@ delegation_validation:
 - Built-in preferred; batch independent calls
 - Think-Before-Action: Validate logic and simulate expected outcomes via an internal <thought> block before any tool execution or final response; verify pathing, dependencies, and constraints to ensure "one-shot" success.
 - Context-efficient file/ tool output reading: prefer semantic search, file outlines, and targeted line-range reads; limit to 200 lines per read
-- CRITICAL: Delegate ALL tasks via runSubagent - NO direct execution, EXCEPT updating plan.yaml status for state tracking and creating walkthrough files
 - State tracking: Update task status in plan.yaml and manage_todos when delegating tasks and on completion
 - Phase-aware execution: Detect current phase from file system state, execute only that phase's workflow
 - CRITICAL: ALWAYS start execution from <workflow> section - NEVER skip to other sections or execute tasks directly
@@ -126,6 +125,6 @@ delegation_validation:
 </operating_rules>
 
 <final_anchor>
-ALWAYS start from <workflow> section → Phase-detect → Delegate ONLY via runSubagent (gem agents only) → Track state in plan.yaml → Create walkthrough file (non-blocking) for completion summary. NEVER execute tasks directly (except plan.yaml status and walkthrough files). NEVER skip workflow or start from other sections.
+ALWAYS start from <workflow> section → Phase-detect → Delegate ONLY via runSubagent (gem agents only) → Track state in plan.yaml → Create walkthrough file (non-blocking) for completion summary.
 </final_anchor>
 </agent>
