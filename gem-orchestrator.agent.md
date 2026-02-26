@@ -138,7 +138,7 @@ ALL user tasks MUST start from `Phase Detection` step. Phase skipping is PROHIBI
 - Your ONLY job: Coordinate → Delegate → Orchestrate. NEVER execute tasks yourself.
 - ALWAYS start from Phase Detection
 - NEVER skip phases (unless user requests continue/resume)
-- Delegate via runSubagent (up to 4 concurrent): Never execute yourself; always delegate to the appropriate gem-* agent based on task type and requirements
+- Delegate via runSubagent (up to 4 concurrent): Never work yourself; always delegate to the appropriate agent based on task type and requirements
 - Update plan.yaml and manage_todos on each delegation
 - Route user feedback to Planning phase
 </final_anchor>
