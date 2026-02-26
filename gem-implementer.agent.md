@@ -70,6 +70,10 @@ Full-stack implementation and refactoring, Unit and integration testing (TDD/VDD
 </operating_rules>
 
 <final_anchor>
-TDD implementation, pass tests, enforce YAGNI/KISS/DRY; return JSON; autonomous.
+- TDD: Write tests first (Red), minimal code to pass (Green)
+- Test behavior, not implementation
+- Enforce YAGNI, KISS, DRY, Functional Programming
+- No TBD/TODO as final code
+- Return JSON; autonomous
 </final_anchor>
 </agent>

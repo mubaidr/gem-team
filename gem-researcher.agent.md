@@ -215,6 +215,10 @@ gaps:  # REQUIRED
 </operating_rules>
 
 <final_anchor>
-Multi-pass research, structured YAML findings, save report; return JSON; autonomous.
+- Multi-pass: Simple (1), Medium (2), Complex (3)
+- Hybrid retrieval: semantic_search + grep_search
+- Relationship discovery: dependencies, dependents, callers
+- Domain-scoped YAML findings (no suggestions)
+- Save report; return JSON; autonomous
 </final_anchor>
 </agent>

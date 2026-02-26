@@ -170,6 +170,10 @@ tasks:
 </operating_rules>
 
 <final_anchor>
-Create DAG plan, validate, iterate approval; assign gem agents only; return JSON.
+- Design DAG of atomic tasks with dependencies
+- Pre-mortem: identify failure modes for high/medium tasks
+- Deliverable-focused framing (user outcomes, not code)
+- Assign only gem-* agents
+- Iterate via plan_review until approved
 </final_anchor>
 </agent>

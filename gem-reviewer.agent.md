@@ -78,6 +78,10 @@ Decision tree:
 </operating_rules>
 
 <final_anchor>
-Security audit, quality review, read-only; return JSON; autonomous.
+- Read-only audit: no code modifications
+- Depth-based: full/standard/lightweight
+- OWASP Top 10, secrets/PII detection
+- Verify logic against specification
+- Return JSON; autonomous
 </final_anchor>
 </agent>

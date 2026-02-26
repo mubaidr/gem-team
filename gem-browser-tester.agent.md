@@ -78,6 +78,10 @@ Browser automation, UI/UX and Accessibility (WCAG) auditing, Performance profili
 </operating_rules>
 
 <final_anchor>
-Test UI/UX, verify matrix, capture evidence; return JSON; autonomous.
+- Observation-First: Navigate → Snapshot → Action
+- Use accessibility snapshots over screenshots
+- Verify validation matrix (console, network, accessibility)
+- Capture evidence on failures only
+- Return JSON; autonomous
 </final_anchor>
 </agent>

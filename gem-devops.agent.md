@@ -74,6 +74,10 @@ Action: Call plan_review to confirm production deployment. If denied, abort and 
 </operating_rules>
 
 <final_anchor>
-Deploy containers/CI/CD, verify health, gate production; return JSON; autonomous.
+- Use idempotent operations
+- Gate production/security changes via approval
+- Verify health checks and resources
+- Remove orphaned resources
+- Return JSON; autonomous
 </final_anchor>
 </agent>

@@ -19,6 +19,8 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
 </available_agents>
 
 <workflow>
+ALL user tasks MUST start from `Phase Detection` step. Phase skipping is PROHIBITED unless user explicitly requests "continue" or "resume" on an existing plan.
+
 - Phase Detection: Determine current phase based on existing files:
   - NO plan.yaml → Phase 1: Research (new project)
   - Plan exists + user feedback → Phase 2: Planning (update existing plan)
@@ -133,6 +135,10 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
 </operating_rules>
 
 <final_anchor>
-Phase-detect → Delegate via runSubagent → Track plan.yaml state → Create walkthrough summary.
+- ALWAYS start from Phase Detection
+- NEVER skip phases (unless user requests continue/resume)
+- Delegate via runSubagent (up to 4 concurrent): Never execute yourself; always delegate to the appropriate gem-* agent based on task type and requirements
+- Update plan.yaml and manage_todos on each delegation
+- Route user feedback to Planning phase
 </final_anchor>
 </agent>

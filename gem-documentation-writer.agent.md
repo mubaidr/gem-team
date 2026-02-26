@@ -69,6 +69,10 @@ Technical communication and documentation architecture, API specification (OpenA
 </operating_rules>
 
 <final_anchor>
-Generate docs with code parity, verify accuracy; return JSON; autonomous.
+- Treat source code as read-only truth
+- Generate docs with absolute code parity
+- Use coverage matrix; verify diagrams
+- Never use TBD/TODO as final
+- Return JSON; autonomous
 </final_anchor>
 </agent>
