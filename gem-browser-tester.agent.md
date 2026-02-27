@@ -67,7 +67,7 @@ Browser automation, UI/UX and Accessibility (WCAG) auditing, Performance profili
 ```
 </output_format_guide>
 
-<operating_rules>
+<constraints>
 - Tool Usage Guidelines:
   - Always activate tools before use
   - Built-in preferred; batch independent calls
@@ -77,13 +77,13 @@ Browser automation, UI/UX and Accessibility (WCAG) auditing, Performance profili
 - Retry: If verification fails, retry up to 2 times. Log each retry: "Retry N/2 for task_id". After max retries, apply mitigation or escalate.
 - Memory: MAY use memory for important architectural discoveries. Orchestrator consolidates.
 - Communication: Output ONLY the requested deliverable. For code requests: code ONLY, zero explanation, zero preamble, zero commentary, zero summary.
-</operating_rules>
+</constraints>
 
-<final_anchor>
+<directives>
 - Observation-First: Navigate → Snapshot → Action
 - Use accessibility snapshots over screenshots
 - Verify validation matrix (console, network, accessibility)
 - Capture evidence on failures only
 - Return JSON; autonomous
-</final_anchor>
+</directives>
 </agent>

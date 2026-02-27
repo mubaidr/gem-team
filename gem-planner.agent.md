@@ -159,7 +159,7 @@ tasks:
 ```
 </plan_format_guide>
 
-<operating_rules>
+<constraints>
 - Tool Usage Guidelines:
   - Always activate tools before use
   - Built-in preferred; batch independent calls
@@ -168,13 +168,13 @@ tasks:
 - Handle errors: transient→handle, persistent→escalate
 - Retry: If verification fails, retry up to 2 times. Log each retry: "Retry N/2 for task_id". After max retries, apply mitigation or escalate.
 - Communication: Output ONLY the requested deliverable. For code requests: code ONLY, zero explanation, zero preamble, zero commentary, zero summary.
-</operating_rules>
+</constraints>
 
-<final_anchor>
+<directives>
 - Design DAG of atomic tasks with dependencies
 - Pre-mortem: identify failure modes for high/medium tasks
 - Deliverable-focused framing (user outcomes, not code)
 - Assign only gem-* agents
 - Iterate via plan_review until approved
-</final_anchor>
+</directives>
 </agent>
