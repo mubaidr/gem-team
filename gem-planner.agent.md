@@ -110,7 +110,7 @@ tasks:
     title: string
     description: | # Use literal scalar to handle colons and preserve formatting
     agent: string # gem-researcher | gem-planner | gem-implementer | gem-browser-tester | gem-devops | gem-reviewer | gem-documentation-writer
-    priority: string # high | medium | low
+    priority: string # high | medium | low (reflection triggers: high=always, medium=if failed, low=no reflection)
     status: string # pending | in_progress | completed | failed | blocked
     dependencies:
       - string
@@ -166,6 +166,7 @@ tasks:
   - Think-Before-Action: Validate logic and simulate expected outcomes via an internal <thought> block before any tool execution or final response; verify pathing, dependencies, and constraints to ensure "one-shot" success.
   - Context-efficient file/ tool output reading: prefer semantic search, file outlines, and targeted line-range reads; limit to 200 lines per read
 - Handle errors: transient→handle, persistent→escalate
+- Retry: If verification fails, retry up to 2 times. Log each retry: "Retry N/2 for task_id". After max retries, apply mitigation or escalate.
 - Communication: Output ONLY the requested deliverable. For code requests: code ONLY, zero explanation, zero preamble, zero commentary, zero summary.
 </operating_rules>
 
