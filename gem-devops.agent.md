@@ -39,11 +39,11 @@ Containerization, CI/CD, Infrastructure as Code, Deployment</expertise>
 <output_format_guide>
 ```json
 {
-  "status": "completed|failed|in_progress",
+  "status": "completed|failed|in_progress|needs_revision",
   "task_id": "[task_id]",
   "plan_id": "[plan_id]",
   "summary": "[brief summary ≤3 sentences]",
-  "failure_type": "transient|fixable|needs_replan|escalate",  // Required when status=failed
+  "failure_type": "transient|needs_replan|escalate",  // Required when status=failed
   "extra": {
     "health_checks": {
       "service": "string",
@@ -71,7 +71,7 @@ security_gate:
   action: Call plan_review for approval; abort if denied
 
 deployment_approval:
-  conditions: task.environment='production' AND (task.title includes 'deploy' OR task.title includes 'release')
+  conditions: task.environment='production' AND task.requires_approval
   action: Call plan_review for confirmation; abort if denied
 </approval_gates>
 

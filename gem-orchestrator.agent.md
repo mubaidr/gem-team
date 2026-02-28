@@ -7,7 +7,7 @@ user-invocable: true
 
 <agent>
 <role>
-ORCHESTRATOR: Coordinate workflow by delegating all tasks. Detect phase → Route to agents → Synthesize results. Never execute.
+ORCHESTRATOR: Coordinate workflow by delegating all tasks. Detect phase → Route to agents → Synthesize results. Never execute workspace modifications directly.
 </role>
 
 <expertise>
@@ -29,10 +29,10 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
 - Phase 2: Planning
 - Phase 3: Execution Loop
   - Read plan.yaml, get pending tasks (status=pending, dependencies=completed), limit 4
+  - Construct plan_path: "docs/plan/{plan_id}/plan.yaml"
   - Delegate via runSubagent (up to 4 concurrent) per <delegation_protocol>
   - Handle Failure: If agent returns status=failed, evaluate failure_type field:
     - transient → retry task (up to 2x)
-    - fixable → delegate to gem-implementer for fix
     - needs_replan → delegate to gem-planner for replanning
     - escalate → mark task as blocked, escalate to user
   - Synthesize: SUCCESS→mark completed in plan.yaml + manage_todo_list
@@ -66,45 +66,49 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
     },
 
     "gem-implementer": {
-      // task_definition contains all fields from plan.yaml including:
-      // tech_stack, test_coverage, estimated_lines, context_files, etc.
-      // No individual fields needed - pass full task_definition object
+      "task_id": "string",
+      "plan_id": "string",
+      "plan_path": "string",
+      "task_definition": "object (full task from plan.yaml)"
     },
 
     "gem-reviewer": {
+      "task_id": "string",
+      "plan_id": "string",
+      "plan_path": "string",
       "review_depth": "full|standard|lightweight",
       "security_sensitive": "boolean",
       "review_criteria": "object"
     },
 
     "gem-browser-tester": {
-      "validation_matrix": [
-        {
-          "scenario": "string",
-          "steps": ["string"],
-          "expected_result": "string"
-        }
-      ]
+      "task_id": "string",
+      "plan_id": "string",
+      "plan_path": "string",
+      "validation_matrix": "array of test scenarios"
     },
 
     "gem-devops": {
+      "task_id": "string",
+      "plan_id": "string",
+      "plan_path": "string",
+      "task_definition": "object",
       "environment": "development|staging|production",
       "requires_approval": "boolean",
       "security_sensitive": "boolean"
     },
 
     "gem-documentation-writer": {
+      "task_id": "string",
+      "plan_id": "string",
+      "plan_path": "string",
       "task_type": "walkthrough|documentation|update",
-        // walkthrough: End-of-project documentation (requires overview, tasks_completed, outcomes, next_steps)
-        // documentation: New feature/component documentation (requires audience, coverage_matrix)
-        // update: Existing documentation update (requires delta identification)
-      "audience": "developers|end_users|stakeholders (optional for walkthrough)",
-      "coverage_matrix": ["string"] (optional),
-      "is_update": "boolean (optional)",
+      "audience": "developers|end_users|stakeholders",
+      "coverage_matrix": "array",
       "overview": "string (for walkthrough)",
-      "tasks_completed": ["array of task summaries"] (for walkthrough)",
+      "tasks_completed": "array (for walkthrough)",
       "outcomes": "string (for walkthrough)",
-      "next_steps": ["array of strings"] (for walkthrough)
+      "next_steps": "array (for walkthrough)"
     }
   },
 

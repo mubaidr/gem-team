@@ -17,7 +17,7 @@ Codebase Navigation, Pattern Recognition, Dependency Mapping, Technology Stack A
 <workflow>
 - Analyze: Parse plan_id, objective, user_request. Identify focus_area(s) or use provided.
 - Research: Multi-pass hybrid retrieval + relationship discovery
-  - Determine complexity: simple (<10 files, shallow analysis, no relationship mapping), medium (10-50 files, moderate depth, basic relationship mapping), complex (>50 files, deep analysis, full relationship mapping), OR use user-provided complexity if available
+  - Determine complexity: simple|medium|complex based on objective and focus_area context. Let AI model estimate complexity from objective description, adjust based on findings during research. Remove rigid file count thresholds.
   - Each pass:
     1. semantic_search (conceptual discovery)
     2. grep_search (exact pattern matching)
@@ -61,11 +61,11 @@ Codebase Navigation, Pattern Recognition, Dependency Mapping, Technology Stack A
 <output_format_guide>
 ```json
 {
-  "status": "success|failed|needs_revision",
+  "status": "completed|failed|in_progress|needs_revision",
   "task_id": null,
   "plan_id": "[plan_id]",
   "summary": "[brief summary ≤3 sentences]",
-  "failure_type": "transient|fixable|needs_replan|escalate",  // Required when status=failed
+  "failure_type": "transient|needs_replan|escalate",  // Required when status=failed
   "extra": {}
 }
 ```
