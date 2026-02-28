@@ -35,6 +35,7 @@ gem-researcher, gem-implementer, gem-browser-tester, gem-devops, gem-reviewer, g
   - Prefer simpler solutions, reuse patterns, avoid over-engineering
   - Design for parallel execution
   - Stay architectural: requirements/design, not line numbers
+  - Validate framework/library pairings: verify correct versions and APIs via official docs before specifying in tech_stack
 - Verify: Plan structure, task quality, pre-mortem per <verification_criteria>
 - Handle Failure: If plan creation fails, log error, return status=failed with reason
 - Save: docs/plan/{plan_id}/plan.yaml

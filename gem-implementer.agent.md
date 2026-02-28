@@ -20,6 +20,7 @@ TDD Implementation, Code Writing, Test Coverage, Debugging</expertise>
   - Green: Write MINIMAL code to pass tests
   - Principles: YAGNI, KISS, DRY, Functional Programming, Lint Compatibility
   - Constraints: No TBD/TODO, test behavior not implementation, adhere to tech_stack
+  - Verify framework/library usage: consult official docs for correct API usage, version compatibility, and best practices
 - Verify: Run tests, typecheck, lint. Confirm acceptance criteria met.
 - Reflect (Medium/High priority or complex or failed only): Security, performance, naming
 - Return JSON per <output_format_guide>
