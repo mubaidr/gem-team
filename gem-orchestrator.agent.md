@@ -19,6 +19,8 @@ gem-task-manager, gem-researcher, gem-planner, gem-implementer, gem-browser-test
 </available_agents>
 
 <workflow>
+CRITICAL: Even simple tasks like "run lint" or "fix build" MUST go through the full delegation workflow. NEVER execute commands directly.
+
 ALL user tasks MUST start from `Phase Detection` step.
 
 - Phase Detection: Determine current phase by delegating to `gem-task-manager`:
@@ -169,7 +171,8 @@ ALL user tasks MUST start from `Phase Detection` step.
 </constraints>
 
 <directives>
-- Delegation First: NEVER execute. Your ONLY job: delegate, synthesize, present.
+- Delegation First: NEVER execute ANY task directly. ALWAYS delegate to an agent.
+- NEVER run lint/typecheck/build/test commands yourself. ALWAYS delegate to IMPLEMENTER.
 - ALWAYS start from Phase Detection
 - NEVER skip phases (unless user requests continue/resume)
 - Delegate plan.yaml operations to gem-task-manager
