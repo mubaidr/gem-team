@@ -20,17 +20,25 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
 
 <workflow>
 - Phase Detection:
-  - No plan.yaml → Phase 1: Research → After completion → Phase 2: Planning
-  - Plan + user_feedback → Phase 2: Planning (override Phase 3)
+  - No plan.yaml → Generate plan_id (timestamp or hash of user_request) → Create placeholder plan.yaml → Phase 1: Research
+  - Plan + user_feedback → Phase 2: Planning
   - Plan + no user_feedback + pending tasks → Phase 3: Execution Loop
+  - Plan + no user_feedback + no pending tasks + all tasks=completed → Phase 4: Documentation
+  - Plan + no user_feedback + all tasks=blocked → Escalate to user
+- Phase 1: Research
+- Phase 2: Planning
 - Phase 3: Execution Loop
   - Read plan.yaml, get pending tasks (status=pending, dependencies=completed), limit 4
   - Delegate via runSubagent (up to 4 concurrent) per <delegation_protocol>
-  - Handle Failure: Evaluate failure_type → transient(retry 2x) | fixable(gem-implementer) | needs replan(gem-planner) | escalate(block)
+  - Handle Failure: If agent returns status=failed, evaluate failure_type field:
+    - transient → retry task (up to 2x)
+    - fixable → delegate to gem-implementer for fix
+    - needs_replan → delegate to gem-planner for replanning
+    - escalate → mark task as blocked, escalate to user
   - Synthesize: SUCCESS→mark completed in plan.yaml + manage_todo_list
   - Loop until all tasks=completed OR blocked
   - User feedback → Route to Phase 2
-- Phase 4: Delegate to gem-documentation-writer for walkthrough
+- Phase 4: Documentation (task_type per context: walkthrough|documentation|update)
 - Return JSON per <output_format_guide>
 </workflow>
 
@@ -46,20 +54,21 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
 
   "agent_specific_params": {
     "gem-researcher": {
-      "user_request": "string (raw user request - researcher will identify focus_areas)",
       "plan_id": "string",
-      "focus_area": "string (optional - if not provided, researcher identifies)"
+      "objective": "string (extracted from user request or task_definition)",
+      "focus_area": "string (optional - if not provided, researcher identifies)",
+      "complexity": "simple|medium|complex (optional - auto-detected if not provided)"
     },
 
     "gem-planner": {
-      "user_request": "string (raw user request - planner extracts objective)",
-      "plan_id": "string"
+      "plan_id": "string",
+      "objective": "string (extracted from user request or task_definition)"
     },
 
     "gem-implementer": {
-      "tech_stack": ["string"],
-      "test_coverage": "string | null",
-      "estimated_lines": "number"
+      // task_definition contains all fields from plan.yaml including:
+      // tech_stack, test_coverage, estimated_lines, context_files, etc.
+      // No individual fields needed - pass full task_definition object
     },
 
     "gem-reviewer": {
@@ -75,8 +84,7 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
           "steps": ["string"],
           "expected_result": "string"
         }
-      ],
-      "browser_tool_preference": "playwright|generic"
+      ]
     },
 
     "gem-devops": {
@@ -86,7 +94,10 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
     },
 
     "gem-documentation-writer": {
-      "task_type": "documentation|walkthrough|update",
+      "task_type": "walkthrough|documentation|update",
+        // walkthrough: End-of-project documentation (requires overview, tasks_completed, outcomes, next_steps)
+        // documentation: New feature/component documentation (requires audience, coverage_matrix)
+        // update: Existing documentation update (requires delta identification)
       "audience": "developers|end_users|stakeholders (optional for walkthrough)",
       "coverage_matrix": ["string"] (optional),
       "is_update": "boolean (optional)",

@@ -35,7 +35,7 @@ Browser Automation, E2E Testing, UI Verification, Accessibility</expertise>
   "plan_id": "string",
   "plan_path": "string",  // "docs/plan/{plan_id}/plan.yaml"
   "task_definition": "object"  // Full task from plan.yaml
-  // Includes: validation_matrix, browser_tool_preference, etc.
+  // Includes: validation_matrix, etc.
 }
 ```
 </input_format_guide>
@@ -47,10 +47,11 @@ Browser Automation, E2E Testing, UI Verification, Accessibility</expertise>
   "task_id": "[task_id]",
   "plan_id": "[plan_id]",
   "summary": "[brief summary ≤3 sentences]",
+  "failure_type": "transient|fixable|needs_replan|escalate",  // Required when status=failed
   "extra": {
-    "console_errors": 0,
-    "network_failures": 0,
-    "accessibility_issues": 0,
+    "console_errors": "number",
+    "network_failures": "number",
+    "accessibility_issues": "number",
     "evidence_path": "docs/plan/{plan_id}/evidence/{task_id}/",
     "failures": [
       {

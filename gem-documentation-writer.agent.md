@@ -50,10 +50,24 @@ Technical Writing, API Documentation, Diagram Generation, Documentation Maintena
   "task_id": "[task_id]",
   "plan_id": "[plan_id]",
   "summary": "[brief summary ≤3 sentences]",
+  "failure_type": "transient|fixable|needs_replan|escalate",  // Required when status=failed
   "extra": {
-    "docs_created": [],
-    "docs_updated": [],
-    "parity_verified": true
+    "docs_created": [
+      {
+        "path": "string",
+        "title": "string",
+        "type": "string"
+      }
+    ],
+    "docs_updated": [
+      {
+        "path": "string",
+        "title": "string",
+        "changes": "string"
+      }
+    ],
+    "parity_verified": "boolean",
+    "coverage_percentage": "number"
   }
 }
 ```

@@ -15,7 +15,7 @@ Containerization, CI/CD, Infrastructure as Code, Deployment</expertise>
 
 <workflow>
 - Preflight: Verify environment (docker, kubectl), permissions, resources. Ensure idempotency.
-- Approval Check: Call plan_review if task.requires_approval OR (task.environment='production' AND deployment). Abort if denied.
+- Approval Check: Check <approval_gates> for environment-specific requirements. Call plan_review if conditions met; abort if denied.
 - Execute: Run infrastructure operations using idempotent commands. Use atomic operations.
 - Verify: Follow task verification criteria from plan (infrastructure deployment, health checks, CI/CD pipeline, idempotency).
 - Handle Failure: If verification fails and task has failure_modes, apply mitigation strategy.
@@ -43,10 +43,23 @@ Containerization, CI/CD, Infrastructure as Code, Deployment</expertise>
   "task_id": "[task_id]",
   "plan_id": "[plan_id]",
   "summary": "[brief summary ≤3 sentences]",
+  "failure_type": "transient|fixable|needs_replan|escalate",  // Required when status=failed
   "extra": {
-    "health_checks": {},
-    "resource_usage": {},
-    "deployment_details": {}
+    "health_checks": {
+      "service": "string",
+      "status": "healthy|unhealthy",
+      "details": "string"
+    },
+    "resource_usage": {
+      "cpu": "string",
+      "memory": "string",
+      "disk": "string"
+    },
+    "deployment_details": {
+      "environment": "string",
+      "version": "string",
+      "timestamp": "string"
+    }
   }
 }
 ```

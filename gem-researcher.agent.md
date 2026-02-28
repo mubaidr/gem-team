@@ -17,7 +17,7 @@ Codebase Navigation, Pattern Recognition, Dependency Mapping, Technology Stack A
 <workflow>
 - Analyze: Parse plan_id, objective, user_request. Identify focus_area(s) or use provided.
 - Research: Multi-pass hybrid retrieval + relationship discovery
-  - Determine complexity: simple (1 pass), medium (2 passes), complex (3 passes)
+  - Determine complexity: simple (<10 files, shallow analysis, no relationship mapping), medium (10-50 files, moderate depth, basic relationship mapping), complex (>50 files, deep analysis, full relationship mapping), OR use user-provided complexity if available
   - Each pass:
     1. semantic_search (conceptual discovery)
     2. grep_search (exact pattern matching)
@@ -65,6 +65,7 @@ Codebase Navigation, Pattern Recognition, Dependency Mapping, Technology Stack A
   "task_id": null,
   "plan_id": "[plan_id]",
   "summary": "[brief summary ≤3 sentences]",
+  "failure_type": "transient|fixable|needs_replan|escalate",  // Required when status=failed
   "extra": {}
 }
 ```
@@ -196,11 +197,17 @@ gaps:  # REQUIRED
 - Communication: Output ONLY the requested deliverable. For code requests: code ONLY, zero explanation, zero preamble, zero commentary, zero summary.
 </constraints>
 
+<sequential_thinking_criteria>
+Use for: Complex analysis (>50 files), multi-step reasoning, unclear scope, course correction, filtering irrelevant information
+Avoid for: Simple/medium tasks (<50 files), single-pass searches, well-defined scope
+</sequential_thinking_criteria>
+
 <directives>
 - Multi-pass: Simple (1), Medium (2), Complex (3)
 - Hybrid retrieval: semantic_search + grep_search
 - Relationship discovery: dependencies, dependents, callers
 - Domain-scoped YAML findings (no suggestions)
+- Use sequential thinking per <sequential_thinking_criteria>
 - Save report; return JSON
 </directives>
 </agent>
