@@ -30,7 +30,7 @@ Traditional AI coding assistants hit walls when projects get complex:
 | Challenge                     | Gem Team Approach                                                                                         |
 | :---------------------------- | :-------------------------------------------------------------------------------------------------------- |
 | 🧠 Context Overload       | Specialized agents with focused expertise — each holds only what it needs                                 |
-| 🎯 Lack of Specialization | 8 expert agents: researcher, planner, implementer, tester, reviewer, devops, and documentation specialist |
+| 🎯 Lack of Specialization | 7 expert agents: researcher, planner, implementer, tester, reviewer, devops, and documentation specialist |
 | 🐢 Sequential Bottlenecks | DAG-based parallel execution — up to 4 agents work simultaneously                                         |
 | ❌ Missing Verification   | Verification-first: no task completes without passing its verification command                            |
 | 📜 No Audit Trail         | Persistent `plan.yaml` state file tracks every decision, status, and outcome                              |
@@ -51,7 +51,7 @@ Traditional AI coding assistants hit walls when projects get complex:
 
 ## 🚀 Overview
 
-Gem Team follows a **Delegation-First** pattern. The Orchestrator never executes—it only detects phase, routes to agents, and synthesizes results. All state operations go through TASK MANAGER.
+Gem Team follows a **Delegation-First** pattern. The Orchestrator never executes—it only detects phase, routes to agents, and synthesizes results. All state operations are managed directly by the Orchestrator.
 
 ```text
 ┌─────────────────────────────────────────────────────────────────┐
@@ -61,13 +61,8 @@ Gem Team follows a **Delegation-First** pattern. The Orchestrator never executes
 ┌──────────────────────────────────────────────────────────────────┐
 │                      ORCHESTRATOR                               │
 │  • Detect phase          • Route to agents                     │
-│  • Synthesize results    • Never execute                       │
-└──────────────────────────────┬───────────────────────────────────┘
-                               ▼
-┌──────────────────────────────────────────────────────────────────┐
-│                     TASK MANAGER                                │
-│  • Read/write plan.yaml   • Track dependencies                  │
-│  • Manage todos           • Detect phase                        │
+│  • Synthesize results    • Manage plan.yaml state              │
+│  • Manage todos          • Never execute                       │
 └──────────────────────────────┬───────────────────────────────────┘
                                ▼
          ┌──────────────────────┴──────────────────────┐
@@ -96,8 +91,7 @@ Gem Team follows a **Delegation-First** pattern. The Orchestrator never executes
 
 | Agent | Role | Primary Responsibility |
 | :------------------------- | :--- | :-------------------------------------------------------------------------------------------- |
-| `gem-orchestrator` | ORCHESTRATOR | Coordinate workflow. Detect phase → Route to agents → Synthesize results. Never execute. |
-| `gem-task-manager` | TASK MANAGER | Execute plan.yaml operations. Read/write task status, track dependencies, manage todos, detect phase. Never implement. |
+| `gem-orchestrator` | ORCHESTRATOR | Coordinate workflow. Detect phase → Route to agents → Synthesize results. Manage plan.yaml state and todos. Never execute. |
 | `gem-researcher` | RESEARCHER | Explore codebase, identify patterns, map dependencies. Deliver structured findings in YAML. Never implement. |
 | `gem-planner` | PLANNER | Design DAG-based plans, decompose tasks, identify failure modes. Create plan.yaml. Never implement. |
 | `gem-implementer` | IMPLEMENTER | Write code using TDD. Follow plan specifications. Ensure tests pass. Never review. |
@@ -133,16 +127,16 @@ flowchart TD
 
 ### Workflow Stages
 
-1. **Phase Detection** — Orchestrator delegates to TASK MANAGER to check plan.yaml existence and task statuses
+1. **Phase Detection** — Orchestrator reads plan.yaml to check existence and task statuses
 2. **Phase 1: Research** — Orchestrator delegates to RESEARCHER(s) per focus_area to gather context
 3. **Phase 2: Planning** — PLANNER creates DAG-based plan.yaml with pre-mortem analysis
 4. **Phase 3: Execution Loop**
-   - TASK MANAGER: Read pending tasks (status=pending, dependencies=completed)
-   - TASK MANAGER: Create todos from task list
+   - Orchestrator: Read pending tasks (status=pending, dependencies=completed)
+   - Orchestrator: Create todos from task list using manage_todo_list tool
    - Workers execute (up to 4 parallel): IMPLEMENTER, BROWSER TESTER, DEVOPS, REVIEWER, DOC WRITER
-   - TASK MANAGER: Update dependencies + Update task status
+   - Orchestrator: Update dependencies + Update task status in plan.yaml
    - Exit: pending_count == 0 → Phase 4
-5. **Phase 4: Completion** — TASK MANAGER validates completion → DOC WRITER creates walkthrough
+5. **Phase 4: Completion** — Orchestrator validates completion → DOC WRITER creates walkthrough
 
 ---
 
@@ -215,11 +209,10 @@ Last Updated: [Date]
 ### 🔒 Agent Hierarchy
 
 ```text
-User → ORCHESTRATOR → TASK MANAGER (state) + WORKERS (execute)
+User → ORCHESTRATOR → WORKERS (execute)
 ```
 
-- **Orchestrator**: `disable-model-invocation: true` — delegates ALL work, never executes
-- **Task Manager**: `disable-model-invocation: true` — manages plan.yaml state, never implements
+- **Orchestrator**: `disable-model-invocation: true` — delegates ALL work, manages plan.yaml state and todos, never executes
 - **Workers**: `disable-model-invocation: false` — execute tasks via tools
   - RESEARCHER, PLANNER, IMPLEMENTER, BROWSER TESTER, DEVOPS, REVIEWER, DOC WRITER
 - Isolation: Workers cannot call other subagents — all collaboration mediated by Orchestrator
@@ -230,8 +223,7 @@ User → ORCHESTRATOR → TASK MANAGER (state) + WORKERS (execute)
 
 ```text
 gem-team/
-├── gem-orchestrator.agent.md      # Coordination hub (routes all work)
-├── gem-task-manager.agent.md      # Plan.yaml operations (state management)
+├── gem-orchestrator.agent.md      # Coordination hub (routes all work, manages state)
 ├── gem-researcher.agent.md        # Context gathering
 ├── gem-planner.agent.md           # DAG-based planning
 ├── gem-implementer.agent.md       # TDD code execution

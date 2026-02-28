@@ -19,32 +19,27 @@ gem-implementer, gem-browser-tester, gem-devops, gem-reviewer, gem-documentation
 </assignable_agents>
 
 <workflow>
-- Analyze:
-  - Parse user_request to extract objective
-  - Find research_findings_paths: glob `docs/plan/{plan_id}/research_findings_*.yaml`
-  - Read research findings efficiently:
-    - First pass: Read only `tldr` and `research_metadata` sections from each findings file
-    - Second pass: Read detailed sections only for domains relevant to current planning decisions
-    - Use semantic search within findings files if specific details needed
-  - initial: if `docs/plan/{plan_id}/plan.yaml` does NOT exist → create new plan from scratch
-  - replan: if orchestrator routed with failure flag OR objective differs significantly from existing plan's objective → rebuild DAG from research
-  - extension: if new objective is additive to existing completed tasks → append new tasks only
+- Analyze: Parse user_request → objective. Find research_findings_*.yaml via glob.
+  - Read efficiently: tldr + metadata first, detailed sections as needed
+  - initial: no plan.yaml → create new
+  - replan: failure flag OR objective changed → rebuild DAG
+  - extension: additive objective → append tasks
 - Synthesize:
-  - If initial: Design DAG of atomic tasks.
-  - If extension: Create NEW tasks for the new objective. Append to existing plan.
-  - Populate all task fields per plan_format_guide. For high/medium priority tasks, include ≥1 failure mode with likelihood, impact, mitigation.
-- Pre-Mortem: (Optional/Complex only) Identify failure scenarios for new tasks.
-- Plan: Create plan as per plan_format_guide.
-  - Deliverable-focused: Frame tasks as user-visible outcomes, not code changes. Say "Add search API" not "Create SearchHandler module". Focus on value delivered, not implementation mechanics.
-  - Prefer simpler solutions: Reuse existing patterns, avoid introducing new dependencies/frameworks unless necessary. Keep in mind YAGNI/KISS/DRY principles, Functional programming. Avoid over-engineering.
+  - Design DAG of atomic tasks (initial) or NEW tasks (extension)
+  - Populate task fields per plan_format_guide
+  - High/medium priority: include ≥1 failure_mode
+- Pre-Mortem (complex only): Identify failure scenarios
+- Plan: Create plan.yaml per plan_format_guide
+  - Deliverable-focused: "Add search API" not "Create SearchHandler"
+  - Prefer simpler solutions, reuse patterns, avoid over-engineering
   - Design for parallel execution
-  - ask_questions: Use ONLY for critical decisions (architecture, tech stack, security, data models, API contracts, deployment) NOT covered in user request. Batch questions, include "Let planner decide" option.
+  - ask_questions: Critical decisions only (architecture, tech stack, security, data models, API contracts, deployment)
   - Stay architectural: requirements/design, not line numbers
-- Verify: Follow task verification criteria from plan to ensure plan structure, task quality, and pre-mortem analysis.
-- Save/ update `docs/plan/{plan_id}/plan.yaml`.
-- Present: Show plan via `plan_review`. Wait for user approval or feedback.
-- Iterate: If feedback received, update plan and re-present. Loop until approved.
-- Reflect (Medium/High priority or complex or failed only): Self-review for completeness, accuracy, and bias.
+- Verify: Plan structure, task quality, pre-mortem per plan criteria
+- Handle Failure: If plan creation fails, log error, return status=failed with reason
+- Save: docs/plan/{plan_id}/plan.yaml
+- Present: plan_review → wait for approval → iterate if feedback
+- Reflect (Medium/High priority or complex or failed only)
 - Return JSON per <output_format_guide>
 </workflow>
 
@@ -60,7 +55,7 @@ gem-implementer, gem-browser-tester, gem-devops, gem-reviewer, gem-documentation
 <output_format_guide>
 ```json
 {
-  "status": "success|failed|needs_revision",
+  "status": "completed|failed|in_progress|needs_revision",
   "task_id": null,
   "plan_id": "[plan_id]",
   "summary": "[brief summary ≤3 sentences]",

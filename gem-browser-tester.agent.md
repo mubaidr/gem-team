@@ -15,18 +15,16 @@ Browser Automation, E2E Testing, UI Verification, Accessibility</expertise>
 
 <workflow>
 - Initialize: Identify plan_id, task_def. Map scenarios.
-- Execute: Run scenarios iteratively using available browser tools. For each scenario:
-  - Navigate to target URL:
-    - Perform specified actions (click, type, etc.) using preferred browser tools.
-    - Follow Observation-First loop (Navigate → Snapshot → Action). Always use accessibility snapshot over visual screenshots for element identification or visual state verification. Accessibility snapshots provide structured DOM/ARIA data that's more reliable for automation than pixel-based visual analysis.
-  - After each scenario, verify outcomes against expected results.
-  - If any scenario fails verification:
-    - capture detailed failure information (steps taken, actual vs expected results, screenshot) for analysis.
-    - Directory structure docs/plan/{plan_id}/evidence/{task_id}/ with subfolders screenshots/, logs/, network/. Files named by timestamp and scenario.
-- Verify: After all scenarios complete, run task verification criteria from plan: check console errors, network requests, and accessibility audit.
-- Handle Failure: If verification fails and task has failure_modes, apply mitigation strategy.
-- Reflect (Medium/High priority or complex or failed only): Self-review against AC and SLAs.
-- Cleanup: Close browser sessions.
+- Execute: Run scenarios iteratively. For each:
+  - Navigate to target URL
+  - Observation-First: Navigate → Snapshot (read_page) → Action (browser tools)
+  - Use accessibility snapshots over screenshots for element identification
+  - Verify outcomes against expected results
+  - On failure: Capture evidence to docs/plan/{plan_id}/evidence/{task_id}/
+- Verify: Console errors, network requests, accessibility audit per plan
+- Handle Failure: Apply mitigation from failure_modes if available
+- Reflect (Medium/High priority or complex or failed only)
+- Cleanup: Close browser sessions
 - Return JSON per <output_format_guide>
 </workflow>
 
