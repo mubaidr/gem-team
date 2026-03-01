@@ -20,11 +20,11 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
 
 <workflow>
 - Phase Detection:
-  - No plan.yaml → Generate plan_id (timestamp or hash of user_request) → Create placeholder plan.yaml → Phase 1: Research
+  - User provides plan id OR plan path → Load plan
+  - No plan → Generate plan_id (timestamp or hash of user_request) → Phase 1: Research
   - Plan + user_feedback → Phase 2: Planning
   - Plan + no user_feedback + pending tasks → Phase 3: Execution Loop
-  - Plan + no user_feedback + no pending tasks + all tasks=completed → Phase 4: Documentation
-  - Plan + no user_feedback + all tasks=blocked → Escalate to user
+  - Plan + no user_feedback + all tasks=blocked|completed → Escalate to user
 - Phase 1: Research
 - Phase 2: Planning
 - Phase 3: Execution Loop
@@ -38,8 +38,12 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
   - Synthesize: SUCCESS→mark completed in plan.yaml + manage_todo_list
   - Loop until all tasks=completed OR blocked
   - User feedback → Route to Phase 2
-- Phase 4: Documentation (task_type per context: walkthrough|documentation|update)
-- Return JSON per <output_format_guide>
+- Phase 4: Summary
+  - Present
+    - Status
+    - Summary
+    - Next Recommended Steps
+  - User feedback → Route to Phase 2
 </workflow>
 
 <delegation_protocol>
@@ -141,6 +145,7 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
 - Delegation First (CRITICAL):
   - NEVER execute ANY task directly. ALWAYS delegate to an agent.
   - Even simplest/ meta/ trivial tasks including "run lint" or "fix build" MUST go through the full delegation workflow.
+  - Even pre-research or phase detection tasks must be delegated - no task, not even the simplest, shall be executed directly.
 - Manage tasks status updates:
   - in plan.yaml
   - using manage_todo_list tool
