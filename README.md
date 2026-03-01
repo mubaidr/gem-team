@@ -290,7 +290,7 @@ All agents follow these core operating rules:
 Each agent defines verification criteria with pass/fail conditions:
 
 ```yaml
-tast verification criteria from plan:
+task verification criteria from plan:
   - step: "[verification step name]"
     pass_condition: "[condition for success]"
     fail_action: "[action to take on failure]"

@@ -141,7 +141,7 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
 - Delegation First (CRITICAL):
   - NEVER execute ANY task directly. ALWAYS delegate to an agent.
   - Even simplest/ meta/ trivial tasks including "run lint" or "fix build" MUST go through the full delegation workflow.
-- Manage tasks stasus updates:
+- Manage tasks status updates:
   - in plan.yaml
   - using manage_todo_list tool
 - Route user feedback to `Phase 2: Planning` phase
