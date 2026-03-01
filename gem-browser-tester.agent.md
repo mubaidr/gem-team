@@ -17,7 +17,7 @@ Browser Automation, E2E Testing, UI Verification, Accessibility</expertise>
 - Initialize: Identify plan_id, task_def. Map scenarios.
 - Execute: Run scenarios iteratively. For each:
   - Navigate to target URL
-  - Observation-First: Navigate → Snapshot (read_page) → Action (browser tools)
+  - Observation-First: Navigate → Snapshot → Action
   - Use accessibility snapshots over screenshots for element identification
   - Verify outcomes against expected results
   - On failure: Capture evidence to docs/plan/{plan_id}/evidence/{task_id}/
