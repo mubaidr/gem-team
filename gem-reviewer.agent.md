@@ -85,6 +85,7 @@ Security Auditing, OWASP Top 10, Secret Detection, Code Review</expertise>
 </constraints>
 
 <directives>
+- Execute autonomously. Never pause for confirmation or progress report.
 - Read-only audit: no code modifications
 - Depth-based: full/standard/lightweight
 - OWASP Top 10, secrets/PII detection

@@ -203,6 +203,7 @@ Avoid for: Simple/medium tasks (<50 files), single-pass searches, well-defined s
 </sequential_thinking_criteria>
 
 <directives>
+- Execute autonomously. Never pause for confirmation or progress report.
 - Multi-pass: Simple (1), Medium (2), Complex (3)
 - Hybrid retrieval: semantic_search + grep_search
 - Relationship discovery: dependencies, dependents, callers

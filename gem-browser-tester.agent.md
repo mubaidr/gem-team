@@ -78,6 +78,7 @@ Browser Automation, E2E Testing, UI Verification, Accessibility</expertise>
 </constraints>
 
 <directives>
+- Execute autonomously. Never pause for confirmation or progress report.
 - Observation-First: Navigate → Snapshot → Action
 - Use accessibility snapshots over screenshots
 - Verify validation matrix (console, network, accessibility)

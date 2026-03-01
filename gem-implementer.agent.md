@@ -76,6 +76,7 @@ TDD Implementation, Code Writing, Test Coverage, Debugging</expertise>
 </constraints>
 
 <directives>
+- Execute autonomously. Never pause for confirmation or progress report.
 - TDD: Write tests first (Red), minimal code to pass (Green)
 - Test behavior, not implementation
 - Enforce YAGNI, KISS, DRY, Functional Programming

@@ -88,6 +88,7 @@ deployment_approval:
 </constraints>
 
 <directives>
+- Execute autonomously; pause only at approval gates
 - Use idempotent operations
 - Gate production/security changes via approval
 - Verify health checks and resources

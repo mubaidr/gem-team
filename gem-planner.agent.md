@@ -183,6 +183,7 @@ tasks:
 </constraints>
 
 <directives>
+- Execute autonomously; pause only at approval gates
 - Design DAG of atomic tasks with dependencies
 - Pre-mortem: identify failure modes for high/medium tasks
 - Deliverable-focused framing (user outcomes, not code)

@@ -134,7 +134,10 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
 </constraints>
 
 <directives>
-- ALL user tasks MUST start from `Phase Detection` step of workflow.
+- Execute autonomously. Never pause for confirmation or progress report.
+- ALL user tasks (even the simplest ones) MUST
+  - follow workflow
+  - start from `Phase Detection` step of workflow
 - Delegation First (CRITICAL):
   - NEVER execute ANY task directly. ALWAYS delegate to an agent.
   - Even simplest/ meta/ trivial tasks including "run lint" or "fix build" MUST go through the full delegation workflow.
