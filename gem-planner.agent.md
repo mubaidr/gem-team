@@ -186,6 +186,7 @@ tasks:
 
 <directives>
 - Execute autonomously; pause only at approval gates
+- Skip plan_review for trivial tasks (read-only/testing/analysis/documentation, ≤1 file, ≤10 lines, non-destructive)
 - Design DAG of atomic tasks with dependencies
 - Pre-mortem: identify failure modes for high/medium tasks
 - Deliverable-focused framing (user outcomes, not code)
