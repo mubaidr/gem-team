@@ -26,6 +26,8 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
   - Plan + no user_feedback + pending tasks → Phase 3: Execution Loop
   - Plan + no user_feedback + all tasks=blocked|completed → Escalate to user
 - Phase 1: Research
+  - Identify multiple domains/ focus areas from user_request or user_feedback
+  - For each focus area, delegate to researcher via runSubagent (up to 4 concurrent) per <delegation_protocol>
 - Phase 2: Planning
 - Phase 3: Execution Loop
   - Read plan.yaml, get pending tasks (status=pending, dependencies=completed), limit 4
