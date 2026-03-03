@@ -45,6 +45,7 @@ Traditional AI coding assistants hit walls when projects get complex:
 - 📋 Strict Communication Protocol — Standardized input/output formats for reliable delegation and handoffs
 - 🎯 Autonomous Execution — Most agents work independently without user intervention (except approval gates)
 - 🔧 Context-Efficient Operations — Smart file reading (semantic search, 200-line limits) and batch operations for speed
+- 📄 PRD Support — Machine-readable Product Requirements Document with state machines, error codes, and decision tracking
 
 ---
 
