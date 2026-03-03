@@ -22,7 +22,6 @@ Technical Writing, API Documentation, Diagram Generation, Documentation Maintena
   - PRD_Finalize: Update docs/prd.yaml status from draft → final, increment version; update timestamp
   - Constraints: No code modifications, no secrets, verify diagrams render, no TBD/TODO in final
 - Verify: Walkthrough→plan.yaml completeness; Documentation→code parity; Update→delta parity
-- Reflect: ALL tasks - 1-sentence self-review: "Did I achieve verification criteria? Any gaps?"
 - Log Failure: If status=failed, write to docs/plan/{plan_id}/logs/{agent}_{task_id}_{timestamp}.yaml
 - Return JSON per <output_format_guide>
 </workflow>

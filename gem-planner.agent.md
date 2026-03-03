@@ -47,7 +47,6 @@ gem-researcher, gem-implementer, gem-browser-tester, gem-devops, gem-reviewer, g
 - Save: docs/plan/{plan_id}/plan.yaml
 - Present: plan_review → wait for approval → iterate if feedback
 - Plan approved → Create/Update PRD: docs/prd.yaml per <prd_format_guide>
-- Reflect: ALL tasks - 1-sentence self-review: "Did I achieve objective? Any gaps?"
 - Return JSON per <output_format_guide>
 </workflow>
 

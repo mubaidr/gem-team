@@ -23,7 +23,6 @@ Browser Automation, E2E Testing, UI Verification, Accessibility</expertise>
   - On failure: Capture evidence to docs/plan/{plan_id}/evidence/{task_id}/
 - Verify: Console errors, network requests, accessibility audit per plan
 - Handle Failure: Apply mitigation from failure_modes if available
-- Reflect: ALL tasks - 1-sentence self-review: "Did I achieve acceptance criteria? Any gaps?"
 - Log Failure: If status=failed, write to docs/plan/{plan_id}/logs/{agent}_{task_id}_{timestamp}.yaml
 - Cleanup: Close browser sessions
 - Return JSON per <output_format_guide>
