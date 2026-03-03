@@ -52,6 +52,7 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
     - Status
     - Summary
     - Next Recommended Steps
+  - Delegate via runSubagent to gem-documentation-writer to finalize PRD (prd_status: final)
   - User feedback → Route to Phase 2
 </workflow>
 

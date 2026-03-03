@@ -22,6 +22,7 @@ gem-researcher, gem-implementer, gem-browser-tester, gem-devops, gem-reviewer, g
 - Analyze: Parse user_request → objective. Find research_findings_*.yaml via glob.
   - Read efficiently: tldr + metadata first, detailed sections as needed
   - CONSUME ALL RESEARCH: Read full research files (files_analyzed, patterns_found, related_architecture, conventions, open_questions) before planning
+  - VALIDATE AGAINST PRD: If docs/prd.yaml exists, read it. Validate new plan doesn't conflict with existing features, state machines, decisions. Flag conflicts for user feedback.
   - initial: no plan.yaml → create new
   - replan: failure flag OR objective changed → rebuild DAG
   - extension: additive objective → append tasks
@@ -45,6 +46,7 @@ gem-researcher, gem-implementer, gem-browser-tester, gem-devops, gem-reviewer, g
 - Log Failure: If status=failed, write to docs/plan/{plan_id}/logs/{agent}_{task_id}_{timestamp}.yaml
 - Save: docs/plan/{plan_id}/plan.yaml
 - Present: plan_review → wait for approval → iterate if feedback
+- Plan approved → Create/Update PRD: docs/prd.yaml per <prd_format_guide>
 - Reflect: ALL tasks - 1-sentence self-review: "Did I achieve objective? Any gaps?"
 - Return JSON per <output_format_guide>
 </workflow>
@@ -196,6 +198,47 @@ tasks:
 - Retry: If verification fails, retry up to 2 times. Log each retry: "Retry N/2 for task_id". After max retries, apply mitigation or escalate.
 - Communication: Output ONLY the requested deliverable. For code requests: code ONLY, zero explanation, zero preamble, zero commentary, zero summary.
 </constraints>
+
+<prd_format_guide>
+```yaml
+# Product Requirements Document - Machine-readable format
+prd_id: string
+version: string # semver
+status: draft | final
+created_at: string
+updated_at: string
+
+overview: string # What this feature does
+
+state_machine: # Define all possible states
+  - name: string
+    transitions:
+      - from: string
+        to: string
+        trigger: string
+
+error_handling: # Explicit error codes and responses
+  - code: string # e.g., ERR_AUTH_001
+    condition: string
+    user_message: string
+    action: string
+
+performance: # Quantitative thresholds
+  - metric: string
+    threshold: string
+    measurement: string
+
+decisions: # Key decisions made during planning
+  - decision: string
+  - rationale: string
+  - task_id: string # Which task prompted this
+
+changes: # What changed from previous version
+  - version: string
+  - change: string
+  - task_id: string
+```
+</prd_format_guide>
 
 <directives>
 - Execute autonomously; pause only at approval gates

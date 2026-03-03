@@ -180,6 +180,26 @@ State persists in `docs/plan/{plan_id}/plan.yaml`, providing:
 - Clear audit trail of project evolution
 - Full traceability of decisions
 
+### 📋 Product Requirements Document (PRD)
+
+Each project maintains a single PRD that evolves with the work:
+
+| When | Who | Action |
+|------|-----|--------|
+| New request | Planner | Validates against existing PRD - flags conflicts |
+| Plan approved | Planner | Creates/updates PRD (draft) |
+| Phase 4 complete | Doc-writer | Finalizes PRD (status: final) |
+
+PRD format (machine-readable):
+
+- State machines with explicit transitions
+- Error codes and handling
+- Performance thresholds
+- Decision log with rationale
+- Change history
+
+Location: `docs/prd.yaml`
+
 ### 🔒 Agent Hierarchy
 
 ```text
@@ -206,6 +226,7 @@ gem-team/
 ├── gem-reviewer.agent.md          # Security gatekeeper
 ├── gem-documentation-writer.agent.md  # Technical docs
 ├── docs/
+│   ├── prd.yaml               # Product Requirements Document (project-level)
 │   └── plan/{plan_id}/
 │       ├── research_findings_*.yaml   # Research output
 │       └── plan.yaml              # Task DAG state
