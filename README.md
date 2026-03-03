@@ -126,16 +126,11 @@ flowchart TD
 
 ### Workflow Stages
 
-1. **Phase Detection** — Orchestrator reads plan.yaml to check existence and task statuses
-2. **Phase 1: Research** — Orchestrator delegates to RESEARCHER(s) per focus_area to gather context
-3. **Phase 2: Planning** — PLANNER creates DAG-based plan.yaml with pre-mortem analysis
-4. **Phase 3: Execution Loop**
-   - Orchestrator: Read pending tasks (status=pending, dependencies=completed)
-   - Orchestrator: Create todos from task list using manage_todo_list tool
-   - Workers execute (up to 4 parallel): IMPLEMENTER, BROWSER TESTER, DEVOPS, REVIEWER, DOC WRITER
-   - Orchestrator: Update dependencies + Update task status in plan.yaml
-   - Exit: pending_count == 0 → Phase 4
-5. **Phase 4: Completion** — Orchestrator validates completion → DOC WRITER creates walkthrough
+1. **Detection** — Orchestrator checks plan existence and task status
+2. **Research** — Parallel researchers gather context per focus area
+3. **Planning** — Planner creates DAG plan with pre-mortem analysis
+4. **Execution** — Up to 4 agents execute tasks in waves (dependencies first)
+5. **Completion** — Doc Writer finalizes walkthrough + PRD
 
 ---
 
@@ -169,36 +164,15 @@ The Reviewer agent acts as a security gatekeeper for critical tasks:
 
 ### 📊 Pre-Mortem Analysis
 
-For complex plans, the Planner runs pre-mortem analysis — identifying potential failure modes, their likelihood, impact, and mitigation strategies BEFORE execution begins.
+Planner identifies failure modes (likelihood, impact, mitigation) for complex plans BEFORE execution.
 
 ### 📝 Plan Continuity & Audit Trail
 
-State persists in `docs/plan/{plan_id}/plan.yaml`, providing:
-
-- Recovery from interruptions
-- Complex retry handling
-- Clear audit trail of project evolution
-- Full traceability of decisions
+State in `docs/plan/{plan_id}/plan.yaml` provides recovery, retry handling, and full decision traceability.
 
 ### 📋 Product Requirements Document (PRD)
 
-Each project maintains a single PRD that evolves with the work:
-
-| When | Who | Action |
-|------|-----|--------|
-| New request | Planner | Validates against existing PRD - flags conflicts |
-| Plan approved | Planner | Creates/updates PRD (draft) |
-| Phase 4 complete | Doc-writer | Finalizes PRD (status: final) |
-
-PRD format (machine-readable):
-
-- State machines with explicit transitions
-- Error codes and handling
-- Performance thresholds
-- Decision log with rationale
-- Change history
-
-Location: `docs/prd.yaml`
+Machine-readable spec at `docs/prd.yaml` — Planner creates draft, Doc Writer finalizes. Contains state machines, error codes, performance thresholds, and decision log.
 
 ### 🔒 Agent Hierarchy
 
@@ -217,94 +191,67 @@ User → ORCHESTRATOR → WORKERS (execute)
 
 ```text
 gem-team/
-├── gem-orchestrator.agent.md      # Coordination hub (routes all work, manages state)
-├── gem-researcher.agent.md        # Context gathering
-├── gem-planner.agent.md           # DAG-based planning
-├── gem-implementer.agent.md       # TDD code execution
-├── gem-browser-tester.agent.md    # Browser automation
-├── gem-devops.agent.md            # Infrastructure & CI/CD
-├── gem-reviewer.agent.md          # Security gatekeeper
-├── gem-documentation-writer.agent.md  # Technical docs
+├── gem-*.agent.md               # Agent definitions (7 agents)
 ├── docs/
-│   ├── prd.yaml               # Product Requirements Document (project-level)
+│   ├── prd.yaml                 # Product Requirements Document (project-level)
 │   └── plan/{plan_id}/
-│       ├── research_findings_*.yaml   # Research output
-│       └── plan.yaml              # Task DAG state
+│       ├── plan.yaml             # Task DAG + state
+│       ├── research_findings_*.yaml    # Researcher output
+│       ├── walkthrough-*.md      # Completion documentation
+│       ├── evidence/{task_id}/   # Browser test failures
+│       └── logs/                  # Failure logs
 └── README.md
 ```
 
+### Generated Artifacts by Agent
+
+| Agent | Generates | Path |
+| :--- | :--- | :--- |
+| **gem-planner** | plan.yaml, PRD (draft) | `docs/plan/{plan_id}/plan.yaml`, `docs/prd.yaml` |
+| **gem-researcher** | findings YAML | `docs/plan/{plan_id}/research_findings_{focus}.yaml` |
+| **gem-documentation-writer** | walkthrough, PRD (final) | `docs/plan/{plan_id}/walkthrough-*.md`, `docs/prd.yaml` |
+| **gem-browser-tester** | evidence (on failure) | `docs/plan/{plan_id}/evidence/{task_id}/` |
+| **All agents** | failure logs | `docs/plan/{plan_id}/logs/{agent}_{task_id}_{ts}.yaml` |
+
 ---
 
-## 📋 Agent Communication Protocol
+## 📋 Agent Protocol
 
-### Strict Input/Output Formats
+### Input → Output
 
-All agents follow strict input/output formats for reliable delegation and handoff:
-
-#### Input Format (Delegation)
-
+**Delegation (Input):**
 ```yaml
-task_id: string
-plan_id: string
-plan_path: string  # "docs/plan/{plan_id}/plan.yaml"
-task_definition: object  # Full task from plan.yaml
-  # Agent-specific fields included here
+task_id, plan_id, plan_path, task_definition (agent-specific)
 ```
 
-#### Output Format (Completion)
-
+**Completion (Output):**
 ```json
-{
-  "status": "success|failed|needs_revision",
-  "task_id": "[task_id]",
-  "plan_id": "[plan_id]",
-  "summary": "[brief summary ≤3 sentences]",
-  "extra": {
-    "agent_specific_data": {}
-  }
-}
+{"status": "completed|failed|needs_revision", "task_id", "plan_id", "summary": "≤3 sentences", "extra": {}}
 ```
 
-### Universal Operating Rules
+### Core Rules
 
-All agents follow these core operating rules:
+- Output ONLY requested deliverable (code: code ONLY)
+- Think-Before-Action via internal `<thought>` block
+- Batch independent operations; context-efficient reads (≤200 lines)
+- Agent-specific `verification` criteria from plan.yaml
 
-- Tool Activation: Always activate tools before use
-- Built-in preferred: Use built-in tools over external ones
-- Batch independent calls: Execute independent operations simultaneously
-- Think-Before-Action: Validate logic and simulate outcomes via internal `<thought>` block before any tool execution
-- Context-efficient reading: Prefer semantic search, file outlines, and targeted line-range reads (limit 200 lines per read)
-- Communication protocol:
-  - Output ONLY the requested deliverable
-  - For code requests: code ONLY (zero explanation, zero preamble, zero commentary)
-  - For questions: direct answer in ≤3 sentences
-  - Never explain process unless explicitly asked "explain how"
+### Verification by Agent
 
-### Verification Criteria
-
-Each agent defines verification criteria with pass/fail conditions:
-
-```yaml
-task verification criteria from plan:
-  - step: "[verification step name]"
-    pass_condition: "[condition for success]"
-    fail_action: "[action to take on failure]"
-```
-
-Examples:
-
-- Implementer: Run get_errors → typecheck → unit tests
-- Browser Tester: Validate matrix → Check console errors → Check network requests → Accessibility audit
-- Reviewer: Security audit (OWASP) → Code quality review → Logic verification
-- DevOps: Infrastructure deployment → Health checks → CI/CD pipeline → Idempotency verification
-- Documentation Writer: Completeness → Accuracy (parity) → Formatting → get_errors
+| Agent | Verification |
+| :--- | :--- |
+| Implementer | get_errors → typecheck → unit tests |
+| Browser Tester | validation matrix → console → network → accessibility |
+| Reviewer | OWASP scan → code quality → logic |
+| DevOps | deployment → health checks → idempotency |
+| Doc Writer | completeness → code parity → formatting |
 
 ### Autonomous Execution
 
-- Most agents: Fully autonomous, no user interaction
-- DevOps: Approval gates for production/security-sensitive tasks
-- Planner: Mandatory `plan_review` for user approval before execution
-- Orchestrator: Coordinating agent, delegates all work via `runSubagent`
+- **Most agents**: Fully autonomous
+- **DevOps**: Approval gates for production/security
+- **Planner**: Mandatory `plan_review` before execution
+- **Orchestrator**: Delegates all via `runSubagent`
 
 ---
 

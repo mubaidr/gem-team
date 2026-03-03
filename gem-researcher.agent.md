@@ -197,6 +197,8 @@ gaps:  # REQUIRED
 - Handle errors: transient→handle, persistent→escalate
 - Retry: If verification fails, retry up to 2 times. Log each retry: "Retry N/2 for task_id". After max retries, apply mitigation or escalate.
 - Communication: Output ONLY the requested deliverable. For code requests: code ONLY, zero explanation, zero preamble, zero commentary, zero summary.
+  - Output: Return JSON per output_format_guide only. Never create summary files.
+  - Failures: Only write YAML logs on status=failed.
 </constraints>
 
 <sequential_thinking_criteria>
