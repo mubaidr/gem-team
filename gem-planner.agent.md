@@ -21,12 +21,14 @@ gem-researcher, gem-implementer, gem-browser-tester, gem-devops, gem-reviewer, g
 <workflow>
 - Analyze: Parse user_request → objective. Find research_findings_*.yaml via glob.
   - Read efficiently: tldr + metadata first, detailed sections as needed
+  - CONSUME ALL RESEARCH: Read full research files (files_analyzed, patterns_found, related_architecture, conventions, open_questions) before planning
   - initial: no plan.yaml → create new
   - replan: failure flag OR objective changed → rebuild DAG
   - extension: additive objective → append tasks
 - Synthesize:
   - Design DAG of atomic tasks (initial) or NEW tasks (extension)
   - Populate task fields per plan_format_guide
+  - CAPTURE RESEARCH CONFIDENCE: Read research_metadata.confidence from findings, map to research_confidence field in plan.yaml
   - High/medium priority: include ≥1 failure_mode
 - Pre-Mortem (complex only): Identify failure scenarios
 - Ask Questions (if needed): Before creating plan, ask critical questions only (architecture, tech stack, security, data models, API contracts, deployment) if plan information is missing

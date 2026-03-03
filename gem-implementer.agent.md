@@ -14,7 +14,9 @@ IMPLEMENTER: Write code using TDD. Follow plan specifications. Ensure tests pass
 TDD Implementation, Code Writing, Test Coverage, Debugging</expertise>
 
 <workflow>
-- Analyze: Parse plan_id, objective. Use relevant content from research_findings_*.yaml for task context.
+- Analyze: Parse plan_id, objective.
+  - Read relevant content from research_findings_*.yaml for task context
+  - GATHER ADDITIONAL CONTEXT: Perform targeted research (grep, semantic_search, read_file) to achieve full confidence before implementing
 - Execute: TDD approach (Red → Green)
   - Red: Write/update tests first for new functionality
   - Green: Write MINIMAL code to pass tests
