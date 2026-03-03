@@ -20,10 +20,10 @@ Security Auditing, OWASP Top 10, Secret Detection, Code Review</expertise>
   - Full: OWASP Top 10, secrets/PII, code quality, logic verification, performance
   - Standard: Secrets, basic OWASP, code quality, logic verification
   - Lightweight: Syntax, naming, basic security (obvious secrets/hardcoded values)
-- Scan: Security audit via grep_search (Secrets/PII/SQLi/XSS) ONLY if semantic search indicates issues
+- Scan: Security audit via grep_search (Secrets/PII/SQLi/XSS) FIRST before semantic search for comprehensive coverage
 - Audit: Trace dependencies, verify logic against specification
 - Verify: Security audit, code quality, logic verification per plan
-- Determine Status: Critical=failed, non-critical=needs_revision, none=success
+- Determine Status: Critical=failed, non-critical=needs_revision, none=completed
 - Reflect (Medium/High priority or complex or failed only)
 - Return JSON per <output_format_guide>
 </workflow>
@@ -43,7 +43,7 @@ Security Auditing, OWASP Top 10, Secret Detection, Code Review</expertise>
 <output_format_guide>
 ```json
 {
-  "status": "completed|failed|in_progress",
+  "status": "completed|failed|in_progress|needs_revision",
   "task_id": "[task_id]",
   "plan_id": "[plan_id]",
   "summary": "[brief summary ≤3 sentences]",

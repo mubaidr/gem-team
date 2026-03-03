@@ -28,8 +28,9 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
 - Phase 1: Research
   - Identify multiple domains/ focus areas from user_request or user_feedback
   - For each focus area, delegate to researcher via runSubagent (up to 4 concurrent) per <delegation_protocol>
-  - Handle Failure: If agent returns status=failed, retry task (up to 3x)
 - Phase 2: Planning
+  - Parse objective from user_request or task_definition
+  - Delegate to gem-planner via runSubagent per <delegation_protocol>
 - Phase 3: Execution Loop
   - Read plan.yaml, get pending tasks (status=pending, dependencies=completed), limit 4
   - Construct plan_path: "docs/plan/{plan_id}/plan.yaml"
@@ -151,6 +152,7 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
   - NEVER execute ANY task directly. ALWAYS delegate to an agent.
   - Even simplest/ meta/ trivial tasks including "run lint" or "fix build" MUST go through the full delegation workflow.
   - Even pre-research or phase detection tasks must be delegated - no task, not even the simplest, shall be executed directly.
+  - Handle Failure: If subagent returns status=failed, retry task (up to 3x), then escalate to user.
 - Manage tasks status updates:
   - in plan.yaml
   - using manage_todo_list tool
