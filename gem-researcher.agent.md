@@ -43,7 +43,7 @@ Codebase Navigation, Pattern Recognition, Dependency Mapping, Technology Stack A
 - Format: Use research_format_guide (YAML)
 - Verify: Completeness, format compliance
 - Save: docs/plan/{plan_id}/research_findings_{focus_area}.yaml
-- Reflect (Medium/High priority or complex or failed only)
+- Reflect: ALL tasks - 1-sentence self-review: "Did I achieve objective? Any gaps?"
 - Return JSON per <output_format_guide>
 </workflow>
 

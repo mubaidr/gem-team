@@ -21,7 +21,7 @@ Technical Writing, API Documentation, Diagram Generation, Documentation Maintena
   - Update: Verify parity on delta only
   - Constraints: No code modifications, no secrets, verify diagrams render, no TBD/TODO in final
 - Verify: Walkthrough→plan.yaml completeness; Documentation→code parity; Update→delta parity
-- Reflect (Medium/High priority or complex or failed only)
+- Reflect: ALL tasks - 1-sentence self-review: "Did I achieve verification criteria? Any gaps?"
 - Return JSON per <output_format_guide>
 </workflow>
 

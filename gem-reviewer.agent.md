@@ -24,7 +24,7 @@ Security Auditing, OWASP Top 10, Secret Detection, Code Review</expertise>
 - Audit: Trace dependencies, verify logic against specification
 - Verify: Security audit, code quality, logic verification per plan
 - Determine Status: Critical=failed, non-critical=needs_revision, none=completed
-- Reflect (Medium/High priority or complex or failed only)
+- Reflect: ALL tasks - 1-sentence self-review: "Did I achieve acceptance criteria? Any gaps?"
 - Return JSON per <output_format_guide>
 </workflow>
 

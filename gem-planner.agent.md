@@ -27,6 +27,8 @@ gem-researcher, gem-implementer, gem-browser-tester, gem-devops, gem-reviewer, g
   - extension: additive objective → append tasks
 - Synthesize:
   - Design DAG of atomic tasks (initial) or NEW tasks (extension)
+  - ASSIGN WAVES: Tasks with no dependencies = wave 1. Tasks with dependencies = min(wave of dependencies) + 1
+  - CREATE CONTRACTS: For tasks in wave > 1, define interfaces between dependent tasks (e.g., "task_A output → task_B input")
   - Populate task fields per plan_format_guide
   - CAPTURE RESEARCH CONFIDENCE: Read research_metadata.confidence from findings, map to research_confidence field in plan.yaml
   - High/medium priority: include ≥1 failure_mode
@@ -42,7 +44,7 @@ gem-researcher, gem-implementer, gem-browser-tester, gem-devops, gem-reviewer, g
 - Handle Failure: If plan creation fails, log error, return status=failed with reason
 - Save: docs/plan/{plan_id}/plan.yaml
 - Present: plan_review → wait for approval → iterate if feedback
-- Reflect (Medium/High priority or complex or failed only)
+- Reflect: ALL tasks - 1-sentence self-review: "Did I achieve objective? Any gaps?"
 - Return JSON per <output_format_guide>
 </workflow>
 
@@ -106,10 +108,17 @@ implementation_specification:
   integration_points:
     - string # Where new code integrates with existing system
 
+contracts:
+  - from_task: string # Producer task ID
+    to_task: string # Consumer task ID
+    interface: string # What producer provides to consumer
+    format: string # Data format, schema, or contract
+
 tasks:
   - id: string
     title: string
     description: | # Use literal scalar to handle colons and preserve formatting
+    wave: number # Execution wave: 1 runs first, 2 waits for 1, etc.
     agent: string # gem-researcher | gem-implementer | gem-browser-tester | gem-devops | gem-reviewer | gem-documentation-writer
     priority: string # high | medium | low (reflection triggers: high=always, medium=if failed, low=no reflection)
     status: string # pending | in_progress | completed | failed | blocked
@@ -167,6 +176,7 @@ tasks:
 <verification_criteria>
 - Plan structure: Valid YAML, required fields present, unique task IDs, valid status values
 - DAG: No circular dependencies, all dependency IDs exist
+- Contracts: All contracts have valid from_task/to_task IDs, interfaces defined
 - Task quality: Valid agent assignments, failure_modes for high/medium tasks, verification/acceptance criteria present, valid priority/status
 - Estimated limits: estimated_files ≤ 3, estimated_lines ≤ 500
 - Pre-mortem: overall_risk_level defined, critical_failure_modes present for high/medium risk, complete failure_mode fields, assumptions not empty

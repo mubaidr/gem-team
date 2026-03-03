@@ -32,9 +32,13 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
   - Parse objective from user_request or task_definition
   - Delegate to gem-planner via runSubagent per <delegation_protocol>
 - Phase 3: Execution Loop
-  - Read plan.yaml, get pending tasks (status=pending, dependencies=completed), limit 4
-  - Construct plan_path: "docs/plan/{plan_id}/plan.yaml"
-  - Delegate via runSubagent (up to 4 concurrent) per <delegation_protocol>
+  - Read plan.yaml, get pending tasks (status=pending, dependencies=completed)
+  - Get unique waves: sort ascending
+  - For each wave (1→n):
+    - If wave > 1: Present contracts from plan.yaml to agents for verification
+    - Getpending AND dependencies=completed AND wave= tasks where status=current
+    - Delegate via runSubagent (up to 4 concurrent) per <delegation_protocol>
+    - Wait for wave to complete before starting next wave
   - Handle Failure: If agent returns status=failed, evaluate failure_type field:
     - transient → retry task (up to 3x)
     - needs_replan → delegate to gem-planner for replanning
@@ -56,8 +60,9 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
   "base_params": {
     "task_id": "string",
     "plan_id": "string",
-    "plan_path": "string",  // "docs/plan/{plan_id}/plan.yaml"
-    "task_definition": "object"  // Full task from plan.yaml
+    "plan_path": "string",
+    "task_definition": "object",
+    "contracts": "array (contracts where this task is producer or consumer)"
   },
 
   "agent_specific_params": {

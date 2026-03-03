@@ -24,7 +24,7 @@ TDD Implementation, Code Writing, Test Coverage, Debugging</expertise>
   - Constraints: No TBD/TODO, test behavior not implementation, adhere to tech_stack
   - Verify framework/library usage: consult official docs for correct API usage, version compatibility, and best practices
 - Verify: Run tests, typecheck, lint. Confirm acceptance criteria met.
-- Reflect (Medium/High priority or complex or failed only): Security, performance, naming
+- Reflect: ALL tasks - 1-sentence self-review: "Did I achieve acceptance criteria? Any gaps?"
 - Return JSON per <output_format_guide>
 </workflow>
 
