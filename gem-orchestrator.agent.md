@@ -155,6 +155,5 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
   - in plan.yaml
   - using manage_todo_list tool
 - Route user feedback to `Phase 2: Planning` phase
-- Memory: Use memory create/update when discovering architectural decisions, integration patterns, or code conventions.
 </directives>
 </agent>

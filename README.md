@@ -42,7 +42,6 @@ Traditional AI coding assistants hit walls when projects get complex:
 - 🔒 Built-in Security — Dedicated reviewer agent applies OWASP scanning on critical tasks
 - 📊 Full Visibility — Real-time plan status, clear approval gates, comprehensive summaries
 - 🔄 Resilient Workflows — Pre-mortem analysis, failure handling, and automatic replanning
-- 🧠 Persistent Memory System — Cross-agent knowledge sharing with structured citations and reflection learning
 - 📋 Strict Communication Protocol — Standardized input/output formats for reliable delegation and handoffs
 - 🎯 Autonomous Execution — Most agents work independently without user intervention (except approval gates)
 - 🔧 Context-Efficient Operations — Smart file reading (semantic search, 200-line limits) and batch operations for speed
@@ -180,31 +179,6 @@ State persists in `docs/plan/{plan_id}/plan.yaml`, providing:
 - Complex retry handling
 - Clear audit trail of project evolution
 - Full traceability of decisions
-
-### 🧠 Cross-Agent Memory
-
-Agents share knowledge via a persistent memory system with structured citations:
-
-- Researcher: Reads memories to understand project context before exploration
-- Planner: Stores architectural decisions, design patterns, tech stack choices
-- Orchestrator: Stores project-level decisions, product vision, code conventions
-- Reflection Memory: All agents learn from execution, user guidance, decisions, and patterns
-- Just-in-time verification: Citations (file:line) are checked before using memories
-
-Memory format follows structured pattern:
-
-```markdown
-## [Subject/Topic]
-
-Fact: [What you learned - concise, actionable]
-
-Citations:
-- `file:line` - Reference to code that supports this fact
-
-Reason: [Why this matters - impact, consequences, benefits]
-
-Last Updated: [Date]
-```
 
 ### 🔒 Agent Hierarchy
 
