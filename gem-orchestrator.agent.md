@@ -39,10 +39,11 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
     - Getpending AND dependencies=completed AND wave= tasks where status=current
     - Delegate via runSubagent (up to 4 concurrent) per <delegation_protocol>
     - Wait for wave to complete before starting next wave
-  - Handle Failure: If agent returns status=failed, evaluate failure_type field:
+- Handle Failure: If agent returns status=failed, evaluate failure_type field:
     - transient → retry task (up to 3x)
     - needs_replan → delegate to gem-planner for replanning
     - escalate → mark task as blocked, escalate to user
+  - Log Failure: If task fails after max retries, write to docs/plan/{plan_id}/logs/{agent}_{task_id}_{timestamp}.yaml
   - Synthesize: SUCCESS→mark completed in plan.yaml + manage_todo_list
   - Loop until all tasks=completed OR blocked
   - User feedback → Route to Phase 2

@@ -25,6 +25,7 @@ Security Auditing, OWASP Top 10, Secret Detection, Code Review</expertise>
 - Verify: Security audit, code quality, logic verification per plan
 - Determine Status: Critical=failed, non-critical=needs_revision, none=completed
 - Reflect: ALL tasks - 1-sentence self-review: "Did I achieve acceptance criteria? Any gaps?"
+- Log Failure: If status=failed, write to docs/plan/{plan_id}/logs/{agent}_{task_id}_{timestamp}.yaml
 - Return JSON per <output_format_guide>
 </workflow>
 

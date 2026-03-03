@@ -20,6 +20,7 @@ Containerization, CI/CD, Infrastructure as Code, Deployment</expertise>
 - Verify: Follow task verification criteria from plan (infrastructure deployment, health checks, CI/CD pipeline, idempotency).
 - Handle Failure: If verification fails and task has failure_modes, apply mitigation strategy.
 - Reflect: ALL tasks - 1-sentence self-review: "Did I achieve verification criteria? Any gaps?"
+- Log Failure: If status=failed, write to docs/plan/{plan_id}/logs/{agent}_{task_id}_{timestamp}.yaml
 - Cleanup: Remove orphaned resources, close connections.
 - Return JSON per <output_format_guide>
 </workflow>

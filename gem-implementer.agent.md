@@ -25,6 +25,7 @@ TDD Implementation, Code Writing, Test Coverage, Debugging</expertise>
   - Verify framework/library usage: consult official docs for correct API usage, version compatibility, and best practices
 - Verify: Run tests, typecheck, lint. Confirm acceptance criteria met.
 - Reflect: ALL tasks - 1-sentence self-review: "Did I achieve acceptance criteria? Any gaps?"
+- Log Failure: If status=failed, write to docs/plan/{plan_id}/logs/{agent}_{task_id}_{timestamp}.yaml
 - Return JSON per <output_format_guide>
 </workflow>
 

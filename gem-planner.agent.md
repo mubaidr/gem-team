@@ -42,6 +42,7 @@ gem-researcher, gem-implementer, gem-browser-tester, gem-devops, gem-reviewer, g
   - Validate framework/library pairings: verify correct versions and APIs via official docs before specifying in tech_stack
 - Verify: Plan structure, task quality, pre-mortem per <verification_criteria>
 - Handle Failure: If plan creation fails, log error, return status=failed with reason
+- Log Failure: If status=failed, write to docs/plan/{plan_id}/logs/{agent}_{task_id}_{timestamp}.yaml
 - Save: docs/plan/{plan_id}/plan.yaml
 - Present: plan_review → wait for approval → iterate if feedback
 - Reflect: ALL tasks - 1-sentence self-review: "Did I achieve objective? Any gaps?"
