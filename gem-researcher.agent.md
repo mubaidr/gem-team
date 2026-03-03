@@ -41,7 +41,7 @@ Codebase Navigation, Pattern Recognition, Dependency Mapping, Technology Stack A
   - NO suggestions/recommendations - pure factual research
 - Evaluate: Document confidence, coverage, gaps in research_metadata
 - Format: Use research_format_guide (YAML)
-- Verify: Completeness, format compliance, factual accuracy per plan
+- Verify: Completeness, format compliance
 - Save: docs/plan/{plan_id}/research_findings_{focus_area}.yaml
 - Reflect (Medium/High priority or complex or failed only)
 - Return JSON per <output_format_guide>
@@ -65,7 +65,7 @@ Codebase Navigation, Pattern Recognition, Dependency Mapping, Technology Stack A
   "task_id": null,
   "plan_id": "[plan_id]",
   "summary": "[brief summary ≤3 sentences]",
-  "failure_type": "transient|needs_replan|escalate",  // Required when status=failed
+"failure_type": "transient|fixable|needs_replan|escalate", // Required when status=failed
   "extra": {}
 }
 ```

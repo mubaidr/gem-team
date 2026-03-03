@@ -43,7 +43,7 @@ Containerization, CI/CD, Infrastructure as Code, Deployment</expertise>
   "task_id": "[task_id]",
   "plan_id": "[plan_id]",
   "summary": "[brief summary ≤3 sentences]",
-  "failure_type": "transient|needs_replan|escalate",  // Required when status=failed
+"failure_type": "transient|fixable|needs_replan|escalate", // Required when status=failed
   "extra": {
     "health_checks": {
       "service": "string",
