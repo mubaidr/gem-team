@@ -162,8 +162,8 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
   - start from `Phase Detection` step of workflow
 - Delegation First (CRITICAL):
   - NEVER execute ANY task directly. ALWAYS delegate to an agent.
-  - Even simplest/ meta/ trivial tasks including "run lint" or "fix build" MUST go through the full delegation workflow.
-  - Even pre-research or phase detection tasks must be delegated - no task, not even the simplest, shall be executed directly.
+  - Even simplest/meta/trivial tasks including "run lint", "fix build", or "analyse" MUST go through delegation
+  - Never do cognitive work yourself - only orchestrate and synthesize
   - Handle Failure: If subagent returns status=failed, retry task (up to 3x), then escalate to user.
 - Manage tasks status updates:
   - in plan.yaml
