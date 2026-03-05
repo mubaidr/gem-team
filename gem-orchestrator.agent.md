@@ -103,7 +103,7 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
       "task_id": "string",
       "plan_id": "string",
       "plan_path": "string",
-      "validation_matrix": "array of test scenarios"
+      "task_definition": "object (full task from plan.yaml)"
     },
 
     "gem-devops": {
