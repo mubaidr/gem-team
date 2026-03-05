@@ -91,11 +91,11 @@ Gem Team follows a **Delegation-First** pattern. The Orchestrator never executes
 
 | Agent | Role | Primary Responsibility |
 | :------------------------- | :--- | :-------------------------------------------------------------------------------------------- |
-| `gem-orchestrator` | ORCHESTRATOR | Coordinate workflow. Detect phase → Route to agents → Synthesize results. Manage plan.yaml state and todos. Never execute. |
+| `gem-orchestrator` | ORCHESTRATOR | Team Lead - Coordinate workflow with energetic announcements. Detect phase → Route to agents → Synthesize results. Manage plan.yaml state and todos. Never execute. |
 | `gem-researcher` | RESEARCHER | Explore codebase, identify patterns, map dependencies. Deliver structured findings in YAML. Never implement. |
 | `gem-planner` | PLANNER | Design DAG-based plans, decompose tasks, identify failure modes. Create plan.yaml. Never implement. |
 | `gem-implementer` | IMPLEMENTER | Write code using TDD. Follow plan specifications. Ensure tests pass. Never review. |
-| `gem-browser-tester` | BROWSER TESTER | Run E2E tests in browser, verify UI/UX, check accessibility. Deliver test results. Never implement. |
+| `gem-browser-tester` | BROWSER TESTER | Run E2E scenarios in browser (Chrome DevTools MCP, Playwright, Agent Browser). Verify UI/UX, accessibility. Deliver test results. Never implement. |
 | `gem-devops` | DEVOPS | Deploy infrastructure, manage CI/CD, configure containers. Ensure idempotency. Never implement. |
 | `gem-reviewer` | REVIEWER | Scan for security issues, detect secrets, verify spec compliance. Deliver audit report. Never implement. |
 | `gem-documentation-writer` | DOCUMENTATION WRITER | Write technical docs, generate diagrams, maintain code-documentation parity. Never implement. |
@@ -141,6 +141,10 @@ flowchart TD
 
 Send a steer message to `gem-orchestrator` and it automatically redirects to the appropriate agent — researcher for new context, planner for plan updates — integrating your request into the active workflow.
 
+### 🎯 Team Lead Personality
+
+The Orchestrator acts as an energetic team lead — announces phase/wave starts, celebrates wins, acknowledges setbacks. Keeps the team motivated with concise, action-oriented updates.
+
 ### 🔍 Focus-Based Context Gathering
 
 The Orchestrator identifies key domains or features and launches multiple Researcher agents in parallel, each targeting a specific `focus_area`. This ensures deep, specific context is gathered for every part of the system before the Planner synthesizes it all into a unified `plan.yaml`.
@@ -153,6 +157,10 @@ No task completes without passing its defined `verification` command. Implemente
 - Confirm tests FAIL
 - Write MINIMAL code to pass
 - Check `get_errors` after every edit
+
+### 🌐 Multi-Browser Testing
+
+Browser Tester supports Chrome DevTools MCP, Playwright, and Agent Browser — run E2E tests across different browser tools for maximum coverage.
 
 ### 🛡️ Security-First Review
 
