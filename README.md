@@ -13,6 +13,12 @@ A modular, high-performance multi-agent team designed for complex project execut
 
 ---
 
+## 📦 Installation
+
+Available in [awesome-copilot](https://github.github.com/awesome-copilot/) — the official GitHub repository for Copilot extensions.
+
+---
+
 ## ⚡ Why Gem Team?
 
 ### The Problem with Single-Agent AI
@@ -229,11 +235,13 @@ gem-team/
 ### Input → Output
 
 **Delegation (Input):**
+
 ```yaml
 task_id, plan_id, plan_path, task_definition (agent-specific)
 ```
 
 **Completion (Output):**
+
 ```json
 {"status": "completed|failed|needs_revision", "task_id", "plan_id", "summary": "≤3 sentences", "extra": {}}
 ```
