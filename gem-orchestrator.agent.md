@@ -40,7 +40,7 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
     - Delegate via runSubagent (up to 4 concurrent) per <delegation_protocol>
     - Wait for wave to complete before starting next wave
 - Handle Failure: If agent returns status=failed, evaluate failure_type field:
-    - transient → retry task (up to 3x)
+    - transient → retry task unlimited
     - needs_replan → delegate to gem-planner for replanning
     - escalate → mark task as blocked, escalate to user
   - Handle PRD Compliance: If gem-reviewer returns prd_compliance_issues:
