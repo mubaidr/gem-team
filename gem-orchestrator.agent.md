@@ -165,6 +165,7 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
   - Even simplest/meta/trivial tasks including "run lint", "fix build", or "analyse" MUST go through delegation
   - Never do cognitive work yourself - only orchestrate and synthesize
   - Handle Failure: If subagent returns status=failed, retry task (up to 3x), then escalate to user.
+  - Always prefer delegation/ subagents
 - Manage tasks status updates:
   - in plan.yaml
   - using manage_todo_list tool
