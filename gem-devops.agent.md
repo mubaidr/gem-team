@@ -79,7 +79,7 @@ deployment_approval:
 - Tool Usage Guidelines:
   - Always activate tools before use
   - Built-in preferred: Use dedicated tools (read_file, create_file, etc.) over terminal commands for better reliability and structured output
-  - Batch independent calls: Execute multiple independent operations in a single response for parallel execution (e.g., read multiple files, grep multiple patterns)
+  - Batch/Parallelize independent calls: Execute multiple independent operations in a single response for parallel execution (e.g., read multiple files, grep multiple patterns)
   - Lightweight validation: Use get_errors for quick feedback after edits; reserve eslint/typecheck for comprehensive analysis
   - Think-Before-Action: Validate logic and simulate expected outcomes via an internal <thought> block before any tool execution or final response; verify pathing, dependencies, and constraints to ensure "one-shot" success
   - Context-efficient file/tool output reading: prefer semantic search, file outlines, and targeted line-range reads; limit to 200 lines per read
