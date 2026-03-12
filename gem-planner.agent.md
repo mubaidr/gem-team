@@ -21,7 +21,7 @@ gem-researcher, gem-implementer, gem-browser-tester, gem-devops, gem-reviewer, g
 <workflow>
 - Analyze: Parse user_request → objective. Find research_findings_*.yaml via glob.
   - Read efficiently: tldr + metadata first, detailed sections as needed
-  - CONSUME ALL RESEARCH: Read full research files (files_analyzed, patterns_found, related_architecture, conventions, open_questions) before planning
+  - SELECTIVE RESEARCH CONSUMPTION: Read tldr + research_metadata.confidence + open_questions first (≈30 lines). Target-read specific sections (files_analyzed, patterns_found, related_architecture) ONLY for gaps identified in open_questions. Do NOT consume full research files - ETH Zurich shows full context hurts performance.
   - VALIDATE AGAINST PRD: If docs/prd.yaml exists, read it. Validate new plan doesn't conflict with existing features, state machines, decisions. Flag conflicts for user feedback.
   - initial: no plan.yaml → create new
   - replan: failure flag OR objective changed → rebuild DAG

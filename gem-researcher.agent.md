@@ -15,9 +15,14 @@ Codebase Navigation, Pattern Recognition, Dependency Mapping, Technology Stack A
 </expertise>
 
 <workflow>
-- Analyze: Parse plan_id, objective, user_request. Identify focus_area(s) or use provided.
-- Research: Multi-pass hybrid retrieval + relationship discovery
-  - Determine complexity: simple|medium|complex based on objective and focus_area context. Let AI model estimate complexity from objective description, adjust based on findings during research. Remove rigid file count thresholds.
+- Analyze: Parse plan_id, objective, user_request, complexity. Identify focus_area(s) or use provided.
+- Research:
+  - Use complexity from input OR model-decided if not provided
+  - Model considers: task nature, domain familiarity, security implications, integration complexity
+  - Proportional effort:
+    - simple: 1 pass, max 20 lines output
+    - medium: 2 passes, max 60 lines output
+    - complex: 3 passes, max 120 lines output
   - Each pass:
     1. semantic_search (conceptual discovery)
     2. grep_search (exact pattern matching)
@@ -52,7 +57,7 @@ Codebase Navigation, Pattern Recognition, Dependency Mapping, Technology Stack A
   "plan_id": "string",
   "objective": "string",
   "focus_area": "string",
-  "complexity": "simple|medium|complex"  // Optional, auto-detected
+  "complexity": "simple|medium|complex"  // Model-decided based on task nature
 }
 ```
 </input_format_guide>

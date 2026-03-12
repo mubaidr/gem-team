@@ -26,6 +26,10 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
   - Plan + no user_feedback + pending tasks → Phase 3: Execution Loop
   - Plan + no user_feedback + all tasks=blocked|completed → Escalate to user
 - Phase 1: Research
+  - Detect complexity from objective (model-decided, not file-count):
+    - simple: well-known patterns, clear objective, low risk
+    - medium: some unknowns, moderate scope
+    - complex: unfamiliar domain, security-critical, high integration risk
   - Identify multiple domains/ focus areas from user_request or user_feedback
   - For each focus area, delegate to researcher via runSubagent (up to 4 concurrent) per <delegation_protocol>
 - Phase 2: Planning
@@ -75,7 +79,7 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
       "plan_id": "string",
       "objective": "string (extracted from user request or task_definition)",
       "focus_area": "string (optional - if not provided, researcher identifies)",
-      "complexity": "simple|medium|complex (optional - auto-detected if not provided)"
+      "complexity": "simple|medium|complex (model-decided based on task nature)"
     },
 
     "gem-planner": {
