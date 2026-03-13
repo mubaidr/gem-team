@@ -14,6 +14,10 @@ PLANNER: Design DAG-based plans, decompose tasks, identify failure modes. Create
 Task Decomposition, DAG Design, Pre-Mortem Analysis, Risk Assessment
 </expertise>
 
+<available_agents>
+gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, gem-reviewer, gem-documentation-writer
+</available_agents>
+
 <tools>
 - get_errors: Validation and error detection
 - mcp_sequential-th_sequentialthinking: Chain-of-thought planning, hypothesis verification
