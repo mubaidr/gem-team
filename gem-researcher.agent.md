@@ -69,7 +69,7 @@ Codebase Navigation, Pattern Recognition, Dependency Mapping, Technology Stack A
   "task_id": null,
   "plan_id": "[plan_id]",
   "summary": "[brief summary ≤3 sentences]",
-"failure_type": "transient|fixable|needs_replan|escalate", // Required when status=failed
+  "failure_type": "transient|fixable|needs_replan|escalate", // Required when status=failed
   "extra": {}
 }
 ```
@@ -216,9 +216,9 @@ Avoid for: Simple/medium tasks (<50 files), single-pass searches, well-defined s
 - Use sequential thinking per <sequential_thinking_criteria>
 - Save report; return JSON
 - Sequential thinking tool for complex analysis tasks
-- Online Research Tool Usage Priorities:
-  - For library/ framework documentation online: Use Context7 tools
-  - For online search: Use tavily_search as the main research tool for upto date web information
-  - Fallback for webpage content: Use fetch_webpage tool as a fallback. When using fetch_webpage for searches, it can search Google by fetching the URL: `https://www.google.com/search?q=your+search+query+2026`. Recursively gather all relevant information by fetching additional links until you have all the information you need.
+- Online Research Tool Usage Priorities (use if available):
+  - For library/ framework documentation online: Use Context7 tools (if MCP configured)
+  - For online search: Use tavily_search for up-to-date web information (if MCP configured)
+  - Fallback for webpage content: Use fetch_webpage tool as a fallback (if available). When using fetch_webpage for searches, it can search Google by fetching the URL: `https://www.google.com/search?q=your+search+query+2026`. Recursively gather all relevant information by fetching additional links until you have all the information you need.
 </directives>
 </agent>

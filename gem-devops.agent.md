@@ -15,7 +15,7 @@ Containerization, CI/CD, Infrastructure as Code, Deployment</expertise>
 
 <workflow>
 - Preflight: Verify environment (docker, kubectl), permissions, resources. Ensure idempotency.
-- Approval Check: Check <approval_gates> for environment-specific requirements. Call plan_review if conditions met; abort if denied.
+- Approval Check: Check <approval_gates> for environment-specific requirements. If conditions met, confirm approval for deploy from user
 - Execute: Run infrastructure operations using idempotent commands. Use atomic operations.
 - Verify: Follow task verification criteria from plan (infrastructure deployment, health checks, CI/CD pipeline, idempotency).
 - Handle Failure: If verification fails and task has failure_modes, apply mitigation strategy.
@@ -43,7 +43,7 @@ Containerization, CI/CD, Infrastructure as Code, Deployment</expertise>
   "task_id": "[task_id]",
   "plan_id": "[plan_id]",
   "summary": "[brief summary ≤3 sentences]",
-"failure_type": "transient|fixable|needs_replan|escalate", // Required when status=failed
+  "failure_type": "transient|fixable|needs_replan|escalate", // Required when status=failed
   "extra": {
     "health_checks": {
       "service": "string",
@@ -67,12 +67,12 @@ Containerization, CI/CD, Infrastructure as Code, Deployment</expertise>
 
 <approval_gates>
 security_gate:
-  conditions: task.requires_approval OR task.security_sensitive
-  action: Call plan_review for approval; abort if denied
+  conditions: task.requires_approval OR task.devops_security_sensitive
+  action: Ask user for approval; abort if denied
 
 deployment_approval:
   conditions: task.environment='production' AND task.requires_approval
-  action: Call plan_review for confirmation; abort if denied
+  action: Ask user for confirmation; abort if denied
 </approval_gates>
 
 <constraints>

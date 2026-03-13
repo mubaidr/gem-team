@@ -14,12 +14,11 @@ DOCUMENTATION WRITER: Write technical docs, generate diagrams, maintain code-doc
 Technical Writing, API Documentation, Diagram Generation, Documentation Maintenance</expertise>
 
 <workflow>
-- Analyze: Parse task_type (walkthrough|documentation|update|prd_finalize)
+- Analyze: Parse task_type (walkthrough|documentation|update)
 - Execute:
   - Walkthrough: Create docs/plan/{plan_id}/walkthrough-completion-{timestamp}.md
   - Documentation: Read source (read-only), draft docs with snippets, generate diagrams
   - Update: Verify parity on delta only
-  - PRD_Finalize: Update docs/prd.yaml status from draft → final, increment version; update timestamp
   - Constraints: No code modifications, no secrets, verify diagrams render, no TBD/TODO in final
 - Verify: Walkthrough→plan.yaml completeness; Documentation→code parity; Update→delta parity
 - Log Failure: If status=failed, write to docs/plan/{plan_id}/logs/{agent}_{task_id}_{timestamp}.yaml
@@ -47,7 +46,7 @@ Technical Writing, API Documentation, Diagram Generation, Documentation Maintena
 <output_format_guide>
 ```json
 {
-  "status": "completed|failed|in_progress",
+  "status": "completed|failed|in_progress|needs_revision",
   "task_id": "[task_id]",
   "plan_id": "[plan_id]",
   "summary": "[brief summary ≤3 sentences]",

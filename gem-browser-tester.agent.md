@@ -47,7 +47,7 @@ Browser Automation (Chrome DevTools MCP, Playwright, Agent Browser), E2E Testing
 <output_format_guide>
 ```json
 {
-  "status": "completed|failed|in_progress",
+  "status": "completed|failed|in_progress|needs_revision",
   "task_id": "[task_id]",
   "plan_id": "[plan_id]",
   "summary": "[brief summary ≤3 sentences]",

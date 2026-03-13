@@ -57,7 +57,7 @@ Traditional AI coding assistants hit walls when projects get complex:
 
 ## 🚀 Overview
 
-Gem Team follows a **Delegation-First** pattern. The Orchestrator never executes—it only detects phase, routes to agents, and synthesizes results. All state operations are managed directly by the Orchestrator.
+Gem Team follows a **Delegation-First** pattern. The Orchestrator never executes—it only detects phase, routes to agents, and synthesizes results. All state operations are managed directly by the Orchestrator via `plan.yaml`.
 
 ```text
 ┌─────────────────────────────────────────────────────────────────┐
@@ -66,29 +66,23 @@ Gem Team follows a **Delegation-First** pattern. The Orchestrator never executes
                                ▼
 ┌──────────────────────────────────────────────────────────────────┐
 │                      ORCHESTRATOR                               │
-│  • Detect phase          • Route to agents                     │
-│  • Synthesize results    • Manage plan.yaml state              │
-│  • Manage todos          • Never execute                       │
+│  • Phase Detection    • Route to agents (runSubagent)          │
+│  • Synthesize results • Manage plan.yaml state                │
+│  • Manage todos       • Never execute directly                  │
 └──────────────────────────────┬───────────────────────────────────┘
-                               ▼
-         ┌──────────────────────┴──────────────────────┐
-         ▼                                             ▼
-┌───────────────────┐                     ┌────────────────────────┐
-│  RESEARCHER       │ ──────────────────▶ │    PLANNER              │
-│  Explore codebase │     findings         │  DAG Task Decomposition│
-└───────────────────┘                     └────────────┬───────────┘
-                                                       ▼
-                                           ┌────────────────────────┐
-                                           │  plan.yaml             │
-                                           │  (Task DAG + State)    │
-                                           └────────────┬───────────┘
-                                                       ▼
-         ┌────────────────────┬─────────────────────────┼─────────────────────────┬────────────────────┐
-         ▼                    ▼                         ▼                         ▼                    ▼
-┌──────────────┐    ┌──────────────┐         ┌──────────────┐         ┌──────────────┐      ┌──────────────┐
-│ IMPLEMENTER  │    │ BROWSER      │         │ DEVOPS       │         │ REVIEWER     │      │ DOC WRITER   │
-│ TDD Execution│    │ TESTER       │         │ CI/CD + Infra│         │ Security Gate│      │ Technical    │
-└──────────────┘    └──────────────┘         └──────────────┘         └──────────────┘      └──────────────┘
+                               │
+        ┌──────────────────────┼──────────────────────┐
+        ▼                      ▼                      ▼
+┌───────────────────┐  ┌───────────────────┐  ┌───────────────────┐
+│  RESEARCHER       │  │    PLANNER        │  │  (other agents)   │
+│  (Phase 1)        │  │  (Phase 2)        │  │  (Phase 3)        │
+│  Focus areas      │  │  DAG + Pre-mortem │  │  Execute tasks    │
+└───────────────────┘  └───────────────────┘  └───────────────────┘
+                                    ▼
+                          ┌────────────────────────┐
+                          │  plan.yaml             │
+                          │  (Task DAG + State)    │
+                          └────────────────────────┘
 ```
 
 ---
@@ -103,41 +97,50 @@ Gem Team follows a **Delegation-First** pattern. The Orchestrator never executes
 | `gem-implementer` | IMPLEMENTER | Write code using TDD. Follow plan specifications. Ensure tests pass. Never review. |
 | `gem-browser-tester` | BROWSER TESTER | Run E2E scenarios in browser (Chrome DevTools MCP, Playwright, Agent Browser). Verify UI/UX, accessibility. Deliver test results. Never implement. |
 | `gem-devops` | DEVOPS | Deploy infrastructure, manage CI/CD, configure containers. Ensure idempotency. Never implement. |
-| `gem-reviewer` | REVIEWER | Scan for security issues, detect secrets, verify spec compliance. Deliver audit report. Never implement. |
+| `gem-reviewer` | REVIEWER | Scan for security issues, detect secrets, verify PRD compliance. Deliver audit report. Never implement. |
 | `gem-documentation-writer` | DOCUMENTATION WRITER | Write technical docs, generate diagrams, maintain code-documentation parity. Never implement. |
 
 ---
 
 ## 🔄 Core Workflow
 
-```mermaid
-flowchart TD
-    A[🎯 User Goal] --> B[🎭 Orchestrator]
-    B --> C[🔍 Researcher]
-    D -->|Feedback| C
-    D -->|Approved| E[📋 Planner]
-    E --> F[📄 plan.yaml]
-    F --> G{⏸️ Plan Approval}
-    G -->|Feedback| F
-    G -->|Approved| H[🚀 Parallel Execution]
-    H --> I[💻 Implementer]
-    H --> J[🌐 Chrome Tester]
-    H --> K[⚙️ DevOps]
-    H --> L[🛡️ Reviewer]
-    H --> M[📝 Doc Writer]
-    I & J & K & L & M --> N[🔄 Synthesize Results]
-    N --> O{All Tasks Done?}
-    O -->|No| H
-    O -->|Yes| P[📊 Walkthrough Summary]
-```
+The Orchestrator follows a **4-Phase** workflow:
 
-### Workflow Stages
+### Phase Detection (Automatic)
 
-1. **Detection** — Orchestrator checks plan existence and task status
-2. **Research** — Parallel researchers gather context per focus area
-3. **Planning** — Planner creates DAG plan with pre-mortem analysis
-4. **Execution** — Up to 4 agents execute tasks in waves (dependencies first)
-5. **Completion** — Doc Writer finalizes walkthrough + PRD
+| Current State | Next Phase |
+| :------------ | :--------- |
+| No plan exists | Phase 1: Research |
+| Plan + user feedback | Phase 2: Planning |
+| Plan + pending tasks | Phase 3: Execution Loop |
+| All tasks complete/blocked | Phase 4: Summary |
+
+### Phase 1: Research
+
+- Orchestrator detects complexity (simple/medium/complex)
+- Identifies focus areas from user goal
+- Delegates to gem-researcher (up to 4 concurrent) per focus area
+- Output: `docs/plan/{plan_id}/research_findings_{focus_area}.yaml`
+
+### Phase 2: Planning
+
+- **Complex tasks**: Delegates to gem-planner 3x (variants a/b/c), selects best
+- **Simple/Medium**: Delegates to gem-planner once
+- Validates against existing PRD
+- Output: `docs/plan/{plan_id}/plan.yaml` with DAG tasks and waves
+
+### Phase 3: Execution Loop
+
+- Reads plan.yaml, gets pending tasks (dependencies=completed)
+- Executes in waves (wave 1 first, wave 2 after wave 1 completes, etc.)
+- Up to 4 agents work in parallel per wave
+- Contracts presented for verification (wave > 1)
+- Loops until all tasks done or blocked
+
+### Phase 4: Summary
+
+- Presents status, summary, next steps
+- User feedback routes back to Phase 2: Planning
 
 ---
 
@@ -187,7 +190,7 @@ State in `docs/plan/{plan_id}/plan.yaml` provides recovery, retry handling, and 
 
 ### 📋 Product Requirements Document (PRD)
 
-Machine-readable spec at `docs/prd.yaml` — Planner creates draft, Doc Writer finalizes. Contains state machines, error codes, performance thresholds, and decision log.
+Machine-readable spec at `docs/prd.yaml` — Orchestrator creates and maintains PRD based on completed plans and reviewer feedback. Contains state machines, error codes, performance thresholds, and decision log.
 
 ### 🔒 Agent Hierarchy
 
@@ -267,12 +270,11 @@ task_id, plan_id, plan_path, task_definition (agent-specific)
 
 - **Most agents**: Fully autonomous
 - **DevOps**: Approval gates for production/security
-- **Planner**: Mandatory `plan_review` before execution
+- **Planner**: Mandatory plan review before execution
 - **Orchestrator**: Delegates all via `runSubagent`
 
 ---
 
----
 
 ## 🎯 Use Cases
 
