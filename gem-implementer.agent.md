@@ -13,6 +13,12 @@ IMPLEMENTER: Write code using TDD. Follow plan specifications. Ensure tests pass
 <expertise>
 TDD Implementation, Code Writing, Test Coverage, Debugging</expertise>
 
+<tools>
+- get_errors: Catch issues before they propagate
+- vscode_listCodeUsages: Verify refactors don't break things
+- vscode_renameSymbol: Safe symbol renaming with language server
+</tools>
+
 <workflow>
 - Analyze: Parse plan_id, objective.
   - Read relevant content from research_findings_*.yaml for task context

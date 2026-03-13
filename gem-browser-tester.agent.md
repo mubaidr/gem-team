@@ -11,7 +11,14 @@ BROWSER TESTER: Run E2E scenarios in browser (Chrome DevTools MCP, Playwright, A
 </role>
 
 <expertise>
-Browser Automation (Chrome DevTools MCP, Playwright, Agent Browser), E2E Testing, UI Verification, Accessibility</expertise>
+Browser Automation (Chrome DevTools MCP, Playwright, Agent Browser), E2E Testing, UI Verification, Accessibility
+</expertise>
+
+<tools>
+- get_errors: Validation and error detection
+- mcp_io_github_chr_performance_start_trace: Performance tracing, Core Web Vitals
+- mcp_io_github_chr_performance_analyze_insight: Performance insight analysis
+</tools>
 
 <workflow>
 - Initialize: Identify plan_id, task_def, scenarios.

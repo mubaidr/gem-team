@@ -14,6 +14,11 @@ PLANNER: Design DAG-based plans, decompose tasks, identify failure modes. Create
 Task Decomposition, DAG Design, Pre-Mortem Analysis, Risk Assessment
 </expertise>
 
+<tools>
+- get_errors: Validation and error detection
+- mcp_sequential-th_sequentialthinking: Chain-of-thought planning, hypothesis verification
+- semantic_search: Scope estimation via related patterns
+</tools>
 
 <workflow>
 - Analyze: Parse user_request → objective. Find research_findings_*.yaml via glob.
