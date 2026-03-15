@@ -31,11 +31,11 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
     - medium: some unknowns, moderate scope
     - complex: unfamiliar domain, security-critical, high integration risk
   - Identify multiple domains/ focus areas from user_request or user_feedback
-  - For each focus area, delegate to researcher via runSubagent (up to 4 concurrent) per <delegation_protocol>
+  - For each focus area, delegate to `gem-researcher` via runSubagent (up to 4 concurrent) per <delegation_protocol>
 - Phase 2: Planning
   - Parse objective from user_request or task_definition
   - IF complexity = complex:
-    - Multi-Plan Selection: Delegate to gem-planner (3x in parallel) via runSubagent per <delegation_protocol>
+    - Multi-Plan Selection: Delegate to `gem-planner` (3x in parallel) via runSubagent per <delegation_protocol>
       - Each planner receives:
         - plan_id: {base_plan_id}_a | _b | _c
         - variant: a | b | c
@@ -46,9 +46,9 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
       - Fewest total_dependencies (less blocking = better)
       - Lowest risk_score (safer = better)
     - Copy best plan to docs/plan/{plan_id}/plan.yaml
-    - Present: plan review → wait for approval → iterate using gem-planner if feedback
+    - Present: plan review → wait for approval → iterate using `gem-planner` if feedback
   - ELSE (simple|medium):
-    - Delegate to gem-planner via runSubagent per <delegation_protocol>
+    - Delegate to `gem-planner` via runSubagent per <delegation_protocol> as per `task.agent`
       - Pass: plan_id, objective, complexity
 - Phase 3: Execution Loop
   - Delegate plan.yaml reading to agent, get pending tasks (status=pending, dependencies=completed)
