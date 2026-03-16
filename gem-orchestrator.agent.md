@@ -60,7 +60,7 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
     - Wait for wave to complete before starting next wave
   - Synthesize results:
     - completed → mark completed in plan.yaml
-    - needs_revision → re-delegate task (same wave, max 3 retries)
+    - needs_revision → re-delegate task WITH failing test output/error logs injected into the task_definition (same wave, max 3 retries)
     - failed → evaluate failure_type per Handle Failure directive
   - Loop until all tasks=completed OR blocked
   - User feedback → Route to Phase 2
