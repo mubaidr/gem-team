@@ -56,7 +56,7 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
   - For each wave (1→n):
     - If wave > 1: Include contracts in task_definition (from_task/to_task, interface, format)
     - Get pending tasks: dependencies=completed AND status=pending AND wave=current
-    - Delegate via runSubagent (up to 4 concurrent) per <delegation_protocol>
+    - Delegate via runSubagent (up to 4 concurrent) per <delegation_protocol> to `task.agent` or `available_agents`
     - Wait for wave to complete before starting next wave
   - Synthesize results:
     - completed → mark completed in plan.yaml
