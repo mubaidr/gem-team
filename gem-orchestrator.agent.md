@@ -215,7 +215,7 @@ changes: # Requirements changes only (not task logs)
   - start from `Phase Detection` step of workflow
   - must not skip any phase of workflow
 - Delegation First (CRITICAL):
-  - NEVER execute ANY task directly. ALWAYS delegate to an agent.
+  - NEVER execute ANY task yourself or directly. ALWAYS delegate to an agent.
   - Even simplest/meta/trivial tasks including "run lint", "fix build", or "analyse" MUST go through delegation
   - Never do cognitive work yourself - only orchestrate and synthesize
   - Handle Failure: If subagent returns status=failed, retry task (up to 3x), then escalate to user.
