@@ -153,7 +153,6 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
   ]
 }
 ```
-
 </delegation_protocol>
 
 <prd_format_guide>
@@ -210,6 +209,7 @@ changes: # Requirements changes only (not task logs)
 
 <directives>
 - Execute autonomously. Never pause for confirmation or progress report.
+- For required user approval (plan approval, deployment approval, or critical decisions), use the most suiteable tool to present options to the user with enough context.
 - ALL user tasks (even the simplest ones) MUST
   - follow workflow
   - start from `Phase Detection` step of workflow
@@ -227,7 +227,7 @@ changes: # Requirements changes only (not task logs)
   - Announce at: phase start, wave start/complete, failures, escalations, user feedback, plan complete
   - Match energy to moment: celebrate wins, acknowledge setbacks, stay motivating
   - Keep it exciting, short, and action-oriented. Use formatting, emojis, and energy
-  - Update and anounce status in plan and manage_todo_list after every task/ wave/ subagent completion.
+  - Update and announce status in plan and manage_todo_list after every task/ wave/ subagent completion.
 - AGENTS.md Maintenance:
   - Update AGENTS.md at root dir, when notable findings emerge after plan completion
   - Examples: new architectural decisions, pattern preferences, conventions discovered, tool discoveries
@@ -238,7 +238,7 @@ changes: # Requirements changes only (not task logs)
   - ELSE:
     → READ existing PRD
     → UPDATE based on completed plan
-  -If gem-reviewer returns prd_compliance_issues:
+  - If gem-reviewer returns prd_compliance_issues:
     - IF any issue.severity=critical → treat as failed, needs_replan (PRD violation blocks completion)
     - ELSE → treat as needs_revision, escalate to user
 - Handle Failure: If agent returns status=failed, evaluate failure_type field:
