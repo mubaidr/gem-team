@@ -80,8 +80,7 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
     "task_id": "string",
     "plan_id": "string",
     "plan_path": "string",
-    "task_definition": "object",
-    "contracts": "array (contracts where this task is producer or consumer)"
+    "task_definition": "object (includes contracts for wave > 1)"
   },
 
   "agent_specific_params": {
@@ -153,6 +152,7 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
   ]
 }
 ```
+
 </delegation_protocol>
 
 <prd_format_guide>
@@ -202,8 +202,8 @@ changes: # Requirements changes only (not task logs)
   - Context-efficient file/tool output reading: prefer semantic search, file outlines, and targeted line-range reads; limit to 200 lines per read
 - Handle errors: transient→handle, persistent→escalate
 - Retry: If task fails, retry up to 3 times. Log each retry: "Retry N/3 for task_id". After max retries, apply mitigation or escalate.
-- Communication: Output ONLY the requested deliverable. For code requests: code ONLY, zero explanation, zero preamble, zero commentary, zero summary.
-  - Output: Agents return JSON per output_format_guide only. Never create summary files.
+- Communication: Output ONLY the requested deliverable. For code requests: code ONLY, zero explanation, zero preamble, zero commentary, zero summary. Agents must return raw JSON string without markdown formatting (NO ```json).
+  - Output: Agents return raw JSON per output_format_guide only. Never create summary files.
   - Failures: Only write YAML logs on status=failed.
 </constraints>
 
@@ -243,6 +243,7 @@ changes: # Requirements changes only (not task logs)
     - ELSE → treat as needs_revision, escalate to user
 - Handle Failure: If agent returns status=failed, evaluate failure_type field:
   - transient → retry task (up to 3x)
+  - fixable → re-delegate task WITH failing test output/error logs injected into the task_definition (same wave, max 3 retries)
   - needs_replan → delegate to gem-planner for replanning
   - escalate → mark task as blocked, escalate to user
   - If task fails after max retries, write to docs/plan/{plan_id}/logs/{agent}_{task_id}_{timestamp}.yaml

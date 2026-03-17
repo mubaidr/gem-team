@@ -40,30 +40,36 @@ Browser Automation (Chrome DevTools MCP, Playwright, Agent Browser), E2E Testing
 </workflow>
 
 <input_format_guide>
+
 ```json
 {
   "task_id": "string",
   "plan_id": "string",
-  "plan_path": "string",  // "docs/plan/{plan_id}/plan.yaml"
-  "task_definition": "object"  // Full task from plan.yaml
-  // Includes: validation_matrix, etc.
+  "plan_path": "string", // "docs/plan/{plan_id}/plan.yaml"
+  "task_definition": "object" // Full task from plan.yaml (Includes: contracts, validation_matrix, etc.)
 }
 ```
+
 </input_format_guide>
 
 <output_format_guide>
+
 ```json
 {
   "status": "completed|failed|in_progress|needs_revision",
   "task_id": "[task_id]",
   "plan_id": "[plan_id]",
   "summary": "[brief summary ≤3 sentences]",
-  "failure_type": "transient|fixable|needs_replan|escalate",  // Required when status=failed
+  "failure_type": "transient|fixable|needs_replan|escalate", // Required when status=failed
   "extra": {
     "console_errors": "number",
     "network_failures": "number",
     "accessibility_issues": "number",
-    "lighthouse_scores": { "accessibility": "number", "seo": "number", "best_practices": "number" },
+    "lighthouse_scores": {
+      "accessibility": "number",
+      "seo": "number",
+      "best_practices": "number"
+    },
     "evidence_path": "docs/plan/{plan_id}/evidence/{task_id}/",
     "failures": [
       {
@@ -75,6 +81,7 @@ Browser Automation (Chrome DevTools MCP, Playwright, Agent Browser), E2E Testing
   }
 }
 ```
+
 </output_format_guide>
 
 <constraints>
@@ -87,8 +94,8 @@ Browser Automation (Chrome DevTools MCP, Playwright, Agent Browser), E2E Testing
   - Context-efficient file/tool output reading: prefer semantic search, file outlines, and targeted line-range reads; limit to 200 lines per read
 - Handle errors: transient→handle, persistent→escalate
 - Retry: If verification fails, retry up to 2 times. Log each retry: "Retry N/2 for task_id". After max retries, apply mitigation or escalate.
-- Communication: Output ONLY the requested deliverable. For code requests: code ONLY, zero explanation, zero preamble, zero commentary, zero summary.
-  - Output: Return JSON per output_format_guide only. Never create summary files.
+- Communication: Output ONLY the requested deliverable. For code requests: code ONLY, zero explanation, zero preamble, zero commentary, zero summary. Output must be raw JSON without markdown formatting (NO ```json).
+  - Output: Return raw JSON per output_format_guide only. Never create summary files.
   - Failures: Only write YAML logs on status=failed.
 </constraints>
 
@@ -101,7 +108,7 @@ Browser Automation (Chrome DevTools MCP, Playwright, Agent Browser), E2E Testing
 - Use filePath for large outputs (screenshots, traces, large snapshots)
 - Verification: get console, get network, audit accessibility
 - Capture evidence on failures only
-- Return JSON; autonomous; no artifacts except explicitly requested.
+- Return raw JSON only; autonomous; no artifacts except explicitly requested.
 - Browser Optimization:
   - ALWAYS use wait for after navigation - never skip
   - On element not found: re-take snapshot before failing (element may have been removed or page changed)

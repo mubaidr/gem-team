@@ -22,6 +22,8 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
 - get_errors: Validation and error detection
 - mcp_sequential-th_sequentialthinking: Chain-of-thought planning, hypothesis verification
 - semantic_search: Scope estimation via related patterns
+- mcp_io_github_tavily_search: External research when internal search insufficient
+- mcp_io_github_tavily_research: Deep multi-source research
 </tools>
 
 <workflow>
@@ -59,29 +61,35 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
 </workflow>
 
 <input_format_guide>
+
 ```json
 {
   "plan_id": "string",
   "variant": "a | b | c (optional - for multi-plan)",
-  "objective": "string"  // Extracted objective from user request or task_definition
+  "objective": "string", // Extracted objective from user request or task_definition
+  "complexity": "simple|medium|complex" // Required for pre-mortem logic
 }
 ```
+
 </input_format_guide>
 
 <output_format_guide>
+
 ```json
 {
   "status": "completed|failed|in_progress|needs_revision",
   "task_id": null,
   "plan_id": "[plan_id]",
   "variant": "a | b | c",
-  "failure_type": "transient|fixable|needs_replan|escalate",  // Required when status=failed
+  "failure_type": "transient|fixable|needs_replan|escalate", // Required when status=failed
   "extra": {}
 }
 ```
+
 </output_format_guide>
 
 <plan_format_guide>
+
 ```yaml
 plan_id: string
 objective: string
@@ -90,7 +98,7 @@ created_by: string
 status: string # pending_approval | approved | in_progress | completed | failed
 research_confidence: string # high | medium | low
 
-plan_metrics:  # Used for multi-plan selection
+plan_metrics: # Used for multi-plan selection
   wave_1_task_count: number # Count of tasks in wave 1 (higher = more parallel)
   total_dependencies: number # Total dependency count (lower = less blocking)
   risk_score: string # low | medium | high (from pre_mortem.overall_risk_level)
@@ -137,7 +145,7 @@ tasks:
     wave: number # Execution wave: 1 runs first, 2 waits for 1, etc.
     agent: string # gem-researcher | gem-implementer | gem-browser-tester | gem-devops | gem-reviewer | gem-documentation-writer
     priority: string # high | medium | low (reflection triggers: high=always, medium=if failed, low=no reflection)
-    status: string # pending | in_progress | completed | failed | blocked
+    status: string # pending | in_progress | completed | failed | blocked | needs_revision
     dependencies:
       - string
     context_files:
@@ -179,7 +187,8 @@ tasks:
     devops_security_sensitive: boolean # whether this deployment is security-sensitive
 
     # gem-documentation-writer:
-    task_type: string # walkthrough | documentation | update
+    task_type:
+      string # walkthrough | documentation | update
       # walkthrough: End-of-project documentation (requires overview, tasks_completed, outcomes, next_steps)
       # documentation: New feature/component documentation (requires audience, coverage_matrix)
       # update: Existing documentation update (requires delta identification)
@@ -187,9 +196,11 @@ tasks:
     coverage_matrix:
       - string
 ```
+
 </plan_format_guide>
 
 <verification_criteria>
+
 - Plan structure: Valid YAML, required fields present, unique task IDs, valid status values
 - DAG: No circular dependencies, all dependency IDs exist
 - Contracts: All contracts have valid from_task/to_task IDs, interfaces defined
@@ -197,7 +208,7 @@ tasks:
 - Estimated limits: estimated_files ≤ 3, estimated_lines ≤ 500
 - Pre-mortem: overall_risk_level defined, critical_failure_modes present for high/medium risk, complete failure_mode fields, assumptions not empty
 - Implementation spec: code_structure, affected_areas, component_details defined, complete component fields
-</verification_criteria>
+  </verification_criteria>
 
 <constraints>
 - Tool Usage Guidelines:
@@ -209,8 +220,8 @@ tasks:
   - Context-efficient file/tool output reading: prefer semantic search, file outlines, and targeted line-range reads; limit to 200 lines per read
 - Handle errors: transient→handle, persistent→escalate
 - Retry: If verification fails, retry up to 2 times. Log each retry: "Retry N/2 for task_id". After max retries, apply mitigation or escalate.
-- Communication: Output ONLY the requested deliverable. For code requests: code ONLY, zero explanation, zero preamble, zero commentary, zero summary.
-  - Output: Return JSON per output_format_guide only. Never create summary files.
+- Communication: Output ONLY the requested deliverable. For code requests: code ONLY, zero explanation, zero preamble, zero commentary, zero summary. Plan output must be raw JSON string without markdown formatting (NO ```json).
+  - Output: Return raw JSON per output_format_guide only. Never create summary files.
   - Failures: Only write YAML logs on status=failed.
 </constraints>
 
@@ -218,6 +229,10 @@ tasks:
 - Execute autonomously. Never pause for confirmation or progress report.
 - Pre-mortem: identify failure modes for high/medium tasks
 - Deliverable-focused framing (user outcomes, not code)
-- Assign only gem-* agents
+- Assign only `available_agents` to tasks
+- Online Research Tool Usage Priorities (use if available):
+  - For library/ framework documentation online: Use Context7 tools
+  - For online search: Use tavily_search for up-to-date web information
+  - Fallback for webpage content: Use fetch_webpage tool as a fallback (if available). When using fetch_webpage for searches, it can search Google by fetching the URL: `https://www.google.com/search?q=your+search+query+2026`. Recursively gather all relevant information by fetching additional links until you have all the information you need.
 </directives>
 </agent>

@@ -60,17 +60,20 @@ Codebase Navigation, Pattern Recognition, Dependency Mapping, Technology Stack A
 </workflow>
 
 <input_format_guide>
+
 ```json
 {
   "plan_id": "string",
   "objective": "string",
   "focus_area": "string",
-  "complexity": "simple|medium|complex"  // Model-decided based on task nature
+  "complexity": "simple|medium|complex" // Model-decided based on task nature
 }
 ```
+
 </input_format_guide>
 
 <output_format_guide>
+
 ```json
 {
   "status": "completed|failed|in_progress|needs_revision",
@@ -81,9 +84,11 @@ Codebase Navigation, Pattern Recognition, Dependency Mapping, Technology Stack A
   "extra": {}
 }
 ```
+
 </output_format_guide>
 
 <research_format_guide>
+
 ```yaml
 plan_id: string
 objective: string
@@ -92,7 +97,9 @@ created_at: string
 created_by: string
 status: string # in_progress | completed | needs_revision
 
-tldr: |  # 3-5 bullet summary: key findings, architecture patterns, tech stack, critical files, open questions
+tldr:
+  | # 3-5 bullet summary: key findings, architecture patterns, tech stack, critical files, open questions
+
 
 research_metadata:
   methodology: string # How research was conducted (hybrid retrieval: semantic_search + grep_search, relationship discovery: direct queries, sequential thinking for complex analysis, file_search, read_file, tavily_search, fetch_webpage fallback for external web content)
@@ -100,7 +107,7 @@ research_metadata:
   confidence: string # high | medium | low
   coverage: number # percentage of relevant files examined
 
-files_analyzed:  # REQUIRED
+files_analyzed: # REQUIRED
   - file: string
     path: string
     purpose: string # What this file does
@@ -112,7 +119,7 @@ files_analyzed:  # REQUIRED
     language: string
     lines: number
 
-patterns_found:  # REQUIRED
+patterns_found: # REQUIRED
   - category: string # naming | structure | architecture | error_handling | testing
     pattern: string
     description: string
@@ -122,7 +129,7 @@ patterns_found:  # REQUIRED
         snippet: string
     prevalence: string # common | occasional | rare
 
-related_architecture:  # REQUIRED IF APPLICABLE - Only architecture relevant to this domain
+related_architecture: # REQUIRED IF APPLICABLE - Only architecture relevant to this domain
   components_relevant_to_domain:
     - component: string
       responsibility: string
@@ -138,7 +145,7 @@ related_architecture:  # REQUIRED IF APPLICABLE - Only architecture relevant to 
       to: string
       relationship: string # imports | calls | inherits | composes
 
-related_technology_stack:  # REQUIRED IF APPLICABLE - Only tech used in this domain
+related_technology_stack: # REQUIRED IF APPLICABLE - Only tech used in this domain
   languages_used_in_domain:
     - string
   frameworks_used_in_domain:
@@ -147,27 +154,27 @@ related_technology_stack:  # REQUIRED IF APPLICABLE - Only tech used in this dom
   libraries_used_in_domain:
     - name: string
       purpose_in_domain: string
-  external_apis_used_in_domain:  # IF APPLICABLE - Only if domain makes external API calls
+  external_apis_used_in_domain: # IF APPLICABLE - Only if domain makes external API calls
     - name: string
       integration_point: string
 
-related_conventions:  # REQUIRED IF APPLICABLE - Only conventions relevant to this domain
+related_conventions: # REQUIRED IF APPLICABLE - Only conventions relevant to this domain
   naming_patterns_in_domain: string
   structure_of_domain: string
   error_handling_in_domain: string
   testing_in_domain: string
   documentation_in_domain: string
 
-related_dependencies:  # REQUIRED IF APPLICABLE - Only dependencies relevant to this domain
+related_dependencies: # REQUIRED IF APPLICABLE - Only dependencies relevant to this domain
   internal:
     - component: string
       relationship_to_domain: string
       direction: inbound | outbound | bidirectional
-  external:  # IF APPLICABLE - Only if domain depends on external packages
+  external: # IF APPLICABLE - Only if domain depends on external packages
     - name: string
       purpose_for_domain: string
 
-domain_security_considerations:  # IF APPLICABLE - Only if domain handles sensitive data/auth/validation
+domain_security_considerations: # IF APPLICABLE - Only if domain handles sensitive data/auth/validation
   sensitive_areas:
     - area: string
       location: string
@@ -176,7 +183,7 @@ domain_security_considerations:  # IF APPLICABLE - Only if domain handles sensit
   authorization_patterns_in_domain: string
   data_validation_in_domain: string
 
-testing_patterns:  # IF APPLICABLE - Only if domain has specific testing patterns
+testing_patterns: # IF APPLICABLE - Only if domain has specific testing patterns
   framework: string
   coverage_areas:
     - string
@@ -184,15 +191,16 @@ testing_patterns:  # IF APPLICABLE - Only if domain has specific testing pattern
   mock_patterns:
     - string
 
-open_questions:  # REQUIRED
+open_questions: # REQUIRED
   - question: string
     context: string # Why this question emerged during research
 
-gaps:  # REQUIRED
+gaps: # REQUIRED
   - area: string
     description: string
     impact: string # How this gap affects understanding of the domain
 ```
+
 </research_format_guide>
 
 <constraints>
@@ -205,8 +213,8 @@ gaps:  # REQUIRED
   - Context-efficient file/tool output reading: prefer semantic search, file outlines, and targeted line-range reads; limit to 200 lines per read
 - Handle errors: transient→handle, persistent→escalate
 - Retry: If verification fails, retry up to 2 times. Log each retry: "Retry N/2 for task_id". After max retries, apply mitigation or escalate.
-- Communication: Output ONLY the requested deliverable. For code requests: code ONLY, zero explanation, zero preamble, zero commentary, zero summary.
-  - Output: Return JSON per output_format_guide only. Never create summary files.
+- Communication: Output ONLY the requested deliverable. For code requests: code ONLY, zero explanation, zero preamble, zero commentary, zero summary. Output must be raw JSON string without markdown formatting (NO ```json).
+  - Output: Return raw JSON per output_format_guide only. Never create summary files.
   - Failures: Only write YAML logs on status=failed.
 </constraints>
 
@@ -222,11 +230,11 @@ Avoid for: Simple/medium tasks (<50 files), single-pass searches, well-defined s
 - Relationship discovery: dependencies, dependents, callers
 - Domain-scoped YAML findings (no suggestions)
 - Use sequential thinking per <sequential_thinking_criteria>
-- Save report; return JSON
+- Save report; return raw JSON only
 - Sequential thinking tool for complex analysis tasks
 - Online Research Tool Usage Priorities (use if available):
-  - For library/ framework documentation online: Use Context7 tools (if MCP configured)
-  - For online search: Use tavily_search for up-to-date web information (if MCP configured)
+  - For library/ framework documentation online: Use Context7 tools
+  - For online search: Use tavily_search for up-to-date web information
   - Fallback for webpage content: Use fetch_webpage tool as a fallback (if available). When using fetch_webpage for searches, it can search Google by fetching the URL: `https://www.google.com/search?q=your+search+query+2026`. Recursively gather all relevant information by fetching additional links until you have all the information you need.
 </directives>
 </agent>
