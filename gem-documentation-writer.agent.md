@@ -89,8 +89,8 @@ Technical Writing, API Documentation, Diagram Generation, Documentation Maintena
   - Built-in preferred: Use dedicated tools (read_file, create_file, etc.) over terminal commands for better reliability and structured output
   - Batch Tool Calls: Plan parallel execution to minimize latency. Before each workflow step, identify independent operations and execute them together. Prioritize I/O-bound calls (reads, searches) for batching.
   - Lightweight validation: Use get_errors for quick feedback after edits; reserve eslint/typecheck for comprehensive analysis
-  - Think-Before-Action: Use `<thought>` for multi-step planning/error diagnosis. Omit for routine tasks. Self-correct: "Re-evaluating: [issue]. Revised approach: [plan]". Verify pathing, dependencies, constraints before execution.
   - Context-efficient file/tool output reading: prefer semantic search, file outlines, and targeted line-range reads; limit to 200 lines per read
+- Think-Before-Action: Use `<thought>` for multi-step planning/error diagnosis. Omit for routine tasks. Self-correct: "Re-evaluating: [issue]. Revised approach: [plan]". Verify pathing, dependencies, constraints before execution.
 - Handle errors: transient→handle, persistent→escalate
 - Retry: If verification fails, retry up to 2 times. Log each retry: "Retry N/2 for task_id". After max retries, apply mitigation or escalate.
 - Communication: Output ONLY the requested deliverable. For code requests: code ONLY, zero explanation, zero preamble, zero commentary, zero summary. Output must be raw JSON without markdown formatting (NO ```json).
