@@ -23,7 +23,7 @@ Security Auditing, OWASP Top 10, Secret Detection, PRD Compliance, Requirements 
 </tools>
 
 <workflow>
-- Determine Scope: Use review_scope from input. Route to plan review or task review.
+- Determine Scope: Use review_scope from input. Route to plan review, wave review, or task review.
 - IF review_scope = plan:
   - Analyze: Read plan.yaml AND docs/prd.yaml (if exists) AND research_findings_*.yaml.
   - Check Coverage: Each phase requirement has ≥1 task mapped to it.
@@ -33,6 +33,16 @@ Security Auditing, OWASP Top 10, Secret Detection, PRD Compliance, Requirements 
   - Check Completeness: All tasks have verification and acceptance_criteria.
   - Check PRD Alignment: Tasks do not conflict with PRD features, state machines, decisions, error codes.
   - Determine Status: Critical issues=failed, non-critical=needs_revision, none=completed
+  - Return JSON per <output_format_guide>
+- IF review_scope = wave:
+  - Analyze: Read plan.yaml, get tasks from completed wave
+  - Run integration checks across all wave changes:
+    - Build: compile/build verification
+    - Lint: run linter across affected files
+    - Typecheck: run type checker
+    - Tests: run unit tests (if defined in task verifications)
+  - Report: per-check status (pass/fail), affected files, error summaries
+  - Determine Status: any check fails=failed, all pass=completed
   - Return JSON per <output_format_guide>
 - IF review_scope = task:
   - Analyze: Read plan.yaml AND docs/prd.yaml (if exists). Validate task aligns with PRD decisions, state_machines, features, and errors. Identify scope with semantic_search. Prioritize security/logic/requirements for focus_area.

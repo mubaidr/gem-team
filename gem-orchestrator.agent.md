@@ -40,7 +40,7 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
 - PRD Creation (after Discuss Phase):
   - Use task_clarifications and architectural_decisions from Discuss Phase
   - Create docs/prd.yaml (or update if exists) per <prd_format_guide>
-  - Include: user stories, IN SCOPE, OUT OF SCOPE, acceptance criteria, 🚨 NEEDS CLARIFICATION
+  - Include: user stories, IN SCOPE, OUT OF SCOPE, acceptance criteria, NEEDS CLARIFICATION
   - PRD is the source of truth for research and planning
 - Phase 1: Research
   - Detect complexity from objective (model-decided, not file-count):
@@ -83,6 +83,11 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
     - Filter conflicts_with: tasks sharing same file targets run serially within wave
     - Delegate via runSubagent (up to 4 concurrent) per <delegation_protocol> to `task.agent` or `available_agents`
     - Wait for wave to complete before starting next wave
+    - Wave Integration Check: Delegate to `gem-reviewer` (review_scope=wave) to verify:
+      - Build passes across all wave changes
+      - Tests pass (lint, typecheck, unit tests)
+      - No integration failures
+      - If fails → treat as wave failure, delegate fixes before continuing
   - Synthesize results:
     - completed → mark completed in plan.yaml
     - needs_revision → re-delegate task WITH failing test output/error logs injected into the task_definition (same wave, max 3 retries)
@@ -134,7 +139,7 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
     },
 
     "gem-reviewer": {
-      "review_scope": "plan | task",
+      "review_scope": "plan | task | wave",
       "task_id": "string (required for task scope)",
       "plan_id": "string",
       "plan_path": "string",
@@ -242,6 +247,19 @@ changes: # Requirements changes only (not task logs)
 
 </prd_format_guide>
 
+<status_summary_format>
+
+```md
+Plan: {plan_id} | {plan_objective}
+  Progress: {completed}/{total} tasks ({percent}%)
+  Waves: Wave {n} ({completed}/{total}) ✓
+  Blocked: {count} ({list task_ids if any})
+  Next: Wave {n+1} ({pending_count} tasks)
+  Blocked tasks (if any): task_id, why blocked (missing dep), how long waiting.
+```
+
+</status_summary_format>
+
 <constraints>
 - Tool Usage Guidelines:
   - Always activate tools before use
@@ -278,6 +296,7 @@ changes: # Requirements changes only (not task logs)
   - Match energy to moment: celebrate wins, acknowledge setbacks, stay motivating
   - Keep it exciting, short, and action-oriented. Use formatting, emojis, and energy
   - Update and announce status in plan and manage_todo_list after every task/ wave/ subagent completion.
+- Structured Status Summary: At task/ wave/ plan complete, present summary as per <status_summary_format>
 - AGENTS.md Maintenance:
   - Update AGENTS.md at root dir, when notable findings emerge after plan completion
   - Examples: new architectural decisions, pattern preferences, conventions discovered, tool discoveries
