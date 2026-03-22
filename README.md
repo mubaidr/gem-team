@@ -77,19 +77,27 @@ Gem Team follows a **Delegation-First** pattern. The Orchestrator never executes
          ┌─────────────────┼─────────────────┐
          ▼                 ▼                 ▼
 ┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐
-│  DISCUSS PHASE  │ │    PLANNER      │ │  other agents   │
-│  (medium|complex│ │  (Phase 2)     │ │  (Phase 3)     │
-│  Intent capture │ │  DAG + Pre-mort│ │  Execute tasks │
-│  → AGENTS.md    │ └────────┬────────┘ └─────────────────┘
+│  DISCUSS PHASE  │ │  PRD CREATION   │ │  other agents  │
+│  (medium|complex│ │  (source truth) │ │  (Phase 3)    │
+│  Intent capture │ │  → docs/prd.yaml│ │  Execute tasks│
+│  → AGENTS.md   │ └────────┬────────┘ └─────────────────┘
 └─────────────────┘          │
          ┌───────────────────┼───────────────────┐
          ▼                   ▼                   ▼
 ┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐
-│  RESEARCHER     │ │    REVIEWER     │ │   plan.yaml     │
-│  (Phase 1)     │ │  (Plan Gate)   │ │  (Task DAG     │
-│  Focus areas   │ │  Verify plan    │ │   + State)     │
-│  + clarificatio │ │  → Loop if fail│ └─────────────────┘
-└─────────────────┘ └─────────────────┘
+│  RESEARCHER     │ │    PLANNER      │ │   plan.yaml     │
+│  (Phase 1)     │ │  (Phase 2)     │ │  (Task DAG     │
+│  Focus areas   │ │  DAG + Pre-mort│ │   + State)     │
+│  + PRD scope   │ │  validates PRD │ │                 │
+└─────────────────┘ └────────┬────────┘ └─────────────────┘
+                              │
+                              ▼
+                     ┌─────────────────┐
+                     │    REVIEWER     │
+                     │  (Plan Gate)   │
+                     │  Verify plan   │
+                     │  → Loop if fail│
+                     └─────────────────┘
 ```
 
 ---
@@ -117,7 +125,7 @@ The Orchestrator follows a **4-Phase** workflow:
 
 | Current State | Next Phase |
 | :------------ | :--------- |
-| No plan exists | Discuss Phase (if medium\|complex) → Phase 1: Research |
+| No plan exists | Discuss Phase (if medium\|complex) → PRD Creation → Phase 1: Research |
 | Plan + user feedback | Phase 2: Planning |
 | Plan + pending tasks | Phase 3: Execution Loop |
 | All tasks complete/blocked | Phase 4: Summary |
@@ -130,11 +138,18 @@ The Orchestrator follows a **4-Phase** workflow:
 - Task-specific clarifications → fed directly to researcher and planner
 - Skipped for simple tasks
 
+### PRD Creation (before planning)
+
+- Created from Discuss Phase answers — source of truth for research and planning
+- Includes: user stories, IN SCOPE / OUT OF SCOPE, acceptance criteria, 🚨 NEEDS CLARIFICATION markers
+- Researchers read PRD for scope context
+- Planners validate against PRD — plan must satisfy all acceptance criteria
+
 ### Phase 1: Research
 
 - Orchestrator detects complexity (simple/medium/complex)
 - Identifies focus areas from user goal
-- Passes task clarifications to researchers
+- Passes task clarifications and PRD scope to researchers
 - Delegates to gem-researcher (up to 4 concurrent) per focus area
 - Output: `docs/plan/{plan_id}/research_findings_{focus_area}.yaml`
 
@@ -142,6 +157,7 @@ The Orchestrator follows a **4-Phase** workflow:
 
 - **Complex tasks**: Delegates to gem-planner 3x (variants a/b/c), selects best
 - **Simple/Medium**: Delegates to gem-planner once
+- Reads PRD for user stories, scope boundaries, acceptance criteria — these are the source of truth
 - Validates against existing PRD and task clarifications
 - **Plan Verification Gate**: Delegates to gem-reviewer (`review_scope=plan`) to verify coverage, atomicity, deps, PRD alignment
 - If reviewer finds issues → loops to planner for fixes (max 2 iterations)
@@ -170,7 +186,7 @@ Send a steer message to `gem-orchestrator` and it automatically redirects to the
 
 ### 🎯 Intent Capture (Discuss Phase)
 
-Before planning on medium|complex tasks, the orchestrator asks 3-5 clarifying questions to lock in user intent. Architectural decisions persist in `AGENTS.md` for future tasks. Task-specific clarifications feed directly to researcher and planner — no rework from "reasonable defaults."
+Before planning on medium|complex tasks, the orchestrator asks 3-5 clarifying questions to lock in user intent. Architectural decisions persist in `AGENTS.md` for future tasks. Task-specific clarifications feed into PRD creation — which becomes the source of truth for research and planning.
 
 ### 🎯 Team Lead Personality
 
@@ -212,7 +228,7 @@ State in `docs/plan/{plan_id}/plan.yaml` provides recovery, retry handling, and 
 
 ### 📋 Product Requirements Document (PRD)
 
-Machine-readable spec at `docs/prd.yaml` — Orchestrator creates and maintains PRD based on completed plans and reviewer feedback. Contains state machines, error codes, performance thresholds, and decision log.
+Machine-readable spec at `docs/prd.yaml` — Created from Discuss Phase *before* planning as the source of truth. Contains user stories, IN SCOPE / OUT OF SCOPE, acceptance criteria, state machines, error codes, and decision log. Updated after plan completion with completed features and decisions.
 
 ### 🔒 Agent Hierarchy
 
@@ -247,7 +263,8 @@ gem-team/
 
 | Agent | Generates | Path |
 | :--- | :--- | :--- |
-| **gem-planner** | plan.yaml, PRD (draft) | `docs/plan/{plan_id}/plan.yaml`, `docs/prd.yaml` |
+| **gem-orchestrator** | PRD (initial) | `docs/prd.yaml` |
+| **gem-planner** | plan.yaml | `docs/plan/{plan_id}/plan.yaml` |
 | **gem-researcher** | findings YAML | `docs/plan/{plan_id}/research_findings_{focus}.yaml` |
 | **gem-documentation-writer** | walkthrough, PRD (final) | `docs/plan/{plan_id}/walkthrough-*.md`, `docs/prd.yaml` |
 | **gem-browser-tester** | evidence (on failure) | `docs/plan/{plan_id}/evidence/{task_id}/` |

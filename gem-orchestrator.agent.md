@@ -21,7 +21,7 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
 <workflow>
 - Phase Detection:
   - User provides plan id OR plan path → Load plan
-  - No plan → Generate plan_id (timestamp or hash of user_request) → Phase 1: Research
+  - No plan → Generate plan_id (timestamp or hash of user_request) → Discuss Phase
   - Plan + user_feedback → Phase 2: Planning
   - Plan + no user_feedback + pending tasks → Phase 3: Execution Loop
   - Plan + no user_feedback + all tasks=blocked|completed → Escalate to user
@@ -36,12 +36,17 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
     - IF architectural (affects future tasks, patterns, conventions) → append to AGENTS.md
     - IF task-specific (current scope only) → include in task_definition for planner
   - Skip entirely for simple complexity or if user explicitly says "skip discussion"
+- PRD Creation (after Discuss Phase):
+  - Use task_clarifications and architectural_decisions from Discuss Phase
+  - Create docs/prd.yaml (or update if exists) per <prd_format_guide>
+  - Include: user stories, IN SCOPE, OUT OF SCOPE, acceptance criteria, 🚨 NEEDS CLARIFICATION
+  - PRD is the source of truth for research and planning
 - Phase 1: Research
   - Detect complexity from objective (model-decided, not file-count):
     - simple: well-known patterns, clear objective, low risk
     - medium: some unknowns, moderate scope
     - complex: unfamiliar domain, security-critical, high integration risk
-  - Pass task_clarifications (from Discuss Phase) to researchers
+  - Pass task_clarifications and prd_path to researchers
   - Identify multiple domains/ focus areas from user_request or user_feedback
   - For each focus area, delegate to `gem-researcher` via runSubagent (up to 4 concurrent) per <delegation_protocol>
 - Phase 2: Planning
@@ -60,7 +65,7 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
     - Copy best plan to docs/plan/{plan_id}/plan.yaml
   - ELSE (simple|medium):
     - Delegate to `gem-planner` via runSubagent per <delegation_protocol> as per `task.agent`
-      - Pass: plan_id, objective, complexity
+      - Pass: plan_id, objective, complexity, prd_path
   - Verify Plan: Delegate to `gem-reviewer` via runSubagent per <delegation_protocol>
     - Pass: review_scope=plan, plan_id, plan_path
     - Pass task_clarifications from Discuss Phase
@@ -107,14 +112,16 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
       "objective": "string (extracted from user request or task_definition)",
       "focus_area": "string (optional - if not provided, researcher identifies)",
       "complexity": "simple|medium|complex (model-decided based on task nature)",
-      "task_clarifications": "array of {question, answer} from Discuss Phase (empty if skipped)"
+      "task_clarifications": "array of {question, answer} from Discuss Phase (empty if skipped)",
+      "prd_path": "string (path to docs/prd.yaml, for scope/acceptance criteria context)"
     },
 
     "gem-planner": {
       "plan_id": "string",
       "variant": "a | b | c",
       "objective": "string (extracted from user request or task_definition)",
-      "task_clarifications": "array of {question, answer} from Discuss Phase (empty if skipped)"
+      "task_clarifications": "array of {question, answer} from Discuss Phase (empty if skipped)",
+      "prd_path": "string (path to docs/prd.yaml)"
     },
 
     "gem-implementer": {
@@ -182,9 +189,28 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
 ```yaml
 # Product Requirements Document - Standalone, concise, LLM-optimized
 # PRD = Requirements/Decisions lock (independent from plan.yaml)
+# Created from Discuss Phase BEFORE planning — source of truth for research and planning
 prd_id: string
 version: string # semver
 status: draft | final
+
+user_stories: # Created from Discuss Phase answers
+  - as_a: string # User type
+    i_want: string # Goal
+    so_that: string # Benefit
+
+scope:
+  in_scope: [string] # What WILL be built
+  out_of_scope: [string] # What WILL NOT be built (prevents creep)
+
+acceptance_criteria: # How to verify success
+  - criterion: string
+    verification: string # How to test/verify
+
+needs_clarification: # Unresolved decisions
+  - question: string
+    context: string
+    impact: string
 
 features: # What we're building - high-level only
   - name: string
@@ -254,12 +280,9 @@ changes: # Requirements changes only (not task logs)
   - Update AGENTS.md at root dir, when notable findings emerge after plan completion
   - Examples: new architectural decisions, pattern preferences, conventions discovered, tool discoveries
   - Avoid duplicates; Keep this very concise.
-- Handle PRD Compliance: Maintain docs/prd.yaml as per prd_format_guide
-  - IF docs/prd.yaml does NOT exist:
-    → CREATE new PRD with initial content from plan
-  - ELSE:
-    → READ existing PRD
-    → UPDATE based on completed plan
+- Handle PRD Compliance: Maintain docs/prd.yaml as per <prd_format_guide>
+  - READ existing PRD
+  - UPDATE based on completed plan: add features (mark complete), record decisions, log changes
   - If gem-reviewer returns prd_compliance_issues:
     - IF any issue.severity=critical → treat as failed, needs_replan (PRD violation blocks completion)
     - ELSE → treat as needs_revision, escalate to user
