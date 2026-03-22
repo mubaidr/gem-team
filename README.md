@@ -60,7 +60,7 @@ Traditional AI coding assistants hit walls when projects get complex:
 
 ## 🚀 Overview
 
-Gem Team follows a **Delegation-First** pattern. The Orchestrator never executes—it only detects phase, routes to agents, and synthesizes results. All state operations are managed directly by the Orchestrator via `plan.yaml`.
+Gem Team follows a Delegation-First pattern. The Orchestrator never executes—it only detects phase, routes to agents, and synthesizes results. All state operations are managed directly by the Orchestrator via `plan.yaml`.
 
 ```text
 ┌─────────────────────────────────────────────────────────┐
@@ -119,7 +119,7 @@ Gem Team follows a **Delegation-First** pattern. The Orchestrator never executes
 
 ## 🔄 Core Workflow
 
-The Orchestrator follows a **4-Phase** workflow:
+The Orchestrator follows a 4-Phase workflow:
 
 ### Phase Detection (Automatic)
 
@@ -156,11 +156,11 @@ The Orchestrator follows a **4-Phase** workflow:
 
 ### Phase 2: Planning
 
-- **Complex tasks**: Delegates to gem-planner 3x (variants a/b/c), selects best
-- **Simple/Medium**: Delegates to gem-planner once
+- Complex tasks: Delegates to gem-planner 3x (variants a/b/c), selects best
+- Simple/Medium: Delegates to gem-planner once
 - Reads PRD for user stories, scope boundaries, acceptance criteria — these are the source of truth
 - Validates against existing PRD and task clarifications
-- **Plan Verification Gate**: Delegates to gem-reviewer (`review_scope=plan`) to verify coverage, atomicity, deps, PRD alignment
+- Plan Verification Gate: Delegates to gem-reviewer (`review_scope=plan`) to verify coverage, atomicity, deps, PRD alignment
 - If reviewer finds issues → loops to planner for fixes (max 2 iterations)
 - Output: `docs/plan/{plan_id}/plan.yaml` with DAG tasks and waves
 
@@ -170,6 +170,7 @@ The Orchestrator follows a **4-Phase** workflow:
 - Executes in waves (wave 1 first, wave 2 after wave 1 completes, etc.)
 - Up to 4 agents work in parallel per wave
 - Contracts presented for verification (wave > 1)
+- Wave Integration Check: After each wave, reviewer runs build/lint/typecheck/tests across all wave changes — catches integration failures early
 - Loops until all tasks done or blocked
 
 ### Phase 4: Summary
@@ -237,8 +238,8 @@ Machine-readable spec at `docs/prd.yaml` — Created from Discuss Phase *before*
 User → ORCHESTRATOR → WORKERS (execute)
 ```
 
-- **Orchestrator**: `disable-model-invocation: true` — delegates ALL work, manages plan.yaml state and todos, never executes
-- **Workers**: `disable-model-invocation: false` — execute tasks via tools
+- Orchestrator: `disable-model-invocation: true` — delegates ALL work, manages plan.yaml state and todos, never executes
+- Workers: `disable-model-invocation: false` — execute tasks via tools
   - RESEARCHER, PLANNER, IMPLEMENTER, BROWSER TESTER, DEVOPS, REVIEWER, DOC WRITER
 - Isolation: Workers cannot call other subagents — all collaboration mediated by Orchestrator
 
@@ -264,12 +265,12 @@ gem-team/
 
 | Agent | Generates | Path |
 | :--- | :--- | :--- |
-| **gem-orchestrator** | PRD (initial) | `docs/prd.yaml` |
-| **gem-planner** | plan.yaml | `docs/plan/{plan_id}/plan.yaml` |
-| **gem-researcher** | findings YAML | `docs/plan/{plan_id}/research_findings_{focus}.yaml` |
-| **gem-documentation-writer** | walkthrough, PRD (final) | `docs/plan/{plan_id}/walkthrough-*.md`, `docs/prd.yaml` |
-| **gem-browser-tester** | evidence (on failure) | `docs/plan/{plan_id}/evidence/{task_id}/` |
-| **All agents** | failure logs | `docs/plan/{plan_id}/logs/{agent}_{task_id}_{ts}.yaml` |
+| gem-orchestrator | PRD (initial) | `docs/prd.yaml` |
+| gem-planner | plan.yaml | `docs/plan/{plan_id}/plan.yaml` |
+| gem-researcher | findings YAML | `docs/plan/{plan_id}/research_findings_{focus}.yaml` |
+| gem-documentation-writer | walkthrough, PRD (final) | `docs/plan/{plan_id}/walkthrough-*.md`, `docs/prd.yaml` |
+| gem-browser-tester | evidence (on failure) | `docs/plan/{plan_id}/evidence/{task_id}/` |
+| All agents | failure logs | `docs/plan/{plan_id}/logs/{agent}_{task_id}_{ts}.yaml` |
 
 ---
 
@@ -277,13 +278,13 @@ gem-team/
 
 ### Input → Output
 
-**Delegation (Input):**
+Delegation (Input):
 
 ```yaml
 task_id, plan_id, plan_path, task_definition (agent-specific)
 ```
 
-**Completion (Output):**
+Completion (Output):
 
 ```json
 {"status": "completed|failed|needs_revision", "task_id", "plan_id", "summary": "≤3 sentences", "extra": {}}
@@ -302,19 +303,20 @@ task_id, plan_id, plan_path, task_definition (agent-specific)
 | :--- | :--- |
 | Implementer | get_errors → typecheck → unit tests |
 | Browser Tester | validation matrix → console → network → accessibility |
-| Reviewer | OWASP scan → code quality → logic |
+| Reviewer (task) | OWASP scan → code quality → logic |
+| Reviewer (wave) | build → lint → typecheck → tests |
+| Reviewer (plan) | coverage → atomicity → deps → PRD alignment |
 | DevOps | deployment → health checks → idempotency |
 | Doc Writer | completeness → code parity → formatting |
 
 ### Autonomous Execution
 
-- **Most agents**: Fully autonomous
-- **DevOps**: Approval gates for production/security
-- **Plan Verification Gate**: Reviewer validates plan (coverage, atomicity, deps, PRD alignment) before execution — loops to planner if issues found (max 2 iterations)
-- **Orchestrator**: Delegates all via `runSubagent`
+- Most agents: Fully autonomous
+- DevOps: Approval gates for production/security
+- Plan Verification Gate: Reviewer validates plan (coverage, atomicity, deps, PRD alignment) before execution — loops to planner if issues found (max 2 iterations)
+- Orchestrator: Delegates all via `runSubagent`
 
 ---
-
 
 ## 🎯 Use Cases
 

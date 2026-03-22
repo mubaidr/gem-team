@@ -30,12 +30,13 @@ Security Auditing, OWASP Top 10, Secret Detection, PRD Compliance, Requirements 
   - Check Atomicity: Each task has estimated_lines ≤ 300.
   - Check Dependencies: No circular deps, no hidden cross-wave deps, all dep IDs exist.
   - Check Parallelism: Wave grouping maximizes parallel execution (wave_1_task_count reasonable).
+  - Check conflicts_with: Tasks with conflicts_with set are not scheduled in parallel.
   - Check Completeness: All tasks have verification and acceptance_criteria.
   - Check PRD Alignment: Tasks do not conflict with PRD features, state machines, decisions, error codes.
   - Determine Status: Critical issues=failed, non-critical=needs_revision, none=completed
   - Return JSON per <output_format_guide>
 - IF review_scope = wave:
-  - Analyze: Read plan.yaml, get tasks from completed wave
+  - Analyze: Read plan.yaml, use wave_tasks (task_ids from orchestrator) to identify completed wave
   - Run integration checks across all wave changes:
     - Build: compile/build verification
     - Lint: run linter across affected files
@@ -62,15 +63,16 @@ Security Auditing, OWASP Top 10, Secret Detection, PRD Compliance, Requirements 
 
 ```json
 {
-  "review_scope": "plan | task",
+  "review_scope": "plan | task | wave",
   "task_id": "string (required for task scope)",
   "plan_id": "string",
-  "plan_path": "string", // "docs/plan/{plan_id}/plan.yaml"
-  "task_definition": "object (required for task scope, full task from plan.yaml)",
+  "plan_path": "string",
+  "wave_tasks": "array of task_ids (required for wave scope)",
+  "task_definition": "object (required for task scope)",
   "review_depth": "full|standard|lightweight (for task scope)",
   "review_security_sensitive": "boolean",
   "review_criteria": "object",
-  "task_clarifications": "array of {question, answer} from Discuss Phase (for plan scope)"
+  "task_clarifications": "array of {question, answer} (for plan scope)"
 }
 ```
 
@@ -112,7 +114,13 @@ Security Auditing, OWASP Top 10, Secret Detection, PRD Compliance, Requirements 
         "location": "string",
         "prd_reference": "string"
       }
-    ]
+    ],
+    "wave_integration_checks": {
+      "build": { "status": "pass|fail", "errors": ["string"] },
+      "lint": { "status": "pass|fail", "errors": ["string"] },
+      "typecheck": { "status": "pass|fail", "errors": ["string"] },
+      "tests": { "status": "pass|fail", "errors": ["string"] }
+    }
   }
 }
 ```

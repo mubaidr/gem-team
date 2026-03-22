@@ -54,10 +54,6 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
   - Parse objective from user_request or task_definition
   - IF complexity = complex:
     - Multi-Plan Selection: Delegate to `gem-planner` (3x in parallel) via runSubagent per <delegation_protocol>
-      - Each planner receives:
-        - plan_id: {base_plan_id}_a | _b | _c
-        - variant: a | b | c
-        - objective: same for all
     - SELECT BEST PLAN based on:
       - Read plan_metrics from each plan variant docs/plan/{plan_id}/plan_{variant}.yaml
       - Highest wave_1_task_count (more parallel = faster)
@@ -65,13 +61,10 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
       - Lowest risk_score (safer = better)
     - Copy best plan to docs/plan/{plan_id}/plan.yaml
   - ELSE (simple|medium):
-    - Delegate to `gem-planner` via runSubagent per <delegation_protocol> as per `task.agent`
-      - Pass: plan_id, objective, complexity, prd_path
+    - Delegate to `gem-planner` via runSubagent per <delegation_protocol>
   - Verify Plan: Delegate to `gem-reviewer` via runSubagent per <delegation_protocol>
-    - Pass: review_scope=plan, plan_id, plan_path
-    - Pass task_clarifications from Discuss Phase
   - IF review.status=failed OR needs_revision:
-    - Loop: Delegate to `gem-planner` with review feedback for fixes (max 2 iterations)
+    - Loop: Delegate to `gem-planner` with review feedback (issues, locations) for fixes (max 2 iterations)
     - Re-verify after each fix
   - Present: clean plan → wait for approval → iterate using `gem-planner` if feedback
 - Phase 3: Execution Loop
@@ -83,11 +76,11 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
     - Filter conflicts_with: tasks sharing same file targets run serially within wave
     - Delegate via runSubagent (up to 4 concurrent) per <delegation_protocol> to `task.agent` or `available_agents`
     - Wait for wave to complete before starting next wave
-    - Wave Integration Check: Delegate to `gem-reviewer` (review_scope=wave) to verify:
+    - Wave Integration Check: Delegate to `gem-reviewer` (review_scope=wave, wave_tasks=[completed task ids from this wave]) to verify:
       - Build passes across all wave changes
       - Tests pass (lint, typecheck, unit tests)
       - No integration failures
-      - If fails → treat as wave failure, delegate fixes before continuing
+      - If fails → identify tasks causing failures, delegate fixes to responsible agents (same wave, max 3 retries), re-run integration check
   - Synthesize results:
     - completed → mark completed in plan.yaml
     - needs_revision → re-delegate task WITH failing test output/error logs injected into the task_definition (same wave, max 3 retries)
@@ -106,86 +99,73 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
 
 ```json
 {
-  "base_params": {
+  "gem-researcher": {
+    "plan_id": "string",
+    "objective": "string",
+    "focus_area": "string (optional)",
+    "complexity": "simple|medium|complex",
+    "task_clarifications": "array of {question, answer} (empty if skipped)",
+    "prd_path": "string"
+  },
+
+  "gem-planner": {
+    "plan_id": "string",
+    "variant": "a | b | c",
+    "objective": "string",
+    "complexity": "simple|medium|complex",
+    "task_clarifications": "array of {question, answer} (empty if skipped)",
+    "prd_path": "string"
+  },
+
+  "gem-implementer": {
     "task_id": "string",
     "plan_id": "string",
     "plan_path": "string",
-    "task_definition": "object (includes contracts for wave > 1)"
+    "task_definition": "object"
   },
 
-  "agent_specific_params": {
-    "gem-researcher": {
-      "plan_id": "string",
-      "objective": "string (extracted from user request or task_definition)",
-      "focus_area": "string (optional - if not provided, researcher identifies)",
-      "complexity": "simple|medium|complex (model-decided based on task nature)",
-      "task_clarifications": "array of {question, answer} from Discuss Phase (empty if skipped)",
-      "prd_path": "string (path to docs/prd.yaml, for scope/acceptance criteria context)"
-    },
-
-    "gem-planner": {
-      "plan_id": "string",
-      "variant": "a | b | c",
-      "objective": "string (extracted from user request or task_definition)",
-      "task_clarifications": "array of {question, answer} from Discuss Phase (empty if skipped)",
-      "prd_path": "string (path to docs/prd.yaml)"
-    },
-
-    "gem-implementer": {
-      "task_id": "string",
-      "plan_id": "string",
-      "plan_path": "string",
-      "task_definition": "object (full task from plan.yaml)"
-    },
-
-    "gem-reviewer": {
-      "review_scope": "plan | task | wave",
-      "task_id": "string (required for task scope)",
-      "plan_id": "string",
-      "plan_path": "string",
-      "review_depth": "full|standard|lightweight (for task scope)",
-      "review_security_sensitive": "boolean",
-      "review_criteria": "object",
-      "task_clarifications": "array of {question, answer} from Discuss Phase (for plan scope)"
-    },
-
-    "gem-browser-tester": {
-      "task_id": "string",
-      "plan_id": "string",
-      "plan_path": "string",
-      "task_definition": "object (full task from plan.yaml)"
-    },
-
-    "gem-devops": {
-      "task_id": "string",
-      "plan_id": "string",
-      "plan_path": "string",
-      "task_definition": "object",
-      "environment": "development|staging|production",
-      "requires_approval": "boolean",
-      "devops_security_sensitive": "boolean"
-    },
-
-    "gem-documentation-writer": {
-      "task_id": "string",
-      "plan_id": "string",
-      "plan_path": "string",
-      "task_type": "walkthrough|documentation|update",
-      "audience": "developers|end_users|stakeholders",
-      "coverage_matrix": "array",
-      "overview": "string (for walkthrough)",
-      "tasks_completed": "array (for walkthrough)",
-      "outcomes": "string (for walkthrough)",
-      "next_steps": "array (for walkthrough)"
-    }
+  "gem-reviewer": {
+    "review_scope": "plan | task | wave",
+    "task_id": "string (required for task scope)",
+    "plan_id": "string",
+    "plan_path": "string",
+    "wave_tasks": "array of task_ids (required for wave scope)",
+    "review_depth": "full|standard|lightweight (for task scope)",
+    "review_security_sensitive": "boolean",
+    "review_criteria": "object",
+    "task_clarifications": "array of {question, answer} (for plan scope)"
   },
 
-  "delegation_validation": [
-    "Validate all base_params present",
-    "Validate agent-specific_params match target agent",
-    "Validate task_definition matches task_id in plan.yaml",
-    "Log delegation with timestamp and agent name"
-  ]
+  "gem-browser-tester": {
+    "task_id": "string",
+    "plan_id": "string",
+    "plan_path": "string",
+    "task_definition": "object"
+  },
+
+  "gem-devops": {
+    "task_id": "string",
+    "plan_id": "string",
+    "plan_path": "string",
+    "task_definition": "object",
+    "environment": "development|staging|production",
+    "requires_approval": "boolean",
+    "devops_security_sensitive": "boolean"
+  },
+
+  "gem-documentation-writer": {
+    "task_id": "string",
+    "plan_id": "string",
+    "plan_path": "string",
+    "task_definition": "object",
+    "task_type": "walkthrough|documentation|update",
+    "audience": "developers|end_users|stakeholders",
+    "coverage_matrix": "array",
+    "overview": "string (for walkthrough)",
+    "tasks_completed": "array (for walkthrough)",
+    "outcomes": "string (for walkthrough)",
+    "next_steps": "array (for walkthrough)"
+  }
 }
 ```
 
