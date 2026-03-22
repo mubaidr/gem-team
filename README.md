@@ -62,42 +62,67 @@ Traditional AI coding assistants hit walls when projects get complex:
 
 Gem Team follows a Delegation-First pattern. The Orchestrator never executes—it only detects phase, routes to agents, and synthesizes results. All state operations are managed directly by the Orchestrator via `plan.yaml`.
 
-```text
-┌─────────────────────────────────────────────────────────┐
-│                      USER GOAL                           │
-└──────────────────────────┬──────────────────────────────┘
-                           ▼
-┌──────────────────────────────────────────────────────────┐
-│                      ORCHESTRATOR                         │
-│  • Phase Detection    • Route to agents (runSubagent)   │
-│  • Synthesize results • Manage plan.yaml state           │
-│  • Manage todos       • Never execute directly           │
-└──────────────────────────┬───────────────────────────────┘
-                           │
-         ┌─────────────────┼─────────────────┐
-         ▼                 ▼                 ▼
-┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐
-│  DISCUSS PHASE  │ │  PRD CREATION   │ │  other agents  │
-│  (medium|complex│ │  (source truth) │ │  (Phase 3)    │
-│  Intent capture │ │  → docs/prd.yaml│ │  Execute tasks│
-│  → AGENTS.md   │ └────────┬────────┘ └─────────────────┘
-└─────────────────┘          │
-         ┌───────────────────┼───────────────────┐
-         ▼                   ▼                   ▼
-┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐
-│  RESEARCHER     │ │    PLANNER      │ │   plan.yaml     │
-│  (Phase 1)     │ │  (Phase 2)     │ │  (Task DAG     │
-│  Focus areas   │ │  DAG + Pre-mort│ │   + State)     │
-│  + PRD scope   │ │  validates PRD │ │                 │
-└─────────────────┘ └────────┬────────┘ └─────────────────┘
-                              │
-                              ▼
-                     ┌─────────────────┐
-                     │    REVIEWER     │
-                     │  (Plan Gate)   │
-                     │  Verify plan   │
-                     │  → Loop if fail│
-                     └─────────────────┘
+```mermaid
+flowchart TB
+    subgraph USER["USER"]
+        goal["User Goal"]
+    end
+    
+    subgraph ORCH["ORCHESTRATOR"]
+        detect["Phase Detection"]
+        route["Route to agents"]
+        synthesize["Synthesize results"]
+        state["Manage plan.yaml state"]
+        todos["Manage todos"]
+        exec["Never execute directly"]
+    end
+    
+    subgraph DISCUSS["Discuss Phase"]
+        dir1["medium|complex only"]
+        intent["Intent capture"]
+        agents["→ AGENTS.md"]
+    end
+    
+    subgraph PRD["PRD Creation"]
+        dir2["Source of truth"]
+        prd["→ docs/prd.yaml"]
+    end
+    
+    subgraph PHASE1["Phase 1: Research"]
+        focus["Focus areas"]
+        scope["+ PRD scope"]
+    end
+    
+    subgraph PHASE2["Phase 2: Planning"]
+        dag["DAG + Pre-mortem"]
+        valid["validates PRD"]
+    end
+    
+    subgraph REVIEW["Reviewer - Plan Gate"]
+        ver["Verify plan"]
+        loop["→ Loop if fail"]
+    end
+    
+    subgraph EXEC["Phase 3: Execution"]
+        exec_tasks["Execute tasks"]
+    end
+    
+    goal --> ORCH
+    ORCH --> DISCUSS
+    ORCH --> PRD
+    ORCH --> EXEC
+    
+    DISCUSS --> |Architectural| agents
+    DISCUSS --> |Clarifications| PRD
+    
+    PRD --> PHASE1
+    PHASE1 --> PHASE2
+    PHASE2 --> REVIEW
+    REVIEW --> |Approved| EXEC
+    
+    style ORCH fill:#9b59b6,color:#fff
+    style REVIEW fill:#e74c3c,color:#fff
+    style USER fill:#2ecc71,color:#fff
 ```
 
 ---
