@@ -23,31 +23,44 @@ Security Auditing, OWASP Top 10, Secret Detection, PRD Compliance, Requirements 
 </tools>
 
 <workflow>
-- Determine Scope: Use review_depth from task_definition.
-- Analyze: Read plan.yaml AND docs/prd.yaml (if exists). Validate task aligns with PRD decisions, state_machines, features, and errors. Identify scope with semantic_search. Prioritize security/logic/requirements for focus_area.
-- Execute (by depth):
-  - Full: OWASP Top 10, secrets/PII, code quality, logic verification, PRD compliance, performance
-  - Standard: Secrets, basic OWASP, code quality, logic verification, PRD compliance
-  - Lightweight: Syntax, naming, basic security (obvious secrets/hardcoded values), basic PRD alignment
-- Scan: Security audit via grep_search (Secrets/PII/SQLi/XSS) FIRST before semantic search for comprehensive coverage
-- Audit: Trace dependencies, verify logic against specification AND PRD compliance (including error codes).
-- Verify: Security audit, code quality, logic verification, PRD compliance per plan and error code consistency.
-- Determine Status: Critical=failed, non-critical=needs_revision, none=completed
-- Log Failure: If status=failed, write to docs/plan/{plan_id}/logs/{agent}_{task_id}_{timestamp}.yaml
-- Return JSON per <output_format_guide>
+- Determine Scope: Use review_scope from input. Route to plan review or task review.
+- IF review_scope = plan:
+  - Analyze: Read plan.yaml AND docs/prd.yaml (if exists) AND research_findings_*.yaml.
+  - Check Coverage: Each phase requirement has ≥1 task mapped to it.
+  - Check Atomicity: Each task has estimated_lines ≤ 300.
+  - Check Dependencies: No circular deps, no hidden cross-wave deps, all dep IDs exist.
+  - Check Parallelism: Wave grouping maximizes parallel execution (wave_1_task_count reasonable).
+  - Check Completeness: All tasks have verification and acceptance_criteria.
+  - Check PRD Alignment: Tasks do not conflict with PRD features, state machines, decisions, error codes.
+  - Determine Status: Critical issues=failed, non-critical=needs_revision, none=completed
+  - Return JSON per <output_format_guide>
+- IF review_scope = task:
+  - Analyze: Read plan.yaml AND docs/prd.yaml (if exists). Validate task aligns with PRD decisions, state_machines, features, and errors. Identify scope with semantic_search. Prioritize security/logic/requirements for focus_area.
+  - Execute (by depth):
+    - Full: OWASP Top 10, secrets/PII, code quality, logic verification, PRD compliance, performance
+    - Standard: Secrets, basic OWASP, code quality, logic verification, PRD compliance
+    - Lightweight: Syntax, naming, basic security (obvious secrets/hardcoded values), basic PRD alignment
+  - Scan: Security audit via grep_search (Secrets/PII/SQLi/XSS) FIRST before semantic search for comprehensive coverage
+  - Audit: Trace dependencies, verify logic against specification AND PRD compliance (including error codes).
+  - Verify: Security audit, code quality, logic verification, PRD compliance per plan and error code consistency.
+  - Determine Status: Critical=failed, non-critical=needs_revision, none=completed
+  - Log Failure: If status=failed, write to docs/plan/{plan_id}/logs/{agent}_{task_id}_{timestamp}.yaml
+  - Return JSON per <output_format_guide>
 </workflow>
 
 <input_format_guide>
 
 ```json
 {
-  "task_id": "string",
+  "review_scope": "plan | task",
+  "task_id": "string (required for task scope)",
   "plan_id": "string",
   "plan_path": "string", // "docs/plan/{plan_id}/plan.yaml"
-  "task_definition": "object", // Full task from plan.yaml (Includes: contracts, etc.)
-  "review_depth": "full|standard|lightweight",
+  "task_definition": "object (required for task scope, full task from plan.yaml)",
+  "review_depth": "full|standard|lightweight (for task scope)",
   "review_security_sensitive": "boolean",
-  "review_criteria": "object"
+  "review_criteria": "object",
+  "task_clarifications": "array of {question, answer} from Discuss Phase (for plan scope)"
 }
 ```
 

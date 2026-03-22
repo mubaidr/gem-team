@@ -58,10 +58,16 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
       - Fewest total_dependencies (less blocking = better)
       - Lowest risk_score (safer = better)
     - Copy best plan to docs/plan/{plan_id}/plan.yaml
-    - Present: plan review → wait for approval → iterate using `gem-planner` if feedback
   - ELSE (simple|medium):
     - Delegate to `gem-planner` via runSubagent per <delegation_protocol> as per `task.agent`
       - Pass: plan_id, objective, complexity
+  - Verify Plan: Delegate to `gem-reviewer` via runSubagent per <delegation_protocol>
+    - Pass: review_scope=plan, plan_id, plan_path
+    - Pass task_clarifications from Discuss Phase
+  - IF review.status=failed OR needs_revision:
+    - Loop: Delegate to `gem-planner` with review feedback for fixes (max 2 iterations)
+    - Re-verify after each fix
+  - Present: clean plan → wait for approval → iterate using `gem-planner` if feedback
 - Phase 3: Execution Loop
   - Delegate plan.yaml reading to agent, get pending tasks (status=pending, dependencies=completed)
   - Get unique waves: sort ascending
@@ -119,12 +125,14 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
     },
 
     "gem-reviewer": {
-      "task_id": "string",
+      "review_scope": "plan | task",
+      "task_id": "string (required for task scope)",
       "plan_id": "string",
       "plan_path": "string",
-      "review_depth": "full|standard|lightweight",
+      "review_depth": "full|standard|lightweight (for task scope)",
       "review_security_sensitive": "boolean",
-      "review_criteria": "object"
+      "review_criteria": "object",
+      "task_clarifications": "array of {question, answer} from Discuss Phase (for plan scope)"
     },
 
     "gem-browser-tester": {
