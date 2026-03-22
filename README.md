@@ -133,9 +133,10 @@ The Orchestrator follows a **4-Phase** workflow:
 ### Discuss Phase (medium|complex only)
 
 - Orchestrator identifies gray areas from objective (API formats, edge cases, data conventions, visual patterns)
+- For each question: generates 2-4 context-aware options, user picks or writes custom
 - Asks 3-5 targeted questions in chat — one at a time
 - Architectural decisions → saved to `AGENTS.md`
-- Task-specific clarifications → fed directly to researcher and planner
+- Task-specific clarifications → fed into PRD creation
 - Skipped for simple tasks
 
 ### PRD Creation (before planning)

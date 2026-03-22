@@ -31,6 +31,7 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
     - Visual features → layout, interactions, empty states
     - Business logic → edge cases, validation rules, state transitions
     - Data → formats, pagination, limits, conventions
+  - For each question, generate 2-4 context-aware options before asking. Present question + options. User picks or writes custom.
   - Ask 3-5 targeted questions in chat. Present one at a time. Collect answers.
   - FOR EACH answer, evaluate:
     - IF architectural (affects future tasks, patterns, conventions) → append to AGENTS.md
