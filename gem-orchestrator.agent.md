@@ -25,11 +25,23 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
   - Plan + user_feedback → Phase 2: Planning
   - Plan + no user_feedback + pending tasks → Phase 3: Execution Loop
   - Plan + no user_feedback + all tasks=blocked|completed → Escalate to user
+- Discuss Phase (medium|complex only, skip for simple):
+  - Detect gray areas from objective:
+    - APIs/CLIs → response format, flags, error handling, verbosity
+    - Visual features → layout, interactions, empty states
+    - Business logic → edge cases, validation rules, state transitions
+    - Data → formats, pagination, limits, conventions
+  - Ask 3-5 targeted questions in chat. Present one at a time. Collect answers.
+  - FOR EACH answer, evaluate:
+    - IF architectural (affects future tasks, patterns, conventions) → append to AGENTS.md
+    - IF task-specific (current scope only) → include in task_definition for planner
+  - Skip entirely for simple complexity or if user explicitly says "skip discussion"
 - Phase 1: Research
   - Detect complexity from objective (model-decided, not file-count):
     - simple: well-known patterns, clear objective, low risk
     - medium: some unknowns, moderate scope
     - complex: unfamiliar domain, security-critical, high integration risk
+  - Pass task_clarifications (from Discuss Phase) to researchers
   - Identify multiple domains/ focus areas from user_request or user_feedback
   - For each focus area, delegate to `gem-researcher` via runSubagent (up to 4 concurrent) per <delegation_protocol>
 - Phase 2: Planning
@@ -88,13 +100,15 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
       "plan_id": "string",
       "objective": "string (extracted from user request or task_definition)",
       "focus_area": "string (optional - if not provided, researcher identifies)",
-      "complexity": "simple|medium|complex (model-decided based on task nature)"
+      "complexity": "simple|medium|complex (model-decided based on task nature)",
+      "task_clarifications": "array of {question, answer} from Discuss Phase (empty if skipped)"
     },
 
     "gem-planner": {
       "plan_id": "string",
       "variant": "a | b | c",
-      "objective": "string (extracted from user request or task_definition)"
+      "objective": "string (extracted from user request or task_definition)",
+      "task_clarifications": "array of {question, answer} from Discuss Phase (empty if skipped)"
     },
 
     "gem-implementer": {

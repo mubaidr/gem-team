@@ -27,6 +27,7 @@ Codebase Navigation, Pattern Recognition, Dependency Mapping, Technology Stack A
 - Research:
   - Use complexity from input OR model-decided if not provided
   - Model considers: task nature, domain familiarity, security implications, integration complexity
+  - Factor task_clarifications into research scope: look for patterns matching clarified preferences (e.g., if "use cursor pagination" is clarified, search for existing pagination patterns)
   - Proportional effort:
     - simple: 1 pass, max 20 lines output
     - medium: 2 passes, max 60 lines output
@@ -66,7 +67,8 @@ Codebase Navigation, Pattern Recognition, Dependency Mapping, Technology Stack A
   "plan_id": "string",
   "objective": "string",
   "focus_area": "string",
-  "complexity": "simple|medium|complex" // Model-decided based on task nature
+  "complexity": "simple|medium|complex",
+  "task_clarifications": "array of {question, answer} from Discuss Phase (empty if skipped)"
 }
 ```
 
