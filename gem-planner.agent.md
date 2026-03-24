@@ -151,7 +151,6 @@ tasks:
     status: string # pending | in_progress | completed | failed | blocked | needs_revision (pending/blocked: orchestrator-only; others: worker outputs)
     dependencies:
       - string
-    parallelizable: boolean # true = can sub-agent parallelize within wave (default: false)
     conflicts_with:
       - string # Task IDs that touch same files — runs serially even if dependencies allow parallel
     context_files:
