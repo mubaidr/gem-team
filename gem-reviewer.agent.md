@@ -23,9 +23,11 @@ Security Auditing, OWASP Top 10, Secret Detection, PRD Compliance, Requirements 
 </tools>
 
 <workflow>
+- READ GLOBAL RULES: If `AGENTS.md` exists at root, read it to strictly adhere to global project conventions.
 - Determine Scope: Use review_scope from input. Route to plan review, wave review, or task review.
 - IF review_scope = plan:
   - Analyze: Read plan.yaml AND docs/PRD.yaml (if exists) AND research_findings_*.yaml.
+  - APPLY TASK CLARIFICATIONS: If task_clarifications is non-empty, validate that plan respects these clarified decisions (do NOT re-question them).
   - Check Coverage: Each phase requirement has ≥1 task mapped to it.
   - Check Atomicity: Each task has estimated_lines ≤ 300.
   - Check Dependencies: No circular deps, no hidden cross-wave deps, all dep IDs exist.

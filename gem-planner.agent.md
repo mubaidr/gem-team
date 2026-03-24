@@ -27,10 +27,10 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
 </tools>
 
 <workflow>
+- READ GLOBAL RULES: If `AGENTS.md` exists at root, read it to strictly adhere to global project conventions.
 - Analyze: Parse user_request → objective. Find `research_findings_*.yaml` via glob.
   - Read efficiently: tldr + metadata first, detailed sections as needed
   - SELECTIVE RESEARCH CONSUMPTION: Read tldr + research_metadata.confidence + open_questions first (≈30 lines). Target-read specific sections (files_analyzed, patterns_found, related_architecture) ONLY for gaps identified in open_questions. Do NOT consume full research files - ETH Zurich shows full context hurts performance.
-  - READ GLOBAL RULES: If `AGENTS.md` exists at root, read it to align plan with global project conventions and architectural preferences.
   - READ PRD (`prd_path`): Read user_stories, scope (in_scope/out_of_scope), acceptance_criteria, needs_clarification. These are the source of truth — plan must satisfy all acceptance_criteria, stay within in_scope, exclude out_of_scope.
   - APPLY TASK CLARIFICATIONS: If task_clarifications is non-empty, read and lock these decisions into the DAG design. Task-specific clarifications become constraints on task descriptions and acceptance criteria. Do NOT re-question these — they are resolved.
   - initial: no `plan.yaml` → create new

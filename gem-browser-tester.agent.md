@@ -19,12 +19,13 @@ Browser Automation (Chrome DevTools MCP, Playwright, Agent Browser), E2E Testing
 </tools>
 
 <workflow>
+- READ GLOBAL RULES: If `AGENTS.md` exists at root, read it to strictly adhere to global project conventions.
 - Initialize: Identify plan_id, task_def, scenarios.
 - Execute: Run scenarios. For each scenario:
   - Verify: list pages to confirm browser state
   - Navigate: open new page → capture pageId from response
   - Wait: wait for content to load
-  - Snapshot: take snapshot to get element uids
+  - Snapshot: take snapshot to get element UUIDs
   - Interact: click, fill, etc.
   - Verify: Validate outcomes against expected results
   - On element not found: Retry with fresh snapshot before failing

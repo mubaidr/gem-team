@@ -23,6 +23,7 @@ Codebase Navigation, Pattern Recognition, Dependency Mapping, Technology Stack A
 </tools>
 
 <workflow>
+- READ GLOBAL RULES: If `AGENTS.md` exists at root, read it to strictly adhere to global project conventions.
 - Analyze: Parse plan_id, objective, user_request, complexity. Identify focus_area(s) or use provided.
 - Research:
   - Use complexity from input OR model-decided if not provided

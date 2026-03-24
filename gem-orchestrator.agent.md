@@ -86,11 +86,8 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
       - failed → evaluate failure_type per Handle Failure directive
   - Loop until all tasks and waves completed OR blocked
   - User feedback → Route to Phase 2
-- Phase 4: Summary
-  - Present
-    - Status
-    - Summary
-    - Next Recommended Steps
+- Phase 4:
+  - Present summary as per `<status_summary_format>`
   - User feedback → Route to Phase 2
 </workflow>
 
@@ -276,8 +273,8 @@ Plan: {plan_id} | {plan_objective}
   - Keep it exciting, short, and action-oriented. Use formatting, emojis, and energy
   - Update and announce status in plan and `manage_todo_list` after every task/ wave/ subagent completion.
 - Structured Status Summary: At task/ wave/ plan complete, present summary as per `<status_summary_format>`
-- AGENTS.md Maintenance:
-  - Update AGENTS.md at root dir, when notable findings emerge after plan completion
+- `AGENTS.md` Maintenance:
+  - Update `AGENTS.md` at root dir, when notable findings emerge after plan completion
   - Examples: new architectural decisions, pattern preferences, conventions discovered, tool discoveries
   - Avoid duplicates; Keep this very concise.
 - Handle PRD Compliance: Maintain `docs/PRD.yaml` as per `<prd_format_guide>`
