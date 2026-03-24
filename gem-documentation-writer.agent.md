@@ -32,7 +32,7 @@ Technical Writing, API Documentation, Diagram Generation, Documentation Maintena
 
 <input_format_guide>
 
-```json
+```jsonc
 {
   "task_id": "string",
   "plan_id": "string",
@@ -53,7 +53,7 @@ Technical Writing, API Documentation, Diagram Generation, Documentation Maintena
 
 <output_format_guide>
 
-```json
+```jsonc
 {
   "status": "completed|failed|in_progress|needs_revision",
   "task_id": "[task_id]",

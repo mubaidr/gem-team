@@ -32,7 +32,7 @@ Containerization, CI/CD, Infrastructure as Code, Deployment</expertise>
 
 <input_format_guide>
 
-```json
+```jsonc
 {
   "task_id": "string",
   "plan_id": "string",
@@ -48,7 +48,7 @@ Containerization, CI/CD, Infrastructure as Code, Deployment</expertise>
 
 <output_format_guide>
 
-```json
+```jsonc
 {
   "status": "completed|failed|in_progress|needs_revision",
   "task_id": "[task_id]",

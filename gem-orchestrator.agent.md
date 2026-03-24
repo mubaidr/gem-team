@@ -96,7 +96,7 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
 
 <delegation_protocol>
 
-```json
+```jsonc
 {
   "gem-researcher": {
     "plan_id": "string",
@@ -216,12 +216,12 @@ errors: # Only public-facing errors
     message: string
 
 decisions: # Architecture decisions only
-  - decision: string
-  - rationale: string
+- decision: string
+  rationale: string
 
 changes: # Requirements changes only (not task logs)
-  - version: string
-  - change: string
+- version: string
+  change: string
 ```
 
 </prd_format_guide>

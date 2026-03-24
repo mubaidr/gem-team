@@ -63,7 +63,7 @@ Codebase Navigation, Pattern Recognition, Dependency Mapping, Technology Stack A
 
 <input_format_guide>
 
-```json
+```jsonc
 {
   "plan_id": "string",
   "objective": "string",
@@ -78,7 +78,7 @@ Codebase Navigation, Pattern Recognition, Dependency Mapping, Technology Stack A
 
 <output_format_guide>
 
-```json
+```jsonc
 {
   "status": "completed|failed|in_progress|needs_revision",
   "task_id": null,
@@ -101,8 +101,7 @@ created_at: string
 created_by: string
 status: string # in_progress | completed | needs_revision
 
-tldr:
-  | # 3-5 bullet summary: key findings, architecture patterns, tech stack, critical files, open questions
+tldr: | # 3-5 bullet summary: key findings, architecture patterns, tech stack, critical files, open questions
 
 
 research_metadata:
@@ -112,55 +111,55 @@ research_metadata:
   coverage: number # percentage of relevant files examined
 
 files_analyzed: # REQUIRED
-  - file: string
-    path: string
-    purpose: string # What this file does
-    key_elements:
-      - element: string
-        type: string # function | class | variable | pattern
-        location: string # file:line
-        description: string
-    language: string
-    lines: number
+- file: string
+  path: string
+  purpose: string # What this file does
+  key_elements:
+  - element: string
+    type: string # function | class | variable | pattern
+    location: string # file:line
+    description: string
+  language: string
+  lines: number
 
 patterns_found: # REQUIRED
-  - category: string # naming | structure | architecture | error_handling | testing
-    pattern: string
-    description: string
-    examples:
-      - file: string
-        location: string
-        snippet: string
-    prevalence: string # common | occasional | rare
+- category: string # naming | structure | architecture | error_handling | testing
+  pattern: string
+  description: string
+  examples:
+  - file: string
+    location: string
+    snippet: string
+  prevalence: string # common | occasional | rare
 
 related_architecture: # REQUIRED IF APPLICABLE - Only architecture relevant to this domain
   components_relevant_to_domain:
-    - component: string
-      responsibility: string
-      location: string # file or directory
-      relationship_to_domain: string # "domain depends on this" | "this uses domain outputs"
+  - component: string
+    responsibility: string
+    location: string # file or directory
+    relationship_to_domain: string # "domain depends on this" | "this uses domain outputs"
   interfaces_used_by_domain:
-    - interface: string
-      location: string
-      usage_pattern: string
+  - interface: string
+    location: string
+    usage_pattern: string
   data_flow_involving_domain: string # How data moves through this domain
   key_relationships_to_domain:
-    - from: string
-      to: string
-      relationship: string # imports | calls | inherits | composes
+  - from: string
+    to: string
+    relationship: string # imports | calls | inherits | composes
 
 related_technology_stack: # REQUIRED IF APPLICABLE - Only tech used in this domain
   languages_used_in_domain:
-    - string
+  - string
   frameworks_used_in_domain:
-    - name: string
-      usage_in_domain: string
+  - name: string
+    usage_in_domain: string
   libraries_used_in_domain:
-    - name: string
-      purpose_in_domain: string
+  - name: string
+    purpose_in_domain: string
   external_apis_used_in_domain: # IF APPLICABLE - Only if domain makes external API calls
-    - name: string
-      integration_point: string
+  - name: string
+    integration_point: string
 
 related_conventions: # REQUIRED IF APPLICABLE - Only conventions relevant to this domain
   naming_patterns_in_domain: string
@@ -171,18 +170,18 @@ related_conventions: # REQUIRED IF APPLICABLE - Only conventions relevant to thi
 
 related_dependencies: # REQUIRED IF APPLICABLE - Only dependencies relevant to this domain
   internal:
-    - component: string
-      relationship_to_domain: string
-      direction: inbound | outbound | bidirectional
+  - component: string
+    relationship_to_domain: string
+    direction: inbound | outbound | bidirectional
   external: # IF APPLICABLE - Only if domain depends on external packages
-    - name: string
-      purpose_for_domain: string
+  - name: string
+    purpose_for_domain: string
 
 domain_security_considerations: # IF APPLICABLE - Only if domain handles sensitive data/auth/validation
   sensitive_areas:
-    - area: string
-      location: string
-      concern: string
+  - area: string
+    location: string
+    concern: string
   authentication_patterns_in_domain: string
   authorization_patterns_in_domain: string
   data_validation_in_domain: string
@@ -190,19 +189,19 @@ domain_security_considerations: # IF APPLICABLE - Only if domain handles sensiti
 testing_patterns: # IF APPLICABLE - Only if domain has specific testing patterns
   framework: string
   coverage_areas:
-    - string
+  - string
   test_organization: string
   mock_patterns:
-    - string
+  - string
 
 open_questions: # REQUIRED
-  - question: string
-    context: string # Why this question emerged during research
+- question: string
+  context: string # Why this question emerged during research
 
 gaps: # REQUIRED
-  - area: string
-    description: string
-    impact: string # How this gap affects understanding of the domain
+- area: string
+  description: string
+  impact: string # How this gap affects understanding of the domain
 ```
 
 </research_format_guide>

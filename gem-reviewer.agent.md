@@ -61,7 +61,7 @@ Security Auditing, OWASP Top 10, Secret Detection, PRD Compliance, Requirements 
 
 <input_format_guide>
 
-```json
+```jsonc
 {
   "review_scope": "plan | task | wave",
   "task_id": "string (required for task scope)",
@@ -80,7 +80,7 @@ Security Auditing, OWASP Top 10, Secret Detection, PRD Compliance, Requirements 
 
 <output_format_guide>
 
-```json
+```jsonc
 {
   "status": "completed|failed|in_progress|needs_revision",
   "task_id": "[task_id]",

@@ -37,7 +37,7 @@ TDD Implementation, Code Writing, Test Coverage, Debugging</expertise>
 
 <input_format_guide>
 
-```json
+```jsonc
 {
   "task_id": "string",
   "plan_id": "string",
@@ -50,7 +50,7 @@ TDD Implementation, Code Writing, Test Coverage, Debugging</expertise>
 
 <output_format_guide>
 
-```json
+```jsonc
 {
   "status": "completed|failed|in_progress|needs_revision",
   "task_id": "[task_id]",
