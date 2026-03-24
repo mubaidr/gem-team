@@ -70,7 +70,7 @@ Codebase Navigation, Pattern Recognition, Dependency Mapping, Technology Stack A
   "focus_area": "string",
   "complexity": "simple|medium|complex",
   "task_clarifications": "array of {question, answer} from Discuss Phase (empty if skipped)",
-  "prd_path": "string (path to docs/prd.yaml, for scope/acceptance criteria context)"
+  "prd_path": "string (path to docs/PRD.yaml, for scope/acceptance criteria context)"
 }
 ```
 

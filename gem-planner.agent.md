@@ -70,7 +70,7 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
   "objective": "string", // Extracted objective from user request or task_definition
   "complexity": "simple|medium|complex", // Required for pre-mortem logic
   "task_clarifications": "array of {question, answer} from Discuss Phase (empty if skipped)",
-  "prd_path": "string (path to docs/prd.yaml)"
+  "prd_path": "string (path to docs/PRD.yaml)"
 }
 ```
 

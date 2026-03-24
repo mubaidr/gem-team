@@ -39,7 +39,7 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
   - Skip entirely for simple complexity or if user explicitly says "skip discussion"
 - PRD Creation (after Discuss Phase):
   - Use task_clarifications and architectural_decisions from Discuss Phase
-  - Create docs/prd.yaml (or update if exists) per <prd_format_guide>
+  - Create docs/PRD.yaml (or update if exists) per <prd_format_guide>
   - Include: user stories, IN SCOPE, OUT OF SCOPE, acceptance criteria, NEEDS CLARIFICATION
   - PRD is the source of truth for research and planning
 - Phase 1: Research
@@ -280,7 +280,7 @@ Plan: {plan_id} | {plan_objective}
   - Update AGENTS.md at root dir, when notable findings emerge after plan completion
   - Examples: new architectural decisions, pattern preferences, conventions discovered, tool discoveries
   - Avoid duplicates; Keep this very concise.
-- Handle PRD Compliance: Maintain docs/prd.yaml as per <prd_format_guide>
+- Handle PRD Compliance: Maintain docs/PRD.yaml as per <prd_format_guide>
   - READ existing PRD
   - UPDATE based on completed plan: add features (mark complete), record decisions, log changes
   - If gem-reviewer returns prd_compliance_issues:

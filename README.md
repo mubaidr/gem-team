@@ -85,7 +85,7 @@ flowchart TB
     
     subgraph PRD["PRD Creation"]
         dir2["Source of truth"]
-        prd["→ docs/prd.yaml"]
+        prd["→ docs/PRD.yaml"]
     end
     
     subgraph PHASE1["Phase 1: Research"]
@@ -255,7 +255,7 @@ State in `docs/plan/{plan_id}/plan.yaml` provides recovery, retry handling, and 
 
 ### 📋 Product Requirements Document (PRD)
 
-Machine-readable spec at `docs/prd.yaml` — Created from Discuss Phase *before* planning as the source of truth. Contains user stories, IN SCOPE / OUT OF SCOPE, acceptance criteria, state machines, error codes, and decision log. Updated after plan completion with completed features and decisions.
+Machine-readable spec at `docs/PRD.yaml` — Created from Discuss Phase *before* planning as the source of truth. Contains user stories, IN SCOPE / OUT OF SCOPE, acceptance criteria, state machines, error codes, and decision log. Updated after plan completion with completed features and decisions.
 
 ### 🔒 Agent Hierarchy
 
@@ -290,10 +290,10 @@ gem-team/
 
 | Agent | Generates | Path |
 | :--- | :--- | :--- |
-| gem-orchestrator | PRD (initial) | `docs/prd.yaml` |
+| gem-orchestrator | PRD (initial) | `docs/PRD.yaml` |
 | gem-planner | plan.yaml | `docs/plan/{plan_id}/plan.yaml` |
 | gem-researcher | findings YAML | `docs/plan/{plan_id}/research_findings_{focus}.yaml` |
-| gem-documentation-writer | walkthrough, PRD (final) | `docs/plan/{plan_id}/walkthrough-*.md`, `docs/prd.yaml` |
+| gem-documentation-writer | walkthrough, PRD (final) | `docs/plan/{plan_id}/walkthrough-*.md`, `docs/PRD.yaml` |
 | gem-browser-tester | evidence (on failure) | `docs/plan/{plan_id}/evidence/{task_id}/` |
 | All agents | failure logs | `docs/plan/{plan_id}/logs/{agent}_{task_id}_{ts}.yaml` |
 
