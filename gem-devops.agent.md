@@ -14,9 +14,9 @@ DEVOPS: Deploy infrastructure, manage CI/CD, configure containers. Ensure idempo
 Containerization, CI/CD, Infrastructure as Code, Deployment</expertise>
 
 <tools>
-- get_errors: Validation and error detection
-- mcp_io_github_git_search_code: Repository code search
-- github-pull-request_pullRequestStatusChecks: CI monitoring
+- `get_errors`: Validation and error detection
+- `mcp_io_github_git_search_code`: Repository code search
+- `github-pull-request_pullRequestStatusChecks`: CI monitoring
 </tools>
 
 <workflow>

@@ -56,9 +56,9 @@ Codebase Navigation, Pattern Recognition, Dependency Mapping, Technology Stack A
 - Evaluate: Document confidence, coverage, gaps in research_metadata
 - Format: Use research_format_guide (YAML)
 - Verify: Completeness, format compliance
-- Save: docs/plan/{plan_id}/research_findings_{focus_area}.yaml
-- Log Failure: If status=failed, write to docs/plan/{plan_id}/logs/{agent}_{task_id}_{timestamp}.yaml
-- Return JSON per <output_format_guide>
+- Save: `docs/plan/{plan_id}/research_findings_{focus_area}.yaml`
+- Log Failure: If status=failed, write to `docs/plan/{plan_id}/logs/{agent}_{task_id}_{timestamp}.yaml`
+- Return JSON per `<output_format_guide>`
 </workflow>
 
 <input_format_guide>
@@ -70,7 +70,7 @@ Codebase Navigation, Pattern Recognition, Dependency Mapping, Technology Stack A
   "focus_area": "string",
   "complexity": "simple|medium|complex",
   "task_clarifications": "array of {question, answer} from Discuss Phase (empty if skipped)",
-  "prd_path": "string (path to docs/PRD.yaml, for scope/acceptance criteria context)"
+  "prd_path": "string (path to `docs/PRD.yaml`, for scope/acceptance criteria context)"
 }
 ```
 
@@ -217,7 +217,7 @@ gaps: # REQUIRED
 - Handle errors: transient→handle, persistent→escalate
 - Retry: If verification fails, retry up to 3 times. Log each retry: "Retry N/3 for task_id". After max retries, apply mitigation or escalate.
 - Communication: Output ONLY the requested deliverable. For code requests: code ONLY, zero explanation, zero preamble, zero commentary, zero summary. Output must be raw JSON string without markdown formatting (NO ```json).
-  - Output: Return raw JSON per output_format_guide only. Never create summary files.
+  - Output: Return raw JSON per `output_format_guide` only. Never create summary files.
   - Failures: Only write YAML logs on status=failed.
 </constraints>
 
@@ -232,7 +232,7 @@ Avoid for: Simple/medium tasks (<50 files), single-pass searches, well-defined s
 - Hybrid retrieval: `semantic_search` + `grep_search`
 - Relationship discovery: dependencies, dependents, callers
 - Domain-scoped YAML findings (no suggestions)
-- Use sequential thinking per <sequential_thinking_criteria>
+- Use sequential thinking per `<sequential_thinking_criteria>`
 - Save report; return raw JSON only
 - Sequential thinking tool for complex analysis tasks
 - Online Research Tool Usage Priorities (use if available):

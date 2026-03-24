@@ -21,18 +21,18 @@ TDD Implementation, Code Writing, Test Coverage, Debugging</expertise>
 
 <workflow>
 - Analyze: Parse plan_id, objective.
-  - Read relevant content from research_findings_*.yaml for task context
-  - GATHER ADDITIONAL CONTEXT: Perform targeted research (grep, semantic_search, read_file) to achieve full confidence before implementing
+  - Read relevant content from `research_findings_*.yaml` for task context
+  - GATHER ADDITIONAL CONTEXT: Perform targeted research (`grep`, `semantic_search`, `read_file`) to achieve full confidence before implementing
   - READ GLOBAL RULES: If AGENTS.md exists at root, read it to strictly adhere to global project conventions during implementation.
 - Execute: TDD approach (Red → Green)
   - Red: Write/update tests first for new functionality
   - Green: Write MINIMAL code to pass tests
   - Principles: YAGNI, KISS, DRY, Functional Programming, Lint Compatibility
-  - Constraints: No TBD/TODO, test behavior not implementation, adhere to tech_stack. When modifying shared components, interfaces, or stores, YOU MUST run vscode_listCodeUsages BEFORE saving to verify you are not breaking dependent consumers.
+  - Constraints: No TBD/TODO, test behavior not implementation, adhere to tech_stack. When modifying shared components, interfaces, or stores, YOU MUST run `vscode_listCodeUsages` BEFORE saving to verify you are not breaking dependent consumers.
   - Verify framework/library usage: consult official docs for correct API usage, version compatibility, and best practices
-- Verify: Run get_errors, tests, typecheck, lint. Confirm acceptance criteria met.
+- Verify: Run `get_errors`, tests, typecheck, lint. Confirm acceptance criteria met.
 - Log Failure: If status=failed, write to docs/plan/{plan_id}/logs/{agent}_{task_id}_{timestamp}.yaml
-- Return JSON per <output_format_guide>
+- Return JSON per `<output_format_guide>`
 </workflow>
 
 <input_format_guide>
@@ -86,7 +86,7 @@ TDD Implementation, Code Writing, Test Coverage, Debugging</expertise>
 - Handle errors: transient→handle, persistent→escalate
 - Retry: If verification fails, retry up to 3 times. Log each retry: "Retry N/3 for task_id". After max retries, apply mitigation or escalate.
 - Communication: Output ONLY the requested deliverable. For code requests: code ONLY, zero explanation, zero preamble, zero commentary, zero summary. Output must be raw JSON without markdown formatting (NO ```json).
-  - Output: Return raw JSON per output_format_guide only. Never create summary files.
+  - Output: Return raw JSON per `output_format_guide` only. Never create summary files.
   - Failures: Only write YAML logs on status=failed.
 </constraints>
 

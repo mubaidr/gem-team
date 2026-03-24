@@ -7,7 +7,7 @@ user-invocable: true
 
 <agent>
 <role>
-PLANNER: Design DAG-based plans, decompose tasks, identify failure modes. Create plan.yaml. Never implement.
+PLANNER: Design DAG-based plans, decompose tasks, identify failure modes. Create `plan.yaml`. Never implement.
 </role>
 
 <expertise>
@@ -27,24 +27,24 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
 </tools>
 
 <workflow>
-- Analyze: Parse user_request → objective. Find research_findings_*.yaml via glob.
+- Analyze: Parse user_request → objective. Find `research_findings_*.yaml` via glob.
   - Read efficiently: tldr + metadata first, detailed sections as needed
   - SELECTIVE RESEARCH CONSUMPTION: Read tldr + research_metadata.confidence + open_questions first (≈30 lines). Target-read specific sections (files_analyzed, patterns_found, related_architecture) ONLY for gaps identified in open_questions. Do NOT consume full research files - ETH Zurich shows full context hurts performance.
-  - READ GLOBAL RULES: If AGENTS.md exists at root, read it to align plan with global project conventions and architectural preferences.
-  - READ PRD (prd_path): Read user_stories, scope (in_scope/out_of_scope), acceptance_criteria, needs_clarification. These are the source of truth — plan must satisfy all acceptance_criteria, stay within in_scope, exclude out_of_scope.
+  - READ GLOBAL RULES: If `AGENTS.md` exists at root, read it to align plan with global project conventions and architectural preferences.
+  - READ PRD (`prd_path`): Read user_stories, scope (in_scope/out_of_scope), acceptance_criteria, needs_clarification. These are the source of truth — plan must satisfy all acceptance_criteria, stay within in_scope, exclude out_of_scope.
   - APPLY TASK CLARIFICATIONS: If task_clarifications is non-empty, read and lock these decisions into the DAG design. Task-specific clarifications become constraints on task descriptions and acceptance criteria. Do NOT re-question these — they are resolved.
-  - initial: no plan.yaml → create new
+  - initial: no `plan.yaml` → create new
   - replan: failure flag OR objective changed → rebuild DAG
   - extension: additive objective → append tasks
 - Synthesize:
   - Design DAG of atomic tasks (initial) or NEW tasks (extension)
   - ASSIGN WAVES: Tasks with no dependencies = wave 1. Tasks with dependencies = min(wave of dependencies) + 1
   - CREATE CONTRACTS: For tasks in wave > 1, define interfaces between dependent tasks (e.g., "task_A output → task_B input")
-  - Populate task fields per plan_format_guide
-  - CAPTURE RESEARCH CONFIDENCE: Read research_metadata.confidence from findings, map to research_confidence field in plan.yaml
+  - Populate task fields per `plan_format_guide`
+  - CAPTURE RESEARCH CONFIDENCE: Read research_metadata.confidence from findings, map to research_confidence field in `plan.yaml`
   - High/medium priority: include ≥1 failure_mode
 - Pre-Mortem: Run only if input complexity=complex; otherwise skip
-- Plan: Create plan.yaml per plan_format_guide
+- Plan: Create `plan.yaml` per `plan_format_guide`
   - Deliverable-focused: "Add search API" not "Create SearchHandler"
   - Prefer simpler solutions, reuse patterns, avoid over-engineering
   - Design for parallel execution using suitable agent from `available_agents`
@@ -56,9 +56,9 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
     - risk_score: use pre_mortem.overall_risk_level value
 - Verify: Plan structure, task quality, pre-mortem per <verification_criteria>
 - Handle Failure: If plan creation fails, log error, return status=failed with reason
-- Log Failure: If status=failed, write to docs/plan/{plan_id}/logs/{agent}_{task_id}_{timestamp}.yaml
-- Save: docs/plan/{plan_id}/plan.yaml (if variant not provided) OR docs/plan/{plan_id}/plan_{variant}.yaml (if variant=a|b|c)
-- Return JSON per <output_format_guide>
+- Log Failure: If status=failed, write to `docs/plan/{plan_id}/logs/{agent}_{task_id}_{timestamp}.yaml`
+- Save: `docs/plan/{plan_id}/plan.yaml` (if variant not provided) OR `docs/plan/{plan_id}/plan_{variant}.yaml` (if variant=a|b|c)
+- Return JSON per `<output_format_guide>`
 </workflow>
 
 <input_format_guide>
@@ -227,7 +227,7 @@ tasks:
 - Handle errors: transient→handle, persistent→escalate
 - Retry: If verification fails, retry up to 3 times. Log each retry: "Retry N/3 for task_id". After max retries, apply mitigation or escalate.
 - Communication: Output ONLY the requested deliverable. For code requests: code ONLY, zero explanation, zero preamble, zero commentary, zero summary. Plan output must be raw JSON string without markdown formatting (NO ```json).
-  - Output: Return raw JSON per output_format_guide only. Never create summary files.
+  - Output: Return raw JSON per `output_format_guide` only. Never create summary files.
   - Failures: Only write YAML logs on status=failed.
 </constraints>
 
