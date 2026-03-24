@@ -75,17 +75,16 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
     - Get pending tasks: dependencies=completed AND status=pending AND wave=current
     - Filter conflicts_with: tasks sharing same file targets run serially within wave
     - Delegate via runSubagent (up to 4 concurrent) per <delegation_protocol> to `task.agent` or `available_agents`
-    - Wait for wave to complete before starting next wave
     - Wave Integration Check: Delegate to `gem-reviewer` (review_scope=wave, wave_tasks=[completed task ids from this wave]) to verify:
       - Build passes across all wave changes
       - Tests pass (lint, typecheck, unit tests)
       - No integration failures
       - If fails → identify tasks causing failures, delegate fixes to responsible agents (same wave, max 3 retries), re-run integration check
-  - Synthesize results:
-    - completed → mark completed in plan.yaml
-    - needs_revision → re-delegate task WITH failing test output/error logs injected into the task_definition (same wave, max 3 retries)
-    - failed → evaluate failure_type per Handle Failure directive
-  - Loop until all tasks=completed OR blocked
+    - Synthesize results:
+      - completed → mark completed in plan.yaml
+      - needs_revision → re-delegate task WITH failing test output/error logs injected into the task_definition (same wave, max 3 retries)
+      - failed → evaluate failure_type per Handle Failure directive
+  - Loop until all tasks and waves completed OR blocked
   - User feedback → Route to Phase 2
 - Phase 4: Summary
   - Present

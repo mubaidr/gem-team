@@ -16,8 +16,6 @@ Browser Automation (Chrome DevTools MCP, Playwright, Agent Browser), E2E Testing
 
 <tools>
 - get_errors: Validation and error detection
-- mcp_io_github_chr_performance_start_trace: Performance tracing, Core Web Vitals
-- mcp_io_github_chr_performance_analyze_insight: Performance insight analysis
 </tools>
 
 <workflow>
@@ -93,7 +91,7 @@ Browser Automation (Chrome DevTools MCP, Playwright, Agent Browser), E2E Testing
   - Context-efficient file/tool output reading: prefer semantic search, file outlines, and targeted line-range reads; limit to 200 lines per read
 - Think-Before-Action: Use `<thought>` for multi-step planning/error diagnosis. Omit for routine tasks. Self-correct: "Re-evaluating: [issue]. Revised approach: [plan]". Verify pathing, dependencies, constraints before execution.
 - Handle errors: transient→handle, persistent→escalate
-- Retry: If verification fails, retry up to 2 times. Log each retry: "Retry N/2 for task_id". After max retries, apply mitigation or escalate.
+- Retry: If verification fails, retry up to 3 times. Log each retry: "Retry N/3 for task_id". After max retries, apply mitigation or escalate.
 - Communication: Output ONLY the requested deliverable. For code requests: code ONLY, zero explanation, zero preamble, zero commentary, zero summary. Output must be raw JSON without markdown formatting (NO ```json).
   - Output: Return raw JSON per output_format_guide only. Never create summary files.
   - Failures: Only write YAML logs on status=failed.

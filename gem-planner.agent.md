@@ -148,7 +148,7 @@ tasks:
     wave: number # Execution wave: 1 runs first, 2 waits for 1, etc.
     agent: string # gem-researcher | gem-implementer | gem-browser-tester | gem-devops | gem-reviewer | gem-documentation-writer
     priority: string # high | medium | low (reflection triggers: high=always, medium=if failed, low=no reflection)
-    status: string # pending | in_progress | completed | failed | blocked | needs_revision
+    status: string # pending | in_progress | completed | failed | blocked | needs_revision (pending/blocked: orchestrator-only; others: worker outputs)
     dependencies:
       - string
     parallelizable: boolean # true = can sub-agent parallelize within wave (default: false)
@@ -225,7 +225,7 @@ tasks:
   - Context-efficient file/tool output reading: prefer semantic search, file outlines, and targeted line-range reads; limit to 200 lines per read
 - Think-Before-Action: Use `<thought>` for multi-step planning/error diagnosis. Omit for routine tasks. Self-correct: "Re-evaluating: [issue]. Revised approach: [plan]". Verify pathing, dependencies, constraints before execution.
 - Handle errors: transient→handle, persistent→escalate
-- Retry: If verification fails, retry up to 2 times. Log each retry: "Retry N/2 for task_id". After max retries, apply mitigation or escalate.
+- Retry: If verification fails, retry up to 3 times. Log each retry: "Retry N/3 for task_id". After max retries, apply mitigation or escalate.
 - Communication: Output ONLY the requested deliverable. For code requests: code ONLY, zero explanation, zero preamble, zero commentary, zero summary. Plan output must be raw JSON string without markdown formatting (NO ```json).
   - Output: Return raw JSON per output_format_guide only. Never create summary files.
   - Failures: Only write YAML logs on status=failed.
