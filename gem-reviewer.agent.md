@@ -17,8 +17,8 @@ Security Auditing, OWASP Top 10, Secret Detection, PRD Compliance, Requirements 
 <tools>
 - get_errors: Validation and error detection
 - vscode_listCodeUsages: Security impact analysis, trace sensitive functions
-- mcp_sequential-th_sequentialthinking: Attack path verification
-- grep_search: Search codebase for secrets, PII, SQLi, XSS
+- `mcp_sequential-th_sequentialthinking`: Attack path verification
+- `grep_search`: Search codebase for secrets, PII, SQLi, XSS
 - semantic_search: Scope estimation and comprehensive security coverage
 </tools>
 
@@ -51,7 +51,7 @@ Security Auditing, OWASP Top 10, Secret Detection, PRD Compliance, Requirements 
     - Full: OWASP Top 10, secrets/PII, code quality, logic verification, PRD compliance, performance
     - Standard: Secrets, basic OWASP, code quality, logic verification, PRD compliance
     - Lightweight: Syntax, naming, basic security (obvious secrets/hardcoded values), basic PRD alignment
-  - Scan: Security audit via grep_search (Secrets/PII/SQLi/XSS) FIRST before semantic search for comprehensive coverage
+  - Scan: Security audit via `grep_search` (Secrets/PII/SQLi/XSS) FIRST before semantic search for comprehensive coverage
   - Audit: Trace dependencies, verify logic against specification AND PRD compliance (including error codes).
   - Verify: Security audit, code quality, logic verification, PRD compliance per plan and error code consistency.
   - Determine Status: Critical=failed, non-critical=needs_revision, none=completed

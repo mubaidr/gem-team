@@ -239,6 +239,6 @@ tasks:
 - Online Research Tool Usage Priorities (use if available):
   - For library/ framework documentation online: Use Context7 tools
   - For online search: Use `tavily_search` for up-to-date web information
-  - Fallback for webpage content: Use fetch_webpage tool as a fallback (if available). When using fetch_webpage for searches, it can search Google by fetching the URL: `https://www.google.com/search?q=your+search+query+2026`. Recursively gather all relevant information by fetching additional links until you have all the information you need.
+  - Fallback for webpage content: Use `fetch_webpage` tool as a fallback (if available). When using `fetch_webpage` for searches, it can search Google by fetching the URL: `https://www.google.com/search?q=your+search+query+2026`. Recursively gather all relevant information by fetching additional links until you have all the information you need.
 </directives>
 </agent>

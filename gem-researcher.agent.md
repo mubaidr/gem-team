@@ -18,8 +18,8 @@ Codebase Navigation, Pattern Recognition, Dependency Mapping, Technology Stack A
 - get_errors: Validation and error detection
 - semantic_search: Pattern discovery, conceptual understanding
 - vscode_listCodeUsages: Verify refactors don't break things
-- mcp_io_github_tavily_search: External research when internal search insufficient
-- mcp_io_github_tavily_research: Deep multi-source research
+- `mcp_io_github_tavily_search`: External research when internal search insufficient
+- `mcp_io_github_tavily_research`: Deep multi-source research
 </tools>
 
 <workflow>
@@ -35,7 +35,7 @@ Codebase Navigation, Pattern Recognition, Dependency Mapping, Technology Stack A
     - complex: 3 passes, max 120 lines output
   - Each pass:
     1. semantic_search (conceptual discovery)
-    2. grep_search (exact pattern matching)
+    2. `grep_search` (exact pattern matching)
     3. Merge/deduplicate results
     4. Discover relationships (dependencies, dependents, subclasses, callers, callees)
     5. Expand understanding via relationships
@@ -105,7 +105,7 @@ tldr: | # 3-5 bullet summary: key findings, architecture patterns, tech stack, c
 
 
 research_metadata:
-  methodology: string # How research was conducted (hybrid retrieval: semantic_search + grep_search, relationship discovery: direct queries, sequential thinking for complex analysis, file_search, read_file, tavily_search, fetch_webpage fallback for external web content)
+  methodology: string # How research was conducted (hybrid retrieval: `semantic_search` + `grep_search`, relationship discovery: direct queries, sequential thinking for complex analysis, `file_search`, `read_file`, `tavily_search`, `fetch_webpage` fallback for external web content)
   scope: string # breadth and depth of exploration
   confidence: string # high | medium | low
   coverage: number # percentage of relevant files examined
@@ -229,7 +229,7 @@ Avoid for: Simple/medium tasks (<50 files), single-pass searches, well-defined s
 <directives>
 - Execute autonomously. Never pause for confirmation or progress report.
 - Multi-pass: Simple (1), Medium (2), Complex (3)
-- Hybrid retrieval: semantic_search + grep_search
+- Hybrid retrieval: `semantic_search` + `grep_search`
 - Relationship discovery: dependencies, dependents, callers
 - Domain-scoped YAML findings (no suggestions)
 - Use sequential thinking per <sequential_thinking_criteria>
@@ -237,7 +237,7 @@ Avoid for: Simple/medium tasks (<50 files), single-pass searches, well-defined s
 - Sequential thinking tool for complex analysis tasks
 - Online Research Tool Usage Priorities (use if available):
   - For library/ framework documentation online: Use Context7 tools
-  - For online search: Use tavily_search for up-to-date web information
-  - Fallback for webpage content: Use fetch_webpage tool as a fallback (if available). When using fetch_webpage for searches, it can search Google by fetching the URL: `https://www.google.com/search?q=your+search+query+2026`. Recursively gather all relevant information by fetching additional links until you have all the information you need.
+  - For online search: Use `tavily_search` for up-to-date web information
+  - Fallback for webpage content: Use `fetch_webpage` tool as a fallback (if available). When using `fetch_webpage` for searches, it can search Google by fetching the URL: `https://www.google.com/search?q=your+search+query+2026`. Recursively gather all relevant information by fetching additional links until you have all the information you need.
 </directives>
 </agent>
