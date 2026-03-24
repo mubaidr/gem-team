@@ -86,7 +86,7 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
       - failed → evaluate failure_type per Handle Failure directive
   - Loop until all tasks and waves completed OR blocked
   - User feedback → Route to Phase 2
-- Phase 4:
+- Phase 4: Summary
   - Present summary as per `<status_summary_format>`
   - User feedback → Route to Phase 2
 </workflow>

@@ -13,121 +13,98 @@ A modular, high-performance multi-agent team designed for complex project execut
 
 ---
 
-## 📦 Installation
-
-Available in [awesome-copilot](https://github.github.com/awesome-copilot/) — the official GitHub repository for Copilot extensions.
-
----
-
-## ⚡ Why Gem Team?
-
-### The Problem with Single-Agent AI
-
-Traditional AI coding assistants hit walls when projects get complex:
-
-- Context overload — One agent trying to hold everything leads to mistakes
-- No specialization — Jack of all trades, master of none
-- Sequential bottlenecks — Tasks execute one-by-one, wasting time
-- Missing verification — Changes ship without proper testing
-- Intent misalignment — AI builds what's reasonable, not what's wanted
-- No audit trail — What changed? Why? Who knows...
-
-### The Gem Team Solution
-
-| Challenge                     | Gem Team Approach                                                                                         |
-| :---------------------------- | :-------------------------------------------------------------------------------------------------------- |
-| 🧠 Context Overload       | Specialized agents with focused expertise — each holds only what it needs                                 |
-| 🎯 Lack of Specialization | 7 expert agents: researcher, planner, implementer, tester, reviewer, devops, and documentation specialist |
-| 🐢 Sequential Bottlenecks | DAG-based parallel execution — up to 4 agents work simultaneously                                         |
-| ❌ Missing Verification   | Verification-first: no task completes without passing its verification command                            |
-| 🎯 Intent Misalignment    | Discuss phase captures intent; plan gate verifies alignment before execution                              |
-| 📜 No Audit Trail         | Persistent `plan.yaml` state file tracks every decision, status, and outcome                              |
-
-### Key Benefits
-
-- 🚀 10x Faster Execution — Parallel agent execution eliminates bottlenecks
-- 🎯 Higher Quality Output — Specialized agents + mandatory verification + plan gate = fewer bugs, less rework
-- 🔒 Built-in Security — Dedicated reviewer agent applies OWASP scanning on critical tasks
-- 📊 Full Visibility — Real-time plan status, clear approval gates, comprehensive summaries
-- 🔄 Resilient Workflows — Pre-mortem analysis, failure handling, and automatic replanning
-- 📋 Strict Communication Protocol — Standardized input/output formats for reliable delegation and handoffs
-- 🎯 Autonomous Execution — Most agents work independently without user intervention (except approval gates)
-- 🔧 Context-Efficient Operations — Smart file reading (semantic search, 200-line limits) and batch operations for speed
-- 📄 PRD Support — Machine-readable Product Requirements Document with state machines, error codes, and decision tracking
-- 🎯 Intent Capture — Discuss phase locks user intent before planning, reducing rework from "reasonable defaults"
-
----
-
-## 🚀 Overview
-
-Gem Team follows a Delegation-First pattern. The Orchestrator never executes—it only detects phase, routes to agents, and synthesizes results. All state operations are managed directly by the Orchestrator via `plan.yaml`.
+## 🚀 Quick Look
 
 ```mermaid
 flowchart TB
-    subgraph USER["USER"]
+    subgraph USER["👤 USER"]
         goal["User Goal"]
     end
-    
-    subgraph ORCH["ORCHESTRATOR"]
+
+    subgraph ORCH["💎 ORCHESTRATOR"]
         detect["Phase Detection"]
         route["Route to agents"]
         synthesize["Synthesize results"]
-        state["Manage plan.yaml state"]
+        state["Manage plan.yaml"]
         todos["Manage todos"]
-        exec["Never execute directly"]
+        exec["Never execute"]
     end
-    
-    subgraph DISCUSS["Discuss Phase"]
+
+    subgraph DISCUSS["💬 Discuss Phase"]
         dir1["medium|complex only"]
         intent["Intent capture"]
-        agents["→ AGENTS.md"]
+        arch["→ AGENTS.md"]
+        clar["Clarifications"]
     end
-    
-    subgraph PRD["PRD Creation"]
-        dir2["Source of truth"]
-        prd["→ docs/PRD.yaml"]
+
+    subgraph PRD["📋 PRD Creation"]
+        prd["docs/PRD.yaml"]
+        stories["User Stories"]
+        scope["IN/OUT SCOPE"]
     end
-    
-    subgraph PHASE1["Phase 1: Research"]
-        focus["Focus areas"]
-        scope["+ PRD scope"]
+
+    subgraph PHASE1["🔬 Phase 1: Research"]
+        focus["Focus areas (≤4∥)"]
+        res["gem-researcher"]
     end
-    
-    subgraph PHASE2["Phase 2: Planning"]
+
+    subgraph PHASE2["📐 Phase 2: Planning"]
         dag["DAG + Pre-mortem"]
-        valid["validates PRD"]
+        valid["Validates PRD"]
+        multi["3 variants (complex)"]
     end
-    
-    subgraph REVIEW["Reviewer - Plan Gate"]
+
+    subgraph REVIEW["🛡️ Reviewer - Plan Gate"]
         ver["Verify plan"]
         loop["→ Loop if fail"]
+        scopes["plan | wave | task"]
     end
-    
-    subgraph EXEC["Phase 3: Execution"]
-        exec_tasks["Execute tasks"]
+
+    subgraph EXEC["⚡ Phase 3: Execution"]
+        waves["Wave-based (1→n)"]
+        parallel["≤4 agents ∥"]
+        contracts["Task contracts"]
+        integ["Wave integration"]
     end
-    
-    goal --> ORCH
-    ORCH --> DISCUSS
-    ORCH --> PRD
-    ORCH --> EXEC
-    
-    DISCUSS --> |Architectural| agents
-    DISCUSS --> |Clarifications| PRD
-    
+
+    subgraph SUMMARY["📊 Phase 4: Summary"]
+        status["Status report"]
+        next["Next steps"]
+    end
+
+    goal --> detect
+    detect --> |"No plan (med|complex)"| DISCUSS
+    detect --> |"Plan + feedback"| PHASE2
+    detect --> |"Plan + pending"| EXEC
+    detect --> |"All done"| SUMMARY
+
+    DISCUSS --> |"Architectural"| arch
+    DISCUSS --> |"Clarifications"| PRD
+
     PRD --> PHASE1
     PHASE1 --> PHASE2
     PHASE2 --> REVIEW
-    REVIEW --> |Approved| EXEC
-    
-    style ORCH fill:#9b59b6,color:#fff
-    style REVIEW fill:#e74c3c,color:#fff
-    style USER fill:#2ecc71,color:#fff
+    REVIEW --> |"Approved"| EXEC
+    REVIEW --> |"Issues"| PHASE2
+
+    EXEC --> |"Complete"| SUMMARY
+    EXEC --> |"Blocked"| SUMMARY
+    SUMMARY --> |"Feedback"| PHASE2
+
+    style ORCH fill:#9b59b6,color:#fff,stroke:#7d3c98,stroke-width:3px
+    style USER fill:#27ae60,color:#fff,stroke:#1e8449,stroke-width:2px
+    style REVIEW fill:#c0392b,color:#fff,stroke:#a93226,stroke-width:2px
+    style EXEC fill:#2980b9,color:#fff,stroke:#1a5276,stroke-width:2px
+    style DISCUSS fill:#8e44ad,color:#fff,stroke:#6c3483,stroke-width:2px
+    style PRD fill:#16a085,color:#fff,stroke:#117a65,stroke-width:2px
+    style PHASE1 fill:#d35400,color:#fff,stroke:#a04000,stroke-width:2px
+    style PHASE2 fill:#c0392b,color:#fff,stroke:#a93226,stroke-width:2px
+    style SUMMARY fill:#2c3e50,color:#fff,stroke:#1a252f,stroke-width:2px
 ```
 
 ---
 
-## 🤖 Agent Roles
+## 🤖 The Agent Team
 
 | Agent | Role | Primary Responsibility |
 | :------------------------- | :--- | :-------------------------------------------------------------------------------------------- |
@@ -142,131 +119,104 @@ flowchart TB
 
 ---
 
+## ✨ Key Differentiators
+
+| Feature | What It Does |
+|:--------|:-------------|
+| 🧪 **Verification-First (TDD)** | Tests first → fail → minimal code → verify |
+| 🛡️ **Security-First Review** | OWASP scanning, secrets/PII detection, tiered depth |
+| 📊 **Pre-Mortem Analysis** | Failure modes identified BEFORE execution |
+| 🎯 **Intent Capture** | Discuss phase locks user intent, architectural decisions persist |
+| 🔐 **Approval Gates** | Security + deployment approval for sensitive ops |
+| 🌐 **Multi-Browser Testing** | Chrome MCP, Playwright, Agent Browser support |
+| 🧠 **Sequential Thinking** | Chain-of-thought for complex analysis (>50 files) |
+| 📊 **Research Confidence** | High/medium/low confidence scoring for research reliability |
+
+---
+
+## ⚡ Why Gem Team?
+
+### Single-Agent Problems → Gem Team Solutions
+
+| Problem | Solution |
+|:--------|:--------|
+| Context overload | Specialized agents with focused expertise |
+| No specialization | 7 expert agents (researcher, planner, implementer, tester, reviewer, devops, docs) |
+| Sequential bottlenecks | DAG-based parallel execution (≤4 agents simultaneously) |
+| Missing verification | TDD + mandatory verification gates |
+| Intent misalignment | Discuss phase captures intent before planning |
+| No audit trail | Persistent `plan.yaml` tracks every decision & outcome |
+
+### Why It Works
+
+- 🚀 **10x Faster** — Parallel execution eliminates bottlenecks
+- 🎯 **Higher Quality** — Specialized agents + verification = fewer bugs
+- 🔒 **Built-in Security** — OWASP scanning on critical tasks
+- 📊 **Full Visibility** — Real-time status, clear approval gates
+- 🔄 **Resilient** — Pre-mortem analysis, failure handling, auto-replanning
+
+---
+
 ## 🔄 Core Workflow
 
 The Orchestrator follows a 4-Phase workflow:
 
-### Phase Detection (Automatic)
+### Phase 1: Discuss (medium|complex only)
 
-| Current State | Next Phase |
-| :------------ | :--------- |
-| No plan exists | Discuss Phase (if medium\|complex) → PRD Creation → Phase 1: Research |
-| Plan + user feedback | Phase 2: Planning |
-| Plan + pending tasks | Phase 3: Execution Loop |
-| All tasks complete/blocked | Phase 4: Summary |
+- Identifies gray areas → generates 2-4 context-aware options per question
+- Asks 3-5 targeted questions → Architectural decisions → `AGENTS.md`
+- Task clarifications → PRD creation
 
-### Discuss Phase (medium|complex only)
+### Phase 2: PRD Creation
 
-- Orchestrator identifies gray areas from objective (API formats, edge cases, data conventions, visual patterns)
-- For each question: generates 2-4 context-aware options, user picks or writes custom
-- Asks 3-5 targeted questions in chat — one at a time
-- Architectural decisions → saved to `AGENTS.md`
-- Task-specific clarifications → fed into PRD creation
-- Skipped for simple tasks
+- Source of truth for research & planning
+- Includes: user stories, IN/OUT SCOPE, acceptance criteria, NEEDS CLARIFICATION
 
-### PRD Creation (before planning)
+### Phase 3: Research
 
-- Created from Discuss Phase answers — source of truth for research and planning
-- Includes: user stories, IN SCOPE / OUT OF SCOPE, acceptance criteria, 🚨 NEEDS CLARIFICATION markers
-- Researchers read PRD for scope context
-- Planners validate against PRD — plan must satisfy all acceptance criteria
+- Detects complexity (simple/medium/complex)
+- Delegates to gem-researcher (≤4 concurrent) per focus area
+- Output: `docs/plan/{plan_id}/research_findings_{focus}.yaml`
 
-### Phase 1: Research
+### Phase 4: Planning
 
-- Orchestrator detects complexity (simple/medium/complex)
-- Identifies focus areas from user goal
-- Passes task clarifications and PRD scope to researchers
-- Delegates to gem-researcher (up to 4 concurrent) per focus area
-- Output: `docs/plan/{plan_id}/research_findings_{focus_area}.yaml`
+- Complex: 3 planner variants (a/b/c) → selects best
+- Simple/Medium: 1 planner run
+- Plan Verification Gate: gem-reviewer validates (coverage, atomicity, deps, PRD)
+- Output: `docs/plan/{plan_id}/plan.yaml` (DAG + waves)
 
-### Phase 2: Planning
+### Phase 5: Execution Loop
 
-- Complex tasks: Delegates to gem-planner 3x (variants a/b/c), selects best
-- Simple/Medium: Delegates to gem-planner once
-- Reads PRD for user stories, scope boundaries, acceptance criteria — these are the source of truth
-- Validates against existing PRD and task clarifications
-- Plan Verification Gate: Delegates to gem-reviewer (`review_scope=plan`) to verify coverage, atomicity, deps, PRD alignment
-- If reviewer finds issues → loops to planner for fixes (max 2 iterations)
-- Output: `docs/plan/{plan_id}/plan.yaml` with DAG tasks and waves
+- Executes in waves (wave 1 first, wave 2 after, etc.)
+- ≤4 agents parallel per wave
+- Wave Integration Check: build/lint/typecheck/tests after each wave
 
-### Phase 3: Execution Loop
+### Phase 6: Summary
 
-- Reads plan.yaml, gets pending tasks (dependencies=completed)
-- Executes in waves (wave 1 first, wave 2 after wave 1 completes, etc.)
-- Up to 4 agents work in parallel per wave
-- Contracts presented for verification (wave > 1)
-- Wave Integration Check: After each wave, reviewer runs build/lint/typecheck/tests across all wave changes — catches integration failures early
-- Loops until all tasks done or blocked
-
-### Phase 4: Summary
-
-- Presents status, summary, next steps
-- User feedback routes back to Phase 2: Planning
+- Presents status, next steps
+- User feedback → routes back to Phase 4
 
 ---
 
 ## 🛠 Key Features
 
-### 🎯 VS Code Copilot Steer Support
+| Feature | Description |
+|:--------|:------------|
+| 🎯 **Copilot Steer** | Send steer to orchestrator → auto-routes to correct agent |
+| 🎯 **Team Lead Personality** | Energetic announcements, phase/wave status, celebrates wins |
+| 🔍 **Focus-Based Gathering** | Multiple researchers in parallel, each targeting specific `focus_area` |
+| 📝 **Plan Continuity** | `docs/plan/{plan_id}/plan.yaml` provides recovery, retry, full audit trail |
+| 📋 **PRD Support** | Machine-readable spec: user stories, scope, acceptance criteria, state machines |
+| 🔒 **Agent Hierarchy** | Orchestrator (`disable-model-invocation: true`) → Workers (execute via tools) |
+| 🔧 **Context-Efficient** | Semantic search, ≤200-line reads, batch operations |
 
-Send a steer message to `gem-orchestrator` and it automatically redirects to the appropriate agent — researcher for new context, planner for plan updates — integrating your request into the active workflow.
+### Review Scopes
 
-### 🎯 Intent Capture (Discuss Phase)
-
-Before planning on medium|complex tasks, the orchestrator asks 3-5 clarifying questions to lock in user intent. Architectural decisions persist in `AGENTS.md` for future tasks. Task-specific clarifications feed into PRD creation — which becomes the source of truth for research and planning.
-
-### 🎯 Team Lead Personality
-
-The Orchestrator acts as an energetic team lead — announces phase/wave starts, celebrates wins, acknowledges setbacks. Keeps the team motivated with concise, action-oriented updates.
-
-### 🔍 Focus-Based Context Gathering
-
-The Orchestrator identifies key domains or features and launches multiple Researcher agents in parallel, each targeting a specific `focus_area`. This ensures deep, specific context is gathered for every part of the system before the Planner synthesizes it all into a unified `plan.yaml`.
-
-### 🧪 Verification-First (TDD)
-
-No task completes without passing its defined `verification` command. Implementers follow strict TDD discipline:
-
-- Write tests FIRST
-- Confirm tests FAIL
-- Write MINIMAL code to pass
-- Check `get_errors` after every edit
-
-### 🌐 Multi-Browser Testing
-
-Browser Tester supports Chrome DevTools MCP, Playwright, and Agent Browser — run E2E tests across different browser tools for maximum coverage.
-
-### 🛡️ Security-First Review
-
-The Reviewer agent acts as a security gatekeeper for critical tasks:
-
-- OWASP Top 10 scanning
-- Secrets/PII detection
-- Compliance verification
-- Tiered review depth (Full → Standard → Lightweight)
-
-### 📊 Pre-Mortem Analysis
-
-Planner identifies failure modes (likelihood, impact, mitigation) for complex plans BEFORE execution.
-
-### 📝 Plan Continuity & Audit Trail
-
-State in `docs/plan/{plan_id}/plan.yaml` provides recovery, retry handling, and full decision traceability.
-
-### 📋 Product Requirements Document (PRD)
-
-Machine-readable spec at `docs/PRD.yaml` — Created from Discuss Phase *before* planning as the source of truth. Contains user stories, IN SCOPE / OUT OF SCOPE, acceptance criteria, state machines, error codes, and decision log. Updated after plan completion with completed features and decisions.
-
-### 🔒 Agent Hierarchy
-
-```text
-User → ORCHESTRATOR → WORKERS (execute)
-```
-
-- Orchestrator: `disable-model-invocation: true` — delegates ALL work, manages plan.yaml state and todos, never executes
-- Workers: `disable-model-invocation: false` — execute tasks via tools
-  - RESEARCHER, PLANNER, IMPLEMENTER, BROWSER TESTER, DEVOPS, REVIEWER, DOC WRITER
-- Isolation: Workers cannot call other subagents — all collaboration mediated by Orchestrator
+| Scope | Purpose |
+|:------|:--------|
+| `plan` | Pre-execution validation (coverage, atomicity, deps, PRD alignment) |
+| `wave` | Integration checks (build, lint, typecheck, tests) |
+| `task` | Individual code review (OWASP, secrets, logic) |
 
 ---
 
@@ -353,6 +303,12 @@ Completion (Output):
 | Documentation Overhaul       | Doc Writer generates accurate docs maintaining code-documentation parity        |
 | CI/CD Pipeline Setup         | DevOps agent creates containers, pipelines, deploys with health checks          |
 | UI/UX Testing                | Chrome Tester automates validation matrix, captures visual evidence             |
+
+---
+
+## 📦 Installation
+
+Available in [awesome-copilot](https://github.github.com/awesome-copilot/) — the official GitHub repository for Copilot extensions.
 
 ---
 
