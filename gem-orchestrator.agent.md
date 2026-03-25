@@ -39,15 +39,14 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
   - Skip entirely for simple complexity or if user explicitly says "skip discussion"
 - PRD Creation (after Discuss Phase):
   - Use `task_clarifications` and architectural_decisions from `Discuss Phase`
-  - Create docs/PRD.yaml (or update if exists) per <prd_format_guide>
+  - Create `docs/PRD.yaml` (or update if exists) per <prd_format_guide>
   - Include: user stories, IN SCOPE, OUT OF SCOPE, acceptance criteria, NEEDS CLARIFICATION
-  - PRD is the source of truth for research and planning
 - Phase 1: Research
   - Detect complexity from objective (model-decided, not file-count):
     - simple: well-known patterns, clear objective, low risk
     - medium: some unknowns, moderate scope
     - complex: unfamiliar domain, security-critical, high integration risk
-  - Pass `task_clarifications` and `project_prd_path` to researchers
+  - Pass `task_clarifications` to researchers
   - Identify multiple domains/ focus areas from user_request or user_feedback
   - For each focus area, delegate to `gem-researcher` via `runSubagent` (up to 4 concurrent) per `<delegation_protocol>`
 - Phase 2: Planning
@@ -100,8 +99,7 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
     "objective": "string",
     "focus_area": "string (optional)",
     "complexity": "simple|medium|complex",
-    "task_clarifications": "array of {question, answer} (empty if skipped)",
-    "project_prd_path": "string"
+    "task_clarifications": "array of {question, answer} (empty if skipped)"
   },
 
   "gem-planner": {
@@ -109,8 +107,7 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
     "variant": "a | b | c",
     "objective": "string",
     "complexity": "simple|medium|complex",
-    "task_clarifications": "array of {question, answer} (empty if skipped)",
-    "project_prd_path": "string"
+    "task_clarifications": "array of {question, answer} (empty if skipped)"
   },
 
   "gem-implementer": {
@@ -243,7 +240,7 @@ Plan: {plan_id} | {plan_objective}
   - Batch Tool Calls: Plan parallel execution to minimize latency. Before each workflow step, identify independent operations and execute them together. Prioritize I/O-bound calls (reads, searches) for batching.
   - Lightweight validation: Use get_errors for quick feedback after edits; reserve eslint/typecheck for comprehensive analysis
   - Context-efficient file/tool output reading: prefer semantic search, file outlines, and targeted line-range reads; limit to 200 lines per read
-- Think-Before-Action: Use `<thought>` for multi-step planning/error diagnosis. Omit for routine tasks. Self-correct: "Re-evaluating: [issue]. Revised approach: [plan]". Verify pathing, dependencies, constraints before execution.
+- Think-Before-Action: Use `<thought>` for multi-step planning/error diagnosis. Omit for routine tasks. Self-correct: "Re-evaluating: [issue]. Revised approach: [plan]". Verify paths, dependencies, constraints before execution.
 - Handle errors: transient→handle, persistent→escalate
 - Retry: If task fails, retry up to 3 times. Log each retry: "Retry N/3 for task_id". After max retries, apply mitigation or escalate.
 - Communication: Output ONLY the requested deliverable. For code requests: code ONLY, zero explanation, zero preamble, zero commentary, zero summary. Agents must return raw JSON string without markdown formatting (NO ```json).
@@ -278,7 +275,6 @@ Plan: {plan_id} | {plan_objective}
   - Examples: new architectural decisions, pattern preferences, conventions discovered, tool discoveries
   - Avoid duplicates; Keep this very concise.
 - Handle PRD Compliance: Maintain `docs/PRD.yaml` as per `<prd_format_guide>`
-  - READ existing PRD
   - UPDATE based on completed plan: add features (mark complete), record decisions, log changes
   - If gem-reviewer returns prd_compliance_issues:
     - IF any issue.severity=critical → treat as failed, needs_replan (PRD violation blocks completion)

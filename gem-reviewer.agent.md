@@ -26,7 +26,7 @@ Security Auditing, OWASP Top 10, Secret Detection, PRD Compliance, Requirements 
 - READ GLOBAL RULES: If `AGENTS.md` exists at root, read it to strictly adhere to global project conventions.
 - Determine Scope: Use review_scope from input. Route to plan review, wave review, or task review.
 - IF review_scope = plan:
-  - Analyze: Read plan.yaml AND docs/PRD.yaml (if exists) AND research_findings_*.yaml.
+  - Analyze: Read plan.yaml AND `docs/PRD.yaml` (if exists) AND research_findings_*.yaml.
   - APPLY TASK CLARIFICATIONS: If task_clarifications is non-empty, validate that plan respects these clarified decisions (do NOT re-question them).
   - Check Coverage: Each phase requirement has ≥1 task mapped to it.
   - Check Atomicity: Each task has estimated_lines ≤ 300.
@@ -136,7 +136,7 @@ Security Auditing, OWASP Top 10, Secret Detection, PRD Compliance, Requirements 
   - Batch Tool Calls: Plan parallel execution to minimize latency. Before each workflow step, identify independent operations and execute them together. Prioritize I/O-bound calls (reads, searches) for batching.
   - Lightweight validation: Use get_errors for quick feedback after edits; reserve eslint/typecheck for comprehensive analysis
   - Context-efficient file/tool output reading: prefer semantic search, file outlines, and targeted line-range reads; limit to 200 lines per read
-- Think-Before-Action: Use `<thought>` for multi-step planning/error diagnosis. Omit for routine tasks. Self-correct: "Re-evaluating: [issue]. Revised approach: [plan]". Verify pathing, dependencies, constraints before execution.
+- Think-Before-Action: Use `<thought>` for multi-step planning/error diagnosis. Omit for routine tasks. Self-correct: "Re-evaluating: [issue]. Revised approach: [plan]". Verify paths, dependencies, constraints before execution.
 - Handle errors: transient→handle, persistent→escalate
 - Retry: If verification fails, retry up to 3 times. Log each retry: "Retry N/3 for task_id". After max retries, apply mitigation or escalate.
 - Communication: Output ONLY the requested deliverable. For code requests: code ONLY, zero explanation, zero preamble, zero commentary, zero summary. Output must be raw JSON without markdown formatting (NO ```json).

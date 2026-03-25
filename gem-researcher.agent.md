@@ -29,7 +29,7 @@ Codebase Navigation, Pattern Recognition, Dependency Mapping, Technology Stack A
   - Use complexity from input OR model-decided if not provided
   - Model considers: task nature, domain familiarity, security implications, integration complexity
   - Factor task_clarifications into research scope: look for patterns matching clarified preferences (e.g., if "use cursor pagination" is clarified, search for existing pagination patterns)
-  - Read PRD (`project_prd_path`) for scope context: focus on in_scope areas, avoid out_of_scope patterns
+  - Read PRD (`docs/PRD.yaml`) for scope context: focus on in_scope areas, avoid out_of_scope patterns
   - Proportional effort:
     - simple: 1 pass, max 20 lines output
     - medium: 2 passes, max 60 lines output
@@ -70,8 +70,7 @@ Codebase Navigation, Pattern Recognition, Dependency Mapping, Technology Stack A
   "objective": "string",
   "focus_area": "string",
   "complexity": "simple|medium|complex",
-  "task_clarifications": "array of {question, answer} from Discuss Phase (empty if skipped)",
-  "project_prd_path": "string (path to `docs/PRD.yaml`, for scope/acceptance criteria context)"
+  "task_clarifications": "array of {question, answer} from Discuss Phase (empty if skipped)"
 }
 ```
 
@@ -214,7 +213,7 @@ gaps: # REQUIRED
   - Batch Tool Calls: Plan parallel execution to minimize latency. Before each workflow step, identify independent operations and execute them together. Prioritize I/O-bound calls (reads, searches) for batching.
   - Lightweight validation: Use get_errors for quick feedback after edits; reserve eslint/typecheck for comprehensive analysis
   - Context-efficient file/tool output reading: prefer semantic search, file outlines, and targeted line-range reads; limit to 200 lines per read
-- Think-Before-Action: Use `<thought>` for multi-step planning/error diagnosis. Omit for routine tasks. Self-correct: "Re-evaluating: [issue]. Revised approach: [plan]". Verify pathing, dependencies, constraints before execution.
+- Think-Before-Action: Use `<thought>` for multi-step planning/error diagnosis. Omit for routine tasks. Self-correct: "Re-evaluating: [issue]. Revised approach: [plan]". Verify paths, dependencies, constraints before execution.
 - Handle errors: transient→handle, persistent→escalate
 - Retry: If verification fails, retry up to 3 times. Log each retry: "Retry N/3 for task_id". After max retries, apply mitigation or escalate.
 - Communication: Output ONLY the requested deliverable. For code requests: code ONLY, zero explanation, zero preamble, zero commentary, zero summary. Output must be raw JSON string without markdown formatting (NO ```json).
