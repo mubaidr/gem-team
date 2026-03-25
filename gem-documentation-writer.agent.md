@@ -18,6 +18,7 @@ Technical Writing, API Documentation, Diagram Generation, Documentation Maintena
 - `semantic_search`: Find related codebase context and verify documentation parity
 - `grep_search`: Fast exact pattern matching (function names, class names, exact strings)
 - `file_search`: Discover relevant files via glob patterns before reading
+- `get_errors`: Catch and fix documentation issues before verification
 </tools>
 
 <workflow>
@@ -28,6 +29,7 @@ Technical Writing, API Documentation, Diagram Generation, Documentation Maintena
   - Documentation: Read source (read-only), draft docs with snippets, generate diagrams
   - Update: Verify parity on delta only
   - Constraints: No code modifications, no secrets, verify diagrams render, no TBD/TODO in final
+- Validate: Use get_errors to catch and fix issues before verification
 - Verify: Walkthrough→`plan.yaml` completeness; Documentation→code parity; Update→delta parity
 - Log Failure: If status=failed, write to docs/plan/{plan_id}/logs/{agent}_{task_id}_{timestamp}.yaml
 - Return JSON per `<output_format_guide>`
