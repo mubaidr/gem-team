@@ -1,11 +1,4 @@
-<p align="center">
-  <img src="https://img.shields.io/badge/Multi--Agent-Orchestration-blueviolet?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0xMiAyQzYuNDggMiAyIDYuNDggMiAxMnM0LjQ4IDEwIDEwIDEwIDEwLTQuNDggMTAtMTBTMTcuNTIgMiAxMiAyem0tMiAxNWwtNS01IDEuNDEtMS40MUwxMCAxNC4xN2w3LjU5LTcuNTlMMTkgOGwtOSA5eiIvPjwvc3ZnPg==" alt="Multi-Agent Orchestration"/>
-  <img src="https://img.shields.io/badge/DAG--Based-Planning-success?style=for-the-badge" alt="DAG-Based Planning"/>
-  <img src="https://img.shields.io/badge/Parallel-Execution-orange?style=for-the-badge" alt="Parallel Execution"/>
-  <img src="https://img.shields.io/badge/TDD-Verified-blue?style=for-the-badge" alt="TDD Verified"/>
-</p>
-
-# 💎 Gem Team: Multi-Agent Orchestration Framework
+# Gem Team: Multi-Agent Orchestration Framework
 
 > Transform complex projects into coordinated, verified, production-ready deliverables — with intelligent agents that research, plan, implement, test, and document autonomously.
 
@@ -13,7 +6,7 @@ A modular, high-performance multi-agent team designed for complex project execut
 
 ---
 
-## 🚀 Quick Look
+## Quick Look
 
 ```mermaid
 flowchart TB
@@ -104,7 +97,7 @@ flowchart TB
 
 ---
 
-## 🤖 The Agent Team
+## The Agent Team
 
 | Agent | Role | Primary Responsibility |
 | :------------------------- | :--- | :-------------------------------------------------------------------------------------------- |
@@ -119,7 +112,7 @@ flowchart TB
 
 ---
 
-## ✨ Key Differentiators
+## Key Differentiators
 
 | Feature | What It Does |
 |:--------|:-------------|
@@ -134,7 +127,7 @@ flowchart TB
 
 ---
 
-## ⚡ Why Gem Team?
+## Why Gem Team?
 
 ### Single-Agent Problems → Gem Team Solutions
 
@@ -145,7 +138,7 @@ flowchart TB
 | Sequential bottlenecks | DAG-based parallel execution (≤4 agents simultaneously) |
 | Missing verification | TDD + mandatory verification gates |
 | Intent misalignment | Discuss phase captures intent before planning |
-| No audit trail | Persistent `plan.yaml` tracks every decision & outcome |
+| No audit trail | Persistent `plan.yaml` and `PRD.yaml` tracks every decision & outcome |
 
 ### Why It Works
 
@@ -157,48 +150,55 @@ flowchart TB
 
 ---
 
-## 🔄 Core Workflow
+## Core Workflow
 
-The Orchestrator follows a 4-Phase workflow:
+The Orchestrator follows a 4-Phase workflow with phase detection at the start:
 
-### Phase 1: Discuss (medium|complex only)
+### Phase Detection
+
+- User provides plan id OR plan path → Load plan → Execution Loop
+- No plan → Discuss Phase (medium|complex) or Research (simple)
+- Plan + user_feedback → Planning
+- Plan + all tasks completed → Summary
+
+### Discuss Phase (medium|complex only)
 
 - Identifies gray areas → generates 2-4 context-aware options per question
 - Asks 3-5 targeted questions → Architectural decisions → `AGENTS.md`
 - Task clarifications → PRD creation
 
-### Phase 2: PRD Creation
+### PRD Creation
 
 - Source of truth for research & planning
 - Includes: user stories, IN/OUT SCOPE, acceptance criteria, NEEDS CLARIFICATION
 
-### Phase 3: Research
+### Phase 1: Research
 
 - Detects complexity (simple/medium/complex)
 - Delegates to gem-researcher (≤4 concurrent) per focus area
 - Output: `docs/plan/{plan_id}/research_findings_{focus}.yaml`
 
-### Phase 4: Planning
+### Phase 2: Planning
 
 - Complex: 3 planner variants (a/b/c) → selects best
 - Simple/Medium: 1 planner run
 - Plan Verification Gate: gem-reviewer validates (coverage, atomicity, deps, PRD)
 - Output: `docs/plan/{plan_id}/plan.yaml` (DAG + waves)
 
-### Phase 5: Execution Loop
+### Phase 3: Execution Loop
 
 - Executes in waves (wave 1 first, wave 2 after, etc.)
 - ≤4 agents parallel per wave
 - Wave Integration Check: build/lint/typecheck/tests after each wave
 
-### Phase 6: Summary
+### Phase 4: Summary
 
 - Presents status, next steps
-- User feedback → routes back to Phase 4
+- User feedback → routes back to Planning
 
 ---
 
-## 🛠 Key Features
+## Key Features
 
 | Feature | Description |
 |:--------|:------------|
@@ -220,22 +220,6 @@ The Orchestrator follows a 4-Phase workflow:
 
 ---
 
-## 📁 Project Structure
-
-```text
-gem-team/
-├── gem-*.agent.md               # Agent definitions (7 agents)
-├── docs/
-│   ├── prd.yaml                 # Product Requirements Document (project-level)
-│   └── plan/{plan_id}/
-│       ├── plan.yaml             # Task DAG + state
-│       ├── research_findings_*.yaml    # Researcher output
-│       ├── walkthrough-*.md      # Completion documentation
-│       ├── evidence/{task_id}/   # Browser test failures
-│       └── logs/                  # Failure logs
-└── README.md
-```
-
 ### Generated Artifacts by Agent
 
 | Agent | Generates | Path |
@@ -243,13 +227,12 @@ gem-team/
 | gem-orchestrator | PRD (initial) | `docs/PRD.yaml` |
 | gem-planner | plan.yaml | `docs/plan/{plan_id}/plan.yaml` |
 | gem-researcher | findings YAML | `docs/plan/{plan_id}/research_findings_{focus}.yaml` |
-| gem-documentation-writer | walkthrough, PRD (final) | `docs/plan/{plan_id}/walkthrough-*.md`, `docs/PRD.yaml` |
+| gem-documentation-writer | PRD (final) | `docs/PRD.yaml` |
 | gem-browser-tester | evidence (on failure) | `docs/plan/{plan_id}/evidence/{task_id}/` |
-| All agents | failure logs | `docs/plan/{plan_id}/logs/{agent}_{task_id}_{ts}.yaml` |
 
 ---
 
-## 📋 Agent Protocol
+## Agent Protocol
 
 ### Input → Output
 
@@ -284,35 +267,15 @@ Completion (Output):
 | DevOps | deployment → health checks → idempotency |
 | Doc Writer | completeness → code parity → formatting |
 
-### Autonomous Execution
-
-- Most agents: Fully autonomous
-- DevOps: Approval gates for production/security
-- Plan Verification Gate: Reviewer validates plan (coverage, atomicity, deps, PRD alignment) before execution — loops to planner if issues found (max 2 iterations)
-- Orchestrator: Delegates all via `runSubagent`
-
 ---
 
-## 🎯 Use Cases
-
-| Scenario                     | How Gem Team Helps                                                              |
-| :--------------------------- | :------------------------------------------------------------------------------ |
-| Large Feature Implementation | Decomposes into parallel subtasks, implements with TDD, verifies each component |
-| Codebase Refactoring         | Researches patterns, plans migration, executes incrementally with tests         |
-| Security Audit               | Reviewer scans for OWASP issues, secrets, compliance gaps                       |
-| Documentation Overhaul       | Doc Writer generates accurate docs maintaining code-documentation parity        |
-| CI/CD Pipeline Setup         | DevOps agent creates containers, pipelines, deploys with health checks          |
-| UI/UX Testing                | Chrome Tester automates validation matrix, captures visual evidence             |
-
----
-
-## 📦 Installation
+## Installation
 
 Available in [awesome-copilot](https://github.github.com/awesome-copilot/) — the official GitHub repository for Copilot extensions.
 
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the Apache License 2.0 — see the [LICENSE](LICENSE) file for details.
 
