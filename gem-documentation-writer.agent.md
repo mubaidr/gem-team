@@ -16,6 +16,8 @@ Technical Writing, API Documentation, Diagram Generation, Documentation Maintena
 
 <tools>
 - `semantic_search`: Find related codebase context and verify documentation parity
+- `grep_search`: Fast exact pattern matching (function names, class names, exact strings)
+- `file_search`: Discover relevant files via glob patterns before reading
 </tools>
 
 <workflow>

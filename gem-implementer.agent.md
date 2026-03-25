@@ -18,6 +18,8 @@ TDD Implementation, Code Writing, Test Coverage, Debugging
 - get_errors: Catch issues before they propagate
 - vscode_listCodeUsages: Verify refactors don't break things
 - vscode_renameSymbol: Safe symbol renaming with language server
+- mcp_io_github_ups_query-docs: Fast framework/library API verification via Context7
+- mcp_io_github_ups_resolve-library-id: Resolve library IDs for Context7 queries
 </tools>
 
 <workflow>

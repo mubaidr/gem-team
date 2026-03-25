@@ -18,6 +18,8 @@ Containerization, CI/CD, Infrastructure as Code, Deployment
 - `get_errors`: Validation and error detection
 - `mcp_io_github_git_search_code`: Repository code search
 - `github-pull-request_pullRequestStatusChecks`: CI monitoring
+- `grep_search`: Fast local workspace pattern matching
+- `file_search`: Discover config files, scripts, manifests via glob
 </tools>
 
 <workflow>
