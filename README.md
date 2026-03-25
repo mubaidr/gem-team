@@ -1,7 +1,5 @@
 # Gem Team: Multi-Agent Orchestration Framework
 
-> Transform complex projects into coordinated, verified, production-ready deliverables — with intelligent agents that research, plan, implement, test, and document autonomously.
-
 A modular, high-performance multi-agent team designed for complex project execution, feature implementation, and automated verification.
 
 ---
