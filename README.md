@@ -2,8 +2,6 @@
 
 A modular, high-performance multi-agent team designed for complex project execution, feature implementation, and automated verification.
 
----
-
 ## Quick Look
 
 ```mermaid
@@ -93,8 +91,6 @@ flowchart TB
     style SUMMARY fill:#2c3e50,color:#fff,stroke:#1a252f,stroke-width:2px
 ```
 
----
-
 ## The Agent Team
 
 | Agent | Role | Primary Responsibility |
@@ -108,8 +104,6 @@ flowchart TB
 | `gem-reviewer` | REVIEWER | Scan for security issues, detect secrets, verify PRD compliance. Also reviews plans pre-execution (coverage, atomicity, deps). Deliver audit report. Never implement. |
 | `gem-documentation-writer` | DOCUMENTATION WRITER | Write technical docs, generate diagrams, maintain code-documentation parity. Never implement. |
 
----
-
 ## Key Differentiators
 
 | Feature | What It Does |
@@ -122,8 +116,6 @@ flowchart TB
 | 🌐 **Multi-Browser Testing** | Chrome MCP, Playwright, Agent Browser support |
 | 🧠 **Sequential Thinking** | Chain-of-thought for complex analysis (>50 files) |
 | 📊 **Research Confidence** | High/medium/low confidence scoring for research reliability |
-
----
 
 ## Why Gem Team?
 
@@ -145,8 +137,6 @@ flowchart TB
 - 🔒 **Built-in Security** — OWASP scanning on critical tasks
 - 📊 **Full Visibility** — Real-time status, clear approval gates
 - 🔄 **Resilient** — Pre-mortem analysis, failure handling, auto-replanning
-
----
 
 ## Core Workflow
 
@@ -194,8 +184,6 @@ The Orchestrator follows a 4-Phase workflow with phase detection at the start:
 - Presents status, next steps
 - User feedback → routes back to Planning
 
----
-
 ## Key Features
 
 | Feature | Description |
@@ -216,8 +204,6 @@ The Orchestrator follows a 4-Phase workflow with phase detection at the start:
 | `wave` | Integration checks (build, lint, typecheck, tests) |
 | `task` | Individual code review (OWASP, secrets, logic) |
 
----
-
 ### Generated Artifacts by Agent
 
 | Agent | Generates | Path |
@@ -227,8 +213,6 @@ The Orchestrator follows a 4-Phase workflow with phase detection at the start:
 | gem-researcher | findings YAML | `docs/plan/{plan_id}/research_findings_{focus}.yaml` |
 | gem-documentation-writer | PRD (final) | `docs/PRD.yaml` |
 | gem-browser-tester | evidence (on failure) | `docs/plan/{plan_id}/evidence/{task_id}/` |
-
----
 
 ## Agent Protocol
 
@@ -265,19 +249,13 @@ Completion (Output):
 | DevOps | deployment → health checks → idempotency |
 | Doc Writer | completeness → code parity → formatting |
 
----
-
 ## Installation
 
 Available in [awesome-copilot](https://github.github.com/awesome-copilot/) — the official GitHub repository for Copilot extensions.
 
----
-
 ## License
 
 This project is licensed under the Apache License 2.0 — see the [LICENSE](LICENSE) file for details.
-
----
 
 Built for Gem Team — Precision. Parallelism. Progress.
 
