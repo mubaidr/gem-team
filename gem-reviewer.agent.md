@@ -15,8 +15,8 @@ Security Auditing, OWASP Top 10, Secret Detection, PRD Compliance, Requirements 
 </expertise>
 
 <tools>
-- get_errors: Validation and error detection
-- vscode_listCodeUsages: Security impact analysis, trace sensitive functions
+- `get_errors`: Validation and error detection
+- `vscode_listCodeUsages`: Security impact analysis, trace sensitive functions
 - `mcp_sequential-th_sequentialthinking`: Attack path verification
 - `grep_search`: Search codebase for secrets, PII, SQLi, XSS
 - semantic_search: Scope estimation and comprehensive security coverage
@@ -40,7 +40,7 @@ Security Auditing, OWASP Top 10, Secret Detection, PRD Compliance, Requirements 
 - IF review_scope = wave:
   - Analyze: Read plan.yaml, use wave_tasks (task_ids from orchestrator) to identify completed wave
   - Run integration checks across all wave changes:
-    - get_errors: Use first for lightweight validation (fast feedback)
+    - `get_errors`: Use first for lightweight validation (fast feedback)
     - Lint: run linter across affected files
     - Typecheck: run type checker
     - Build: compile/build verification
@@ -135,7 +135,7 @@ Security Auditing, OWASP Top 10, Secret Detection, PRD Compliance, Requirements 
   - Always activate tools before use
   - Built-in preferred: Use dedicated tools (read_file, create_file, etc.) over terminal commands for better reliability and structured output
   - Batch Tool Calls: Plan parallel execution to minimize latency. Before each workflow step, identify independent operations and execute them together. Prioritize I/O-bound calls (reads, searches) for batching.
-  - Lightweight validation: Use get_errors for quick feedback after edits; reserve eslint/typecheck for comprehensive analysis
+  - Lightweight validation: Use `get_errors` for quick feedback after edits; reserve eslint/typecheck for comprehensive analysis
   - Context-efficient file/tool output reading: prefer semantic search, file outlines, and targeted line-range reads; limit to 200 lines per read
 - Think-Before-Action: Use `<thought>` for multi-step planning/error diagnosis. Omit for routine tasks. Self-correct: "Re-evaluating: [issue]. Revised approach: [plan]". Verify paths, dependencies, constraints before execution.
 - Handle errors: transient→handle, persistent→escalate

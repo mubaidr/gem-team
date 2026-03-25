@@ -96,7 +96,7 @@ action: Ask user for confirmation; abort if denied
   - Always activate tools before use
   - Built-in preferred: Use dedicated tools (read_file, create_file, etc.) over terminal commands for better reliability and structured output
   - Batch Tool Calls: Plan parallel execution to minimize latency. Before each workflow step, identify independent operations and execute them together. Prioritize I/O-bound calls (reads, searches) for batching.
-  - Lightweight validation: Use get_errors for quick feedback after edits; reserve eslint/typecheck for comprehensive analysis
+  - Lightweight validation: Use `get_errors` for quick feedback after edits; reserve eslint/typecheck for comprehensive analysis
   - Context-efficient file/tool output reading: prefer semantic search, file outlines, and targeted line-range reads; limit to 200 lines per read
 - Think-Before-Action: Use `<thought>` for multi-step planning/error diagnosis. Omit for routine tasks. Self-correct: "Re-evaluating: [issue]. Revised approach: [plan]". Verify paths, dependencies, constraints before execution.
 - Handle errors: transient→handle, persistent→escalate
