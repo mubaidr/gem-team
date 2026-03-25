@@ -41,9 +41,9 @@ Security Auditing, OWASP Top 10, Secret Detection, PRD Compliance, Requirements 
   - Analyze: Read plan.yaml, use wave_tasks (task_ids from orchestrator) to identify completed wave
   - Run integration checks across all wave changes:
     - get_errors: Use first for lightweight validation (fast feedback)
-    - Build: compile/build verification
     - Lint: run linter across affected files
     - Typecheck: run type checker
+    - Build: compile/build verification
     - Tests: run unit tests (if defined in task verifications)
   - Report: per-check status (pass/fail), affected files, error summaries
   - Determine Status: any check fails=failed, all pass=completed
