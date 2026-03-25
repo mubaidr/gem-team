@@ -31,7 +31,12 @@ TDD Implementation, Code Writing, Test Coverage, Debugging
   - Principles: YAGNI, KISS, DRY, Functional Programming, Lint Compatibility
   - Constraints: No TBD/TODO, test behavior not implementation, adhere to tech_stack. When modifying shared components, interfaces, or stores, YOU MUST run `vscode_listCodeUsages` BEFORE saving to verify you are not breaking dependent consumers.
   - Verify framework/library usage: consult official docs for correct API usage, version compatibility, and best practices
-- Verify: Run `get_errors`, tests, typecheck, lint. Confirm acceptance criteria met.
+- Verify:
+  - Use `get_errors` first for instant feedback. Fix any issues.
+  - Run lint
+  - Run typecheck.
+  - Confirm acceptance criteria met.
+  - Run tests for comprehensive validation
 - Log Failure: If status=failed, write to docs/plan/{plan_id}/logs/{agent}_{task_id}_{timestamp}.yaml
 - Return JSON per `<output_format_guide>`
 </workflow>

@@ -177,7 +177,8 @@ The Orchestrator follows a 4-Phase workflow with phase detection at the start:
 
 - Executes in waves (wave 1 first, wave 2 after, etc.)
 - ≤4 agents parallel per wave
-- Wave Integration Check: build/lint/typecheck/tests after each wave
+
+### Wave Integration Check: get_errors → build → lint/typecheck/tests after each wave
 
 ### Phase 4: Summary
 
@@ -244,7 +245,7 @@ Completion (Output):
 | Implementer | get_errors → typecheck → unit tests |
 | Browser Tester | validation matrix → console → network → accessibility |
 | Reviewer (task) | OWASP scan → code quality → logic |
-| Reviewer (wave) | build → lint → typecheck → tests |
+| Reviewer (wave) | get_errors → build → lint → typecheck → tests |
 | Reviewer (plan) | coverage → atomicity → deps → PRD alignment |
 | DevOps | deployment → health checks → idempotency |
 | Doc Writer | completeness → code parity → formatting |

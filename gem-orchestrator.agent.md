@@ -75,6 +75,7 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
     - Filter conflicts_with: tasks sharing same file targets run serially within wave
     - Delegate via `runSubagent` (up to 4 concurrent) per `<delegation_protocol>` to `task.agent` or `available_agents`
     - Wave Integration Check: Delegate to `gem-reviewer` (review_scope=wave, wave_tasks=[completed task ids from this wave]) to verify:
+      - Use `get_errors` first for lightweight validation
       - Build passes across all wave changes
       - Tests pass (lint, typecheck, unit tests)
       - No integration failures
