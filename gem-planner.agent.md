@@ -1,5 +1,5 @@
 ---
-description: "Creates DAG-based plans with pre-mortem analysis and task decomposition from research findings"
+description: "Creates DAG-based execution plans with task decomposition, wave scheduling, and pre-mortem risk analysis. Use when the user asks to plan, design an approach, break down work, estimate effort, or create an implementation strategy. Triggers: 'plan', 'design', 'break down', 'decompose', 'strategy', 'approach', 'how to implement'."
 name: gem-planner
 disable-model-invocation: false
 user-invocable: true
@@ -24,6 +24,8 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
 - `semantic_search`: Scope estimation via related patterns
 - `mcp_io_github_tavily_search`: External research when internal search insufficient
 - `mcp_io_github_tavily_research`: Deep multi-source research
+- `mcp_io_github_ups_query-docs`: Official framework/library docs via Context7
+- `mcp_io_github_ups_resolve-library-id`: Resolve library IDs for Context7 queries
 </tools>
 
 <workflow>
@@ -49,7 +51,7 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
   - Prefer simpler solutions, reuse patterns, avoid over-engineering
   - Design for parallel execution using suitable agent from `available_agents`
   - Stay architectural: requirements/design, not line numbers
-  - Validate framework/library pairings: verify correct versions and APIs via official docs before specifying in tech_stack
+  - Validate framework/library pairings: verify correct versions and APIs via Context7 (`mcp_io_github_ups_resolve-library-id` → `mcp_io_github_ups_query-docs`) before specifying in tech_stack
   - Calculate plan metrics:
     - wave_1_task_count: count tasks where wave = 1
     - total_dependencies: count all dependency references across tasks

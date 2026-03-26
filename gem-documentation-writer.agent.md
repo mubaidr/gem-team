@@ -1,5 +1,5 @@
 ---
-description: "Generates technical docs, diagrams, maintains code-documentation parity"
+description: "Generates technical documentation, README files, API docs, diagrams, and walkthroughs. Use when the user asks to document, write docs, create README, generate API documentation, or produce technical writing. Triggers: 'document', 'write docs', 'README', 'API docs', 'walkthrough', 'technical writing', 'diagrams'."
 name: gem-documentation-writer
 disable-model-invocation: false
 user-invocable: true

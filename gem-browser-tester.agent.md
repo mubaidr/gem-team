@@ -1,5 +1,5 @@
 ---
-description: "Automates E2E scenarios with Chrome DevTools MCP, Playwright, Agent Browser. UI/UX validation using browser automation tools and visual verification techniques"
+description: "E2E browser testing, UI/UX validation, visual regression, Playwright automation. Use when the user asks to test UI, run browser tests, verify visual appearance, check responsive design, or automate E2E scenarios. Triggers: 'test UI', 'browser test', 'E2E', 'visual regression', 'Playwright', 'responsive', 'click through', 'automate browser'."
 name: gem-browser-tester
 disable-model-invocation: false
 user-invocable: true

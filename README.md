@@ -93,16 +93,16 @@ flowchart TB
 
 ## The Agent Team
 
-| Agent | Role | Primary Responsibility |
+| Agent | Role | When to Use |
 | :------------------------- | :--- | :-------------------------------------------------------------------------------------------- |
-| `gem-orchestrator` | ORCHESTRATOR | Team Lead - Coordinate workflow with energetic announcements. Detect phase → Route to agents → Synthesize results. Manage plan.yaml state and todos. Never execute. |
-| `gem-researcher` | RESEARCHER | Explore codebase, identify patterns, map dependencies. Deliver structured findings in YAML. Never implement. |
-| `gem-planner` | PLANNER | Design DAG-based plans, decompose tasks, identify failure modes. Create plan.yaml. Never implement. |
-| `gem-implementer` | IMPLEMENTER | Write code using TDD. Follow plan specifications. Ensure tests pass. Never review. |
-| `gem-browser-tester` | BROWSER TESTER | Run E2E scenarios in browser (Chrome DevTools MCP, Playwright, Agent Browser). Verify UI/UX, accessibility. Deliver test results. Never implement. |
-| `gem-devops` | DEVOPS | Deploy infrastructure, manage CI/CD, configure containers. Ensure idempotency. Never implement. |
-| `gem-reviewer` | REVIEWER | Scan for security issues, detect secrets, verify PRD compliance. Also reviews plans pre-execution (coverage, atomicity, deps). Deliver audit report. Never implement. |
-| `gem-documentation-writer` | DOCUMENTATION WRITER | Write technical docs, generate diagrams, maintain code-documentation parity. Never implement. |
+| `gem-orchestrator` | ORCHESTRATOR | Primary entry point for all tasks. Coordinates research → planning → execution → review. Never executes directly. |
+| `gem-researcher` | RESEARCHER | User asks to research, explore, analyze code, find patterns, investigate dependencies, or understand architecture. |
+| `gem-planner` | PLANNER | User asks to plan, design an approach, break down work, estimate effort, or create an implementation strategy. |
+| `gem-implementer` | IMPLEMENTER | User asks to implement, build, create, code, write, fix, or refactor. Uses TDD. Never reviews its own work. |
+| `gem-browser-tester` | BROWSER TESTER | User asks to test UI, run browser tests, verify visual appearance, check responsive design, or automate E2E scenarios. |
+| `gem-devops` | DEVOPS | User asks to deploy, configure infrastructure, set up CI/CD, manage containers, or handle deployment tasks. |
+| `gem-reviewer` | REVIEWER | User asks to review, audit, check security, validate, or verify compliance. Also gates plans and waves. Never modifies code. |
+| `gem-documentation-writer` | DOCUMENTATION WRITER | User asks to document, write docs, create README, generate API documentation, or produce technical writing. |
 
 ## Key Differentiators
 

@@ -1,5 +1,5 @@
 ---
-description: "Security gatekeeper for critical tasks—OWASP, secrets, compliance"
+description: "Security auditing, code review, OWASP scanning, secrets/PII detection, PRD compliance verification. Use when the user asks to review, audit, check security, validate, or verify compliance. Never modifies code. Triggers: 'review', 'audit', 'check security', 'validate', 'verify', 'compliance', 'OWASP', 'secrets'."
 name: gem-reviewer
 disable-model-invocation: false
 user-invocable: true

@@ -1,5 +1,5 @@
 ---
-description: "Team Lead - Coordinates multi-agent workflows with energetic announcements, delegates tasks, synthesizes results via runSubagent"
+description: "Coordinates multi-agent workflows, delegates tasks, synthesizes results. Use as the primary entry point for all tasks — orchestrates research, planning, execution, and review phases. Triggers: any user request, multi-step tasks, complex implementations, project coordination."
 name: gem-orchestrator
 disable-model-invocation: true
 user-invocable: true

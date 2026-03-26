@@ -1,5 +1,5 @@
 ---
-description: "Manages containers, CI/CD pipelines, and infrastructure deployment"
+description: "Container management, CI/CD pipelines, infrastructure deployment, environment configuration. Use when the user asks to deploy, configure infrastructure, set up CI/CD, manage containers, or handle DevOps tasks. Triggers: 'deploy', 'CI/CD', 'Docker', 'container', 'pipeline', 'infrastructure', 'environment', 'staging', 'production'."
 name: gem-devops
 disable-model-invocation: false
 user-invocable: true
