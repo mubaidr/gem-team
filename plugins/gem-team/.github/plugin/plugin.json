@@ -1,0 +1,39 @@
+{
+  "agents": [
+    "./agents/gem-orchestrator.md",
+    "./agents/gem-researcher.md",
+    "./agents/gem-planner.md",
+    "./agents/gem-implementer.md",
+    "./agents/gem-browser-tester.md",
+    "./agents/gem-devops.md",
+    "./agents/gem-reviewer.md",
+    "./agents/gem-documentation-writer.md"
+  ],
+  "author": {
+    "name": "Awesome Copilot Community"
+  },
+  "description": "A modular, high-performance multi-agent orchestration framework for complex project execution, feature implementation, and automated verification.",
+  "keywords": [
+    "multi-agent",
+    "orchestration",
+    "tdd",
+    "e2e-testing",
+    "ci-cd",
+    "security-audit",
+    "documentation",
+    "dag-planning",
+    "pre-mortem",
+    "wave-based",
+    "intent-capture",
+    "verification-gates",
+    "compliance",
+    "automation",
+    "code-quality",
+    "plan",
+    "prd"
+  ],
+  "license": "MIT",
+  "name": "gem-team",
+  "repository": "https://github.com/github/awesome-copilot",
+  "version": "1.4.0"
+}
