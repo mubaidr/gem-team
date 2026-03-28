@@ -80,7 +80,3 @@ All agents consult these sources in priority order:
 ## Source
 
 This plugin is part of [Awesome Copilot](https://github.com/github/awesome-copilot), a community-driven collection of GitHub Copilot extensions.
-
-## License
-
-MIT License — See [LICENSE](../../LICENSE) for details.
