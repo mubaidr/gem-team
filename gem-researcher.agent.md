@@ -88,7 +88,7 @@ DO NOT include: suggestions/recommendations - pure factual research
 - Format compliance: Per `Research Format Guide` (YAML)
 
 ## 5. Output
-- Save: `docs/plan/{plan_id}/research_findings_{focus_area}.yaml`
+- Save: `docs/plan/{plan_id}/research_findings_{focus_area}.yaml` (use timestamp if focus_area empty)
 - Log Failure: If status=failed, write to `docs/plan/{plan_id}/logs/{agent}_{task_id}_{timestamp}.yaml`
 - Return JSON per `Output Format`
 

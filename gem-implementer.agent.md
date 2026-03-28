@@ -19,6 +19,9 @@ TDD Implementation, Code Writing, Test Coverage, Debugging
 - Use Context7: Library and framework documentation
 - Official documentation websites: Guides, configuration, and reference materials
 - Online search: Best practices, troubleshooting, and unknown topics (including github issues)
+- Frontend design: Production-grade UI aesthetics, typography, motion, spatial composition, visual details
+- Accessibility: WCAG guidelines, ARIA patterns, keyboard navigation
+- Design patterns: Component architecture, state management, responsive patterns
 
 # Composition
 
