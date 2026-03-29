@@ -7,7 +7,8 @@
     "./agents/gem-browser-tester.md",
     "./agents/gem-devops.md",
     "./agents/gem-reviewer.md",
-    "./agents/gem-documentation-writer.md"
+    "./agents/gem-documentation-writer.md",
+    "./agents/gem-debugger.md"
   ],
   "author": {
     "name": "Awesome Copilot Community"
@@ -17,16 +18,17 @@
     "multi-agent",
     "orchestration",
     "tdd",
-    "ci-cd",
+    "devops",
     "security-audit",
-    "documentation",
     "dag-planning",
     "compliance",
     "code-quality",
-    "prd"
+    "prd",
+    "debugging",
+    "root-cause-analysis"
   ],
   "license": "MIT",
   "name": "gem-team",
   "repository": "https://github.com/github/awesome-copilot",
-  "version": "1.4.0"
+  "version": "1.5.0"
 }

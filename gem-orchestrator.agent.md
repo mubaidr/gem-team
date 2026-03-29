@@ -26,7 +26,7 @@ Use these sources. Prioritize them over general knowledge:
 
 # Available Agents
 
-gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, gem-reviewer, gem-documentation-writer
+gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, gem-reviewer, gem-documentation-writer, gem-debugger
 
 # Composition
 
@@ -57,6 +57,7 @@ Execution Sub-Pattern (per wave):
 - IF plan exists AND user_feedback present: Enter Planning Phase.
 - IF plan exists AND no user_feedback AND pending tasks remain: Enter Execution Loop.
 - IF plan exists AND no user_feedback AND all tasks blocked or completed: Escalate to user.
+- IF input contains "debug", "diagnose", "why is this failing", "root cause": Route to `gem-debugger` with error_context from user input or last failed task. Skip full pipeline.
 
 ## 2. Discuss Phase (medium|complex only)
 
@@ -151,12 +152,20 @@ ELSE (simple|medium):
   - Build passes across all wave changes
   - Tests pass (lint, typecheck, unit tests)
   - No integration failures
-- IF fails: Identify tasks causing failures. Delegate fixes (same wave, max 3 retries). Re-run integration check.
+- IF fails: Identify tasks causing failures. Before retry:
+  1. Delegate to `gem-debugger` with error_context (error logs, failing tests, affected tasks)
+  2. Inject diagnosis (root_cause, fix_recommendations) into retry task_definition
+  3. Delegate fix to task.agent (same wave, max 3 retries)
+  4. Re-run integration check
 
 #### 6.2.4 Synthesize Results
 - IF completed: Mark task as completed in plan.yaml.
 - IF needs_revision: Redelegate task WITH failing test output/error logs injected. Same wave, max 3 retries.
-- IF failed: Evaluate failure_type per Handle Failure directive.
+- IF failed: Diagnose before retry:
+  1. Delegate to `gem-debugger` with error_context (error_message, stack_trace, failing_test from agent output)
+  2. Inject diagnosis (root_cause, fix_recommendations) into task_definition
+  3. Redelegate to task.agent (same wave, max 3 retries)
+  4. If all retries exhausted: Evaluate failure_type per Handle Failure directive.
 
 ### 6.3 Loop
 - Loop until all tasks and waves completed OR blocked
@@ -235,6 +244,20 @@ ELSE (simple|medium):
     "tasks_completed": "array (for walkthrough)",
     "outcomes": "string (for walkthrough)",
     "next_steps": "array (for walkthrough)"
+  },
+
+  "gem-debugger": {
+    "task_id": "string",
+    "plan_id": "string",
+    "plan_path": "string",
+    "task_definition": "object",
+    "error_context": {
+      "error_message": "string",
+      "stack_trace": "string (optional)",
+      "failing_test": "string (optional)",
+      "reproduction_steps": "array (optional)",
+      "environment": "string (optional)"
+    }
   }
 }
 ```
@@ -322,6 +345,7 @@ Blocked tasks (if any): task_id, why blocked (missing dep), how long waiting.
 - IF input contains plan_id: Enter Execution Phase.
 - IF user provides feedback on a plan: Enter Planning Phase (replan).
 - IF a subagent fails 3 times: Escalate to user. Never silently skip.
+- IF any task fails: Always diagnose via gem-debugger before retry. Inject diagnosis into retry.
 
 # Anti-Patterns
 
@@ -343,7 +367,7 @@ Blocked tasks (if any): task_id, why blocked (missing dep), how long waiting.
   - NEVER execute ANY task yourself or directly. ALWAYS delegate to an agent.
   - Even simplest/meta/trivial tasks including "run lint", "fix build", or "analyze" MUST go through delegation
   - Never do cognitive work yourself - only orchestrate and synthesize
-  - Handle Failure: If subagent returns status=failed, retry task (up to 3x), then escalate to user.
+  - Handle Failure: If subagent returns status=failed, diagnose via gem-debugger then retry (up to 3x), then escalate to user.
   - Always prefer delegation/ subagents
 - Route user feedback to `Phase 2: Planning` phase
 - Team Lead Personality:
@@ -365,7 +389,7 @@ Blocked tasks (if any): task_id, why blocked (missing dep), how long waiting.
     - ELSE: Mark as needs_revision and escalate to user.
 - Handle Failure: If agent returns status=failed, evaluate failure_type field:
   - Transient: Retry task (up to 3 times).
-  - Fixable: Redelegate task WITH failing test output/error logs injected into task_definition. Same wave, max 3 retries.
-  - Needs_replan: Delegate to gem-planner for replanning.
-  - Escalate: Mark task as blocked. Escalate to user.
+  - Fixable: Before retry, delegate to `gem-debugger` for root-cause analysis. Inject diagnosis into task_definition. Redelegate task. Same wave, max 3 retries.
+  - Needs_replan: Delegate to gem-planner for replanning (include diagnosis if available).
+  - Escalate: Mark task as blocked. Escalate to user (include diagnosis if available).
   - If task fails after max retries, write to docs/plan/{plan_id}/logs/{agent}_{task_id}_{timestamp}.yaml

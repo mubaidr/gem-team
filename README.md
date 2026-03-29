@@ -3,7 +3,7 @@
 > A modular, high-performance multi-agent orchestration framework for complex project execution, feature implementation, and automated verification.
 
 [![Copilot Plugin](https://img.shields.io/badge/Plugin-Awesome%20Copilot-0078D4?style=flat-square&logo=microsoft)](https://awesome-copilot.github.com/plugins/#file=plugins%2Fgem-team)
-![Version](https://img.shields.io/badge/Version-1.4.0-6366f1?style=flat-square)
+![Version](https://img.shields.io/badge/Version-1.5.0-6366f1?style=flat-square)
 
 ## Installation
 
@@ -119,6 +119,7 @@ style SUMMARY fill:#2c3e50,color:#fff,stroke:#1a252f,stroke-width:2px
 | `gem-devops` | **DEVOPS** | User asks to deploy, configure infrastructure, set up CI/CD, manage containers, or handle deployment tasks. |
 | `gem-reviewer` | **REVIEWER** | User asks to review, audit, check security, validate, or verify compliance. Also gates plans and waves. Never modifies code. |
 | `gem-documentation-writer` | **DOCUMENTATION WRITER** | User asks to document, write docs, create README, generate API documentation, or produce technical writing. |
+| `gem-debugger` | **DEBUGGER** | User asks to debug, diagnose, find root cause, trace errors, or investigate failures. Never implements fixes. |
 
 ---
 
@@ -177,6 +178,7 @@ The Implementer additionally consults:
 |  **Codebase Pattern Discovery** | Agents search for existing patterns before implementing — avoids reinventing wheels |
 |  **Self-Critique** | Concise reflection step in every workflow to catch gaps before output |
 |  **Lightweight Validation** | `get_errors` for fast feedback before full build/lint/test |
+|  **Root-Cause Diagnosis** | Dedicated debugger with stack trace analysis regression bisection and fix recommendations |
 
 ---
 
@@ -187,7 +189,7 @@ The Implementer additionally consults:
 | Problem | Solution |
 |:--------|:--------|
 | Context overload | Specialized agents with focused expertise |
-| No specialization | 7 expert agents (researcher, planner, implementer, tester, reviewer, devops, docs) |
+| No specialization | 8 expert agents (researcher, planner, implementer, tester, reviewer, devops, docs, debugger) |
 | Sequential bottlenecks | DAG-based parallel execution (≤4 agents simultaneously) |
 | Missing verification | TDD + mandatory verification gates |
 | Intent misalignment | Discuss phase captures intent before planning |
@@ -287,6 +289,7 @@ get_errors → build → lint/typecheck/tests after each wave
 | gem-researcher | findings YAML | `docs/plan/{plan_id}/research_findings_{focus}.yaml` |
 | gem-documentation-writer | PRD (final) | `docs/PRD.yaml` |
 | gem-browser-tester | evidence (on failure) | `docs/plan/{plan_id}/evidence/{task_id}/` |
+| gem-debugger | diagnosis YAML | `docs/plan/{plan_id}/logs/{agent}_{task_id}_{timestamp}.yaml` |
 
 ---
 
@@ -326,6 +329,7 @@ task_id, plan_id, plan_path, task_definition (agent-specific)
 | Agent | Verification |
 | :--- | :--- |
 | Implementer | get_errors → typecheck → unit tests |
+| Debugger | reproduce → stack trace → root cause → fix recommendations |
 | Browser Tester | validation matrix → console → network → accessibility |
 | Reviewer (task) | OWASP scan → code quality → logic |
 | Reviewer (wave) | get_errors → build → lint → typecheck → tests |

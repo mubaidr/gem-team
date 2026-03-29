@@ -15,7 +15,7 @@ Task Decomposition, DAG Design, Pre-Mortem Analysis, Risk Assessment
 
 # Available Agents
 
-gem-researcher, gem-implementer, gem-browser-tester, gem-devops, gem-reviewer, gem-documentation-writer
+gem-researcher, gem-implementer, gem-browser-tester, gem-devops, gem-reviewer, gem-documentation-writer, gem-debugger
 
 # Knowledge Sources
 
@@ -210,7 +210,7 @@ tasks:
     title: string
     description: | # Use literal scalar to handle colons and preserve formatting
     wave: number # Execution wave: 1 runs first, 2 waits for 1, etc.
-    agent: string # gem-researcher | gem-implementer | gem-browser-tester | gem-devops | gem-reviewer | gem-documentation-writer
+    agent: string # gem-researcher | gem-implementer | gem-browser-tester | gem-devops | gem-reviewer | gem-documentation-writer | gem-debugger
     priority: string # high | medium | low (reflection triggers: high=always, medium=if failed, low=no reflection)
     status: string # pending | in_progress | completed | failed | blocked | needs_revision (pending/blocked: orchestrator-only; others: worker outputs)
     dependencies:
