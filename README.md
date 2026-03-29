@@ -3,7 +3,7 @@
 > A modular, high-performance multi-agent orchestration framework for complex project execution, feature implementation, and automated verification.
 
 [![Copilot Plugin](https://img.shields.io/badge/Plugin-Awesome%20Copilot-0078D4?style=flat-square&logo=microsoft)](https://awesome-copilot.github.com/plugins/#file=plugins%2Fgem-team)
-![Version](https://img.shields.io/badge/Version-1.5.0-6366f1?style=flat-square)
+![Version](https://img.shields.io/badge/Version-1.6.0-6366f1?style=flat-square)
 
 ## Installation
 
@@ -120,6 +120,7 @@ style SUMMARY fill:#2c3e50,color:#fff,stroke:#1a252f,stroke-width:2px
 | `gem-reviewer` | **REVIEWER** | User asks to review, audit, check security, validate, or verify compliance. Also gates plans and waves. Never modifies code. |
 | `gem-documentation-writer` | **DOCUMENTATION WRITER** | User asks to document, write docs, create README, generate API documentation, or produce technical writing. |
 | `gem-debugger` | **DEBUGGER** | User asks to debug, diagnose, find root cause, trace errors, or investigate failures. Never implements fixes. |
+| `gem-critic` | **CRITIC** | User asks to critique, challenge assumptions, find edge cases, review quality, or check for over-engineering. Never implements. |
 
 ---
 
@@ -179,6 +180,7 @@ The Implementer additionally consults:
 |  **Self-Critique** | Concise reflection step in every workflow to catch gaps before output |
 |  **Lightweight Validation** | `get_errors` for fast feedback before full build/lint/test |
 |  **Root-Cause Diagnosis** | Dedicated debugger with stack trace analysis regression bisection and fix recommendations |
+|  **Constructive Critique** | Devil's advocate challenges assumptions finds edge cases identifies over-engineering |
 
 ---
 
@@ -189,7 +191,7 @@ The Implementer additionally consults:
 | Problem | Solution |
 |:--------|:--------|
 | Context overload | Specialized agents with focused expertise |
-| No specialization | 8 expert agents (researcher, planner, implementer, tester, reviewer, devops, docs, debugger) |
+| No specialization | 9 expert agents (researcher, planner, implementer, tester, reviewer, devops, docs, debugger, critic) |
 | Sequential bottlenecks | DAG-based parallel execution (≤4 agents simultaneously) |
 | Missing verification | TDD + mandatory verification gates |
 | Intent misalignment | Discuss phase captures intent before planning |
@@ -290,6 +292,7 @@ get_errors → build → lint/typecheck/tests after each wave
 | gem-documentation-writer | PRD (final) | `docs/PRD.yaml` |
 | gem-browser-tester | evidence (on failure) | `docs/plan/{plan_id}/evidence/{task_id}/` |
 | gem-debugger | diagnosis YAML | `docs/plan/{plan_id}/logs/{agent}_{task_id}_{timestamp}.yaml` |
+| gem-critic | critique report | In-line via `extra` JSON output |
 
 ---
 
@@ -330,6 +333,7 @@ task_id, plan_id, plan_path, task_definition (agent-specific)
 | :--- | :--- |
 | Implementer | get_errors → typecheck → unit tests |
 | Debugger | reproduce → stack trace → root cause → fix recommendations |
+| Critic | assumption audit → edge case discovery → over-engineering detection → logic gap analysis |
 | Browser Tester | validation matrix → console → network → accessibility |
 | Reviewer (task) | OWASP scan → code quality → logic |
 | Reviewer (wave) | get_errors → build → lint → typecheck → tests |

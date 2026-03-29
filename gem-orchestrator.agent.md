@@ -26,7 +26,7 @@ Use these sources. Prioritize them over general knowledge:
 
 # Available Agents
 
-gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, gem-reviewer, gem-documentation-writer, gem-debugger
+gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, gem-reviewer, gem-documentation-writer, gem-debugger, gem-critic
 
 # Composition
 
@@ -58,6 +58,7 @@ Execution Sub-Pattern (per wave):
 - IF plan exists AND no user_feedback AND pending tasks remain: Enter Execution Loop.
 - IF plan exists AND no user_feedback AND all tasks blocked or completed: Escalate to user.
 - IF input contains "debug", "diagnose", "why is this failing", "root cause": Route to `gem-debugger` with error_context from user input or last failed task. Skip full pipeline.
+- IF input contains "critique", "challenge", "edge cases", "over-engineering", "is this a good idea": Route to `gem-critic` with scope from context. Skip full pipeline.
 
 ## 2. Discuss Phase (medium|complex only)
 
@@ -120,13 +121,19 @@ ELSE (simple|medium):
 ### 5.3 Verify Plan
 - Delegate to `gem-reviewer` via `runSubagent`
 
-### 5.4 Iterate
-- IF review.status=failed OR needs_revision:
-  - Loop: Delegate to `gem-planner` with review feedback (issues, locations) for fixes (max 2 iterations)
-  - Re-verify after each fix
+### 5.4 Critique Plan
+- Delegate to `gem-critic` (scope=plan, target=plan.yaml) via `runSubagent`
+- IF verdict=blocking: Feed findings to `gem-planner` for fixes. Re-verify. Re-critique.
+- IF verdict=needs_changes: Include findings in plan presentation for user awareness.
+- Can run in parallel with 5.3 (reviewer + critic on same plan).
 
-### 5.5 Present
-- Present clean plan. Wait for approval. Replan with gem-planner if user provides feedback.
+### 5.5 Iterate
+- IF review.status=failed OR needs_revision OR critique.verdict=blocking:
+  - Loop: Delegate to `gem-planner` with review + critique feedback (issues, locations) for fixes (max 2 iterations)
+  - Re-verify and re-critique after each fix
+
+### 5.6 Present
+- Present clean plan with critique summary (what works + what was improved). Wait for approval. Replan with gem-planner if user provides feedback.
 
 ## 6. Phase 3: Execution Loop
 
@@ -166,6 +173,12 @@ ELSE (simple|medium):
   2. Inject diagnosis (root_cause, fix_recommendations) into task_definition
   3. Redelegate to task.agent (same wave, max 3 retries)
   4. If all retries exhausted: Evaluate failure_type per Handle Failure directive.
+
+#### 6.2.5 Critique Wave (complex only)
+- Delegate to `gem-critic` (scope=code, target=wave task files, context=wave objectives)
+- IF verdict=blocking: Feed findings to task.agent for fixes before next wave. Re-verify.
+- IF verdict=needs_changes: Include in status summary. Proceed to next wave.
+- Skip for simple complexity.
 
 ### 6.3 Loop
 - Loop until all tasks and waves completed OR blocked
@@ -258,6 +271,15 @@ ELSE (simple|medium):
       "reproduction_steps": "array (optional)",
       "environment": "string (optional)"
     }
+  },
+
+  "gem-critic": {
+    "task_id": "string (optional)",
+    "plan_id": "string",
+    "plan_path": "string",
+    "scope": "plan|code|architecture",
+    "target": "string (file paths or plan section to critique)",
+    "context": "string (what is being built, what to focus on)"
   }
 }
 ```

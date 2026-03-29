@@ -8,7 +8,8 @@
     "./agents/gem-devops.md",
     "./agents/gem-reviewer.md",
     "./agents/gem-documentation-writer.md",
-    "./agents/gem-debugger.md"
+    "./agents/gem-debugger.md",
+    "./agents/gem-critic.md"
   ],
   "author": {
     "name": "Awesome Copilot Community"
@@ -25,10 +26,12 @@
     "code-quality",
     "prd",
     "debugging",
-    "root-cause-analysis"
+    "root-cause-analysis",
+    "code-critique",
+    "edge-cases"
   ],
   "license": "MIT",
   "name": "gem-team",
   "repository": "https://github.com/github/awesome-copilot",
-  "version": "1.5.0"
+  "version": "1.6.0"
 }

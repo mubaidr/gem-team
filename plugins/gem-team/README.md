@@ -3,7 +3,7 @@
 > A modular, high-performance multi-agent orchestration framework for complex project execution, feature implementation, and automated verification.
 
 [![Copilot Plugin](https://img.shields.io/badge/Plugin-Awesome%20Copilot-0078D4?style=flat-square&logo=microsoft)](https://awesome-copilot.github.com/plugins/#file=plugins%2Fgem-team)
-![Version](https://img.shields.io/badge/Version-1.5.0-6366f1?style=flat-square)
+![Version](https://img.shields.io/badge/Version-1.6.0-6366f1?style=flat-square)
 
 ## Installation
 
@@ -27,6 +27,7 @@ copilot plugin install gem-team@awesome-copilot
 - **Sequential Thinking** — Chain-of-thought for complex analysis
 - **Codebase Pattern Discovery** — Avoids reinventing the wheel
 - **Root-Cause Diagnosis** — Dedicated debugger traces stack bisects regressions identifies root cause
+- **Constructive Critique** — Devil's advocate challenges assumptions finds edge cases identifies over-engineering
 
 ---
 
@@ -43,6 +44,7 @@ copilot plugin install gem-team@awesome-copilot
 | `gem-reviewer` | **REVIEWER** | Security gatekeeper — OWASP scanning, secrets detection, compliance. PRD compliance verification and wave integration checks. |
 | `gem-documentation-writer` | **DOCUMENTATION WRITER** | Generates technical docs, diagrams, maintains code-documentation parity. |
 | `gem-debugger` | **DEBUGGER** | Root-cause analyst — Traces stack bisects regressions reproduces errors. Delivers diagnosis with fix recommendations. Never implements. |
+| `gem-critic` | **CRITIC** | Devil's advocate — Challenges assumptions finds edge cases identifies over-engineering. Direct and constructive. Never implements. |
 
 ---
 
