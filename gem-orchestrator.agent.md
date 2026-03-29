@@ -26,7 +26,7 @@ Use these sources. Prioritize them over general knowledge:
 
 # Available Agents
 
-gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, gem-reviewer, gem-documentation-writer, gem-debugger, gem-critic
+gem-researcher, gem-implementer, gem-browser-tester, gem-devops, gem-reviewer, gem-documentation-writer, gem-debugger, gem-critic, gem-code-simplifier, gem-designer
 
 # Composition
 
@@ -52,13 +52,36 @@ Execution Sub-Pattern (per wave):
 
 ## 1. Phase Detection
 
+### 1.1 Magic Keywords Detection
+
+Check for magic keywords FIRST to enable fast-track execution modes:
+
+| Keyword | Mode | Behavior |
+|:---|:---|:---|
+| `autopilot` | Full autonomous | Skip Discuss Phase, go straight to Research → Plan → Execute → Verify |
+| `deep-interview` | Socratic questioning | Expand Discuss Phase, ask more questions for thorough requirements |
+| `simplify` | Code simplification | Route to gem-code-simplifier |
+| `critique` | Challenge mode | Route to gem-critic for assumption checking |
+| `debug` | Diagnostic mode | Route to gem-debugger with error context |
+| `fast` / `parallel` | Ultrawork | Increase parallel agent cap (4 → 6-8 for non-conflicting tasks) |
+| `review` | Code review | Route to gem-reviewer for task scope review |
+
+- IF magic keyword detected: Set execution mode, continue with normal routing but apply keyword behavior
+- IF `autopilot`: Skip Discuss Phase entirely, proceed to Research Phase
+- IF `deep-interview`: Expand Discuss Phase to ask 5-8 questions instead of 3-5
+- IF `fast` / `parallel`: Set parallel_cap = 6-8 for execution phase (default is 4)
+
+### 1.2 Standard Phase Detection
+
 - IF user provides plan_id OR plan_path: Load plan.
-- IF no plan: Generate plan_id. Enter Discuss Phase.
+- IF no plan: Generate plan_id. Enter Discuss Phase (unless autopilot).
 - IF plan exists AND user_feedback present: Enter Planning Phase.
-- IF plan exists AND no user_feedback AND pending tasks remain: Enter Execution Loop.
+- IF plan exists AND no user_feedback AND pending tasks remain: Enter Execution Loop (respect fast mode parallel cap).
 - IF plan exists AND no user_feedback AND all tasks blocked or completed: Escalate to user.
 - IF input contains "debug", "diagnose", "why is this failing", "root cause": Route to `gem-debugger` with error_context from user input or last failed task. Skip full pipeline.
 - IF input contains "critique", "challenge", "edge cases", "over-engineering", "is this a good idea": Route to `gem-critic` with scope from context. Skip full pipeline.
+- IF input contains "simplify", "refactor", "clean up", "reduce complexity", "dead code", "remove unused", "consolidate", "improve naming": Route to `gem-code-simplifier` with scope and targets. Skip full pipeline.
+- IF input contains "design", "UI", "layout", "theme", "color", "typography", "responsive", "design system", "visual", "accessibility", "WCAG": Route to `gem-designer` with mode and scope. Skip full pipeline.
 
 ## 2. Discuss Phase (medium|complex only)
 
@@ -74,7 +97,7 @@ From objective detect:
 ### 2.2 Generate Questions
 - For each gray area, generate 2-4 context-aware options before asking
 - Present question + options. User picks or writes custom
-- Ask 3-5 targeted questions. Present one at a time. Collect answers
+- Ask 3-5 targeted questions (5-8 if deep-interview mode). Present one at a time. Collect answers
 
 ### 2.3 Classify Answers
 For EACH answer, evaluate:
@@ -142,6 +165,27 @@ ELSE (simple|medium):
 - Get pending tasks (status=pending, dependencies=completed)
 - Get unique waves: sort ascending
 
+### 6.1.1 Task Type Detection
+Analyze tasks to identify specialized agent needs:
+
+| Task Type | Detect Keywords | Auto-Assign Agent | Notes |
+|:----------|:----------------|:------------------|:------|
+| UI/Component | .vue, .jsx, .tsx, component, button, card, modal, form, layout | gem-designer | For CREATE mode; browser-tester for runtime validation |
+| Design System | theme, color, typography, token, design-system | gem-designer | |
+| Refactor | refactor, simplify, clean, dead code, reduce complexity | gem-code-simplifier | |
+| Bug Fix | fix, bug, error, broken, failing | gem-implementer | gem-debugger DIAGNOSES; implementer FIXES |
+| Security | security, auth, permission, secret, token | gem-reviewer | |
+| Documentation | docs, readme, comment, explain | gem-documentation-writer | |
+| E2E Test | test, e2e, browser, ui-test | gem-browser-tester | |
+| Deployment | deploy, docker, ci/cd, infrastructure | gem-devops | |
+| Diagnostic | debug, diagnose, root cause, trace | gem-debugger | Diagnoses ONLY; never implements fixes |
+
+- Tag tasks with detected types in task_definition
+- Pre-assign appropriate agents to task.agent field
+- gem-designer runs AFTER completion (validation), not for implementation
+- gem-critic runs AFTER each wave for complex projects
+- gem-debugger only DIAGNOSES issues; gem-implementer performs fixes based on diagnosis
+
 ### 6.2 Execute Waves (for each wave 1 to n)
 
 #### 6.2.1 Prepare Wave
@@ -150,7 +194,9 @@ ELSE (simple|medium):
 - Filter conflicts_with: tasks sharing same file targets run serially within wave
 
 #### 6.2.2 Delegate Tasks
-- Delegate via `runSubagent` (up to 4 concurrent) to `task.agent`
+- Delegate via `runSubagent` (up to 6-8 concurrent if fast/parallel mode, otherwise up to 4) to `task.agent`
+- IF fast/parallel mode active: Set parallel_cap = 6-8 for non-conflicting tasks
+- Use pre-assigned `task.agent` from Task Type Detection (Section 6.1.1)
 
 #### 6.2.3 Integration Check
 - Delegate to `gem-reviewer` (review_scope=wave, wave_tasks={completed task ids})
@@ -174,11 +220,26 @@ ELSE (simple|medium):
   3. Redelegate to task.agent (same wave, max 3 retries)
   4. If all retries exhausted: Evaluate failure_type per Handle Failure directive.
 
-#### 6.2.5 Critique Wave (complex only)
+#### 6.2.5 Auto-Agent Invocations (post-wave)
+After each wave completes, automatically invoke specialized agents based on task types:
+
+**Automatic gem-critic (complex only):**
 - Delegate to `gem-critic` (scope=code, target=wave task files, context=wave objectives)
 - IF verdict=blocking: Feed findings to task.agent for fixes before next wave. Re-verify.
 - IF verdict=needs_changes: Include in status summary. Proceed to next wave.
 - Skip for simple complexity.
+
+**Automatic gem-designer (if UI tasks detected):**
+- IF wave contains UI/component tasks (detect: .vue, .jsx, .tsx, .css, .scss, tailwind, component keywords):
+  - Delegate to `gem-designer` (mode=validate, scope=component|page) for completed UI files
+  - Check visual hierarchy, responsive design, accessibility compliance
+  - IF critical issues: Flag for fix before next wave
+- This runs alongside gem-critic in parallel
+
+**Optional gem-code-simplifier (if refactor tasks detected):**
+- IF wave contains "refactor", "clean", "simplify" in task descriptions OR complexity is high:
+  - Can invoke gem-code-simplifier after wave for cleanup pass
+  - Requires explicit user trigger or config flag (not automatic by default)
 
 ### 6.3 Loop
 - Loop until all tasks and waves completed OR blocked
@@ -190,6 +251,20 @@ ELSE (simple|medium):
 - IF user feedback: Route to Planning Phase.
 
 # Delegation Protocol
+
+All agents return their output to the orchestrator. The orchestrator analyzes the result and decides next routing based on:
+- **Plan phase**: Route to next plan task (verify, critique, or approve)
+- **Execution phase**: Route based on task result status and type
+- **User intent**: Route to specialized agent or back to user
+
+**Planner Agent Assignment:**
+The `gem-planner` assigns the `agent` field to each task in `plan.yaml`. This field determines which worker agent executes the task:
+- Tasks with `agent: gem-implementer` → routed to gem-implementer
+- Tasks with `agent: gem-browser-tester` → routed to gem-browser-tester
+- Tasks with `agent: gem-devops` → routed to gem-devops
+- Tasks with `agent: gem-documentation-writer` → routed to gem-documentation-writer
+
+The orchestrator reads `task.agent` from plan.yaml and delegates accordingly.
 
 ```jsonc
 {
@@ -203,7 +278,7 @@ ELSE (simple|medium):
 
   "gem-planner": {
     "plan_id": "string",
-    "variant": "a | b | c",
+    "variant": "a | b | c (required for multi-plan, omit for single plan)",
     "objective": "string",
     "complexity": "simple|medium|complex",
     "task_clarifications": "array of {question, answer} (empty if skipped)"
@@ -245,25 +320,11 @@ ELSE (simple|medium):
     "devops_security_sensitive": "boolean"
   },
 
-  "gem-documentation-writer": {
-    "task_id": "string",
-    "plan_id": "string",
-    "plan_path": "string",
-    "task_definition": "object",
-    "task_type": "walkthrough|documentation|update",
-    "audience": "developers|end_users|stakeholders",
-    "coverage_matrix": "array",
-    "overview": "string (for walkthrough)",
-    "tasks_completed": "array (for walkthrough)",
-    "outcomes": "string (for walkthrough)",
-    "next_steps": "array (for walkthrough)"
-  },
-
   "gem-debugger": {
     "task_id": "string",
     "plan_id": "string",
-    "plan_path": "string",
-    "task_definition": "object",
+    "plan_path": "string (optional)",
+    "task_definition": "object (optional)",
     "error_context": {
       "error_message": "string",
       "stack_trace": "string (optional)",
@@ -280,9 +341,69 @@ ELSE (simple|medium):
     "scope": "plan|code|architecture",
     "target": "string (file paths or plan section to critique)",
     "context": "string (what is being built, what to focus on)"
+  },
+
+  "gem-code-simplifier": {
+    "task_id": "string",
+    "plan_id": "string (optional)",
+    "plan_path": "string (optional)",
+    "scope": "single_file|multiple_files|project_wide",
+    "targets": "array of file paths or patterns",
+    "focus": "dead_code|complexity|duplication|naming|all",
+    "constraints": {
+      "preserve_api": "boolean (default: true)",
+      "run_tests": "boolean (default: true)",
+      "max_changes": "number (optional)"
+    }
+  },
+
+  "gem-designer": {
+    "task_id": "string",
+    "plan_id": "string (optional)",
+    "plan_path": "string (optional)",
+    "mode": "create|validate",
+    "scope": "component|page|layout|theme|design_system",
+    "target": "string (file paths or component names)",
+    "context": {
+      "framework": "string (react, vue, vanilla, etc.)",
+      "library": "string (tailwind, mui, bootstrap, etc.)",
+      "existing_design_system": "string (optional)",
+      "requirements": "string"
+    },
+    "constraints": {
+      "responsive": "boolean (default: true)",
+      "accessible": "boolean (default: true)",
+      "dark_mode": "boolean (default: false)"
+    }
+  },
+
+  "gem-documentation-writer": {
+    "task_id": "string",
+    "plan_id": "string",
+    "plan_path": "string",
+    "task_definition": "object",
+    "task_type": "documentation|walkthrough|update",
+    "audience": "developers|end_users|stakeholders",
+    "coverage_matrix": "array"
   }
 }
 ```
+
+## Result Routing
+
+After each agent completes, the orchestrator routes based on:
+
+| Result Status | Agent Type | Next Action |
+|:--------------|:-----------|:------------|
+| completed | gem-reviewer (plan) | Present plan to user for approval |
+| completed | gem-reviewer (wave) | Continue to next wave or summary |
+| completed | gem-reviewer (task) | Mark task done, continue wave |
+| failed | gem-reviewer | Evaluate failure_type, retry or escalate |
+| completed | gem-critic | Aggregate findings, present to user |
+| blocking | gem-critic | Route findings to gem-planner for fixes |
+| completed | gem-debugger | Inject diagnosis into task, delegate to implementer |
+| completed | gem-implementer | Mark task done, run integration check |
+| completed | gem-* | Return to orchestrator for next decision |
 
 # PRD Format Guide
 

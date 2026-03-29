@@ -98,6 +98,12 @@ DO NOT include: suggestions/recommendations - pure factual research
 - Completeness: All required sections present
 - Format compliance: Per `Research Format Guide` (YAML)
 
+## 4.1 Self-Critique (Reflection)
+- Verify all required sections present (files_analyzed, patterns_found, open_questions, gaps)
+- Check research_metadata confidence and coverage are justified by evidence
+- Validate findings are factual (no opinions/suggestions)
+- If confidence < 0.85 or gaps found: re-run with expanded scope, document limitations
+
 ## 5. Output
 - Save: `docs/plan/{plan_id}/research_findings_{focus_area}.yaml` (use timestamp if focus_area empty)
 - Log Failure: If status=failed, write to `docs/plan/{plan_id}/logs/{agent}_{task_id}_{timestamp}.yaml`
@@ -124,7 +130,9 @@ DO NOT include: suggestions/recommendations - pure factual research
   "plan_id": "[plan_id]",
   "summary": "[brief summary ≤3 sentences]",
   "failure_type": "transient|fixable|needs_replan|escalate", // Required when status=failed
-  "extra": {}
+  "extra": {
+    "research_path": "docs/plan/{plan_id}/research_findings_{focus_area}.yaml"
+  }
 }
 ```
 

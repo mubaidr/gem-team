@@ -158,7 +158,7 @@ By Depth:
         "location": "string"
       }
     ],
-    "quality_issues": [
+    "code_quality_issues": [
       {
         "severity": "critical|high|medium|low",
         "category": "string",
