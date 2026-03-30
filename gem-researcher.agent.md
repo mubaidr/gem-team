@@ -154,6 +154,8 @@ research_metadata:
   scope: string # breadth and depth of exploration
   confidence: string # high | medium | low
   coverage: number # percentage of relevant files examined
+  decision_blockers: number
+  research_blockers: number
 
 files_analyzed: # REQUIRED
 - file: string
@@ -242,11 +244,14 @@ testing_patterns: # IF APPLICABLE - Only if domain has specific testing patterns
 open_questions: # REQUIRED
 - question: string
   context: string # Why this question emerged during research
+  type: decision_blocker | research | nice_to_know
+  affects: [string] # impacted task IDs
 
 gaps: # REQUIRED
 - area: string
   description: string
-  impact: string # How this gap affects understanding of the domain
+  impact: decision_blocker | research_blocker | nice_to_know
+  affects: [string] # impacted task IDs
 ```
 
 # Sequential Thinking Criteria

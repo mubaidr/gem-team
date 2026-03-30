@@ -217,6 +217,8 @@ tasks:
     description: | # Use literal scalar to handle colons and preserve formatting
     wave: number # Execution wave: 1 runs first, 2 waits for 1, etc.
     agent: string # gem-researcher | gem-implementer | gem-browser-tester | gem-devops | gem-reviewer | gem-documentation-writer | gem-debugger | gem-critic | gem-code-simplifier | gem-designer
+    prototype: boolean # true for prototype tasks, false for full feature
+    covers: [string] # Optional list of acceptance criteria IDs covered by this task
     priority: string # high | medium | low (reflection triggers: high=always, medium=if failed, low=no reflection)
     status: string # pending | in_progress | completed | failed | blocked | needs_revision (pending/blocked: orchestrator-only; others: worker outputs)
     dependencies:
@@ -226,6 +228,11 @@ tasks:
     context_files:
       - path: string
         description: string
+planning_pass: number # Current planning iteration pass
+planning_history:
+  - pass: number
+    reason: string
+    timestamp: string
     estimated_effort: string # small | medium | large
     estimated_files: number # Count of files affected (max 3)
     estimated_lines: number # Estimated lines to change (max 300)

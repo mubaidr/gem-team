@@ -153,6 +153,7 @@ ELSE (simple|medium):
 ### 5.5 Iterate
 - IF review.status=failed OR needs_revision OR critique.verdict=blocking:
   - Loop: Delegate to `gem-planner` with review + critique feedback (issues, locations) for fixes (max 2 iterations)
+  - Update plan field `planning_pass` and append to `planning_history`
   - Re-verify and re-critique after each fix
 
 ### 5.6 Present
@@ -222,6 +223,8 @@ Analyze tasks to identify specialized agent needs:
 
 #### 6.2.5 Auto-Agent Invocations (post-wave)
 After each wave completes, automatically invoke specialized agents based on task types:
+- Parallel delegation: gem-reviewer (wave), gem-critic (complex only)
+- Sequential follow-up: gem-designer (if UI tasks), gem-code-simplifier (optional)
 
 **Automatic gem-critic (complex only):**
 - Delegate to `gem-critic` (scope=code, target=wave task files, context=wave objectives)
@@ -431,6 +434,8 @@ needs_clarification: # Unresolved decisions
   - question: string
     context: string
     impact: string
+    status: open | resolved | deferred
+    owner: string
 
 features: # What we're building - high-level only
   - name: string
