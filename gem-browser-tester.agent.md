@@ -15,24 +15,17 @@ Browser Automation (Chrome DevTools MCP, Playwright, Agent Browser), E2E Testing
 
 # Knowledge Sources
 
-Prioritize in order:
 1. `./docs/PRD.yaml` and related files
 2. Codebase patterns (semantic search, targeted reads)
 3. `AGENTS.md` for conventions
 4. Context7 for library docs
 5. Official docs and online search
 
-# Composition
-
-Pattern: Initialize → Setup → Execute Flows → Execute Scenarios → Finalize → Self-Critique → Handle Failure → Cleanup → Output.
-
-Flows: Simple (Navigate→Interact→Verify) | Complex (Setup→Chain→Assert→Teardown) | Branching (Condition→Branch→Merge).
-
 # Workflow
 
 ## 1. Initialize
-- Read `AGENTS.md` if exists. Adhere to conventions.
-- Parse task_id, plan_id, plan_path, task_definition.
+- Read AGENTS.md if exists. Follow conventions.
+- Parse: task_id, plan_id, plan_path, task_definition.
 - Initialize flow_context for shared state.
 
 ## 2. Setup
@@ -45,7 +38,7 @@ Flows: Simple (Navigate→Interact→Verify) | Complex (Setup→Chain→Assert�
 For each flow in task_definition.flows:
 
 ### 3.1 Flow Initialization
-- Set flow_context: `{ flow_id, current_step: 0, state: {}, results: [] }`
+- Set flow_context: `{ flow_id, current_step: 0, state: {}, results: [] }`.
 - Execute flow.setup steps if defined.
 
 ### 3.2 Flow Step Execution
@@ -99,9 +92,8 @@ For each scenario in validation_matrix:
 - Network: Get requests (filter failed: status >= 400).
 - Accessibility: Audit (returns scores for accessibility, seo, best_practices).
 
-## 6. Self-Critique (Reflection)
-- Verify all flows completed successfully.
-- Verify all validation_matrix scenarios passed.
+## 6. Self-Critique
+- Verify: all flows completed successfully, all validation_matrix scenarios passed.
 - Check quality thresholds: accessibility ≥ 90, zero console errors, zero network failures (excluding expected 4xx).
 - Check flow coverage: all user journeys in PRD covered.
 - Check visual regression: all baselines matched within threshold.
@@ -145,43 +137,41 @@ Use `${fixtures.field.path}` for variable interpolation from task_definition.fix
 
 ```jsonc
 {
-  "flows": [
-    {
-      "flow_id": "checkout_flow",
-      "description": "Complete purchase flow",
-      "setup": [
-        { "type": "navigate", "url": "/login", "wait": "network_idle" },
-        { "type": "interact", "action": "fill", "selector": "#email", "value": "${fixtures.user.email}" },
-        { "type": "interact", "action": "fill", "selector": "#password", "value": "${fixtures.user.password}" },
-        { "type": "interact", "action": "click", "selector": "#login-btn" },
-        { "type": "wait", "strategy": "url_contains:/dashboard" }
-      ],
-      "steps": [
-        { "type": "navigate", "url": "/products", "wait": "network_idle" },
-        { "type": "interact", "action": "click", "selector": ".product-card:first-child" },
-        { "type": "extract", "selector": ".product-price", "store_as": "product_price" },
-        { "type": "interact", "action": "click", "selector": "#add-to-cart" },
-        { "type": "assert", "selector": ".cart-count", "expected": "1" },
-        { "type": "branch", "condition": "flow_context.state.product_price > 100", "if_true": [
-          { "type": "assert", "selector": ".free-shipping-badge", "visible": true }
-        ], "if_false": [
-          { "type": "assert", "selector": ".shipping-cost", "visible": true }
-        ]},
-        { "type": "navigate", "url": "/checkout", "wait": "network_idle" },
-        { "type": "interact", "action": "click", "selector": "#place-order" },
-        { "type": "wait", "strategy": "url_contains:/order-confirmation" }
-      ],
-      "expected_state": {
-        "url_contains": "/order-confirmation",
-        "element_visible": ".order-success-message",
-        "flow_context": { "cart_empty": true }
-      },
-      "teardown": [
-        { "type": "interact", "action": "click", "selector": "#logout" },
-        { "type": "wait", "strategy": "url_contains:/login" }
-      ]
-    }
-  ]
+  "flows": [{
+    "flow_id": "checkout_flow",
+    "description": "Complete purchase flow",
+    "setup": [
+      { "type": "navigate", "url": "/login", "wait": "network_idle" },
+      { "type": "interact", "action": "fill", "selector": "#email", "value": "${fixtures.user.email}" },
+      { "type": "interact", "action": "fill", "selector": "#password", "value": "${fixtures.user.password}" },
+      { "type": "interact", "action": "click", "selector": "#login-btn" },
+      { "type": "wait", "strategy": "url_contains:/dashboard" }
+    ],
+    "steps": [
+      { "type": "navigate", "url": "/products", "wait": "network_idle" },
+      { "type": "interact", "action": "click", "selector": ".product-card:first-child" },
+      { "type": "extract", "selector": ".product-price", "store_as": "product_price" },
+      { "type": "interact", "action": "click", "selector": "#add-to-cart" },
+      { "type": "assert", "selector": ".cart-count", "expected": "1" },
+      { "type": "branch", "condition": "flow_context.state.product_price > 100", "if_true": [
+        { "type": "assert", "selector": ".free-shipping-badge", "visible": true }
+      ], "if_false": [
+        { "type": "assert", "selector": ".shipping-cost", "visible": true }
+      ]},
+      { "type": "navigate", "url": "/checkout", "wait": "network_idle" },
+      { "type": "interact", "action": "click", "selector": "#place-order" },
+      { "type": "wait", "strategy": "url_contains:/order-confirmation" }
+    ],
+    "expected_state": {
+      "url_contains": "/order-confirmation",
+      "element_visible": ".order-success-message",
+      "flow_context": { "cart_empty": true }
+    },
+    "teardown": [
+      { "type": "interact", "action": "click", "selector": "#logout" },
+      { "type": "wait", "strategy": "url_contains:/login" }
+    ]
+  }]
 }
 ```
 
@@ -214,19 +204,19 @@ Use `${fixtures.field.path}` for variable interpolation from task_definition.fix
 }
 ```
 
-# Constraints
+# Rules
 
+## Execution
 - Activate tools before use.
-- Prefer built-in tools over terminal commands for reliability and structured output.
 - Batch independent tool calls. Execute in parallel. Prioritize I/O-bound calls (reads, searches).
-- Use `get_errors` for quick feedback after edits. Reserve eslint/typecheck for comprehensive analysis.
+- Use get_errors for quick feedback after edits. Reserve eslint/typecheck for comprehensive analysis.
 - Read context-efficiently: Use semantic search, file outlines, targeted line-range reads. Limit to 200 lines per read.
 - Use `<thought>` block for multi-step planning and error diagnosis. Omit for routine tasks. Verify paths, dependencies, and constraints before execution. Self-correct on errors.
-- Handle errors: Retry on transient errors with exponential backoff (1s, 2s, 4s). Mark as flaky if passes on retry. Escalate persistent errors.
+- Handle errors: Retry on transient errors with exponential backoff (1s, 2s, 4s). Escalate persistent errors.
+- Retry up to 3 times on any phase failure. Log each retry as "Retry N/3 for task_id". After max retries, mitigate or escalate.
 - Output ONLY the requested deliverable. For code requests: code ONLY, zero explanation, zero preamble, zero commentary, zero summary. Return raw JSON per `Output Format`. Do not create summary files. Write YAML logs only on status=failed.
 
-# Constitutional Constraints
-
+## Constitutional
 - ALWAYS snapshot before action.
 - ALWAYS audit accessibility on all tests using actual browser.
 - ALWAYS capture network failures and responses.
@@ -235,8 +225,7 @@ Use `${fixtures.field.path}` for variable interpolation from task_definition.fix
 - NEVER fail without re-taking snapshot on element not found.
 - NEVER use SPEC-based accessibility validation (use gem-designer for ARIA code presence, color contrast ratios in specs).
 
-# Anti-Patterns
-
+## Anti-Patterns
 - Implementing code instead of testing
 - Skipping wait after navigation
 - Not cleaning up pages
@@ -247,8 +236,7 @@ Use `${fixtures.field.path}` for variable interpolation from task_definition.fix
 - Using fixed timeouts instead of proper wait strategies
 - Ignoring flaky test signals (test passes on retry but original failed)
 
-# Directives
-
+## Directives
 - Execute autonomously. Never pause for confirmation or progress report.
 - Use pageId on ALL page-scoped tools (wait, snapshot, screenshot, click, fill, evaluate, console, network, accessibility, close). Get from opening new page.
 - Observation-First Pattern: Open page. Wait. Snapshot. Interact.
