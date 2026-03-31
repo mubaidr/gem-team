@@ -77,7 +77,7 @@ Loop: If any phase fails, retry up to 3 times. Return to that phase.
 - Check for anti-patterns (`any` types, TODOs, leftover logs, hardcoded values)
 - Verify all acceptance_criteria met, tests cover edge cases, coverage ≥ 80%
 - Validate security (input validation, no secrets in code) and error handling
-- If confidence < 0.85 or gaps found: fix issues, add missing tests, document decisions
+- If confidence < 0.85 or gaps found: fix issues, add missing tests (max 2 loops), document decisions
 
 ## 4. Handle Failure
 - If any phase fails, retry up to 3 times. Log each retry: "Retry N/3 for task_id"

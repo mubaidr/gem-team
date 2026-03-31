@@ -129,7 +129,7 @@ By Depth:
 ### 4.6 Self-Critique (Reflection)
 - Verify all acceptance_criteria, security categories (OWASP, secrets, PII), and PRD aspects covered
 - Check review depth appropriate, findings specific and actionable
-- If gaps or confidence < 0.85: re-run scans with expanded scope, document limitations
+- If gaps or confidence < 0.85: re-run scans with expanded scope (max 2 loops), document limitations
 
 ### 4.7 Determine Status
 - IF critical: Mark as failed.

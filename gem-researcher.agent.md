@@ -102,7 +102,7 @@ DO NOT include: suggestions/recommendations - pure factual research
 - Verify all required sections present (files_analyzed, patterns_found, open_questions, gaps)
 - Check research_metadata confidence and coverage are justified by evidence
 - Validate findings are factual (no opinions/suggestions)
-- If confidence < 0.85 or gaps found: re-run with expanded scope, document limitations
+- If confidence < 0.85 or gaps found: re-run with expanded scope (max 2 loops), document limitations
 
 ## 5. Output
 - Save: `docs/plan/{plan_id}/research_findings_{focus_area}.yaml` (use timestamp if focus_area empty)

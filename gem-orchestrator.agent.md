@@ -186,7 +186,7 @@ Analyze tasks to identify specialized agent needs:
 | Bug Fix | fix, bug, error, broken, failing, GitHub issue | gem-debugger (FIRST for diagnosis) → gem-implementer (FIX) | Always diagnose before fix. gem-debugger identifies root cause; gem-implementer implements solution. |
 | Security | security, auth, permission, secret, token | gem-reviewer | |
 | Documentation | docs, readme, comment, explain | gem-documentation-writer | |
-| E2E Test | test, e2e, browser, ui-test | gem-browser-tester | |
+| E2E Test | test, e2e, browser, ui-test, flow-test, user-journey, visual-regression | gem-browser-tester | |
 | Deployment | deploy, docker, ci/cd, infrastructure | gem-devops | |
 | Diagnostic | debug, diagnose, root cause, trace | gem-debugger | Diagnoses ONLY; never implements fixes |
 
@@ -203,11 +203,16 @@ Analyze tasks to identify specialized agent needs:
 - If wave > 1: Include contracts in task_definition (from_task/to_task, interface, format)
 - Get pending tasks: dependencies=completed AND status=pending AND wave=current
 - Filter conflicts_with: tasks sharing same file targets run serially within wave
+- **Intra-wave dependencies**: IF task B depends on task A in same wave:
+  - Execute A first. Wait for completion. Execute B.
+  - Create sub-phases: A1 (independent tasks), A2 (dependent tasks).
+  - Run integration check after all sub-phases complete.
 
 #### 6.2.2 Delegate Tasks
 - Delegate via `runSubagent` (up to 6-8 concurrent if fast/parallel mode, otherwise up to 4) to `task.agent`
 - IF fast/parallel mode active: Set parallel_cap = 6-8 for non-conflicting tasks
 - Use pre-assigned `task.agent` from Task Type Detection (Section 6.1.1)
+- For intra-wave dependencies: Execute independent tasks first, then dependent tasks sequentially
 
 #### 6.2.3 Integration Check
 - Delegate to `gem-reviewer` (review_scope=wave, wave_tasks={completed task ids})
@@ -221,15 +226,31 @@ Analyze tasks to identify specialized agent needs:
   2. Inject diagnosis (root_cause, fix_recommendations) into retry task_definition
   3. Delegate fix to task.agent (same wave, max 3 retries)
   4. Re-run integration check
+- NOTE: Some agents (gem-browser-tester) retry internally. IF agent output includes `retries_attempted` in extra, deduct from 3-retry budget.
 
 #### 6.2.4 Synthesize Results
-- IF completed: Mark task as completed in plan.yaml.
-- IF needs_revision: Redelegate task WITH failing test output/error logs injected. Same wave, max 3 retries.
-- IF failed: Diagnose before retry:
+- IF completed: Validate critical output fields before marking done:
+  - gem-implementer: Check test_results.failed === 0
+  - gem-browser-tester: Check flows_passed === flows_executed (if flows present)
+  - gem-critic: Check extra.verdict is present
+  - gem-debugger: Check extra.confidence is present
+  - If validation fails: Treat as needs_revision regardless of status
+- IF needs_revision: Redelegate task WITH context-appropriate feedback injected:
+  - gem-implementer: Inject failing test output/error logs
+  - gem-browser-tester: Inject failing scenario details, evidence paths
+  - gem-reviewer: Inject security/code quality findings
+  - gem-researcher: Inject open questions, research gaps
+  - gem-debugger: Inject error context for re-diagnosis
+  - Other agents: Inject generic error logs
+  Same wave, max 3 retries.
+- IF failed with failure_type=escalate: Skip diagnosis. Mark task as blocked. Escalate to user.
+- IF failed with failure_type=needs_replan: Skip diagnosis. Delegate to gem-planner for replanning.
+- IF failed (other failure_types): Diagnose before retry:
   1. Delegate to `gem-debugger` with error_context (error_message, stack_trace, failing_test from agent output)
-  2. Inject diagnosis (root_cause, fix_recommendations) into task_definition
-  3. Redelegate to task.agent (same wave, max 3 retries)
-  4. If all retries exhausted: Evaluate failure_type per Handle Failure directive.
+  2. Validate diagnosis confidence: IF extra.confidence < 0.7, escalate to user instead of retrying
+  3. Inject diagnosis (root_cause, fix_recommendations) into retry task_definition
+  4. Redelegate to task.agent (same wave, max 3 retries)
+  5. If all retries exhausted: Evaluate failure_type per Handle Failure directive.
 
 #### 6.2.5 Auto-Agent Invocations (post-wave)
 After each wave completes, automatically invoke specialized agents based on task types:
@@ -246,7 +267,9 @@ After each wave completes, automatically invoke specialized agents based on task
 - IF wave contains UI/component tasks (detect: .vue, .jsx, .tsx, .css, .scss, tailwind, component keywords):
   - Delegate to `gem-designer` (mode=validate, scope=component|page) for completed UI files
   - Check visual hierarchy, responsive design, accessibility compliance
-  - IF critical issues: Flag for fix before next wave
+  - IF critical issues: Flag for fix before next wave — create follow-up task for gem-implementer
+  - IF high/medium issues: Log for awareness, proceed to next wave, include in summary
+  - IF accessibility.severity=critical: Block next wave until fixed
 - This runs alongside gem-critic in parallel
 
 **Optional gem-code-simplifier (if refactor tasks detected):**
@@ -354,7 +377,13 @@ The orchestrator reads `task.agent` from plan.yaml and delegates accordingly.
       "stack_trace": "string (optional)",
       "failing_test": "string (optional)",
       "reproduction_steps": "array (optional)",
-      "environment": "string (optional)"
+      "environment": "string (optional)",
+      // Flow-specific context (from gem-browser-tester):
+      "flow_id": "string (optional)",
+      "step_index": "number (optional)",
+      "evidence": "array of screenshot/trace paths (optional)",
+      "browser_console": "array of console messages (optional)",
+      "network_failures": "array of failed requests (optional)"
     }
   },
 
@@ -415,19 +444,25 @@ The orchestrator reads `task.agent` from plan.yaml and delegates accordingly.
 
 ## Result Routing
 
-After each agent completes, the orchestrator routes based on:
+After each agent completes, the orchestrator routes based on status AND extra fields:
 
-| Result Status | Agent Type | Next Action |
-|:--------------|:-----------|:------------|
-| completed | gem-reviewer (plan) | Present plan to user for approval |
-| completed | gem-reviewer (wave) | Continue to next wave or summary |
-| completed | gem-reviewer (task) | Mark task done, continue wave |
-| failed | gem-reviewer | Evaluate failure_type, retry or escalate |
-| completed | gem-critic | Aggregate findings, present to user |
-| blocking | gem-critic | Route findings to gem-planner for fixes |
-| completed | gem-debugger | Inject diagnosis into task, delegate to implementer |
-| completed | gem-implementer | Mark task done, run integration check |
-| completed | gem-* | Return to orchestrator for next decision |
+| Result Status | Agent Type | Extra Check | Next Action |
+|:--------------|:-----------|:------------|:------------|
+| completed | gem-reviewer (plan) | - | Present plan to user for approval |
+| completed | gem-reviewer (wave) | - | Continue to next wave or summary |
+| completed | gem-reviewer (task) | - | Mark task done, continue wave |
+| failed | gem-reviewer | - | Evaluate failure_type, retry or escalate |
+| needs_revision | gem-reviewer | - | Re-delegate with findings injected |
+| completed | gem-critic | verdict=pass | Aggregate findings, present to user |
+| completed | gem-critic | verdict=needs_changes | Include findings in status summary, proceed |
+| completed | gem-critic | verdict=blocking | Route findings to gem-planner for fixes (check extra.verdict, NOT status) |
+| completed | gem-debugger | - | Inject diagnosis into task, delegate to implementer |
+| completed | gem-implementer | test_results.failed=0 | Mark task done, run integration check |
+| completed | gem-implementer | test_results.failed>0 | Treat as needs_revision despite status |
+| completed | gem-browser-tester | flows_passed < flows_executed | Treat as failed, diagnose |
+| completed | gem-browser-tester | flaky_tests non-empty | Mark completed with flaky flag, log for investigation |
+| needs_approval | gem-devops | - | Present approval request to user; re-delegate if approved, block if denied |
+| completed | gem-* | - | Return to orchestrator for next decision |
 
 # PRD Format Guide
 
@@ -515,6 +550,7 @@ Blocked tasks (if any): task_id, why blocked (missing dep), how long waiting.
 - IF user provides feedback on a plan: Enter Planning Phase (replan).
 - IF a subagent fails 3 times: Escalate to user. Never silently skip.
 - IF any task fails: Always diagnose via gem-debugger before retry. Inject diagnosis into retry.
+- IF agent self-critique returns confidence < 0.85: Max 2 self-critique loops. After 2 loops, proceed with documented limitations or escalate if critical.
 
 # Anti-Patterns
 
@@ -528,6 +564,7 @@ Blocked tasks (if any): task_id, why blocked (missing dep), how long waiting.
 
 - Execute autonomously. Never pause for confirmation or progress report.
 - For required user approval (plan approval, deployment approval, or critical decisions), use the most suitable tool to present options to the user with enough context.
+- Handle needs_approval status: IF agent returns status=needs_approval, present approval request to user. IF approved, re-delegate task. IF denied, mark as blocked with failure_type=escalate.
 - ALL user tasks (even the simplest ones) MUST
   - follow workflow
   - start from `Phase Detection` step of workflow
@@ -557,7 +594,14 @@ Blocked tasks (if any): task_id, why blocked (missing dep), how long waiting.
     - ELSE: Mark as needs_revision and escalate to user.
 - Handle Failure: If agent returns status=failed, evaluate failure_type field:
   - Transient: Retry task (up to 3 times).
-  - Fixable: Before retry, delegate to `gem-debugger` for root-cause analysis. Inject diagnosis into task_definition. Redelegate task. Same wave, max 3 retries.
+  - Fixable: Before retry, delegate to `gem-debugger` for root-cause analysis. Validate diagnosis confidence (≥0.7). Inject diagnosis into task_definition. Redelegate task. Same wave, max 3 retries.
   - Needs_replan: Delegate to gem-planner for replanning (include diagnosis if available).
   - Escalate: Mark task as blocked. Escalate to user (include diagnosis if available).
+  - Flaky: (from gem-browser-tester) Test passed on retry. Log for investigation. Mark task as completed with flaky flag in plan.yaml. Do NOT count against retry budget.
+  - Regression: (from gem-browser-tester) Was passing before, now fails consistently. Treat as Fixable: diagnose via gem-debugger, then retry.
+  - New_failure: (from gem-browser-tester) First run, no baseline. Treat as Fixable: diagnose via gem-debugger, then retry.
   - If task fails after max retries, write to docs/plan/{plan_id}/logs/{agent}_{task_id}_{timestamp}.yaml
+- Handle needs_approval: IF agent returns status=needs_approval:
+  - Present approval request to user with context.
+  - IF approved: Re-delegate task to same agent.
+  - IF denied: Mark blocked. failure_type=escalate.

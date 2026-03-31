@@ -133,7 +133,7 @@ Pipeline Stages:
 - Verify plan satisfies all acceptance_criteria from PRD
 - Check DAG maximizes parallelism (wave_1_task_count is reasonable)
 - Validate all tasks have agent assignments from available_agents list
-- If confidence < 0.85 or gaps found: re-design, document limitations
+- If confidence < 0.85 or gaps found: re-design (max 2 loops), document limitations
 
 ## 5. Handle Failure
 - If plan creation fails, log error, return status=failed with reason
@@ -228,6 +228,9 @@ tasks:
     covers: [string] # Optional list of acceptance criteria IDs covered by this task
     priority: string # high | medium | low (reflection triggers: high=always, medium=if failed, low=no reflection)
     status: string # pending | in_progress | completed | failed | blocked | needs_revision (pending/blocked: orchestrator-only; others: worker outputs)
+    flags: # Optional: Task-level flags set by orchestrator
+      flaky: boolean # true if task passed on retry (from gem-browser-tester)
+      retries_used: number # Total retries used (internal + orchestrator)
     dependencies:
       - string
     conflicts_with:
@@ -235,6 +238,10 @@ tasks:
     context_files:
       - path: string
         description: string
+    diagnosis: # Optional: Injected by orchestrator from gem-debugger output on retry
+      root_cause: string
+      fix_recommendations: string
+      injected_at: string # timestamp
 planning_pass: number # Current planning iteration pass
 planning_history:
   - pass: number
@@ -270,6 +277,47 @@ planning_history:
         steps:
           - string
         expected_result: string
+    flows: # Optional: Multi-step user flows for complex E2E testing
+      - flow_id: string
+        description: string
+        setup:
+          - type: string # navigate | interact | wait | extract
+            selector: string | null
+            action: string | null
+            value: string | null
+            url: string | null
+            strategy: string | null
+            store_as: string | null
+        steps:
+          - type: string # navigate | interact | assert | branch | extract | wait | screenshot
+            selector: string | null
+            action: string | null
+            value: string | null
+            expected: string | null
+            visible: boolean | null
+            url: string | null
+            strategy: string | null
+            store_as: string | null
+            condition: string | null
+            if_true: array | null
+            if_false: array | null
+        expected_state:
+          url_contains: string | null
+          element_visible: string | null
+          flow_context: object | null
+        teardown:
+          - type: string
+    fixtures: # Optional: Test data setup
+      test_data: # Optional: Seed data for tests
+        - type: string # e.g., "user", "product", "order"
+          data: object # Data to seed
+      user:
+        email: string
+        password: string
+      cleanup: boolean
+    visual_regression: # Optional: Visual regression config
+      baselines: string # path to baseline screenshots
+      threshold: number # similarity threshold 0-1, default 0.95
 
     # gem-devops:
     environment: string | null # development | staging | production

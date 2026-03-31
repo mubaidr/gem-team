@@ -221,7 +221,7 @@ The Orchestrator follows a 6-phase workflow with automatic phase detection.
 | `gem-researcher` | **RESEARCHER** | Research, explore, analyze code, find patterns, investigate dependencies. Decision-focused output with blockers highlighted. |
 | `gem-planner` | **PLANNER** | Plan, design approach, break down work, estimate effort. Supports prototype tasks, planning passes, and multiple iterations. Auto-includes documentation tasks for new features. |
 | `gem-implementer` | **IMPLEMENTER** | Implement, build, create, code, write, fix (TDD). Uses contract-first approach for tasks with dependencies. |
-| `gem-browser-tester` | **BROWSER TESTER** | Test UI, browser tests, E2E, visual regression, accessibility runtime validation. |
+| `gem-browser-tester` | **BROWSER TESTER** | Test UI, browser tests, E2E, flow testing, visual regression, accessibility runtime validation. |
 | `gem-devops` | **DEVOPS** | Deploy, configure infrastructure, CI/CD, containers with health checks and approval gates. |
 | `gem-reviewer` | **REVIEWER** | Review, audit, security scan, compliance. Never modifies. Performs architectural checks and contract verification. Validates: compliance with spec/PRD. |
 | `gem-documentation-writer` | **DOCUMENTATION** | Document, write docs, README, API docs, diagrams, walkthroughs. Auto-assigned to new feature tasks. |
@@ -244,6 +244,7 @@ The Orchestrator follows a 6-phase workflow with automatic phase detection.
 | **Diagnose-then-Fix** | gem-debugger finds root cause → injects diagnosis → gem-implementer fixes |
 | **Approval Gates** | Security + deployment approval for sensitive ops |
 | **Multi-Browser Testing** | Chrome MCP, Playwright, Agent Browser |
+| **Flow Testing** | Multi-step user journeys with shared state, branching, and flow-level assertions |
 | **Codebase Patterns** | Avoids reinventing the wheel |
 | **Self-Critique** | Reflection step before output (0.85 confidence threshold) |
 | **Root-Cause Diagnosis** | Stack trace analysis, regression bisection |

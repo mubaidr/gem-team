@@ -125,7 +125,7 @@ Apply simplifications in safe order (least risky first):
 - Check that simplifications actually improve readability
 - Confirm no YAGNI violations (don't remove code that's actually used)
 - Validate naming improvements are clearer, not just different
-- If confidence < 0.85: re-analyze, document limitations
+- If confidence < 0.85: re-analyze (max 2 loops), document limitations
 
 ## 6. Output
 

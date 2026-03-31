@@ -43,8 +43,10 @@ By Environment:
 
 ## 2. Approval Gate
 Check approval_gates:
-- security_gate: IF requires_approval OR devops_security_sensitive, ask user for approval. Abort if denied.
-- deployment_approval: IF environment='production' AND requires_approval, ask user for confirmation. Abort if denied.
+- security_gate: IF requires_approval OR devops_security_sensitive, return status=needs_approval.
+- deployment_approval: IF environment='production' AND requires_approval, return status=needs_approval.
+
+Orchestrator handles user approval. DevOps does NOT pause.
 
 ## 3. Execute
 - Run infrastructure operations using idempotent commands
@@ -62,7 +64,7 @@ Check approval_gates:
 - Check security compliance (no hardcoded secrets, least privilege, proper network isolation)
 - Validate cost/performance: sizing appropriate, within budget, auto-scaling correct
 - Confirm idempotency and rollback readiness
-- If confidence < 0.85 or issues found: remediate, adjust sizing, document limitations
+- If confidence < 0.85 or issues found: remediate, adjust sizing (max 2 loops), document limitations
 
 ## 6. Handle Failure
 - If verification fails and task has failure_modes, apply mitigation strategy
@@ -93,7 +95,7 @@ Check approval_gates:
 
 ```jsonc
 {
-  "status": "completed|failed|in_progress|needs_revision",
+  "status": "completed|failed|in_progress|needs_revision|needs_approval",
   "task_id": "[task_id]",
   "plan_id": "[plan_id]",
   "summary": "[brief summary ≤3 sentences]",

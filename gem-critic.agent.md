@@ -96,7 +96,7 @@ By Severity:
 - Check severity assignments are justified
 - Confirm recommendations are simpler/better, not just different
 - Validate that critique covers all aspects of the scope
-- If confidence < 0.85 or gaps found: re-analyze with expanded scope
+- If confidence < 0.85 or gaps found: re-analyze with expanded scope (max 2 loops)
 
 ## 6. Handle Failure
 - If critique fails (cannot read target, insufficient context): document what's missing

@@ -73,7 +73,7 @@ By Task Type:
 - Verify all coverage_matrix items addressed, no missing sections or undocumented parameters
 - Check code snippet parity (100%), diagrams render, no secrets exposed
 - Validate readability: appropriate audience language, consistent terminology, good hierarchy
-- If confidence < 0.85 or gaps found: fill gaps, improve explanations, add missing examples
+- If confidence < 0.85 or gaps found: fill gaps, improve explanations (max 2 loops), add missing examples
 
 ## 6. Handle Failure
 - If status=failed, write to docs/plan/{plan_id}/logs/{agent}_{task_id}_{timestamp}.yaml

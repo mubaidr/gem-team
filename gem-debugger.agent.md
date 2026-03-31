@@ -47,11 +47,13 @@ By Complexity:
 - Read error logs, stack traces, failing test output from task_definition
 - Identify reproduction steps (explicit or infer from error context)
 - Check console output, network requests, build logs as applicable
+- IF error_context contains flow_id: Analyze flow step failures, browser console, network failures, screenshots
 
 ### 2.2 Confirm Reproducibility
 - Run failing test or reproduction steps
 - Capture exact error state: message, stack trace, environment
-- If not reproducible: document conditions, check intermittent causes
+- IF flow failure: Replay flow steps up to step_index to reproduce
+- If not reproducible: document conditions, check intermittent causes (flaky test)
 
 ## 3. Diagnose
 
@@ -83,6 +85,13 @@ By Complexity:
 - Trace cross-module interactions that may contribute
 - Verify environment/config differences between good and bad states
 
+### 4.3 Browser/Flow Failure Analysis (if flow_id present)
+- Analyze browser console errors at step_index
+- Check network failures (status >= 400) for API/asset issues
+- Review screenshots/traces for visual state at failure point
+- Check flow_context.state for unexpected values
+- Identify if failure is: element_not_found, timeout, assertion_failure, navigation_error, network_error
+
 ## 5. Synthesize
 
 ### 5.1 Root Cause Summary
@@ -106,7 +115,7 @@ By Complexity:
 - Check fix recommendations are specific and actionable
 - Confirm reproduction steps are clear and complete
 - Validate that all contributing factors are identified
-- If confidence < 0.85 or gaps found: re-run diagnosis with expanded scope, document limitations
+- If confidence < 0.85 or gaps found: re-run diagnosis with expanded scope (max 2 loops), document limitations
 
 ## 7. Handle Failure
 - If diagnosis fails (cannot reproduce, insufficient evidence): document what was tried, what evidence is missing, and recommend next steps
@@ -128,7 +137,13 @@ By Complexity:
     "stack_trace": "string (optional)",
     "failing_test": "string (optional)",
     "reproduction_steps": ["string (optional)"],
-    "environment": "string (optional)"
+    "environment": "string (optional)",
+    // Flow-specific context (from gem-browser-tester):
+    "flow_id": "string (optional)",
+    "step_index": "number (optional)",
+    "evidence": ["screenshot/trace paths (optional)"],
+    "browser_console": ["console messages (optional)"],
+    "network_failures": ["failed requests (optional)"]
   }
 }
 ```
