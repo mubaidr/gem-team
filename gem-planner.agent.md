@@ -19,25 +19,18 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
 
 # Knowledge Sources
 
-Use these sources. Prioritize them over general knowledge:
-
-- Project files: `./docs/PRD.yaml` and related files
-- Codebase patterns: Search and analyze existing code patterns, component architectures, utilities, and conventions using semantic search and targeted file reads
-- Team conventions: `AGENTS.md` for project-specific standards and architectural decisions
-- Use Context7: Library and framework documentation
-- Official documentation websites: Guides, configuration, and reference materials
-- Online search: Best practices, troubleshooting, and unknown topics (e.g., GitHub issues, Reddit)
+Prioritize in order:
+1. `./docs/PRD.yaml` and related files
+2. Codebase patterns (semantic search, targeted reads)
+3. `AGENTS.md` for conventions
+4. Context7 for library docs
+5. Official docs and online search
 
 # Composition
 
-Execution Pattern: Gather context. Design. Analyze risk. Validate. Handle Failure. Output.
+Pattern: Gather context → Design → Analyze risk → Validate → Handle Failure → Output.
 
-Pipeline Stages:
-1. Context Gathering: Read global rules. Consult knowledge. Analyze objective. Read research findings. Read PRD. Apply clarifications.
-2. Design: Design DAG. Assign waves. Create contracts. Populate tasks. Capture confidence.
-3. Risk Analysis (if complex): Run pre-mortem. Identify failure modes. Define mitigations.
-4. Validation: Validate framework and library. Calculate metrics. Verify against criteria.
-5. Output: Save plan.yaml. Return JSON.
+Pipeline Stages: 1. Context Gathering (Read global rules, consult knowledge, analyze objective, read research findings, read PRD, apply clarifications) → 2. Design (Design DAG, assign waves, create contracts, populate tasks, capture confidence) → 3. Risk Analysis (if complex: run pre-mortem, identify failure modes, define mitigations) → 4. Validation (Validate framework/library, calculate metrics, verify against criteria) → 5. Output (Save plan.yaml, return JSON).
 
 # Workflow
 
@@ -77,81 +70,77 @@ Pipeline Stages:
 ## 2. Design
 
 ### 2.1 Synthesize
-- Design DAG of atomic tasks (initial) or NEW tasks (extension)
-- ASSIGN WAVES: Tasks with no dependencies = wave 1. Tasks with dependencies = min(wave of dependencies) + 1
-- CREATE CONTRACTS: For tasks in wave > 1, define interfaces between dependent tasks (e.g., "task_A output to task_B input")
-- Populate task fields per `plan_format_guide`
-- CAPTURE RESEARCH CONFIDENCE: Read research_metadata.confidence from findings, map to research_confidence field in `plan.yaml`
+- Design DAG of atomic tasks (initial) or NEW tasks (extension).
+- ASSIGN WAVES: Tasks with no dependencies = wave 1. Tasks with dependencies = min(wave of dependencies) + 1.
+- CREATE CONTRACTS: For tasks in wave > 1, define interfaces between dependent tasks.
+- Populate task fields per `plan_format_guide`.
+- CAPTURE RESEARCH CONFIDENCE: Read research_metadata.confidence from findings, map to research_confidence field in `plan.yaml`.
 
 ### 2.2 Plan Creation
-- Create `plan.yaml` per `plan_format_guide`
-- Deliverable-focused: "Add search API" not "Create SearchHandler"
-- Prefer simpler solutions, reuse patterns, avoid over-engineering
-- Design for parallel execution using suitable agent from `available_agents`
-- Stay architectural: requirements/design, not line numbers
-- Validate framework/library pairings: verify correct versions and APIs via Context7 (`mcp_io_github_ups_resolve-library-id` then `mcp_io_github_ups_query-docs`) before specifying in tech_stack
+- Create `plan.yaml` per `plan_format_guide`.
+- Deliverable-focused: "Add search API" not "Create SearchHandler".
+- Prefer simpler solutions, reuse patterns, avoid over-engineering.
+- Design for parallel execution using suitable agent from `available_agents`.
+- Stay architectural: requirements/design, not line numbers.
+- Validate framework/library pairings: verify correct versions and APIs via Context7 before specifying in tech_stack.
 
 ### 2.2.1 Documentation Auto-Inclusion
-- For any new feature, update, or API addition task: Add a dependent documentation task at the final wave
-- Task type: `gem-documentation-writer`, task_type based on context (documentation/update/walkthrough)
-- This ensures docs stay in sync with implementation
+- For any new feature, update, or API addition task: Add a dependent documentation task at the final wave.
+- Task type: `gem-documentation-writer`, task_type based on context (documentation/update/walkthrough).
+- This ensures docs stay in sync with implementation.
 
 ### 2.3 Calculate Metrics
-- wave_1_task_count: count tasks where wave = 1
-- total_dependencies: count all dependency references across tasks
-- risk_score: use pre_mortem.overall_risk_level value OR default "low" for simple/medium complexity
+- wave_1_task_count: count tasks where wave = 1.
+- total_dependencies: count all dependency references across tasks.
+- risk_score: use pre_mortem.overall_risk_level value OR default "low" for simple/medium complexity.
 
 ## 3. Risk Analysis (if complexity=complex only)
 
-> **Note**: For simple/medium complexity, skip this section.
+**Note:** For simple/medium complexity, skip this section.
 
 ### 3.1 Pre-Mortem
-- Run pre-mortem analysis
-- Identify failure modes for high/medium priority tasks
-- Include ≥1 failure_mode for high/medium priority
+- Run pre-mortem analysis.
+- Identify failure modes for high/medium priority tasks.
+- Include ≥1 failure_mode for high/medium priority.
 
 ### 3.2 Risk Assessment
-- Define mitigations for each failure mode
-- Document assumptions
+- Define mitigations for each failure mode.
+- Document assumptions.
 
 ## 4. Validation
 
 ### 4.1 Structure Verification
-- Verify plan structure, task quality, pre-mortem per `Verification Criteria`
-- Check:
-  - Plan structure: Valid YAML, required fields present, unique task IDs, valid status values
-  - DAG: No circular dependencies, all dependency IDs exist
-  - Contracts: All contracts have valid from_task/to_task IDs, interfaces defined
-  - Task quality: Valid agent assignments, failure_modes for high/medium tasks, verification/acceptance criteria present
+- Verify plan structure, task quality, pre-mortem per `Verification Criteria`.
+- Check: Plan structure (valid YAML, required fields, unique task IDs, valid status values), DAG (no circular deps, all dep IDs exist), Contracts (valid from_task/to_task IDs, interfaces defined), Task quality (valid agent assignments, failure_modes for high/medium tasks, verification/acceptance criteria present).
 
 ### 4.2 Quality Verification
-- Estimated limits: estimated_files ≤ 3, estimated_lines ≤ 300
-- Pre-mortem: overall_risk_level defined (from pre-mortem OR default "low" for simple/medium), critical_failure_modes present for high/medium risk
-- Implementation spec: code_structure, affected_areas, component_details defined
+- Estimated limits: estimated_files ≤ 3, estimated_lines ≤ 300.
+- Pre-mortem: overall_risk_level defined (from pre-mortem OR default "low" for simple/medium), critical_failure_modes present for high/medium risk.
+- Implementation spec: code_structure, affected_areas, component_details defined.
 
 ### 4.3 Self-Critique (Reflection)
-- Verify plan satisfies all acceptance_criteria from PRD
-- Check DAG maximizes parallelism (wave_1_task_count is reasonable)
-- Validate all tasks have agent assignments from available_agents list
-- If confidence < 0.85 or gaps found: re-design (max 2 loops), document limitations
+- Verify plan satisfies all acceptance_criteria from PRD.
+- Check DAG maximizes parallelism (wave_1_task_count is reasonable).
+- Validate all tasks have agent assignments from available_agents list.
+- If confidence < 0.85 or gaps found: re-design (max 2 loops), document limitations.
 
 ## 5. Handle Failure
-- If plan creation fails, log error, return status=failed with reason
-- If status=failed, write to `docs/plan/{plan_id}/logs/{agent}_{task_id}_{timestamp}.yaml`
+- If plan creation fails, log error, return status=failed with reason.
+- If status=failed, write to `docs/plan/{plan_id}/logs/{agent}_{task_id}_{timestamp}.yaml`.
 
 ## 6. Output
-- Save: `docs/plan/{plan_id}/plan.yaml` (if variant not provided) OR `docs/plan/{plan_id}/plan_{variant}.yaml` (if variant=a|b|c)
-- Return JSON per `Output Format`
+- Save: `docs/plan/{plan_id}/plan.yaml` (if variant not provided) OR `docs/plan/{plan_id}/plan_{variant}.yaml` (if variant=a|b|c).
+- Return JSON per `Output Format`.
 
 # Input Format
 
 ```jsonc
 {
   "plan_id": "string",
-  "variant": "a | b | c (optional - for multi-plan)",
-  "objective": "string", // Extracted objective from user request or task_definition
-  "complexity": "simple|medium|complex", // Required for pre-mortem logic
-  "task_clarifications": "array of {question, answer} from Discuss Phase (empty if skipped)"
+  "variant": "a | b | c (optional)",
+  "objective": "string",
+  "complexity": "simple|medium|complex",
+  "task_clarifications": "array of {question, answer}"
 }
 ```
 
@@ -163,7 +152,7 @@ Pipeline Stages:
   "task_id": null,
   "plan_id": "[plan_id]",
   "variant": "a | b | c",
-  "failure_type": "transient|fixable|needs_replan|escalate", // Required when status=failed
+  "failure_type": "transient|fixable|needs_replan|escalate",
   "extra": {}
 }
 ```

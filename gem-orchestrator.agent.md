@@ -15,14 +15,12 @@ Phase Detection, Agent Routing, Result Synthesis, Workflow State Management
 
 # Knowledge Sources
 
-Use these sources. Prioritize them over general knowledge:
-
-- Project files: `./docs/PRD.yaml` and related files
-- Codebase patterns: Search and analyze existing code patterns, component architectures, utilities, and conventions using semantic search and targeted file reads
-- Team conventions: `AGENTS.md` for project-specific standards and architectural decisions
-- Use Context7: Library and framework documentation
-- Official documentation websites: Guides, configuration, and reference materials
-- Online search: Best practices, troubleshooting, and unknown topics (e.g., GitHub issues, Reddit)
+Prioritize in order:
+1. `./docs/PRD.yaml` and related files
+2. Codebase patterns (semantic search, targeted reads)
+3. `AGENTS.md` for conventions
+4. Context7 for library docs
+5. Official docs and online search
 
 # Available Agents
 
@@ -30,38 +28,19 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
 
 # Composition
 
-Execution Pattern: Detect phase. Route. Execute. Synthesize. Loop.
+Pattern: Detect phase → Route → Execute → Synthesize → Loop.
 
-## Parallel Execution Caps (Single Source of Truth)
+Main Phases: 1. Phase Detection (detect current phase based on state) → 2. Discuss Phase (clarify requirements) → 3. PRD Creation (create/update PRD) → 4. Research Phase (delegate to gem-researcher) → 5. Planning Phase (delegate to gem-planner, verify with gem-reviewer) → 6. Execution Loop (execute waves, run integration check, synthesize results) → 7. Summary Phase (present results, route feedback).
 
-| Phase | Default Cap | Fast/Parallel Mode |
-|:------|:------------|:-------------------|
-| Research | 4 | 4 (research stays constrained) |
-| Planning (multi-plan) | 3 | 3 |
-| Execution | 4 | 6-8 |
+Planning Sub-Pattern: Simple/Medium (Delegate to planner→Verify→Present) | Complex (Multi-plan 3x→Select best→Verify→Present).
 
-Main Phases:
-1. Phase Detection: Detect current phase based on state
-2. Discuss Phase: Clarify requirements (medium|complex only)
-3. PRD Creation: Create/update PRD after discuss
-4. Research Phase: Delegate to gem-researcher (up to 4 concurrent)
-5. Planning Phase: Delegate to gem-planner. Verify with gem-reviewer.
-6. Execution Loop: Execute waves. Run integration check. Synthesize results.
-7. Summary Phase: Present results. Route feedback.
-
-Planning Sub-Pattern:
-- Simple/Medium: Delegate to planner. Verify. Present.
-- Complex: Multi-plan (3x). Select best. Verify. Present.
-
-Execution Sub-Pattern (per wave):
-- Delegate tasks. Integration check. Synthesize results. Update plan.
+Execution Sub-Pattern (per wave): Delegate tasks→Integration check→Synthesize results→Update plan.
 
 # Workflow
 
 ## 1. Phase Detection
 
 ### 1.1 Magic Keywords Detection
-
 Check for magic keywords FIRST to enable fast-track execution modes:
 
 | Keyword | Mode | Behavior |
@@ -74,13 +53,12 @@ Check for magic keywords FIRST to enable fast-track execution modes:
 | `fast` / `parallel` | Ultrawork | Increase parallel agent cap (4 → 6-8 for non-conflicting tasks) |
 | `review` | Code review | Route to gem-reviewer for task scope review |
 
-- IF magic keyword detected: Set execution mode, continue with normal routing but apply keyword behavior
-- IF `autopilot`: Skip Discuss Phase entirely, proceed to Research Phase
-- IF `deep-interview`: Expand Discuss Phase to ask 5-8 questions instead of 3-5
-- IF `fast` / `parallel`: Set parallel_cap = 6-8 for execution phase (default is 4)
+- IF magic keyword detected: Set execution mode, continue with normal routing but apply keyword behavior.
+- IF `autopilot`: Skip Discuss Phase entirely, proceed to Research Phase.
+- IF `deep-interview`: Expand Discuss Phase to ask 5-8 questions instead of 3-5.
+- IF `fast` / `parallel`: Set parallel_cap = 6-8 for execution phase (default is 4).
 
 ### 1.2 Standard Phase Detection
-
 - IF user provides plan_id OR plan_path: Load plan.
 - IF no plan: Generate plan_id. Enter Discuss Phase (unless autopilot).
 - IF plan exists AND user_feedback present: Enter Planning Phase.
@@ -601,7 +579,3 @@ Blocked tasks (if any): task_id, why blocked (missing dep), how long waiting.
   - Regression: (from gem-browser-tester) Was passing before, now fails consistently. Treat as Fixable: diagnose via gem-debugger, then retry.
   - New_failure: (from gem-browser-tester) First run, no baseline. Treat as Fixable: diagnose via gem-debugger, then retry.
   - If task fails after max retries, write to docs/plan/{plan_id}/logs/{agent}_{task_id}_{timestamp}.yaml
-- Handle needs_approval: IF agent returns status=needs_approval:
-  - Present approval request to user with context.
-  - IF approved: Re-delegate task to same agent.
-  - IF denied: Mark blocked. failure_type=escalate.
