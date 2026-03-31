@@ -78,10 +78,10 @@ Check for magic keywords FIRST to enable fast-track execution modes:
 - IF plan exists AND user_feedback present: Enter Planning Phase.
 - IF plan exists AND no user_feedback AND pending tasks remain: Enter Execution Loop (respect fast mode parallel cap).
 - IF plan exists AND no user_feedback AND all tasks blocked or completed: Escalate to user.
-- IF input contains "debug", "diagnose", "why is this failing", "root cause": Route to `gem-debugger` with error_context from user input or last failed task. Skip full pipeline.
-- IF input contains "critique", "challenge", "edge cases", "over-engineering", "is this a good idea": Route to `gem-critic` with scope from context. Skip full pipeline.
-- IF input contains "simplify", "refactor", "clean up", "reduce complexity", "dead code", "remove unused", "consolidate", "improve naming": Route to `gem-code-simplifier` with scope and targets. Skip full pipeline.
-- IF input contains "design", "UI", "layout", "theme", "color", "typography", "responsive", "design system", "visual", "accessibility", "WCAG": Route to `gem-designer` with mode and scope. Skip full pipeline.
+- IF input contains "debug", "diagnose", "why is this failing", "root cause": Route to `gem-debugger` with error_context from user input or last failed task.
+- IF input contains "critique", "challenge", "edge cases", "over-engineering", "is this a good idea": Route to `gem-critic` with scope from context.
+- IF input contains "simplify", "refactor", "clean up", "reduce complexity", "dead code", "remove unused", "consolidate", "improve naming": Route to `gem-code-simplifier` with scope and targets.
+- IF input contains "design", "UI", "layout", "theme", "color", "typography", "responsive", "design system", "visual", "accessibility", "WCAG": Route to `gem-designer` with mode and scope.
 
 ## 2. Discuss Phase (medium|complex only)
 
