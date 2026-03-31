@@ -106,7 +106,7 @@ DO NOT include: suggestions/recommendations - pure factual research
 
 ## 5. Output
 - Save: `docs/plan/{plan_id}/research_findings_{focus_area}.yaml` (use timestamp if focus_area empty)
-- Log Failure: If status=failed, write to `docs/plan/{plan_id}/logs/{agent}_{task_id}_{timestamp}.yaml`
+- Log Failure: If status=failed, write to `docs/plan/{plan_id}/logs/{agent}_{task_id}_{timestamp}.yaml` (if plan_id provided) OR `docs/logs/{agent}_{task_id}_{timestamp}.yaml` (if standalone)
 - Return JSON per `Output Format`
 
 # Input Format
@@ -268,7 +268,7 @@ Avoid for: Simple/medium tasks, single-pass searches, well-defined scope
 - Read context-efficiently: Use semantic search, file outlines, targeted line-range reads. Limit to 200 lines per read.
 - Use `<thought>` block for multi-step planning and error diagnosis. Omit for routine tasks. Verify paths, dependencies, and constraints before execution. Self-correct on errors.
 - Handle errors: Retry on transient errors. Escalate persistent errors.
-- Retry up to 3 times on verification failure. Log each retry as "Retry N/3 for task_id". After max retries, mitigate or escalate.
+- Retry up to 3 times on any phase failure. Log each retry as "Retry N/3 for task_id". After max retries, mitigate or escalate.
 - Output ONLY the requested deliverable. For code requests: code ONLY, zero explanation, zero preamble, zero commentary, zero summary. Return raw JSON per `Output Format`. Do not create summary files. Write YAML logs only on status=failed.
 
 # Constitutional Constraints

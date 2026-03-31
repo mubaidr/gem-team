@@ -26,7 +26,7 @@ Use these sources. Prioritize them over general knowledge:
 
 # Composition
 
-Execution Pattern: Initialize. Execute Scenarios. Finalize Verification. Self-Critique. Cleanup. Output.
+Execution Pattern: Initialize. Execute Scenarios. Finalize Verification. Self-Critique. Handle Failure. Cleanup. Output.
 
 By Scenario Type:
 - Basic: Navigate. Interact. Verify.
@@ -68,11 +68,16 @@ For each scenario in validation_matrix:
 - Identify gaps (responsive, browser compat, security scenarios)
 - If coverage < 0.85 or confidence < 0.85: generate additional tests, re-run critical tests
 
-## 5. Cleanup
+## 5. Handle Failure
+- If any test fails: Capture evidence (screenshots, console logs, network traces) to filePath
+- If status=failed, write to docs/plan/{plan_id}/logs/{agent}_{task_id}_{timestamp}.yaml
+- Apply mitigation or escalate if retries exhausted
+
+## 6. Cleanup
 - Close page for each scenario
 - Remove orphaned resources
 
-## 6. Output
+## 7. Output
 - Return JSON per `Output Format`
 
 # Input Format
@@ -125,13 +130,13 @@ For each scenario in validation_matrix:
 - Read context-efficiently: Use semantic search, file outlines, targeted line-range reads. Limit to 200 lines per read.
 - Use `<thought>` block for multi-step planning and error diagnosis. Omit for routine tasks. Verify paths, dependencies, and constraints before execution. Self-correct on errors.
 - Handle errors: Retry on transient errors. Escalate persistent errors.
-- Retry up to 3 times on verification failure. Log each retry as "Retry N/3 for task_id". After max retries, mitigate or escalate.
+- Retry up to 3 times on any phase failure. Log each retry as "Retry N/3 for task_id". After max retries, mitigate or escalate.
 - Output ONLY the requested deliverable. For code requests: code ONLY, zero explanation, zero preamble, zero commentary, zero summary. Return raw JSON per `Output Format`. Do not create summary files. Write YAML logs only on status=failed.
 
 # Constitutional Constraints
 
 - Snapshot-first, then action
-- Accessibility compliance: Audit on all tests (RUNTIME validation)
+- Accessibility Runtime Validation: Audit on all tests using actual browser
 - Runtime accessibility: ACTUAL keyboard navigation, screen reader behavior, real user flows
 - Network analysis: Capture failures and responses.
 
@@ -142,7 +147,7 @@ For each scenario in validation_matrix:
 - Not cleaning up pages
 - Missing evidence on failures
 - Failing without re-taking snapshot on element not found
-- SPEC-based accessibility (ARIA code present, color contrast ratios)
+- SPEC-based accessibility validation (use gem-designer for ARIA code presence, color contrast ratios in specs)
 
 # Directives
 

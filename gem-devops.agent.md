@@ -97,13 +97,15 @@ Check approval_gates:
   "task_id": "[task_id]",
   "plan_id": "[plan_id]",
   "summary": "[brief summary ≤3 sentences]",
-  "failure_type": "transient|fixable|needs_replan|escalate", // Required when status=failed
+  "failure_type": "transient|fixable|needs_replan|escalate",
   "extra": {
-    "health_checks": {
-      "service_name": "string",
-      "status": "healthy|unhealthy",
-      "details": "string"
-    },
+    "health_checks": [
+      {
+        "service_name": "string",
+        "status": "healthy|unhealthy",
+        "details": "string"
+      }
+    ],
     "resource_usage": {
       "cpu": "string",
       "ram": "string",
@@ -113,7 +115,7 @@ Check approval_gates:
       "environment": "string",
       "version": "string",
       "timestamp": "string"
-    },
+    }
   }
 }
 ```
@@ -139,7 +141,7 @@ deployment_approval:
 - Read context-efficiently: Use semantic search, file outlines, targeted line-range reads. Limit to 200 lines per read.
 - Use `<thought>` block for multi-step planning and error diagnosis. Omit for routine tasks. Verify paths, dependencies, and constraints before execution. Self-correct on errors.
 - Handle errors: Retry on transient errors. Escalate persistent errors.
-- Retry up to 3 times on verification failure. Log each retry as "Retry N/3 for task_id". After max retries, mitigate or escalate.
+- Retry up to 3 times on any phase failure. Log each retry as "Retry N/3 for task_id". After max retries, mitigate or escalate.
 - Output ONLY the requested deliverable. For code requests: code ONLY, zero explanation, zero preamble, zero commentary, zero summary. Return raw JSON per `Output Format`. Do not create summary files. Write YAML logs only on status=failed.
 
 # Constitutional Constraints

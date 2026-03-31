@@ -3,7 +3,7 @@
 > A modular, high-performance multi-agent orchestration framework for spec-driven development, feature implementation, and automated verification.
 
 [![Copilot Plugin](https://img.shields.io/badge/Plugin-Awesome%20Copilot-0078D4?style=flat-square&logo=microsoft)](https://awesome-copilot.github.com/plugins/#file=plugins%2Fgem-team)
-![Version](https://img.shields.io/badge/Version-1.5.0-6366f1?style=flat-square)
+![Version](https://img.shields.io/badge/Version-1.5.1-6366f1?style=flat-square)
 
 ---
 
@@ -14,18 +14,18 @@
 | Problem | Solution |
 |:--------|:---------|
 | Context overload | **Specialized agents** with focused expertise |
-| No specialization | **12 expert agents** with clear roles and zero overlap |
-| Sequential bottlenecks | **DAG-based parallel execution** (≤4 agents simultaneously) |
+| No specialization | **11 expert agents** with clear roles and zero overlap |
+| Sequential bottlenecks | **DAG-based parallel execution** (≤4 agents, ≤8 with `fast`) |
 | Missing verification | **TDD + mandatory verification gates** per agent |
 | Intent misalignment | **Discuss phase** captures intent; **clarification tracking** in PRD |
 | No audit trail | Persistent **`plan.yaml` and `PRD.yaml`** tracks every decision & outcome |
 | Over-engineering | **Architectural gates** validate simplicity; **gem-critic** challenges assumptions |
-| Untested accessibility | **WCAG spec validation** (designer) + **runtime checks** (browser tester) |
+| Untested accessibility | **WCAG spec validation** (gem-designer) + **runtime checks** (gem-browser-tester) |
 | Blind retries | **Diagnose-then-fix**: gem-debugger finds root cause, gem-implementer applies fix |
 | Single-plan risk | Complex tasks get **3 planner variants** → best DAG selected automatically |
 | Missed edge cases | **gem-critic** audits for logic gaps, boundary conditions, YAGNI violations |
 | Slow manual workflows | **Magic keywords** (`autopilot`, `simplify`, `critique`, `debug`, `fast`) skip to what you need |
-| Docs drift from code | **gem-documentation-writer** enforces code-documentation parity |
+| Docs drift from code | **Auto-included docs tasks** for new features ensures code-documentation parity |
 | Unsafe deployments | **Approval gates** block production/security changes until confirmed |
 | Browser fragmentation | **Multi-browser testing** via Chrome MCP, Playwright, and Agent Browser |
 | Broken contracts | **Contract verification** post-wave ensures dependent tasks integrate correctly |
@@ -183,7 +183,7 @@ The Orchestrator follows a 6-phase workflow with automatic phase detection.
 
 - **Detects complexity** (simple/medium/complex)
 - **Delegates to gem-researcher** (≤4 concurrent) per focus area
-- **Output:** `docs/plan/{plan_id}/research_findings_{focus}.yaml`
+- **Output:** `docs/plan/{plan_id}/research_findings_{focus}.yaml` (or `docs/research_findings_{timestamp}.yaml` for standalone calls)
 
 ### Phase 4: Planning
 
@@ -219,16 +219,16 @@ The Orchestrator follows a 6-phase workflow with automatic phase detection.
 |:------|:-----|:------------|
 | `gem-orchestrator` | **ORCHESTRATOR** | Coordinates multi-agent workflows, delegates tasks. Never executes directly. |
 | `gem-researcher` | **RESEARCHER** | Research, explore, analyze code, find patterns, investigate dependencies. Decision-focused output with blockers highlighted. |
-| `gem-planner` | **PLANNER** | Plan, design approach, break down work, estimate effort. Supports prototype tasks, planning passes, and multiple iterations. |
+| `gem-planner` | **PLANNER** | Plan, design approach, break down work, estimate effort. Supports prototype tasks, planning passes, and multiple iterations. Auto-includes documentation tasks for new features. |
 | `gem-implementer` | **IMPLEMENTER** | Implement, build, create, code, write, fix (TDD). Uses contract-first approach for tasks with dependencies. |
-| `gem-browser-tester` | **BROWSER TESTER** | Test UI, browser tests, E2E, visual regression, accessibility. |
-| `gem-devops` | **DEVOPS** | Deploy, configure infrastructure, CI/CD, containers. |
-| `gem-reviewer` | **REVIEWER** | Review, audit, security scan, compliance. Never modifies. Performs architectural checks and contract verification. |
-| `gem-documentation-writer` | **DOCUMENTATION** | Document, write docs, README, API docs, diagrams. |
-| `gem-debugger` | **DEBUGGER** | Debug, diagnose, root cause analysis, trace errors. Never fixes. |
-| `gem-critic` | **CRITIC** | Critique, challenge assumptions, edge cases, over-engineering. |
+| `gem-browser-tester` | **BROWSER TESTER** | Test UI, browser tests, E2E, visual regression, accessibility runtime validation. |
+| `gem-devops` | **DEVOPS** | Deploy, configure infrastructure, CI/CD, containers with health checks and approval gates. |
+| `gem-reviewer` | **REVIEWER** | Review, audit, security scan, compliance. Never modifies. Performs architectural checks and contract verification. Validates: compliance with spec/PRD. |
+| `gem-documentation-writer` | **DOCUMENTATION** | Document, write docs, README, API docs, diagrams, walkthroughs. Auto-assigned to new feature tasks. |
+| `gem-debugger` | **DEBUGGER** | Debug, diagnose, root cause analysis, trace errors. Never fixes - only diagnoses. |
+| `gem-critic` | **CRITIC** | Critique, challenge assumptions, edge cases, over-engineering. Validates: approach correctness. |
 | `gem-code-simplifier` | **SIMPLIFIER** | Simplify, refactor, dead code removal, reduce complexity. |
-| `gem-designer` | **DESIGNER** | Design UI, create themes, layouts, validate accessibility. |
+| `gem-designer` | **DESIGNER** | Design UI, create themes, layouts. Two modes: create (specs before) and validate (review after). Validates: accessibility spec compliance. |
 
 ---
 
@@ -249,13 +249,14 @@ The Orchestrator follows a 6-phase workflow with automatic phase detection.
 | **Root-Cause Diagnosis** | Stack trace analysis, regression bisection |
 | **Constructive Critique** | Challenges assumptions, finds edge cases |
 | **Magic Keywords** | Fast-track modes: `autopilot`, `simplify`, `critique`, `debug`, `fast` |
-| **Docs-Code Parity** | Documentation verified against source code |
+| **Docs-Code Parity** | Documentation auto-included for new features |
 | **Contract-First Development** | Contract tests written before implementation |
 | **Self-Documenting IDs** | Task/AC IDs encode lineage for traceability |
 | **Architectural Gates** | Plan review validates simplicity & integration-first |
 | **Prototype Wave** | Wave 1 can validate architecture before full implementation |
 | **Planning History** | Tracks iteration passes for continuous improvement |
 | **Clarification Tracking** | PRD tracks unresolved items with ownership |
+| **Critic vs Reviewer Routing** | Critic validates approach, Reviewer validates compliance |
 
 ---
 

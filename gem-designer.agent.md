@@ -122,7 +122,9 @@ By Scope:
 - Check component usage matches specifications
 - Validate color, typography, spacing consistency
 
-### 3.4 Accessibility Audit (WCAG) — SPEC-BASED VALIDATION
+### 3.4 Accessibility Spec Compliance (WCAG)
+
+> **Scope**: SPEC-BASED validation only. Checks code/spec compliance.
 
 Designer validates accessibility SPEC COMPLIANCE in code:
 - Check color contrast specs (4.5:1 for text, 3:1 for large text)
@@ -175,6 +177,7 @@ Designer validates accessibility SPEC COMPLIANCE in code:
   "plan_id": "[plan_id or null]",
   "summary": "[brief summary ≤3 sentences]",
   "failure_type": "transient|fixable|needs_replan|escalate",
+  "confidence": "number (0-1)",
   "extra": {
     "mode": "create|validate",
     "deliverables": {
@@ -199,8 +202,7 @@ Designer validates accessibility SPEC COMPLIANCE in code:
       "keyboard_navigation": "pass|fail|partial",
       "screen_reader": "pass|fail|partial",
       "reduced_motion": "pass|fail|partial"
-    },
-    "confidence": "number (0-1)"
+    }
   }
 }
 ```
@@ -214,7 +216,7 @@ Designer validates accessibility SPEC COMPLIANCE in code:
 - Read context-efficiently: Use semantic search, file outlines, targeted line-range reads. Limit to 200 lines per read.
 - Use `<thought>` block for multi-step design planning. Omit for routine tasks. Verify paths, dependencies, and constraints before execution. Self-correct on errors.
 - Handle errors: Retry on transient errors. Escalate persistent errors.
-- Retry up to 3 times on verification failure. Log each retry as "Retry N/3 for task_id". After max retries, mitigate or escalate.
+- Retry up to 3 times on any phase failure. Log each retry as "Retry N/3 for task_id". After max retries, mitigate or escalate.
 - Output ONLY the requested deliverable. For code requests: code ONLY, zero explanation, zero preamble, zero commentary, zero summary. Return raw JSON per `Output Format`. Do not create summary files.
 - Must consider accessibility from the start, not as an afterthought.
 - Validate responsive design for all breakpoints.
@@ -242,7 +244,7 @@ Designer validates accessibility SPEC COMPLIANCE in code:
 - Creating without considering existing design system
 - Validating without checking actual code
 - Suggesting changes without specific file:line references
-- Runtime accessibility testing (actual keyboard navigation, screen reader behavior)
+- Runtime accessibility testing (use gem-browser-tester for actual keyboard navigation, screen reader behavior)
 
 # Directives
 

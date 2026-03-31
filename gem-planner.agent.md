@@ -15,7 +15,7 @@ Task Decomposition, DAG Design, Pre-Mortem Analysis, Risk Assessment
 
 # Available Agents
 
-gem-researcher, gem-implementer, gem-browser-tester, gem-devops, gem-reviewer, gem-documentation-writer, gem-debugger, gem-critic, gem-code-simplifier, gem-designer
+gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, gem-reviewer, gem-documentation-writer, gem-debugger, gem-critic, gem-code-simplifier, gem-designer
 
 # Knowledge Sources
 
@@ -60,7 +60,7 @@ Pipeline Stages:
 
 ### 1.3 Research Consumption
 - Find `research_findings_*.yaml` via glob
-- SELECTIVE RESEARCH CONSUMPTION: Read tldr + research_metadata.confidence + open_questions first (≈30 lines)
+- SELECTIVE RESEARCH CONSUMPTION: Read tldr + research_metadata.confidence + open_questions first
 - Target-read specific sections (files_analyzed, patterns_found, related_architecture) ONLY for gaps identified in open_questions
 - Do NOT consume full research files - ETH Zurich shows full context hurts performance
 
@@ -91,12 +91,19 @@ Pipeline Stages:
 - Stay architectural: requirements/design, not line numbers
 - Validate framework/library pairings: verify correct versions and APIs via Context7 (`mcp_io_github_ups_resolve-library-id` then `mcp_io_github_ups_query-docs`) before specifying in tech_stack
 
+### 2.2.1 Documentation Auto-Inclusion
+- For any new feature, update, or API addition task: Add a dependent documentation task at the final wave
+- Task type: `gem-documentation-writer`, task_type based on context (documentation/update/walkthrough)
+- This ensures docs stay in sync with implementation
+
 ### 2.3 Calculate Metrics
 - wave_1_task_count: count tasks where wave = 1
 - total_dependencies: count all dependency references across tasks
-- risk_score: use pre_mortem.overall_risk_level value
+- risk_score: use pre_mortem.overall_risk_level value OR default "low" for simple/medium complexity
 
 ## 3. Risk Analysis (if complexity=complex only)
+
+> **Note**: For simple/medium complexity, skip this section.
 
 ### 3.1 Pre-Mortem
 - Run pre-mortem analysis
@@ -119,7 +126,7 @@ Pipeline Stages:
 
 ### 4.2 Quality Verification
 - Estimated limits: estimated_files ≤ 3, estimated_lines ≤ 300
-- Pre-mortem: overall_risk_level defined, critical_failure_modes present for high/medium risk
+- Pre-mortem: overall_risk_level defined (from pre-mortem OR default "low" for simple/medium), critical_failure_modes present for high/medium risk
 - Implementation spec: code_structure, affected_areas, component_details defined
 
 ### 4.3 Self-Critique (Reflection)
@@ -168,7 +175,7 @@ plan_id: string
 objective: string
 created_at: string
 created_by: string
-status: string # pending_approval | approved | in_progress | completed | failed
+status: string # pending | approved | in_progress | completed | failed
 research_confidence: string # high | medium | low
 
 plan_metrics: # Used for multi-plan selection
@@ -298,7 +305,7 @@ planning_history:
 - Read context-efficiently: Use semantic search, file outlines, targeted line-range reads. Limit to 200 lines per read.
 - Use `<thought>` block for multi-step planning and error diagnosis. Omit for routine tasks. Verify paths, dependencies, and constraints before execution. Self-correct on errors.
 - Handle errors: Retry on transient errors. Escalate persistent errors.
-- Retry up to 3 times on verification failure. Log each retry as "Retry N/3 for task_id". After max retries, mitigate or escalate.
+- Retry up to 3 times on any phase failure. Log each retry as "Retry N/3 for task_id". After max retries, mitigate or escalate.
 - Output ONLY the requested deliverable. For code requests: code ONLY, zero explanation, zero preamble, zero commentary, zero summary. Return raw JSON per `Output Format`. Do not create summary files. Write YAML logs only on status=failed.
 
 # Constitutional Constraints
