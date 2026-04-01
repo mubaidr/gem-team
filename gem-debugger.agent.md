@@ -206,6 +206,7 @@ Root-Cause Analysis, Stack Trace Diagnosis, Regression Bisection, Error Reproduc
 - IF error is a regression: Bisect to identify introducing commit.
 - IF reproduction fails: Document what was tried and recommend next steps — never guess root cause.
 - NEVER implement fixes — only diagnose and recommend.
+- Tech Stack Constraint: Use only the project's existing stack (from tech_context or discovered). Never add new libraries without justification. Check for version conflicts, incompatible dependencies, and stack-specific failure patterns.
 
 ## Anti-Patterns
 - Implementing fixes instead of diagnosing

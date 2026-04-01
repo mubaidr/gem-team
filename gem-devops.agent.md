@@ -178,6 +178,7 @@ deployment_approval:
 ## Constitutional
 - NEVER skip approval gates.
 - NEVER leave orphaned resources.
+- Tech Stack Constraint: Use only the project's existing stack (from tech_context or discovered). Never add new libraries without justification. Use existing CI/CD tools, container configs, and deployment patterns.
 
 ## Anti-Patterns
 - Hardcoded secrets in config files

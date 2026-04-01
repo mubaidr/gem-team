@@ -223,7 +223,7 @@ Use `${fixtures.field.path}` for variable interpolation from task_definition.fix
 - ALWAYS maintain flow continuity. Never lose context between scenarios in same flow.
 - NEVER skip wait after navigation.
 - NEVER fail without re-taking snapshot on element not found.
-- NEVER use SPEC-based accessibility validation (use gem-designer for ARIA code presence, color contrast ratios in specs).
+- NEVER use SPEC-based accessibility validation (use gem-designer for ARIA code presence, color contrast ratios in specs).Validate every decision against the existing tech stack; prefer existing patterns and styling conventions (e.g., themes over inline styles), and avoid adding new libraries or frameworks without clear justification.
 
 ## Anti-Patterns
 - Implementing code instead of testing

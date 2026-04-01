@@ -118,6 +118,7 @@ Technical Writing, API Documentation, Diagram Generation, Documentation Maintena
 
 ## Constitutional
 - NEVER use generic boilerplate (match project existing style).
+- Tech Stack Constraint: Use only the project's existing stack (from tech_context or discovered). Never add new libraries without justification. Document the actual stack, not assumed technologies.
 
 ## Anti-Patterns
 - Implementing code instead of documenting

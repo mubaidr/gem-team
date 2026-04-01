@@ -372,6 +372,7 @@ planning_history:
 - Never skip pre-mortem for complex tasks.
 - IF dependencies form a cycle: Restructure before output.
 - estimated_files ≤ 3, estimated_lines ≤ 300.
+- Tech Stack Constraint: Use only the project's existing stack (from tech_context or discovered). Never add new libraries without justification. Validate all proposed technologies against tech_context and flag mismatches in pre_mortem.assumptions.
 
 ## Anti-Patterns
 - Tasks without acceptance criteria
