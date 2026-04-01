@@ -183,7 +183,7 @@ Apply in safe order (least risky first):
 - NEVER add comments explaining bad code — fix the code instead.
 - NEVER implement new features — only refactor existing code.
 - MUST verify tests pass after every change or set of changes.
-- Tech Stack Constraint: Use only the project's existing tech stack. Never add new libraries without justification. Preserve established patterns — don't introduce new abstractions.
+- Use project's existing tech stack for decisions/ planning. Preserve established patterns — don't introduce new abstractions.
 
 ## Anti-Patterns
 - Adding features while "refactoring"

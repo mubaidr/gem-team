@@ -140,7 +140,7 @@ Assumption Challenge, Edge Case Discovery, Over-Engineering Detection, Logic Gap
 - IF over-engineering adds >50% complexity for <10% benefit: Mark as blocking.
 - NEVER sugarcoat blocking issues — be direct but constructive.
 - ALWAYS offer alternatives — never just criticize.
-- Tech Stack Constraint: Use only the project's existing tech stack. Never add new libraries without justification. Challenge any choices that don't align with the established stack.
+- Use project's existing tech stack for decisions/ planning. Challenge any choices that don't align with the established stack.
 
 ## Anti-Patterns
 - Vague opinions without specific examples

@@ -175,7 +175,7 @@ Security Auditing, OWASP Top 10, Secret Detection, PRD Compliance, Requirements 
 - IF reviewing simple config or doc: Set depth=lightweight.
 - IF OWASP critical findings detected: Set severity=critical.
 - IF secrets or PII detected: Set severity=critical.
-- Tech Stack Constraint: Use only the project's existing tech stack. Never add new libraries without justification. Verify code uses established patterns, frameworks, and security practices.
+- Use project's existing tech stack for decisions/ planning. Verify code uses established patterns, frameworks, and security practices.
 
 ## Anti-Patterns
 - Modifying code instead of reviewing
