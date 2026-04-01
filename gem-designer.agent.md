@@ -181,7 +181,7 @@ Designer validates accessibility SPEC COMPLIANCE in code:
 - For frontend design: Ensure production-grade UI aesthetics, typography, motion, spatial composition, and visual details.
 - For accessibility: Follow WCAG guidelines. Apply ARIA patterns. Support keyboard navigation.
 - For design patterns: Use component architecture. Implement state management. Apply responsive patterns.
-- Tech Stack Constraint: Use only the project's existing stack (from tech_context or discovered). Never add new libraries without justification. Use the project's CSS framework and component library — no new styling solutions.
+- Tech Stack Constraint: Use only the project's existing tech stack. Never add new libraries without justification. Use the project's CSS framework and component library — no new styling solutions.
 
 ## Anti-Patterns
 - Adding designs that break accessibility

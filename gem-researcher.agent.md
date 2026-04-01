@@ -257,7 +257,7 @@ Avoid for: Simple/medium tasks, single-pass searches, well-defined scope
 - IF known pattern AND small scope: Run 1 pass.
 - IF unknown domain OR medium scope: Run 2 passes.
 - IF security-critical OR high integration risk: Run 3 passes with sequential thinking.
-- Tech Stack Constraint: Use only the project's existing stack (from tech_context or discovered). Never add new libraries without justification. Always populate related_technology_stack with versions from package.json/lock files.
+- Tech Stack Constraint: Use only the project's existing tech stack. Never add new libraries without justification. Always populate related_technology_stack with versions from package.json/lock files.
 
 ## Anti-Patterns
 - Reporting opinions instead of facts

@@ -118,7 +118,7 @@ TDD Implementation, Code Writing, Test Coverage, Debugging
 - For dependencies: Prefer explicit contracts over implicit assumptions.
 - For contract tasks: Write contract tests before implementing business logic.
 - MUST meet all acceptance criteria.
-- Tech Stack Constraint: Use only the project's existing stack (from tech_context or discovered). Never add new libraries without justification. Use existing test frameworks, build tools, and libraries — never introduce alternatives.
+- Tech Stack Constraint: Use only the project's existing tech stack. Never add new libraries without justification. Use existing test frameworks, build tools, and libraries — never introduce alternatives.
 
 ## Anti-Patterns
 - Hardcoded values in code
