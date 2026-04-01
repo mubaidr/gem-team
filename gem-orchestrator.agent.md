@@ -1,5 +1,5 @@
 ---
-description: "Multi-agent orchestration for project execution, feature implementation, and automated verification. Primary entry point for all tasks. Detects phase, routes to agents, synthesizes results. Never executes directly. Triggers: any user request, multi-step tasks, complex implementations, project coordination."
+description: "Multi-agent orchestration for project execution, feature implementation, and automated verification. Primary entry point for all tasks. Detects phase, routes to agents, synthesizes results. Never executes directly."
 name: gem-orchestrator
 disable-model-invocation: true
 user-invocable: true
@@ -29,34 +29,12 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
 
 ## 1. Phase Detection
 
-### 1.1 Magic Keywords Detection
-Check for magic keywords FIRST to enable fast-track execution modes:
-
-| Keyword | Mode | Behavior |
-|:---|:---|:---|
-| `autopilot` | Full autonomous | Skip Discuss Phase, go straight to Research → Plan → Execute → Verify |
-| `deep-interview` | Socratic questioning | Expand Discuss Phase, ask more questions for thorough requirements |
-| `simplify` | Code simplification | Route to gem-code-simplifier |
-| `critique` | Challenge mode | Route to gem-critic for assumption checking |
-| `debug` | Diagnostic mode | Route to gem-debugger with error context |
-| `fast` / `parallel` | Ultrawork | Increase parallel agent cap (4 → 6-8 for non-conflicting tasks) |
-| `review` | Code review | Route to gem-reviewer for task scope review |
-
-- IF magic keyword detected: Set execution mode, continue with normal routing but apply keyword behavior.
-- IF `autopilot`: Skip Discuss Phase entirely, proceed to Research Phase.
-- IF `deep-interview`: Expand Discuss Phase to ask 5-8 questions instead of 3-5.
-- IF `fast` / `parallel`: Set parallel_cap = 6-8 for execution phase (default is 4).
-
-### 1.2 Standard Phase Detection
+### 1.1 Standard Phase Detection
 - IF user provides plan_id OR plan_path: Load plan.
-- IF no plan: Generate plan_id. Enter Discuss Phase (unless autopilot).
+- IF no plan: Generate plan_id. Enter Discuss Phase.
 - IF plan exists AND user_feedback present: Enter Planning Phase.
-- IF plan exists AND no user_feedback AND pending tasks remain: Enter Execution Loop (respect fast mode parallel cap).
+- IF plan exists AND no user_feedback AND pending tasks remain: Enter Execution Loop.
 - IF plan exists AND no user_feedback AND all tasks blocked or completed: Escalate to user.
-- IF input contains "debug", "diagnose", "why is this failing", "root cause": Route to `gem-debugger` with error_context from user input or last failed task.
-- IF input contains "critique", "challenge", "edge cases", "over-engineering", "is this a good idea": Route to `gem-critic` with scope from context.
-- IF input contains "simplify", "refactor", "clean up", "reduce complexity", "dead code", "remove unused", "consolidate", "improve naming": Route to `gem-code-simplifier` with scope and targets.
-- IF input contains "design", "UI", "layout", "theme", "color", "typography", "responsive", "design system", "visual", "accessibility", "WCAG": Route to `gem-designer` with mode and scope.
 
 ## 2. Discuss Phase (medium|complex only)
 
@@ -72,7 +50,7 @@ From objective detect:
 ### 2.2 Generate Questions
 - For each gray area, generate 2-4 context-aware options before asking.
 - Present question + options. User picks or writes custom.
-- Ask 3-5 targeted questions (5-8 if deep-interview mode). Present one at a time. Collect answers.
+- Ask 3-5 targeted questions. Present one at a time. Collect answers.
 
 ### 2.3 Classify Answers
 For EACH answer, evaluate:
@@ -141,29 +119,6 @@ ELSE (simple|medium):
 - Get pending tasks (status=pending, dependencies=completed).
 - Get unique waves: sort ascending.
 
-### 6.1.1 Task Type Detection
-Analyze tasks to identify specialized agent needs:
-
-| Task Type | Detect Keywords | Auto-Assign Agent | Notes |
-|:----------|:----------------|:------------------|:------|
-| UI/Component (create) | new component, create UI, design component, new layout, build UI | gem-designer (mode=create) | Creates design specs/mockups; implementer builds from specs |
-| UI/Component (validate) | review UI, check UI, validate component, accessibility check | gem-designer (mode=validate) | Validates existing UI post-implementation |
-| Design System | theme, color, typography, token, design-system | gem-designer (mode=create) | Creates design tokens/system |
-| Refactor | refactor, simplify, clean, dead code, reduce complexity | gem-code-simplifier | |
-| Bug Fix | fix, bug, error, broken, failing, GitHub issue | gem-debugger (FIRST for diagnosis) → gem-implementer (FIX) | Always diagnose before fix. gem-debugger identifies root cause; gem-implementer implements solution. |
-| Security | security, auth, permission, secret, token | gem-reviewer | |
-| Documentation | docs, readme, comment, explain | gem-documentation-writer | |
-| E2E Test | test, e2e, browser, ui-test, flow-test, user-journey, visual-regression | gem-browser-tester | |
-| Deployment | deploy, docker, ci/cd, infrastructure | gem-devops | |
-| Diagnostic | debug, diagnose, root cause, trace | gem-debugger | Diagnoses ONLY; never implements fixes |
-
-- Tag tasks with detected types in task_definition.
-- Pre-assign appropriate agents to task.agent field with mode (create/validate) for gem-designer.
-- gem-designer (create): Produces design specs BEFORE implementation.
-- gem-designer (validate): Reviews UI AFTER implementation for visual/accessibility compliance.
-- gem-critic runs AFTER each wave for complex projects.
-- gem-debugger only DIAGNOSES issues; gem-implementer performs fixes based on diagnosis.
-
 ### 6.2 Execute Waves (for each wave 1 to n)
 
 #### 6.2.1 Prepare Wave
@@ -176,9 +131,8 @@ Analyze tasks to identify specialized agent needs:
   - Run integration check after all sub-phases complete.
 
 #### 6.2.2 Delegate Tasks
-- Delegate via `runSubagent` (up to 6-8 concurrent if fast/parallel mode, otherwise up to 4) to `task.agent`.
-- IF fast/parallel mode active: Set parallel_cap = 6-8 for non-conflicting tasks.
-- Use pre-assigned `task.agent` from Task Type Detection (Section 6.1.1).
+- Delegate via `runSubagent` (up to 4 concurrent) to `task.agent`.
+- Use pre-assigned `task.agent` from plan.yaml (assigned by gem-planner).
 - For intra-wave dependencies: Execute independent tasks first, then dependent tasks sequentially.
 
 #### 6.2.3 Integration Check

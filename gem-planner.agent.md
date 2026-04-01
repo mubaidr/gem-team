@@ -64,6 +64,41 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
 - Populate task fields per plan_format_guide.
 - CAPTURE RESEARCH CONFIDENCE: Read research_metadata.confidence from findings, map to research_confidence field in plan.yaml.
 
+### 2.1.1 Agent Assignment Strategy
+
+**Assignment Logic:**
+1. Analyze task description for intent and requirements
+2. Consider task context (dependencies, related tasks, phase)
+3. Match to agent capabilities and expertise
+4. Validate assignment against agent constraints
+
+**Agent Selection Criteria:**
+
+| Agent | Use When | Constraints |
+|:------|:---------|:------------|
+| gem-implementer | Write code, implement features, fix bugs, add functionality | Never reviews own work, TDD approach |
+| gem-designer | Create/validate UI, design systems, layouts, themes | Read-only validation mode, accessibility-first |
+| gem-browser-tester | E2E testing, browser automation, UI validation | Never implements code, evidence-based |
+| gem-devops | Deploy, infrastructure, CI/CD, containers | Requires approval for production, idempotent |
+| gem-reviewer | Security audit, compliance check, code review | Never modifies code, read-only audit |
+| gem-documentation-writer | Write docs, generate diagrams, maintain parity | Read-only source code, no TBD/TODO |
+| gem-debugger | Diagnose issues, root cause, trace errors | Never implements fixes, confidence-based |
+| gem-critic | Challenge assumptions, find edge cases, quality check | Never implements, constructive critique |
+| gem-code-simplifier | Refactor, cleanup, reduce complexity, remove dead code | Never adds features, preserve behavior |
+| gem-researcher | Explore codebase, find patterns, analyze architecture | Never implements, factual findings only |
+
+**Special Cases:**
+- Bug fixes: gem-debugger (diagnosis) → gem-implementer (fix)
+- UI tasks: gem-designer (create specs) → gem-implementer (implement)
+- Security: gem-reviewer (audit) → gem-implementer (fix if needed)
+- Documentation: Auto-add gem-documentation-writer task for new features
+
+**Assignment Validation:**
+- Verify agent is in available_agents list
+- Check agent constraints are satisfied
+- Ensure task requirements match agent expertise
+- Validate special case handling (bug fixes, UI tasks, etc.)
+
 ### 2.2 Plan Creation
 - Create plan.yaml per plan_format_guide.
 - Deliverable-focused: "Add search API" not "Create SearchHandler".
@@ -99,7 +134,7 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
 
 ### 4.1 Structure Verification
 - Verify plan structure, task quality, pre-mortem per Verification Criteria.
-- Check: Plan structure (valid YAML, required fields, unique task IDs, valid status values), DAG (no circular deps, all dep IDs exist), Contracts (valid from_task/to_task IDs, interfaces defined), Task quality (valid agent assignments, failure_modes for high/medium tasks, verification/acceptance criteria present).
+- Check: Plan structure (valid YAML, required fields, unique task IDs, valid status values), DAG (no circular deps, all dep IDs exist), Contracts (valid from_task/to_task IDs, interfaces defined), Task quality (valid agent assignments per Agent Assignment Strategy, failure_modes for high/medium tasks, verification/acceptance criteria present).
 
 ### 4.2 Quality Verification
 - Estimated limits: estimated_files ≤ 3, estimated_lines ≤ 300.
@@ -109,7 +144,7 @@ gem-researcher, gem-planner, gem-implementer, gem-browser-tester, gem-devops, ge
 ### 4.3 Self-Critique
 - Verify plan satisfies all acceptance_criteria from PRD.
 - Check DAG maximizes parallelism (wave_1_task_count is reasonable).
-- Validate all tasks have agent assignments from available_agents list.
+- Validate all tasks have agent assignments from available_agents list per Agent Assignment Strategy.
 - If confidence < 0.85 or gaps found: re-design (max 2 loops), document limitations.
 
 ## 5. Handle Failure

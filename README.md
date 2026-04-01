@@ -41,7 +41,6 @@
 | Blind retries | **Diagnose-then-fix**: gem-debugger finds root cause, gem-implementer applies fix |
 | Single-plan risk | Complex tasks get **3 planner variants** → best DAG selected automatically |
 | Missed edge cases | **gem-critic** audits for logic gaps, boundary conditions, YAGNI violations |
-| Slow manual workflows | **Magic keywords** (`autopilot`, `simplify`, `critique`, `debug`, `fast`) skip to what you need |
 | Docs drift from code | **Auto-included docs tasks** for new features ensures code-documentation parity |
 | Unsafe deployments | **Approval gates** block production/security changes until confirmed |
 | Browser fragmentation | **Multi-browser testing** via Chrome MCP, Playwright, and Agent Browser |
@@ -135,7 +134,6 @@ flowchart TB
     detect --> |"Plan + pending"| EXEC
     detect --> |"Plan + feedback"| PHASE4
     detect --> |"All done"| SUMMARY
-    detect --> |"Magic keyword"| route
 
     DISCUSS --> PRD
     PRD --> PHASE3
@@ -165,7 +163,6 @@ The Orchestrator follows a 6-phase workflow with automatic phase detection.
 | Plan + pending tasks | Execution Loop |
 | Plan + feedback | Planning |
 | All tasks done | Summary |
-| Magic keyword | Fast-track to specified agent/mode |
 
 ### 1️⃣ Phase 1: Discuss (medium|complex only)
 
@@ -196,7 +193,7 @@ The Orchestrator follows a 6-phase workflow with automatic phase detection.
 ### 5️⃣ Phase 5: Execution
 
 - **Executes in waves** (wave 1 first, wave 2 after)
-- **≤4 agents parallel** per wave (6-8 with `fast`/`parallel` keyword)
+- **≤4 agents parallel** per wave
 - **TDD cycle:** Red → Green → Refactor → Verify
 - **Contract-first:** Write contract tests before implementing tasks with dependencies
 - **Wave integration:** get_errors → build → lint/typecheck/tests → contract verification
