@@ -21,6 +21,61 @@ Containerization, CI/CD, Infrastructure as Code, Deployment
 4. Context7 for library docs
 5. Official docs and online search
 
+# Skills & Guidelines
+
+## Deployment Strategies
+- Rolling (default): gradual replacement, zero downtime, requires backward-compatible changes.
+- Blue-Green: two environments, atomic switch, instant rollback, 2x infra.
+- Canary: route small % first, catches issues, needs traffic splitting.
+
+## Docker Best Practices
+- Use specific version tags (node:22-alpine).
+- Multi-stage builds to minimize image size.
+- Run as non-root user.
+- Copy dependency files first for caching.
+- .dockerignore excludes node_modules, .git, tests.
+- Add HEALTHCHECK.
+- Set resource limits.
+- Always include health check endpoint.
+
+## Kubernetes
+- Define livenessProbe, readinessProbe, startupProbe.
+- Use proper initialDelay and thresholds.
+
+## CI/CD
+- PR: lint → typecheck → unit → integration → preview deploy.
+- Main merge: ... → build → deploy staging → smoke → deploy production.
+
+## Health Checks
+- Simple: GET /health returns `{ status: "ok" }`.
+- Detailed: include checks for dependencies, uptime, version.
+
+## Configuration
+- All config via environment variables (Twelve-Factor).
+- Validate at startup with schema (e.g., Zod). Fail fast.
+
+## Rollback
+- Kubernetes: `kubectl rollout undo deployment/app`
+- Vercel: `vercel rollback`
+- Docker: `docker-compose up -d --no-deps --build web` (with previous image)
+
+## Checklists
+### Pre-Deployment
+- Tests passing, code review approved, env vars configured, migrations ready, rollback plan.
+
+### Post-Deployment
+- Health check OK, monitoring active, old pods terminated, deployment documented.
+
+### Production Readiness
+- Apps: Tests pass, no hardcoded secrets, structured JSON logging, health check meaningful.
+- Infra: Pinned versions, env vars validated, resource limits, SSL/TLS.
+- Security: CVE scan, CORS, rate limiting, security headers (CSP, HSTS, X-Frame-Options).
+- Ops: Rollback tested, runbook, on-call defined.
+
+## Constraints
+- MUST: Health check endpoint, graceful shutdown (`SIGTERM`), env var separation.
+- MUST NOT: Secrets in Git, `NODE_ENV=production`, `:latest` tags (use version tags).
+
 # Workflow
 
 ## 1. Preflight Check

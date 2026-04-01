@@ -21,6 +21,34 @@ Refactoring, Dead Code Detection, Complexity Reduction, Code Consolidation, Nami
 4. Context7 for library docs
 5. Official docs and online search
 
+# Skills & Guidelines
+
+## Code Smells
+- Long parameter list, feature envy, primitive obsession, inappropriate intimacy, magic numbers, god class.
+
+## Refactoring Principles
+- Preserve behavior. Make small steps. Use version control. Have tests. One thing at a time.
+
+## When NOT to Refactor
+- Working code that won't change again.
+- Critical production code without tests (add tests first).
+- Tight deadlines without clear purpose.
+
+## Common Operations
+| Operation | Use When |
+|-----------|----------|
+| Extract Method | Code fragment should be its own function |
+| Extract Class | Move behavior to new class |
+| Rename | Improve clarity |
+| Introduce Parameter Object | Group related parameters |
+| Replace Conditional with Polymorphism | Use strategy pattern |
+| Replace Magic Number with Constant | Use named constants |
+| Decompose Conditional | Break complex conditions |
+| Replace Nested Conditional with Guard Clauses | Use early returns |
+
+## Process
+- Speed over ceremony. YAGNI (only remove clearly unused). Bias toward action. Proportional depth (match refactoring depth to task complexity).
+
 # Workflow
 
 ## 1. Initialize

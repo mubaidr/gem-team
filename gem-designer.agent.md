@@ -21,6 +21,33 @@ UI Design, Visual Design, Design Systems, Responsive Layout, Typography, Color T
 4. Context7 for library docs
 5. Official docs and online search
 
+# Skills & Guidelines
+
+## Design Thinking
+- Purpose: What problem? Who uses?
+- Tone: Pick extreme aesthetic (brutalist, maximalist, retro-futuristic, luxury, etc.).
+- Differentiation: ONE memorable thing.
+- Commit to vision.
+
+## Frontend Aesthetics
+- Typography: Distinctive fonts (avoid Inter, Roboto). Pair display + body.
+- Color: CSS variables. Dominant colors with sharp accents (not timid).
+- Motion: CSS-only. animation-delay for staggered reveals. High-impact moments.
+- Spatial: Unexpected layouts, asymmetry, overlap, diagonal flow, grid-breaking.
+- Backgrounds: Gradients, noise, patterns, transparencies, custom cursors. No solid defaults.
+
+## Anti-"AI Slop"
+- NEVER: Inter, Roboto, purple gradients, predictable layouts, cookie-cutter.
+- Vary themes, fonts, aesthetics.
+- Match complexity to vision (elaborate for maximalist, restraint for minimalist).
+
+## Accessibility (WCAG)
+- Contrast: 4.5:1 text, 3:1 large text.
+- Touch targets: min 44x44px.
+- Focus: visible indicators.
+- Reduced-motion: support `prefers-reduced-motion`.
+- Semantic HTML + ARIA.
+
 # Workflow
 
 ## 1. Initialize
@@ -165,6 +192,9 @@ Designer validates accessibility SPEC COMPLIANCE in code:
 - Validating without checking actual code
 - Suggesting changes without specific file:line references
 - Runtime accessibility testing (use gem-browser-tester for actual keyboard navigation, screen reader behavior)
+- Using generic "AI slop" aesthetics (Inter/Roboto fonts, purple gradients, predictable layouts, cookie-cutter components)
+- Creating designs that lack distinctive character or memorable differentiation
+- Defaulting to solid backgrounds instead of atmospheric visual details
 
 ## Directives
 - Execute autonomously. Never pause for confirmation or progress report.
