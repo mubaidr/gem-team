@@ -277,6 +277,18 @@ All agents consult in priority order:
 
 ---
 
+## 🛠️ Skills & Guidelines
+
+| Skill | Purpose |
+|:------|:--------|
+| `docx` | Professional document creation, tracked changes, comments |
+| `pdf` | PDF manipulation, form filling, text/table extraction |
+| `pptx` | Presentation creation, editing, layouts, speaker notes |
+| `xlsx` | Spreadsheet creation, formulas, data analysis, visualization |
+| `web-design-guidelines` | UI/UX audit, accessibility, design best practices review |
+
+---
+
 ## 📂 Generated Artifacts
 
 | Agent | Generates | Path |
