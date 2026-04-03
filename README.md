@@ -22,6 +22,8 @@
 - 🔬 **Smart Debugging** — Root-cause analysis with stack trace parsing, regression bisection, and confidence-scored fix recommendations
 - 🚀 **Safe DevOps** — Idempotent operations, health checks, and mandatory approval gates for production
 - 🔗 **Traceable** — Self-documenting IDs link requirements → tasks → tests → evidence
+- 📚 **Knowledge-Driven** — Agents consult prioritized sources (PRD → codebase patterns → AGENTS.md → Context7 → docs → online) for informed decisions
+- 🛠️ **Skills & Guidelines** — Built-in skill modules (docx, pdf, pptx, xlsx, web-design-guidelines) ensure format-accurate, accessibility-compliant outputs
 - 🎯 **Decision-Focused** — Research outputs highlight blockers and decision points for planners
 - 📋 **Rich Specification Creation** — PRD creation with user stories, IN/OUT of scope, acceptance criteria, and clarification tracking
 - 📐 **Spec-Driven Development** — Specifications define the "what" before the "how", with multi-step refinement rather than one-shot code generation from prompts
@@ -45,6 +47,8 @@
 | Unsafe deployments | **Approval gates** block production/security changes until confirmed |
 | Browser fragmentation | **Multi-browser testing** via Chrome MCP, Playwright, and Agent Browser |
 | Broken contracts | **Contract verification** post-wave ensures dependent tasks integrate correctly |
+| Knowledge gaps | **Prioritized knowledge sources** — PRD → codebase patterns → AGENTS.md → Context7 → docs → online |
+| Format inconsistency | **Built-in skills** (docx, pdf, pptx, xlsx) + **web-design-guidelines** for consistent, accessible outputs |
 
 ---
 
