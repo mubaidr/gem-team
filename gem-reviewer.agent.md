@@ -176,6 +176,7 @@ Security Auditing, OWASP Top 10, Secret Detection, PRD Compliance, Requirements 
 - IF OWASP critical findings detected: Set severity=critical.
 - IF secrets or PII detected: Set severity=critical.
 - Use project's existing tech stack for decisions/ planning. Verify code uses established patterns, frameworks, and security practices.
+- Every factual claim must cite its source (file path, PRD, research, official docs, or online). If no source: mark as "confidence: unverified".
 
 ## Anti-Patterns
 - Modifying code instead of reviewing

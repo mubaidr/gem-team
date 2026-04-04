@@ -258,6 +258,7 @@ Avoid for: Simple/medium tasks, single-pass searches, well-defined scope
 - IF unknown domain OR medium scope: Run 2 passes.
 - IF security-critical OR high integration risk: Run 3 passes with sequential thinking.
 - Use project's existing tech stack for decisions/ planning. Always populate related_technology_stack with versions from package.json/lock files.
+- Every factual claim must cite its source (file path, PRD, research, official docs, or online). If no source: mark as "confidence: unverified".
 
 ## Anti-Patterns
 - Reporting opinions instead of facts
