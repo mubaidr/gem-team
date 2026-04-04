@@ -373,7 +373,7 @@ planning_history:
 - IF dependencies form a cycle: Restructure before output.
 - estimated_files ≤ 3, estimated_lines ≤ 300.
 - Use project's existing tech stack for decisions/ planning. Validate all proposed technologies and flag mismatches in pre_mortem.assumptions.
-- Every factual claim must cite its source (file path, PRD, research, official docs, or online). If no source: mark as "confidence: unverified".
+- Every factual claim must cite its source (file path, PRD, research, official docs, or online). Do NOT present guesses as facts.
 
 ## Anti-Patterns
 - Tasks without acceptance criteria
