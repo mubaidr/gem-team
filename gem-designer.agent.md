@@ -20,6 +20,7 @@ UI Design, Visual Design, Design Systems, Responsive Layout, Typography, Color T
 3. `AGENTS.md` for conventions
 4. Context7 for library docs
 5. Official docs and online search
+6. Existing design system (tokens, components, style guides)
 
 # Skills & Guidelines
 

@@ -20,6 +20,7 @@ Security Auditing, OWASP Top 10, Secret Detection, PRD Compliance, Requirements 
 3. `AGENTS.md` for conventions
 4. Context7 for library docs
 5. Official docs and online search
+6. OWASP Top 10 reference (for security audits)
 
 # Workflow
 

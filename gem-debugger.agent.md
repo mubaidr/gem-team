@@ -20,6 +20,8 @@ Root-Cause Analysis, Stack Trace Diagnosis, Regression Bisection, Error Reproduc
 3. `AGENTS.md` for conventions
 4. Context7 for library docs
 5. Official docs and online search
+6. Error logs, stack traces, test output (from error_context)
+7. Git history (git blame/log) for regression identification
 
 # Skills & Guidelines
 
@@ -29,7 +31,7 @@ Root-Cause Analysis, Stack Trace Diagnosis, Regression Bisection, Error Reproduc
   1. Investigation: Reproduce, gather evidence, trace data flow.
   2. Pattern: Find working examples, identify differences.
   3. Hypothesis: Form theory, test minimally.
-  4. Implementation: Create test, fix, verify.
+  4. Recommendation: Suggest fix strategy, estimate complexity, identify affected files.
 - Three-Fail Rule: After 3 failed fix attempts, STOP — architecture problem. Escalate.
 - Multi-Component: Log data at each boundary before investigating specific component.
 
@@ -51,7 +53,7 @@ Root-Cause Analysis, Stack Trace Diagnosis, Regression Bisection, Error Reproduc
 | 1. Investigation | Evidence gathering | Understand WHAT and WHY |
 | 2. Pattern | Find working examples | Identify differences |
 | 3. Hypothesis | Form & test theory | Confirm/refute hypothesis |
-| 4. Implementation | Create test, fix, verify | Resolve bug, tests pass |
+| 4. Recommendation | Fix strategy, complexity | Guide implementer |
 
 ---
 **Note**: These skills complement workflow. Constitutional: NEVER implement — only diagnose and recommend.

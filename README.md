@@ -3,7 +3,7 @@
 > A modular, high-performance multi-agent orchestration framework for spec-driven development, feature implementation, and automated verification.
 
 [![Copilot Plugin](https://img.shields.io/badge/Plugin-Awesome%20Copilot-0078D4?style=flat-square&logo=microsoft)](https://awesome-copilot.github.com/plugins/#file=plugins%2Fgem-team)
-![Version](https://img.shields.io/badge/Version-1.5.2-6366f1?style=flat-square)
+![Version](https://img.shields.io/badge/Version-1.5.3-6366f1?style=flat-square)
 
 ---
 
@@ -41,7 +41,7 @@
 | No audit trail | Persistent **`plan.yaml` and `PRD.yaml`** tracks every decision & outcome |
 | Over-engineering | **Architectural gates** validate simplicity; **gem-critic** challenges assumptions |
 | Untested accessibility | **WCAG spec validation** (gem-designer) + **runtime checks** (gem-browser-tester) |
-| Blind retries | **Diagnose-then-fix**: gem-debugger finds root cause, gem-implementer applies fix |
+| Blind retries | **Diagnose-then-fix**: gem-debugger finds root cause → confidence gate → gem-implementer applies fix → original agent re-verifies |
 | Single-plan risk | Complex tasks get **3 planner variants** → best DAG selected automatically |
 | Missed edge cases | **gem-critic** audits for logic gaps, boundary conditions, YAGNI violations |
 | Docs drift from code | **Auto-included docs tasks** for new features ensures code-documentation parity |
@@ -109,7 +109,12 @@ flowchart TB
         waves["Wave-based (1→n)"]
         parallel["≤4 agents ∥"]
         integ["Wave Integration"]
-        diag_fix["Diagnose-then-Fix Loop"]
+    end
+
+    subgraph DIAG["Diagnose-then-Fix Loop"]
+        debug["gem-debugger\n(diagnose root cause)"]
+        impl_fix["gem-implementer\n(apply fix)"]
+        reverify["Original agent\n(re-verify/re-run)"]
     end
 
     subgraph AUTO["Auto-Invocations (post-wave)"]
@@ -122,9 +127,6 @@ flowchart TB
         test["gem-browser-tester"]
         devops["gem-devops"]
         docs["gem-documentation-writer"]
-        debug["gem-debugger"]
-        simplify["gem-code-simplifier"]
-        design["gem-designer"]
     end
 
     subgraph SUMMARY["Phase 6: Summary"]
@@ -148,8 +150,13 @@ flowchart TB
     PHASE4 --> |"Issues"| PHASE4
     EXEC --> WORKERS
     EXEC --> AUTO
-    EXEC --> |"Failure"| diag_fix
-    diag_fix --> |"Retry"| EXEC
+    EXEC --> |"Failure"| DIAG
+    DIAG --> debug
+    debug --> |"code fix"| impl_fix
+    debug --> |"infra/config"| reverify
+    impl_fix --> reverify
+    reverify --> |"pass"| EXEC
+    reverify --> |"fail"| DIAG
     EXEC --> |"Complete"| SUMMARY
     SUMMARY --> |"Feedback"| PHASE4
 ```
@@ -203,8 +210,8 @@ The Orchestrator follows a 6-phase workflow with automatic phase detection.
 - **TDD cycle:** Red → Green → Refactor → Verify
 - **Contract-first:** Write contract tests before implementing tasks with dependencies
 - **Wave integration:** get_errors → build → lint/typecheck/tests → contract verification
-- **On failure:** gem-debugger diagnoses → root cause injected → gem-implementer retries (max 3)
-- **Prototype support:** Wave 1 can include prototype tasks to validate architecture early
+- **On failure:** gem-debugger diagnoses → confidence check (≥0.7) → IF code fix: gem-implementer → original agent re-verifies
+- **On needs_revision:** Same diagnose-then-fix chain — never direct re-delegate
 - **Auto-invocations:** gem-critic after each wave (complex); gem-designer validates UI tasks post-wave
 
 ### 6️⃣ Phase 6: Summary
@@ -244,7 +251,7 @@ The Orchestrator follows a 6-phase workflow with automatic phase detection.
 | ⚠️ **Pre-Mortem Analysis** | Failure modes identified BEFORE execution |
 | 🗂️ **Multi-Plan Selection** | Complex tasks: 3 planner variants → selects best DAG |
 | 🌊 **Wave-Based Execution** | Parallel agent execution with integration gates |
-| 🩺 **Diagnose-then-Fix** | gem-debugger finds root cause → injects diagnosis → gem-implementer fixes |
+| 🩺 **Diagnose-then-Fix** | gem-debugger finds root cause → confidence gate → gem-implementer applies fix → original agent re-verifies |
 | 🚪 **Approval Gates** | Security + deployment approval for sensitive ops |
 | 🌐 **Multi-Browser Testing** | Chrome MCP, Playwright, Agent Browser |
 | 🧭 **Flow Testing** | Multi-step user journeys with shared state, branching, and flow-level assertions |
@@ -266,16 +273,22 @@ The Orchestrator follows a 6-phase workflow with automatic phase detection.
 
 ## 📚 Knowledge Sources
 
-All agents consult in priority order:
+Agents consult only the sources relevant to their role:
 
-| Source | Description |
-|:-------|:------------|
-| 📋 `docs/PRD.yaml` | Product requirements — scope and acceptance criteria |
-| 🔎 Codebase patterns | Semantic search for implementations, reusable components |
-| 📄 `AGENTS.md` | Team conventions and architectural decisions |
-| 📖 Context7 | Library and framework documentation |
-| 🌐 Official docs | Guides, configuration, reference materials |
-| 🔍 Online search | Best practices, troubleshooting, GitHub issues |
+| Agent | Knowledge Sources |
+|:------|:------------------|
+| orchestrator | PRD.yaml, AGENTS.md |
+| researcher | PRD.yaml, codebase patterns, AGENTS.md, Context7, official docs, online search |
+| planner | PRD.yaml, codebase patterns, AGENTS.md, Context7, official docs |
+| implementer | codebase patterns, AGENTS.md, Context7 (API verification) |
+| debugger | codebase patterns, AGENTS.md, error logs, git history |
+| reviewer | PRD.yaml, codebase patterns, AGENTS.md, OWASP reference |
+| critic | PRD.yaml, codebase patterns, AGENTS.md |
+| browser-tester | PRD.yaml (flow coverage), AGENTS.md, test fixtures, baseline screenshots |
+| devops | AGENTS.md, infrastructure configs (Docker, K8s, CI/CD), cloud provider docs |
+| designer | PRD.yaml (UX goals), codebase patterns, AGENTS.md, existing design system |
+| code-simplifier | codebase patterns, AGENTS.md, test suites (behavior verification) |
+| documentation-writer | AGENTS.md, existing docs, source code |
 
 ---
 

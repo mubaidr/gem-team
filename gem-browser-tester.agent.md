@@ -20,6 +20,7 @@ Browser Automation (Chrome DevTools MCP, Playwright, Agent Browser), E2E Testing
 3. `AGENTS.md` for conventions
 4. Context7 for library docs
 5. Official docs and online search
+6. Test fixtures and baseline screenshots (from task_definition)
 
 # Workflow
 

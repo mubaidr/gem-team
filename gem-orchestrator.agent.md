@@ -144,9 +144,10 @@ ELSE (simple|medium):
   - No integration failures.
 - IF fails: Identify tasks causing failures. Before retry:
   1. Delegate to `gem-debugger` with error_context (error logs, failing tests, affected tasks).
-  2. Inject diagnosis (root_cause, fix_recommendations) into retry task_definition.
-  3. Delegate fix to task.agent (same wave, max 3 retries).
-  4. Re-run integration check.
+  2. Validate diagnosis confidence: IF extra.confidence < 0.7, escalate to user.
+  3. Inject diagnosis (root_cause, fix_recommendations) into retry task_definition.
+  4. IF code fix needed → delegate to `gem-implementer`. IF infra/config → delegate to original agent.
+  5. After fix → re-run integration check. Same wave, max 3 retries.
 - NOTE: Some agents (gem-browser-tester) retry internally. IF agent output includes `retries_attempted` in extra, deduct from 3-retry budget.
 
 #### 6.2.4 Synthesize Results
@@ -156,22 +157,22 @@ ELSE (simple|medium):
   - gem-critic: Check extra.verdict is present.
   - gem-debugger: Check extra.confidence is present.
   - If validation fails: Treat as needs_revision regardless of status.
-- IF needs_revision: Redelegate task WITH context-appropriate feedback injected:
-  - gem-implementer: Inject failing test output/error logs.
-  - gem-browser-tester: Inject failing scenario details, evidence paths.
-  - gem-reviewer: Inject security/code quality findings.
-  - gem-researcher: Inject open questions, research gaps.
-  - gem-debugger: Inject error context for re-diagnosis.
-  - Other agents: Inject generic error logs.
-  Same wave, max 3 retries.
+- IF needs_revision: Diagnose before retry:
+  1. Delegate to `gem-debugger` with error_context (failing output, error logs, evidence from agent).
+  2. Validate diagnosis confidence: IF extra.confidence < 0.7, escalate to user.
+  3. Inject diagnosis (root_cause, fix_recommendations) into retry task_definition.
+  4. IF code fix needed → delegate to `gem-implementer`. IF test/config issue → delegate to original agent.
+  5. After fix → re-delegate to original agent to re-verify/re-run (browser re-tests, devops re-deploys, etc.).
+  Same wave, max 3 retries (debugger → implementer → re-verify = 1 retry).
 - IF failed with failure_type=escalate: Skip diagnosis. Mark task as blocked. Escalate to user.
 - IF failed with failure_type=needs_replan: Skip diagnosis. Delegate to gem-planner for replanning.
 - IF failed (other failure_types): Diagnose before retry:
   1. Delegate to `gem-debugger` with error_context (error_message, stack_trace, failing_test from agent output).
   2. Validate diagnosis confidence: IF extra.confidence < 0.7, escalate to user instead of retrying.
   3. Inject diagnosis (root_cause, fix_recommendations) into retry task_definition.
-  4. Redelegate to task.agent (same wave, max 3 retries).
-  5. If all retries exhausted: Evaluate failure_type per Handle Failure directive.
+  4. IF code fix needed → delegate to `gem-implementer`. IF infra/config → delegate to original agent.
+  5. After fix → re-delegate to original agent to re-verify/re-run.
+  6. If all retries exhausted: Evaluate failure_type per Handle Failure directive.
 
 #### 6.2.5 Auto-Agent Invocations (post-wave)
 After each wave completes, automatically invoke specialized agents based on task types:
@@ -180,7 +181,7 @@ After each wave completes, automatically invoke specialized agents based on task
 
 **Automatic gem-critic (complex only):**
 - Delegate to `gem-critic` (scope=code, target=wave task files, context=wave objectives).
-- IF verdict=blocking: Feed findings to task.agent for fixes before next wave. Re-verify.
+- IF verdict=blocking: Delegate to `gem-debugger` with critic findings. Inject diagnosis → `gem-implementer` for fixes. Re-verify before next wave.
 - IF verdict=needs_changes: Include in status summary. Proceed to next wave.
 - Skip for simple complexity.
 
@@ -377,7 +378,10 @@ After each agent completes, the orchestrator routes based on status AND extra fi
 | completed | gem-critic | verdict=pass | Aggregate findings, present to user |
 | completed | gem-critic | verdict=needs_changes | Include findings in status summary, proceed |
 | completed | gem-critic | verdict=blocking | Route findings to gem-planner for fixes (check extra.verdict, NOT status) |
-| completed | gem-debugger | - | Inject diagnosis into task, delegate to implementer |
+| completed | gem-debugger | - | IF code fix: delegate to gem-implementer. IF config/test/infra: delegate to original agent. |
+| needs_revision | gem-browser-tester | - | gem-debugger → gem-implementer (if code bug) → gem-browser-tester re-verify. |
+| needs_revision | gem-devops | - | gem-debugger → gem-implementer (if code) or gem-devops retry (if infra) → re-verify. |
+| needs_revision | gem-implementer | - | gem-debugger → gem-implementer (with diagnosis) → re-verify. |
 | completed | gem-implementer | test_results.failed=0 | Mark task done, run integration check |
 | completed | gem-implementer | test_results.failed>0 | Treat as needs_revision despite status |
 | completed | gem-browser-tester | flows_passed < flows_executed | Treat as failed, diagnose |
@@ -512,10 +516,10 @@ Blocked tasks (if any): task_id, why blocked (missing dep), how long waiting.
     - ELSE: Mark as needs_revision and escalate to user.
 - Handle Failure: If agent returns status=failed, evaluate failure_type field:
   - Transient: Retry task (up to 3 times).
-  - Fixable: Before retry, delegate to `gem-debugger` for root-cause analysis. Validate diagnosis confidence (≥0.7). Inject diagnosis into task_definition. Redelegate task. Same wave, max 3 retries.
+  - Fixable: Delegate to `gem-debugger` for root-cause analysis. Validate confidence (≥0.7). Inject diagnosis. IF code fix → `gem-implementer`. IF infra/config → original agent. After fix → original agent re-verifies. Same wave, max 3 retries.
   - Needs_replan: Delegate to gem-planner for replanning (include diagnosis if available).
   - Escalate: Mark task as blocked. Escalate to user (include diagnosis if available).
   - Flaky: (from gem-browser-tester) Test passed on retry. Log for investigation. Mark task as completed with flaky flag in plan.yaml. Do NOT count against retry budget.
-  - Regression: (from gem-browser-tester) Was passing before, now fails consistently. Treat as Fixable: diagnose via gem-debugger, then retry.
-  - New_failure: (from gem-browser-tester) First run, no baseline. Treat as Fixable: diagnose via gem-debugger, then retry.
+  - Regression: (from gem-browser-tester) Was passing before, now fails consistently. Treat as Fixable: gem-debugger → gem-implementer → gem-browser-tester re-verify.
+  - New_failure: (from gem-browser-tester) First run, no baseline. Treat as Fixable: gem-debugger → gem-implementer → gem-browser-tester re-verify.
   - If task fails after max retries, write to docs/plan/{plan_id}/logs/{agent}_{task_id}_{timestamp}.yaml

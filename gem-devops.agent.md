@@ -20,6 +20,8 @@ Containerization, CI/CD, Infrastructure as Code, Deployment
 3. `AGENTS.md` for conventions
 4. Context7 for library docs
 5. Official docs and online search
+6. Infrastructure configs (Dockerfile, docker-compose, CI/CD YAML, K8s manifests)
+7. Cloud provider docs (AWS, GCP, Azure, Vercel, etc.)
 
 # Skills & Guidelines
 

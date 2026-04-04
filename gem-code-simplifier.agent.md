@@ -20,6 +20,7 @@ Refactoring, Dead Code Detection, Complexity Reduction, Code Consolidation, Nami
 3. `AGENTS.md` for conventions
 4. Context7 for library docs
 5. Official docs and online search
+6. Test suites (verify behavior preservation after simplification)
 
 # Skills & Guidelines
 

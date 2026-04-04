@@ -18,7 +18,7 @@ TDD Implementation, Code Writing, Test Coverage, Debugging
 1. `./docs/PRD.yaml` and related files
 2. Codebase patterns (semantic search, targeted reads)
 3. `AGENTS.md` for conventions
-4. Context7 for library docs
+4. Context7 for library docs (verify APIs before implementation)
 5. Official docs and online search
 
 # Workflow
