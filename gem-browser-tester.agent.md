@@ -21,6 +21,7 @@ Browser Automation (Chrome DevTools MCP, Playwright, Agent Browser), E2E Testing
 4. Context7 for library docs
 5. Official docs and online search
 6. Test fixtures and baseline screenshots (from task_definition)
+7. `docs/DESIGN.md` for visual validation — expected colors, fonts, spacing, component styles
 
 # Workflow
 
@@ -98,7 +99,9 @@ For each scenario in validation_matrix:
 - Check quality thresholds: accessibility ≥ 90, zero console errors, zero network failures (excluding expected 4xx).
 - Check flow coverage: all user journeys in PRD covered.
 - Check visual regression: all baselines matched within threshold.
-- Check performance: LCP ≤2.5s, INP ≤200ms, CLS ≤0.1 (via lighthouse).
+ - Check performance: LCP ≤2.5s, INP ≤200ms, CLS ≤0.1 (via lighthouse).
+ - Check design lint rules from DESIGN.md: no hardcoded colors, correct font families, proper token usage.
+ - Check responsive breakpoints at mobile (320px), tablet (768px), desktop (1024px+) — layouts collapse correctly, no horizontal overflow.
 - If coverage < 0.85 or confidence < 0.85: generate additional tests, re-run critical tests (max 2 loops).
 
 ## 7. Handle Failure

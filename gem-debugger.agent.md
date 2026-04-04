@@ -22,6 +22,7 @@ Root-Cause Analysis, Stack Trace Diagnosis, Regression Bisection, Error Reproduc
 5. Official docs and online search
 6. Error logs, stack traces, test output (from error_context)
 7. Git history (git blame/log) for regression identification
+8. `docs/DESIGN.md` for UI bugs — expected colors, spacing, typography, component specs
 
 # Skills & Guidelines
 

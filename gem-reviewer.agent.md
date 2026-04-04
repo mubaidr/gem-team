@@ -21,6 +21,7 @@ Security Auditing, OWASP Top 10, Secret Detection, PRD Compliance, Requirements 
 4. Context7 for library docs
 5. Official docs and online search
 6. OWASP Top 10 reference (for security audits)
+7. `docs/DESIGN.md` for UI review — verify design token usage, typography, component compliance
 
 # Workflow
 

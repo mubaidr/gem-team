@@ -75,13 +75,21 @@ Component Design: Define props/interface, specify states (default, hover, focus,
 Layout Design: Grid/flex structure, responsive breakpoints, spacing system, container widths, gutter/padding.
 
 Theme Design: Color palette (primary, secondary, accent, success, warning, error, background, surface, text), typography scale, spacing scale, border radius scale, shadow definitions, dark/light mode variants.
+- Shadow levels: 0 (none), 1 (subtle), 2 (lifted/card), 3 (raised/dropdown), 4 (overlay/modal), 5 (toast/focus).
+- Radius scale: none (0), sm (2-4px), md (6-8px), lg (12-16px), pill (9999px).
 
 Design System: Design tokens, component library specifications, usage guidelines, accessibility requirements.
 
+Semantic token naming per project system: CSS variables (--color-surface-primary), Tailwind config (bg-surface-primary), or component library tokens (color="primary"). Consistent across all components.
+
 ### 2.4 Output
-- Generate design specs (can include code snippets, CSS variables, Tailwind config, etc.).
-- Include rationale for design decisions.
-- Document accessibility considerations.
+- Write docs/DESIGN.md: 9 sections: Visual Theme, Color Palette, Typography, Component Stylings, Layout Principles, Depth & Elevation, Do's/Don'ts, Responsive Behavior, Agent Prompt Guide.
+  - Generate design specs (can include code snippets, CSS variables, Tailwind config, etc.).
+  - Include rationale for design decisions.
+  - Document accessibility considerations.
+  - Include design lint rules: [{rule: string, status: pass|fail, detail: string}].
+  - Include iteration guide: [{rule: string, rationale: string}]. Numbered non-negotiable rules for maintaining design consistency.
+  - When updating DESIGN.md: Include `changed_tokens: [token_name, ...]` — tokens that changed from previous version.
 
 ## 3. Validate Mode
 

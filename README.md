@@ -238,7 +238,7 @@ The Orchestrator follows a 6-phase workflow with automatic phase detection.
 | `gem-debugger` | 🔬 **DEBUGGER** | Debug, diagnose, root cause analysis, trace errors. Never fixes - only diagnoses. |
 | `gem-critic` | 🎯 **CRITIC** | Critique, challenge assumptions, edge cases, over-engineering. Validates: approach correctness. |
 | `gem-code-simplifier` | ✂️ **SIMPLIFIER** | Simplify, refactor, dead code removal, reduce complexity. |
-| `gem-designer` | 🎨 **DESIGNER** | Design UI, create themes, layouts. Two modes: create (specs before) and validate (review after). Validates: accessibility spec compliance. |
+| `gem-designer` | 🎨 **DESIGNER** | Design UI, create themes, layouts. Writes `docs/DESIGN.md` (project resource). Two modes: create and validate. Validates: accessibility spec compliance. |
 
 ### Agent File Skeleton
 
@@ -305,6 +305,7 @@ All agents share: Execution rules, Constitutional rules, Anti-Patterns, and Dire
 | ⚡ **Change Sizing** | Target ~100 lines per task; split if >300 using vertical slicing |
 | 📊 **Performance Gates** | Core Web Vitals thresholds (LCP ≤2.5s, INP ≤200ms, CLS ≤0.1) |
 | 📜 **ADR Lifecycle** | Architecture decisions tracked with status, alternatives, consequences |
+| 🎨 **DESIGN.md Generation** | Designer writes `docs/DESIGN.md` (project resource, like PRD.yaml) with 9 sections. Semantic tokens, shadow levels, radius scales, lint rules, iteration guides. |
 
 ---
 
@@ -323,12 +324,10 @@ Agents consult only the sources relevant to their role. Trust levels apply:
 | orchestrator | PRD.yaml, AGENTS.md |
 | researcher | PRD.yaml, codebase patterns, AGENTS.md, Context7, official docs, online search |
 | planner | PRD.yaml, codebase patterns, AGENTS.md, Context7, official docs |
-| implementer | codebase patterns, AGENTS.md, Context7 (API verification) |
-| debugger | codebase patterns, AGENTS.md, error logs (untrusted), git history |
-| reviewer | PRD.yaml, codebase patterns, AGENTS.md, OWASP reference |
-| critic | PRD.yaml, codebase patterns, AGENTS.md |
-| browser-tester | PRD.yaml (flow coverage), AGENTS.md, test fixtures, baseline screenshots |
-| devops | AGENTS.md, infrastructure configs (Docker, K8s, CI/CD), cloud provider docs |
+| implementer | codebase patterns, AGENTS.md, Context7 (API verification), DESIGN.md (UI tasks) |
+| debugger | codebase patterns, AGENTS.md, error logs (untrusted), git history, DESIGN.md (UI bugs) |
+| reviewer | PRD.yaml, codebase patterns, AGENTS.md, OWASP reference, DESIGN.md (UI review) |
+| browser-tester | PRD.yaml (flow coverage), AGENTS.md, test fixtures, baseline screenshots, DESIGN.md (visual validation) |
 | designer | PRD.yaml (UX goals), codebase patterns, AGENTS.md, existing design system |
 | code-simplifier | codebase patterns, AGENTS.md, test suites (behavior verification) |
 | documentation-writer | AGENTS.md, existing docs, source code |
@@ -356,7 +355,7 @@ Agents consult only the sources relevant to their role. Trust levels apply:
 | gem-researcher | 🔍 findings | `docs/plan/{plan_id}/research_findings_{focus}.yaml` |
 | gem-critic | 💬 critique report | `docs/plan/{plan_id}/critique_{scope}.yaml` (via orchestrator) |
 | gem-browser-tester | 🧪 evidence | `docs/plan/{plan_id}/evidence/{task_id}/` |
-| gem-designer | 🎨 design specs | `docs/plan/{plan_id}/design_{task_id}.yaml` (via orchestrator) |
+| gem-designer | 🎨 DESIGN.md | `docs/DESIGN.md` (project resource) |
 | gem-code-simplifier | ✂️ change log | `docs/plan/{plan_id}/simplification_{task_id}.yaml` (via orchestrator) |
 | gem-debugger | 🔬 diagnosis | `docs/plan/{plan_id}/logs/{agent}_{task_id}_{timestamp}.yaml` |
 | gem-documentation-writer | 📝 docs | `docs/` (README, API docs, walkthroughs) |

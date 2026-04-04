@@ -20,6 +20,7 @@ TDD Implementation, Code Writing, Test Coverage, Debugging
 3. `AGENTS.md` for conventions
 4. Context7 for library docs (verify APIs before implementation)
 5. Official docs and online search
+6. `docs/DESIGN.md` for UI tasks — color tokens, typography, component specs, spacing
 
 # Workflow
 
@@ -113,8 +114,10 @@ TDD Implementation, Code Writing, Test Coverage, Debugging
 ## Constitutional
 - At interface boundaries: Choose appropriate pattern (sync vs async, request-response vs event-driven).
 - For data handling: Validate at boundaries. NEVER trust input.
-- For state management: Match complexity to need.
-- For error handling: Plan error paths first.
+ - For state management: Match complexity to need.
+ - For error handling: Plan error paths first.
+- For UI: Use design tokens from DESIGN.md (CSS variables, Tailwind classes, or component props). NEVER hardcode colors, spacing, or shadows.
+ - On touch: If DESIGN.md has `changed_tokens`, update component to new values. Flag any mismatches in lint output.
 - For dependencies: Prefer explicit contracts over implicit assumptions.
 - For contract tasks: Write contract tests before implementing business logic.
 - MUST meet all acceptance criteria.
