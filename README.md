@@ -3,7 +3,7 @@
 > A modular, high-performance multi-agent orchestration framework for spec-driven development, feature implementation, and automated verification.
 
 [![Copilot Plugin](https://img.shields.io/badge/Plugin-Awesome%20Copilot-0078D4?style=flat-square&logo=microsoft)](https://awesome-copilot.github.com/plugins/#file=plugins%2Fgem-team)
-![Version](https://img.shields.io/badge/Version-1.5.1-6366f1?style=flat-square)
+![Version](https://img.shields.io/badge/Version-1.5.2-6366f1?style=flat-square)
 
 ---
 
@@ -18,6 +18,7 @@
 - 🛡️ **Resilient** — Pre-mortem analysis, failure handling, auto-replanning
 - ♻️ **Pattern Reuse** — Codebase pattern discovery prevents reinventing wheels
 - 🪞 **Self-Correcting** — All agents self-critique at 0.85 confidence threshold before returning results
+- 📋 **Source Verified** — Every factual claim cites its source (PRD, codebase, docs, online); no guesswork — if unclear, agents ask for clarification
 - ♿ **Accessibility-First** — WCAG compliance validated at both spec and runtime layers
 - 🔬 **Smart Debugging** — Root-cause analysis with stack trace parsing, regression bisection, and confidence-scored fix recommendations
 - 🚀 **Safe DevOps** — Idempotent operations, health checks, and mandatory approval gates for production
@@ -47,7 +48,8 @@
 | Unsafe deployments | **Approval gates** block production/security changes until confirmed |
 | Browser fragmentation | **Multi-browser testing** via Chrome MCP, Playwright, and Agent Browser |
 | Broken contracts | **Contract verification** post-wave ensures dependent tasks integrate correctly |
-| Knowledge gaps | **Prioritized knowledge sources** — PRD → codebase patterns → AGENTS.md → Context7 → docs → online |
+| Knowledge gaps | **Prioritized knowledge sources** (PRD, codebase, AGENTS.md, Context7, docs, online) |
+| Unverified facts | **Source-cited claims** — every fact cites source; no guesswork — if unclear, agents ask |
 | Format inconsistency | **Built-in skills** (docx, pdf, pptx, xlsx) + **web-design-guidelines** for consistent, accessible outputs |
 
 ---
