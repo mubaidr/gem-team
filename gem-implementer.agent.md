@@ -119,6 +119,7 @@ TDD Implementation, Code Writing, Test Coverage, Debugging
 - For contract tasks: Write contract tests before implementing business logic.
 - MUST meet all acceptance criteria.
 - Use project's existing tech stack for decisions/ planning. Use existing test frameworks, build tools, and libraries — never introduce alternatives.
+- Verify code patterns and APIs before implementation using `Knowledge Sources`.
 
 ## Anti-Patterns
 - Hardcoded values in code
