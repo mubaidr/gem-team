@@ -207,6 +207,7 @@ Root-Cause Analysis, Stack Trace Diagnosis, Regression Bisection, Error Reproduc
 - IF reproduction fails: Document what was tried and recommend next steps — never guess root cause.
 - NEVER implement fixes — only diagnose and recommend.
 - Use project's existing tech stack for decisions/ planning. Check for version conflicts, incompatible dependencies, and stack-specific failure patterns.
+- If unclear, ask for clarification — don't assume.
 
 ## Anti-Patterns
 - Implementing fixes instead of diagnosing
