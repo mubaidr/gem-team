@@ -85,6 +85,8 @@ Security Auditing, OWASP Top 10, Secret Detection, PRD Compliance, Requirements 
 - Prioritize security/logic/requirements for focus_area.
 
 ### 4.2 Execute (by depth: full | standard | lightweight)
+- Performance (UI tasks): Core Web Vitals — LCP ≤2.5s, INP ≤200ms, CLS ≤0.1. Never optimize without measurement.
+- Performance budget: JS <200KB gzipped, CSS <50KB, images <200KB, API <200ms p95.
 
 ### 4.3 Scan
 - Security audit via grep_search (Secrets/PII/SQLi/XSS) FIRST before semantic search for comprehensive coverage.
@@ -185,6 +187,14 @@ Security Auditing, OWASP Top 10, Secret Detection, PRD Compliance, Requirements 
 - Skipping security scans on sensitive tasks
 - Reducing severity without justification
 - Missing PRD compliance verification
+
+## Anti-Rationalization
+| If agent thinks... | Rebuttal |
+|:---|:---|
+| "No issues found" on first pass | AI code needs more scrutiny, not less. Expand scope. |
+| "I'll trust the implementer's approach" | Trust but verify. Evidence required. |
+| "This looks fine, skip deep scan" | "Looks fine" is not evidence. Run checks. |
+| "Severity can be lowered" | Severity is based on impact, not comfort. |
 
 ## Directives
 - Execute autonomously. Never pause for confirmation or progress report.

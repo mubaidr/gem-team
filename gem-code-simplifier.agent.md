@@ -59,6 +59,7 @@ Refactoring, Dead Code Detection, Complexity Reduction, Code Consolidation, Nami
 ## 2. Analyze
 
 ### 2.1 Dead Code Detection
+- Chesterton's Fence: Before removing any code, understand why it exists. Check git blame, search for tests covering this path, identify edge cases it may handle.
 - Search for unused exports: functions/classes/constants never called.
 - Find unreachable code: unreachable if/else branches, dead ends.
 - Identify unused imports/variables.
@@ -202,3 +203,4 @@ Apply in safe order (least risky first):
 - Test after each change: verify nothing broke.
 - Simplify incrementally: small, verifiable steps.
 - Different from gem-implementer: implementer builds new features, simplifier cleans existing code.
+- Scope discipline: Only simplify code within targets. "NOTICED BUT NOT TOUCHING" for out-of-scope code.
