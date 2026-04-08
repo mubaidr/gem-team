@@ -1,0 +1,40 @@
+{
+    "packages": {
+        ".": {
+            "release-type": "simple",
+            "package-name": "gem-team",
+            "changelog-sections": [
+                {
+                    "type": "feat",
+                    "section": "\ud83d\ude80 New Agents & Features",
+                    "hidden": false
+                },
+                {
+                    "type": "fix",
+                    "section": "\ud83d\udee0\ufe0f Bug Fixes",
+                    "hidden": false
+                },
+                {
+                    "type": "perf",
+                    "section": "\u26a1 Performance",
+                    "hidden": false
+                },
+                {
+                    "type": "docs",
+                    "section": "\ud83d\udcdd Documentation",
+                    "hidden": false
+                },
+                {
+                    "type": "chore",
+                    "section": "\ud83e\uddf9 Housekeeping",
+                    "hidden": true
+                }
+            ],
+            "extra-files": [
+                "version.txt",
+                "README.md",
+                "plugins/gem-team/.github/plugin/plugin.json"
+            ]
+        }
+    }
+}

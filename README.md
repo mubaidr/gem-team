@@ -182,7 +182,7 @@ Agents consult only the sources relevant to their role. Trust levels apply:
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! Please feel free to submit a Pull Request. [CONTRIBUTING](./CONTRIBUTING.md) for detailed guidelines on commit message formatting, branching strategy, and code standards.
 
 ## 📄 License
 
@@ -191,24 +191,3 @@ This project is licensed under the MIT License.
 ## 💬 Support
 
 If you encounter any issues or have questions, please [open an issue](https://github.com/mubaidr/gem-team/issues) on GitHub.
-
----
-
-## 📋 Changelog
-
-### 1.6.0 (April 8, 2026)
-
-**New:**
-
-- Mobile agents — build, design, and test iOS/Android apps with gem-implementer-mobile, gem-designer-mobile, gem-mobile-tester
-
-**Improved:**
-
-- Concise agent descriptions — one-liners that quickly communicate what each agent does
-- Unified agent table — clean overview of all 15 agents with roles and outputs
-
-### 1.5.4
-
-**Bug Fixes:**
-
-- Fixed AGENTS.md pattern extraction logic for semantic search integration
