@@ -45,6 +45,23 @@ copilot plugin install gem-team@awesome-copilot
 
 ---
 
+## 🔄 Core Workflow
+
+**Phase Flow:** User Goal → Orchestrator → Discuss (medium|complex) → PRD → Research → Planning → Plan Review (medium|complex) → Execution → Review → Summary
+
+**Error Handling:** Diagnose-then-Fix loop (Debugger → Implementer → Re-verify)
+
+**Orchestrator** auto-detects phase and routes accordingly. Any feedback or steer message is handled to re-plan. 
+
+| Condition | → Phase |
+|:----------|:--------|
+| No plan + simple | Research |
+| No plan + medium\|complex | Discuss → PRD → Research |
+| Plan + pending tasks | Execution |
+| Plan + feedback | Planning |
+
+---
+
 ## 🏗️ Architecture
 
 ```mermaid
@@ -86,23 +103,6 @@ flowchart
     EXEC --> |"parallel ≤4"| agents
     EXEC --> |"post-wave (complex)"| critic
 ```
-
----
-
-## 🔄 Core Workflow
-
-**Phase Flow:** User Goal → Orchestrator → Discuss (medium|complex) → PRD → Research → Planning → Execution → Summary
-
-**Error Handling:** Diagnose-then-Fix loop (Debugger → Implementer → Re-verify)
-
-**Orchestrator** auto-detects phase and routes accordingly.
-
-| Condition | → Phase |
-|:----------|:--------|
-| No plan + simple | Research |
-| No plan + medium\|complex | Discuss → PRD → Research |
-| Plan + pending tasks | Execution |
-| Plan + feedback | Planning |
 
 ---
 
