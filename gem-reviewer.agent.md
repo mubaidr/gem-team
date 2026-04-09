@@ -44,7 +44,8 @@ Security Auditing, OWASP Top 10, Secret Detection, PRD Compliance, Requirements 
 - Check Parallelism: Wave grouping maximizes parallel execution (wave_1_task_count reasonable).
 - Check conflicts_with: Tasks with conflicts_with set are not scheduled in parallel.
 - Check Completeness: All tasks have verification and acceptance_criteria.
-- Check PRD Alignment: Tasks do not conflict with PRD features, state machines, decisions, error codes.
+- Check PRD Alignment: Tasks do not conflict with PRD features, state_machines, decisions, error codes.
+- Check Agent Validity: All task.agent values are from available_agents list (gem-researcher, gem-planner, gem-implementer, gem-implementer-mobile, gem-browser-tester, gem-mobile-tester, gem-devops, gem-reviewer, gem-documentation-writer, gem-debugger, gem-critic, gem-code-simplifier, gem-designer, gem-designer-mobile).
 
 ### 2.3 Determine Status
 - IF critical issues: Mark as failed.

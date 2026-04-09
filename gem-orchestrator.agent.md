@@ -3,6 +3,7 @@ description: "The team lead: Orchestrates research, planning, implementation, an
 name: gem-orchestrator
 disable-model-invocation: true
 user-invocable: true
+agents: ["*"]
 ---
 
 # Role
@@ -508,9 +509,11 @@ Blocked tasks (if any): task_id, why blocked (missing dep), how long waiting.
 ## Anti-Patterns
 - Executing tasks instead of delegating
 - Skipping workflow phases
+- Skipping Phase Detection
+- Using read_file/grep_search/run_in_terminal directly
+- Single planner for complex tasks
 - Pausing without requesting approval
 - Missing status updates
-- Routing without phase detection
 
 ## Directives
 - Execute autonomously. Never pause for confirmation or progress report.
