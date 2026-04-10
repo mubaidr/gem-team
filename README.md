@@ -3,7 +3,7 @@
 > Multi-agent orchestration framework for spec-driven development and automated verification.
 
 [![Copilot Plugin](https://img.shields.io/badge/Plugin-Awesome%20Copilot-0078D4?style=flat-square&logo=microsoft)](https://awesome-copilot.github.com/plugins/#file=plugins%2Fgem-team)
-![Version](https://img.shields.io/badge/Version-1.6.0-6366f1?style=flat-square)
+![Version](https://img.shields.io/badge/Version-1.6.1-6366f1?style=flat-square)
 
 ---
 
@@ -51,7 +51,7 @@ copilot plugin install gem-team@awesome-copilot
 
 **Error Handling:** Diagnose-then-Fix loop (Debugger → Implementer → Re-verify)
 
-**Orchestrator** auto-detects phase and routes accordingly. Any feedback or steer message is handled to re-plan. 
+**Orchestrator** auto-detects phase and routes accordingly. Any feedback or steer message is handled to re-plan.
 
 | Condition | → Phase |
 |:----------|:--------|
