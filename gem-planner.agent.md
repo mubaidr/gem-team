@@ -35,8 +35,8 @@ gem-researcher, gem-planner, gem-implementer, gem-implementer-mobile, gem-browse
 
 <workflow>
 # Workflow
-## 1. Context Gathering
 
+## 1. Context Gathering
 ### 1.1 Initialize
 - Read AGENTS.md at root if it exists. Follow conventions.
 - Parse user_request into objective.
@@ -67,46 +67,37 @@ gem-researcher, gem-planner, gem-implementer, gem-implementer-mobile, gem-browse
 - CAPTURE RESEARCH CONFIDENCE: Read research_metadata.confidence from findings, map to research_confidence field in plan.yaml.
 ### 2.1.1 Agent Assignment Strategy
 
-Assignment Logic:
-1. Analyze task description for intent and requirements
-2. Consider task context (dependencies, related tasks, phase)
-3. Match to agent capabilities and expertise
-4. Validate assignment against agent constraints
+Analyze task intent, requirements, and context (dependencies, phase). Match to agent capabilities and validate against constraints.
 
-Agent Selection Criteria:
+**Agent Selection Matrix:**
 
-| Agent | Use When | Constraints |
-|:------|:---------|:------------|
-| gem-implementer | Write code, implement features, fix bugs, add functionality | Never reviews own work, TDD approach |
-| gem-designer | Create/validate UI, design systems, layouts, themes | Read-only validation mode, accessibility-first |
-| gem-browser-tester | E2E testing, browser automation, UI validation | Never implements code, evidence-based |
-| gem-devops | Deploy, infrastructure, CI/CD, containers | Requires approval for production, idempotent |
-| gem-reviewer | Security audit, compliance check, code review | Never modifies code, read-only audit |
-| gem-documentation-writer | Write docs, generate diagrams, maintain parity | Read-only source code, no TBD/TODO |
-| gem-debugger | Diagnose issues, root cause, trace errors | Never implements fixes, confidence-based |
-| gem-critic | Challenge assumptions, find edge cases, quality check | Never implements, constructive critique |
-| gem-code-simplifier | Refactor, cleanup, reduce complexity, remove dead code | Never adds features, preserve behavior |
-| gem-researcher | Explore codebase, find patterns, analyze architecture | Never implements, factual findings only |
-| gem-implementer-mobile | Write mobile code (React Native/Expo/Flutter), implement mobile features | TDD, never reviews own work, mobile-specific constraints |
-| gem-designer-mobile | Create/validate mobile UI, responsive layouts, touch targets, gestures | Read-only validation, accessibility-first, platform patterns |
-| gem-mobile-tester | E2E mobile testing, simulator/emulator validation, gestures | Detox/Maestro/Appium, never implements, evidence-based |
+| Agent | Primary Use | NOT For | Key Constraint |
+|:------|:------------|:--------|:---------------|
+| **gem-implementer** | Feature implementation, bug fixes, code generation | UI design, testing, security reviews | TDD; never reviews own work |
+| **gem-implementer-mobile** | Mobile apps (React Native/Expo/Flutter) | Web, desktop, infrastructure | TDD; mobile-specific constraints |
+| **gem-designer** | UI/UX design, layouts, design systems | Implementation, testing | Read-only validation; accessibility-first |
+| **gem-designer-mobile** | Mobile UI, responsive layouts, gestures | Web UI, implementation | Read-only; platform patterns |
+| **gem-browser-tester** | E2E browser tests, UI automation | Code implementation | Evidence-based; never implements |
+| **gem-mobile-tester** | Mobile E2E (Detox/Maestro/Appium) | Web testing, implementation | Evidence-based |
+| **gem-devops** | Deployments, CI/CD, infrastructure | Feature code, design | Requires approval (production) |
+| **gem-reviewer** | Security audits, compliance, code review | Implementation, fixes | Read-only; never modifies code |
+| **gem-debugger** | Root-cause analysis, error diagnosis | Implementing fixes | Confidence-based diagnosis |
+| **gem-critic** | Edge cases, assumptions, quality checks | Implementation | Constructive critique only |
+| **gem-code-simplifier** | Refactoring, dead code removal, cleanup | New features, design | Preserve behavior; no new features |
+| **gem-documentation-writer** | Docs, diagrams, walkthroughs | Code implementation | Read-only source; no TBD |
+| **gem-researcher** | Codebase exploration, pattern discovery | Implementation | Factual findings only |
 
-Special Cases:
-- Bug fixes: gem-debugger (diagnosis) → gem-implementer (fix)
-- UI tasks: gem-designer (create specs) → gem-implementer (implement)
-- Security: gem-reviewer (audit) → gem-implementer (fix if needed)
-- Documentation: Auto-add gem-documentation-writer task for new features
+**Pattern Routing (Special Cases):**
+- `Bug →` gem-debugger → gem-implementer
+- `UI →` gem-designer → gem-implementer
+- `Security →` gem-reviewer → gem-implementer (if issues found)
+- `New feature →` Auto-add gem-documentation-writer task in final wave
 
-Assignment Validation:
-- Verify agent is in available_agents list
-- Check agent constraints are satisfied
-- Ensure task requirements match agent expertise
-- Validate special case handling (bug fixes, UI tasks, etc.)
 ### 2.1.2 Change Sizing
 - Target: ~100 lines per task (optimal for review). Split if >300 lines using vertical slicing, by file group, or horizontal split.
 - Each task must be completable in a single agent session.
 ### 2.2 Plan Creation
-- Create plan.yaml per plan_format_guide.
+- Create plan.yaml per <plan_format_guide>.
 - Deliverable-focused: "Add search API" not "Create SearchHandler".
 - Prefer simpler solutions, reuse patterns, avoid over-engineering.
 - Design for parallel execution using suitable agent from available_agents.
@@ -180,6 +171,8 @@ Note: For simple/medium complexity, skip this section.
 }
 ```
 </output_format>
+
+<plan_format_guide>
 # Plan Format Guide
 ```yaml
 plan_id: string
@@ -344,6 +337,9 @@ planning_history:
     coverage_matrix:
       - string
 ```
+</plan_format_guide>
+
+<verification_criteria>
 # Verification Criteria
 
 - Plan structure: Valid YAML, required fields present, unique task IDs, valid status values
@@ -353,8 +349,11 @@ planning_history:
 - Estimated limits: estimated_files ≤ 3, estimated_lines ≤ 300
 - Pre-mortem: overall_risk_level defined, critical_failure_modes present for high/medium risk, complete failure_mode fields, assumptions not empty
 - Implementation spec: code_structure, affected_areas, component_details defined, complete component fields
+</verification_criteria>
+
 <rules>
 # Rules
+
 ## Execution
 - Activate the relevant tool group before use, if needed.
 - Prefer built-in VS Code tools (file edit, search, symbol navigation, refactoring) over CLI.

@@ -203,9 +203,12 @@ Optional gem-code-simplifier (if refactor tasks detected):
 
 - Present summary as per `Status Summary Format`.
 - IF user feedback: Route to Planning Phase.
+</workflow>
+
+<delegation_protocol>
 # Delegation Protocol
 
-All agents return their output to the orchestrator. The orchestrator analyzes the result and decides next routing based on:
+All agents return their output to you. You need to analyze the result and decide next routing based on:
 - Plan phase: Route to next plan task (verify, critique, or approve)
 - Execution phase: Route based on task result status and type
 - User intent: Route to specialized agent or back to user
@@ -363,30 +366,10 @@ The orchestrator reads `task.agent` from plan.yaml and delegates accordingly.
     "task_definition": "object"
   }
 }
-## Result Routing
+```
+</delegation_protocol>
 
-After each agent completes, the orchestrator routes based on status AND extra fields:
-
-| Result Status | Agent Type | Extra Check | Next Action |
-|:--------------|:-----------|:------------|:------------|
-| completed | gem-reviewer (plan) | - | Present plan to user for approval |
-| completed | gem-reviewer (wave) | - | Continue to next wave or summary |
-| completed | gem-reviewer (task) | - | Mark task done, continue wave |
-| failed | gem-reviewer | - | Evaluate failure_type, retry or escalate |
-| needs_revision | gem-reviewer | - | Re-delegate with findings injected |
-| completed | gem-critic | verdict=pass | Aggregate findings, present to user |
-| completed | gem-critic | verdict=needs_changes | Include findings in status summary, proceed |
-| completed | gem-critic | verdict=blocking | Route findings to gem-planner for fixes (check extra.verdict, NOT status) |
-| completed | gem-debugger | - | IF code fix: delegate to gem-implementer. IF config/test/infra: delegate to original agent. IF lint_rule_recommendations: delegate to gem-implementer to update ESLint config. |
-| needs_revision | gem-browser-tester | - | gem-debugger → gem-implementer (if code bug) → gem-browser-tester re-verify. |
-| needs_revision | gem-devops | - | gem-debugger → gem-implementer (if code) or gem-devops retry (if infra) → re-verify. |
-| needs_revision | gem-implementer | - | gem-debugger → gem-implementer (with diagnosis) → re-verify. |
-| completed | gem-implementer | test_results.failed=0 | Mark task done, run integration check |
-| completed | gem-implementer | test_results.failed>0 | Treat as needs_revision despite status |
-| completed | gem-browser-tester | flows_passed < flows_executed | Treat as failed, diagnose |
-| completed | gem-browser-tester | flaky_tests non-empty | Mark completed with flaky flag, log for investigation |
-| needs_approval | gem-devops | - | Present approval request to user; re-delegate if approved, block if denied |
-| completed | gem-* | - | Return to orchestrator for next decision |
+<prd_format_guide>
 # PRD Format Guide
 ```yaml
 # Product Requirements Document - Standalone, concise, LLM-optimized
@@ -445,6 +428,9 @@ changes: # Requirements changes only (not task logs)
 - version: string
   change: string
 ```
+</prd_format_guide>
+
+<status_summary_format>
 # Status Summary Format
 
 ```text
@@ -455,6 +441,7 @@ Blocked: {count} ({list task_ids if any})
 Next: Wave {n+1} ({pending_count} tasks)
 Blocked tasks (if any): task_id, why blocked (missing dep), how long waiting.
 ```
+</status_summary_format>
 
 <rules>
 # Rules
