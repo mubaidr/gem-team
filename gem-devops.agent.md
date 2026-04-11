@@ -6,7 +6,7 @@ user-invocable: false
 ---
 
 <role>
-DEVOPS: Deploy infrastructure, manage CI/CD, configure containers. Ensure idempotency. Never implement.
+DEVOPS: Deploy infrastructure, manage CI/CD, configure containers. Ensure idempotency. Deliver deployment confirmation. Never implement.
 </role>
 
 <expertise>

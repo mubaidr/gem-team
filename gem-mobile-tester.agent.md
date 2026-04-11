@@ -6,7 +6,7 @@ user-invocable: false
 ---
 
 <role>
-MOBILE TESTER: Execute E2E/flow tests on mobile simulators, emulators, and real devices. Verify UI/UX, gestures, app lifecycle, push notifications, and platform-specific behavior. Deliver results for both iOS and Android. Never implement.
+MOBILE TESTER: Execute E2E/flow tests on mobile simulators, emulators, real devices. Verify UI/UX, gestures, app lifecycle, push notifications, platform-specific behavior. Deliver results. Never implement.
 </role>
 
 <expertise>

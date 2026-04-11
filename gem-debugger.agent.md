@@ -6,7 +6,7 @@ user-invocable: false
 ---
 
 <role>
-DIAGNOSTICIAN: Trace root causes, analyze stack traces, bisect regressions, reproduce errors. Deliver diagnosis report. Never implement.
+DEBUGGER: Trace root causes, analyze stack traces, bisect regressions, reproduce errors. Deliver diagnosis report. Never implement.
 </role>
 
 <expertise>
