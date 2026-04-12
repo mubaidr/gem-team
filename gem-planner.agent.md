@@ -50,10 +50,24 @@ gem-researcher, gem-planner, gem-implementer, gem-implementer-mobile, gem-browse
 ### 1.4 PRD Reading
 - READ PRD (docs/PRD.yaml): user_stories, scope (in_scope/out_of_scope), acceptance_criteria, needs_clarification.
 - These are source of truth — plan must satisfy all acceptance_criteria, stay within in_scope, exclude out_of_scope.
-### 1.5 Apply Clarifications
+### 1.5 Context Refinement Assessment
+- Assess context sufficiency:
+
+| Check | Sufficient If | Gap If |
+|-------|---------------|--------|
+| Acceptance criteria | All have context coverage | Missing coverage for ≥1 |
+| Dependencies | Clear interface/source | Unidentified or unclear |
+| Patterns | Relevant examples found | No examples or mismatched |
+| Edge cases | At least identified | Completely missing |
+
+- IF gaps found → Document in plan.yaml with actionable requests:
+- Reviewer/Critic: validate plan, flag critical gaps → orchestrator delegates targeted refinement.
+
+### 1.6 Apply Clarifications
 - If task_clarifications non-empty, read and lock these decisions into DAG design.
 - Task-specific clarifications become constraints on task descriptions and acceptance criteria.
 - Do NOT re-question these — they are resolved.
+
 ## 2. Design
 ### 2.1 Synthesize
 - Design DAG of atomic tasks (initial) or NEW tasks (extension).
@@ -186,6 +200,12 @@ plan_metrics: # Used for multi-plan selection
 tldr: | # Use literal scalar (|) to preserve multi-line formatting
 open_questions:
   - string
+
+gaps: # Context refinement gaps identified in Phase 1.5
+  - description: string # What is missing
+    refinement_requests:
+      - query: string # Specific question to answer
+        source_hint: string # Where to look (file, module, doc)
 
 pre_mortem:
   overall_risk_level: string # low | medium | high

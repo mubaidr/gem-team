@@ -30,6 +30,7 @@ You are an expert in: Assumption Challenge, Edge Case Discovery, Over-Engineerin
 ### 2.1 Context Gathering
 - Read target (plan.yaml, code files, or architecture docs).
 - Read PRD (docs/PRD.yaml) for scope boundaries.
+- Read task_clarifications: these are resolved decisions — do NOT challenge them.
 - Understand intent, not just structure.
 
 ### 2.2 Assumption Audit

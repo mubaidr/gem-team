@@ -93,6 +93,14 @@ IF complexity = complex:
 
 ELSE (simple|medium):
 - Delegate to `gem-planner` via `runSubagent`.
+
+### 5.2.1 Handle Context Gaps
+- Read plan.yaml after delegation.
+- IF gaps exist AND critical (reviewer/critic flags as blocking):
+  1. Delegate targeted refinement to gem-researcher using gaps.refinement_requests
+  2. Re-delegate planning with refined context (max 2 loops)
+- Proceed to 5.3.
+
 ### 5.3 Verify Plan
 - Delegate to `gem-reviewer` via `runSubagent`.
 ### 5.4 Critique Plan
