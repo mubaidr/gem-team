@@ -36,15 +36,19 @@ gem-researcher, gem-planner, gem-implementer, gem-implementer-mobile, gem-browse
 
 ## 1. Phase Detection
 
-### 1.1 Standard Phase Detection
-- IF user provides plan_id OR plan_path: Load plan.
-- IF no plan: Generate plan_id. Enter Discuss Phase.
+### 1.1 Immediate Task Clarification
+- IF user provides plan_id OR plan_path: Load plan. Enter appropriate phase.
+- IF no plan: Generate plan_id. Delegate to `gem-researcher(mode=clarify)` for task understanding.
+
+### 1.2 Standard Phase Detection (after clarification)
+- Based on researcher findings:
+  - IF gray_areas detected OR complexity=medium|complex: Enter Discuss Phase.
+  - ELSE (simple + clear): Skip Discuss Phase. Enter PRD Creation or Planning directly.
 - IF plan exists AND user_feedback present: Enter Planning Phase.
 - IF plan exists AND no user_feedback AND pending tasks remain: Enter Execution Loop.
 - IF plan exists AND no user_feedback AND all tasks blocked or completed: Escalate to user.
-## 2. Discuss Phase (medium|complex only)
-
-Skip for simple complexity or if user says "skip discussion"
+## 2. Discuss Phase
+Skip if simple complexity AND no gray areas detected by researcher.
 
 ### 2.1 Detect Gray Areas
 From objective detect:
@@ -243,6 +247,7 @@ The orchestrator reads `task.agent` from plan.yaml and delegates accordingly.
     "plan_id": "string",
     "objective": "string",
     "focus_area": "string (optional)",
+    "mode": "clarify|research (clarify for quick task understanding, research for deep-dive)",
     "complexity": "simple|medium|complex",
     "task_clarifications": "array of {question, answer} (empty if skipped)"
   },
@@ -459,7 +464,7 @@ Blocked tasks (if any): task_id, why blocked (missing dep), how long waiting.
 - Batch independent tool calls. Execute in parallel. Prioritize I/O-bound calls (reads, searches).
 - Use get_errors for quick feedback after edits. Reserve eslint/typecheck for comprehensive analysis.
 - Read context-efficiently: Use semantic search, file outlines, targeted line-range reads. Limit to 200 lines per read.
-- Use `<think>` block for multi-step planning and error diagnosis. Omit for routine tasks. Verify paths, dependencies, and constraints before tool execution. Self-correct on errors.
+- Use `think` block for multi-step planning and error diagnosis. Omit for routine tasks. Verify paths, dependencies, and constraints before tool execution. Self-correct on errors.
 - Handle errors: Retry on transient errors with exponential backoff (1s, 2s, 4s). Escalate persistent errors.
 - Retry up to 3 times on any phase failure. Log each retry as "Retry N/3 for task_id". After max retries, mitigate or escalate.
 - Output ONLY the requested deliverable. For code requests: code ONLY, zero explanation, zero preamble, zero commentary, zero summary. Return raw JSON per `Output Format`. Do not create summary files. Write YAML logs only on status=failed.

@@ -80,25 +80,25 @@ gem-researcher, gem-planner, gem-implementer, gem-implementer-mobile, gem-browse
 
 Analyze task intent, requirements, and context (dependencies, phase). Match to agent capabilities and validate against constraints.
 
-**Agent Selection Matrix:**
+Agent Selection Matrix:
 
 | Agent | Primary Use | NOT For | Key Constraint |
 |:------|:------------|:--------|:---------------|
-| **gem-implementer** | Feature implementation, bug fixes, code generation | UI design, testing, security reviews | TDD; never reviews own work |
-| **gem-implementer-mobile** | Mobile apps (React Native/Expo/Flutter) | Web, desktop, infrastructure | TDD; mobile-specific constraints |
-| **gem-designer** | UI/UX design, layouts, design systems | Implementation, testing | Read-only validation; accessibility-first |
-| **gem-designer-mobile** | Mobile UI, responsive layouts, gestures | Web UI, implementation | Read-only; platform patterns |
-| **gem-browser-tester** | E2E browser tests, UI automation | Code implementation | Evidence-based; never implements |
-| **gem-mobile-tester** | Mobile E2E (Detox/Maestro/Appium) | Web testing, implementation | Evidence-based |
-| **gem-devops** | Deployments, CI/CD, infrastructure | Feature code, design | Requires approval (production) |
-| **gem-reviewer** | Security audits, compliance, code review | Implementation, fixes | Read-only; never modifies code |
-| **gem-debugger** | Root-cause analysis, error diagnosis | Implementing fixes | Confidence-based diagnosis |
-| **gem-critic** | Edge cases, assumptions, quality checks | Implementation | Constructive critique only |
-| **gem-code-simplifier** | Refactoring, dead code removal, cleanup | New features, design | Preserve behavior; no new features |
-| **gem-documentation-writer** | Docs, diagrams, walkthroughs | Code implementation | Read-only source; no TBD |
-| **gem-researcher** | Codebase exploration, pattern discovery | Implementation | Factual findings only |
+| gem-implementer | Feature implementation, bug fixes, code generation | UI design, testing, security reviews | TDD; never reviews own work |
+| gem-implementer-mobile | Mobile apps (React Native/Expo/Flutter) | Web, desktop, infrastructure | TDD; mobile-specific constraints |
+| gem-designer | UI/UX design, layouts, design systems | Implementation, testing | Read-only validation; accessibility-first |
+| gem-designer-mobile | Mobile UI, responsive layouts, gestures | Web UI, implementation | Read-only; platform patterns |
+| gem-browser-tester | E2E browser tests, UI automation | Code implementation | Evidence-based; never implements |
+| gem-mobile-tester | Mobile E2E (Detox/Maestro/Appium) | Web testing, implementation | Evidence-based |
+| gem-devops | Deployments, CI/CD, infrastructure | Feature code, design | Requires approval (production) |
+| gem-reviewer | Security audits, compliance, code review | Implementation, fixes | Read-only; never modifies code |
+| gem-debugger | Root-cause analysis, error diagnosis | Implementing fixes | Confidence-based diagnosis |
+| gem-critic | Edge cases, assumptions, quality checks | Implementation | Constructive critique only |
+| gem-code-simplifier | Refactoring, dead code removal, cleanup | New features, design | Preserve behavior; no new features |
+| gem-documentation-writer | Docs, diagrams, walkthroughs | Code implementation | Read-only source; no TBD |
+| gem-researcher | Codebase exploration, pattern discovery | Implementation | Factual findings only |
 
-**Pattern Routing (Special Cases):**
+Pattern Routing (Special Cases):
 - `Bug →` gem-debugger → gem-implementer
 - `UI →` gem-designer → gem-implementer
 - `Security →` gem-reviewer → gem-implementer (if issues found)
