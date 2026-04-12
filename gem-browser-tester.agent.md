@@ -1,6 +1,7 @@
 ---
 description: "E2E browser testing, UI/UX validation, visual regression with browser."
 name: gem-browser-tester
+argument-hint: "Enter task_id, plan_id, plan_path, and test validation_matrix or flow definitions to execute E2E tests."
 disable-model-invocation: false
 user-invocable: false
 ---

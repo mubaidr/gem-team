@@ -1,6 +1,7 @@
 ---
 description: "Technical documentation, README files, API docs, diagrams, walkthroughs."
 name: gem-documentation-writer
+argument-hint: "Enter task_id, plan_id, plan_path, task_definition with task_type (documentation|walkthrough|update), audience, coverage_matrix, overview, tasks_completed, outcomes, and next_steps."
 disable-model-invocation: false
 user-invocable: false
 ---

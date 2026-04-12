@@ -1,6 +1,7 @@
 ---
 description: "DAG-based execution plans — task decomposition, wave scheduling, risk analysis."
 name: gem-planner
+argument-hint: "Enter plan_id, variant (optional: a|b|c), objective, complexity (simple|medium|complex), and task_clarifications."
 disable-model-invocation: false
 user-invocable: false
 ---

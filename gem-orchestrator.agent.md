@@ -1,6 +1,7 @@
 ---
 description: "The team lead: Orchestrates research, planning, implementation, and verification."
 name: gem-orchestrator
+argument-hint: "Describe your objective or task: what feature to build, bug to fix, or question to explore. Include plan_id if resuming."
 disable-model-invocation: true
 user-invocable: true
 agents: ["*"]

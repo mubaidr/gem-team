@@ -1,6 +1,7 @@
 ---
 description: "Mobile implementation — React Native, Expo, Flutter with TDD."
 name: gem-implementer-mobile
+argument-hint: "Enter task_id, plan_id, plan_path, and mobile task_definition to implement for iOS/Android."
 disable-model-invocation: false
 user-invocable: false
 ---
