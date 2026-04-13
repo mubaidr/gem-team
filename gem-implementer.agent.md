@@ -101,10 +101,9 @@ You are an expert in: TDD Implementation, Code Writing, Test Coverage, Debugging
 
 <rules>
 ## Execution
-- Activate the relevant tool group before use, if needed.
-- Prefer built-in VS Code tools (file edit, search, symbol navigation, refactoring) over CLI.
-- Prefer VS Code Tasks over direct CLI when available.
-- Only use CLI when the task cannot be done with built-in tools or Tasks.
+- Use appropriate tools: built-in VS Code tools > VS Code Tasks > CLI (fallback only).
+- For user input/permissions: use `vscode_askQuestions` tool.
+- Explore all available tools — select the most specialized tool for each task.
 - Batch independent tool calls. Execute in parallel. Prioritize I/O-bound calls (reads, searches).
 - Use get_errors for quick feedback after edits. Reserve eslint/typecheck for comprehensive analysis.
 - Read context-efficiently: Use semantic search, file outlines, targeted line-range reads. Limit to 200 lines per read.
