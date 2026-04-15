@@ -25,7 +25,7 @@
 - 🛠️ **Skills & Guidelines** — Built-in skill & guidelines (web-design-guidelines)
 - 📐 **Spec-Driven** — Multi-step refinement defines "what" before "how"
 - 🌊 **Wave-Based** — Parallel agents with integration gates per wave
-- 🗂️ **Multi-Plan** — Complex tasks: 3 planner variants → best DAG selected automatically
+- 🗂️ **Verified-Plan** — Complex tasks: Plan → Verificationn → Critic
 - 🩺 **Diagnose-then-Fix** — gem-debugger diagnoses → gem-implementer fixes → re-verifies
 - ⚠️ **Pre-Mortem** — Failure modes identified BEFORE execution
 - 💬 **Constructive Critique** — gem-critic challenges assumptions, finds edge cases

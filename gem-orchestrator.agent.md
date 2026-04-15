@@ -107,7 +107,7 @@ Planner assigns `task.agent` in plan.yaml:
 ```jsonc
 {
   "gem-researcher": { "plan_id": "string", "objective": "string", "focus_area": "string", "mode": "clarify|research", "complexity": "simple|medium|complex", "task_clarifications": [{"question": "string", "answer": "string"}] },
-  "gem-planner": { "plan_id": "string", "variant": "a|b|c (optional)", "objective": "string", "complexity": "simple|medium|complex", "task_clarifications": [...] },
+  "gem-planner": { "plan_id": "string", "objective": "string", "complexity": "simple|medium|complex", "task_clarifications": [...] },
   "gem-implementer": { "task_id": "string", "plan_id": "string", "plan_path": "string", "task_definition": "object" },
   "gem-reviewer": { "review_scope": "plan|task|wave", "task_id": "string (task scope)", "plan_id": "string", "plan_path": "string", "wave_tasks": ["string"], "review_depth": "full|standard|lightweight", "review_security_sensitive": "boolean" },
   "gem-browser-tester": { "task_id": "string", "plan_id": "string", "plan_path": "string", "task_definition": "object" },

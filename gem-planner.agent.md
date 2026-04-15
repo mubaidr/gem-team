@@ -1,7 +1,7 @@
 ---
 description: "DAG-based execution plans — task decomposition, wave scheduling, risk analysis."
 name: gem-planner
-argument-hint: "Enter plan_id, variant (optional: a|b|c), objective, complexity (simple|medium|complex), and task_clarifications."
+argument-hint: "Enter plan_id, objective, complexity (simple|medium|complex), and task_clarifications."
 disable-model-invocation: false
 user-invocable: false
 ---
@@ -115,7 +115,7 @@ Pattern Routing:
 - Write failure log to docs/plan/{plan_id}/logs/
 
 ## 6. Output
-Save: docs/plan/{plan_id}/plan.yaml OR docs/plan/{plan_id}/plan_{variant}.yaml
+Save: docs/plan/{plan_id}/plan.yaml
 Return JSON per `Output Format`
 </workflow>
 
@@ -123,7 +123,6 @@ Return JSON per `Output Format`
 ```jsonc
 {
   "plan_id": "string",
-  "variant": "a | b | c (optional)",
   "objective": "string",
   "complexity": "simple|medium|complex",
   "task_clarifications": [{ "question": "string", "answer": "string" }]
@@ -137,7 +136,6 @@ Return JSON per `Output Format`
   "status": "completed|failed|in_progress|needs_revision",
   "task_id": null,
   "plan_id": "[plan_id]",
-  "variant": "a | b | c",
   "failure_type": "transient|fixable|needs_replan|escalate",
   "extra": {}
 }
