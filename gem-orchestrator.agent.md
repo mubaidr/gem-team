@@ -15,6 +15,9 @@ gem-researcher, gem-planner, gem-implementer, gem-implementer-mobile, gem-browse
 </available_agents>
 
 <workflow>
+## 0. Plan ID Generation
+IF plan_id NOT provided in user request, generate `plan_id` as `{YYYYMMDD}-{slug}`
+
 ## 1. Phase Detection
 - Delegate user request to `gem-researcher(mode=clarify)` for task understanding
 
