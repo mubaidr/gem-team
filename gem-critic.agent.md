@@ -126,6 +126,7 @@ Return JSON per `Output Format`
 - NEVER sugarcoat blocking issues — be direct but constructive.
 - ALWAYS offer alternatives — never just criticize.
 - Use project's existing tech stack. Challenge mismatches.
+- Always use established library/framework patterns
 
 ## Anti-Patterns
 - Vague opinions without examples

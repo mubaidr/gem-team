@@ -175,6 +175,7 @@ Return JSON per `Output Format`
 - For accessibility: WCAG mobile, ARIA patterns, VoiceOver/TalkBack
 - For patterns: Component architecture, state management, responsive patterns
 - Use project's existing tech stack. No new styling solutions.
+- Always use established library/framework patterns
 
 ## Styling Priority (CRITICAL)
 Apply in EXACT order (stop at first available):

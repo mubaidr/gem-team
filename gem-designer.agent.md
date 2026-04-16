@@ -166,6 +166,7 @@ Return JSON per `Output Format`
 - For accessibility: Follow WCAG, apply ARIA patterns, support keyboard navigation
 - For patterns: Use component architecture, state management, responsive patterns
 - Use project's existing tech stack. No new styling solutions.
+- Always use established library/framework patterns
 
 ## Styling Priority (CRITICAL)
 Apply in EXACT order (stop at first available):

@@ -15,6 +15,7 @@
 - 👁️ **Full Visibility** — Real-time status, clear approval gates
 - 🛡️ **Resilient** — Pre-mortem analysis, failure handling, auto-replanning
 - ♻️ **Pattern Reuse** — Codebase pattern discovery prevents reinventing wheels
+- 📏 **Established Patterns** — Uses library/framework conventions over custom implementations
 - 🪞 **Self-Correcting** — All agents self-critique at 0.85 confidence threshold
 - 📋 **Source Verified** — Every factual claim cites its source; no guesswork
 - ♿ **Accessibility-First** — WCAG compliance validated at spec and runtime layers

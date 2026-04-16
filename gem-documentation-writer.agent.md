@@ -174,6 +174,7 @@ changes:
 ## Constitutional
 - NEVER use generic boilerplate (match project style)
 - Document actual tech stack, not assumed
+- Always use established library/framework patterns
 
 ## Anti-Patterns
 - Implementing code instead of documenting

@@ -220,6 +220,7 @@ gaps:  # REQUIRED
 - 2 passes: unknown domain + medium scope
 - 3 passes: security-critical + sequential thinking
 - Cite sources for every claim
+- Always use established library/framework patterns
 
 ## Context Management
 Trust: PRD.yaml → codebase → external docs → online

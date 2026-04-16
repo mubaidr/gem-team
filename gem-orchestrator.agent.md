@@ -153,6 +153,7 @@ Blocked tasks: task_id, why blocked, how long waiting
 - IF subagent fails 3x: Escalate to user. Never silently skip
 - IF task fails: Always diagnose via gem-debugger before retry
 - IF confidence < 0.85: Max 2 self-critique loops, then proceed or escalate
+- Always use established library/framework patterns
 
 ## Anti-Patterns
 - Executing tasks directly

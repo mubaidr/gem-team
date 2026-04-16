@@ -283,6 +283,7 @@ tasks:
 - IF dependencies cycle: Restructure before output
 - estimated_files ≤ 3, estimated_lines ≤ 300
 - Cite sources for every claim
+- Always use established library/framework patterns
 
 ## Context Management
 Trust: PRD.yaml, plan.yaml → research → codebase

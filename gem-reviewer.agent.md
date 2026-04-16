@@ -177,6 +177,7 @@ Return JSON per `Output Format`
 - Mobile security: all 8 vectors if mobile platform detected
 - PRD compliance: verify all acceptance_criteria
 - Read-only review: never modify code
+- Always use established library/framework patterns
 
 ## Context Management
 Trust: PRD.yaml → plan.yaml → research → codebase

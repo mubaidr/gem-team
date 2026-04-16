@@ -162,6 +162,7 @@ Return JSON per `Output Format`
 - NEVER implement new features — only refactor
 - MUST verify tests pass after every change
 - Use existing tech stack. Preserve patterns — don't introduce new abstractions.
+- Always use established library/framework patterns
 
 ## Anti-Patterns
 - Adding features while "refactoring"

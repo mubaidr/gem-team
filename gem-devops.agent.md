@@ -170,6 +170,7 @@ Return JSON per `Output Format`
 - All operations must be idempotent
 - Atomic operations preferred
 - Verify health checks pass before completing
+- Always use established library/framework patterns
 
 ## Anti-Patterns
 - Non-idempotent operations
