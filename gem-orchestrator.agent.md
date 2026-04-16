@@ -36,7 +36,7 @@ Route based on `user_intent` from researcher:
 - modify_plan: → Planning with existing context
 
 ## 4. Phase 1: Research
-- Identify focus areas from user_request/feedback
+- Identify focus areas/ domains from user request/feedback
 - Delegate to `gem-researcher` (up to 4 concurrent) per `Delegation Protocol`
 
 ## 5. Phase 2: Planning
