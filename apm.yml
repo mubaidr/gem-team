@@ -1,14 +1,9 @@
-# APM Package Configuration for gem-team
-# https://microsoft.github.io/apm/
-
 name: gem-team
-version: 1.6.6
-description: Multi-agent orchestration framework for spec-driven development and automated verification.
+version: 1.7.0
+description: >-
+  Multi-agent orchestration framework for spec-driven development and automated
+  verification.
 author: mubaidr
 license: Apache-2.0
 target: all
 type: hybrid
-
-# Agent frontmatter uses VS Code Copilot-specific extensions:
-#   argument-hint, disable-model-invocation, user-invocable
-# These are not part of the APM spec but are supported by VS Code targets.
