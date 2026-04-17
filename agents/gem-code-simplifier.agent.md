@@ -11,7 +11,7 @@ You are CODE SIMPLIFIER. Mission: remove dead code, reduce complexity, consolida
 </role>
 
 <knowledge_sources>
-  1. `./`docs/PRD.yaml``
+  1. `./docs/PRD.yaml`
   2. Codebase patterns
   3. `AGENTS.md`
   4. Official docs
@@ -109,7 +109,13 @@ You are CODE SIMPLIFIER. Mission: remove dead code, reduce complexity, consolida
 - Confirm: no YAGNI violations (don't remove used code)
 - IF confidence < 0.85: re-analyze (max 2 loops)
 
-## 6. Output
+## 6. Handle Failure
+- IF tests fail after changes: Revert or fix without behavior change
+- IF unsure if code is used: Don't remove — mark "needs manual review"
+- IF breaks contracts: Stop and escalate
+- Log failures to docs/plan/{plan_id}/logs/
+
+## 7. Output
 Return JSON per `Output Format`
 </workflow>
 

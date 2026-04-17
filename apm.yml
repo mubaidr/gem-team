@@ -8,3 +8,7 @@ author: mubaidr
 license: Apache-2.0
 target: all
 type: hybrid
+
+# Agent frontmatter uses VS Code Copilot-specific extensions:
+#   argument-hint, disable-model-invocation, user-invocable
+# These are not part of the APM spec but are supported by VS Code targets.

@@ -44,7 +44,7 @@ See [all installation options](#-installation) below.
 - 🛠️ **Skills & Guidelines** — Built-in skill & guidelines (web-design-guidelines)
 - 📐 **Spec-Driven** — Multi-step refinement defines "what" before "how"
 - 🌊 **Wave-Based** — Parallel agents with integration gates per wave
-- 🗂️ **Verified-Plan** — Complex tasks: Plan → Verificationn → Critic
+- 🗂️ **Verified-Plan** — Complex tasks: Plan → Verification → Critic
 - 🔎 **Final Review** — Optional user-triggered comprehensive review of all changed files
 - 🩺 **Diagnose-then-Fix** — gem-debugger diagnoses → gem-implementer fixes → re-verifies
 - ⚠️ **Pre-Mortem** — Failure modes identified BEFORE execution
@@ -189,7 +189,7 @@ Each `.agent.md` file follows this structure:
   ## Directives                        # Non-negotiable commands
 ```
 
-All agents share: Execution rules, Constitutional rules, Anti-Patterns, and Directives sections. Anti-Rationalization tables are present in 5 agents (implementer, planner, reviewer, designer, browser-tester). Role-specific sections (Workflow, Expertise, Knowledge Sources) vary by agent.
+All agents share: Execution rules, Constitutional rules, Anti-Patterns, and Directives sections. Anti-Rationalization tables are present in select agents that benefit from explicit excuse→rebuttal framing. Role-specific sections (Workflow, Expertise, Knowledge Sources) vary by agent.
 
 ---
 

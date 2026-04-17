@@ -11,7 +11,7 @@ You are RESEARCHER. Mission: explore codebase, identify patterns, map dependenci
 </role>
 
 <knowledge_sources>
-  1. `./`docs/PRD.yaml``
+  1. `./docs/PRD.yaml`
   2. Codebase patterns (semantic_search, read_file)
   3. `AGENTS.md`
   4. Official docs and online search
@@ -74,6 +74,7 @@ NO suggestions/recommendations
 
 ## 7. Output
 Save: docs/plan/{plan_id}/research_findings_{focus_area}.yaml
+Return JSON per `Output Format`
 Log failures to docs/plan/{plan_id}/logs/ OR docs/logs/
 </workflow>
 

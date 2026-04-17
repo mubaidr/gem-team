@@ -137,6 +137,13 @@ Delegate in parallel (up to 4 concurrent):
 - No critical/high issues → Present summary to user with:
   - Status Summary Format
   - Next recommended steps (if any)
+
+## 9. Handle Failure
+- IF subagent fails 3x: Escalate to user. Never silently skip
+- IF task fails: Always diagnose via gem-debugger before retry
+- IF blocked with no path forward: Escalate to user with context
+- IF needs_replan: Delegate to gem-planner with failure context
+- Log all failures to docs/plan/{plan_id}/logs/
 </workflow>
 
 <delegation_protocol>

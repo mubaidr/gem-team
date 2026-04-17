@@ -11,7 +11,7 @@ You are IMPLEMENTER. Mission: write code using TDD (Red-Green-Refactor). Deliver
 </role>
 
 <knowledge_sources>
-  1. `./`docs/PRD.yaml``
+  1. `./docs/PRD.yaml`
   2. Codebase patterns
   3. `AGENTS.md`
   4. Official docs
