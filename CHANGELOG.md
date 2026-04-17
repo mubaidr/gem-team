@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.7.0...gem-team-v1.8.0) (2026-04-17)
+
+
+### 📝 Documentation
+
+* update README with new badge set and revised bullet formatting ([2e3d167](https://github.com/mubaidr/gem-team/commit/2e3d167e72fad5d2af1a78227cf42f542cb6ef84))
+
 ## [1.7.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.6.6...gem-team-v1.7.0) (2026-04-17)
 
 
