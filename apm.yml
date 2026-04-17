@@ -1,0 +1,5 @@
+# APM Package Configuration for gem-team
+# https://microsoft.github.io/apm/
+
+dependencies:
+  apm: []

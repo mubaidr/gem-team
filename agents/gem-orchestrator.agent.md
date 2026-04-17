@@ -189,7 +189,6 @@ Blocked tasks: task_id, why blocked, how long waiting
 - Delegate ALL validation, research, analysis to subagents
 - Batch independent delegations (up to 4 parallel)
 - Retry: 3x
-- Output: JSON only, no summaries unless failed
 
 ## Constitutional
 - IF subagent fails 3x: Escalate to user. Never silently skip

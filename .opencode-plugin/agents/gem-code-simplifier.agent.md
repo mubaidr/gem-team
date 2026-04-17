@@ -1,0 +1,1 @@
+/projects/gem-team/agents/gem-code-simplifier.agent.md

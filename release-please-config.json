@@ -2,6 +2,7 @@
     "packages": {
         ".": {
             "release-type": "simple",
+            "versioning": "always-bump-minor",
             "package-name": "gem-team",
             "changelog-sections": [
                 {
@@ -33,7 +34,12 @@
             "extra-files": [
                 "version.txt",
                 "README.md",
-                "plugins/gem-team/.github/plugin/plugin.json"
+                ".github/plugin/plugin.json",
+                "plugin.json",
+                ".cursor-plugin/plugin.json",
+                ".claude-plugin/plugin.json",
+                "awesome-copilot/plugins/gem-team/.github/plugin/plugin.json",
+                "awesome-copilot/plugins/gem-team/README.md"
             ]
         }
     }
