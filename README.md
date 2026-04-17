@@ -4,8 +4,13 @@
 >
 > **"Turning Model Quality into System Quality."**
 
-[![Copilot Plugin](https://img.shields.io/badge/Plugin-Awesome%20Copilot-0078D4?style=flat-square&logo=microsoft)](https://awesome-copilot.github.com/plugins/#file=plugins%2Fgem-team)
 ![Version](https://img.shields.io/badge/Version-1.6.6-6366f1?style=flat-square)
+[![Copilot Plugin](https://img.shields.io/badge/Plugin-Awesome%20Copilot-0078D4?style=flat-square&logo=microsoft)](https://awesome-copilot.github.com/plugins/#file=plugins%2Fgem-team)
+![Code](https://img.shields.io/badge/Code-Supported-brightgreen?style=flat-square)
+![Code Insiders](https://img.shields.io/badge/Code%20Insiders-Supported-blue?style=flat-square)
+![Windsurf](https://img.shields.io/badge/Windsurf-Supported-orange?style=flat-square)
+![Opencode](https://img.shields.io/badge/Opencode-Supported-purple?style=flat-square)
+![Cursor](https://img.shields.io/badge/Cursor-Supported-red?style=flat-square)
 
 ---
 
@@ -52,15 +57,17 @@ Raw reasoning isn't enough in single-pass chat. Gem-Team wraps your preferred LL
 
 | Method | Command / Link |
 |:-------|:---------------|
+| **Code** | **[Install Now](https://aka.ms/awesome-copilot/install/agent?url=vscode%3Achat-agent%2Finstall%3Furl%3Dhttps%253A%252F%252Fraw.githubusercontent.com%252Fgithub%252Fawesome-copilot%252Fmain%252F.%252Fagents)** |
+| **Code Insiders** | **[Install Now](https://aka.ms/awesome-copilot/install/agent?url=vscode-insiders%3Achat-agent%2Finstall%3Furl%3Dhttps%253A%252F%252Fraw.githubusercontent.com%252Fgithub%252Fawesome-copilot%252Fmain%252F.%252Fagents)** |
 | **Copilot CLI** | `copilot plugin install gem-team@awesome-copilot` |
-| **Code** | **[Install Now →](https://aka.ms/awesome-copilot/install/agent?url=vscode%3Achat-agent%2Finstall%3Furl%3Dhttps%253A%252F%252Fraw.githubusercontent.com%252Fgithub%252Fawesome-copilot%252Fmain%252F.%252Fagents)** |
-| **Code Insiders** | **[Install Now →](https://aka.ms/awesome-copilot/install/agent?url=vscode-insiders%3Achat-agent%2Finstall%3Furl%3Dhttps%253A%252F%252Fraw.githubusercontent.com%252Fgithub%252Fawesome-copilot%252Fmain%252F.%252Fagents)** |
+| **APM** | `apm install gem-team@awesome-copilot` |
+| **Manual (Copy `.agent.md` files)** | VS Code: `~/.vscode/agents/` (Linux/macOS), `%USERPROFILE%\.vscode\agents\` (Windows); VS Code Insiders: `~/.vscode-insiders/agents/` (Linux/macOS), `%USERPROFILE%\.vscode-insiders\agents\` (Windows); Cursor: `~/.cursor/agents/` (Linux/macOS), `%USERPROFILE%\.cursor\agents\` (Windows) |
 
 ---
 
 ## 🔄 Core Workflow
 
-**Phase Flow:** User Goal → Orchestrator → Discuss (medium|complex) → PRD → Research → Planning → Plan Review (medium|complex) → Execution → Summary → [Optional] Final Review
+**Phase Flow:** User Goal → Orchestrator → Discuss (medium|complex) → PRD → Research → Planning → Plan Review (medium|complex) → Execution → Summary → (Optional) Final Review
 
 **Error Handling:** Diagnose-then-Fix loop (Debugger → Implementer → Re-verify)
 
