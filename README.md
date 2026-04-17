@@ -2,16 +2,16 @@
 >
 > Multi-agent orchestration framework for spec-driven development and automated verification.
 >
-> **"Turning Model Quality into System Quality."**
+> **Turning Model Quality into System Quality.**
+>
 
-![Version](https://img.shields.io/badge/Version-1.6.6-6366f1?style=flat-square)
-[![Copilot Plugin](https://img.shields.io/badge/Plugin-Awesome%20Copilot-0078D4?style=flat-square&logo=microsoft)](https://awesome-copilot.github.com/plugins/#file=plugins%2Fgem-team)
-![Code](https://img.shields.io/badge/Code-Supported-brightgreen?style=flat-square)
-![Code Insiders](https://img.shields.io/badge/Code%20Insiders-Supported-blue?style=flat-square)
-![Windsurf](https://img.shields.io/badge/Windsurf-Supported-orange?style=flat-square)
-![Opencode](https://img.shields.io/badge/Opencode-Supported-purple?style=flat-square)
-![Claude](https://img.shields.io/badge/Claude%20Code-Supported-black?style=flat-square&logo=anthropic)
-![Cursor](https://img.shields.io/badge/Cursor-Supported-red?style=flat-square)
+![VS Code](https://img.shields.io/badge/VS_Code-007ACC)
+![VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-24bfa5)
+![Copilot CLI](https://img.shields.io/badge/Copilot_CLI-000000)
+![Cursor](https://img.shields.io/badge/Cursor-000000)
+![OpenCode](https://img.shields.io/badge/OpenCode-7C3AED)
+![Claude Code](https://img.shields.io/badge/Claude_Code-D97757)
+![Windsurf](https://img.shields.io/badge/Windsurf-097AE9)
 
 ---
 
@@ -33,7 +33,7 @@ See [all installation options](#-installation) below.
 - ♻️ **Pattern Reuse** — Codebase pattern discovery prevents reinventing wheels
 - 📏 **Established Patterns** — Uses library/framework conventions over custom implementations
 - 🪞 **Self-Correcting** — All agents self-critique at 0.85 confidence threshold
-- 🧠 **Context Scaffolding** — Maps large-scale dependencies *before* the model reads code, preventing context-loss in legacy repos
+- 🧠 **Context Scaffolding** — Maps large-scale dependencies _before_ the model reads code, preventing context-loss in legacy repos
 - ⚖️ **Intent vs. Compliance** — Shifts the burden from writing "perfect prompts" to enforcing strict, YAML-based approval gates
 - 📋 **Source Verified** — Every factual claim cites its source; no guesswork
 - ♿ **Accessibility-First** — WCAG compliance validated at spec and runtime layers
@@ -87,9 +87,9 @@ Raw reasoning isn't enough in single-pass chat. Gem-Team wraps your preferred LL
 |:-------|:---------------|:-----|
 | **Code** | **[Install Now](https://aka.ms/awesome-copilot/install/agent?url=vscode%3Achat-agent%2Finstall%3Furl%3Dhttps%253A%252F%252Fraw.githubusercontent.com%252Fgithub%252Fawesome-copilot%252Fmain%252F.%252Fagents)** | [Copilot Docs](https://docs.github.com/en/copilot/using-github-copilot/using-github-copilot-chat) |
 | **Code Insiders** | **[Install Now](https://aka.ms/awesome-copilot/install/agent?url=vscode-insiders%3Achat-agent%2Finstall%3Furl%3Dhttps%253A%252F%252Fraw.githubusercontent.com%252Fgithub%252Fawesome-copilot%252Fmain%252F.%252Fagents)** | [Copilot Docs](https://docs.github.com/en/copilot/using-github-copilot/using-github-copilot-chat) |
+| **APM <br/> (All AI coding agents)** | `apm install mubaidr/gem-team` | [APM Docs](https://microsoft.github.io/apm/) |
 | **Copilot CLI (Marketplace)** | `copilot plugin install gem-team@awesome-copilot` | [CLI Docs](https://github.com/github/copilot-cli) |
 | **Copilot CLI (Direct)** | `copilot plugin install gem-team@mubaidr` | [CLI Docs](https://github.com/github/copilot-cli) |
-| **APM <br/> (All AI coding agents)** | `apm install mubaidr/gem-team` | [APM Docs](https://microsoft.github.io/apm/) |
 | **Windsurf** | `codeium agent install mubaidr/gem-team` | [Windsurf Docs](https://docs.codeium.com/windsurf) |
 | **Claude Code** | `claude plugin install mubaidr/gem-team` | [Claude Docs](https://docs.anthropic.com/en/docs/claude-code) |
 | **OpenCode** | `opencode plugin install mubaidr/gem-team` | [OpenCode Docs](https://opencode.ai/docs/) |
