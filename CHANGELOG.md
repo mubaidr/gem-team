@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.8.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.7.0...gem-team-v1.8.0) (2026-04-18)
+
+
+### 🛠️ Bug Fixes
+
+* Licence info, use symlink for agents definitins ([7da3aa2](https://github.com/mubaidr/gem-team/commit/7da3aa2af0fda7b264b24f0f66e675357bc72e01))
+* Missing apm config ([af4347c](https://github.com/mubaidr/gem-team/commit/af4347c0126c6b844652de8f761fc07d7267d14e))
+
+
+### 📝 Documentation
+
+* update README with new badge set and revised bullet formatting ([2e3d167](https://github.com/mubaidr/gem-team/commit/2e3d167e72fad5d2af1a78227cf42f542cb6ef84))
+
 ## [1.7.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.6.6...gem-team-v1.7.0) (2026-04-17)
 
 
