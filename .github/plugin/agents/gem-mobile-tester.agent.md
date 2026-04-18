@@ -1,1 +1,0 @@
-../../../agents/gem-mobile-tester.agent.md

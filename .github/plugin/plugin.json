@@ -7,7 +7,7 @@
     "email": "mubaidr@gmail.com",
     "url": "https://github.com/mubaidr"
   },
-  "license": "MIT",
+  "license": "Apache-2.0",
   "repository": "https://github.com/mubaidr/gem-team",
   "keywords": [
     "multi-agent",
