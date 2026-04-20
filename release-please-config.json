@@ -1,34 +1,31 @@
 {
     "packages": {
         ".": {
-            "release-type": "simple",
-            "versioning": "always-bump-minor",
-            "package-name": "gem-team",
             "changelog-sections": [
                 {
-                    "type": "feat",
-                    "section": "\ud83d\ude80 New Agents & Features",
-                    "hidden": false
+                    "hidden": false,
+                    "section": "🚀 New Agents & Features",
+                    "type": "feat"
                 },
                 {
-                    "type": "fix",
-                    "section": "\ud83d\udee0\ufe0f Bug Fixes",
-                    "hidden": false
+                    "hidden": false,
+                    "section": "🛠️ Bug Fixes",
+                    "type": "fix"
                 },
                 {
-                    "type": "perf",
-                    "section": "\u26a1 Performance",
-                    "hidden": false
+                    "hidden": false,
+                    "section": "⚡ Performance",
+                    "type": "perf"
                 },
                 {
-                    "type": "docs",
-                    "section": "\ud83d\udcdd Documentation",
-                    "hidden": false
+                    "hidden": false,
+                    "section": "📝 Documentation",
+                    "type": "docs"
                 },
                 {
-                    "type": "chore",
-                    "section": "\ud83e\uddf9 Housekeeping",
-                    "hidden": true
+                    "hidden": true,
+                    "section": "🧹 Housekeeping",
+                    "type": "chore"
                 }
             ],
             "extra-files": [
@@ -39,9 +36,13 @@
                 "plugin.json",
                 ".cursor-plugin/plugin.json",
                 ".claude-plugin/plugin.json",
+                ".opencode-plugin/plugin.json",
                 "awesome-copilot/plugins/gem-team/.github/plugin/plugin.json",
                 "awesome-copilot/plugins/gem-team/README.md"
-            ]
+            ],
+            "package-name": "gem-team",
+            "release-type": "simple",
+            "versioning": "always-bump-minor"
         }
     }
 }
