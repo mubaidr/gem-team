@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.10.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.9.0...gem-team-v1.10.0) (2026-04-21)
+
+
+### 🛠️ Bug Fixes
+
+* Hanlde plan compleixty correctly ([6b0b1da](https://github.com/mubaidr/gem-team/commit/6b0b1da7a3a0ef0b2c3d590084027f06c1009035))
+
+
+### 📝 Documentation
+
+* Add creative design agent guidelines and README section ([946092d](https://github.com/mubaidr/gem-team/commit/946092d466b3b401f9e6895d64a954c7a5bd22c3))
+* **gem-orchestrator:** renumber workflow phases and add Phase 8 Final Review ([6531019](https://github.com/mubaidr/gem-team/commit/65310192ba2ffa5ed473f698a5a71b5fb9c50ba2))
+
 ## [1.9.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.8.0...gem-team-v1.9.0) (2026-04-20)
 
 
