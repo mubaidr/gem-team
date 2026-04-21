@@ -1,7 +1,7 @@
 ---
 description: "Codebase exploration — patterns, dependencies, architecture discovery."
 name: gem-researcher
-argument-hint: "Enter plan_id, objective, focus_area (optional), complexity (simple|medium|complex), and task_clarifications array."
+argument-hint: "Enter plan_id, objective, focus_area (optional), and task_clarifications array."
 disable-model-invocation: false
 user-invocable: false
 ---
@@ -94,7 +94,6 @@ Log failures to docs/plan/{plan_id}/logs/ OR docs/logs/
   "objective": "string",
   "focus_area": "string",
   "mode": "clarify|research",
-  "complexity": "simple|medium|complex",
   "task_clarifications": [{ "question": "string", "answer": "string" }]
 }
 ```

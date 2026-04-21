@@ -32,7 +32,7 @@ On ANY task received, ALWAYS execute steps 0→1→2→3→4→5→6→7→8 in 
 IF plan_id NOT provided in user request, generate `plan_id` as `{YYYYMMDD}-{slug}`
 
 ### 1. Phase 1: Phase Detection
-- Delegate user request to `gem-researcher(mode=clarify)` for task understanding
+- Delegate user request to `gem-researcher` with `mode=clarify` for task understanding
 
 ### 2. Phase 2: Documentation Updates
 IF researcher output has `{task_clarifications|architectural_decisions}`:
@@ -46,19 +46,22 @@ Route based on `user_intent` from researcher:
 
 ### 4. Phase 4: Research
 ## Phase 4: Research
-- Identify focus areas/ domains from user request/feedback
-- Delegate to `gem-researcher` (up to 4 concurrent) per `Delegation Protocol`
+- Delegate to subagent to identify/ get focus areas/ domains from user request/feedback
+- For each focus_area, delegate to `gem-researcher` (up to 4 concurrent) per `Delegation Protocol`
 
 ### 5. Phase 5: Planning
 ## Phase 5: Planning
+#### 5.0 Create Plan
+- Delegate to `gem-planner` to create plan.
+
 #### 5.1 Validation
-- Medium complexity: `gem-reviewer`
-- Complex: `gem-critic(scope=plan, target=plan.yaml)`
+- Low/Medium complexity: delegate to `gem-reviewer` for plan review.
+- High complexity: delegate to `gem-critic` with scope=plan and target=plan.yaml for plan review.
 - IF failed/blocking: Loop to `gem-planner` with feedback (max 3 iterations)
 
 #### 5.2 Present
-- Present plan via `vscode_askQuestions`
-- IF user changes → replan
+- Present plan via `vscode_askQuestions` if complexity is medium/ high
+- IF user requests changes or feedback → replan, otherwise continue to execution
 
 ### 6. Phase 6: Execution Loop
 
@@ -169,8 +172,8 @@ Planner assigns `task.agent` in plan.yaml:
 
 ```jsonc
 {
-  "gem-researcher": { "plan_id": "string", "objective": "string", "focus_area": "string", "mode": "clarify|research", "complexity": "simple|medium|complex", "task_clarifications": [{"question": "string", "answer": "string"}] },
-  "gem-planner": { "plan_id": "string", "objective": "string", "complexity": "simple|medium|complex", "task_clarifications": [...] },
+  "gem-researcher": { "plan_id": "string", "objective": "string", "focus_area": "string", "mode": "clarify|research", "task_clarifications": [{"question": "string", "answer": "string"}] },
+  "gem-planner": { "plan_id": "string", "objective": "string", "task_clarifications": [...] },
   "gem-implementer": { "task_id": "string", "plan_id": "string", "plan_path": "string", "task_definition": "object" },
   "gem-reviewer": { "review_scope": "plan|task|wave", "task_id": "string (task scope)", "plan_id": "string", "plan_path": "string", "wave_tasks": ["string"], "review_depth": "full|standard|lightweight", "review_security_sensitive": "boolean" },
   "gem-browser-tester": { "task_id": "string", "plan_id": "string", "plan_path": "string", "task_definition": "object" },

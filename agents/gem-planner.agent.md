@@ -1,7 +1,7 @@
 ---
 description: "DAG-based execution plans — task decomposition, wave scheduling, risk analysis."
 name: gem-planner
-argument-hint: "Enter plan_id, objective, complexity (simple|medium|complex), and task_clarifications."
+argument-hint: "Enter plan_id, objective, and task_clarifications."
 disable-model-invocation: false
 user-invocable: false
 ---
@@ -134,7 +134,6 @@ Return JSON per `Output Format`
 {
   "plan_id": "string",
   "objective": "string",
-  "complexity": "simple|medium|complex",
   "task_clarifications": [{ "question": "string", "answer": "string" }]
 }
 ```
@@ -148,7 +147,9 @@ Return JSON per `Output Format`
   "task_id": null,
   "plan_id": "[plan_id]",
   "failure_type": "transient|fixable|needs_replan|escalate",
-  "extra": {}
+  "extra": {
+    "complexity": "simple|medium|complex"
+  }
 }
 ```
 </output_format>
