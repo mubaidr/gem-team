@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.9.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.8.0...gem-team-v1.9.0) (2026-04-20)
+
+
+### 📝 Documentation
+
+* **agents:** restructure BROWSER TESTER and RESEARCHER role and workflow documentation ([716bcb2](https://github.com/mubaidr/gem-team/commit/716bcb2ba6f09244cf9ed07eb40de210066c0937))
+* clarify orchestrator role and delegation guidance ([189bc80](https://github.com/mubaidr/gem-team/commit/189bc806c4365d032b94d0b86f7da86bafc61be3))
+
 ## [1.8.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.7.0...gem-team-v1.8.0) (2026-04-18)
 
 

@@ -1,5 +1,5 @@
 name: gem-team
-version: 1.8.0
+version: 1.9.0
 description: >-
   Multi-agent orchestration framework for spec-driven development and automated
   verification.
