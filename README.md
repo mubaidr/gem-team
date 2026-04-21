@@ -17,8 +17,6 @@
 
 ## 🚀 Quick Start
 
-**[Install Now for Code](https://aka.ms/awesome-copilot/install/agent?url=vscode%3Achat-agent%2Finstall%3Furl%3Dhttps%253A%252F%252Fraw.githubusercontent.com%252Fgithub%252Fawesome-copilot%252Fmain%252F.%252Fagents)**
-
 See [all installation options](#-installation) below.
 
 ---
@@ -59,6 +57,24 @@ Raw reasoning isn't enough in single-pass chat. Gem-Team wraps your preferred LL
 - **For Small Models (e.g., Qwen 1.7B - 8B):** The framework provides the "executive brain." Task decomposition and isolated 50-line chunks can up to **double** their localized debugging success rates.
 - **For Reasoning Models (e.g., DeepSeek 3.2):** TDD loops and parallel research stabilize their native file I/O fragility, yielding up to a **+25% lift** in execution reliability.
 - **For SOTA Models (e.g., GLM 5.1, Kimi K2.5):** The `gem-reviewer` acts as a noise-filter, pruning verbosity and enforcing strict PRD compliance to prevent over-engineering.
+
+### 🎨 Design Support
+
+Gem Team includes specialized design agents with **anti-"AI slop" guidelines** for distinctive, modern aesthetics:
+
+| Agent | Focus | Key Capabilities |
+|:------|:------|:-----------------|
+| **DESIGNER** | Web UI/UX | Layouts, themes, design systems, accessibility (WCAG), 7 design movements (Brutalism → Maximalism), 5-level elevation system |
+| **DESIGNER-MOBILE** | Mobile UI/UX | iOS HIG, Material 3, safe areas, haptics, platform-specific adaptations of design movements |
+
+**Anti-AI Slop Principles:**
+- Distinctive fonts (Cabinet Grotesk, Satoshi, Clash Display — never Inter/Roboto defaults)
+- 60-30-10 color strategy with sharp accents
+- Break predictable layouts (asymmetric grids, overlap, bento patterns)
+- Purposeful motion with orchestrated page loads
+- Design movement library: Brutalism, Neo-brutalism, Glassmorphism, Claymorphism, Minimalist Luxury, Retro-futurism, Maximalism
+
+Both agents include quality checklists for generating unique, memorable designs.
 
 ---
 
@@ -163,33 +179,6 @@ flowchart
 | 📱 **IMPLEMENTER-MOBILE** | Mobile implementation — React Native, Expo, Flutter with TDD | 💻 code | **Closed:** Claude Opus 4.6, GPT-5.4, Gemini 3.1 Pro<br>**Open:** DeepSeek-V3.2, GLM-5, Qwen3-Coder-Next |
 | 📱 **DESIGNER-MOBILE** | Mobile UI/UX specialist — HIG, Material Design, safe areas, touch targets | 🎨 DESIGN.md | **Closed:** GPT-5.4, Gemini 3.1 Pro, Claude Sonnet 4.6<br>**Open:** Qwen3.5, GLM-5, MiniMax M2.7 |
 | 📱 **MOBILE TESTER** | Mobile E2E testing — Detox, Maestro, iOS/Android simulators | 🧪 evidence | **Closed:** GPT-5.4, Claude Sonnet 4.6, Gemini 3.1 Flash<br>**Open:** Llama 4 Maverick, Qwen3.5-Flash, MiniMax M2.7 |
-
-### Agent File Skeleton
-
-Each `.agent.md` file follows this structure:
-
-```txt
----                                    # Frontmatter: description, name, triggers
-# Role                                 # One-line identity
-# Expertise                            # Core competencies
-# Knowledge Sources                    # Prioritized reference list
-# Workflow                             # Step-by-step execution phases
-  ## 1. Initialize                     # Setup and context gathering
-  ## 2. Analyze/Execute                # Role-specific work
-  ## N. Self-Critique                  # Confidence check (≥0.85)
-  ## N+1. Handle Failure               # Retry/escalate logic
-  ## N+2. Output                       # JSON deliverable format
-# Input Format                         # Expected JSON schema
-# Output Format                        # Return JSON schema
-# Rules
-  ## Execution                         # Tool usage, batching, error handling
-  ## Constitutional                    # IF-THEN decision rules
-  ## Anti-Patterns                     # Behaviors to avoid
-  ## Anti-Rationalization              # Excuse → Rebuttal table
-  ## Directives                        # Non-negotiable commands
-```
-
-All agents share: Execution rules, Constitutional rules, Anti-Patterns, and Directives sections. Anti-Rationalization tables are present in select agents that benefit from explicit excuse→rebuttal framing. Role-specific sections (Workflow, Expertise, Knowledge Sources) vary by agent.
 
 ---
 

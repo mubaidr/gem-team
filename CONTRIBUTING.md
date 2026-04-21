@@ -15,6 +15,32 @@ We follow **Conventional Commits** strictly. Your commit messages must follow th
 
 [optional body]
 ```
+### Agent File Skeleton
+
+Each `.agent.md` file follows this structure:
+
+```txt
+---                                    # Frontmatter: description, name, triggers
+# Role                                 # One-line identity
+# Expertise                            # Core competencies
+# Knowledge Sources                    # Prioritized reference list
+# Workflow                             # Step-by-step execution phases
+  ## 1. Initialize                     # Setup and context gathering
+  ## 2. Analyze/Execute                # Role-specific work
+  ## N. Self-Critique                  # Confidence check (≥0.85)
+  ## N+1. Handle Failure               # Retry/escalate logic
+  ## N+2. Output                       # JSON deliverable format
+# Input Format                         # Expected JSON schema
+# Output Format                        # Return JSON schema
+# Rules
+  ## Execution                         # Tool usage, batching, error handling
+  ## Constitutional                    # IF-THEN decision rules
+  ## Anti-Patterns                     # Behaviors to avoid
+  ## Anti-Rationalization              # Excuse → Rebuttal table
+  ## Directives                        # Non-negotiable commands
+```
+
+All agents share: Execution rules, Constitutional rules, Anti-Patterns, and Directives sections. Anti-Rationalization tables are present in select agents that benefit from explicit excuse→rebuttal framing. Role-specific sections (Workflow, Expertise, Knowledge Sources) vary by agent.
 
 ### Types
 
