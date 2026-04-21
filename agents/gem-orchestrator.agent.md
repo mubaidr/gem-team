@@ -26,31 +26,31 @@ gem-researcher, gem-planner, gem-implementer, gem-implementer-mobile, gem-browse
 <workflow>
 ## Workflow
 
-On ANY task received, ALWAYS execute steps 0→1→2→3→4→5→6→7 in order. Never skip phases. Even for the simplest/ meta tasks, follow the workflow.
+On ANY task received, ALWAYS execute steps 0→1→2→3→4→5→6→7→8 in order. Never skip phases. Even for the simplest/ meta tasks, follow the workflow.
 
-### 0. Plan ID Generation
+### 0. Phase 0: Plan ID Generation
 IF plan_id NOT provided in user request, generate `plan_id` as `{YYYYMMDD}-{slug}`
 
-### 1. Phase Detection
+### 1. Phase 1: Phase Detection
 - Delegate user request to `gem-researcher(mode=clarify)` for task understanding
 
-### 2. Documentation Updates
+### 2. Phase 2: Documentation Updates
 IF researcher output has `{task_clarifications|architectural_decisions}`:
 - Delegate to `gem-documentation-writer` to update AGENTS.md/PRD
 
-### 3. Phase Routing
+### 3. Phase 3: Phase Routing
 Route based on `user_intent` from researcher:
-- continue_plan: IF user_feedback → Planning; IF pending tasks → Execution; IF blocked/completed → Escalate
-- new_task: IF simple AND no clarifications/gray_areas → Planning; ELSE → Research
-- modify_plan: → Planning with existing context
+- continue_plan: IF user_feedback → Phase 5: Planning; IF pending tasks → Phase 6: Execution; IF blocked/completed → Escalate
+- new_task: IF simple AND no clarifications/gray_areas → Phase 5: Planning; ELSE → Phase 4: Research
+- modify_plan: → Phase 5: Planning with existing context
 
-### 4. Phase 1: Research
-## Phase 1: Research
+### 4. Phase 4: Research
+## Phase 4: Research
 - Identify focus areas/ domains from user request/feedback
 - Delegate to `gem-researcher` (up to 4 concurrent) per `Delegation Protocol`
 
-### 5. Phase 2: Planning
-## Phase 2: Planning
+### 5. Phase 5: Planning
+## Phase 5: Planning
 #### 5.1 Validation
 - Medium complexity: `gem-reviewer`
 - Complex: `gem-critic(scope=plan, target=plan.yaml)`
@@ -60,7 +60,7 @@ Route based on `user_intent` from researcher:
 - Present plan via `vscode_askQuestions`
 - IF user changes → replan
 
-### 6. Phase 3: Execution Loop
+### 6. Phase 6: Execution Loop
 
 CRITICAL: Execute ALL waves/ tasks WITHOUT pausing between them.
 
@@ -99,10 +99,10 @@ CRITICAL: Execute ALL waves/ tasks WITHOUT pausing between them.
 #### 6.2 Loop
 - After each wave completes, IMMEDIATELY begin the next wave.
 - Loop until all waves/ tasks completed OR blocked
-- IF all waves/ tasks completed → Phase 4: Summary
+- IF all waves/ tasks completed → Phase 7: Summary
 - IF blocked with no path forward → Escalate to user
 
-### 7. Phase 4: Summary
+### 7. Phase 7: Summary
 #### 7.1 Present Summary
 - Present summary to user with:
   - Status Summary Format
@@ -110,12 +110,10 @@ CRITICAL: Execute ALL waves/ tasks WITHOUT pausing between them.
 
 #### 7.2 Collect User Decision
 - Ask user a question:
-  - Do you have any feedback? → Phase 2: Planning (replan with context)
-  - Should I review all changed files? → Phase 5: Final Review
-  - Approve and complete → Provide exiting remarks and exit
-
-### 8. Phase 5: Final Review (user-triggered)
-Triggered when user selects "Review all changed files" in Phase 4.
+- Do you have any feedback? → Phase 5: Planning (replan with context)
+- Should I review all changed files? → Phase 8: Final Review
+### 8. Phase 8: Final Review (user-triggered)
+Triggered when user selects "Review all changed files" in Phase 7.
 
 #### 8.1 Prepare
 - Collect all tasks with status=completed from plan.yaml
