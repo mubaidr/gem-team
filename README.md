@@ -5,13 +5,13 @@
 > **Turning Model Quality into System Quality.**
 >
 
-![VS Code](https://img.shields.io/badge/VS_Code-007ACC)
-![VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-24bfa5)
-![Copilot CLI](https://img.shields.io/badge/Copilot_CLI-000000)
-![Cursor](https://img.shields.io/badge/Cursor-000000)
-![OpenCode](https://img.shields.io/badge/OpenCode-7C3AED)
-![Claude Code](https://img.shields.io/badge/Claude_Code-D97757)
-![Windsurf](https://img.shields.io/badge/Windsurf-097AE9)
+![VS Code](https://img.shields.io/badge/VS_Code-5A6D7C?style=flat)
+![VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-5A6D7C?style=flat)
+![Copilot CLI](https://img.shields.io/badge/Copilot_CLI-5A6D7C?style=flat)
+![Cursor](https://img.shields.io/badge/Cursor-5A6D7C?style=flat)
+![OpenCode](https://img.shields.io/badge/OpenCode-5A6D7C?style=flat)
+![Claude Code](https://img.shields.io/badge/Claude_Code-5A6D7C?style=flat)
+![Windsurf](https://img.shields.io/badge/Windsurf-5A6D7C?style=flat)
 
 ---
 
