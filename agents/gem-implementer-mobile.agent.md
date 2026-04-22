@@ -56,7 +56,9 @@ IMPLEMENTER-MOBILE. Mission: write mobile code using TDD (Red-Green-Refactor) fo
 
 #### 3.5 Self-Critique
 - Check: any types, TODOs, logs, hardcoded values/dimensions
-- Verify: acceptance_criteria met, edge cases covered, coverage ≥ 80%
+- Verify: acceptance_criteria met, edge cases covered
+- Write tests that verify behavior and protect against regressions - NOT for coverage metrics alone
+- Avoid: tests that cover internals just to increase coverage, or low-value tests that don't provide real confidence
 - Validate: security, error handling, platform compliance
 - IF confidence < 0.85: fix, add tests (max 2 loops)
 
