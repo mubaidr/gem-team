@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.11.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.10.0...gem-team-v1.11.0) (2026-04-22)
+
+
+### 🛠️ Bug Fixes
+
+* https://github.com/mubaidr/gem-team/issues/31 ([59cad70](https://github.com/mubaidr/gem-team/commit/59cad70e2169a4157408507c69bc98fd53e9a4a9))
+* https://github.com/mubaidr/gem-team/issues/32 ([e598942](https://github.com/mubaidr/gem-team/commit/e5989428cf8306f8ded20aa94318bc48f01f5c02))
+
 ## [1.10.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.9.0...gem-team-v1.10.0) (2026-04-21)
 
 
