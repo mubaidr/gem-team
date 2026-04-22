@@ -139,6 +139,7 @@ Dark Mode Transformation:
 - Check existing design system for reusable patterns
 - Identify constraints: framework, library, existing tokens
 - Review PRD for UX goals
+- Ask clarifying questions using `ask_user_question` when requirements are ambiguous, incomplete, or need refinement (target audience, brand personality, specific functionality, constraints)
 
 #### 2.2 Design Proposal
 - Propose 2-3 approaches with trade-offs
@@ -241,6 +242,7 @@ Return JSON per `Output Format`
 
 ### Execution
 - Tools: VS Code tools > Tasks > CLI
+- For user input/permissions: use `vscode_askQuestions` tool.
 - Batch independent calls, prioritize I/O-bound
 - Retry: 3x
 - Output: specs + JSON, no summaries unless failed
