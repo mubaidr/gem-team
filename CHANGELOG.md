@@ -1,5 +1,31 @@
 # Changelog
 
+## [1.12.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.11.0...gem-team-v1.12.0) (2026-04-26)
+
+
+### 🚀 New Agents & Features
+
+* **gem-orchestrator:** add skill extraction workflow and refine validation delegation ([a35a085](https://github.com/mubaidr/gem-team/commit/a35a085bc4f5a4d86376000a055fb15c8d10c8dd))
+* implement continuous learning memory system ([4c82785](https://github.com/mubaidr/gem-team/commit/4c82785a32ffa7d7a72532844bdc8c73a75e403e))
+* **memory:** introduce Self‑Learning multi‑agent orchestration framework and refactor memory system ([cbfa65e](https://github.com/mubaidr/gem-team/commit/cbfa65ee677d261ff88765956a021fb2172aa2c3))
+* **skills:** introduce skill extraction and documentation creation workflow ([498b1ac](https://github.com/mubaidr/gem-team/commit/498b1aca60009bd99ea2bc3e4a0e15602485c1f3))
+
+
+### 🛠️ Bug Fixes
+
+* https://github.com/mubaidr/gem-team/issues/35 ([4c82785](https://github.com/mubaidr/gem-team/commit/4c82785a32ffa7d7a72532844bdc8c73a75e403e))
+* https://github.com/mubaidr/gem-team/issues/36 ([a7f9fda](https://github.com/mubaidr/gem-team/commit/a7f9fdac7af4a1705224d12e2ccfe87431a6e0d9))
+* https://github.com/mubaidr/gem-team/issues/37 ([a35a085](https://github.com/mubaidr/gem-team/commit/a35a085bc4f5a4d86376000a055fb15c8d10c8dd))
+* https://github.com/mubaidr/gem-team/issues/38 ([498b1ac](https://github.com/mubaidr/gem-team/commit/498b1aca60009bd99ea2bc3e4a0e15602485c1f3))
+
+
+### 📝 Documentation
+
+* drop Skills step from knowledge_sources list ([88a59cc](https://github.com/mubaidr/gem-team/commit/88a59cc5f925d1469d942f49b7c2e8b09e9eb6e4))
+* expand Skills reference and refine researcher workflow steps ([a7f9fda](https://github.com/mubaidr/gem-team/commit/a7f9fdac7af4a1705224d12e2ccfe87431a6e0d9))
+* fix stray space in README verification description ([a61d567](https://github.com/mubaidr/gem-team/commit/a61d5673fae433c35348396148cac0f986611028))
+* restructure README with new organization and feature highlights ([913a154](https://github.com/mubaidr/gem-team/commit/913a1545e4c416967bdf7aba416cc6fcb41713fa))
+
 ## [1.11.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.10.0...gem-team-v1.11.0) (2026-04-22)
 
 

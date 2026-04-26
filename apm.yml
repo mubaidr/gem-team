@@ -1,7 +1,8 @@
 name: gem-team
-version: 1.11.0
+version: 1.12.0
 description: >-
-  Self-Learning Multi-agent orchestration framework for spec-driven development and automated verification.
+  Self-Learning Multi-agent orchestration framework for spec-driven development
+  and automated verification.
 author: mubaidr
 license: Apache-2.0
 target: all
