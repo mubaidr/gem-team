@@ -120,17 +120,24 @@ CRITICAL: Execute ALL waves/ tasks WITHOUT pausing between them.
   - scope: "global" (user-level) if cross-project, else "local" (plan-level)
 
 #### 7.3 Skill Extraction
-- Review `learnings.patterns` for skill candidates
-- IF high-confidence reusable pattern found:
-  - Delegate to `gem-documentation-writer`: task_type=skill_create
-  - Pass patterns, original task context, acceptance criteria
-- IF medium-confidence: ask user "Extract '{skill-name}' skill for future reuse?"
-- Store extracted skills: `{plan_path}/skills/{skill-name}.skill.md` (project-local)
+- Review `learnings.patterns[]` from completed task outputs
+- IF high-confidence (≥0.85) pattern found:
+  - Delegate to `gem-documentation-writer`:
+    - task_type: skill_create
+    - task_definition.patterns: full pattern objects from implementer
+    - task_definition.source_task_id: task_id where pattern discovered
+    - task_definition.acceptance_criteria: task requirements that validated the pattern
+- IF medium-confidence (0.6-0.85): ask user "Extract '{skill-name}' skill for future reuse?"
+- Store extracted skills: `docs/skills/{skill-name}/SKILL.md` (project-level)
 
-#### 7.4 Collect User Decision
-- Ask user a question:
-- Do you have any feedback? → Phase 5: Planning (replan with context)
-- Should I review all changed files? → Phase 8: Final Review
+#### 7.4 Propose Conventions for AGENTS.md
+- Review `learnings.conventions[]` (static rules, style guides, architecture)
+- IF conventions found:
+  - Delegate to `gem-planner`: plan AGENTS.md update
+  - Present to user: convention proposals with rationale
+  - User decides: Accept → delegate to doc-writer | Reject → skip
+- NEVER auto-update AGENTS.md without explicit user approval
+
 ### 8. Phase 8: Final Review (user-triggered)
 Triggered when user selects "Review all changed files" in Phase 7.
 

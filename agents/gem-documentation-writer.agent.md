@@ -69,6 +69,40 @@ DOCUMENTATION WRITER. Mission: write technical docs, generate diagrams, maintain
   - user_prefs → global only: user-prefs.md
 - Deduplicate, timestamp entries, create dirs if missing
 
+#### 2.7 Skill Creation (Structure Only)
+- Read `learnings.patterns[]` from task outputs (implementer provides rich content)
+- Filter by `pattern.confidence`:
+  - **HIGH** (≥0.85): Auto-create skill
+  - **MEDIUM** (0.6-0.85): Ask user first
+  - **LOW** (<0.6): Skip
+- **Structure** into Agent Skills v1 (no extraction, just format):
+
+**Step 1: Create base folder**
+- `docs/skills/{skill-name}/`
+
+**Step 2: Generate SKILL.md**
+- Follow `skill_format_guide` for structure and content
+- Keep SKILL.md <500 tokens; overflow → references/
+
+**Step 3: Create artifact directories as needed**
+- `references/` — always create for extended docs
+  - If content >500 tokens: split to `references/DETAIL.md`
+  - Link from SKILL.md: `See [references/DETAIL.md]`
+- `scripts/` — create IF skill needs executables
+  - Store helper scripts: `scripts/verify.sh`, `scripts/migrate.py`
+  - Reference from SKILL.md: `Run [scripts/verify.sh]`
+- `assets/` — create IF skill needs templates/resources
+  - Store templates: `assets/template.tsx`, `assets/config.json`
+  - Reference from SKILL.md: `Use [assets/template.tsx]`
+
+**Step 4: Cross-link artifacts**
+- Use relative paths: `[references/GUIDE.md]`, `[scripts/helper.sh]`
+- Keep references one level deep from SKILL.md
+
+**Step 5: Validate**
+- Deduplicate: skip if `docs/skills/{skill-name}/SKILL.md` exists
+- Report in `extra.skills_created: {name, path, artifacts: [scripts, references, assets]}`
+
 ### 3. Validate
 - get_errors for issues
 - Ensure diagrams render
@@ -91,29 +125,6 @@ DOCUMENTATION WRITER. Mission: write technical docs, generate diagrams, maintain
 ### 7. Output
 Return JSON per `Output Format`
 
-#### 2.7 Skill Creation
-- Read `learnings.patterns` from completed task outputs
-- Assess reuse confidence:
-  - HIGH (≥0.85): Pattern in ≥2 waves, recurring problem, well tested → auto-extract
-  - MEDIUM (0.6-0.85): Pattern in 1 wave, seems reusable → ask user via vscode_askQuestions
-  - LOW (<0.6): One-off, highly contextual → skip
-- On approval: generate `{plan_path}/skills/{skill-name}.skill.md` with format:
-  ```yaml
-  ---
-  title: "Human-readable name"
-  tags: [tag1, tag2]
-  source: task-{task_id}
-  version: 1
-  confidence: high|medium
-  usages: 0
-  ---
-  ## When to Apply
-  ## Context Required
-  ## Steps
-  ## Code Example
-  ## Anti-Patterns
-  ```
-- Deduplicate: check existing skills in `{plan_path}/skills/` before creating
 </workflow>
 
 <input_format>
@@ -136,7 +147,18 @@ Return JSON per `Output Format`
   "overview": "string",
   "tasks_completed": ["string"],
   "outcomes": "string",
-  "next_steps": ["string"]
+  "next_steps": ["string"],
+  // Skill creation specific:
+  "patterns": [{
+    "name": "string",
+    "when_to_apply": "string",
+    "code_example": "string",
+    "anti_pattern": "string",
+    "context": "string",
+    "confidence": "number"
+  }],
+  "source_task_id": "string",
+  "acceptance_criteria": ["string"]
 }
 ```
 </input_format>
@@ -209,6 +231,29 @@ changes:
     change: string
 ```
 </prd_format_guide>
+
+<skill_format_guide>
+## Skill Format Guide
+
+```markdown
+---
+name: {skill-name}
+description: "{condensed lesson}"
+metadata:
+  version: "1.0"
+  confidence: high|medium
+  source: task-{task_id}
+  usages: 0
+---
+
+## When to Apply
+## Steps
+## Example
+## Common Edge Cases
+## References
+- See [references/DETAIL.md] for extended docs (if >500 tokens)
+```
+</skill_format_guide>
 
 <rules>
 ## Rules

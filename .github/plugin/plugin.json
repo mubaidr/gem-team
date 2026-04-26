@@ -1,7 +1,7 @@
 {
   "name": "gem-team",
   "version": "1.11.0",
-  "description": "Multi-agent orchestration framework for spec-driven development and automated verification.",
+  "description": "Self-Learning Multi-agent orchestration framework for spec-driven development and automated verification.",
   "author": {
     "name": "mubaidr",
     "email": "mubaidr@gmail.com",

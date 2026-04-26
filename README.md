@@ -1,6 +1,6 @@
 # 💎 Gem Team
 >
-> Multi-agent orchestration framework for spec-driven development and automated verification.
+> Self-Learning Multi-agent orchestration framework for spec-driven development and automated verification.
 >
 > **Turning Model Quality into System Quality.**
 >
@@ -210,16 +210,33 @@ Agents consult only the sources relevant to their role. Trust levels apply:
 
 ---
 
-## 🧠 Memory
+## 🧠 Triple Learning System
 
-Agents use `memory` tool to persist learnings across sessions.
+Agents output three distinct learning types, each routed to appropriate storage:
 
-| Scope | Purpose |
-|-------|---------|
-| **Global** | User-level: cross-project patterns, user preferences, known fixes |
-| **Local** | Plan-level: task context, plan-specific gotchas, decisions |
+| Type | Storage | Content | Route | Approval |
+|------|---------|---------|-------|----------|
+| **Facts** | Memory | Discoveries ("Uses Go 1.22") | Auto-save | None |
+| **Skills** | Agent Skills v1 | Procedures with code examples | Auto if confidence ≥0.85 | Medium: ask user |
+| **Conventions** | AGENTS.md proposals | Static rules ("Use strict TS") | Proposal | Required |
 
-AGENTS.md = static conventions; memory = dynamic session context.
+### Memory (Facts)
+
+- **Global**: `/memories/` — User preferences, cross-project patterns
+- **Local**: `docs/plan/{plan_id}/notes.md` — Plan context, task-specific gotchas
+
+### Skills (Procedures)
+
+- **Format**: [Agent Skills v1](https://agentskills.io/specification)
+- **Structure**: `docs/skills/{skill-name}/SKILL.md` with optional `scripts/`, `references/`
+- **Extraction**: High confidence (≥0.85) auto, Medium (0.6-0.85) ask, Low skip
+- **Use**: Progressive disclosure (metadata → content → resources on demand)
+
+### Conventions (Static Rules)
+
+- **Destination**: AGENTS.md — Static coding standards
+- **Process**: Proposed via gem-planner, requires explicit user approval
+- **Auto-update**: Never — human approval always required
 
 ---
 

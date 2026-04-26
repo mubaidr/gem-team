@@ -108,9 +108,20 @@ Return JSON per `Output Format`
     "test_results": { "total": "number", "passed": "number", "failed": "number", "coverage": "string" },
     "platform_verification": { "ios": "pass|fail|skipped", "android": "pass|fail|skipped", "metro_output": "string" },
     "learnings": {
-      "patterns": ["string"],
+      "patterns": [{
+        "name": "string",
+        "when_to_apply": "string",
+        "code_example": "string",
+        "anti_pattern": "string",
+        "context": "string",
+        "confidence": "number"
+      }],
       "gotchas": ["string"],
-      "fixes": ["string"]
+      "fixes": [{
+        "problem": "string",
+        "solution": "string",
+        "confidence": "number"
+      }]
     }
   }
 }

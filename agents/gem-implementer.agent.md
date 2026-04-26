@@ -21,7 +21,7 @@ IMPLEMENTER. Mission: write code using TDD (Red-Green-Refactor). Deliver: workin
   2. Codebase patterns
   3. `AGENTS.md`
   4. Memory — check global (user prefs) and project-local (context, gotchas) if relevant
-  5. Skills — check `{plan_path}/skills/*.skill.md` before implementation (if plan exists)
+  5. Skills — check `docs/skills/*.skill.md` for project patterns (if exists)
   6. Official docs (online or llms.txt)
   7. `docs/DESIGN.md` (for UI tasks)
 </knowledge_sources>
@@ -109,9 +109,20 @@ Return JSON per `Output Format`
       "coverage": "string"
     },
     "learnings": {
-      "patterns": ["string"],
-      "gotchas": ["string"],
-      "fixes": ["string"]
+      "facts": ["string"],
+      "patterns": [{
+        "name": "string",
+        "when_to_apply": "string",
+        "code_example": "string",
+        "anti_pattern": "string",
+        "context": "string",
+        "confidence": "number"
+      }],
+      "conventions": [{
+        "type": "code_style|architecture|tooling",
+        "proposal": "string",
+        "rationale": "string"
+      }]
     }
   }
 }
@@ -127,10 +138,20 @@ Return JSON per `Output Format`
 - Retry: 3x
 - Output: code + JSON, no summaries unless failed
 
-### Memory
-- MUST output `learnings` in task result: patterns, gotchas, fixes
-- Save: global scope (patterns, user prefs) + local scope (plan context, gotchas)
-- Read: from global and local if relevant before task execution
+### Learnings Routing (Triple System)
+MUST output `learnings` with clear type discrimination:
+
+facts[] → Memory: Discoveries, context ("Project uses Go 1.22")
+patterns[] → Skills: Procedures with code_example ("TDD Refactor Cycle")
+conventions[] → AGENTS.md proposals: Static rules ("Use strict TS")
+
+Rule: Facts ≠ Patterns ≠ Conventions. Never duplicate across systems.
+
+- facts: Auto-save via doc-writer task_type=memory_update
+- patterns: Auto-extract if confidence ≥0.85 via task_type=skill_create
+- conventions: Require human approval, delegate to gem-planner for AGENTS.md
+
+Implementer provides KNOWLEDGE; Orchestrator routes; Doc-writer structures appropriately.
 
 ### Constitutional
 - Interface boundaries: choose pattern (sync/async, req-resp/event)
