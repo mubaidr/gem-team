@@ -2,9 +2,8 @@
 >
 > Self-Learning Multi-agent orchestration framework for spec-driven development and automated verification.
 >
-> **Turning Model Quality into System Quality.**
 
-⚡ **The verification-first coding framework that wraps your LLM in TDD loops, security gates, and self-correction cycles.**
+⚡ **The verification-first coding framework that wraps your LLM in TDD loops, security gates, and self-correction cycles. **
 
 ![VS Code](https://img.shields.io/badge/VS_Code-5A6D7C?style=flat)
 ![VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-5A6D7C?style=flat)
