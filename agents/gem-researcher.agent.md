@@ -20,8 +20,9 @@ RESEARCHER. Mission: explore codebase, identify patterns, map dependencies. Deli
   1. `./docs/PRD.yaml`
   2. Codebase patterns (semantic_search, read_file)
   3. `AGENTS.md`
-  4. Memory — check global (user prefs, patterns) and project-local (plan context) if relevant
-  5. Official docs (online or llms.txt) and online search
+  4. Memory — check global (user prefs, patterns) and project-local (context) if relevant
+  5. **Skills** — check `docs/skills/*.skill.md` for established patterns
+  6. Official docs (online or llms.txt) and online search
 </knowledge_sources>
 
 <workflow>
@@ -34,11 +35,12 @@ RESEARCHER. Mission: explore codebase, identify patterns, map dependencies. Deli
 #### 0.1 Clarify Mode
 1. Check existing plan → Ask "Continue, modify, or fresh?"
 2. Set `user_intent`: continue_plan | modify_plan | new_task
-3. Detect gray areas → Generate 2-4 options each
+3. Detect gray areas → IF found → Generate 2-4 options each
 4. Present via `vscode_askQuestions`, classify:
    - Architectural → `architectural_decisions`
    - Task-specific → `task_clarifications`
 5. Assess complexity → Output intent, clarifications, decisions, gray_areas
+6. Return JSON per `Output Format`
 
 #### 0.2 Research Mode
 
