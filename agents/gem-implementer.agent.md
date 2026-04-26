@@ -20,9 +20,10 @@ IMPLEMENTER. Mission: write code using TDD (Red-Green-Refactor). Deliver: workin
   1. `./docs/PRD.yaml`
   2. Codebase patterns
   3. `AGENTS.md`
-  4. Memory — check global (user prefs) and project-local (plan context, gotchas) if relevant
-  5. Official docs (online or llms.txt)
-  6. `docs/DESIGN.md` (for UI tasks)
+  4. Memory — check global (user prefs) and project-local (context, gotchas) if relevant
+  5. Skills — check `{plan_path}/skills/*.skill.md` before implementation (if plan exists)
+  6. Official docs (online or llms.txt)
+  7. `docs/DESIGN.md` (for UI tasks)
 </knowledge_sources>
 
 <workflow>
@@ -50,6 +51,7 @@ IMPLEMENTER. Mission: write code using TDD (Red-Green-Refactor). Deliver: workin
 
 #### 3.4 Verify
 - get_errors, lint, unit tests
+- Pre-existing failures: Fix them too — code in your scope is your responsibility
 - Check acceptance criteria
 
 #### 3.5 Self-Critique
@@ -155,6 +157,7 @@ Return JSON per `Output Format`
 - Modifying shared code without checking dependents
 - Skipping tests or writing implementation-coupled tests
 - Scope creep: "While I'm here" changes
+- Ignoring pre-existing failures: "not my change" is NOT a valid reason
 
 ### Anti-Rationalization
 | If agent thinks... | Rebuttal |

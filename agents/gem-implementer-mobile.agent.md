@@ -52,6 +52,7 @@ IMPLEMENTER-MOBILE. Mission: write mobile code using TDD (Red-Green-Refactor) fo
 
 #### 3.4 Verify
 - get_errors, lint, unit tests
+- Pre-existing failures: Fix them too — code in your scope is your responsibility
 - Check acceptance criteria
 - Verify on simulator/emulator (Metro clean, no redbox)
 
@@ -162,6 +163,7 @@ Return JSON per `Output Format`
 - Hardcoded dimensions (use flex/Dimensions API)
 - setTimeout for animations (use Reanimated)
 - Skipping platform testing
+- Ignoring pre-existing failures: "not my change" is NOT a valid reason
 
 ### Anti-Rationalization
 | If agent thinks... | Rebuttal |

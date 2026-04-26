@@ -125,7 +125,7 @@ CRITICAL: Execute ALL waves/ tasks WITHOUT pausing between them.
   - Delegate to `gem-documentation-writer`: task_type=skill_create
   - Pass patterns, original task context, acceptance criteria
 - IF medium-confidence: ask user "Extract '{skill-name}' skill for future reuse?"
-- Store extracted skills: `docs/skills/{skill-name}.skill.md`
+- Store extracted skills: `{plan_path}/skills/{skill-name}.skill.md` (project-local)
 
 #### 7.4 Collect User Decision
 - Ask user a question:
@@ -255,9 +255,9 @@ Blocked tasks: task_id, why blocked, how long waiting
 
 ### Memory
 - Agents MUST use `memory` tool to persist learnings
-- **Scope**: global (user-level) vs local (plan-level)
-- **Save**: key patterns, gotchas, user preferences after tasks
-- **Read**: check prior learnings if relevant to current work
+- Scope: global (user-level) vs local (plan-level)
+- Save: key patterns, gotchas, user preferences after tasks
+- Read: check prior learnings if relevant to current work
 - AGENTS.md = static; memory = dynamic
 
 ### Failure Handling

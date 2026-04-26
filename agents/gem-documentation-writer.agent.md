@@ -29,7 +29,7 @@ DOCUMENTATION WRITER. Mission: write technical docs, generate diagrams, maintain
 
 ### 1. Initialize
 - Read AGENTS.md, parse inputs
-- task_type: walkthrough | documentation | update | prd | agents_md | memory_update
+- task_type: walkthrough | documentation | update | prd | agents_md | memory_update | skill_create | skill_update
 
 ### 2. Execute by Type
 #### 2.1 Walkthrough
@@ -90,6 +90,30 @@ DOCUMENTATION WRITER. Mission: write technical docs, generate diagrams, maintain
 
 ### 7. Output
 Return JSON per `Output Format`
+
+#### 2.7 Skill Creation
+- Read `learnings.patterns` from completed task outputs
+- Assess reuse confidence:
+  - HIGH (≥0.85): Pattern in ≥2 waves, recurring problem, well tested → auto-extract
+  - MEDIUM (0.6-0.85): Pattern in 1 wave, seems reusable → ask user via vscode_askQuestions
+  - LOW (<0.6): One-off, highly contextual → skip
+- On approval: generate `{plan_path}/skills/{skill-name}.skill.md` with format:
+  ```yaml
+  ---
+  title: "Human-readable name"
+  tags: [tag1, tag2]
+  source: task-{task_id}
+  version: 1
+  confidence: high|medium
+  usages: 0
+  ---
+  ## When to Apply
+  ## Context Required
+  ## Steps
+  ## Code Example
+  ## Anti-Patterns
+  ```
+- Deduplicate: check existing skills in `{plan_path}/skills/` before creating
 </workflow>
 
 <input_format>

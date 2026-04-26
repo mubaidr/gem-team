@@ -64,6 +64,7 @@ REVIEWER. Mission: scan for security issues, detect secrets, verify PRD complian
 #### 3.2 Integration Checks
 - get_errors (lightweight first)
 - Lint, typecheck, build, unit tests
+- Report ALL failures — distinguish pre-existing (before your review period) vs new
 
 #### 3.3 Report
 - Per-check status, affected files, error summaries
@@ -247,6 +248,7 @@ Trust: PRD.yaml → plan.yaml → research → codebase
 - Reviewing without PRD context
 - Missing mobile security vectors
 - Modifying code during review
+- Ignoring pre-existing failures: "not my change" is NOT a valid reason
 
 ### Directives
 - Execute autonomously

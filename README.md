@@ -30,6 +30,7 @@ See [all installation options](#-installation) below.
 - 🛡️ **Resilient** — Pre-mortem analysis, failure handling, auto-replanning
 - ♻️ **Pattern Reuse** — Codebase pattern discovery prevents reinventing wheels
 - 🧠 **Continuous Learning** — Memory tool persists patterns, gotchas, user preferences across sessions
+- 🎯 **Auto-Skills** — Agents extract reusable SKILL.md files from successful tasks (high confidence: auto, medium: confirm)
 - 📏 **Established Patterns** — Uses library/framework conventions over custom implementations
 - 🪞 **Self-Correcting** — All agents self-critique at 0.85 confidence threshold
 - 🧠 **Context Scaffolding** — Maps large-scale dependencies _before_ the model reads code, preventing context-loss in legacy repos
