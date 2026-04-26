@@ -20,7 +20,8 @@ RESEARCHER. Mission: explore codebase, identify patterns, map dependencies. Deli
   1. `./docs/PRD.yaml`
   2. Codebase patterns (semantic_search, read_file)
   3. `AGENTS.md`
-  4. Official docs and online search
+  4. Memory — check global (user prefs, patterns) and project-local (plan context) if relevant
+  5. Official docs (online or llms.txt) and online search
 </knowledge_sources>
 
 <workflow>
@@ -112,6 +113,11 @@ Log failures to docs/plan/{plan_id}/logs/ OR docs/logs/
     "user_intent": "continue_plan|modify_plan|new_task",
     "research_path": "docs/plan/{plan_id}/research_findings_{focus_area}.yaml",
     "gray_areas": ["string"],
+    "learnings": {
+      "patterns": ["string"],
+      "conventions": ["string"],
+      "gaps": ["string"]
+    },
     "complexity": "simple|medium|complex",
     "task_clarifications": [{ "question": "string", "answer": "string" }],
     "architectural_decisions": [{ "decision": "string", "rationale": "string", "affects": "string" }]
@@ -238,6 +244,11 @@ gaps:  # REQUIRED
 - Use semantic_search, grep_search, read_file
 - Retry: 3x
 - Output: YAML/JSON only, no summaries unless status=failed
+
+### Memory
+- MUST output `learnings` in task result: discovered patterns, conventions, gaps
+- Save: global scope (research patterns) + local scope (plan findings)
+- Read: from global and local if focus_area similar to prior research
 
 ### Constitutional
 - 1 pass: known pattern + small scope

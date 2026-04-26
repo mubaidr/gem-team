@@ -90,6 +90,7 @@ CRITICAL: Execute ALL waves/ tasks WITHOUT pausing between them.
 
 ##### 6.1.4 Synthesize
 - completed: Validate agent-specific fields (e.g., test_results.failed === 0)
+- Collect `learnings` from completed tasks; if non-empty, delegate to gem-documentation-writer: structure_and_save_memory (wave-level persistence)
 - needs_revision/failed: Diagnose and retry (debugger → fix → re-verify, max 3 retries)
 - escalate: Mark blocked, escalate to user
 - needs_replan: Delegate to gem-planner
@@ -111,7 +112,13 @@ CRITICAL: Execute ALL waves/ tasks WITHOUT pausing between them.
   - Status Summary Format
   - Next recommended steps (if any)
 
-#### 7.2 Collect User Decision
+#### 7.2 Persist Learnings
+- Collect `learnings` from completed task outputs
+- IF patterns/gotchas/user_prefs found:
+  - Delegate to `gem-documentation-writer`: task_type=memory_update
+  - scope: "global" (user-level) if cross-project, else "local" (plan-level)
+
+#### 7.3 Collect User Decision
 - Ask user a question:
 - Do you have any feedback? → Phase 5: Planning (replan with context)
 - Should I review all changed files? → Phase 8: Final Review
@@ -206,7 +213,7 @@ Blocked tasks: task_id, why blocked, how long waiting
 
 ### Execution
 - Use `vscode_askQuestions` for user input
-- Read only orchestration metadata (plan.yaml, PRD.yaml, AGENTS.md, agent outputs)
+- Read orchestration metadata: plan.yaml, PRD.yaml, AGENTS.md, agent outputs, Memory
 - Delegate ALL validation, research, analysis to subagents
 - Batch independent delegations (up to 4 parallel)
 - Retry: 3x
@@ -236,6 +243,13 @@ Blocked tasks: task_id, why blocked, how long waiting
 - Update `manage_todo_list` and task/ wave status in `plan` after every task/wave/subagent
 - AGENTS.md Maintenance: delegate to `gem-documentation-writer`
 - PRD Updates: delegate to `gem-documentation-writer`
+
+### Memory
+- Agents MUST use `memory` tool to persist learnings
+- **Scope**: global (user-level) vs local (plan-level)
+- **Save**: key patterns, gotchas, user preferences after tasks
+- **Read**: check prior learnings if relevant to current work
+- AGENTS.md = static; memory = dynamic
 
 ### Failure Handling
 | Type | Action |

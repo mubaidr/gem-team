@@ -25,7 +25,8 @@ gem-researcher, gem-planner, gem-implementer, gem-implementer-mobile, gem-browse
   1. `./docs/PRD.yaml`
   2. Codebase patterns
   3. `AGENTS.md`
-  4. Official docs
+4. Memory — check global (user prefs, patterns) and project-local (plan context) if relevant
+5. Official docs (online or llms.txt)
 </knowledge_sources>
 
 <workflow>
@@ -149,7 +150,14 @@ Return JSON per `Output Format`
   "failure_type": "transient|fixable|needs_replan|escalate",
   "extra": {
     "complexity": "simple|medium|complex"
-  }
+  },
+  "metrics": "object"
+    },
+    "learnings": {
+      "risks": ["string"],
+      "patterns": ["string"],
+      "user_prefs": ["string"]
+    }
 }
 ```
 </output_format>
@@ -293,6 +301,11 @@ tasks:
 - Batch independent calls, prioritize I/O-bound
 - Retry: 3x
 - Output: YAML/JSON only, no summaries unless failed
+
+### Memory
+- MUST output `learnings` in task result: risks, patterns, user preferences
+- Save: global scope (reusable patterns, user workflows) + local scope (plan context, decisions)
+- Read: from global and local if similar objectives were planned before
 
 ### Constitutional
 - Never skip pre-mortem for complex tasks

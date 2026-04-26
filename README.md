@@ -29,6 +29,7 @@ See [all installation options](#-installation) below.
 - 👁️ **Full Visibility** — Real-time status, clear approval gates
 - 🛡️ **Resilient** — Pre-mortem analysis, failure handling, auto-replanning
 - ♻️ **Pattern Reuse** — Codebase pattern discovery prevents reinventing wheels
+- 🧠 **Continuous Learning** — Memory tool persists patterns, gotchas, user preferences across sessions
 - 📏 **Established Patterns** — Uses library/framework conventions over custom implementations
 - 🪞 **Self-Correcting** — All agents self-critique at 0.85 confidence threshold
 - 🧠 **Context Scaffolding** — Maps large-scale dependencies _before_ the model reads code, preventing context-loss in legacy repos
@@ -68,6 +69,7 @@ Gem Team includes specialized design agents with **anti-"AI slop" guidelines** f
 | **DESIGNER-MOBILE** | Mobile UI/UX | iOS HIG, Material 3, safe areas, haptics, platform-specific adaptations of design movements |
 
 **Anti-AI Slop Principles:**
+
 - Distinctive fonts (Cabinet Grotesk, Satoshi, Clash Display — never Inter/Roboto defaults)
 - 60-30-10 color strategy with sharp accents
 - Break predictable layouts (asymmetric grids, overlap, bento patterns)
@@ -204,6 +206,19 @@ Agents consult only the sources relevant to their role. Trust levels apply:
 | designer | PRD.yaml (UX goals), codebase patterns, AGENTS.md, existing design system |
 | code-simplifier | codebase patterns, AGENTS.md, test suites (behavior verification) |
 | documentation-writer | AGENTS.md, existing docs, source code |
+
+---
+
+## 🧠 Memory
+
+Agents use `memory` tool to persist learnings across sessions.
+
+| Scope | Purpose |
+|-------|---------|
+| **Global** | User-level: cross-project patterns, user preferences, known fixes |
+| **Local** | Plan-level: task context, plan-specific gotchas, decisions |
+
+AGENTS.md = static conventions; memory = dynamic session context.
 
 ---
 

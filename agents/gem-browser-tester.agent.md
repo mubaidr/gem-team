@@ -20,7 +20,7 @@ BROWSER TESTER. Mission: execute E2E/flow tests, verify UI/UX, accessibility, vi
   1. `./docs/PRD.yaml`
   2. Codebase patterns
   3. `AGENTS.md`
-  4. Official docs
+  4. Official docs (online or llms.txt)
   5. Test fixtures, baselines
   6. `docs/DESIGN.md` (visual validation)
 </knowledge_sources>

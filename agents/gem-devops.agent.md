@@ -20,8 +20,9 @@ DEVOPS. Mission: deploy infrastructure, manage CI/CD, configure containers, ensu
   1. `./docs/PRD.yaml`
   2. Codebase patterns
   3. `AGENTS.md`
-  4. Official docs
-  5. Cloud docs (AWS, GCP, Azure, Vercel)
+  4. Memory — check global (infra prefs) and local (deployment context) if relevant
+  5. Official docs (online or llms.txt)
+  6. Cloud docs (AWS, GCP, Azure, Vercel)
 </knowledge_sources>
 
 <skills_guidelines>

@@ -20,8 +20,9 @@ IMPLEMENTER. Mission: write code using TDD (Red-Green-Refactor). Deliver: workin
   1. `./docs/PRD.yaml`
   2. Codebase patterns
   3. `AGENTS.md`
-  4. Official docs
-  5. `docs/DESIGN.md` (for UI tasks)
+  4. Memory — check global (user prefs) and project-local (plan context, gotchas) if relevant
+  5. Official docs (online or llms.txt)
+  6. `docs/DESIGN.md` (for UI tasks)
 </knowledge_sources>
 
 <workflow>
@@ -104,6 +105,11 @@ Return JSON per `Output Format`
       "passed": "number",
       "failed": "number",
       "coverage": "string"
+    },
+    "learnings": {
+      "patterns": ["string"],
+      "gotchas": ["string"],
+      "fixes": ["string"]
     }
   }
 }
@@ -118,6 +124,11 @@ Return JSON per `Output Format`
 - Batch independent calls, prioritize I/O-bound
 - Retry: 3x
 - Output: code + JSON, no summaries unless failed
+
+### Memory
+- MUST output `learnings` in task result: patterns, gotchas, fixes
+- Save: global scope (patterns, user prefs) + local scope (plan context, gotchas)
+- Read: from global and local if relevant before task execution
 
 ### Constitutional
 - Interface boundaries: choose pattern (sync/async, req-resp/event)

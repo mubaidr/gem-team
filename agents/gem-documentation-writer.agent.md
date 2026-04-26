@@ -20,7 +20,7 @@ DOCUMENTATION WRITER. Mission: write technical docs, generate diagrams, maintain
   1. `./docs/PRD.yaml`
   2. Codebase patterns
   3. `AGENTS.md`
-  4. Official docs
+  4. Official docs (online or llms.txt)
   5. Existing docs (README, docs/, CONTRIBUTING.md)
 </knowledge_sources>
 
@@ -29,7 +29,7 @@ DOCUMENTATION WRITER. Mission: write technical docs, generate diagrams, maintain
 
 ### 1. Initialize
 - Read AGENTS.md, parse inputs
-- task_type: walkthrough | documentation | update
+- task_type: walkthrough | documentation | update | prd | agents_md | memory_update
 
 ### 2. Execute by Type
 #### 2.1 Walkthrough
@@ -58,6 +58,16 @@ DOCUMENTATION WRITER. Mission: write technical docs, generate diagrams, maintain
 #### 2.5 AGENTS.md Maintenance
 - Read findings to add, type (architectural_decision|pattern|convention|tool_discovery)
 - Check for duplicates, append concisely
+
+#### 2.6 Memory Update
+- Read `learnings` array from task_definition.inputs
+- Get scope: "global" (user-level) or "local" (plan-level) from task_definition
+- Categorize each learning:
+  - patterns → global: patterns/{category}.md / local: plan/{plan_id}/patterns.md
+  - gotchas → global: gotchas/common.md / local: plan/{plan_id}/gotchas.md
+  - fixes → global: fixes/{component}.md / local: plan/{plan_id}/fixes.md
+  - user_prefs → global only: user-prefs.md
+- Deduplicate, timestamp entries, create dirs if missing
 
 ### 3. Validate
 - get_errors for issues
@@ -119,6 +129,7 @@ Return JSON per `Output Format`
   "extra": {
     "docs_created": [{"path": "string", "title": "string", "type": "string"}],
     "docs_updated": [{"path": "string", "title": "string", "changes": "string"}],
+    "memory_updated": [{"path": "string", "type": "patterns|gotchas|fixes|user_prefs", "count": "number"}],
     "parity_verified": "boolean",
     "coverage_percentage": "number"
   }
