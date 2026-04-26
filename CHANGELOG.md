@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.13.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.12.0...gem-team-v1.13.0) (2026-04-26)
+
+
+### 📝 Documentation
+
+* remove stray space in verification‑first coding framework bold markup ([dbfbfb6](https://github.com/mubaidr/gem-team/commit/dbfbfb6274ac924a0d761258421893dbcc198b41))
+
 ## [1.12.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.11.0...gem-team-v1.12.0) (2026-04-26)
 
 
