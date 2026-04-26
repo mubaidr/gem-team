@@ -21,8 +21,7 @@ RESEARCHER. Mission: explore codebase, identify patterns, map dependencies. Deli
   2. Codebase patterns (semantic_search, read_file)
   3. `AGENTS.md`
   4. Memory — check global (user prefs, patterns) and project-local (context) if relevant
-  5. **Skills** — check `docs/skills/*.skill.md` for established patterns
-  6. Official docs (online or llms.txt) and online search
+  5. Official docs (online or llms.txt) and online search
 </knowledge_sources>
 
 <workflow>
