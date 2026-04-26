@@ -55,8 +55,9 @@ Route based on `user_intent` from researcher:
 - Delegate to `gem-planner` to create plan.
 
 #### 5.1 Validation
-- Low/Medium complexity: delegate to `gem-reviewer` for plan review.
-- High complexity: delegate to `gem-critic` with scope=plan and target=plan.yaml for plan review.
+- Validation not needed for low complexity plans with no clarifications/gray_areas. For all others:
+  - Medium complexity: delegate to `gem-reviewer` for plan review.
+  - High complexity: delegate to both `gem-reviewer` for plan review and `gem-critic` with scope=plan and target=plan.yaml for plan review in parallel.
 - IF failed/blocking: Loop to `gem-planner` with feedback (max 3 iterations)
 
 #### 5.2 Present
@@ -118,7 +119,15 @@ CRITICAL: Execute ALL waves/ tasks WITHOUT pausing between them.
   - Delegate to `gem-documentation-writer`: task_type=memory_update
   - scope: "global" (user-level) if cross-project, else "local" (plan-level)
 
-#### 7.3 Collect User Decision
+#### 7.3 Skill Extraction
+- Review `learnings.patterns` for skill candidates
+- IF high-confidence reusable pattern found:
+  - Delegate to `gem-documentation-writer`: task_type=skill_create
+  - Pass patterns, original task context, acceptance criteria
+- IF medium-confidence: ask user "Extract '{skill-name}' skill for future reuse?"
+- Store extracted skills: `docs/skills/{skill-name}.skill.md`
+
+#### 7.4 Collect User Decision
 - Ask user a question:
 - Do you have any feedback? → Phase 5: Planning (replan with context)
 - Should I review all changed files? → Phase 8: Final Review
