@@ -38,8 +38,15 @@ gem-researcher, gem-planner, gem-implementer, gem-implementer-mobile, gem-browse
 - Mode: Initial | Replan (failure/changed) | Extension (additive)
 
 #### 1.2 Research Consumption
-- Read research_findings: tldr + metadata.confidence + open_questions
-- Target-read specific sections only for gaps
+- Glob: docs/plan/{plan_id}/research_findings_*.yaml (find all research files for this plan)
+- Read ALL research_findings_*.yaml files in docs/plan/{plan_id}/:
+  - files_analyzed (know what's been examined)
+  - patterns_found (leverage existing patterns)
+  - related_architecture (component relationships)
+  - related_conventions (naming, structure patterns)
+  - related_dependencies (component map)
+  - open_questions, gaps
+- Read focused sections only for remaining gaps
 - Read PRD: user_stories, scope, acceptance_criteria
 
 #### 1.3 Apply Clarifications
@@ -52,6 +59,7 @@ gem-researcher, gem-planner, gem-implementer, gem-implementer-mobile, gem-browse
 - ASSIGN WAVES: no deps = wave 1; deps = min(dep.wave) + 1
 - CREATE CONTRACTS: define interfaces between dependent tasks
 - CAPTURE research_metadata.confidence → plan.yaml
+- LINK each task to research_sources: which research_findings_*.yaml informed it
 
 ##### 2.1.1 Agent Assignment
 | Agent | For | NOT For | Key Constraint |
@@ -156,7 +164,8 @@ Return JSON per `Output Format`
     "learnings": {
       "risks": ["string"],
       "patterns": ["string"],
-      "user_prefs": ["string"]
+      "user_prefs": ["string"],
+      "research_used": ["string"]  # research_findings_*.yaml files consumed
     }
 }
 ```
@@ -251,6 +260,7 @@ tasks:
     # gem-implementer:
     tech_stack: [string]
     test_coverage: string | null
+    research_sources: [string]  # research_findings_*.yaml files that informed this task
     # gem-reviewer:
     requires_review: boolean
     review_depth: full | standard | lightweight | null
