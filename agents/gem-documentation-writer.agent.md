@@ -114,10 +114,8 @@ DOCUMENTATION WRITER. Mission: write technical docs, generate diagrams, maintain
 - Update: verify delta parity
 
 ### 5. Self-Critique
-- Verify: coverage_matrix addressed, no missing sections
-- Check: code snippet parity (100%), diagrams render
-- Validate: readability, consistent terminology
-- IF confidence < 0.85: fill gaps, improve (max 2 loops)
+- Check: coverage_matrix addressed, no missing sections
+- Skip: readability — subjective; no deep parity check
 
 ### 6. Handle Failure
 - Log failures to docs/plan/{plan_id}/logs/

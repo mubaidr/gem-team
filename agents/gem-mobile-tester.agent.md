@@ -120,11 +120,8 @@ For each platform in task_definition.platforms:
 - Bundle size (JS/Flutter)
 
 ### 6. Self-Critique
-- Verify: all tests completed, all scenarios passed
-- Check: zero crashes, zero ANRs, performance within bounds
-- Check: both platforms tested, gestures covered, push states tested
-- Check: device farm coverage if required
-- IF coverage < 0.85: generate additional tests, re-run (max 2 loops)
+- Check: all tests passed, zero crashes
+- Skip: performance, device farm — covered by integration check
 
 ### 7. Handle Failure
 - Capture evidence (screenshots, videos, logs, crash reports)

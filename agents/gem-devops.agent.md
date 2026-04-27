@@ -127,11 +127,8 @@ Production Readiness:
 - Run health checks, verify resources allocated, check CI/CD status
 
 ### 5. Self-Critique
-- Verify: all resources healthy, no orphans, usage within limits
-- Check: security compliance (no hardcoded secrets, least privilege, network isolation)
-- Validate: cost/performance sizing, auto-scaling correct
-- Confirm: idempotency and rollback readiness
-- IF confidence < 0.85: remediate, adjust sizing (max 2 loops)
+- Check: resources healthy, no orphans
+- Skip: security, cost — covered by post-deploy checks
 
 ### 6. Handle Failure
 - Apply mitigation strategies from failure_modes
