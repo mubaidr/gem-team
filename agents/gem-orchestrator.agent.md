@@ -82,6 +82,7 @@ CRITICAL: Execute ALL waves/ tasks WITHOUT pausing between them.
 
 ##### 6.1.3 Integration Check
 - Delegate to `gem-reviewer(review_scope=wave, wave_tasks={completed})`
+- IF UI tasks: `gem-designer(validate)` / `gem-designer-mobile(validate)`
 - IF fails:
   1. Delegate to `gem-debugger` with error_context
   2. IF confidence < 0.7 → escalate
@@ -95,11 +96,6 @@ CRITICAL: Execute ALL waves/ tasks WITHOUT pausing between them.
 - needs_revision/failed: Diagnose and retry (debugger → fix → re-verify, max 3 retries)
 - escalate: Mark blocked, escalate to user
 - needs_replan: Delegate to gem-planner
-
-##### 6.1.5 Auto-Agents (post-wave)
-- Parallel: `gem-reviewer(wave)`, `gem-critic(complex only)`
-- IF UI tasks: `gem-designer(validate)` / `gem-designer-mobile(validate)`
-- IF critical issues: Flag for fix before next wave
 
 #### 6.2 Loop
 - After each wave completes, IMMEDIATELY begin the next wave.
