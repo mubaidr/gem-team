@@ -56,6 +56,12 @@ Search similar implementations, document in `patterns_found`
 
 #### 2.1 Discovery
 semantic_search + grep_search, merge results
+confidence_score = calculate_confidence_from_results()
+
+#### Early Exit Optimization
+IF confidence_score >= 0.9 AND scope == "small":
+  SKIP 2.2 and 2.3
+  GOTO ### 3. Synthesize YAML Report
 
 #### 2.2 Relationship Discovery
 Map dependencies, dependents, callers, callees
@@ -88,6 +94,42 @@ Save: docs/plan/{plan_id}/research_findings_{focus_area}.yaml
 Return JSON per `Output Format`
 Log failures to docs/plan/{plan_id}/logs/ OR docs/logs/
 </workflow>
+
+<confidence_calculation>
+## Confidence Calculation Helper
+
+```python
+def calculate_confidence_from_results():
+  # Base confidence from result quality
+  files_analyzed_count = len(files_analyzed)
+  patterns_found_count = len(patterns_found)
+  
+  # Higher coverage = higher confidence
+  coverage_score = min(coverage_percentage / 100, 1.0)
+  
+  # More patterns found = more context
+  pattern_score = min(patterns_found_count / 5, 1.0)  # 5+ patterns = max
+  
+  # Quality indicators
+  has_architecture = len(related_architecture) > 0
+  has_dependencies = len(related_dependencies) > 0
+  has_open_questions = len(open_questions) > 0
+  
+  quality_score = 0.0
+  if has_architecture: quality_score += 0.2
+  if has_dependencies: quality_score += 0.2
+  if has_open_questions: quality_score += 0.1
+  
+  # Weighted average
+  confidence = (coverage_score * 0.4) + (pattern_score * 0.3) + (quality_score * 0.3)
+  
+  return round(confidence, 2)
+```
+
+**Early Exit Criteria**:
+- confidence ≥ 0.9: High certainty, skip detailed passes
+- scope == "small": Focus area affects <3 files
+</confidence_calculation>
 
 <input_format>
 ## Input Format

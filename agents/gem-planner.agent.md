@@ -111,22 +111,8 @@ Pattern Routing:
 - Define mitigations, document assumptions
 
 ### 4. Validation
-#### 4.1 Structure Verification
-- Valid YAML, required fields, unique task IDs
-- DAG: no circular deps, all dep IDs exist
-- Contracts: valid from_task/to_task, interfaces defined
-- Tasks: valid agent, failure_modes for high/medium, verification present
-
-#### 4.2 Quality Verification
-- estimated_files ≤ 3, estimated_lines ≤ 300
-- Pre-mortem: overall_risk_level defined, critical_failure_modes present
-- Implementation spec: code_structure, affected_areas, component_details
-
-#### 4.3 Self-Critique
-- Verify all PRD acceptance_criteria satisfied
-- Check DAG maximizes parallelism
-- Validate agent assignments
-- IF confidence < 0.85: re-design (max 2 loops)
+- Valid YAML, no placeholder content
+- Skip: deep validation — covered by orchestrator review
 
 ### 5. Handle Failure
 - Log error, return status=failed with reason

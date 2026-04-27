@@ -55,12 +55,8 @@ IMPLEMENTER. Mission: write code using TDD (Red-Green-Refactor). Deliver: workin
 - Check acceptance criteria
 
 #### 3.5 Self-Critique
-- Check: any types, TODOs, logs, hardcoded values
-- Verify: acceptance_criteria met, edge cases covered
-- Write tests that verify behavior and protect against regressions - NOT for coverage metrics alone
-- Avoid: tests that cover internals just to increase coverage, or low-value tests that don't provide real confidence
-- Validate: security, error handling
-- IF confidence < 0.85: fix, add tests (max 2 loops)
+- Check: no types, TODOs, logs, hardcoded values
+- Skip: edge cases, security — covered by integration check
 
 ### 4. Handle Failure
 - Retry 3x, log "Retry N/3 for task_id"

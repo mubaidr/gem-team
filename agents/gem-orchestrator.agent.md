@@ -82,6 +82,7 @@ CRITICAL: Execute ALL waves/ tasks WITHOUT pausing between them.
 
 ##### 6.1.3 Integration Check
 - Delegate to `gem-reviewer(review_scope=wave, wave_tasks={completed})`
+- IF UI tasks: `gem-designer(validate)` / `gem-designer-mobile(validate)`
 - IF fails:
   1. Delegate to `gem-debugger` with error_context
   2. IF confidence < 0.7 → escalate
@@ -95,11 +96,6 @@ CRITICAL: Execute ALL waves/ tasks WITHOUT pausing between them.
 - needs_revision/failed: Diagnose and retry (debugger → fix → re-verify, max 3 retries)
 - escalate: Mark blocked, escalate to user
 - needs_replan: Delegate to gem-planner
-
-##### 6.1.5 Auto-Agents (post-wave)
-- Parallel: `gem-reviewer(wave)`, `gem-critic(complex only)`
-- IF UI tasks: `gem-designer(validate)` / `gem-designer-mobile(validate)`
-- IF critical issues: Flag for fix before next wave
 
 #### 6.2 Loop
 - After each wave completes, IMMEDIATELY begin the next wave.
@@ -178,39 +174,6 @@ Delegate in parallel (up to 4 concurrent):
 - IF needs_replan: Delegate to gem-planner with failure context
 - Log all failures to docs/plan/{plan_id}/logs/
 </workflow>
-
-<delegation_protocol>
-## Delegation Protocol
-| Agent | Role | When to Use |
-|-------|------|-------------|
-| gem-reviewer | Compliance | Does work match spec? Security, quality, PRD alignment |
-| gem-reviewer (final) | Final Audit | After all waves complete - review all changed files holistically |
-| gem-critic | Approach | Is approach correct? Assumptions, edge cases, over-engineering |
-
-Planner assigns `task.agent` in plan.yaml:
-- gem-implementer → routed to implementer
-- gem-browser-tester → routed to browser-tester
-- gem-devops → routed to devops
-- gem-documentation-writer → routed to documentation-writer
-
-```jsonc
-{
-  "gem-researcher": { "plan_id": "string", "objective": "string", "focus_area": "string", "mode": "clarify|research", "task_clarifications": [{"question": "string", "answer": "string"}] },
-  "gem-planner": { "plan_id": "string", "objective": "string", "task_clarifications": [...] },
-  "gem-implementer": { "task_id": "string", "plan_id": "string", "plan_path": "string", "task_definition": "object" },
-  "gem-reviewer": { "review_scope": "plan|task|wave", "task_id": "string (task scope)", "plan_id": "string", "plan_path": "string", "wave_tasks": ["string"], "review_depth": "full|standard|lightweight", "review_security_sensitive": "boolean" },
-  "gem-browser-tester": { "task_id": "string", "plan_id": "string", "plan_path": "string", "task_definition": "object" },
-  "gem-devops": { "task_id": "string", "plan_id": "string", "plan_path": "string", "task_definition": "object", "environment": "dev|staging|prod", "requires_approval": "boolean", "devops_security_sensitive": "boolean" },
-  "gem-debugger": { "task_id": "string", "plan_id": "string", "plan_path": "string", "task_definition": "object", "error_context": {"error_message": "string", "stack_trace": "string", "failing_test": "string", "flow_id": "string", "step_index": "number", "evidence": ["string"], "browser_console": ["string"], "network_failures": ["string"]} },
-  "gem-critic": { "task_id": "string", "plan_id": "string", "plan_path": "string", "scope": "plan|code|architecture", "target": "string", "context": "string" },
-  "gem-code-simplifier": { "task_id": "string", "scope": "single_file|multiple_files|project_wide", "targets": ["string"], "focus": "dead_code|complexity|duplication|naming|all", "constraints": {"preserve_api": "boolean", "run_tests": "boolean", "max_changes": "number"} },
-  "gem-designer": { "task_id": "string", "mode": "create|validate", "scope": "component|page|layout|theme", "target": "string", "context": {"framework": "string", "library": "string"}, "constraints": {"responsive": "boolean", "accessible": "boolean", "dark_mode": "boolean"} },
-  "gem-designer-mobile": { "task_id": "string", "mode": "create|validate", "scope": "component|screen|navigation", "target": "string", "context": {"framework": "string"}, "constraints": {"platform": "ios|android|cross-platform", "accessible": "boolean"} },
-  "gem-documentation-writer": { "task_id": "string", "task_type": "documentation|walkthrough|update", "audience": "developers|end_users|stakeholders", "coverage_matrix": ["string"] },
-  "gem-mobile-tester": { "task_id": "string", "plan_id": "string", "plan_path": "string", "task_definition": "object" }
-}
-```
-</delegation_protocol>
 
 <status_summary_format>
 ## Status Summary Format

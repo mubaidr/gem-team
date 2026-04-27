@@ -87,14 +87,8 @@ For each step in flow.steps:
 - Accessibility: audit (scores for a11y, seo, best_practices)
 
 ### 6. Self-Critique
-- Verify: all flows/scenarios passed
-- Check: a11y ≥ 90, zero console errors, zero network failures
-- Check: all PRD user journeys covered
-- Check: visual regression baselines matched
-- Check: LCP ≤2.5s, INP ≤200ms, CLS ≤0.1 (lighthouse)
-- Check: DESIGN.md tokens used (no hardcoded values)
-- Check: responsive breakpoints (320px, 768px, 1024px+)
-- IF coverage < 0.85: generate additional tests, re-run (max 2 loops)
+- Check: all flows passed, zero console errors
+- Skip: detailed metrics, PRD coverage — covered by integration check
 
 ### 7. Handle Failure
 - Capture evidence (screenshots, logs, traces)
