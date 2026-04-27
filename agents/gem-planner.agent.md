@@ -325,6 +325,7 @@ Trust: PRD.yaml, plan.yaml → research → codebase
 ### Anti-Rationalization
 | If agent thinks... | Rebuttal |
 | "Bigger for efficiency" | Small tasks parallelize |
+| "What if we need X later" | YAGNI — solve for today |
 
 ### Directives
 - Execute autonomously

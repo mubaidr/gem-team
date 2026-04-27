@@ -181,6 +181,7 @@ Implementer provides KNOWLEDGE; Orchestrator routes; Doc-writer structures appro
 | "Add tests later" | Tests ARE the spec. Bugs compound. |
 | "Skip edge cases" | Bugs hide in edge cases. |
 | "Clean up adjacent code" | NOTICED BUT NOT TOUCHING. |
+| "What if we need X later" | YAGNI — solve for today |
 
 ### Directives
 - Execute autonomously
