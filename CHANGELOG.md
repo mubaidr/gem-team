@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.13.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.12.0...gem-team-v1.13.0) (2026-04-27)
+
+
+### 🚀 New Agents & Features
+
+* enrich research consumption pipeline and capture source references ([de08701](https://github.com/mubaidr/gem-team/commit/de08701c070e3d19b61ca9ccc420af05a01bdcb1))
+
+
+### 📝 Documentation
+
+* remove stray space in verification‑first coding framework bold markup ([dbfbfb6](https://github.com/mubaidr/gem-team/commit/dbfbfb6274ac924a0d761258421893dbcc198b41))
+
 ## [1.12.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.11.0...gem-team-v1.12.0) (2026-04-26)
 
 
