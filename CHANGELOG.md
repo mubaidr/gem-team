@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.14.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.13.0...gem-team-v1.14.0) (2026-04-28)
+
+
+### 🚀 New Agents & Features
+
+* add .editorconfig and refine BROWSER TESTER role documentation ([bac3a64](https://github.com/mubaidr/gem-team/commit/bac3a642c5f48edf11d882943009171d29f65259))
+
+
+### 📝 Documentation
+
+* add YAGNI — solve for today entry to anti‑rationalization tables in gem‑implementer.agent.md and gem‑planner.agent.md ([e412775](https://github.com/mubaidr/gem-team/commit/e412775bec02848fef90d0c02fb87c8375a1b942))
+* correct typo in delegate description ([7b37ae1](https://github.com/mubaidr/gem-team/commit/7b37ae1fcc5d537f169a506ba57d295b4b598a0e))
+* **researcher:** improve workflow description and clarify confidence calculation ([d1bb60c](https://github.com/mubaidr/gem-team/commit/d1bb60ce797dd31d3f1d5a30ed14104a31de42e9))
+
 ## [1.13.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.12.0...gem-team-v1.13.0) (2026-04-27)
 
 
