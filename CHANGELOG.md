@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.15.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.14.0...gem-team-v1.15.0) (2026-04-30)
+
+
+### 🛠️ Bug Fixes
+
+* correct anchor links and list syntax in README.md ([4d367a6](https://github.com/mubaidr/gem-team/commit/4d367a6759e0a3257fba877d599255317a97f3eb))
+
 ## [1.14.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.13.0...gem-team-v1.14.0) (2026-04-28)
 
 
