@@ -6,19 +6,19 @@ Self-Learning Multi-agent orchestration framework for spec-driven development an
 
 ## Quick Start
 
-See [all supported installation options](#-installation) below.
+See [all supported installation options](#installation) below.
 
 ---
 
 ## Contents
 
-- [Quick Start](#-quick-start)
-- [Why Gem Team?](#-why-gem-team)
-- [Architecture](#-architecture)
-- [Installation](#-installation)
-- [The Agent Team](#-the-agent-team)
-- [Knowledge Sources](#-knowledge-sources)
-- [Contributing](#-contributing)
+- [Quick Start](#quick-start)
+- [Why Gem Team?](#why-gem-team)
+- [Architecture](#architecture)
+- [Installation](#installation)
+- [The Agent Team](#the-agent-team)
+- [Knowledge Sources](#knowledge-sources)
+- [Contributing](#contributing)
 
 ---
 
