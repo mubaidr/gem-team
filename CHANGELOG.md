@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.15.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.14.0...gem-team-v1.15.0) (2026-05-04)
+
+
+### 🛠️ Bug Fixes
+
+* correct anchor links and list syntax in README.md ([4d367a6](https://github.com/mubaidr/gem-team/commit/4d367a6759e0a3257fba877d599255317a97f3eb))
+
+
+### 📝 Documentation
+
+* add token efficiency improvements and enforce concise, strict JSON output across agents ([25db4a2](https://github.com/mubaidr/gem-team/commit/25db4a24576386e20aa58eb7e7f4852df06d8de6))
+
 ## [1.14.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.13.0...gem-team-v1.14.0) (2026-04-28)
 
 
