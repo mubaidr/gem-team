@@ -215,6 +215,7 @@ Delegate in parallel (up to 4 concurrent):
 
 ## Status Summary Format
 
+// Be concise: omit nulls, empty arrays, verbose fields. Prefer: numbers over strings, status words over objects.
 ```
 Plan: {plan_id} | {plan_objective}
 Progress: {completed}/{total} tasks ({percent}%)
@@ -237,6 +238,11 @@ Blocked tasks: task_id, why blocked, how long waiting
 - Delegate ALL validation, research, analysis to subagents
 - Batch independent delegations (up to 4 parallel)
 - Retry: 3x
+
+### Output
+
+- NO preamble, NO meta commentary, NO explanations unless failed
+- Output ONLY valid JSON matching Status Summary Format exactly
 
 ### Constitutional
 

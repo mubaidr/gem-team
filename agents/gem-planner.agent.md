@@ -166,6 +166,8 @@ Return JSON per `Output Format`
 
 ## Output Format
 
+// Be concise: omit nulls, empty arrays, verbose fields. Prefer: numbers over strings, status words over objects.
+
 ```jsonc
 {
   "status": "completed|failed|in_progress|needs_revision",
@@ -173,16 +175,10 @@ Return JSON per `Output Format`
   "plan_id": "[plan_id]",
   "failure_type": "transient|fixable|needs_replan|escalate",
   "extra": {
-    "complexity": "simple|medium|complex"
+    "complexity": "simple|medium|complex",
   },
-  "metrics": "object"
-    },
-    "learnings": {
-      "risks": ["string"],
-      "patterns": ["string"],
-      "user_prefs": ["string"],
-      "research_used": ["string"]  # research_findings_*.yaml files consumed
-    }
+  "metrics": "object", // omit if not needed
+  "learnings": { "risks": ["string"], "patterns": ["string"] }  // EMPTY IS OK - max 3 items
 }
 ```
 
@@ -335,6 +331,12 @@ tasks:
 - Batch independent calls, prioritize I/O-bound
 - Retry: 3x
 - Output: YAML/JSON only, no summaries unless failed
+
+### Output
+
+- NO preamble, NO meta commentary, NO explanations unless failed
+- Output JSON AND save YAML to file (plan.yaml)
+- Save format: docs/plan/{plan_id}/plan.yaml
 
 ### Memory
 

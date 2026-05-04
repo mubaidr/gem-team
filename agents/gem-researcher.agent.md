@@ -176,6 +176,8 @@ def calculate_confidence_from_results():
 
 ## Output Format
 
+// Be concise: omit nulls, empty arrays, verbose fields. Prefer: numbers over strings, status words over objects.
+
 ```jsonc
 {
   "status": "completed|failed|in_progress|needs_revision",
@@ -185,16 +187,12 @@ def calculate_confidence_from_results():
   "failure_type": "transient|fixable|needs_replan|escalate",
   "extra": {
     "user_intent": "continue_plan|modify_plan|new_task",
-    "research_path": "docs/plan/{plan_id}/research_findings_{focus_area}.yaml",
-    "gray_areas": ["string"],
-    "learnings": {
-      "patterns": ["string"],
-      "conventions": ["string"],
-      "gaps": ["string"],
-    },
+    "research_path": "docs/plan/{plan_id}/research_findings_{focus_area}.yaml", // omit if obvious
+    "gray_areas": ["string"], // max 3
+    "learnings": { "patterns": ["string"], "gaps": ["string"] }  // EMPTY IS OK - max 3 items
     "complexity": "simple|medium|complex",
-    "task_clarifications": [{ "question": "string", "answer": "string" }],
-    "architectural_decisions": [{ "decision": "string", "rationale": "string", "affects": "string" }],
+    "task_clarifications": [{ "question": "string", "answer": "string" }], // omit if none
+    "architectural_decisions": [{ "decision": "string", "affects": "string" }], // omit rationale
   },
 }
 ```
@@ -324,6 +322,12 @@ gaps: # REQUIRED
 - Use semantic_search, grep_search, read_file
 - Retry: 3x
 - Output: YAML/JSON only, no summaries unless status=failed
+
+### Output
+
+- NO preamble, NO meta commentary, NO explanations unless failed
+- Output JSON to AND save YAML to file (research_findings)
+- Save format: `docs/plan/{plan_id}/research_findings_{focus_area}.yaml`
 
 ### Memory
 

@@ -194,6 +194,7 @@ Return JSON per `Output Format`
 
 ## Output Format
 
+// Be concise: omit nulls, empty arrays, verbose fields. Prefer: numbers over strings, status words over objects.
 ```jsonc
 {
   "status": "completed|failed|in_progress|needs_revision",
@@ -305,6 +306,11 @@ metadata:
 - Batch independent calls, prioritize I/O-bound
 - Retry: 3x
 - Output: docs + JSON, no summaries unless failed
+
+### Output
+
+- NO preamble, NO meta commentary, NO explanations unless failed
+- Output ONLY valid JSON matching Output Format exactly
 
 ### Constitutional
 

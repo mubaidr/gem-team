@@ -57,6 +57,18 @@ See [all supported installation options](#installation) below.
 - **Pre-Mortem** — Failure modes identified BEFORE execution
 - **Contract-First** — Contract tests written before implementation
 
+### Token Efficiency
+
+Optimized for reduced LLM token consumption without quality loss:
+
+- **Concise Output** — No preamble, no meta commentary, no verbose explanations
+- **Strict Formats** — JSON/YAML exactly matching schemas — eliminates parse errors and retries
+- **Empty is OK** — Skip empty arrays, nulls, verbose fields where not needed
+- **File-Based** — Researcher/Planner save to YAML files (not all in JSON output)
+- **Learnings** — Empty patterns/conventions unless critical
+
+> **Result:** ~40-60% reduction on output tokens while maintaining quality.
+
 ### Design
 
 - **Design Agents** — Dedicated agents for web and mobile UI/UX with anti-"AI slop" guidelines for distinctive aesthetics

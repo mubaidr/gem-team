@@ -105,6 +105,7 @@ Return JSON per `Output Format`
 
 ## Output Format
 
+// Be concise: omit nulls, empty arrays, verbose fields. Prefer: numbers over strings, status words over objects.
 ```jsonc
 {
   "status": "completed|failed|in_progress|needs_revision",
@@ -125,24 +126,9 @@ Return JSON per `Output Format`
       "coverage": "string",
     },
     "learnings": {
-      "facts": ["string"],
-      "patterns": [
-        {
-          "name": "string",
-          "when_to_apply": "string",
-          "code_example": "string",
-          "anti_pattern": "string",
-          "context": "string",
-          "confidence": "number",
-        },
-      ],
-      "conventions": [
-        {
-          "type": "code_style|architecture|tooling",
-          "proposal": "string",
-          "rationale": "string",
-        },
-      ],
+      "facts": ["string"],  // max 3 - simple strings, skip if obvious
+      "patterns": [],  // EMPTY IS OK - only emit if confidence ≥0.9 AND needed
+      "conventions": []  // EMPTY IS OK - skip unless human approval given
     },
   },
 }
@@ -160,6 +146,11 @@ Return JSON per `Output Format`
 - Batch independent calls, prioritize I/O-bound
 - Retry: 3x
 - Output: code + JSON, no summaries unless failed
+
+### Output
+
+- NO preamble, NO meta commentary, NO explanations unless failed
+- Output ONLY valid JSON matching Output Format exactly
 
 ### Learnings Routing (Triple System)
 

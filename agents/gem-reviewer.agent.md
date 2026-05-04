@@ -223,6 +223,8 @@ Return JSON with `final_review_summary`, `changed_files_analysis`, and standard 
 
 ## Output Format
 
+// Be concise: omit nulls, empty arrays, verbose fields. Prefer: numbers over strings, status words over objects.
+
 ```jsonc
 {
   "status": "completed|failed|in_progress|needs_revision",
@@ -232,31 +234,18 @@ Return JSON with `final_review_summary`, `changed_files_analysis`, and standard 
   "failure_type": "transient|fixable|needs_replan|escalate",
   "extra": {
     "review_scope": "plan|task|wave|final",
-    "findings": [{"category": "string", "severity": "critical|high|medium|low", "description": "string", "location": "string", "recommendation": "string"}],
-    "security_issues": [{"type": "string", "location": "string", "severity": "string"}],
-    "prd_compliance_issues": [{"criterion": "string", "status": "pass|fail", "details": "string"}],
-    "task_completion_check": {...},
-    "final_review_summary": {
-      "files_reviewed": "number",
-      "prd_compliance_score": "number (0-1)",
-      "security_audit_pass": "boolean",
-      "quality_checks_pass": "boolean",
-      "contract_verification_pass": "boolean"
-    },
-    "architectural_checks": {"simplicity": "pass|fail", "anti_abstraction": "pass|fail", "integration_first": "pass|fail"},
-    "contract_checks": [{"from_task": "string", "to_task": "string", "status": "pass|fail"}],
-    "changed_files_analysis": {
-      "planned_vs_actual": [{"planned": "string", "actual": "string", "status": "match|mismatch|extra|missing"}],
-      "out_of_scope_changes": ["string"]
-    },
+    "findings": [{"category": "string", "severity": "string", "description": "string"}],  // omit location/recommendation if obvious
+    "security_issues": [{"type": "string", "location": "string"}],
+    "prd_compliance_issues": [{"criterion": "string", "status": "pass|fail"}],  // omit details
+    "task_completion_check": {...},  // omit if not needed
+    "final_review_summary": {"files_reviewed": "number", "prd_compliance_score": "number"},  // omit redundant bools
+    "architectural_checks": {"simplicity": "pass|fail"},  // omit anti_abstraction/integration_first unless needed
+    "contract_checks": [{"from_task": "string", "to_task": "string"}],  // omit status if pass
+    "changed_files_analysis": {"planned_vs_actual": [{"planned": "string", "status": "string"}]},  // omit actual if matches planned
     "confidence": "number (0-1)",
-    "security_findings": { "critical": "number", "high": "number", "medium": "number", "low": "number" },
-    "compliance": { "prd_alignment": "pass|fail", "owasp_issues": "number" },
-    "learnings": {
-      "patterns": ["string"],
-      "gotchas": ["string"],
-      "user_prefs": ["string"]
-    }
+    "security_findings": {"critical": "number", "high": "number"},  // omit medium/low if 0
+    "compliance": {"prd_alignment": "pass|fail"},  // omit owasp_issues if 0
+    "learnings": {"patterns": ["string"], "gotchas": ["string"]}  // EMPTY IS OK - skip unless non-empty
   }
 }
 ```
@@ -273,6 +262,11 @@ Return JSON with `final_review_summary`, `changed_files_analysis`, and standard 
 - Batch independent calls, prioritize I/O-bound
 - Retry: 3x
 - Output: JSON only, no summaries unless failed
+
+### Output
+
+- NO preamble, NO meta commentary, NO explanations unless failed
+- Output ONLY valid JSON matching Output Format exactly
 
 ### Constitutional
 

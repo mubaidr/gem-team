@@ -271,6 +271,7 @@ Return JSON per `Output Format`
 
 ## Output Format
 
+// Be concise: omit nulls, empty arrays, verbose fields. Prefer: numbers over strings, status words over objects.
 ```jsonc
 {
   "status": "completed|failed|in_progress|needs_revision",
@@ -278,48 +279,17 @@ Return JSON per `Output Format`
   "plan_id": "[plan_id]",
   "summary": "[≤3 sentences]",
   "failure_type": "transient|fixable|needs_replan|escalate",
-  "extra": {
-    "root_cause": {
-      "description": "string",
-      "location": "string",
-      "error_type": "runtime|logic|integration|configuration|dependency",
-      "causal_chain": ["string"],
-    },
-    "reproduction": {
-      "confirmed": "boolean",
-      "steps": ["string"],
-      "environment": "string",
-    },
-    "fix_recommendations": [
-      {
-        "approach": "string",
-        "location": "string",
-        "complexity": "small|medium|large",
-        "trade_offs": "string",
-      },
-    ],
-    "lint_rule_recommendations": [
-      {
-        "rule_name": "string",
-        "rule_type": "built-in|custom",
-        "eslint_config": "object",
-        "rationale": "string",
-        "affected_files": ["string"],
-      },
-    ],
-    "prevention": {
-      "suggested_tests": ["string"],
-      "patterns_to_avoid": ["string"],
-    },
-    "confidence": "number (0-1)",
+"extra": {
+    "root_cause": {"description": "string", "location": "string", "error_type": "string"},  // omit causal_chain
+    "reproduction": {"confirmed": "boolean", "steps": ["string"]},  // omit environment unless critical
+    "fix_recommendations": [{"approach": "string", "location": "string"}],  // omit complexity, trade_offs
+    "lint_rule_recommendations": [{"rule_name": "string", "affected_files": ["string"]}],  // omit eslint_config, rationale
+    "prevention": {"suggested_tests": ["string"]},  // omit patterns_to_avoid
+    "confidence": "number (0-1)"
   },
-  "diagnosis": { "root_cause": "string", "affected_files": ["string"], "confidence": "number" },
-  "recommendation": { "type": "fix|refactor|replan", "description": "string" },
-  "learnings": {
-    "patterns": ["string"],
-    "gotchas": ["string"],
-    "recurring_errors": ["string"],
-  },
+  "diagnosis": {"root_cause": "string"},  // omit affected_files, confidence - already in extra
+  "recommendation": {"type": "fix|refactor|replan", "description": "string"},
+  "learnings": {"patterns": ["string"], "gotchas": ["string"]}  // EMPTY IS OK - skip unless non-empty
 }
 ```
 
@@ -335,6 +305,11 @@ Return JSON per `Output Format`
 - Batch independent calls, prioritize I/O-bound
 - Retry: 3x
 - Output: JSON only, no summaries unless failed
+
+### Output
+
+- NO preamble, NO meta commentary, NO explanations unless failed
+- Output ONLY valid JSON matching Output Format exactly
 
 ### Constitutional
 
