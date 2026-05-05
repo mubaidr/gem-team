@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.16.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.15.0...gem-team-v1.16.0) (2026-05-05)
+
+
+### 🚀 New Agents & Features
+
+* expand agent configurations in plugin manifest ([28f652a](https://github.com/mubaidr/gem-team/commit/28f652a305b6f403360c4a9d4e796add41c94bee))
+
+
+### 📝 Documentation
+
+* add I/O optimization guidance to agent documentation ([6148d43](https://github.com/mubaidr/gem-team/commit/6148d43e2be7d87c01726a69c22f9a48d8251317))
+
 ## [1.15.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.14.0...gem-team-v1.15.0) (2026-05-04)
 
 
