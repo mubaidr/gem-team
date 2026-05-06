@@ -108,47 +108,67 @@ User Goal → Orchestrator → [Simple: Research/Plan] or [Complex: Discuss → 
 
 ## Installation
 
-| Tool                         | Installation Command                                             | Notes                                                                                     |
-| :--------------------------- | :--------------------------------------------------------------- | :---------------------------------------------------------------------------------------- |
-| **GitHub Copilot (VS Code)** | Extension panel → Search "gem-team" → Install                    | [Docs](https://docs.github.com/en/copilot/using-github-copilot/using-github-copilot-chat) |
-| **GitHub Copilot CLI**       | `copilot plugin install gem-team@awesome-copilot`                | Default marketplace                                                                       |
-| **Claude Code**              | `/plugin install mubaidr/gem-team`                               | [Docs](https://docs.anthropic.com/en/docs/claude-code)                                    |
-| **OpenCode**                 | Add to `opencode.json` plugin array                              | [Docs](https://opencode.ai/docs/)                                                         |
-| **Cursor IDE**               | `/add-plugin /path/to/gem-team` or clone to `~/.cursor/plugins/` | See below                                                                                 |
-| **APM**                      | `apm install mubaidr/gem-team`                                   | All runtimes, version pinned                                                              |
-| **Manual Copy**              | Copy `.apm/agents/` to runtime directory                         | See below                                                                                 |
+| Tool                         | Installation Command                              | Notes                                                                                                                                 |
+| :--------------------------- | :------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------ |
+| **GitHub Copilot (VS Code)** | Extension panel → Search "gem-team" → Install     | [Docs](https://docs.github.com/en/copilot/using-github-copilot/using-github-copilot-chat)                                             |
+| **GitHub Copilot CLI**       | `copilot plugin install gem-team@awesome-copilot` | [Docs](https://docs.github.com/en/enterprise-cloud%40latest/copilot/how-tos/copilot-cli/customize-copilot/plugins-finding-installing) |
+| **Claude Code**              | `/plugin install gem-team@<marketplace>`          | [Docs](https://code.claude.com/docs/en/discover-plugins)                                                                              |
+| **OpenCode**                 | Add to `opencode.json` plugin array               | [Docs](https://open-code.ai/en/docs/plugins)                                                                                          |
+| **Cursor IDE**               | `/add-plugin /path/to/gem-team`                   | [Rules docs](https://docs.cursor.com/context/rules)                                                                                   |
+| **APM**                      | `apm install mubaidr/gem-team`                    | [Docs](https://microsoft.github.io/apm/getting-started/quick-start/)                                                                  |
+| **Manual Copy**              | Copy `.apm/agents/` to runtime directory          | See below                                                                                                                             |
 
 ### Claude Code Local Install
 
 ```bash
-# Clone to Claude Code plugins directory
-git clone https://github.com/mubaidr/gem-team.git ~/.claude/plugins/gem-team
+# Clone anywhere
+git clone https://github.com/mubaidr/gem-team.git
+cd gem-team
 
-# Restart Claude Code or run:
-/plugin refresh
+# Load as a local plugin for this session
+claude --plugin-dir .
+
+# If you edit plugin files during the session, run:
+/reload-plugins
 ```
 
 ### Cursor IDE Local Install
 
 ```bash
-# Clone to Cursor plugins directory
-git clone https://github.com/mubaidr/gem-team.git ~/.cursor/plugins/gem-team
+# Clone anywhere
+git clone https://github.com/mubaidr/gem-team.git
+cd gem-team
 
 # In Cursor chat, run:
-/add-plugin ~/.cursor/plugins/gem-team
+/add-plugin /absolute/path/to/gem-team
 ```
 
 Or import as a **Team Marketplace** in Settings → Plugins → Team Marketplaces → Import.
 
-### Manual Installation Paths
+### Where Things Live (Newbie-Friendly)
 
-| Tool                     | Path                        |
-| :----------------------- | :-------------------------- |
-| GitHub Copilot           | `~/.github/copilot/agents/` |
-| GitHub Copilot (project) | `.github/plugin/agents/`    |
-| Claude Code              | `~/.claude/agents/`         |
-| OpenCode                 | `~/.opencode/agents/`       |
-| Cursor                   | `~/.cursor/agents/`         |
+Different tools use different concepts:
+
+1. Tool-managed installs: the tool downloads and caches plugins for you (you normally should not manually edit these directories).
+2. Project configuration: files you commit to your repo (recommended for teams).
+
+#### Tool-Managed Installs (Caches, Installed Plugins)
+
+| Tool               | What                                             | Path                            | Docs                                                                                                |
+| :----------------- | :----------------------------------------------- | :------------------------------ | :-------------------------------------------------------------------------------------------------- |
+| GitHub Copilot CLI | Installed plugins                                | `~/.copilot/installed-plugins/` | [Docs](https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-plugin-reference)     |
+| GitHub Copilot CLI | Config home                                      | `~/.copilot/`                   | [Docs](https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-config-dir-reference) |
+| Claude Code        | Installed plugins, marketplaces, per-plugin data | `~/.claude/plugins/`            | [Docs](https://code.claude.com/docs/en/claude-directory)                                            |
+| OpenCode           | Global plugins                                   | `~/.config/opencode/plugins/`   | [Docs](https://open-code.ai/en/docs/plugins)                                                        |
+
+#### Project Configuration (Commit These)
+
+| Tool               | What                    | Path                         | Docs                                                                                            |
+| :----------------- | :---------------------- | :--------------------------- | :---------------------------------------------------------------------------------------------- |
+| GitHub Copilot CLI | Project plugin manifest | `.github/plugin/plugin.json` | [Docs](https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-plugin-reference) |
+| Claude Code        | Project settings        | `.claude/settings.json`      | [Docs](https://code.claude.com/docs/en/claude-directory)                                        |
+| OpenCode           | Project plugins         | `.opencode/plugins/`         | [Docs](https://open-code.ai/en/docs/plugins)                                                    |
+| Cursor             | Project rules           | `.cursor/rules/`             | [Docs](https://docs.cursor.com/context/rules)                                                   |
 
 ---
 
