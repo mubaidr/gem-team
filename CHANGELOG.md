@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.19.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.18.0...gem-team-v1.19.0) (2026-05-06)
+
+
+### 📝 Documentation
+
+* **readme:** rewrite installation instructions and improve formatting of plugin setup details ([4c5ac3f](https://github.com/mubaidr/gem-team/commit/4c5ac3fa4191794672fdbf93d33b7fb994164de8))
+
 ## [1.18.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.17.0...gem-team-v1.18.0) (2026-05-06)
 
 
