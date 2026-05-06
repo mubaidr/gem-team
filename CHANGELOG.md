@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.18.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.17.0...gem-team-v1.18.0) (2026-05-06)
+
+
+### 🚀 New Agents & Features
+
+* **gem-team:** add plugin metadata and installation instructions ([8933ec8](https://github.com/mubaidr/gem-team/commit/8933ec8a330ca21715fe7b04acd7dd0a7d528c09))
+
 ## [1.17.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.16.0...gem-team-v1.17.0) (2026-05-06)
 
 
