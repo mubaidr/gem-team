@@ -29,6 +29,7 @@
         }
       ],
       "extra-files": [
+        ".claude-plugin/plugin.json",
         ".cursor-plugin/plugin.json",
         ".github/plugin/plugin.json",
         "apm.yml",

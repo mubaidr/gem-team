@@ -118,6 +118,16 @@ User Goal → Orchestrator → [Simple: Research/Plan] or [Complex: Discuss → 
 | **APM**                      | `apm install mubaidr/gem-team`                                   | All runtimes, version pinned                                                              |
 | **Manual Copy**              | Copy `.apm/agents/` to runtime directory                         | See below                                                                                 |
 
+### Claude Code Local Install
+
+```bash
+# Clone to Claude Code plugins directory
+git clone https://github.com/mubaidr/gem-team.git ~/.claude/plugins/gem-team
+
+# Restart Claude Code or run:
+/plugin refresh
+```
+
 ### Cursor IDE Local Install
 
 ```bash
