@@ -15,6 +15,7 @@ We follow **Conventional Commits** strictly. Your commit messages must follow th
 
 [optional body]
 ```
+
 ### Agent File Skeleton
 
 Each `.agent.md` file follows this structure:
@@ -44,16 +45,16 @@ All agents share: Execution rules, Constitutional rules, Anti-Patterns, and Dire
 
 ### Types
 
-| Type | Description | Release Impact |
-|------|-------------|----------------|
-| `feat` | New feature or agent | 🚀 Minor release |
-| `fix` | Bug fix | 🛠️ Patch release |
-| `perf` | Performance improvement | ⚡ Patch release |
-| `docs` | Documentation only | 📝 No release (changelog only) |
-| `refactor` | Code refactoring | 🧹 No release |
-| `test` | Adding/updating tests | 🧪 No release |
-| `chore` | Maintenance, deps, build | 🧹 No release |
-| `BREAKING CHANGE` | Breaking change | 🔥 Major release |
+| Type              | Description              | Release Impact                 |
+| ----------------- | ------------------------ | ------------------------------ |
+| `feat`            | New feature or agent     | 🚀 Minor release               |
+| `fix`             | Bug fix                  | 🛠️ Patch release               |
+| `perf`            | Performance improvement  | ⚡ Patch release               |
+| `docs`            | Documentation only       | 📝 No release (changelog only) |
+| `refactor`        | Code refactoring         | 🧹 No release                  |
+| `test`            | Adding/updating tests    | 🧪 No release                  |
+| `chore`           | Maintenance, deps, build | 🧹 No release                  |
+| `BREAKING CHANGE` | Breaking change          | 🔥 Major release               |
 
 ### Examples
 
@@ -96,6 +97,13 @@ git commit -m "refactor(gem-planner): simplify wave scheduling"
 ## 🏷️ Pull Request Titles
 
 Since we use squash merging, **PR titles become commit messages**. Make sure your PR titles follow the same format!
+
+### After Your Changes
+
+1. Push agent changes to `.apm/agents/`
+2. Conventional commit message triggers Release Please
+3. Version auto-bumps in git tags
+4. Users update via their tool's install command
 
 ## ❌ What Won't Work
 

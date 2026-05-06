@@ -1,1 +1,0 @@
-/projects/gem-team/agents/gem-researcher.agent.md

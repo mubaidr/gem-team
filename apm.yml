@@ -6,4 +6,8 @@ description: >-
 author: mubaidr
 license: Apache-2.0
 target: all
-type: hybrid
+includes: auto
+scripts: {}
+dependencies:
+  apm: []
+  mcp: []

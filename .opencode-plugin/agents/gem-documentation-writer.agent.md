@@ -1,1 +1,0 @@
-/projects/gem-team/agents/gem-documentation-writer.agent.md
