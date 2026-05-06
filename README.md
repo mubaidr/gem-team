@@ -139,7 +139,6 @@ Or import as a **Team Marketplace** in Settings → Plugins → Team Marketplace
 | Claude Code              | `~/.claude/agents/`         |
 | OpenCode                 | `~/.opencode/agents/`       |
 | Cursor                   | `~/.cursor/agents/`         |
-| Windsurf                 | `~/.windsurf/agents/`       |
 
 ---
 
