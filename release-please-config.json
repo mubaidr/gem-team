@@ -1,48 +1,43 @@
 {
-    "packages": {
-        ".": {
-            "changelog-sections": [
-                {
-                    "hidden": false,
-                    "section": "🚀 New Agents & Features",
-                    "type": "feat"
-                },
-                {
-                    "hidden": false,
-                    "section": "🛠️ Bug Fixes",
-                    "type": "fix"
-                },
-                {
-                    "hidden": false,
-                    "section": "⚡ Performance",
-                    "type": "perf"
-                },
-                {
-                    "hidden": false,
-                    "section": "📝 Documentation",
-                    "type": "docs"
-                },
-                {
-                    "hidden": true,
-                    "section": "🧹 Housekeeping",
-                    "type": "chore"
-                }
-            ],
-            "extra-files": [
-                "apm.yml",
-                "version.txt",
-                "README.md",
-                ".github/plugin/plugin.json",
-                "plugin.json",
-                ".cursor-plugin/plugin.json",
-                ".claude-plugin/plugin.json",
-                ".opencode-plugin/plugin.json",
-                "awesome-copilot/plugins/gem-team/.github/plugin/plugin.json",
-                "awesome-copilot/plugins/gem-team/README.md"
-            ],
-            "package-name": "gem-team",
-            "release-type": "simple",
-            "versioning": "always-bump-minor"
+  "packages": {
+    ".": {
+      "changelog-sections": [
+        {
+          "hidden": false,
+          "section": "🚀 New Agents & Features",
+          "type": "feat"
+        },
+        {
+          "hidden": false,
+          "section": "🛠️ Bug Fixes",
+          "type": "fix"
+        },
+        {
+          "hidden": false,
+          "section": "⚡ Performance",
+          "type": "perf"
+        },
+        {
+          "hidden": false,
+          "section": "📝 Documentation",
+          "type": "docs"
+        },
+        {
+          "hidden": true,
+          "section": "🧹 Housekeeping",
+          "type": "chore"
         }
+      ],
+      "extra-files": [
+        ".cursor-plugin/plugin.json",
+        ".github/plugin/plugin.json",
+        "apm.yml",
+        "plugin.json",
+        "version.txt"
+      ],
+      "package-name": "gem-team",
+      "release-type": "simple",
+      "versioning": "always-bump-minor"
     }
+  }
 }
