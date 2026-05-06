@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.17.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.16.0...gem-team-v1.17.0) (2026-05-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* Agents moved from root agents/ to .apm/agents/
+
+### refactor
+
+* migrate to APM structure and update documentation ([41d5870](https://github.com/mubaidr/gem-team/commit/41d587064c4e498e4e0309c16205f53a6e446911))
+
+
+### 📝 Documentation
+
+* fix typo in test filtering description across agent docs ([cf9ed54](https://github.com/mubaidr/gem-team/commit/cf9ed547eb4a6067ff61aa773f647af6907fcf89))
+* **readme:** remove Windsurf entry from agents list ([2b3121c](https://github.com/mubaidr/gem-team/commit/2b3121cdb9c7b7c7d35942cb34b5241c3c10c244))
+* **readme:** replace "framework" with "harness" terminology and update section headings accordingly ([bd79ed9](https://github.com/mubaidr/gem-team/commit/bd79ed9b40f4a4832d90fedc007bd8787a6812be))
+
 ## [1.16.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.15.0...gem-team-v1.16.0) (2026-05-05)
 
 
