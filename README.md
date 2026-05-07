@@ -115,88 +115,162 @@ User Goal → Orchestrator → [Simple: Research/Plan] or [Complex: Discuss → 
 
 ---
 
-## Installation
+# Installation
 
-### APM (Recommended)
+Choose the method that works best for your workflow:
 
-The easiest way to install and manage Gem Team:
+## Method 1: Direct Install via APM (Recommended)
+
+Fastest way to get started. APM automatically detects your tool and installs to the correct location.
 
 ```bash
-# Install via APM
 apm install mubaidr/gem-team
-
-# Or register as a marketplace and browse packages
-apm marketplace add mubaidr/gem-team
-apm marketplace browse gem-team
-apm install gem-team@gem-team
 ```
+
+**Works with:** GitHub Copilot CLI, Claude Code, Cursor, OpenCode
 
 [APM Documentation](https://microsoft.github.io/apm/getting-started/quick-start/)
 
-### Other Tools
+---
 
-| Tool                         | Installation Command                              | Notes                                                                                                                                 |
-| :--------------------------- | :------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------ |
-| **GitHub Copilot (VS Code)** | Extension panel → Search "gem-team" → Install     | [Docs](https://docs.github.com/en/copilot/using-github-copilot/using-github-copilot-chat)                                             |
-| **GitHub Copilot CLI**       | `copilot plugin install gem-team@awesome-copilot` | [Docs](https://docs.github.com/en/enterprise-cloud%40latest/copilot/how-tos/copilot-cli/customize-copilot/plugins-finding-installing) |
-| **Claude Code**              | `/plugin install gem-team@<marketplace>`          | [Docs](https://code.claude.com/docs/en/discover-plugins)                                                                              |
-| **OpenCode**                 | Add to `opencode.json` plugin array               | [Docs](https://open-code.ai/en/docs/plugins)                                                                                          |
-| **Cursor IDE**               | `/add-plugin /path/to/gem-team`                   | [Rules docs](https://docs.cursor.com/context/rules)                                                                                   |
-| **Manual Copy**              | Copy `.apm/agents/` to runtime directory          | See below                                                                                                                             |
+## Method 2: Via Marketplace
 
-### Claude Code Local Install
+Add gem-team as a marketplace, then install from it. Useful for browsing available agents and managing updates.
+
+### GitHub Copilot CLI
 
 ```bash
-# Clone anywhere
+# Add marketplace
+copilot plugin marketplace add mubaidr/gem-team
+
+# Browse available plugins
+copilot plugin marketplace browse gem-team
+
+# Install
+copilot plugin install gem-team@gem-team
+```
+
+### Claude Code
+
+```bash
+# Add marketplace
+/plugin marketplace add mubaidr/gem-team
+
+# Browse in UI
+/plugin
+
+# Install
+/plugin install gem-team@gem-team
+```
+
+### Cursor IDE
+
+```bash
+# Add marketplace via APM
+apm marketplace add mubaidr/gem-team
+
+# Install
+apm install gem-team@gem-team
+```
+
+---
+
+## Method 3: From awesome-copilot Marketplace
+
+Install from the official awesome-copilot marketplace (GitHub Copilot CLI only).
+
+```bash
+# awesome-copilot is pre-registered by default
+copilot plugin install gem-team@awesome-copilot
+```
+
+**Note:** This method is only available if gem-team is listed in the awesome-copilot marketplace.
+
+---
+
+## Method 4: Local/Manual Installation
+
+For development, testing, or offline use.
+
+### Clone Repository
+
+```bash
 git clone https://github.com/mubaidr/gem-team.git
 cd gem-team
+```
 
-# Load as a local plugin for this session
+### Claude Code
+
+```bash
+# Load as local plugin
 claude --plugin-dir .
 
-# If you edit plugin files during the session, run:
+# Or add as local marketplace
+/plugin marketplace add ./
+
+# Reload after changes
 /reload-plugins
 ```
 
-### Cursor IDE Local Install
+### Cursor IDE
 
 ```bash
-# Clone anywhere
-git clone https://github.com/mubaidr/gem-team.git
-cd gem-team
+# Option 1: Via chat command
+# In Cursor: /add-plugin /absolute/path/to/gem-team
 
-# In Cursor chat, run:
-/add-plugin /absolute/path/to/gem-team
+# Option 2: Copy agents to project
+cp -r .apm/agents .cursor/rules/
 ```
 
-Or import as a **Team Marketplace** in Settings → Plugins → Team Marketplaces → Import.
+### GitHub Copilot CLI
 
-### Where Things Live (Newbie-Friendly)
+```bash
+# Add as local marketplace
+copilot plugin marketplace add /absolute/path/to/gem-team
 
-Different tools use different concepts:
+# Install
+copilot plugin install gem-team@gem-team
+```
 
-1. Tool-managed installs: the tool downloads and caches plugins for you (you normally should not manually edit these directories).
-2. Project configuration: files you commit to your repo (recommended for teams).
+### Manual Copy (Any Tool)
 
-#### Tool-Managed Installs (Caches, Installed Plugins)
+```bash
+# Copy agents to your tool's directory
+# GitHub Copilot: ~/.copilot/
+# Claude Code: ~/.claude/plugins/
+# Cursor: .cursor/rules/
+# OpenCode: .opencode/plugins/
 
-| Tool               | What                                             | Path                            | Docs                                                                                                |
-| :----------------- | :----------------------------------------------- | :------------------------------ | :-------------------------------------------------------------------------------------------------- |
-| GitHub Copilot CLI | Installed plugins                                | `~/.copilot/installed-plugins/` | [Docs](https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-plugin-reference)     |
-| GitHub Copilot CLI | Config home                                      | `~/.copilot/`                   | [Docs](https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-config-dir-reference) |
-| Claude Code        | Installed plugins, marketplaces, per-plugin data | `~/.claude/plugins/`            | [Docs](https://code.claude.com/docs/en/claude-directory)                                            |
-| OpenCode           | Global plugins                                   | `~/.config/opencode/plugins/`   | [Docs](https://open-code.ai/en/docs/plugins)                                                        |
-
-#### Project Configuration (Commit These)
-
-| Tool               | What                    | Path                         | Docs                                                                                            |
-| :----------------- | :---------------------- | :--------------------------- | :---------------------------------------------------------------------------------------------- |
-| GitHub Copilot CLI | Project plugin manifest | `.github/plugin/plugin.json` | [Docs](https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-plugin-reference) |
-| Claude Code        | Project settings        | `.claude/settings.json`      | [Docs](https://code.claude.com/docs/en/claude-directory)                                        |
-| OpenCode           | Project plugins         | `.opencode/plugins/`         | [Docs](https://open-code.ai/en/docs/plugins)                                                    |
-| Cursor             | Project rules           | `.cursor/rules/`             | [Docs](https://docs.cursor.com/context/rules)                                                   |
+cp -r .apm/agents <destination>
+```
 
 ---
+
+## VS Code Extension (GitHub Copilot)
+
+Search for "gem-team" in the VS Code Extensions marketplace.
+
+1. Open VS Code
+2. Go to Extensions (Ctrl+Shift+X)
+3. Search "gem-team"
+4. Click Install
+
+---
+
+## Verification
+
+After installation, verify agents are available:
+
+```bash
+# GitHub Copilot CLI
+copilot plugin list
+
+# Claude Code
+/plugin list
+
+# APM (any tool)
+apm list
+```
 
 ## The Agent Team
 
