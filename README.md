@@ -240,7 +240,8 @@ claude --plugin-dir .
 # In Cursor: /add-plugin /absolute/path/to/gem-team
 
 # Option 2: Copy agents to project
-cp -r .apm/agents .cursor/rules/
+# One-line install: Copy agents and rename to .mdc
+mkdir -p .cursor/rules && cp .apm/agents/*.agent.md .cursor/rules/ && cd .cursor/rules && for f in *.agent.md; do mv "$f" "${f%.agent.md}.mdc"; done && cd ../..
 ```
 
 #### GitHub Copilot CLI
