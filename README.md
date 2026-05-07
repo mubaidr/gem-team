@@ -115,11 +115,32 @@ User Goal → Orchestrator → [Simple: Research/Plan] or [Complex: Discuss → 
 
 ---
 
-# Installation
+## Installation
+
+### Install APM First
+
+If you don't have APM installed, install it first:
+
+```bash
+# macOS/Linux
+curl -fsSL https://microsoft.github.io/apm/install.sh | sh
+
+# Windows (PowerShell)
+irm https://microsoft.github.io/apm/install.ps1 | iex
+
+# Or via npm
+npm install -g @microsoft/apm
+```
+
+**Why APM?** Universal package manager for AI coding tools. One command installs to all your tools (Copilot CLI, Claude Code, Cursor, OpenCode). Handles version locking, updates, and dependencies automatically.
+
+[APM Documentation](https://microsoft.github.io/apm/) | [GitHub](https://github.com/microsoft/apm)
+
+---
 
 Choose the method that works best for your workflow:
 
-## Method 1: Direct Install via APM (Recommended)
+### Method 1: Direct Install via APM (Recommended)
 
 Fastest way to get started. APM automatically detects your tool and installs to the correct location.
 
@@ -133,11 +154,11 @@ apm install mubaidr/gem-team
 
 ---
 
-## Method 2: Via Marketplace
+### Method 2: Via Marketplace
 
 Add gem-team as a marketplace, then install from it. Useful for browsing available agents and managing updates.
 
-### GitHub Copilot CLI
+#### GitHub Copilot CLI
 
 ```bash
 # Add marketplace
@@ -150,7 +171,7 @@ copilot plugin marketplace browse gem-team
 copilot plugin install gem-team@gem-team
 ```
 
-### Claude Code
+#### Claude Code
 
 ```bash
 # Add marketplace
@@ -163,7 +184,7 @@ copilot plugin install gem-team@gem-team
 /plugin install gem-team@gem-team
 ```
 
-### Cursor IDE
+#### Cursor IDE
 
 ```bash
 # Add marketplace via APM
@@ -175,7 +196,7 @@ apm install gem-team@gem-team
 
 ---
 
-## Method 3: From awesome-copilot Marketplace
+### Method 3: From awesome-copilot Marketplace
 
 Install from the official awesome-copilot marketplace (GitHub Copilot CLI only).
 
@@ -188,18 +209,18 @@ copilot plugin install gem-team@awesome-copilot
 
 ---
 
-## Method 4: Local/Manual Installation
+### Method 4: Local/Manual Installation
 
 For development, testing, or offline use.
 
-### Clone Repository
+#### Clone Repository
 
 ```bash
 git clone https://github.com/mubaidr/gem-team.git
 cd gem-team
 ```
 
-### Claude Code
+#### Claude Code
 
 ```bash
 # Load as local plugin
@@ -212,7 +233,7 @@ claude --plugin-dir .
 /reload-plugins
 ```
 
-### Cursor IDE
+#### Cursor IDE
 
 ```bash
 # Option 1: Via chat command
@@ -222,7 +243,7 @@ claude --plugin-dir .
 cp -r .apm/agents .cursor/rules/
 ```
 
-### GitHub Copilot CLI
+#### GitHub Copilot CLI
 
 ```bash
 # Add as local marketplace
@@ -232,7 +253,7 @@ copilot plugin marketplace add /absolute/path/to/gem-team
 copilot plugin install gem-team@gem-team
 ```
 
-### Manual Copy (Any Tool)
+#### Manual Copy (Any Tool)
 
 ```bash
 # Copy agents to your tool's directory
@@ -246,7 +267,7 @@ cp -r .apm/agents <destination>
 
 ---
 
-## VS Code Extension (GitHub Copilot)
+### VS Code Extension (GitHub Copilot)
 
 Search for "gem-team" in the VS Code Extensions marketplace.
 
@@ -257,7 +278,7 @@ Search for "gem-team" in the VS Code Extensions marketplace.
 
 ---
 
-## Verification
+### Verification
 
 After installation, verify agents are available:
 
