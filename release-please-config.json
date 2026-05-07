@@ -29,11 +29,10 @@
         }
       ],
       "extra-files": [
-        ".claude-plugin/plugin.json",
-        ".cursor-plugin/plugin.json",
-        ".github/plugin/plugin.json",
+        ".claude-plugin/marketplace.json",
         "apm.yml",
         "plugin.json",
+        "README.md",
         "version.txt"
       ],
       "package-name": "gem-team",

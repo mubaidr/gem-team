@@ -6,6 +6,15 @@ Self-Learning Multi-agent orchestration harness for spec-driven development and 
 
 ## Quick Start
 
+```bash
+# Install via APM (recommended)
+apm install mubaidr/gem-team
+
+# Or register as a marketplace
+apm marketplace add mubaidr/gem-team
+apm install gem-team@gem-team
+```
+
 See [all supported installation options](#installation) below.
 
 ---
@@ -108,6 +117,24 @@ User Goal → Orchestrator → [Simple: Research/Plan] or [Complex: Discuss → 
 
 ## Installation
 
+### APM (Recommended)
+
+The easiest way to install and manage Gem Team:
+
+```bash
+# Install via APM
+apm install mubaidr/gem-team
+
+# Or register as a marketplace and browse packages
+apm marketplace add mubaidr/gem-team
+apm marketplace browse gem-team
+apm install gem-team@gem-team
+```
+
+[APM Documentation](https://microsoft.github.io/apm/getting-started/quick-start/)
+
+### Other Tools
+
 | Tool                         | Installation Command                              | Notes                                                                                                                                 |
 | :--------------------------- | :------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------ |
 | **GitHub Copilot (VS Code)** | Extension panel → Search "gem-team" → Install     | [Docs](https://docs.github.com/en/copilot/using-github-copilot/using-github-copilot-chat)                                             |
@@ -115,7 +142,6 @@ User Goal → Orchestrator → [Simple: Research/Plan] or [Complex: Discuss → 
 | **Claude Code**              | `/plugin install gem-team@<marketplace>`          | [Docs](https://code.claude.com/docs/en/discover-plugins)                                                                              |
 | **OpenCode**                 | Add to `opencode.json` plugin array               | [Docs](https://open-code.ai/en/docs/plugins)                                                                                          |
 | **Cursor IDE**               | `/add-plugin /path/to/gem-team`                   | [Rules docs](https://docs.cursor.com/context/rules)                                                                                   |
-| **APM**                      | `apm install mubaidr/gem-team`                    | [Docs](https://microsoft.github.io/apm/getting-started/quick-start/)                                                                  |
 | **Manual Copy**              | Copy `.apm/agents/` to runtime directory          | See below                                                                                                                             |
 
 ### Claude Code Local Install
