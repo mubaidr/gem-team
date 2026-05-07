@@ -71,9 +71,9 @@ Route based on `user_intent` from researcher:
 
 #### 5.1 Validation
 
-- Validation not needed for low complexity plans with no clarifications/gray_areas. For all others:
+- Validation not needed for low complexity plans. For:
   - Medium complexity: delegate to `gem-reviewer` for plan review.
-  - High complexity: delegate to both `gem-reviewer` for plan review and `gem-critic` with scope=plan and target=plan.yaml for plan review in parallel.
+  - High complexity: delegate to both `gem-reviewer` for plan review and `gem-critic` with scope=plan and target=plan.yaml for plan review and critic in parallel.
 - IF failed/blocking: Loop to `gem-planner` with feedback (max 3 iterations)
 
 #### 5.2 Present
