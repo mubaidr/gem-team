@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.20.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.19.0...gem-team-v1.20.0) (2026-05-07)
+
+
+### 🚀 New Agents & Features
+
+* add context7.json with configuration details ([c530aee](https://github.com/mubaidr/gem-team/commit/c530aee37b07b6bccfa6b96e7fc2462e783bdabb))
+* add marketplace metadata and install instructions for gem-team ([d867bcc](https://github.com/mubaidr/gem-team/commit/d867bcc9f3dcec8c936ea9fe2a45a2fa545870d2))
+* **install:** add one‑line command to copy agents and rename them to .mdc for cursor ([839ae63](https://github.com/mubaidr/gem-team/commit/839ae6305b8a2db7b41dc103577ef66775796a99))
+* **installation:** add detailed README installation guide and methods for gem-team plugin ([66e58c1](https://github.com/mubaidr/gem-team/commit/66e58c157184b7be78eb8c751806d5c1a83e2111))
+
+
+### 📝 Documentation
+
+* improve clarity of validation rules for plan complexity ([19f6c79](https://github.com/mubaidr/gem-team/commit/19f6c79c4bfb25659477702a58eb01a160f9dbda))
+* rewrite installation with new methods guide ([c592d33](https://github.com/mubaidr/gem-team/commit/c592d33c44290bb4cc8cdc8241fee2d3f6831e73))
+
 ## [1.19.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.18.0...gem-team-v1.19.0) (2026-05-06)
 
 ### 📝 Documentation

@@ -1,5 +1,5 @@
 name: gem-team
-version: 1.19.0
+version: 1.20.0
 description: >-
   Self-Learning Multi-agent orchestration harness for spec-driven development
   and automated verification.
@@ -10,24 +10,22 @@ includes: auto
 dependencies:
   apm: []
   mcp: []
-
 marketplace:
   owner:
     name: mubaidr
     url: https://github.com/mubaidr
     email: mubaidr@gmail.com
-
   build:
-    tagPattern: "gem-team-v{version}"
-
+    tagPattern: gem-team-v{version}
   metadata:
     homepage: https://github.com/mubaidr/gem-team
-
   packages:
     - name: gem-team
-      description: Self-Learning Multi-agent orchestration harness for spec-driven development and automated verification
+      description: >-
+        Self-Learning Multi-agent orchestration harness for spec-driven
+        development and automated verification
       source: mubaidr/gem-team
-      version: "^1.19.0"
+      version: ^1.19.0
       tags:
         - multi-agent
         - orchestration
