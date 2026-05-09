@@ -15,30 +15,34 @@
       </div>
 
       <!-- Agents grid -->
-      <div class="grid grid-cols-4 gap-6 max-w-5xl mx-auto">
-        <UTooltip
+      <div
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-6xl mx-auto"
+      >
+        <UPageCard
+          class="text-center cursor-default"
+          spotlight
           v-for="agent in agents"
           :key="agent.name"
-          :text="agent.description"
-          :popper="{ arrow: true }"
         >
-          <UCard class="text-center cursor-default">
-            <div class="flex flex-col items-center">
-              <div
-                class="w-10 h-10 rounded-xl bg-sky-500/10 flex items-center justify-center mb-2"
-              >
-                <UIcon
-                  :name="agent.icon"
-                  class="w-6 h-6 text-sky-600 dark:text-sky-400"
-                />
-              </div>
-              <span
-                class="text-lg font-medium text-slate-700 dark:text-slate-300 truncate"
-                >{{ agent.name }}</span
-              >
+          <div class="flex flex-col items-center">
+            <div
+              class="w-10 h-10 rounded-xl bg-sky-500/10 flex items-center justify-center mb-2"
+            >
+              <UIcon
+                :name="agent.icon"
+                class="w-6 h-6 text-sky-600 dark:text-sky-400"
+              />
             </div>
-          </UCard>
-        </UTooltip>
+            <span
+              class="font-semibold text-slate-700 dark:text-slate-300 truncate"
+              >{{ agent.name }}</span
+            >
+            <br />
+            <div class="text-sm">
+              {{ agent.description }}
+            </div>
+          </div>
+        </UPageCard>
       </div>
 
       <!-- Footer note -->
@@ -113,7 +117,7 @@ const agents = [
   },
   {
     name: "gem-mobile-tester",
-    icon: "i-lucide-test-2",
+    icon: "i-lucide-tablet",
     description: "Tests iOS and Android applications",
   },
   {

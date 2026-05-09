@@ -92,8 +92,10 @@
 
         <!-- RIGHT COLUMN: Why Gem Team? Features (40%) -->
         <div class="lg:pt-4">
-          <UCard
+          <UPageCard
             class="bg-white/80 dark:bg-white/5 backdrop-blur-xl border border-slate-200 dark:border-white/10"
+            spotlight
+            highlight
           >
             <div class="flex items-center gap-3 mb-6">
               <UIcon name="i-lucide-gem" class="w-5 h-5 text-primary" />
@@ -123,7 +125,7 @@
                 </div>
               </li>
             </ul>
-          </UCard>
+          </UPageCard>
         </div>
       </div>
     </div>

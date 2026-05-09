@@ -1,17 +1,25 @@
 <script setup lang="ts">
 const route = useRoute();
 
-// Get path from route (e.g., /docs/introduction -> introduction)
-const slug = route.params.slug ? route.params.slug.join("/") : "index";
+// Content is in content/docs/ folder, so paths are /docs/{slug}
+const slug = route.params.slug
+  ? Array.isArray(route.params.slug)
+    ? route.params.slug.join("/")
+    : route.params.slug
+  : "index";
 
-const { data: page } = await useAsyncData("doc-" + slug, () =>
-  queryCollection("docs")
-    .path("/" + slug)
-    .first(),
+// Build full path: /docs/contributing
+const contentPath = "/docs/" + slug;
+
+const { data: page } = await useAsyncData("doc-" + contentPath, () =>
+  queryCollection("docs").path(contentPath).first(),
 );
 
 if (!page.value) {
-  throw createError({ statusCode: 404, message: "Page not found" });
+  throw createError({
+    statusCode: 404,
+    message: "Page not found at " + contentPath,
+  });
 }
 
 useSeoMeta({
@@ -21,8 +29,8 @@ useSeoMeta({
 </script>
 
 <template>
-  <div class="min-h-screen py-8 md:py-12">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+  <div class="min-h-screen py-8 md:py-12 px-4 sm:px-6 lg:px-8">
+    <div class="container mx-auto max-w-4xl">
       <ContentRenderer v-if="page" :value="page" />
     </div>
   </div>
