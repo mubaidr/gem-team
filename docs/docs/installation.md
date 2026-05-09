@@ -3,8 +3,6 @@ title: Installation - Gem Team
 description: How to install Gem Team
 ---
 
-# Installation
-
 Gem Team can be installed through several methods. Choose the one that best fits your workflow.
 
 ## APM Package Manager (Recommended)

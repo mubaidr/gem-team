@@ -49,12 +49,12 @@
               size="lg"
             />
             <UButton
-              to="https://github.com/mubaidr/gem-team"
+              to="https://mubaidr.js.org"
               target="_blank"
               external
-              label="View on GitHub"
-              icon="i-lucide-github"
-              variant="outline"
+              label="Contact Me"
+              icon="i-lucide-info"
+              variant="ghost"
               size="lg"
             />
           </div>

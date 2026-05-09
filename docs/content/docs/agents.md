@@ -3,8 +3,6 @@ title: Agents - Gem Team
 description: Gem Team specialized agents
 ---
 
-# Agent Team
-
 Gem Team consists of 14 specialized agents, each trained for specific development tasks.
 
 ## Core Agents

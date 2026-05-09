@@ -14,16 +14,13 @@ export default defineNuxtConfig({
   colorMode: {
     classSuffix: "",
     preference: "system",
-    fallback: "light",
+    fallback: "dark",
   },
   site: {
     url: "https://gem-team.pages.dev",
   },
   fonts: {
-    families: [
-      { name: "Inter", provider: "google" },
-      { name: "JetBrains Mono", provider: "google" },
-    ],
+    families: [{ name: "JetBrains Mono", provider: "google" }],
   },
   robots: {
     blockAiBots: false,

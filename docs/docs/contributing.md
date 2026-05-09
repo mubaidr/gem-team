@@ -3,8 +3,6 @@ title: Contributing to Gem Team
 description: Learn how to contribute to the Gem Team project.
 ---
 
-# Contributing to Gem Team
-
 We welcome contributions from the community! Here's how you can help.
 
 ## Ways to Contribute

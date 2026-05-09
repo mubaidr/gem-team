@@ -3,8 +3,6 @@ title: Introduction
 description: Get started with Gem Team
 ---
 
-# Introduction
-
 Gem Team is a self-learning multi-agent orchestration harness designed for spec-driven development and automated verification.
 
 ## Quick Start
