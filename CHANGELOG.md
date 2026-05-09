@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.21.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.20.0...gem-team-v1.21.0) (2026-05-09)
+
+
+### 🚀 New Agents & Features
+
+* **docs:** add SEO metadata and glassmorphism CSS ([6dd51ae](https://github.com/mubaidr/gem-team/commit/6dd51aea5b6270d6cd3d1d996cd892ce82eded03))
+* improve SEO metadata and refactor documentation components ([534dcb7](https://github.com/mubaidr/gem-team/commit/534dcb7f4def10f292daa86d29232d1c362ced17))
+* **ui, docs:** add features documentation, update hero button CTA and simplify agent/contributing headings ([ce468df](https://github.com/mubaidr/gem-team/commit/ce468dfb1b4ce6c481a575fdc2a1a0363b3d5232))
+
+
+### 📝 Documentation
+
+* **app.vue:** update SEO meta tags, add titleTemplate, ogSiteName, twitterCard and twitterSite, and configure useHead for language and favicon ([534dcb7](https://github.com/mubaidr/gem-team/commit/534dcb7f4def10f292daa86d29232d1c362ced17))
+
 ## [1.20.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.19.0...gem-team-v1.20.0) (2026-05-07)
 
 
