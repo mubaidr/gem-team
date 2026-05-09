@@ -13,11 +13,13 @@ APM is the universal package manager for AI coding tools.
 apm install mubaidr/gem-team
 ```
 
-## VS Code Marketplace
+### VS Code (GitHub Copilot)
+
+Search for "gem-team" in the VS Code Chat marketplace.
 
 1. Open VS Code
-2. Press `Ctrl+Shift+X` to open Extensions
-3. Search for "gem-team"
+2. Go to Chat Settings
+3. Search "gem-team" in agents or plugins marketplace
 4. Click Install
 
 ## Awesome Copilot Extension
