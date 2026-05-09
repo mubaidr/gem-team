@@ -1,3 +1,10 @@
+<script setup lang="ts">
+useSeoMeta({
+  ogType: "website",
+  ogSiteName: "GEM Team Docs",
+});
+</script>
+
 <template>
   <UApp>
     <NuxtLayout>
@@ -5,3 +12,5 @@
     </NuxtLayout>
   </UApp>
 </template>
+
+<style></style>

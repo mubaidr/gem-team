@@ -6,5 +6,5 @@ definePageMeta({
 </script>
 
 <template>
-  <div />
+  <div class="min-h-screen" />
 </template>

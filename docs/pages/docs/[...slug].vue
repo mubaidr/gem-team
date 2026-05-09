@@ -21,7 +21,9 @@ useSeoMeta({
 </script>
 
 <template>
-  <div class="container mx-auto px-4 py-12 max-w-4xl">
-    <ContentRenderer v-if="page" :value="page" />
+  <div class="min-h-screen py-8 md:py-12">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+      <ContentRenderer v-if="page" :value="page" />
+    </div>
   </div>
 </template>

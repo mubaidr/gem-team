@@ -3,31 +3,13 @@ title: Gem Team - Self-Learning Multi-Agent Orchestration
 description: A modern documentation site for Gem Team - the self-learning multi-agent orchestration harness for spec-driven development.
 ---
 
-:callout
-
-## Welcome to Gem Team
-
-**Gem Team** is a self-learning multi-agent orchestration harness for spec-driven development and automated verification.
-
 :hero-section
 
 :features-section
 
-## The Agent Team
-
-Gem Team consists of **14 specialized agents**, each trained for specific development tasks:
-
-:agent-team
-
-## How It Works
-
-Our workflow orchestrates multiple agents working together to deliver high-quality results:
-
 :workflow-section
 
-## Installation
-
-Getting started with Gem Team is quick and easy:
+:agent-team
 
 :installation-section
 

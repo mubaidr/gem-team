@@ -1,93 +1,161 @@
 <template>
-  <div class="relative py-24 sm:py-32 lg:py-40 overflow-hidden">
-    <!-- Radial gradient background -->
-    <div
-      class="absolute inset-0 bg-gradient-radial from-emerald-500/10 via-transparent to-transparent"
-    />
+  <div class="py-20 sm:py-28 lg:py-36 bg-slate-50 dark:bg-slate-950">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Two-column grid: 60/40 split -->
+      <div
+        class="grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-12 lg:gap-16 items-start"
+      >
+        <!-- LEFT COLUMN: Main Hero Content (60%) -->
+        <div class="flex flex-col">
+          <!-- Badge -->
+          <div class="mb-6">
+            <UBadge
+              color="primary"
+              variant="subtle"
+              size="lg"
+              icon="i-lucide-sparkles"
+            >
+              Self-Learning AI Agents
+            </UBadge>
+          </div>
 
-    <div class="relative container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-4xl mx-auto text-center">
-        <!-- Badge -->
-        <UBadge
-          label="Self-Learning AI Agents"
-          variant="subtle"
-          color="emerald"
-          class="mb-6"
-        />
-
-        <!-- Title -->
-        <h1
-          class="text-5xl sm:text-6xl lg:text-7xl font-bold text-white text-balance tracking-tight mb-6"
-        >
-          <span
-            class="bg-gradient-to-r from-emerald-400 to-emerald-600 bg-clip-text text-transparent"
+          <!-- Title -->
+          <h1
+            class="text-5xl sm:text-6xl lg:text-7xl font-bold text-slate-900 dark:text-white text-balance tracking-tight mb-6 leading-[1.1]"
           >
-            Gem Team
-          </span>
-        </h1>
+            <span class="text-primary">Gem Team</span>
+          </h1>
 
-        <!-- Description -->
-        <p
-          class="text-xl sm:text-2xl text-slate-400 text-balance mb-10 max-w-3xl mx-auto leading-relaxed"
-        >
-          Self-learning multi-agent orchestration harness for
-          <span class="text-white font-semibold">spec-driven development</span>
-          and automated verification.
-        </p>
+          <!-- Description -->
+          <p
+            class="text-lg sm:text-xl text-slate-600 dark:text-slate-300 text-balance mb-8 max-w-2xl leading-relaxed"
+          >
+            Self-learning multi-agent orchestration harness for
+            <span
+              class="font-semibold text-slate-900 dark:text-white bg-primary-50 dark:bg-primary-500/20 px-2 py-0.5 rounded"
+            >
+              spec-driven development
+            </span>
+            and automated verification.
+          </p>
 
-        <!-- CTA Buttons -->
-        <div class="flex flex-wrap items-center justify-center gap-4">
-          <UButton
-            to="/docs/introduction"
-            label="Get Started"
-            icon="i-lucide-rocket"
-            color="primary"
-            size="lg"
-            class="shadow-lg shadow-emerald-500/25"
-          />
-          <UButton
-            to="https://github.com/mubaidr/gem-team"
-            target="_blank"
-            external
-            label="View on GitHub"
-            icon="i-lucide-github"
-            color="neutral"
-            variant="outline"
-            size="lg"
-          />
+          <!-- CTA Buttons -->
+          <div class="flex flex-wrap items-center gap-4 mb-12">
+            <UButton
+              to="/docs/introduction"
+              label="Get Started"
+              icon="i-lucide-rocket"
+              color="primary"
+              size="lg"
+            />
+            <UButton
+              to="https://github.com/mubaidr/gem-team"
+              target="_blank"
+              external
+              label="View on GitHub"
+              icon="i-lucide-github"
+              variant="outline"
+              size="lg"
+            />
+          </div>
+
+          <!-- Quick stats -->
+          <div
+            class="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 pt-8 border-t border-slate-200 dark:border-white/10"
+          >
+            <div class="text-center">
+              <div class="text-3xl sm:text-4xl font-bold text-primary">14</div>
+              <div class="text-xs sm:text-sm text-slate-500 mt-2">
+                Specialized Agents
+              </div>
+            </div>
+            <div class="text-center">
+              <div class="text-3xl sm:text-4xl font-bold text-primary">4x</div>
+              <div class="text-xs sm:text-sm text-slate-500 mt-2">
+                Faster Dev
+              </div>
+            </div>
+            <div class="text-center">
+              <div class="text-3xl sm:text-4xl font-bold text-primary">TDD</div>
+              <div class="text-xs sm:text-sm text-slate-500 mt-2">
+                First Workflow
+              </div>
+            </div>
+            <div class="text-center">
+              <div class="text-3xl sm:text-4xl font-bold text-primary">∞</div>
+              <div class="text-xs sm:text-sm text-slate-500 mt-2">
+                Self-Learning
+              </div>
+            </div>
+          </div>
         </div>
 
-        <!-- Quick stats -->
-        <div
-          class="flex flex-wrap items-center justify-center gap-8 mt-16 pt-16 border-t border-white/5"
-        >
-          <div class="text-center">
-            <div class="text-3xl font-bold text-emerald-400">14</div>
-            <div class="text-sm text-slate-500 mt-1">Specialized Agents</div>
-          </div>
-          <div class="text-center">
-            <div class="text-3xl font-bold text-emerald-400">4x</div>
-            <div class="text-sm text-slate-500 mt-1">Faster Development</div>
-          </div>
-          <div class="text-center">
-            <div class="text-3xl font-bold text-emerald-400">TDD</div>
-            <div class="text-sm text-slate-500 mt-1">First Workflow</div>
-          </div>
-          <div class="text-center">
-            <div class="text-3xl font-bold text-emerald-400">∞</div>
-            <div class="text-sm text-slate-500 mt-1">Self-Learning</div>
-          </div>
+        <!-- RIGHT COLUMN: Why Gem Team? Features (40%) -->
+        <div class="lg:pt-4">
+          <UCard
+            class="bg-white/80 dark:bg-white/5 backdrop-blur-xl border border-slate-200 dark:border-white/10"
+          >
+            <div class="flex items-center gap-3 mb-6">
+              <UIcon name="i-lucide-gem" class="w-5 h-5 text-primary" />
+              <h3 class="text-lg font-semibold text-slate-900 dark:text-white">
+                Why Gem Team?
+              </h3>
+            </div>
+
+            <ul class="space-y-4">
+              <li
+                v-for="(feature, index) in whyFeatures"
+                :key="feature.title"
+                class="flex items-start gap-4"
+              >
+                <UBadge :color="feature.color" variant="subtle" size="sm">{{
+                  index + 1
+                }}</UBadge>
+                <div>
+                  <h4
+                    class="text-sm font-semibold text-slate-800 dark:text-slate-100 mb-1"
+                  >
+                    {{ feature.title }}
+                  </h4>
+                  <p class="text-xs text-slate-500 dark:text-slate-400">
+                    {{ feature.description }}
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </UCard>
         </div>
       </div>
     </div>
-
-    <!-- Decorative grid -->
-    <div
-      class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMSIvPjwvZz48L2c+PC9zdmc+')] opacity-30 pointer-events-none"
-    />
   </div>
 </template>
 
 <script setup lang="ts">
-// Hero section component - clean, modern design
+const whyFeatures = [
+  {
+    title: "Parallel Execution",
+    description: "Multiple agents work simultaneously.",
+    color: "emerald",
+  },
+  {
+    title: "Wave-Based Processing",
+    description: "Intelligent task cascades.",
+    color: "sky",
+  },
+  {
+    title: "Self-Healing",
+    description: "Auto-recovery from failures.",
+    color: "violet",
+  },
+  {
+    title: "Enterprise Security",
+    description: "OWASP, secrets, PII protection.",
+    color: "amber",
+  },
+  {
+    title: "Context Preservation",
+    description: "Cross-session knowledge.",
+    color: "rose",
+  },
+];
 </script>

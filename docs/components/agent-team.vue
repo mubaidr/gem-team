@@ -1,57 +1,44 @@
 <template>
-  <div class="relative py-24 sm:py-32 lg:py-40">
+  <div class="py-16 sm:py-20 lg:py-24 bg-white dark:bg-slate-900">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Section header -->
-      <div class="text-center mb-16">
+      <div class="text-center mb-12">
         <UBadge label="The Team" variant="subtle" color="sky" class="mb-4" />
         <h2
-          class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white text-balance tracking-tight"
+          class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4"
         >
-          Meet the <span class="text-sky-400">Agents</span>
+          Meet the <span class="text-sky-500">Agents</span>
         </h2>
-        <p class="mt-4 text-lg text-slate-400 max-w-2xl mx-auto">
+        <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
           14 specialized agents, each trained for specific development tasks
         </p>
       </div>
 
       <!-- Agents grid -->
-      <div
-        class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4 max-w-6xl mx-auto"
-      >
-        <div v-for="agent in agents" :key="agent.name" class="group relative">
-          <UCard
-            class="text-center bg-slate-900/50 border-white/5 hover:border-white/20 transition-all duration-300 backdrop-blur-sm cursor-default"
-            :ui="{
-              base: 'p-4',
-            }"
-          >
-            <!-- Avatar container -->
-            <div class="relative mb-3">
+      <div class="grid grid-cols-4 gap-6 max-w-5xl mx-auto">
+        <UTooltip
+          v-for="agent in agents"
+          :key="agent.name"
+          :text="agent.description"
+          :popper="{ arrow: true }"
+        >
+          <UCard class="text-center cursor-default">
+            <div class="flex flex-col items-center">
               <div
-                class="w-14 h-14 mx-auto rounded-2xl flex items-center justify-center bg-gradient-to-br from-primary-400/20 to-primary-600/20 group-hover:from-primary-400/30 group-hover:to-primary-600/30 transition-all duration-300 border border-primary-500/20 group-hover:border-primary-500/40"
+                class="w-10 h-10 rounded-xl bg-sky-500/10 flex items-center justify-center mb-2"
               >
-                <UIcon :name="agent.icon" class="w-7 h-7 text-primary-400" />
-              </div>
-
-              <!-- Tooltip -->
-              <div
-                class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 rounded-lg bg-slate-800 text-xs text-slate-200 whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-20 border border-white/10 shadow-xl"
-              >
-                {{ agent.description }}
-                <div
-                  class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-slate-800"
+                <UIcon
+                  :name="agent.icon"
+                  class="w-6 h-6 text-sky-600 dark:text-sky-400"
                 />
               </div>
+              <span
+                class="text-lg font-medium text-slate-700 dark:text-slate-300 truncate"
+                >{{ agent.name }}</span
+              >
             </div>
-
-            <!-- Name -->
-            <h4
-              class="text-xs font-medium text-slate-300 group-hover:text-white transition-colors truncate"
-            >
-              {{ agent.name }}
-            </h4>
           </UCard>
-        </div>
+        </UTooltip>
       </div>
 
       <!-- Footer note -->

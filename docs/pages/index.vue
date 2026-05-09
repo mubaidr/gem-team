@@ -4,7 +4,7 @@ const { data: page } = await useAsyncData("index", () =>
 );
 </script>
 <template>
-  <div>
+  <div class="min-h-screen">
     <ContentRenderer v-if="page" :value="page" />
   </div>
 </template>

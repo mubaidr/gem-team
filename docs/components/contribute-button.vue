@@ -15,7 +15,6 @@
       external
       label="View on GitHub"
       icon="i-lucide-github"
-      color="neutral"
       variant="outline"
       size="lg"
     />
