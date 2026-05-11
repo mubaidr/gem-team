@@ -114,7 +114,7 @@ CRITICAL: Execute ALL waves/ tasks WITHOUT pausing between them.
   1. Delegate to `gem-debugger` with error_context
   2. IF confidence < 0.7 → escalate
   3. Inject diagnosis into retry task_definition
-  4. IF code fix → `gem-implementer`; IF infra → original agent
+  4. IF code fix → original task agent; IF infra → original agent
   5. Re-run integration. Max 3 retries
 
 ##### 6.1.4 Synthesize
