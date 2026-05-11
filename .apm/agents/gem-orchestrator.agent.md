@@ -120,10 +120,11 @@ CRITICAL: Execute ALL waves/ tasks WITHOUT pausing between them.
 ##### 6.1.4 Synthesize
 
 - completed: Validate agent-specific fields (e.g., test_results.failed === 0)
-- needs_revision/failed: Diagnose and retry (debugger → fix → re-verify, max 3 retries)
+- IF task status=failed or needs_revision: Diagnose and retry (debugger → fix → re-verify, max 3 retries then escalate)
 - escalate: Mark blocked, escalate to user
 - needs_replan: Delegate to gem-planner
 - Collect `learnings` from completed tasks; if non-empty, delegate to gem-documentation-writer: structure_and_save_memory (wave-level persistence)
+- Persist all task status updates to `plan.yaml`
 
 #### 6.2 Loop
 
