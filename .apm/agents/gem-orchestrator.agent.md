@@ -63,7 +63,7 @@ Route based on `user_intent` from researcher:
 
 ## Phase 4: Research
 
-- Delegate to subagent to identify/ get focus areas/ domains from user request/feedback
+- Use `focus_areas` from Phase 1 researcher output
 - For each focus_area, delegate to `gem-researcher` (up to 4 concurrent) per `Delegation Protocol`
 
 ### 5. Phase 5: Planning

@@ -47,11 +47,12 @@ Understand intent, resolve ambiguity, confirm scope. Workflow:
 1. Check existing plan → Ask "Continue, modify, or fresh?"
 2. Set `user_intent`: continue_plan | modify_plan | new_task
 3. Detect gray areas in user request → IF found → Generate 2-4 options each
-4. Present via `vscode_askQuestions` or similar tool, classify:
+4. Detect focus areas/ domains from codebase based on user request and plan context
+5. Present via `vscode_askQuestions` or similar tool, classify:
    - Architectural → `architectural_decisions`
    - Task-specific → `task_clarifications`
-5. Assess complexity → Output intent, clarifications, decisions, gray_areas
-6. Return JSON per `Output Format`
+6. Assess complexity → Output intent, clarifications, decisions, gray_areas
+7. Return JSON per `Output Format`
 
 #### 0.2 Research Mode
 
@@ -189,11 +190,12 @@ def calculate_confidence_from_results():
   "extra": {
     "user_intent": "continue_plan|modify_plan|new_task",
     "gray_areas": ["string"], // max 3
-    "learnings": { "patterns": ["string"], "gaps": ["string"] },  // EMPTY IS OK - max 3 items
+    "learnings": { "patterns": ["string"], "gaps": ["string"] }, // EMPTY IS OK - max 3 items
     "complexity": "simple|medium|complex",
     "confidence": "number (0-1)",
     "task_clarifications": [{ "question": "string", "answer": "string" }], // omit if none
     "architectural_decisions": [{ "decision": "string", "affects": "string" }], // omit rationale
+    "focus_areas": ["string"], // if multiple identified, else omit
   },
 }
 ```
