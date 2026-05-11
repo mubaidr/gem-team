@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.22.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.21.0...gem-team-v1.22.0) (2026-05-11)
+
+
+### 🚀 New Agents & Features
+
+* enhance continue_plan decision flow ([9d8e85f](https://github.com/mubaidr/gem-team/commit/9d8e85f25d79f045024813a9d7841c7c5444e51a))
+* **orchestrator:** add conditional retry escalation and persist plan.yaml updates ([410a041](https://github.com/mubaidr/gem-team/commit/410a04118764c675f53569260f05da2703db1c10))
+* **research:** integrate Phase 1 focus_areas into Phase 4 research delegation workflow ([5dba132](https://github.com/mubaidr/gem-team/commit/5dba13237705b2a0fd59d72715414ba5a11c3943))
+
+
+### 📝 Documentation
+
+* clarify wave completion and improve task routing wording ([5abfec4](https://github.com/mubaidr/gem-team/commit/5abfec44b1cc8a7288802e4d7336c5ac1eb992f0))
+* refine escalation handling description in gem-orchestrator.agent.md ([34e9e13](https://github.com/mubaidr/gem-team/commit/34e9e138d40ede3932924c40a0b58eaa011b6d84))
+
 ## [1.21.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.20.0...gem-team-v1.21.0) (2026-05-11)
 
 
