@@ -51,7 +51,11 @@ IF researcher output has `{task_clarifications|architectural_decisions}`:
 
 Route based on `user_intent` from researcher:
 
-- continue_plan: IF user_feedback → Phase 5: Planning; IF pending tasks → Phase 6: Execution; IF blocked/completed → Escalate
+- continue_plan:
+    IF user_feedback → Phase 5: Planning
+    ELSE IF pending_tasks → Phase 6: Execution
+    ELSE IF blocked → Escalate
+    ELSE → Phase 7: Summary
 - new_task: IF simple AND no clarifications/gray_areas → Phase 5: Planning; ELSE → Phase 4: Research
 - modify_plan: → Phase 5: Planning with existing context
 
