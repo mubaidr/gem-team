@@ -52,10 +52,10 @@ IF researcher output has `{task_clarifications|architectural_decisions}`:
 Route based on `user_intent` from researcher:
 
 - continue_plan:
-    IF user_feedback → Phase 5: Planning
-    ELSE IF pending_tasks → Phase 6: Execution
-    ELSE IF blocked → Escalate
-    ELSE → Phase 7: Summary
+  IF user_feedback → Phase 5: Planning
+  ELSE IF pending_tasks → Phase 6: Execution
+  ELSE IF blocked → Escalate
+  ELSE → Phase 7: Summary
 - new_task: IF simple AND no clarifications/gray_areas → Phase 5: Planning; ELSE → Phase 4: Research
 - modify_plan: → Phase 5: Planning with existing context
 
@@ -112,7 +112,7 @@ CRITICAL: Execute ALL waves/ tasks WITHOUT pausing between them.
 - Validate task success: Check `success_criteria` predicates when defined (e.g., `test_results.failed === 0`, `coverage >= 80%`)
 - IF fails:
   1. Delegate to `gem-debugger` with error_context
-  2. IF confidence < 0.7 → escalate
+  2. IF confidence < 0.85 → escalate
   3. Inject diagnosis into retry task_definition
   4. IF code fix → original task agent; IF infra → original agent
   5. Re-run integration. Max 3 retries
@@ -120,10 +120,10 @@ CRITICAL: Execute ALL waves/ tasks WITHOUT pausing between them.
 ##### 6.1.4 Synthesize
 
 - completed: Validate agent-specific fields (e.g., test_results.failed === 0)
-- Collect `learnings` from completed tasks; if non-empty, delegate to gem-documentation-writer: structure_and_save_memory (wave-level persistence)
 - needs_revision/failed: Diagnose and retry (debugger → fix → re-verify, max 3 retries)
 - escalate: Mark blocked, escalate to user
 - needs_replan: Delegate to gem-planner
+- Collect `learnings` from completed tasks; if non-empty, delegate to gem-documentation-writer: structure_and_save_memory (wave-level persistence)
 
 #### 6.2 Loop
 
@@ -131,6 +131,8 @@ CRITICAL: Execute ALL waves/ tasks WITHOUT pausing between them.
 - Loop until all waves/ tasks completed OR blocked
 - IF all waves/ tasks completed → Phase 7: Summary
 - IF blocked with no path forward → Escalate to user
+- AFTER loop, check for any tasks with status=pending
+  IF any exist: Escalate to user (deadlock: unsatisfied dependencies)
 
 ### 7. Phase 7: Summary
 
