@@ -201,7 +201,9 @@ Return JSON per `Output Format`
   "plan_id": "[plan_id]",
   "summary": "[≤3 sentences]",
   "failure_type": "transient|fixable|needs_replan|escalate",
-  "extra": {},
+  "extra": {
+    "confidence": "number (0-1)",
+  },
 }
 ```
 

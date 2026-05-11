@@ -246,6 +246,7 @@ Return JSON per `Output Format`
   "extra": {
     "execution_details": { "platforms_tested": ["ios", "android"], "framework": "string", "tests_total": "number", "time_elapsed": "string" },
     "test_results": { "ios": { "total": "number", "passed": "number", "failed": "number", "skipped": "number" }, "android": {...} },
+    "confidence": "number (0-1)",
     "performance_metrics": { "cold_start_ms": {...}, "memory_mb": {...}, "bundle_size_kb": "number" },
     "gesture_results": [{ "gesture_id": "string", "status": "passed|failed", "platform": "string" }],
     "push_notification_results": [{ "scenario_id": "string", "status": "passed|failed", "platform": "string" }],

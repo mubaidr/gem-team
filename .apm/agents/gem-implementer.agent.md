@@ -128,6 +128,7 @@ Return JSON per `Output Format`
       "failed": "number",
       "coverage": "string",
     },
+    "confidence": "number (0-1)",
     "learnings": {
       "facts": ["string"], // max 3 - simple strings, skip if obvious
       "patterns": [], // EMPTY IS OK - only emit if confidence ≥0.9 AND needed

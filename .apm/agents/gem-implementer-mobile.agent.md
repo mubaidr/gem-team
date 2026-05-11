@@ -127,6 +127,7 @@ Return JSON per `Output Format`
   "extra": {
     "execution_details": { "files_modified": "number", "lines_changed": "number", "time_elapsed": "string" },
     "test_results": { "total": "number", "passed": "number", "failed": "number", "coverage": "string" },
+    "confidence": "number (0-1)",
     "platform_verification": { "ios": "pass|fail|skipped", "android": "pass|fail|skipped", "metro_output": "string" },
     "learnings": {
       "patterns": [

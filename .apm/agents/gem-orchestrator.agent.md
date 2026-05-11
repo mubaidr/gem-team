@@ -105,6 +105,7 @@ CRITICAL: Execute ALL waves/ tasks WITHOUT pausing between them.
 
 - Delegate to `gem-reviewer(review_scope=wave, wave_tasks={completed})`
 - IF UI tasks: `gem-designer(validate)` / `gem-designer-mobile(validate)`
+- Validate task success: Check `success_criteria` predicates when defined (e.g., `test_results.failed === 0`, `coverage >= 80%`)
 - IF fails:
   1. Delegate to `gem-debugger` with error_context
   2. IF confidence < 0.7 → escalate

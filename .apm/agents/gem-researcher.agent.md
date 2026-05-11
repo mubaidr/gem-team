@@ -189,8 +189,9 @@ def calculate_confidence_from_results():
   "extra": {
     "user_intent": "continue_plan|modify_plan|new_task",
     "gray_areas": ["string"], // max 3
-    "learnings": { "patterns": ["string"], "gaps": ["string"] }  // EMPTY IS OK - max 3 items
+    "learnings": { "patterns": ["string"], "gaps": ["string"] },  // EMPTY IS OK - max 3 items
     "complexity": "simple|medium|complex",
+    "confidence": "number (0-1)",
     "task_clarifications": [{ "question": "string", "answer": "string" }], // omit if none
     "architectural_decisions": [{ "decision": "string", "affects": "string" }], // omit rationale
   },

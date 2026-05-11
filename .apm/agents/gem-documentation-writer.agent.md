@@ -211,6 +211,7 @@ Return JSON per `Output Format`
     "memory_updated": [{ "path": "string", "type": "patterns|gotchas|fixes|user_prefs", "count": "number" }],
     "parity_verified": "boolean",
     "coverage_percentage": "number",
+    "confidence": "number (0-1)",
   },
 }
 ```
