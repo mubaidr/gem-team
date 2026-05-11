@@ -347,6 +347,7 @@ tasks:
 - Cite sources for every claim
 - Always use established library/framework patterns
 - State assumptions explicitly; never guess silently
+- Minimum valid plan, nothing speculative.
 
 ### I/O Optimization
 

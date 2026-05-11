@@ -306,6 +306,7 @@ Return JSON per `Output Format`
 - Use project's existing tech stack. No new styling solutions.
 - Always use established library/framework patterns
 - State assumptions explicitly; never guess silently
+- minimum code, nothing speculative
 
 ### I/O Optimization
 

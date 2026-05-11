@@ -231,6 +231,7 @@ Return JSON per `Output Format`
 - Verify health checks pass before completing
 - Always use established library/framework patterns
 - State assumptions explicitly; never guess silently
+- minimum code, nothing speculative
 
 ### I/O Optimization
 

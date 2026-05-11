@@ -321,6 +321,7 @@ metadata:
 - Document actual tech stack, not assumed
 - Always use established library/framework patterns
 - State assumptions explicitly; never guess silently
+- minimum content, nothing speculative
 
 ### I/O Optimization
 

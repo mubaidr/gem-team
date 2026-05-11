@@ -289,6 +289,7 @@ Return JSON per `Output Format`
 - NEVER test simulator only if device farm required
 - Always use established library/framework patterns
 - State assumptions explicitly; never guess silently
+- minimum code, nothing speculative
 
 ### I/O Optimization
 
