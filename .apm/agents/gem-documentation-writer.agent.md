@@ -320,6 +320,7 @@ metadata:
 - NEVER use generic boilerplate (match project style)
 - Document actual tech stack, not assumed
 - Always use established library/framework patterns
+- State assumptions explicitly; never guess silently
 
 ### I/O Optimization
 

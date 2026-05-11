@@ -288,6 +288,7 @@ Return JSON per `Output Format`
 - NEVER skip app lifecycle testing
 - NEVER test simulator only if device farm required
 - Always use established library/framework patterns
+- State assumptions explicitly; never guess silently
 
 ### I/O Optimization
 

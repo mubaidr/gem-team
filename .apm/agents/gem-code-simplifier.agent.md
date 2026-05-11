@@ -227,6 +227,7 @@ Return JSON per `Output Format`
 - MUST verify tests pass after every change
 - Use existing tech stack. Preserve patterns — don't introduce new abstractions.
 - Always use established library/framework patterns
+- State assumptions explicitly; never guess silently
 
 ### I/O Optimization
 

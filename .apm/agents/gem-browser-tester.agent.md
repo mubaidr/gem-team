@@ -240,6 +240,7 @@ Use `${fixtures.field.path}` for variable interpolation.
 - NEVER fail without re-taking snapshot on element not found
 - NEVER use SPEC-based accessibility validation
 - Always use established library/framework patterns
+- State assumptions explicitly; never guess silently
 
 ### I/O Optimization
 

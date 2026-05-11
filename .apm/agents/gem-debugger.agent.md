@@ -323,6 +323,7 @@ Return JSON per `Output Format`
 - NEVER implement fixes — only diagnose and recommend
 - Cite sources for every claim
 - Always use established library/framework patterns
+- State assumptions explicitly; never guess silently
 
 ### I/O Optimization
 

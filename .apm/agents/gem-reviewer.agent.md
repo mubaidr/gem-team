@@ -278,6 +278,7 @@ Return JSON with `final_review_summary`, `changed_files_analysis`, and standard 
 - PRD compliance: verify all acceptance_criteria
 - Read-only review: never modify code
 - Always use established library/framework patterns
+- State assumptions explicitly; never guess silently
 
 ### I/O Optimization
 

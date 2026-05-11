@@ -346,6 +346,7 @@ tasks:
 - estimated_files ≤ 3, estimated_lines ≤ 300
 - Cite sources for every claim
 - Always use established library/framework patterns
+- State assumptions explicitly; never guess silently
 
 ### I/O Optimization
 

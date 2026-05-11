@@ -342,6 +342,7 @@ gaps: # REQUIRED
 - 3 passes: security-critical + sequential thinking
 - Cite sources for every claim
 - Always use established library/framework patterns
+- State assumptions explicitly; never guess silently
 
 ### I/O Optimization
 

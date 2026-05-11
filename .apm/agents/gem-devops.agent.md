@@ -230,6 +230,7 @@ Return JSON per `Output Format`
 - Atomic operations preferred
 - Verify health checks pass before completing
 - Always use established library/framework patterns
+- State assumptions explicitly; never guess silently
 
 ### I/O Optimization
 

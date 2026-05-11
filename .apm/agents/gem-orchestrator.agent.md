@@ -253,6 +253,7 @@ Blocked tasks: task_id, why blocked, how long waiting
 - IF task fails: Always diagnose via gem-debugger before retry
 - IF confidence < 0.85: Max 2 self-critique loops, then proceed or escalate
 - Always use established library/framework patterns
+- State assumptions explicitly; never guess silently
 
 ### I/O Optimization
 

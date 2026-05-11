@@ -193,6 +193,7 @@ Return JSON per `Output Format`
 - Use existing tech stack, test frameworks, build tools
 - Cite sources for every claim
 - Always use established library/framework patterns
+- State assumptions explicitly; never guess silently
 
 ### I/O Optimization
 
