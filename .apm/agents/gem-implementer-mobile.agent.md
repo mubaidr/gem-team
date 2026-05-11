@@ -194,7 +194,8 @@ Return JSON per `Output Format`
 - Cite sources for every claim
 - Always use established library/framework patterns
 - State assumptions explicitly; never guess silently
-- minimum code, nothing speculative
+- Minimum code, nothing speculative
+- Surgical changes, don't refactor adjacent code
 
 ### I/O Optimization
 
