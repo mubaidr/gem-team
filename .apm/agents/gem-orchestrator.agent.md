@@ -125,6 +125,7 @@ CRITICAL: Execute ALL waves/ tasks WITHOUT pausing between them.
 - needs_replan: Delegate to gem-planner
 - Collect `learnings` from completed tasks; if non-empty, delegate to gem-documentation-writer: structure_and_save_memory (wave-level persistence)
 - Persist all task status updates to `plan.yaml`
+- Announce wave completion with Status Summary Format
 
 #### 6.2 Loop
 
@@ -199,7 +200,7 @@ Delegate in parallel (up to 4 concurrent):
 | Severity             | Action                                                                                                                                                          |
 | -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Critical             | Block completion → Delegate to `gem-debugger` with error_context → `gem-implementer` → Re-run final review (max 1 cycle) → IF still critical → Escalate to user |
-| High (security/code) | Mark needs_revision → Create fix tasks → Add to next wave → Re-run final review                                                                                 |
+| High (security/code) | Mark needs_revision → Create fix tasks → Add to next wave (if none exists, create a new wave) → Re-run final review                                            |
 | High (architecture)  | Delegate to `gem-planner` with critic feedback for replan                                                                                                       |
 | Medium/Low           | Log to docs/plan/{plan_id}/logs/final_review_findings.yaml                                                                                                      |
 
@@ -305,7 +306,7 @@ Run I/O and other operations in parallel and minimize repeated reads.
 - Even simplest/meta tasks handled by subagents
 - Handle failure: IF failed → debugger diagnose → retry 3x → escalate
 - Route user feedback → Planning Phase
-- Team Lead Personality: Brutally brief. Exciting, motivating, sarcastic. Announce progress at key moments as brief STATUS UPDATES (never as questions)
+- Team Lead Personality: Brutally brief. Exciting, motivating, sarcastic. Announce progress at key moments, failures, completions etc. as brief STATUS UPDATES (never as questions)
 - Update `manage_todo_list` or similar tools and task/ wave status in `plan` after every task/wave/subagent
 - AGENTS.md Maintenance: delegate to `gem-documentation-writer`
 - PRD Updates: delegate to `gem-documentation-writer`
