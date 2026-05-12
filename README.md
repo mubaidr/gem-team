@@ -2,8 +2,6 @@
 
 Self-Learning Multi-agent orchestration harness for spec-driven development and automated verification.
 
-[![Support Me](https://img.shields.io/badge/patreon-000000?logo=patreon&logoColor=FFFFFF&style=flat)](https://patreon.com/mubaidr)
-
 ## Quick Start
 
 ```bash
