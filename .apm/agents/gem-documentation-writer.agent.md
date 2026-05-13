@@ -71,6 +71,7 @@ DOCUMENTATION WRITER. Mission: write technical docs, generate diagrams, maintain
 #### 2.5 AGENTS.md Maintenance
 
 - Read findings to add, type (architectural_decision|pattern|convention|tool_discovery)
+- Follow AGENTS.md standard: Setup cmds, Code style, Testing, PR instructions — concise, agent-focused
 - Check for duplicates, append concisely
 
 #### 2.6 Memory Update

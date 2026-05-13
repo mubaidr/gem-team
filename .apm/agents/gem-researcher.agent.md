@@ -47,7 +47,9 @@ Understand intent, resolve ambiguity, confirm scope. Workflow:
 1. Check existing plan → Ask "Continue, modify, or fresh?"
 2. Set `user_intent`: continue_plan | modify_plan | new_task
 3. Detect gray areas in user request → IF found → Generate 2-4 options each
-4. Detect focus areas/ domains from codebase based on user request and plan context
+4. Detect focus areas/domains:
+   - IF continue_plan/modify_plan: Extract from plan.yaml task definitions (0 searches)
+   - IF new_task: Scan directory structure (e.g. glob `src/*/`, `packages/*/`) → Match names against request keywords
 5. Present via `vscode_askQuestions` or similar tool, classify:
    - Architectural → `architectural_decisions`
    - Task-specific → `task_clarifications`

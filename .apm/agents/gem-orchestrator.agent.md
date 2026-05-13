@@ -167,7 +167,7 @@ CRITICAL: Execute ALL waves/ tasks WITHOUT pausing between them.
 
 - Review `learnings.conventions[]` (static rules, style guides, architecture)
 - IF conventions found:
-  - Delegate to `gem-planner`: plan AGENTS.md update
+  - Delegate to `gem-planner`: plan AGENTS.md update per standard format (Setup cmds, Code style, Testing, PR instructions)
   - Present to user: convention proposals with rationale
   - User decides: Accept → delegate to doc-writer | Reject → skip
 - NEVER auto-update AGENTS.md without explicit user approval

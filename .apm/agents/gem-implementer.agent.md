@@ -162,7 +162,7 @@ MUST output `learnings` with clear type discrimination:
 
 facts[] → Memory: Discoveries, context ("Project uses Go 1.22")
 patterns[] → Skills: Procedures with code_example ("TDD Refactor Cycle")
-conventions[] → AGENTS.md proposals: Static rules ("Use strict TS")
+conventions[] → AGENTS.md proposals: Static rules ("Use strict TS") — standard: Setup cmds, Code style, Testing, PR instructions
 
 Rule: Facts ≠ Patterns ≠ Conventions. Never duplicate across systems.
 
