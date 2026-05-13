@@ -52,7 +52,7 @@ gem-researcher, gem-planner, gem-implementer, gem-implementer-mobile, gem-browse
 
 - Read PRD: user_stories, scope, acceptance_criteria
 - Read all research files from `docs/plan/{plan_id}/research_findings_{focus_area}.yaml`
-- Explore codebase for only for remaining gaps
+- Check researcher's `open_questions`
 
 #### 1.3 Apply Clarifications
 
@@ -263,7 +263,7 @@ tasks:
     focus_area: string | null
     verification: [string]
     acceptance_criteria: [string]
-    success_criteria: [string]  # machine-checkable predicates (e.g., "test_results.failed === 0", "coverage >= 80%")
+    success_criteria: [string] # machine-checkable predicates (e.g., "test_results.failed === 0", "coverage >= 80%")
     failure_modes:
       - scenario: string
         likelihood: low | medium | high
