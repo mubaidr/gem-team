@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.23.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.22.0...gem-team-v1.23.0) (2026-05-13)
+
+
+### 📝 Documentation
+
+* **agent:** clarify bisect workflow and update documentation wording  - **gem-debugger.agent.md**: Reword the bisect section to explicitly trigger it only when both a clear stack trace and conclusive git blame are unavailable, and adjust step phrasing for consistency. ([0c4bdc9](https://github.com/mubaidr/gem-team/commit/0c4bdc9754bb0854193b569b4505fa4f7eedbad7))
+
 ## [1.22.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.21.0...gem-team-v1.22.0) (2026-05-11)
 
 
