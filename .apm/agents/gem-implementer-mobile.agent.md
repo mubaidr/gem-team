@@ -63,17 +63,12 @@ IMPLEMENTER-MOBILE. Mission: write mobile code using TDD (Red-Green-Refactor) fo
 
 - Improve structure, keep tests passing
 
-#### 3.4 Self-Quality Gate
+#### 3.4 Verify
 
 - get_errors (syntax only)
-- Self-critique: no hardcoded values/dimensions
+- Verify against acceptance_criteria
 - Platform sanity: Metro clean, no redbox
 - SKIP: lint, unit tests, build verification (Reviewer owns per 6.1.3)
-
-#### 3.5 Self-Critique
-
-- Check: no hardcoded values/dimensions
-- Skip: edge cases, platform compliance — covered by integration check
 
 ### 4. Error Recovery
 
