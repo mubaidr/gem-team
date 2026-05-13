@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.24.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.23.0...gem-team-v1.24.0) (2026-05-13)
+
+
+### 📝 Documentation
+
+* refine self‑quality gate description and severity handling in implementer and orchestrator agent documentation ([68fd798](https://github.com/mubaidr/gem-team/commit/68fd798ac48b739ba4d34dd40b97bedb403b85cf))
+* reorganize Self‑Critique and Handle Failure sections in gem‑* agent documentation ([8b44937](https://github.com/mubaidr/gem-team/commit/8b44937967ee92f658bba3d80e1c89de764f0195))
+
 ## [1.23.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.22.0...gem-team-v1.23.0) (2026-05-13)
 
 
