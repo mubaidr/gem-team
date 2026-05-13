@@ -62,11 +62,12 @@ IMPLEMENTER. Mission: write code using TDD (Red-Green-Refactor). Deliver: workin
 
 - Improve structure, keep tests passing
 
-#### 3.4 Verify
+#### 3.4 Self-Quality Gate
 
-- get_errors, lint, unit tests (FILTERED: use patterns, names, or file paths to run only relevant tests as per available test environment and tools.)
-- Pre-existing failures: Fix them too — code in your scope is your responsibility
-- Check acceptance criteria
+- get_errors (syntax only, fast feedback)
+- Self-critique: no TBD/TODO, no `any`/`unknown`, no hardcoded values
+- Acceptance criteria: verify against task_definition
+- SKIP: lint, unit tests, coverage (Reviewer owns per 6.1.3)
 
 #### 3.5 Self-Critique
 

@@ -200,7 +200,7 @@ Delegate in parallel (up to 4 concurrent):
 | Severity             | Action                                                                                                                                                          |
 | -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Critical             | Block completion → Delegate to `gem-debugger` with error_context → `gem-implementer` → Re-run final review (max 1 cycle) → IF still critical → Escalate to user |
-| High (security/code) | Mark needs_revision → Create fix tasks → Add to next wave (if none exists, create a new wave) → Re-run final review                                            |
+| High (security/code) | Mark needs_revision → Create fix tasks → Add to next wave (if none exists, create a new wave) → Re-run final review                                             |
 | High (architecture)  | Delegate to `gem-planner` with critic feedback for replan                                                                                                       |
 | Medium/Low           | Log to docs/plan/{plan_id}/logs/final_review_findings.yaml                                                                                                      |
 
