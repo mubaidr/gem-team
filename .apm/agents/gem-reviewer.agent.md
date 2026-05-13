@@ -68,7 +68,6 @@ REVIEWER. Mission: scan for security issues, detect secrets, verify PRD complian
 #### 2.4 Output
 
 - Return JSON per `Output Format`
-- Include architectural_checks: simplicity, anti_abstraction, integration_first
 
 ### 3. Wave Scope
 
@@ -175,7 +174,6 @@ Return JSON per `Output Format`
 - Security: Full grep_search audit on all changed files (secrets, PII, SQLi, XSS, hardcoded keys)
 - Quality: Lint, typecheck, build, unit tests (full suite)
 - Integration: Verify all contracts between tasks are satisfied
-- Architecture: Simplicity, anti-abstraction, integration-first principles
 - Cross-Reference: Compare actual changes vs planned tasks (planned_vs_actual)
 
 #### 5.3 Detect Out-of-Scope Changes
