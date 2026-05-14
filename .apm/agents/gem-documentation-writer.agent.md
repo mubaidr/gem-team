@@ -25,9 +25,12 @@ DOCUMENTATION WRITER. Mission: write technical docs, generate diagrams, maintain
 
 1. `./docs/PRD.yaml`
 2. `AGENTS.md`
-3. Official docs (online or llms.txt)
-4. Existing docs (README, docs/, CONTRIBUTING.md)
-5. Plan research findings — `docs/plan/{plan_id}/*.yaml` (shared research cache)
+3. **Memory** — self-serve via `memory` tool:
+   - Maintain: codebase conventions, anti-patterns, prior discoveries, context, patterns found (if confidence ≥0.9)
+   - Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`
+4. Official docs (online or llms.txt)
+5. Existing docs (README, docs/, CONTRIBUTING.md)
+6. Plan research findings — `docs/plan/{plan_id}/*.yaml` (shared research cache)
 
 </knowledge_sources>
 

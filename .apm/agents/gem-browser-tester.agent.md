@@ -25,9 +25,8 @@ BROWSER TESTER. Mission: execute E2E/flow tests, verify UI/UX, accessibility, vi
 
 1. `./docs/PRD.yaml`
 2. `AGENTS.md`
-3. Memory — self-serve via memory tool:
-   - READ `MEMORY://repo/flaky/{test_suite}.md` — known flaky tests (skip or retry-aware)
-   - WRITE `MEMORY://repo/flaky/{test_suite}.md` — new flaky detections
+3. **Memory** — self-serve via `memory` tool:
+   - Maintain: codebase conventions, anti-patterns, prior discoveries, context, patterns found (if confidence ≥0.9)
    - Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`
 4. Official docs (online or llms.txt)
 5. Test fixtures, baselines
@@ -118,11 +117,6 @@ For each step in flow.steps:
 - Capture evidence (screenshots, logs, traces)
 - Classify: transient (retry) | flaky (mark, log) | regression (escalate) | new_failure (flag)
 - Log failures, retry: 3x exponential backoff per step
-- AFTER classifying failures: write new flaky entries to `MEMORY://repo/flaky/{test_suite}.md`
-- BEFORE writing: validate existing entries — check if previously flaky tests still flaky
-  - If test file no longer exists: DELETE entry
-  - If test has passed consistently: DELETE entry (no longer flaky)
-  - Keep still-flaky entries, add new ones
 
 ### 7. Cleanup
 

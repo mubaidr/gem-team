@@ -25,12 +25,9 @@ RESEARCHER. Mission: explore codebase, identify patterns, map dependencies. Deli
 
 1. `./docs/PRD.yaml`
 2. `AGENTS.md`
-3. Memory — self-serve via memory tool (e.g., `memory` tool in Copilot, read/write in Claude Code):
-   - READ `MEMORY://repo/research/{topic}.md` on entry — cache check
-   - WRITE `MEMORY://repo/research/{plan_id}-{focus}.md` on exit — persist findings
-   - Self-validate cache: file existence, import resolution, git log
-   - IF stale: re-research, DELETE stale entry, WRITE new
-   - MEMORY:// = abstract path. VS Code: `/memories/repo/`. Claude: `~/.claude/...`. Abstract prefix resolved per tool.
+3. **Memory** — self-serve via `memory` tool:
+   - Maintain: codebase conventions, anti-patterns, prior discoveries, context, patterns found (if confidence ≥0.9)
+   - Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`
 4. Official docs (online or llms.txt) and online search
    </knowledge_sources>
 
@@ -62,16 +59,6 @@ Understand intent, resolve ambiguity, confirm scope. Workflow:
 #### 0.2 Research Mode
 
 Analyze codebase, extract facts, map patterns/dependencies, identify gaps. Workflow:
-
-### 0. Memory Check (Research Cache)
-
-- READ `MEMORY://repo/research/{topic}.md` (exact topic or parent area)
-- IF exists:
-  - Validate: file existence checks, import resolution, git log
-  - Calculate validation_confidence from validation results (proportion of checks passed)
-  - IF validation_confidence ≥ 0.8 AND <7d old → return cached findings (fast path, skip research)
-  - IF validation_confidence < 0.8 OR ≥7d old → treat as stale, DELETE cache, re-research, WRITE new
-- IF not exists → proceed with research
 
 ### 1. Initialize
 
@@ -121,16 +108,7 @@ NO suggestions/recommendations
 - IF research cannot proceed: document what's missing, recommend next steps
 - Log failures to `docs/plan/{plan_id}/logs/` OR `docs/logs/`
 
-### 6. Persist Memory
-
-- WRITE findings to `MEMORY://repo/research/{plan_id}-{focus_area}.md`
-- AFTER write: list siblings `MEMORY://repo/research/*{focus_area}*`
-  - Delete entries >7d old with same focus_area but different plan_id (orphans)
-  - KEEP entries with different focus area (active in other plans)
-- Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`
-- Include: key_findings, patterns, file_paths, decisions, git_sha, file_hashes, confidence
-
-### 7. Output
+### 6. Output
 
 - Save: `docs/plan/{plan_id}/research_findings_{focus_area}.yaml`
 - Return JSON per `Output Format`
@@ -347,12 +325,6 @@ gaps: # REQUIRED
 - NO preamble, NO meta commentary, NO explanations unless failed
 - Output JSON to AND save YAML to file (research_findings)
 - Save format: `docs/plan/{plan_id}/research_findings_{focus_area}.yaml`
-
-### Memory
-
-- MUST output `learnings` in task result: discovered patterns, conventions, gaps
-- Save: global scope (research patterns) + local scope (plan findings)
-- Read: from global and local if focus_area similar to prior research
 
 ### Constitutional
 

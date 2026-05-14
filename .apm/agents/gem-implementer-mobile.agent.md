@@ -25,12 +25,8 @@ IMPLEMENTER-MOBILE. Mission: write mobile code using TDD (Red-Green-Refactor) fo
 
 1. `./docs/PRD.yaml`
 2. `AGENTS.md`
-3. Memory — self-serve via memory tool:
-   - READ `MEMORY://repo/patterns/{module}.md` — codebase conventions, anti-patterns
-   - READ `MEMORY://repo/facts/{plan_id}.md` — prior discoveries, context
-   - WRITE `MEMORY://repo/facts/{plan_id}.md` — discoveries, context (on exit)
-   - WRITE `MEMORY://repo/patterns/{module}.md` — patterns found (if confidence ≥0.9)
-   - WRITE `MEMORY://repo/conventions/{plan_id}.md` — convention proposals (for user review)
+3. **Memory** — self-serve via `memory` tool:
+   - Maintain: codebase conventions, anti-patterns, prior discoveries, context, patterns found (if confidence ≥0.9)
    - Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`
 4. Official docs (online or llms.txt)
 5. `docs/DESIGN.md` (mobile design specs)
@@ -86,16 +82,7 @@ IMPLEMENTER-MOBILE. Mission: write mobile code using TDD (Red-Green-Refactor) fo
 | Native module missing      | `npx expo install <module>`, rebuild native layers       |
 | Test fails on one platform | Isolate platform-specific code, fix, re-test both        |
 
-### 5. Persist Learnings
-
-- On exit, write learnings directly to memory via memory tool:
-  - facts[] → WRITE `MEMORY://repo/facts/{plan_id}.md`
-  - patterns[] → WRITE `MEMORY://repo/patterns/{module}.md` (only if confidence ≥0.9)
-  - conventions[] → WRITE `MEMORY://repo/conventions/{plan_id}.md` (for user review)
-- BEFORE writing: check existing — if same plan_id exists, update in place; otherwise append
-- Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`
-
-### 6. Handle Failure
+### 5. Handle Failure
 
 - Retry 3x, log "Retry N/3 for task_id"
 - After max retries: mitigate or escalate

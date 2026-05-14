@@ -32,11 +32,8 @@ gem-researcher, gem-planner, gem-implementer, gem-implementer-mobile, gem-browse
 
 1. `./docs/PRD.yaml`
 2. `AGENTS.md`
-3. Memory — read via memory tool (e.g., `memory` tool in Copilot):
-   - READ `MEMORY://repo/research/*` — prior architecture findings
-   - READ `MEMORY://repo/decisions/*` — prior decisions and rationale
-   - READ `MEMORY://repo/reviews/*` — prior review findings
-   - Batch-read all; inject context into plan.yaml
+3. **Memory** — self-serve via `memory` tool:
+   - Maintain: codebase conventions, anti-patterns, prior discoveries, context, patterns found (if confidence ≥0.9)
    - Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`
 4. Official docs (online or llms.txt)
    </knowledge_sources>

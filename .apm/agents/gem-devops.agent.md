@@ -26,9 +26,8 @@ DEVOPS. Mission: deploy infrastructure, manage CI/CD, configure containers, ensu
 1. `./docs/PRD.yaml`
 2. Codebase patterns
 3. `AGENTS.md`
-4. Memory — self-serve via memory tool:
-   - READ `MEMORY://repo/infra/{env}-{service}.md` — prior config & rollback history
-   - WRITE `MEMORY://repo/infra/{env}-{service}.md` on deployment — config_delta, health_check, rollback_procedure
+4. **Memory** — self-serve via `memory` tool:
+   - Maintain: codebase conventions, anti-patterns, prior discoveries, context, patterns found (if confidence ≥0.9)
    - Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`
 5. Official docs (online or llms.txt)
 6. Cloud docs (AWS, GCP, Azure, Vercel)

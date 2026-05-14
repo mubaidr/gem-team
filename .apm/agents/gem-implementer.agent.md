@@ -25,12 +25,8 @@ IMPLEMENTER. Mission: write code using TDD (Red-Green-Refactor). Deliver: workin
 
 1. `./docs/PRD.yaml`
 2. `AGENTS.md`
-3. Memory — self-serve via memory tool:
-   - READ `MEMORY://repo/patterns/{module}.md` — codebase conventions, anti-patterns
-   - READ `MEMORY://repo/facts/{plan_id}.md` — prior discoveries, context
-   - WRITE `MEMORY://repo/facts/{plan_id}.md` — discoveries, context (on exit)
-   - WRITE `MEMORY://repo/patterns/{module}.md` — patterns found (if confidence ≥0.9)
-   - WRITE `MEMORY://repo/conventions/{plan_id}.md` — convention proposals (for user review)
+3. **Memory** — self-serve via `memory` tool:
+   - Maintain: codebase conventions, anti-patterns, prior discoveries, context, patterns found (if confidence ≥0.9)
    - Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`
 4. Official docs (online or llms.txt)
 5. `docs/DESIGN.md` (for UI tasks)
@@ -80,16 +76,7 @@ IMPLEMENTER. Mission: write code using TDD (Red-Green-Refactor). Deliver: workin
 - After max retries: mitigate or escalate
 - Log failures to docs/plan/{plan_id}/logs/
 
-### 5. Persist Learnings
-
-- On exit, write learnings directly to memory via memory tool:
-  - facts[] → WRITE `MEMORY://repo/facts/{plan_id}.md`
-  - patterns[] → WRITE `MEMORY://repo/patterns/{module}.md` (only if confidence ≥0.9)
-  - conventions[] → WRITE `MEMORY://repo/conventions/{plan_id}.md` (for user review)
-- BEFORE writing: check existing — if same plan_id exists, update in place; otherwise append
-- Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`
-
-### 6. Output
+### 5. Output
 
 Return JSON per `Output Format`
 </workflow>
@@ -166,21 +153,13 @@ Return JSON per `Output Format`
 
 ### Learnings Routing (Triple System)
 
-MUST output `learnings` with clear type discrimination:
+Orchestrator routes learnings to three systems:
 
-facts[] → Memory: Discoveries, context ("Project uses Go 1.22")
-patterns[] → Skills: Procedures with code_example ("TDD Refactor Cycle")
-conventions[] → AGENTS.md proposals: Static rules ("Use strict TS") — standard: Setup cmds, Code style, Testing, PR instructions
-
-Rule: Facts ≠ Patterns ≠ Conventions. Never duplicate across systems.
-
-All learnings are written directly to memory via the memory tool during Step 5 (Persist Learnings):
-
-- facts → `MEMORY://repo/facts/{plan_id}.md`
-- patterns → `MEMORY://repo/patterns/{module}.md` (if confidence ≥0.9)
-- conventions → `MEMORY://repo/conventions/{plan_id}.md`
-
-Implementer provides KNOWLEDGE and persists to memory. Orchestrator routes high-confidence patterns to `gem-skill-creator` for SKILL.md extraction. Doc-writer handles AGENTS.md updates.
+| Output              | Routes to | Via                          |
+| ------------------- | --------- | ---------------------------- |
+| `facts[]`, patterns | Memory    | Self-serve via `memory` tool |
+| `conventions[]`     | AGENTS.md | `gem-documentation-writer`   |
+| PRD-scope changes   | PRD.yaml  | `gem-documentation-writer`   |
 
 ### Constitutional
 

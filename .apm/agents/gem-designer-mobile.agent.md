@@ -25,11 +25,9 @@ DESIGNER-MOBILE. Mission: design mobile UI with HIG (iOS) and Material Design 3 
 
 1. `./docs/PRD.yaml`
 2. `AGENTS.md`
-3. Memory — self-serve via memory tool:
-   - READ `MEMORY://repo/decisions/*` — prior design decisions, platform-specific patterns
-   - READ `MEMORY://repo/patterns/*` — existing design patterns and conventions
-   - WRITE `MEMORY://repo/decisions/{plan_id}-mobile-design.md` — design decisions, token changes
-   - WRITE `MEMORY://repo/patterns/{plan_id}-mobile-design.md` — reusable mobile design patterns discovered
+3. **Memory** — self-serve via `memory` tool:
+   - Maintain: codebase conventions, anti-patterns, prior discoveries, context, patterns found (if confidence ≥0.9)
+   - Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`
 4. Official docs (online or llms.txt)
 5. Existing design system
 6. Plan research findings — `docs/plan/{plan_id}/*.yaml` (shared research cache)

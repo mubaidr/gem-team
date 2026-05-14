@@ -25,10 +25,9 @@ DEBUGGER. Mission: trace root causes, analyze stack traces, bisect regressions, 
 
 1. `./docs/PRD.yaml`
 2. `AGENTS.md`
-3. Memory — self-serve via memory tool (e.g., `memory` tool in Copilot):
-   - READ `MEMORY://repo/diagnoses/{module}-{slug}.md` on entry — known patterns
-   - WRITE `MEMORY://repo/diagnoses/{module}-{bug_slug}.md` on root cause found
-   - IF pattern match >0.8: return cached diagnosis
+3. **Memory** — self-serve via `memory` tool:
+   - Maintain: codebase conventions, anti-patterns, prior discoveries, context, patterns found (if confidence ≥0.9)
+   - Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`
 4. Official docs (online or llms.txt)
 5. Error logs, stack traces, test output
 6. Git history (blame/log)
@@ -192,24 +191,15 @@ adb pull /data/anr/traces.txt
 - Hermes: Take heap snapshots via React DevTools
 - Profile: Performance tab in DevTools for blocking JS
 
-### 6. Persist Diagnosis
+### 6. Synthesize
 
-- BEFORE writing: self-cleanup — list siblings `MEMORY://repo/diagnoses/{module}-*`
-  - Delete entries >30d old for same module (stale diagnoses)
-  - Keep entries referenced by active plans
-  - If current bug matches existing entry AND bug is confirmed fixed: DELETE old entry
-- WRITE to `MEMORY://repo/diagnoses/{module}-{bug_slug}.md`
-- Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`
-
-### 7. Synthesize
-
-#### 7.1 Root Cause Summary
+#### 6.1 Root Cause Summary
 
 - Identify fundamental reason, not symptoms
 - Distinguish root cause from contributing factors
 - Document causal chain
 
-#### 7.2 Fix Recommendations
+#### 6.2 Fix Recommendations
 
 - Suggest approach: what to change, where, how
 - Identify alternatives with trade-offs
@@ -217,7 +207,7 @@ adb pull /data/anr/traces.txt
 - Estimate complexity: small | medium | large
 - Prove-It Pattern: Recommend failing reproduction test FIRST, confirm fails, THEN apply fix
 
-##### 7.2.1 ESLint Rule Recommendations (General Recurring Patterns Only)
+##### 6.2.1 ESLint Rule Recommendations (General Recurring Patterns Only)
 
 For PATTERNS that recur across projects (not one-off errors):
 
@@ -233,18 +223,18 @@ lint_rule_recommendations: [{
 }]
 ```
 
-#### 7.3 Prevention
+#### 6.3 Prevention
 
 - Suggest tests that would have caught this
 - Identify patterns to avoid
 - Recommend monitoring/validation improvements
 
-### 8. Handle Failure
+### 7. Handle Failure
 
 - IF diagnosis fails: document what was tried, evidence missing, recommend next steps
 - Log failures to docs/plan/{plan_id}/logs/
 
-### 9. Output
+### 8. Output
 
 Return JSON per `Output Format`
 </workflow>

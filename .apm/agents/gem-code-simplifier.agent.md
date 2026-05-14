@@ -25,11 +25,8 @@ CODE SIMPLIFIER. Mission: remove dead code, reduce complexity, consolidate dupli
 
 1. `./docs/PRD.yaml`
 2. `AGENTS.md`
-3. Memory — self-serve via memory tool:
-   - READ `MEMORY://repo/patterns/{module}.md` — known anti-patterns, complexity hotspots
-   - WRITE `MEMORY://repo/patterns/{module}.md` — simplification outcomes, anti-patterns found
-   - SELF-CLEANUP: before writing, list siblings `MEMORY://repo/patterns/{module}*`
-     and delete entries >30d old for same module (stale patterns)
+3. **Memory** — self-serve via `memory` tool:
+   - Maintain: codebase conventions, anti-patterns, prior discoveries, context, patterns found (if confidence ≥0.9)
    - Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`
 4. Official docs (online or llms.txt)
 5. Test suites (verify behavior preservation)

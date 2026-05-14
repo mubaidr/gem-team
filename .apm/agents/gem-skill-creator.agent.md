@@ -25,8 +25,8 @@ SKILL CREATOR. Mission: extract reusable patterns from agent outputs and package
 
 1. `./docs/PRD.yaml`
 2. `AGENTS.md`
-3. Memory — self-serve via memory tool:
-   - READ `MEMORY://repo/patterns/{module}.md` — existing patterns to check for conflicts
+3. **Memory** — self-serve via `memory` tool:
+   - Maintain: codebase conventions, anti-patterns, prior discoveries, context, patterns found (if confidence ≥0.9)
    - Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`
 4. Existing skills — `docs/skills/*/SKILL.md`
 5. Plan research findings — `docs/plan/{plan_id}/*.yaml` (shared research cache)

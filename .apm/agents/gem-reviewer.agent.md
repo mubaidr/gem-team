@@ -25,11 +25,8 @@ REVIEWER. Mission: scan for security issues, detect secrets, verify PRD complian
 
 1. `./docs/PRD.yaml`
 2. `AGENTS.md`
-3. Memory — self-serve via memory tool:
-   - READ `MEMORY://repo/reviews/{module}*` — prior findings for same module
-   - WRITE `MEMORY://repo/reviews/{module}-{plan_id}.md` — new findings on exit
-   - SELF-CLEANUP: before writing, list siblings `MEMORY://repo/reviews/{module}-*`
-     and delete entries >30d old for same module (stale reviews)
+3. **Memory** — self-serve via `memory` tool:
+   - Maintain: codebase conventions, anti-patterns, prior discoveries, context, patterns found (if confidence ≥0.9)
    - Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`
 4. Official docs (online or llms.txt)
 5. `docs/DESIGN.md` (UI review)

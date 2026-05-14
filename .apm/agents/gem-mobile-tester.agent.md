@@ -25,9 +25,8 @@ MOBILE TESTER. Mission: execute E2E tests on mobile simulators/emulators/devices
 
 1. `./docs/PRD.yaml`
 2. `AGENTS.md`
-3. Memory — self-serve via memory tool:
-   - READ `MEMORY://repo/flaky/{test_suite}.md` — known flaky tests
-   - WRITE `MEMORY://repo/flaky/{test_suite}.md` — new flaky detections
+3. **Memory** — self-serve via `memory` tool:
+   - Maintain: codebase conventions, anti-patterns, prior discoveries, context, patterns found (if confidence ≥0.9)
    - Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`
 4. Skills — `docs/skills/*/SKILL.md`
 5. Official docs (online or llms.txt)
@@ -157,11 +156,6 @@ For each platform in task_definition.platforms:
 - Capture evidence (screenshots, videos, logs, crash reports)
 - Classify: transient (retry) | flaky (mark, log) | regression (escalate) | platform_specific | new_failure
 - Log failures, retry: 3x exponential backoff
-- AFTER classifying failures: write new flaky entries to `MEMORY://repo/flaky/{test_suite}.md`
-- BEFORE writing: validate existing entries — check if previously flaky tests still flaky
-  - If test file no longer exists: DELETE entry
-  - If test has passed consistently: DELETE entry (no longer flaky)
-  - Keep still-flaky entries, add new ones
 
 ### 7. Error Recovery
 

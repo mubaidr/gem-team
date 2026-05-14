@@ -52,7 +52,7 @@ See [all supported installation options](#installation) below.
 - **Knowledge-Driven** — Prioritized sources (PRD → codebase → AGENTS.md → Context7 → docs)
 - **Continuous Learning** — Memory tool persists patterns, gotchas, user preferences across sessions
 - **Agent Memory Contracts** — Every agent reads/writes structured memory autonomously. Researcher caches, debugger logs, planner aggregates, reviewers persist
-- **Self-Validating Cache** — Researcher checks `MEMORY://repo/research/` before searching. Validates (file checks, import resolve, git log). IF stale: re-research, DELETE old, WRITE new
+- **Self-Validating Cache** — Researcher checks memory before searching. Validates (file checks, import resolve, git log). IF stale: re-research, DELETE old, WRITE new
 - **Diagnosis History** — Debugger saves root-causes. Same bug pattern >0.8 match: cached diagnosis
 - **Auto-Skills** — Agents extract reusable SKILL.md files from successful tasks
 - **Skills & Guidelines** — Built-in skill & guidelines (web-design-guidelines)
@@ -111,19 +111,6 @@ Gem Team includes specialized design agents with anti-"AI slop" guidelines for d
 | **Memory**           | `MEMORY://user/`           | Facts & user preferences (auto-save)                                        |
 | **Skills**           | `docs/skills/`             | Procedures with code examples                                               |
 | **Conventions**      | `AGENTS.md`                | Static rules (requires approval)                                            |
-
-### Memory Architecture
-
-Orchestrator never manages memory. Agents self-serve via tool-native memory:
-
-```
-Agent on ENTRY → MEMORY://repo/{category}/{key} → validates (if stale: DELETE + WRITE new)
-Agent on EXIT  → writes to MEMORY://repo/{category}/{key} → dense/bulleted format
-```
-
-`MEMORY://` is abstract. VS Code Copilot: `/memories/repo/`, Claude Code: `~/.claude/...`, Cursor: `.cursor/memory/`.
-
-See [Memory Contracts](./docs/docs/agents.md#memory-contracts) for per-agent R/W spec.
 
 ---
 
@@ -370,12 +357,10 @@ Agents consult only the sources relevant to their role:
 
 ### Skill Creation Flow
 
-During the execution loop in Phase 6, the orchestrator reviews `learnings.patterns[]` from agent outputs:
+During the execution loop, the orchestrator reviews `learnings.patterns[]` from agent outputs:
 
-1. **Implementer** persists high-confidence patterns to `MEMORY://repo/patterns/` on each task exit
-2. **Orchestrator** detects patterns with confidence ≥0.85 during Skill Extraction (6.1.5)
-3. **`gem-skill-creator`** receives patterns → deduplicates against `docs/skills/` → creates `SKILL.md` with code examples, gotchas, and references
-4. **Deduplication** ensures no duplicate skill files are created per `docs/skills/`
+- **Implementer** persists high-confidence patterns to memory on each task exit
+- **`gem-skill-creator`** receives patterns → deduplicates against `docs/skills/` → creates `SKILL.md` with code examples, gotchas, and references
 
 Skills follow the [Agent Skills](https://agentskills.io) format for cross-tool portability.
 
