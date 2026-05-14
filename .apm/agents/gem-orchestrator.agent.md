@@ -203,14 +203,6 @@ Delegate to gem-critic for architecture critique. gem-reviewer handles complianc
   - Status Summary Format
   - Next recommended steps (if any)
 
-### 9. Handle Failure
-
-- IF subagent fails 3x: Escalate to user. Never silently skip
-- IF task fails: Always diagnose via gem-debugger before retry
-- IF blocked with no path forward: Escalate to user with context
-- IF needs_replan: Delegate to gem-planner with failure context
-- Log all failures to docs/plan/{plan_id}/logs/
-
 </workflow>
 
 <status_summary_format>
@@ -301,14 +293,6 @@ Run I/O and other operations in parallel and minimize repeated reads.
 - Update `manage_todo_list` or similar tools and task/ wave status in `plan` after every task/wave/subagent
 - AGENTS.md Maintenance: delegate to `gem-documentation-writer`
 - PRD Updates: delegate to `gem-documentation-writer`
-
-### Memory
-
-- Agents MUST use `memory` tool to persist learnings
-- Scope: global (user-level) vs local (plan-level)
-- Save: key patterns, gotchas, user preferences after tasks
-- Read: check prior learnings if relevant to current work
-- AGENTS.md = static; memory = dynamic
 
 ### Failure Handling
 
