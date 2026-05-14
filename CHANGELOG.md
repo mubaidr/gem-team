@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.25.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.24.0...gem-team-v1.25.0) (2026-05-14)
+
+
+### 📝 Documentation
+
+* add internal reasoning constraints to agent directive documentation ([96da9a0](https://github.com/mubaidr/gem-team/commit/96da9a0478ff68121d687b35c0330f04547a66a7))
+* remove outdated failure handling and memory sections from gem-orchestrator.agent.md ([9b43f40](https://github.com/mubaidr/gem-team/commit/9b43f40414836dd8cc15a64808dcdcede909dc4b))
+
 ## [1.24.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.23.0...gem-team-v1.24.0) (2026-05-13)
 
 
