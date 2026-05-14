@@ -29,7 +29,7 @@ BROWSER TESTER. Mission: execute E2E/flow tests, verify UI/UX, accessibility, vi
 4. Memory — self-serve via memory tool:
    - READ `MEMORY://repo/flaky/{test_suite}.md` — known flaky tests (skip or retry-aware)
    - WRITE `MEMORY://repo/flaky/{test_suite}.md` — new flaky detections
-   - Format: dense, abbreviated, bulleted. No prose.
+   - Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`
 5. Official docs (online or llms.txt)
 6. Test fixtures, baselines
 7. `docs/DESIGN.md` (visual validation)

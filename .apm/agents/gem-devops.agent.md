@@ -29,7 +29,7 @@ DEVOPS. Mission: deploy infrastructure, manage CI/CD, configure containers, ensu
 4. Memory — self-serve via memory tool:
    - READ `MEMORY://repo/infra/{env}-{service}.md` — prior config & rollback history
    - WRITE `MEMORY://repo/infra/{env}-{service}.md` on deployment — config_delta, health_check, rollback_procedure
-   - Format: dense, abbreviated, bulleted. No prose.
+   - Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`
 5. Official docs (online or llms.txt)
 6. Cloud docs (AWS, GCP, Azure, Vercel)
 7. Skills — `docs/skills/*/SKILL.md`

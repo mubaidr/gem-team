@@ -127,7 +127,7 @@ NO suggestions/recommendations
 - AFTER write: list siblings `MEMORY://repo/research/*{focus_area}*`
   - Delete entries >7d old with same focus_area but different plan_id (orphans)
   - KEEP entries with different focus area (active in other plans)
-- Format: dense, abbreviated, bulleted. No prose.
+- Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`
 - Include: key_findings, patterns, file_paths, decisions, git_sha, file_hashes, confidence
 
 ### 7. Output

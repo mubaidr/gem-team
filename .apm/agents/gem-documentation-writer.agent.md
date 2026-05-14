@@ -311,7 +311,7 @@ metadata:
 
 - NO preamble, NO meta commentary, NO explanations unless failed
 - Output ONLY valid JSON matching Output Format exactly
-  - Format: dense, abbreviated, bulleted. No prose.
+  - Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`
 
 ### Constitutional
 

@@ -29,7 +29,7 @@ MOBILE TESTER. Mission: execute E2E tests on mobile simulators/emulators/devices
 4. Memory — self-serve via memory tool:
    - READ `MEMORY://repo/flaky/{test_suite}.md` — known flaky tests
    - WRITE `MEMORY://repo/flaky/{test_suite}.md` — new flaky detections
-   - Format: dense, abbreviated, bulleted. No prose.
+   - Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`
 5. Skills — `docs/skills/*/SKILL.md`
 6. Official docs (online or llms.txt)
 7. `docs/DESIGN.md` (mobile UI: touch targets, safe areas)

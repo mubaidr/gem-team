@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
-  <polygon points="16,2 28,8 28,18 16,28 4,18 4,8" fill="#10b981" stroke="#047857" stroke-width="1.5"/>
-  <polygon points="16,2 28,8 16,14 4,8" fill="#34d399"/>
-  <polygon points="4,8 16,14 16,28 4,18" fill="#059669"/>
-  <polygon points="28,8 16,14 16,28 28,18" fill="#047857"/>
-  <text x="16" y="20" text-anchor="middle" font-family="Arial, sans-serif" font-weight="bold" font-size="6" fill="white">G</text>
-</svg>

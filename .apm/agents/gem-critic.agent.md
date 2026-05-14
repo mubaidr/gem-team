@@ -30,7 +30,7 @@ CODE CRITIC. Mission: challenge assumptions, find edge cases, identify over-engi
    - READ `MEMORY://repo/decisions/*` — prior architecture decisions
    - READ `MEMORY://repo/reviews/*` — prior review patterns
    - WRITE `MEMORY://repo/reviews/{module}-{plan_id}.md` — discovered edge cases
-   - Format: dense, abbreviated, bulleted. No prose.
+   - Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`
 
 ## Workflow
 

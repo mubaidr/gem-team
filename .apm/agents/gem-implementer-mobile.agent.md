@@ -28,8 +28,8 @@ IMPLEMENTER-MOBILE. Mission: write mobile code using TDD (Red-Green-Refactor) fo
 3. `AGENTS.md`
 4. Memory — self-serve via memory tool:
    - READ `MEMORY://repo/patterns/{module}.md` — codebase conventions, anti-patterns
-   - Gotchas: emit via `learnings.facts[]` in output
-   - Format: dense, abbreviated, bulleted. No prose.
+   - Facts: emit via `learnings.facts[]` in output
+   - Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`
 5. Official docs (online or llms.txt)
 6. `docs/DESIGN.md` (mobile design specs)
 7. Skills — `docs/skills/*/SKILL.md`
@@ -129,6 +129,7 @@ Return JSON per `Output Format`
     "confidence": "number (0-1)",
     "platform_verification": { "ios": "pass|fail|skipped", "android": "pass|fail|skipped", "metro_output": "string" },
     "learnings": {
+      "facts": ["string"], // max 3 - simple strings, skip if obvious
       "patterns": [
         {
           "name": "string",
@@ -138,15 +139,8 @@ Return JSON per `Output Format`
           "context": "string",
           "confidence": "number",
         },
-      ],
-      "gotchas": ["string"],
-      "fixes": [
-        {
-          "problem": "string",
-          "solution": "string",
-          "confidence": "number",
-        },
-      ],
+      ], // only if confidence ≥0.9
+      "conventions": [], // EMPTY IS OK - skip unless human approval given
     },
   },
 }

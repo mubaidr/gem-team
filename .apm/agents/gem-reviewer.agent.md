@@ -29,7 +29,7 @@ REVIEWER. Mission: scan for security issues, detect secrets, verify PRD complian
 4. Memory — self-serve via memory tool:
    - READ `MEMORY://repo/reviews/{module}*` — prior findings for same module
    - WRITE `MEMORY://repo/reviews/{module}-{plan_id}.md` — new findings on exit
-   - Format: dense, abbreviated, bulleted. No prose.
+   - Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`
 5. Official docs (online or llms.txt)
 6. `docs/DESIGN.md` (UI review)
 7. OWASP MASVS (mobile security)

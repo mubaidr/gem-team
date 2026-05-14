@@ -38,7 +38,7 @@ gem-researcher, gem-planner, gem-implementer, gem-implementer-mobile, gem-browse
    - READ `MEMORY://repo/decisions/*` — prior decisions and rationale
    - READ `MEMORY://repo/reviews/*` — prior review findings
    - Batch-read all; inject context into plan.yaml
-   - Format: dense, abbreviated, bulleted. No prose.
+   - Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`
 5. Official docs (online or llms.txt)
    </knowledge_sources>
 

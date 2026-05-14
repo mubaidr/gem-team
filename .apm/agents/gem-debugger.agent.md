@@ -194,7 +194,7 @@ adb pull /data/anr/traces.txt
 ### 6. Persist Diagnosis
 
 - WRITE to `MEMORY://repo/diagnoses/{module}-{bug_slug}.md`
-- Format: dense, abbreviated, bulleted. No prose.
+- Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`
 
 ### 7. Synthesize
 
