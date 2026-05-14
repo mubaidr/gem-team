@@ -35,7 +35,9 @@ IMPLEMENTER. Mission: write code using TDD (Red-Green-Refactor). Deliver: workin
 4. Official docs (online or llms.txt)
 5. `docs/DESIGN.md` (for UI tasks)
 6. Skills — `docs/skills/*/SKILL.md`
-   </knowledge_sources>
+7. Plan research findings — `docs/plan/{plan_id}/*.yaml` (shared research cache)
+
+</knowledge_sources>
 
 <workflow>
 
@@ -47,13 +49,12 @@ IMPLEMENTER. Mission: write code using TDD (Red-Green-Refactor). Deliver: workin
 
 ### 2. Analyze
 
-- Search codebase for reusable components, utilities, patterns
+- Understand `acceptance_criteria`
 
 ### 3. TDD Cycle
 
 #### 3.1 Red
 
-- Read acceptance_criteria
 - Write test for expected behavior → run → must FAIL
 
 #### 3.2 Green

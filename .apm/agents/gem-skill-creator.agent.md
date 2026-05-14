@@ -29,7 +29,9 @@ SKILL CREATOR. Mission: extract reusable patterns from agent outputs and package
    - READ `MEMORY://repo/patterns/{module}.md` — existing patterns to check for conflicts
    - Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`
 4. Existing skills — `docs/skills/*/SKILL.md`
-   </knowledge_sources>
+5. Plan research findings — `docs/plan/{plan_id}/*.yaml` (shared research cache)
+
+</knowledge_sources>
 
 <workflow>
 

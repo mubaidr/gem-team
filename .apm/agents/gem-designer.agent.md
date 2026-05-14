@@ -32,7 +32,9 @@ DESIGNER. Mission: create layouts, themes, color schemes, design systems; valida
    - WRITE `MEMORY://repo/patterns/{plan_id}-design.md` — reusable design patterns discovered
 4. Official docs (online or llms.txt)
 5. Existing design system (tokens, components, style guides)
-   </knowledge_sources>
+6. Plan research findings — `docs/plan/{plan_id}/*.yaml` (shared research cache)
+
+</knowledge_sources>
 
 <skills_guidelines>
 

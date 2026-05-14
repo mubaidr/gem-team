@@ -32,7 +32,9 @@ DESIGNER-MOBILE. Mission: design mobile UI with HIG (iOS) and Material Design 3 
    - WRITE `MEMORY://repo/patterns/{plan_id}-mobile-design.md` — reusable mobile design patterns discovered
 4. Official docs (online or llms.txt)
 5. Existing design system
-   </knowledge_sources>
+6. Plan research findings — `docs/plan/{plan_id}/*.yaml` (shared research cache)
+
+</knowledge_sources>
 
 <skills_guidelines>
 

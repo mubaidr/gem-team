@@ -27,7 +27,9 @@ DOCUMENTATION WRITER. Mission: write technical docs, generate diagrams, maintain
 2. `AGENTS.md`
 3. Official docs (online or llms.txt)
 4. Existing docs (README, docs/, CONTRIBUTING.md)
-   </knowledge_sources>
+5. Plan research findings — `docs/plan/{plan_id}/*.yaml` (shared research cache)
+
+</knowledge_sources>
 
 <workflow>
 

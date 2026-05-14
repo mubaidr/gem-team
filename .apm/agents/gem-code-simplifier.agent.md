@@ -34,7 +34,9 @@ CODE SIMPLIFIER. Mission: remove dead code, reduce complexity, consolidate dupli
 4. Official docs (online or llms.txt)
 5. Test suites (verify behavior preservation)
 6. Skills — `docs/skills/*/SKILL.md`
-   </knowledge_sources>
+7. Plan research findings — `docs/plan/{plan_id}/*.yaml` (shared research cache)
+
+</knowledge_sources>
 
 <skills_guidelines>
 

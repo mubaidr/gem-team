@@ -35,7 +35,9 @@ IMPLEMENTER-MOBILE. Mission: write mobile code using TDD (Red-Green-Refactor) fo
 4. Official docs (online or llms.txt)
 5. `docs/DESIGN.md` (mobile design specs)
 6. Skills — `docs/skills/*/SKILL.md`
-   </knowledge_sources>
+7. Plan research findings — `docs/plan/{plan_id}/*.yaml` (shared research cache)
+
+</knowledge_sources>
 
 <workflow>
 
@@ -44,12 +46,10 @@ IMPLEMENTER-MOBILE. Mission: write mobile code using TDD (Red-Green-Refactor) fo
 ### 1. Initialize
 
 - Read AGENTS.md, parse inputs
-- Detect project type: React Native/Expo/Flutter
 
 ### 2. Analyze
 
-- Search codebase for reusable components, patterns
-- Check navigation, state management, design tokens
+- Detect project type: React Native/Expo/Flutter
 
 ### 3. TDD Cycle
 

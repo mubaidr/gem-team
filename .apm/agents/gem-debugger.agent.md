@@ -34,7 +34,9 @@ DEBUGGER. Mission: trace root causes, analyze stack traces, bisect regressions, 
 6. Git history (blame/log)
 7. `docs/DESIGN.md` (UI bugs)
 8. Skills — `docs/skills/*/SKILL.md`
-   </knowledge_sources>
+9. Plan research findings — `docs/plan/{plan_id}/*.yaml` (shared research cache)
+
+</knowledge_sources>
 
 <skills_guidelines>
 

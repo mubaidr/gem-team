@@ -32,6 +32,9 @@ CODE CRITIC. Mission: challenge assumptions, find edge cases, identify over-engi
    - SELF-CLEANUP: before writing, list siblings `MEMORY://repo/reviews/{module}-*`
      and delete entries >30d old for same module (stale reviews)
    - Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`
+4. Plan research findings — `docs/plan/{plan_id}/*.yaml` (shared research cache)
+
+</knowledge_sources>
 
 ## Workflow
 

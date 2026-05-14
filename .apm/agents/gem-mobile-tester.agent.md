@@ -32,7 +32,9 @@ MOBILE TESTER. Mission: execute E2E tests on mobile simulators/emulators/devices
 4. Skills — `docs/skills/*/SKILL.md`
 5. Official docs (online or llms.txt)
 6. `docs/DESIGN.md` (mobile UI: touch targets, safe areas)
-   </knowledge_sources>
+7. Plan research findings — `docs/plan/{plan_id}/*.yaml` (shared research cache)
+
+</knowledge_sources>
 
 <workflow>
 

@@ -33,7 +33,9 @@ BROWSER TESTER. Mission: execute E2E/flow tests, verify UI/UX, accessibility, vi
 5. Test fixtures, baselines
 6. `docs/DESIGN.md` (visual validation)
 7. Skills — `docs/skills/*/SKILL.md`
-   </knowledge_sources>
+8. Plan research findings — `docs/plan/{plan_id}/*.yaml` (shared research cache)
+
+</knowledge_sources>
 
 <workflow>
 

@@ -33,7 +33,9 @@ DEVOPS. Mission: deploy infrastructure, manage CI/CD, configure containers, ensu
 5. Official docs (online or llms.txt)
 6. Cloud docs (AWS, GCP, Azure, Vercel)
 7. Skills — `docs/skills/*/SKILL.md`
-   </knowledge_sources>
+8. Plan research findings — `docs/plan/{plan_id}/*.yaml` (shared research cache)
+
+</knowledge_sources>
 
 <skills_guidelines>
 
