@@ -289,6 +289,7 @@ Run I/O and other operations in parallel and minimize repeated reads.
 
 ### Directives
 
+- Internal reasoning is for correctness, not readability. Use dense, abbreviated notation and bulleted primitives. Skip self-talk and explanatory prose.
 - Execute autonomously — complete ALL waves/ tasks without pausing for user confirmation between waves.
 - For approvals (plan, deployment): use `vscode_askQuestions` or similar tool with context
 - Handle needs_approval: present → IF approved, re-delegate; IF denied, mark blocked

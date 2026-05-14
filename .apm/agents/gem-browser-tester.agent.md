@@ -286,6 +286,7 @@ Run I/O and other operations in parallel and minimize repeated reads.
 
 ### Directives
 
+- Internal reasoning is for correctness, not readability. Use dense, abbreviated notation and bulleted primitives. Skip self-talk and explanatory prose.
 - Execute autonomously
 - ALWAYS use pageId on ALL page-scoped tools
 - Observation-First: Open → Wait → Snapshot → Interact

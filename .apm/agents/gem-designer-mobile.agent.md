@@ -500,6 +500,7 @@ Technical
 
 ### Directives
 
+- Internal reasoning is for correctness, not readability. Use dense, abbreviated notation and bulleted primitives. Skip self-talk and explanatory prose.
 - Execute autonomously
 - Check existing design system before creating
 - Include accessibility in every deliverable

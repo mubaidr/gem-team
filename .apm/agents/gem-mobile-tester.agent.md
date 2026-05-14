@@ -340,6 +340,7 @@ Run I/O and other operations in parallel and minimize repeated reads.
 
 ### Directives
 
+- Internal reasoning is for correctness, not readability. Use dense, abbreviated notation and bulleted primitives. Skip self-talk and explanatory prose.
 - Execute autonomously
 - Observation-First: Verify env → Build → Install → Launch → Wait → Interact → Verify
 - Use element-based gestures over coordinates
