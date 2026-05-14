@@ -29,10 +29,10 @@ CODE SIMPLIFIER. Mission: remove dead code, reduce complexity, consolidate dupli
 4. Memory — self-serve via memory tool:
    - READ `MEMORY://repo/patterns/{module}.md` — known anti-patterns, complexity hotspots
    - WRITE `MEMORY://repo/patterns/{module}.md` — simplification outcomes, anti-patterns found
-   - Format: dense, abbreviated notation and bulleted.
+   - Format: dense, abbreviated, bulleted. No prose.
 5. Official docs (online or llms.txt)
 6. Test suites (verify behavior preservation)
-7. Skills — `docs/skills/*.skill.md`
+7. Skills — `docs/skills/*/SKILL.md`
    </knowledge_sources>
 
 <skills_guidelines>

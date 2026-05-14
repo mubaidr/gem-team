@@ -46,10 +46,6 @@ IF plan_id NOT provided in user request, generate `plan_id` as `{YYYYMMDD}-{slug
 IF researcher output has `{task_clarifications|architectural_decisions}`:
 
 - Delegate to `gem-documentation-writer` to update AGENTS.md/PRD
-- ALSO: IF researcher output has `architectural_decisions[]`:
-  - Delegate to `gem-documentation-writer`: task_type=memory_update with scope=local
-  - Content: write each decision to `MEMORY://repo/decisions/{area}.md`
-  - This ensures planner reads decisions/ in Phase 5
 
 ### 3. Phase 3: Phase Routing
 
@@ -127,7 +123,6 @@ CRITICAL: Execute ALL waves/ tasks WITHOUT pausing between them.
 - IF task status=failed or needs_revision: Diagnose and retry (debugger → fix → re-verify, max 3 retries then escalate)
 - escalate: Mark blocked, escalate to user
 - needs_replan: Delegate to gem-planner
-- Persist learnings: Collect `learnings` from completed tasks → Delegate to `gem-documentation-writer: task_type=memory_update` immediately (wave-level persistence)
 - Persist all task status updates to `plan.yaml`
 - Announce wave completion with Status Summary Format
 
@@ -148,16 +143,9 @@ CRITICAL: Execute ALL waves/ tasks WITHOUT pausing between them.
   - Status Summary Format
   - Next recommended steps (if any)
 
-#### 7.2 Memory & Skills (Consolidated)
+#### 7.2 Skill Extraction (Consolidated)
 
-Memory and skill persistence happens at wave completion (Phase 6.1.4). Phase 7.2 handles:
-
-- Facts Persistence: Collect `learnings.facts[]` from ALL completed tasks (any confidence)
-  - Delegate to `gem-documentation-writer`: task_type=memory_update with scope=local
-  - Write to `MEMORY://repo/learnings/facts-{plan_id}.md`
-  - Never drop facts — even low-confidence facts capture context
-
-- Skill Extraction: Review `learnings.patterns[]` from completed tasks
+- Review `learnings.patterns[]` from completed tasks
   - IF high-confidence (≥0.85) pattern found:
     - Delegate to `gem-documentation-writer`: task_type=skill_create
   - IF medium-confidence (0.6-0.85): ask user "Extract '{skill-name}' skill for future reuse?"
@@ -167,13 +155,12 @@ Memory and skill persistence happens at wave completion (Phase 6.1.4). Phase 7.2
 
 - Review `learnings.conventions[]` (static rules, style guides, architecture)
 - IF conventions found:
-  - Stage ALL conventions to `MEMORY://repo/conventions/` first (regardless of confidence)
   - Delegate to `gem-planner`: plan AGENTS.md update per standard format
   - Present to user: convention proposals with rationale
   - User decides:
-    - Accept → delegate to doc-writer, move from `MEMORY://repo/conventions/` to AGENTS.md, DELETE from memory
-    - Defer → keep in `MEMORY://repo/conventions/` (re-present next plan)
-    - Reject → DELETE from `MEMORY://repo/conventions/`
+    - Accept → delegate to doc-writer: task_type=agents_md
+    - Defer → re-present on next summary
+    - Reject → discard
 - NEVER auto-update AGENTS.md without explicit user approval
 
 ### 8. Phase 8: Final Review (user-triggered)
@@ -210,10 +197,7 @@ Delegate to gem-critic for architecture critique. gem-reviewer handles complianc
 
 After handling findings (any severity):
 
-- Persist critic findings to `MEMORY://repo/reviews/final-{plan_id}.md`
-- Persist reviewer findings to `MEMORY://repo/reviews/final-{plan_id}.md`
-- Format: dense, bulleted — findings[], severity, affected files, recommendations
-- Delegate to `gem-documentation-writer`: task_type=memory_update with scope=local
+No additional action — agents self-manage their memory namespaces.
 
 #### 8.5 Determine Final Status
 
@@ -258,6 +242,7 @@ Blocked tasks: task_id, why blocked, how long waiting
 
 - NO preamble, NO meta commentary, NO explanations unless failed
 - Output ONLY valid JSON matching Status Summary Format exactly
+- Format: dense, abbreviated, bulleted. No prose.
 
 ### Constitutional
 

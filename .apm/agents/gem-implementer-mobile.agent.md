@@ -29,9 +29,10 @@ IMPLEMENTER-MOBILE. Mission: write mobile code using TDD (Red-Green-Refactor) fo
 4. Memory — self-serve via memory tool:
    - READ `MEMORY://repo/patterns/{module}.md` — codebase conventions, anti-patterns
    - Gotchas: emit via `learnings.facts[]` in output
+   - Format: dense, abbreviated, bulleted. No prose.
 5. Official docs (online or llms.txt)
 6. `docs/DESIGN.md` (mobile design specs)
-7. Skills — `docs/skills/*.skill.md`
+7. Skills — `docs/skills/*/SKILL.md`
    </knowledge_sources>
 
 <workflow>
@@ -57,7 +58,7 @@ IMPLEMENTER-MOBILE. Mission: write mobile code using TDD (Red-Green-Refactor) fo
 
 #### 3.2 Green
 
-- Write MINIMAL code to pass
+- Write MINIMAL code to pass. Surgical changes only, no refactoring or adjacent improvements, to preserve reviewability and minimize risk.
 - Run test → must PASS
 - Remove extra code (YAGNI)
 - Before modifying shared components: run `vscode_listCodeUsages`

@@ -31,17 +31,17 @@ Gem Team consists of 14 specialized agents, each trained for specific developmen
 
 ## Memory Contracts
 
-All agents self-serve memory via the `memory` tool. Orchestrator never gates or manages memory — agents read/write autonomously.
+All agents self-serve memory via their tool's native memory mechanism. `MEMORY://` is an abstract prefix — each tool resolves it to its own storage (see `docs/memory/mapping.md`).
 
-Format: **dense, abbreviated, bulleted**. No prose..
+Format: **dense, abbreviated, bulleted**. No prose.
 
 ### Memory Scope
 
-| Scope                   | Path                 | TTL               | What goes here                                                                                          |
-| ----------------------- | -------------------- | ----------------- | ------------------------------------------------------------------------------------------------------- |
-| **User** (global)       | `/memories/`         | Permanent         | Cross-project user preferences, coding style, agent behavior rules                                      |
-| **Repo** (project)      | `/memories/repo/`    | Per-major-version | Codebase-specific: research cache, diagnoses, decisions, patterns, infra, flaky, conventions, learnings |
-| **Session** (transient) | `/memories/session/` | Per-conversation  | Current plan context, in-progress notes, temporary findings                                             |
+| Scope                   | Path                | TTL               | What goes here                                                                                          |
+| ----------------------- | ------------------- | ----------------- | ------------------------------------------------------------------------------------------------------- |
+| **User** (global)       | `MEMORY://user/`    | Permanent         | Cross-project user preferences, coding style, agent behavior rules                                      |
+| **Repo** (project)      | `MEMORY://repo/`    | Per-major-version | Codebase-specific: research cache, diagnoses, decisions, patterns, infra, flaky, conventions, learnings |
+| **Session** (transient) | `MEMORY://session/` | Per-conversation  | Current plan context, in-progress notes, temporary findings                                             |
 
 | Agent                              | Read                                                     | Write                                            | Purpose                                                                                                                                                |
 | ---------------------------------- | -------------------------------------------------------- | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -70,6 +70,17 @@ Researcher owns cache validation on entry:
 4. IF any fail → re-research, DELETE stale entry, WRITE new
 
 All other agents calling memory: check `Updated:` field. IF >7d: flag as potentially stale, treat as low confidence.
+
+### Cleanup Gates
+
+Memory grows unbounded unless cleaned. Four self-cleaning gates prevent bloat without background daemons:
+
+| Gate                  | Where                                 | When                             | Action                                                                                                                                        |
+| --------------------- | ------------------------------------- | -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Orphan cache**      | gem-researcher                        | On write (Step 6)                | List siblings with same topic for different plan_ids. Delete >7d old                                                                          |
+| **Flaky rot**         | gem-browser-tester, gem-mobile-tester | Before writing to flaky registry | Validate existing entries: if test file gone or consistently passing, DELETE                                                                  |
+| **Plan cleanup**      | gem-orchestrator                      | Phase 7.2 completion             | DELETE `research/{plan_id}-*`, `learnings/facts-{plan_id}`, `reviews/final-{plan_id}`. Keep decisions, module reviews, patterns, infra, flaky |
+| **Convention expiry** | gem-orchestrator                      | Phase 7.3                        | Deferred conventions >30d flagged stale — re-present or auto-delete                                                                           |
 
 ### Additional Memory Paths (Orchestrator-Managed)
 

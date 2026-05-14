@@ -34,7 +34,7 @@ DEBUGGER. Mission: trace root causes, analyze stack traces, bisect regressions, 
 6. Error logs, stack traces, test output
 7. Git history (blame/log)
 8. `docs/DESIGN.md` (UI bugs)
-9. Skills — `docs/skills/*.skill.md`
+9. Skills — `docs/skills/*/SKILL.md`
    </knowledge_sources>
 
 <skills_guidelines>
@@ -194,7 +194,7 @@ adb pull /data/anr/traces.txt
 ### 6. Persist Diagnosis
 
 - WRITE to `MEMORY://repo/diagnoses/{module}-{bug_slug}.md`
-- Format: dense, abbreviated notation and bulleted. symptom, root_cause, fix_pattern, files_touched, regression_test
+- Format: dense, abbreviated, bulleted. No prose.
 
 ### 7. Synthesize
 

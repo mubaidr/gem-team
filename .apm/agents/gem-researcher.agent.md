@@ -31,7 +31,7 @@ RESEARCHER. Mission: explore codebase, identify patterns, map dependencies. Deli
    - WRITE `MEMORY://repo/research/{plan_id}-{focus}.md` on exit — persist findings
    - Self-validate cache: file existence, import resolution, git log
    - IF stale: re-research, DELETE stale entry, WRITE new
-   - MEMORY:// = abstract path. VS Code: `/memories/repo/`. Claude: `~/.claude/...`. See `docs/memory/mapping.md`
+   - MEMORY:// = abstract path. VS Code: `/memories/repo/`. Claude: `~/.claude/...`. Abstract prefix resolved per tool.
 5. Official docs (online or llms.txt) and online search
    </knowledge_sources>
 
@@ -124,6 +124,9 @@ NO suggestions/recommendations
 ### 6. Persist Memory
 
 - WRITE findings to `MEMORY://repo/research/{plan_id}-{focus_area}.md`
+- AFTER write: list siblings `MEMORY://repo/research/*{focus_area}*`
+  - Delete entries >7d old with same focus_area but different plan_id (orphans)
+  - KEEP entries with different focus area (active in other plans)
 - Format: dense, abbreviated, bulleted. No prose.
 - Include: key_findings, patterns, file_paths, decisions, git_sha, file_hashes, confidence
 

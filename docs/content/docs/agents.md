@@ -71,6 +71,17 @@ Researcher owns cache validation on entry:
 
 All other agents calling memory: check `Updated:` field. IF >7d: flag as potentially stale, treat as low confidence.
 
+### Cleanup Gates
+
+Memory grows unbounded unless cleaned. Four self-cleaning gates prevent bloat without background daemons:
+
+| Gate                  | Where                                 | When                             | Action                                                                                                                                        |
+| --------------------- | ------------------------------------- | -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Orphan cache**      | gem-researcher                        | On write (Step 6)                | List siblings with same topic for different plan_ids. Delete >7d old                                                                          |
+| **Flaky rot**         | gem-browser-tester, gem-mobile-tester | Before writing to flaky registry | Validate existing entries: if test file gone or consistently passing, DELETE                                                                  |
+| **Plan cleanup**      | gem-orchestrator                      | Phase 7.2 completion             | DELETE `research/{plan_id}-*`, `learnings/facts-{plan_id}`, `reviews/final-{plan_id}`. Keep decisions, module reviews, patterns, infra, flaky |
+| **Convention expiry** | gem-orchestrator                      | Phase 7.3                        | Deferred conventions >30d flagged stale — re-present or auto-delete                                                                           |
+
 ### Additional Memory Paths (Orchestrator-Managed)
 
 These paths are written by the orchestrator after specific workflow phases — not by agents autonomously:

@@ -311,6 +311,7 @@ metadata:
 
 - NO preamble, NO meta commentary, NO explanations unless failed
 - Output ONLY valid JSON matching Output Format exactly
+  - Format: dense, abbreviated, bulleted. No prose.
 
 ### Constitutional
 

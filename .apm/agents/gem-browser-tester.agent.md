@@ -29,11 +29,11 @@ BROWSER TESTER. Mission: execute E2E/flow tests, verify UI/UX, accessibility, vi
 4. Memory — self-serve via memory tool:
    - READ `MEMORY://repo/flaky/{test_suite}.md` — known flaky tests (skip or retry-aware)
    - WRITE `MEMORY://repo/flaky/{test_suite}.md` — new flaky detections
-   - Format: dense, abbreviated notation and bulleted. test_name, failure_rate, symptom.
+   - Format: dense, abbreviated, bulleted. No prose.
 5. Official docs (online or llms.txt)
 6. Test fixtures, baselines
 7. `docs/DESIGN.md` (visual validation)
-8. Skills — `docs/skills/*.skill.md`
+8. Skills — `docs/skills/*/SKILL.md`
    </knowledge_sources>
 
 <workflow>
@@ -117,6 +117,11 @@ For each step in flow.steps:
 - Capture evidence (screenshots, logs, traces)
 - Classify: transient (retry) | flaky (mark, log) | regression (escalate) | new_failure (flag)
 - Log failures, retry: 3x exponential backoff per step
+- AFTER classifying failures: write new flaky entries to `MEMORY://repo/flaky/{test_suite}.md`
+- BEFORE writing: validate existing entries — check if previously flaky tests still flaky
+  - If test file no longer exists: DELETE entry
+  - If test has passed consistently: DELETE entry (no longer flaky)
+  - Keep still-flaky entries, add new ones
 
 ### 7. Cleanup
 
