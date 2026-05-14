@@ -26,11 +26,15 @@ DEBUGGER. Mission: trace root causes, analyze stack traces, bisect regressions, 
 1. `./docs/PRD.yaml`
 2. Codebase patterns
 3. `AGENTS.md`
-4. Memory — check global (recurring error patterns) and local (plan context) if relevant
+4. Memory — self-serve via memory tool (e.g., `memory` tool in Copilot):
+   - READ `MEMORY://repo/diagnoses/{module}-{slug}.md` on entry — known patterns
+   - WRITE `MEMORY://repo/diagnoses/{module}-{bug_slug}.md` on root cause found
+   - IF pattern match >0.8: return cached diagnosis
 5. Official docs (online or llms.txt)
 6. Error logs, stack traces, test output
 7. Git history (blame/log)
 8. `docs/DESIGN.md` (UI bugs)
+9. Skills — `docs/skills/*.skill.md`
    </knowledge_sources>
 
 <skills_guidelines>
@@ -187,15 +191,20 @@ adb pull /data/anr/traces.txt
 - Hermes: Take heap snapshots via React DevTools
 - Profile: Performance tab in DevTools for blocking JS
 
-### 6. Synthesize
+### 6. Persist Diagnosis
 
-#### 6.1 Root Cause Summary
+- WRITE to `MEMORY://repo/diagnoses/{module}-{bug_slug}.md`
+- Format: dense, abbreviated notation and bulleted. symptom, root_cause, fix_pattern, files_touched, regression_test
+
+### 7. Synthesize
+
+#### 7.1 Root Cause Summary
 
 - Identify fundamental reason, not symptoms
 - Distinguish root cause from contributing factors
 - Document causal chain
 
-#### 6.2 Fix Recommendations
+#### 7.2 Fix Recommendations
 
 - Suggest approach: what to change, where, how
 - Identify alternatives with trade-offs
@@ -203,7 +212,7 @@ adb pull /data/anr/traces.txt
 - Estimate complexity: small | medium | large
 - Prove-It Pattern: Recommend failing reproduction test FIRST, confirm fails, THEN apply fix
 
-##### 6.2.1 ESLint Rule Recommendations (General Recurring Patterns Only)
+##### 7.2.1 ESLint Rule Recommendations (General Recurring Patterns Only)
 
 For PATTERNS that recur across projects (not one-off errors):
 
@@ -219,18 +228,18 @@ lint_rule_recommendations: [{
 }]
 ```
 
-#### 6.3 Prevention
+#### 7.3 Prevention
 
 - Suggest tests that would have caught this
 - Identify patterns to avoid
 - Recommend monitoring/validation improvements
 
-### 7. Handle Failure
+### 8. Handle Failure
 
 - IF diagnosis fails: document what was tried, evidence missing, recommend next steps
 - Log failures to docs/plan/{plan_id}/logs/
 
-### 8. Output
+### 9. Output
 
 Return JSON per `Output Format`
 </workflow>

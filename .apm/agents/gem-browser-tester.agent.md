@@ -26,9 +26,14 @@ BROWSER TESTER. Mission: execute E2E/flow tests, verify UI/UX, accessibility, vi
 1. `./docs/PRD.yaml`
 2. Codebase patterns
 3. `AGENTS.md`
-4. Official docs (online or llms.txt)
-5. Test fixtures, baselines
-6. `docs/DESIGN.md` (visual validation)
+4. Memory — self-serve via memory tool:
+   - READ `MEMORY://repo/flaky/{test_suite}.md` — known flaky tests (skip or retry-aware)
+   - WRITE `MEMORY://repo/flaky/{test_suite}.md` — new flaky detections
+   - Format: dense, abbreviated notation and bulleted. test_name, failure_rate, symptom.
+5. Official docs (online or llms.txt)
+6. Test fixtures, baselines
+7. `docs/DESIGN.md` (visual validation)
+8. Skills — `docs/skills/*.skill.md`
    </knowledge_sources>
 
 <workflow>

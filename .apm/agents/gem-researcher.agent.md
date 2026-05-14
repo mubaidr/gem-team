@@ -26,9 +26,13 @@ RESEARCHER. Mission: explore codebase, identify patterns, map dependencies. Deli
 1. `./docs/PRD.yaml`
 2. Codebase patterns (semantic_search, read_file)
 3. `AGENTS.md`
-4. Memory — check global (user prefs, patterns) and project-local (context) if relevant
-5. Skills — check `docs/skills/*.skill.md` for project patterns (if exists)
-6. Official docs (online or llms.txt) and online search
+4. Memory — self-serve via memory tool (e.g., `memory` tool in Copilot, read/write in Claude Code):
+   - READ `MEMORY://repo/research/{topic}.md` on entry — cache check
+   - WRITE `MEMORY://repo/research/{plan_id}-{focus}.md` on exit — persist findings
+   - Self-validate cache: file existence, import resolution, git log
+   - IF stale: re-research, DELETE stale entry, WRITE new
+   - MEMORY:// = abstract path. VS Code: `/memories/repo/`. Claude: `~/.claude/...`. See `docs/memory/mapping.md`
+5. Official docs (online or llms.txt) and online search
    </knowledge_sources>
 
 <workflow>
@@ -59,6 +63,15 @@ Understand intent, resolve ambiguity, confirm scope. Workflow:
 #### 0.2 Research Mode
 
 Analyze codebase, extract facts, map patterns/dependencies, identify gaps. Workflow:
+
+### 0. Memory Check (Research Cache)
+
+- READ `MEMORY://repo/research/{topic}.md` (exact topic or parent area)
+- IF exists:
+  - Validate: file existence checks, import resolution, git log
+  - IF valid AND <7d old → return cached findings (fast path, skip research)
+  - IF stale → re-research from scratch, DELETE stale cache, WRITE new
+- IF not exists → proceed with research
 
 ### 1. Initialize
 
@@ -108,7 +121,13 @@ NO suggestions/recommendations
 - IF research cannot proceed: document what's missing, recommend next steps
 - Log failures to `docs/plan/{plan_id}/logs/` OR `docs/logs/`
 
-### 6. Output
+### 6. Persist Memory
+
+- WRITE findings to `MEMORY://repo/research/{plan_id}-{focus_area}.md`
+- Format: dense, abbreviated, bulleted. No prose.
+- Include: key_findings, patterns, file_paths, decisions, git_sha, file_hashes, confidence
+
+### 7. Output
 
 - Save: `docs/plan/{plan_id}/research_findings_{focus_area}.yaml`
 - Return JSON per `Output Format`

@@ -33,7 +33,11 @@ gem-researcher, gem-planner, gem-implementer, gem-implementer-mobile, gem-browse
 1. `./docs/PRD.yaml`
 2. Codebase patterns
 3. `AGENTS.md`
-4. Memory — check global (user prefs, patterns) and project-local (plan context) if relevant
+4. Memory — read via memory tool (e.g., `memory` tool in Copilot):
+   - READ `MEMORY://repo/research/*` — prior architecture findings
+   - READ `MEMORY://repo/decisions/*` — prior decisions and rationale
+   - READ `MEMORY://repo/reviews/*` — prior review findings
+   - Batch-read all; inject context into plan.yaml
 5. Official docs (online or llms.txt)
    </knowledge_sources>
 

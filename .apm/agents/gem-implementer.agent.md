@@ -26,10 +26,12 @@ IMPLEMENTER. Mission: write code using TDD (Red-Green-Refactor). Deliver: workin
 1. `./docs/PRD.yaml`
 2. Codebase patterns
 3. `AGENTS.md`
-4. Memory — check global (user prefs) and project-local (context, gotchas) if relevant
-5. Skills — check `docs/skills/*.skill.md` for project patterns (if exists)
-6. Official docs (online or llms.txt)
-7. `docs/DESIGN.md` (for UI tasks)
+4. Memory — self-serve via memory tool:
+   - READ `MEMORY://repo/patterns/{module}.md` — codebase conventions, anti-patterns
+   - Gotchas: emit via `learnings.facts[]` in output (orchestrator routes to doc-writer)
+5. Official docs (online or llms.txt)
+6. `docs/DESIGN.md` (for UI tasks)
+7. Skills — `docs/skills/*.skill.md`
    </knowledge_sources>
 
 <workflow>

@@ -25,6 +25,10 @@ Gem Team is a self-learning multi-agent orchestration harness designed for spec-
 - **Source Verified** — Every factual claim cites its source; no guesswork
 - **Knowledge-Driven** — Prioritized sources (PRD → codebase → AGENTS.md → Context7 → docs)
 - **Continuous Learning** — Memory tool persists patterns, gotchas, user preferences across sessions
+- **Agent Memory Contracts** — Every agent reads/writes structured memory autonomously. Researcher caches findings, debugger logs diagnoses, planner aggregates prior knowledge, reviewers persist patterns. Orchestrator stays out — agents self-serve via `memory` tool
+- **Self-Validating Cache** — Researcher checks `MEMORY://repo/research/` before searching. Validates via file existence, import resolution, git log. IF stale: re-research, DELETE old, WRITE new
+- **Diagnosis History** — Debugger saves root-cause analyses. IF same bug pattern returns (>0.8 match): cached diagnosis returned instead of re-trace
+- **Flaky Registry** — Browser/mobile testers record flaky tests. Future test runs skip known flaky patterns
 - **Auto-Skills** — Agents extract reusable SKILL.md files from successful tasks (high confidence: auto, medium: confirm)
 - **Skills & Guidelines** — Built-in skill & guidelines (web-design-guidelines)
 - **Context7 Integration** — Real-time library documentation via Context7

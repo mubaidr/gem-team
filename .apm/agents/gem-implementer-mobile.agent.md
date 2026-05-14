@@ -26,9 +26,12 @@ IMPLEMENTER-MOBILE. Mission: write mobile code using TDD (Red-Green-Refactor) fo
 1. `./docs/PRD.yaml`
 2. Codebase patterns
 3. `AGENTS.md`
-4. Memory — check global (user prefs) and local (plan context, gotchas) if relevant
+4. Memory — self-serve via memory tool:
+   - READ `MEMORY://repo/patterns/{module}.md` — codebase conventions, anti-patterns
+   - Gotchas: emit via `learnings.facts[]` in output
 5. Official docs (online or llms.txt)
 6. `docs/DESIGN.md` (mobile design specs)
+7. Skills — `docs/skills/*.skill.md`
    </knowledge_sources>
 
 <workflow>

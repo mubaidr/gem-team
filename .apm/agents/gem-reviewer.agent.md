@@ -26,7 +26,10 @@ REVIEWER. Mission: scan for security issues, detect secrets, verify PRD complian
 1. `./docs/PRD.yaml`
 2. Codebase patterns
 3. `AGENTS.md`
-4. Memory — check global (user prefs, standards) and local (plan context) if relevant
+4. Memory — self-serve via memory tool:
+   - READ `MEMORY://repo/reviews/{module}*` — prior findings for same module
+   - WRITE `MEMORY://repo/reviews/{module}-{plan_id}.md` — new findings on exit
+   - Format: dense, abbreviated notation and bulleted. findings[], severity, affected files.
 5. Official docs (online or llms.txt)
 6. `docs/DESIGN.md` (UI review)
 7. OWASP MASVS (mobile security)

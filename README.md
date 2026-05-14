@@ -51,6 +51,9 @@ See [all supported installation options](#installation) below.
 - **Source Verified** — Every factual claim cites its source; no guesswork
 - **Knowledge-Driven** — Prioritized sources (PRD → codebase → AGENTS.md → Context7 → docs)
 - **Continuous Learning** — Memory tool persists patterns, gotchas, user preferences across sessions
+- **Agent Memory Contracts** — Every agent reads/writes structured memory autonomously. Researcher caches, debugger logs, planner aggregates, reviewers persist
+- **Self-Validating Cache** — Researcher checks `MEMORY://repo/research/` before searching. Validates (file checks, import resolve, git log). IF stale: re-research, DELETE old, WRITE new
+- **Diagnosis History** — Debugger saves root-causes. Same bug pattern >0.8 match: cached diagnosis
 - **Auto-Skills** — Agents extract reusable SKILL.md files from successful tasks (high confidence: auto, medium: confirm)
 - **Skills & Guidelines** — Built-in skill & guidelines (web-design-guidelines)
 
@@ -95,11 +98,32 @@ Gem Team includes specialized design agents with anti-"AI slop" guidelines for d
 
 ### Triple Learning System
 
-| Type            | Storage        | 1-liner                               |
-| :-------------- | :------------- | :------------------------------------ |
-| **Memory**      | `/memories/`   | Facts & user preferences (auto- save) |
-| **Skills**      | `docs/skills/` | Procedures with code examples         |
-| **Conventions** | `AGENTS.md`    | Static rules (requires approval)      |
+| Type                 | Storage                    | 1-liner                                                                     |
+| :------------------- | :------------------------- | :-------------------------------------------------------------------------- |
+| **Memory**           | `MEMORY://user/`           | Facts & user preferences (auto-save)                                        |
+| - **Research Cache** | `MEMORY://repo/research/`  | Architecture patterns cached per topic. Researcher self-validates staleness |
+| **Diagnosis**        | `MEMORY://repo/diagnoses/` | Bug root-cause analyses. Reused on pattern match >0.8                       |
+| **Review**           | `MEMORY://repo/reviews/`   | Review findings per module. Cross-plan consistency                          |
+| **Decisions**        | `MEMORY://repo/decisions/` | Architecture decisions, rationale, alternatives                             |
+| **Patterns**         | `MEMORY://repo/patterns/`  | Codebase conventions, anti-patterns, outcomes                               |
+| **Infra**            | `MEMORY://repo/infra/`     | Deployment config, rollback history                                         |
+| **Flaky**            | `MEMORY://repo/flaky/`     | Known flaky tests per suite                                                 |
+| **Memory**           | `MEMORY://user/`           | Facts & user preferences (auto-save)                                        |
+| **Skills**           | `docs/skills/`             | Procedures with code examples                                               |
+| **Conventions**      | `AGENTS.md`                | Static rules (requires approval)                                            |
+
+### Memory Architecture
+
+Orchestrator never manages memory. Agents self-serve via tool-native memory:
+
+```
+Agent on ENTRY → MEMORY://repo/{category}/{key} → validates (if stale: DELETE + WRITE new)
+Agent on EXIT  → writes to MEMORY://repo/{category}/{key} → dense/bulleted format
+```
+
+`MEMORY://` is abstract. VS Code Copilot: `/memories/repo/`, Claude Code: `~/.claude/...`, Cursor: `.cursor/memory/`.
+
+See [Memory Contracts](./docs/docs/agents.md#memory-contracts) for per-agent R/W spec.
 
 ---
 

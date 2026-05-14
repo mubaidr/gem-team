@@ -23,6 +23,22 @@ Gem Team uses a triple learning system:
 - **Skills**: Procedures with code examples
 - **Conventions**: Static rules (requires approval)
 
+#### Per-Agent Memory
+
+Every agent self-serves memory via the `memory` tool. Orchestrator never manages memory:
+
+- **gem-researcher** — checks cache on entry, self-validates staleness, writes findings on exit
+- **gem-debugger** — reads diagnosis history on entry, writes root-cause on exit
+- **gem-planner** — batch-reads research cache + decisions + reviews before planning
+- **gem-reviewer** — reads prior findings, writes new review results
+- **gem-critic** — reads prior architecture decisions, writes edge case discoveries
+- **gem-implementer** — reads pattern library, writes gotchas via `learnings.facts[]`
+- **gem-devops** — reads/writes deployment config for rollback safety
+- **gem-code-simplifier** — reads/writes pattern library (anti-patterns, outcomes)
+- **gem-browser-tester / gem-mobile-tester** — reads/writes flaky test registry
+
+See [Memory Contracts](/docs/agents#memory-contracts) for full spec.
+
 ### Wave-Based Execution
 
 Tasks are executed in parallel waves, with up to 4 concurrent agents working together.

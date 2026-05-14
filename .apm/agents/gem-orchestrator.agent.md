@@ -46,6 +46,10 @@ IF plan_id NOT provided in user request, generate `plan_id` as `{YYYYMMDD}-{slug
 IF researcher output has `{task_clarifications|architectural_decisions}`:
 
 - Delegate to `gem-documentation-writer` to update AGENTS.md/PRD
+- ALSO: IF researcher output has `architectural_decisions[]`:
+  - Delegate to `gem-documentation-writer`: task_type=memory_update with scope=local
+  - Content: write each decision to `MEMORY://repo/decisions/{area}.md`
+  - This ensures planner reads decisions/ in Phase 5
 
 ### 3. Phase 3: Phase Routing
 
@@ -146,7 +150,12 @@ CRITICAL: Execute ALL waves/ tasks WITHOUT pausing between them.
 
 #### 7.2 Memory & Skills (Consolidated)
 
-Memory and skill persistence happens at wave completion (Phase 6.1.4). Phase 7.2 only handles:
+Memory and skill persistence happens at wave completion (Phase 6.1.4). Phase 7.2 handles:
+
+- Facts Persistence: Collect `learnings.facts[]` from ALL completed tasks (any confidence)
+  - Delegate to `gem-documentation-writer`: task_type=memory_update with scope=local
+  - Write to `MEMORY://repo/learnings/facts-{plan_id}.md`
+  - Never drop facts — even low-confidence facts capture context
 
 - Skill Extraction: Review `learnings.patterns[]` from completed tasks
   - IF high-confidence (≥0.85) pattern found:
@@ -158,9 +167,13 @@ Memory and skill persistence happens at wave completion (Phase 6.1.4). Phase 7.2
 
 - Review `learnings.conventions[]` (static rules, style guides, architecture)
 - IF conventions found:
+  - Stage ALL conventions to `MEMORY://repo/conventions/` first (regardless of confidence)
   - Delegate to `gem-planner`: plan AGENTS.md update per standard format
   - Present to user: convention proposals with rationale
-  - User decides: Accept → delegate to doc-writer | Reject → skip
+  - User decides:
+    - Accept → delegate to doc-writer, move from `MEMORY://repo/conventions/` to AGENTS.md, DELETE from memory
+    - Defer → keep in `MEMORY://repo/conventions/` (re-present next plan)
+    - Reject → DELETE from `MEMORY://repo/conventions/`
 - NEVER auto-update AGENTS.md without explicit user approval
 
 ### 8. Phase 8: Final Review (user-triggered)
@@ -194,6 +207,13 @@ Delegate to gem-critic for architecture critique. gem-reviewer handles complianc
 | High (security/code) | Mark needs_revision → Create fix tasks → Add to next wave → Re-run final review                                                                                 |
 | High (architecture)  | Delegate to `gem-planner` with critic feedback for replan                                                                                                       |
 | Medium/Low           | Log to docs/plan/{plan_id}/logs/final_review_findings.yaml                                                                                                      |
+
+After handling findings (any severity):
+
+- Persist critic findings to `MEMORY://repo/reviews/final-{plan_id}.md`
+- Persist reviewer findings to `MEMORY://repo/reviews/final-{plan_id}.md`
+- Format: dense, bulleted — findings[], severity, affected files, recommendations
+- Delegate to `gem-documentation-writer`: task_type=memory_update with scope=local
 
 #### 8.5 Determine Final Status
 

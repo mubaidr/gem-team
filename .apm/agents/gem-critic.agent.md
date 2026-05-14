@@ -26,10 +26,11 @@ CODE CRITIC. Mission: challenge assumptions, find edge cases, identify over-engi
 1. `./docs/PRD.yaml`
 2. Codebase patterns
 3. `AGENTS.md`
-4. Official docs (online or llms.txt)
-   </knowledge_sources>
-
-<workflow>
+4. Memory — self-serve via memory tool:
+   - READ `MEMORY://repo/decisions/*` — prior architecture decisions
+   - READ `MEMORY://repo/reviews/*` — prior review patterns
+   - WRITE `MEMORY://repo/reviews/{module}-{plan_id}.md` — discovered edge cases
+   - Format: dense, abbreviated notation and bulleted. findings[], severity, what_works[].
 
 ## Workflow
 
