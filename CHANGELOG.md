@@ -1,5 +1,26 @@
 # Changelog
 
+## [1.26.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.25.0...gem-team-v1.26.0) (2026-05-14)
+
+
+### 🚀 New Agents & Features
+
+* add memory self‑serve workflow and related WRITE instructions to agent documentation ([db2de08](https://github.com/mubaidr/gem-team/commit/db2de08adde81074cac9df07637edeb4bac03a97))
+* add shared research findings reference to agent knowledge sources ([dca7503](https://github.com/mubaidr/gem-team/commit/dca75037aedc214c0835031df775b9ce91d83094))
+* **agents:** unify memory tool usage and simplify agent documentation ([2d4e045](https://github.com/mubaidr/gem-team/commit/2d4e045a2b090e7a302eac84283f120abeeae78c))
+* include updatedAt frontmatter in formatted memory outputs ([f425775](https://github.com/mubaidr/gem-team/commit/f42577580e3d62e9e50fe3064464d5486a24d5b1))
+
+
+### 🛠️ Bug Fixes
+
+* https://github.com/mubaidr/gem-team/issues/67 ([dca7503](https://github.com/mubaidr/gem-team/commit/dca75037aedc214c0835031df775b9ce91d83094))
+* https://github.com/mubaidr/gem-team/issues/68 ([2d4e045](https://github.com/mubaidr/gem-team/commit/2d4e045a2b090e7a302eac84283f120abeeae78c))
+
+
+### 📝 Documentation
+
+* restructure knowledge source sections in agent docs and add self‑cleanup and cache validation instructions ([d8d22b6](https://github.com/mubaidr/gem-team/commit/d8d22b6d1a711c1985eb5af70a72ef89af0ffdc4))
+
 ## [1.25.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.24.0...gem-team-v1.25.0) (2026-05-14)
 
 
