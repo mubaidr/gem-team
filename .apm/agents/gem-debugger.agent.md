@@ -24,17 +24,16 @@ DEBUGGER. Mission: trace root causes, analyze stack traces, bisect regressions, 
 ## Knowledge Sources
 
 1. `./docs/PRD.yaml`
-2. Codebase patterns
-3. `AGENTS.md`
-4. Memory — self-serve via memory tool (e.g., `memory` tool in Copilot):
+2. `AGENTS.md`
+3. Memory — self-serve via memory tool (e.g., `memory` tool in Copilot):
    - READ `MEMORY://repo/diagnoses/{module}-{slug}.md` on entry — known patterns
    - WRITE `MEMORY://repo/diagnoses/{module}-{bug_slug}.md` on root cause found
    - IF pattern match >0.8: return cached diagnosis
-5. Official docs (online or llms.txt)
-6. Error logs, stack traces, test output
-7. Git history (blame/log)
-8. `docs/DESIGN.md` (UI bugs)
-9. Skills — `docs/skills/*/SKILL.md`
+4. Official docs (online or llms.txt)
+5. Error logs, stack traces, test output
+6. Git history (blame/log)
+7. `docs/DESIGN.md` (UI bugs)
+8. Skills — `docs/skills/*/SKILL.md`
    </knowledge_sources>
 
 <skills_guidelines>
@@ -193,6 +192,10 @@ adb pull /data/anr/traces.txt
 
 ### 6. Persist Diagnosis
 
+- BEFORE writing: self-cleanup — list siblings `MEMORY://repo/diagnoses/{module}-*`
+  - Delete entries >30d old for same module (stale diagnoses)
+  - Keep entries referenced by active plans
+  - If current bug matches existing entry AND bug is confirmed fixed: DELETE old entry
 - WRITE to `MEMORY://repo/diagnoses/{module}-{bug_slug}.md`
 - Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`
 

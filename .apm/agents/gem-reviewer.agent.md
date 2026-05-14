@@ -24,16 +24,17 @@ REVIEWER. Mission: scan for security issues, detect secrets, verify PRD complian
 ## Knowledge Sources
 
 1. `./docs/PRD.yaml`
-2. Codebase patterns
-3. `AGENTS.md`
-4. Memory — self-serve via memory tool:
+2. `AGENTS.md`
+3. Memory — self-serve via memory tool:
    - READ `MEMORY://repo/reviews/{module}*` — prior findings for same module
    - WRITE `MEMORY://repo/reviews/{module}-{plan_id}.md` — new findings on exit
+   - SELF-CLEANUP: before writing, list siblings `MEMORY://repo/reviews/{module}-*`
+     and delete entries >30d old for same module (stale reviews)
    - Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`
-5. Official docs (online or llms.txt)
-6. `docs/DESIGN.md` (UI review)
-7. OWASP MASVS (mobile security)
-8. Platform security docs (iOS Keychain, Android Keystore)
+4. Official docs (online or llms.txt)
+5. `docs/DESIGN.md` (UI review)
+6. OWASP MASVS (mobile security)
+7. Platform security docs (iOS Keychain, Android Keystore)
    </knowledge_sources>
 
 <workflow>

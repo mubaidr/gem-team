@@ -24,15 +24,17 @@ IMPLEMENTER-MOBILE. Mission: write mobile code using TDD (Red-Green-Refactor) fo
 ## Knowledge Sources
 
 1. `./docs/PRD.yaml`
-2. Codebase patterns
-3. `AGENTS.md`
-4. Memory — self-serve via memory tool:
+2. `AGENTS.md`
+3. Memory — self-serve via memory tool:
    - READ `MEMORY://repo/patterns/{module}.md` — codebase conventions, anti-patterns
-   - Facts: emit via `learnings.facts[]` in output
+   - READ `MEMORY://repo/facts/{plan_id}.md` — prior discoveries, context
+   - WRITE `MEMORY://repo/facts/{plan_id}.md` — discoveries, context (on exit)
+   - WRITE `MEMORY://repo/patterns/{module}.md` — patterns found (if confidence ≥0.9)
+   - WRITE `MEMORY://repo/conventions/{plan_id}.md` — convention proposals (for user review)
    - Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`
-5. Official docs (online or llms.txt)
-6. `docs/DESIGN.md` (mobile design specs)
-7. Skills — `docs/skills/*/SKILL.md`
+4. Official docs (online or llms.txt)
+5. `docs/DESIGN.md` (mobile design specs)
+6. Skills — `docs/skills/*/SKILL.md`
    </knowledge_sources>
 
 <workflow>
@@ -84,13 +86,22 @@ IMPLEMENTER-MOBILE. Mission: write mobile code using TDD (Red-Green-Refactor) fo
 | Native module missing      | `npx expo install <module>`, rebuild native layers       |
 | Test fails on one platform | Isolate platform-specific code, fix, re-test both        |
 
-### 5. Handle Failure
+### 5. Persist Learnings
+
+- On exit, write learnings directly to memory via memory tool:
+  - facts[] → WRITE `MEMORY://repo/facts/{plan_id}.md`
+  - patterns[] → WRITE `MEMORY://repo/patterns/{module}.md` (only if confidence ≥0.9)
+  - conventions[] → WRITE `MEMORY://repo/conventions/{plan_id}.md` (for user review)
+- BEFORE writing: check existing — if same plan_id exists, update in place; otherwise append
+- Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`
+
+### 6. Handle Failure
 
 - Retry 3x, log "Retry N/3 for task_id"
 - After max retries: mitigate or escalate
 - Log failures to docs/plan/{plan_id}/logs/
 
-### 6. Output
+### 7. Output
 
 Return JSON per `Output Format`
 </workflow>

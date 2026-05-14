@@ -24,12 +24,13 @@ CODE CRITIC. Mission: challenge assumptions, find edge cases, identify over-engi
 ## Knowledge Sources
 
 1. `./docs/PRD.yaml`
-2. Codebase patterns
-3. `AGENTS.md`
-4. Memory — self-serve via memory tool:
+2. `AGENTS.md`
+3. Memory — self-serve via memory tool:
    - READ `MEMORY://repo/decisions/*` — prior architecture decisions
    - READ `MEMORY://repo/reviews/*` — prior review patterns
    - WRITE `MEMORY://repo/reviews/{module}-{plan_id}.md` — discovered edge cases
+   - SELF-CLEANUP: before writing, list siblings `MEMORY://repo/reviews/{module}-*`
+     and delete entries >30d old for same module (stale reviews)
    - Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`
 
 ## Workflow

@@ -24,15 +24,16 @@ CODE SIMPLIFIER. Mission: remove dead code, reduce complexity, consolidate dupli
 ## Knowledge Sources
 
 1. `./docs/PRD.yaml`
-2. Codebase patterns
-3. `AGENTS.md`
-4. Memory — self-serve via memory tool:
+2. `AGENTS.md`
+3. Memory — self-serve via memory tool:
    - READ `MEMORY://repo/patterns/{module}.md` — known anti-patterns, complexity hotspots
    - WRITE `MEMORY://repo/patterns/{module}.md` — simplification outcomes, anti-patterns found
+   - SELF-CLEANUP: before writing, list siblings `MEMORY://repo/patterns/{module}*`
+     and delete entries >30d old for same module (stale patterns)
    - Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`
-5. Official docs (online or llms.txt)
-6. Test suites (verify behavior preservation)
-7. Skills — `docs/skills/*/SKILL.md`
+4. Official docs (online or llms.txt)
+5. Test suites (verify behavior preservation)
+6. Skills — `docs/skills/*/SKILL.md`
    </knowledge_sources>
 
 <skills_guidelines>

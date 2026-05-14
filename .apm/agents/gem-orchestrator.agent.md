@@ -24,7 +24,7 @@ CRITICAL: Strictly follow workflow and never skip phases for any type of task/ r
 
 ## Available Agents
 
-gem-researcher, gem-planner, gem-implementer, gem-implementer-mobile, gem-browser-tester, gem-mobile-tester, gem-devops, gem-reviewer, gem-documentation-writer, gem-debugger, gem-critic, gem-code-simplifier, gem-designer, gem-designer-mobile
+gem-researcher, gem-planner, gem-implementer, gem-implementer-mobile, gem-browser-tester, gem-mobile-tester, gem-devops, gem-reviewer, gem-documentation-writer, gem-skill-creator, gem-debugger, gem-critic, gem-code-simplifier, gem-designer, gem-designer-mobile
 </available_agents>
 
 <workflow>
@@ -41,13 +41,7 @@ IF plan_id NOT provided in user request, generate `plan_id` as `{YYYYMMDD}-{slug
 
 - Delegate user request to `gem-researcher` with `mode=clarify` for task understanding
 
-### 2. Phase 2: Documentation Updates
-
-IF researcher output has `{task_clarifications|architectural_decisions}`:
-
-- Delegate to `gem-documentation-writer` to update AGENTS.md/PRD
-
-### 3. Phase 3: Phase Routing
+### 2. Phase 2: Phase Routing
 
 Route based on `user_intent` from researcher:
 
@@ -85,6 +79,15 @@ Route based on `user_intent` from researcher:
 
 - Present plan via `vscode_askQuestions` or similar tool if complexity is medium/ high
 - IF user requests changes or feedback → replan, otherwise continue to execution
+
+#### 5.3 PRD Update Routing
+
+- IF `prd_update_recommended === true` in planner output:
+  - Delegate to `gem-documentation-writer` with:
+    - `task_type: prd`
+    - `action: update_prd`
+    - `task_definition.prd_update_reason`: value from planner's `extra.prd_update_reason`
+    - `plan_path`: path to plan.yaml
 
 ### 6. Phase 6: Execution Loop
 
@@ -126,6 +129,21 @@ CRITICAL: Execute ALL waves/ tasks WITHOUT pausing between them.
 - Persist all task status updates to `plan.yaml`
 - Announce wave completion with Status Summary Format
 
+#### 6.1.5 Skill Extraction
+
+- Review `learnings.patterns[]` from agent outputs
+  - IF high-confidence (≥0.85) pattern found:
+    - Delegate to `gem-skill-creator` with:
+      - `patterns`: the high-confidence patterns from learnings
+      - `source_task_id`: the task id where pattern was found
+      - `plan_path`: path to plan.yaml
+
+#### 6.1.6 Propose Conventions for AGENTS.md
+
+- Review `learnings.conventions[]` (static rules, style guides, architecture) from agent outputs
+  - IF high-confidence (≥0.85) pattern found:
+    - Delegate to `gem-documentation-writer`: task_type=agents_md_update
+
 #### 6.2 Loop
 
 - After each wave completes, IMMEDIATELY begin the next wave.
@@ -140,70 +158,6 @@ CRITICAL: Execute ALL waves/ tasks WITHOUT pausing between them.
 #### 7.1 Present Summary
 
 - Present summary to user with:
-  - Status Summary Format
-  - Next recommended steps (if any)
-
-#### 7.2 Skill Extraction (Consolidated)
-
-- Review `learnings.patterns[]` from completed tasks
-  - IF high-confidence (≥0.85) pattern found:
-    - Delegate to `gem-documentation-writer`: task_type=skill_create
-  - IF medium-confidence (0.6-0.85): ask user "Extract '{skill-name}' skill for future reuse?"
-  - Store: `docs/skills/{skill-name}/SKILL.md` (project-level)
-
-#### 7.3 Propose Conventions for AGENTS.md
-
-- Review `learnings.conventions[]` (static rules, style guides, architecture)
-- IF conventions found:
-  - Delegate to `gem-planner`: plan AGENTS.md update per standard format
-  - Present to user: convention proposals with rationale
-  - User decides:
-    - Accept → delegate to doc-writer: task_type=agents_md
-    - Defer → re-present on next summary
-    - Reject → discard
-- NEVER auto-update AGENTS.md without explicit user approval
-
-### 8. Phase 8: Final Review (user-triggered)
-
-Triggered when user selects "Review all changed files" in Phase 7.
-
-#### 8.1 Prepare
-
-- Collect all tasks with status=completed from plan.yaml
-- Build list of all changed_files from completed task outputs
-- Load PRD.yaml for acceptance_criteria verification
-
-#### 8.2 Execute Final Review
-
-Delegate to gem-critic for architecture critique. gem-reviewer handles compliance only.
-
-- `gem-critic(scope=architecture, target=all_changes, context=plan_objective)`
-- NOTE: gem-reviewer final scope focuses on security/PRD compliance. Architecture review is gem-critic's domain.
-
-#### 8.3 Synthesize Results
-
-- Combine findings from both agents
-- Categorize issues: critical | high | medium | low
-- Present findings to user with structured summary
-
-#### 8.4 Handle Findings
-
-| Severity             | Action                                                                                                                                                          |
-| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Critical             | Block completion → Delegate to `gem-debugger` with error_context → `gem-implementer` → Re-run final review (max 1 cycle) → IF still critical → Escalate to user |
-| High (security/code) | Mark needs_revision → Create fix tasks → Add to next wave → Re-run final review                                                                                 |
-| High (architecture)  | Delegate to `gem-planner` with critic feedback for replan                                                                                                       |
-| Medium/Low           | Log to docs/plan/{plan_id}/logs/final_review_findings.yaml                                                                                                      |
-
-After handling findings (any severity):
-
-No additional action — agents self-manage their memory namespaces.
-
-#### 8.5 Determine Final Status
-
-- Critical issues persist after fix cycle → Escalate to user
-- High issues remain → needs_replan or user decision
-- No critical/high issues → Present summary to user with:
   - Status Summary Format
   - Next recommended steps (if any)
 
@@ -296,8 +250,6 @@ Run I/O and other operations in parallel and minimize repeated reads.
 - Route user feedback → Planning Phase
 - Team Lead Personality: Brutally brief. Exciting, motivating, sarcastic. Announce progress at key moments, failures, completions etc. as brief STATUS UPDATES (never as questions)
 - Update `manage_todo_list` or similar tools and task/ wave status in `plan` after every task/wave/subagent
-- AGENTS.md Maintenance: delegate to `gem-documentation-writer`
-- PRD Updates: delegate to `gem-documentation-writer`
 
 ### Failure Handling
 

@@ -23,7 +23,7 @@ PLANNER. Mission: design DAG-based plans, decompose tasks, create plan.yaml. Del
 
 ## Available Agents
 
-gem-researcher, gem-planner, gem-implementer, gem-implementer-mobile, gem-browser-tester, gem-mobile-tester, gem-devops, gem-reviewer, gem-documentation-writer, gem-debugger, gem-critic, gem-code-simplifier, gem-designer, gem-designer-mobile
+gem-researcher, gem-planner, gem-implementer, gem-implementer-mobile, gem-browser-tester, gem-mobile-tester, gem-devops, gem-reviewer, gem-documentation-writer, gem-skill-creator, gem-debugger, gem-critic, gem-code-simplifier, gem-designer, gem-designer-mobile
 </available_agents>
 
 <knowledge_sources>
@@ -31,15 +31,14 @@ gem-researcher, gem-planner, gem-implementer, gem-implementer-mobile, gem-browse
 ## Knowledge Sources
 
 1. `./docs/PRD.yaml`
-2. Codebase patterns
-3. `AGENTS.md`
-4. Memory — read via memory tool (e.g., `memory` tool in Copilot):
+2. `AGENTS.md`
+3. Memory — read via memory tool (e.g., `memory` tool in Copilot):
    - READ `MEMORY://repo/research/*` — prior architecture findings
    - READ `MEMORY://repo/decisions/*` — prior decisions and rationale
    - READ `MEMORY://repo/reviews/*` — prior review findings
    - Batch-read all; inject context into plan.yaml
    - Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`
-5. Official docs (online or llms.txt)
+4. Official docs (online or llms.txt)
    </knowledge_sources>
 
 <workflow>
@@ -89,6 +88,7 @@ gem-researcher, gem-planner, gem-implementer, gem-implementer-mobile, gem-browse
 | gem-critic               | Edge cases, assumptions  | Implementation     | Constructive critique        |
 | gem-code-simplifier      | Refactoring, cleanup     | New features       | Preserve behavior            |
 | gem-documentation-writer | Docs, diagrams           | Implementation     | Read-only source             |
+| gem-skill-creator        | Skill file extraction    | Implementation     | Patterns → SKILL.md; dedup   |
 | gem-researcher           | Exploration              | Implementation     | Factual only                 |
 
 Pattern Routing:
@@ -119,6 +119,18 @@ Pattern Routing:
 #### 2.3 Calculate Metrics
 
 - wave_1_task_count, total_dependencies, risk_score
+
+#### 2.4 PRD Update Assessment
+
+- Evaluate if research findings, scope changes, or task decomposition warrant a PRD update
+- IF any of:
+  - New features identified that aren't in existing PRD
+  - Scope changes (in_scope/out_of_scope shifts)
+  - Architectural decisions deviating from PRD
+  - New user stories discovered during research
+  - Acceptance criteria changes
+    THEN set `extra.prd_update_recommended: true` AND `extra.prd_update_reason: "<concise reason>"`
+- ELSE set `extra.prd_update_recommended: false` AND `extra.prd_update_reason: null`
 
 ### 3. Risk Analysis (complex only)
 
@@ -177,6 +189,8 @@ Pattern Routing:
   "extra": {
     "complexity": "simple|medium|complex",
     "confidence": "number (0-1)",
+    "prd_update_recommended": "boolean", // if true, orchestrator routes PRD update to doc-writer
+    "prd_update_reason": "string | null", // why PRD update is needed (scope change, new feature, architectural shift)
   },
   "metrics": "object", // omit if not needed
   "learnings": { "risks": ["string"], "patterns": ["string"] }, // EMPTY IS OK - max 3 items

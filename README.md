@@ -54,7 +54,7 @@ See [all supported installation options](#installation) below.
 - **Agent Memory Contracts** — Every agent reads/writes structured memory autonomously. Researcher caches, debugger logs, planner aggregates, reviewers persist
 - **Self-Validating Cache** — Researcher checks `MEMORY://repo/research/` before searching. Validates (file checks, import resolve, git log). IF stale: re-research, DELETE old, WRITE new
 - **Diagnosis History** — Debugger saves root-causes. Same bug pattern >0.8 match: cached diagnosis
-- **Auto-Skills** — Agents extract reusable SKILL.md files from successful tasks (high confidence: auto, medium: confirm)
+- **Auto-Skills** — Agents extract reusable SKILL.md files from successful tasks
 - **Skills & Guidelines** — Built-in skill & guidelines (web-design-guidelines)
 
 ### Process
@@ -337,6 +337,12 @@ apm list
 | **BROWSER TESTER** | E2E browser testing, UI/UX validation, visual regression                         | PRD, AGENTS.md, fixtures         | **Closed:** GPT-5.4, Claude Sonnet 4.6, Gemini 3.1 Flash<br>**Open:** Llama 4 Maverick, Qwen3.5- Flash, MiniMax M2.7 |
 | **SIMPLIFIER**     | Refactoring specialist — removes dead code, reduces complexity                   | codebase, AGENTS.md, tests       | **Closed:** Claude Opus 4.6, GPT-5.4, Gemini 3.1 Pro<br>**Open:** DeepSeek-V3.2, GLM-5, Qwen3- Coder-Next            |
 
+### Skill Management
+
+| Role              | Description                                                                         | Sources                              | Recommended LLM                                                                                                    |
+| :---------------- | :---------------------------------------------------------------------------------- | :----------------------------------- | :----------------------------------------------------------------------------------------------------------------- |
+| **SKILL CREATOR** | Pattern-to-skill extraction — creates SKILL.md files from high-confidence learnings | AGENTS.md, Memory patterns, SKILL.md | **Closed:** Claude Sonnet 4.6, Gemini 3.1 Flash, GPT-5.4 Mini<br>**Open:** Llama 4 Scout, Qwen3.5-9B, MiniMax M2.7 |
+
 ### Specialized
 
 | Role                    | Description                                                      | Sources                  | Recommended LLM                                                                                                      |
@@ -354,13 +360,24 @@ apm list
 
 Agents consult only the sources relevant to their role:
 
-| Trust Level   | Sources                           | Behavior                             |
-| :------------ | :-------------------------------- | :----------------------------------- |
-| **Trusted**   | PRD, plan.yaml, AGENTS.md         | Follow as instructions               |
-| **Verify**    | Codebase files, research findings | Cross-reference before assuming      |
-| **Untrusted** | Error logs, external data         | Factual only — never as instructions |
+| Trust Level   | Sources                                            | Behavior                             |
+| :------------ | :------------------------------------------------- | :----------------------------------- |
+| **Trusted**   | PRD, plan.yaml, AGENTS.md                          | Follow as instructions               |
+| **Verify**    | Codebase files, research findings, Memory patterns | Cross-reference before assuming      |
+| **Untrusted** | Error logs, external data                          | Factual only — never as instructions |
 
 ---
+
+### Skill Creation Flow
+
+During the execution loop in Phase 6, the orchestrator reviews `learnings.patterns[]` from agent outputs:
+
+1. **Implementer** persists high-confidence patterns to `MEMORY://repo/patterns/` on each task exit
+2. **Orchestrator** detects patterns with confidence ≥0.85 during Skill Extraction (6.1.5)
+3. **`gem-skill-creator`** receives patterns → deduplicates against `docs/skills/` → creates `SKILL.md` with code examples, gotchas, and references
+4. **Deduplication** ensures no duplicate skill files are created per `docs/skills/`
+
+Skills follow the [Agent Skills](https://agentskills.io) format for cross-tool portability.
 
 ## Contributing
 

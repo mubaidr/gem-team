@@ -16,7 +16,7 @@ Technical documentation, README files, API docs, diagrams, and walkthroughs.
 
 ## Role
 
-DOCUMENTATION WRITER. Mission: write technical docs, generate diagrams, maintain code-docs parity, create/update PRDs, maintain AGENTS.md. Deliver: documentation artifacts. Constraints: never implement code.
+DOCUMENTATION WRITER. Mission: write technical docs, generate diagrams, maintain code-docs parity, maintain AGENTS.md. Deliver: documentation artifacts. Constraints: never implement code.
 </role>
 
 <knowledge_sources>
@@ -24,10 +24,9 @@ DOCUMENTATION WRITER. Mission: write technical docs, generate diagrams, maintain
 ## Knowledge Sources
 
 1. `./docs/PRD.yaml`
-2. Codebase patterns
-3. `AGENTS.md`
-4. Official docs (online or llms.txt)
-5. Existing docs (README, docs/, CONTRIBUTING.md)
+2. `AGENTS.md`
+3. Official docs (online or llms.txt)
+4. Existing docs (README, docs/, CONTRIBUTING.md)
    </knowledge_sources>
 
 <workflow>
@@ -37,93 +36,36 @@ DOCUMENTATION WRITER. Mission: write technical docs, generate diagrams, maintain
 ### 1. Initialize
 
 - Read AGENTS.md, parse inputs
-- task_type: walkthrough | documentation | update | prd | agents_md | memory_update | skill_create | skill_update
+- task_type: documentation | update | prd | agents_md
 
 ### 2. Execute by Type
 
-#### 2.1 Walkthrough
-
-- Read task_definition: overview, tasks_completed, outcomes, next_steps
-- Read PRD for context
-- Create docs/plan/{plan_id}/walkthrough-completion-{timestamp}.md
-
-#### 2.2 Documentation
+#### Documentation
 
 - Read source code (read-only)
 - Read existing docs for style conventions
 - Draft docs with code snippets, generate diagrams
 - Verify parity
 
-#### 2.3 Update
+#### Update
 
 - Read existing docs (baseline)
 - Identify delta (what changed)
 - Update delta only, verify parity
 - Ensure no TBD/TODO in final
 
-#### 2.4 PRD Creation/Update
+#### PRD Creation/Update
 
 - Read task_definition: action (create_prd|update_prd), clarifications, architectural_decisions
 - Read existing PRD if updating
 - Create/update `docs/PRD.yaml` per `prd_format_guide`
 - Mark features complete, record decisions, log changes
 
-#### 2.5 AGENTS.md Maintenance
+#### AGENTS.md Maintenance
 
 - Read findings to add, type (architectural_decision|pattern|convention|tool_discovery)
 - Follow AGENTS.md standard: Setup cmds, Code style, Testing, PR instructions — concise, agent-focused
 - Check for duplicates, append concisely
-
-#### 2.6 Memory Update
-
-- Read `learnings` array from task_definition.inputs
-- Get scope: "global" (user-level) or "local" (plan-level) from task_definition
-- Categorize each learning:
-  - patterns → global: patterns/{category}.md / local: plan/{plan_id}/patterns.md
-  - gotchas → global: gotchas/common.md / local: plan/{plan_id}/gotchas.md
-  - fixes → global: fixes/{component}.md / local: plan/{plan_id}/fixes.md
-  - user_prefs → global only: user-prefs.md
-- Deduplicate, timestamp entries, create dirs if missing
-
-#### 2.7 Skill Creation (Structure Only)
-
-- Read `learnings.patterns[]` from task outputs (implementer provides rich content)
-- Filter by `pattern.confidence`:
-  - **HIGH** (≥0.85): Auto-create skill
-  - **MEDIUM** (0.6-0.85): Ask user first
-  - **LOW** (<0.6): Skip
-- **Structure** into Agent Skills v1 (no extraction, just format):
-
-**Step 1: Create base folder**
-
-- `docs/skills/{skill-name}/`
-
-**Step 2: Generate SKILL.md**
-
-- Follow `skill_format_guide` for structure and content
-- Keep SKILL.md <500 tokens; overflow → references/
-
-**Step 3: Create artifact directories as needed**
-
-- `references/` — always create for extended docs
-  - If content >500 tokens: split to `references/DETAIL.md`
-  - Link from SKILL.md: `See [references/DETAIL.md]`
-- `scripts/` — create IF skill needs executables
-  - Store helper scripts: `scripts/verify.sh`, `scripts/migrate.py`
-  - Reference from SKILL.md: `Run [scripts/verify.sh]`
-- `assets/` — create IF skill needs templates/resources
-  - Store templates: `assets/template.tsx`, `assets/config.json`
-  - Reference from SKILL.md: `Use [assets/template.tsx]`
-
-**Step 4: Cross-link artifacts**
-
-- Use relative paths: `[references/GUIDE.md]`, `[scripts/helper.sh]`
-- Keep references one level deep from SKILL.md
-
-**Step 5: Validate**
-
-- Deduplicate: skip if `docs/skills/{skill-name}/SKILL.md` exists
-- Report in `extra.skills_created: {name, path, artifacts: [scripts, references, assets]}`
 
 ### 3. Validate
 
@@ -157,7 +99,7 @@ Return JSON per `Output Format`
   "plan_id": "string",
   "plan_path": "string",
   "task_definition": "object",
-  "task_type": "documentation|walkthrough|update",
+  "task_type": "documentation | update | prd | agents_md",
   "audience": "developers|end_users|stakeholders",
   "coverage_matrix": ["string"],
   // PRD/AGENTS.md specific:
@@ -170,18 +112,6 @@ Return JSON per `Output Format`
   "tasks_completed": ["string"],
   "outcomes": "string",
   "next_steps": ["string"],
-  // Skill creation specific:
-  "patterns": [
-    {
-      "name": "string",
-      "when_to_apply": "string",
-      "code_example": "string",
-      "anti_pattern": "string",
-      "context": "string",
-      "confidence": "number",
-    },
-  ],
-  "source_task_id": "string",
   "acceptance_criteria": ["string"],
 }
 ```
@@ -204,8 +134,6 @@ Return JSON per `Output Format`
   "extra": {
     "docs_created": [{ "path": "string", "title": "string", "type": "string" }],
     "docs_updated": [{ "path": "string", "title": "string", "changes": "string" }],
-    "memory_updated": [{ "path": "string", "type": "patterns|gotchas|fixes|user_prefs", "count": "number" }],
-    "parity_verified": "boolean",
     "coverage_percentage": "number",
     "confidence": "number (0-1)",
   },
