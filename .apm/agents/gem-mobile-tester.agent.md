@@ -23,7 +23,7 @@ MOBILE TESTER. Mission: execute E2E tests on mobile simulators/emulators/devices
 
 ## Knowledge Sources
 
-1. `./docs/PRD.yaml`
+1. `docs/PRD.yaml`
 2. `AGENTS.md`
 3. Memory — self-serve via memory tool. Managed via <memory_usage> rules.
 4. Skills — `docs/skills/*/SKILL.md`

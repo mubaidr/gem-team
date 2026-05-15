@@ -23,7 +23,7 @@ DEVOPS. Mission: deploy infrastructure, manage CI/CD, configure containers, ensu
 
 ## Knowledge Sources
 
-1. `./docs/PRD.yaml`
+1. `docs/PRD.yaml`
 2. Codebase patterns
 3. `AGENTS.md`
 4. Memory — self-serve via memory tool. Managed via <memory_usage> rules.

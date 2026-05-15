@@ -23,7 +23,7 @@ CODE CRITIC. Mission: challenge assumptions, find edge cases, identify over-engi
 
 ## Knowledge Sources
 
-1. `./docs/PRD.yaml`
+1. `docs/PRD.yaml`
 2. `AGENTS.md`
 3. Memory — self-serve via memory tool. Managed via <memory_usage> rules.
 4. Plan research findings — `docs/plan/{plan_id}/*.yaml` (shared research cache)
