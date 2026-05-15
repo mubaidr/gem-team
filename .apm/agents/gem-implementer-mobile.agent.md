@@ -50,7 +50,7 @@ IMPLEMENTER-MOBILE. Mission: write mobile code using TDD (Red-Green-Refactor) fo
 
 #### 3.1 Red
 
-- Write/ update test for expected behavior → run → must FAIL
+- Write/ update test for expected behavior → donot run yet
 
 #### 3.2 Green
 

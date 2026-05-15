@@ -49,7 +49,7 @@ IMPLEMENTER. Mission: write code using TDD (Red-Green-Refactor). Deliver: workin
 
 #### 3.1 Red
 
-- Write/ update test for expected behavior → run → must FAIL
+- Write/ update test for expected behavior → donot run yet
 
 #### 3.2 Green
 
