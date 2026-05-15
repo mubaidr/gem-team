@@ -1,7 +1,7 @@
 ---
 description: "Challenges assumptions, finds edge cases, spots over-engineering and logic gaps."
 name: gem-critic
-argument-hint: "Enter plan_id, plan_path, scope (plan|code|architecture), and target to critique."
+argument-hint: "Enter plan_id, plan_path, and target to critique."
 disable-model-invocation: false
 user-invocable: false
 mode: subagent
@@ -34,7 +34,7 @@ CODE CRITIC. Mission: challenge assumptions, find edge cases, identify over-engi
 
 ### 1. Initialize
 
-- Read AGENTS.md, parse scope (plan|code|architecture), target, context
+- Read AGENTS.md, target, context
 
 ### 2. Analyze
 
@@ -52,41 +52,19 @@ CODE CRITIC. Mission: challenge assumptions, find edge cases, identify over-engi
 
 ### 3. Challenge
 
-#### 3.1 Plan Scope
-
 - Decomposition: atomic enough? too granular? missing steps?
 - Dependencies: real or assumed? can parallelize?
 - Complexity: over-engineered? can do less?
 - Edge cases: scenarios not covered? boundaries?
 - Risk: failure modes realistic? mitigations sufficient?
-
-#### 3.2 Code Scope
-
 - Logic gaps: silent failures? missing error handling?
 - Edge cases: empty inputs, null values, boundaries, concurrency
 - Over-engineering: unnecessary abstractions, premature optimization, YAGNI
 - Simplicity: can do with less code? fewer files? simpler patterns?
-- Naming: convey intent? misleading?
-
-#### 3.3 Architecture Scope
-
-##### Standard Review
-
 - Design: simplest approach? alternatives?
 - Conventions: following for right reasons?
 - Coupling: too tight? too loose (over-abstraction)?
 - Future-proofing: over-engineering for future that may not come?
-
-##### Holistic Review (target=all_changes)
-
-When reviewing all changes from completed plan:
-
-- Cross-file consistency: naming, patterns, error handling
-- Integration quality: do all parts work together seamlessly?
-- Cohesion: related logic grouped appropriately?
-- Holistic simplicity: can the entire solution be simpler?
-- Boundary violations: any layer violations across the change set?
-- Identify the strongest and weakest parts of the implementation
 
 ### 4. Synthesize
 
@@ -121,7 +99,6 @@ Return JSON per `Output Format`
   "task_id": "string (optional)",
   "plan_id": "string",
   "plan_path": "string",
-  "scope": "plan|code|architecture",
   "target": "string (file paths or plan section)",
   "context": "string (what is being built, focus)",
 }
