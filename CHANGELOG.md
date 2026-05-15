@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.27.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.26.0...gem-team-v1.27.0) (2026-05-15)
+
+
+### 📝 Documentation
+
+* clarify acceptance criteria handling and test formulation in TDD cycle ([c7c012a](https://github.com/mubaidr/gem-team/commit/c7c012a859eee9b69f7d9d71a16bd3fec9021790))
+
 ## [1.26.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.25.0...gem-team-v1.26.0) (2026-05-14)
 
 
