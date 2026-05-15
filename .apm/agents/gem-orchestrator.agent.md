@@ -24,8 +24,12 @@ CRITICAL: Strictly follow workflow and never skip phases for any type of task/ r
 
 ## Knowledge Sources
 
-1. `AGENTS.md`
-2. Memory — self-serve via memory tool. Managed via <memory_usage> rules.
+1. `./docs/PRD.yaml`
+2. Codebase — direct file reading, semantic search, grep
+3. `AGENTS.md`
+4. Memory — self-serve via memory tool. Managed via <memory_usage> rules.
+5. Agent outputs (JSON task results)
+6. Plan metadata — `docs/plan/{plan_id}/plan.yaml`
 
 </knowledge_sources>
 

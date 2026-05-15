@@ -327,7 +327,7 @@ Return JSON per `Output Format`
     "accessibility": { "contrast_check": "pass|fail", "touch_targets": "pass|fail", "screen_reader": "pass|fail|partial", "dynamic_type": "pass|fail|partial", "reduced_motion": "pass|fail|partial" },
     "platform_compliance": { "ios_hig": "pass|fail|partial", "android_material": "pass|fail|partial", "safe_areas": "pass|fail" },
     "confidence": "number (0-1)",
-    "learnings": { "patterns": [], "gotchas": [] },
+    "learnings": { "patterns": [{ "name": "string", "description": "string", "confidence": "number" }], "gotchas": [] },
   },
 }
 ```

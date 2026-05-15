@@ -126,7 +126,13 @@ Return JSON per `Output Format`
     "confidence": "number (0-1)",
     "learnings": {
       "facts": ["string"], // max 3 - simple strings, skip if obvious
-      "patterns": [], // EMPTY IS OK - only emit if confidence ≥0.9 AND needed
+      "patterns": [
+        {
+          "name": "string",
+          "description": "string",
+          "confidence": "number",
+        },
+      ], // EMPTY IS OK - only emit if confidence ≥0.9 AND needed
       "conventions": [], // EMPTY IS OK - skip unless human approval given
     },
   },

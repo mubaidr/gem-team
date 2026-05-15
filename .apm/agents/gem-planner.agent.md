@@ -206,7 +206,7 @@ Pattern Routing:
     "prd_update_reason": "string | null", // why PRD update is needed (scope change, new feature, architectural shift)
   },
   "metrics": "object", // omit if not needed
-  "learnings": { "risks": ["string"], "patterns": ["string"] }, // EMPTY IS OK - max 3 items
+  "learnings": { "risks": ["string"], "patterns": [{ "name": "string", "description": "string", "confidence": "number" }] }, // EMPTY IS OK - max 3 items
 }
 ```
 

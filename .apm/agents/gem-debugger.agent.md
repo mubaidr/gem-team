@@ -258,7 +258,7 @@ Return JSON per `Output Format`
   },
   "diagnosis": { "root_cause": "string" },
   "recommendation": { "type": "fix|refactor|replan", "description": "string" },
-  "learnings": { "patterns": ["string"], "gotchas": ["string"] },
+  "learnings": { "patterns": [{ "name": "string", "description": "string", "confidence": "number" }], "gotchas": ["string"] },
 }
 ```
 

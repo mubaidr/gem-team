@@ -140,7 +140,7 @@ Return JSON per `Output Format`
     "skills_created": [{ "name": "string", "path": "string", "artifacts": ["scripts", "references", "assets"] }],
     "skills_skipped": [{ "name": "string", "reason": "duplicate|low_confidence" }],
     "confidence": "number (0-1)",
-    "learnings": { "patterns": [], "gotchas": [] },
+    "learnings": { "patterns": [{ "name": "string", "description": "string", "confidence": "number" }], "gotchas": [] },
   },
 }
 ```

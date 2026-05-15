@@ -253,7 +253,7 @@ Return JSON per `Output Format`
     "flaky_tests": ["test_id"],
     "crashes": ["test_id"],
     "failures": [{ "type": "string", "test_id": "string", "platform": "string", "details": "string", "evidence": ["string"] }],
-    "learnings": { "patterns": [], "gotchas": [] },
+    "learnings": { "patterns": [{ "name": "string", "description": "string", "confidence": "number" }], "gotchas": [] },
   }
 }
 ```

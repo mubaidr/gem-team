@@ -185,7 +185,7 @@ Switch on `review_scope` — only ONE branch executes:
     "confidence": "number (0-1)",
     "security_findings": {"critical": "number", "high": "number"},
     "compliance": {"prd_alignment": "pass|fail"},
-    "learnings": {"patterns": ["string"], "gotchas": ["string"]}
+    "learnings": {"patterns": [{ "name": "string", "description": "string", "confidence": "number" }], "gotchas": ["string"]}
   }
 }
 ```

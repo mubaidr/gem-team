@@ -268,7 +268,7 @@ Return JSON per `Output Format`
     "validation_findings": { "passed": "boolean", "issues": [{ "severity": "critical|high|medium|low", "category": "string", "description": "string", "location": "string", "recommendation": "string" }] },
     "accessibility": { "contrast_check": "pass|fail", "keyboard_navigation": "pass|fail|partial", "screen_reader": "pass|fail|partial", "reduced_motion": "pass|fail|partial" },
     "confidence": "number (0-1)",
-    "learnings": { "patterns": [], "gotchas": [] },
+    "learnings": { "patterns": [{ "name": "string", "description": "string", "confidence": "number" }], "gotchas": [] },
   },
 }
 ```
