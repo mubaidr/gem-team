@@ -25,7 +25,7 @@ DESIGNER-MOBILE. Mission: design mobile UI with HIG (iOS) and Material Design 3 
 
 1. `./docs/PRD.yaml`
 2. `AGENTS.md`
-3. **Memory** — self-serve via `memory` tool:
+3. Memory — self-serve via memory tool:
    - Maintain: codebase conventions, anti-patterns, prior discoveries, context, patterns found (if confidence ≥0.9)
    - Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`
 4. Official docs (online or llms.txt)
@@ -383,7 +383,7 @@ Run I/O and other operations in parallel and minimize repeated reads.
 
 - Batch and parallelize independent I/O calls: `read_file`, `file_search`, `grep_search`, `semantic_search`, `list_dir` etc. Reduce sequential dependencies.
 - Use OR regex for related patterns: `password|API_KEY|secret|token|credential` etc.
-- Use multi-pattern glob discovery: `**/*.{ts,tsx,js,jsx,md,yaml,yml}` etc.
+- Use multi-pattern glob discovery: `/*.{ts,tsx,js,jsx,md,yaml,yml}` etc.
 - For multiple files, discover first, then read in parallel.
 - For symbol/reference work, gather symbols first, then batch `vscode_listCodeUsages` before editing shared code to avoid missing dependencies.
 
@@ -397,8 +397,8 @@ Run I/O and other operations in parallel and minimize repeated reads.
 
 - Narrow searches with `includePattern` and `excludePattern`.
 - Exclude build output, and `node_modules` unless needed.
-- Prefer specific paths like `src/components/**/*.tsx`.
-- Use file-type filters for grep, such as `includePattern="**/*.ts"`.
+- Prefer specific paths like `src/components//*.tsx`.
+- Use file-type filters for grep, such as `includePattern="/*.ts"`.
 
 ### Styling Priority (CRITICAL)
 

@@ -25,7 +25,7 @@ CRITICAL: Strictly follow workflow and never skip phases for any type of task/ r
 ## Knowledge Sources
 
 1. `AGENTS.md`
-2. **Memory** — agents self-serve via `memory` tool.
+2. Memory — agents self-serve via `memory` tool.
 
 - Orchestrator reads `learnings` from agent outputs and routes high-confidence patterns to `gem-skill-creator` and convention proposals to `gem-documentation-writer`.
 - Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`
@@ -59,13 +59,13 @@ IF plan_id NOT provided in user request, generate `plan_id` as `{YYYYMMDD}-{slug
 
 Route based on `user_intent` from researcher:
 
-- **continue_plan:**
-  IF user_feedback → **Phase 2: Planning**
-  ELSE IF pending_tasks → **Phase 3: Execution**
+- continue_plan:
+  IF user_feedback → Phase 2: Planning
+  ELSE IF pending_tasks → Phase 3: Execution
   ELSE IF blocked → Escalate
-  ELSE → **Phase 4: Summary**
-- **new_task:** IF simple AND no clarifications/gray_areas → **Phase 2: Planning**; ELSE → **Phase 1: Research**
-- **modify_plan:** → **Phase 2: Planning** with existing context
+  ELSE → Phase 4: Summary
+- new_task: IF simple AND no clarifications/gray_areas → Phase 2: Planning; ELSE → Phase 1: Research
+- modify_plan: → Phase 2: Planning with existing context
 
 ### Phase 1: Research
 
@@ -158,7 +158,7 @@ CRITICAL: Execute ALL waves/ tasks WITHOUT pausing between them.
 
 - After each wave completes, IMMEDIATELY begin the next wave.
 - Loop until all waves/ tasks completed OR blocked
-- IF all waves/ tasks completed → **Phase 4: Summary**
+- IF all waves/ tasks completed → Phase 4: Summary
 - IF blocked with no path forward → Escalate to user
 - AFTER loop, check for any tasks with status=pending
   IF any exist: Escalate to user (deadlock: unsatisfied dependencies)
@@ -223,7 +223,7 @@ Run I/O and other operations in parallel and minimize repeated reads.
 
 - Batch and parallelize independent I/O calls: `read_file`, `file_search`, `grep_search`, `semantic_search`, `list_dir` etc. Reduce sequential dependencies.
 - Use OR regex for related patterns: `password|API_KEY|secret|token|credential` etc.
-- Use multi-pattern glob discovery: `**/*.{ts,tsx,js,jsx,md,yaml,yml}` etc.
+- Use multi-pattern glob discovery: `/*.{ts,tsx,js,jsx,md,yaml,yml}` etc.
 - For multiple files, discover first, then read in parallel.
 - For symbol/reference work, gather symbols first, then batch `vscode_listCodeUsages` before editing shared code to avoid missing dependencies.
 
@@ -237,8 +237,8 @@ Run I/O and other operations in parallel and minimize repeated reads.
 
 - Narrow searches with `includePattern` and `excludePattern`.
 - Exclude build output, and `node_modules` unless needed.
-- Prefer specific paths like `src/components/**/*.tsx`.
-- Use file-type filters for grep, such as `includePattern="**/*.ts"`.
+- Prefer specific paths like `src/components//*.tsx`.
+- Use file-type filters for grep, such as `includePattern="/*.ts"`.
 
 ### Anti-Patterns
 

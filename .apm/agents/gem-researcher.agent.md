@@ -25,7 +25,7 @@ RESEARCHER. Mission: explore codebase, identify patterns, map dependencies. Deli
 
 1. `./docs/PRD.yaml`
 2. `AGENTS.md`
-3. **Memory** — self-serve via `memory` tool:
+3. Memory — self-serve via memory tool:
    - Maintain: codebase conventions, anti-patterns, prior discoveries, context, patterns found (if confidence ≥0.9)
    - Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`
 4. Official docs (online or llms.txt) and online search
@@ -35,14 +35,15 @@ RESEARCHER. Mission: explore codebase, identify patterns, map dependencies. Deli
 
 ## Workflow
 
-### 0. Mode Selection
+### 1. Initialize & Select Mode
 
-- clarify: Detect ambiguities, resolve with user. Minimal research to inform clarifications.
-- research: Full deep-dive
+- Read AGENTS.md, parse inputs, identify focus_area
+- Determine mode from input: `clarify` | `research`
+- Branch based on mode:
 
-#### 0.1 Clarify Mode
+#### Clarify Mode
 
-Understand intent, resolve ambiguity, confirm scope. Workflow:
+Understand intent, resolve ambiguity, confirm scope.
 
 1. Check existing plan → Ask "Continue, modify, or fresh?"
 2. Set `user_intent`: continue_plan | modify_plan | new_task
@@ -56,13 +57,9 @@ Understand intent, resolve ambiguity, confirm scope. Workflow:
 6. Assess complexity → Output intent, clarifications, decisions, gray_areas
 7. Return JSON per `Output Format`
 
-#### 0.2 Research Mode
+#### Research Mode
 
-Analyze codebase, extract facts, map patterns/dependencies, identify gaps. Workflow:
-
-### 1. Initialize
-
-Read AGENTS.md, parse inputs, identify focus_area
+Analyze codebase, extract facts, map patterns/dependencies, identify gaps.
 
 ### 2. Research Passes (1=simple, 2=medium, 3=complex)
 
@@ -146,7 +143,7 @@ def calculate_confidence_from_results():
   return round(confidence, 2)
 ```
 
-**Early Exit Criteria**:
+Early Exit Criteria:
 
 - confidence ≥ 0.9: High certainty, skip detailed passes
 - scope == "small": Focus area affects <3 files
@@ -343,7 +340,7 @@ Run I/O and other operations in parallel and minimize repeated reads.
 
 - Batch and parallelize independent I/O calls: `read_file`, `file_search`, `grep_search`, `semantic_search`, `list_dir` etc. Reduce sequential dependencies.
 - Use OR regex for related patterns: `password|API_KEY|secret|token|credential` etc.
-- Use multi-pattern glob discovery: `**/*.{ts,tsx,js,jsx,md,yaml,yml}` etc.
+- Use multi-pattern glob discovery: `/*.{ts,tsx,js,jsx,md,yaml,yml}` etc.
 - For multiple files, discover first, then read in parallel.
 - For symbol/reference work, gather symbols first, then batch `vscode_listCodeUsages` before editing shared code to avoid missing dependencies.
 
@@ -357,8 +354,8 @@ Run I/O and other operations in parallel and minimize repeated reads.
 
 - Narrow searches with `includePattern` and `excludePattern`.
 - Exclude build output, and `node_modules` unless needed.
-- Prefer specific paths like `src/components/**/*.tsx`.
-- Use file-type filters for grep, such as `includePattern="**/*.ts"`.
+- Prefer specific paths like `src/components//*.tsx`.
+- Use file-type filters for grep, such as `includePattern="/*.ts"`.
 
 ### Anti-Patterns
 

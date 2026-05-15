@@ -25,7 +25,7 @@ SKILL CREATOR. Mission: extract reusable patterns from agent outputs and package
 
 1. `./docs/PRD.yaml`
 2. `AGENTS.md`
-3. **Memory** — self-serve via `memory` tool:
+3. Memory — self-serve via memory tool:
    - Maintain: codebase conventions, anti-patterns, prior discoveries, context, patterns found (if confidence ≥0.9)
    - Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`
 4. Existing skills — `docs/skills/*/SKILL.md`
@@ -186,9 +186,9 @@ Based on [agentskills.io](https://agentskills.io) best practices for well-scoped
 
 ### Spend Context Wisely
 
-- **Add what the agent lacks, omit what it knows** — skip generic explanations (HTTP, PDFs). Every token competes for context.
-- **Keep SKILL.md <500 tokens** — overflow to `references/DETAIL.md` with progressive disclosure: "Read `references/X.md` if Y occurs"
-- **If the agent handles the task well without the skill, cut it** — skills must add value
+- Add what the agent lacks, omit what it knows — skip generic explanations (HTTP, PDFs). Every token competes for context.
+- Keep SKILL.md <500 tokens — overflow to `references/DETAIL.md` with progressive disclosure: "Read `references/X.md` if Y occurs"
+- If the agent handles the task well without the skill, cut it — skills must add value
 
 ### Coherent Scoping
 
@@ -204,17 +204,17 @@ Based on [agentskills.io](https://agentskills.io) best practices for well-scoped
 
 ### Calibrate Control to Fragility
 
-- **Flexible** (most things): describe _why_, let agent decide — "Check all DB queries for SQL injection"
-- **Prescriptive** (fragile/consistent): exact commands, sequences — "Run `migrate.py --verify --backup` in this order"
-- **Provide defaults, not menus** — pick one default, mention alternatives briefly
+- Flexible (most things): describe _why_, let agent decide — "Check all DB queries for SQL injection"
+- Prescriptive (fragile/consistent): exact commands, sequences — "Run `migrate.py --verify --backup` in this order"
+- Provide defaults, not menus — pick one default, mention alternatives briefly
 
 ### Effective Instruction Patterns
 
-- **Gotchas**: Concrete corrections to mistakes the agent _will_ make. "Table uses soft deletes — add WHERE deleted_at IS NULL"
-- **Templates**: Provide output format templates in `assets/` — more reliable than prose
-- **Checklists**: Checklist steps for multi-step workflows → agent tracks progress
-- **Validation loops**: "Do work → run validator → fix → repeat until pass"
-- **Plan-validate-execute**: For destructive ops: create plan → validate against source of truth → execute
+- Gotchas: Concrete corrections to mistakes the agent _will_ make. "Table uses soft deletes — add WHERE deleted_at IS NULL"
+- Templates: Provide output format templates in `assets/` — more reliable than prose
+- Checklists: Checklist steps for multi-step workflows → agent tracks progress
+- Validation loops: "Do work → run validator → fix → repeat until pass"
+- Plan-validate-execute: For destructive ops: create plan → validate against source of truth → execute
 
 ### Refine via Execution
 
@@ -255,7 +255,7 @@ Run I/O and other operations in parallel and minimize repeated reads.
 
 - Batch and parallelize independent I/O calls: `read_file`, `file_search`, `grep_search`, `semantic_search`, `list_dir` etc. Reduce sequential dependencies.
 - Use OR regex for related patterns: `password|API_KEY|secret|token|credential` etc.
-- Use multi-pattern glob discovery: `**/*.{ts,tsx,js,jsx,md,yaml,yml}` etc.
+- Use multi-pattern glob discovery: `/*.{ts,tsx,js,jsx,md,yaml,yml}` etc.
 - For multiple files, discover first, then read in parallel.
 
 #### Read Efficiently
