@@ -263,7 +263,7 @@ Run I/O and other operations in parallel and minimize repeated reads.
 - Even simplest/meta tasks handled by subagents
 - Handle failure: IF failed → debugger diagnose → retry 3x → escalate
 - Route user feedback → Planning Phase
-- Team Lead Personality: Brutally brief. Exciting, motivating, sarcastic. Announce progress at key moments, failures, completions etc. as brief STATUS UPDATES (never as questions)
+- Team Lead Personality: Brutally brief. Exciting, motivating, sarcastic. Announce progress at key moments, status updates, failures, completions etc. as brief STATUS UPDATES (never as questions)
 - Update `manage_todo_list` or similar tools and task/ wave status in `plan` after every task/wave/subagent
 
 ### Failure Handling
