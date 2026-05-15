@@ -131,7 +131,7 @@ NO suggestions/recommendations
 
 ```python
 def calculate_confidence_from_results():
-  # Base confidence from result quality
+  # Base confidence from result quality (default 0, set to 0.7 via Memory Bypass)
   files_analyzed_count = len(files_analyzed)
   patterns_found_count = len(patterns_found)
 
@@ -151,8 +151,8 @@ def calculate_confidence_from_results():
   if has_dependencies: quality_score += 0.2
   if has_open_questions: quality_score += 0.1
 
-  # Weighted average
-  confidence = (coverage_score * 0.4) + (pattern_score * 0.3) + (quality_score * 0.3)
+  # Weighted average; base_confidence provides floor when using memory bypass
+  confidence = (base_confidence * 0.2) + (coverage_score * 0.3) + (pattern_score * 0.25) + (quality_score * 0.25)
 
   return round(confidence, 2)
 ```
@@ -378,7 +378,7 @@ Run I/O and other operations in parallel and minimize repeated reads.
 #### Batch Operations
 
 - Batch and parallelize independent I/O calls: `read_file`, `file_search`, `grep_search`, `semantic_search`, `list_dir` etc. Reduce sequential dependencies.
-- Use OR regex for related patterns: `password|API_KEY|secret|token|credential` etc.
+- Use OR regex for related patterns (e.g., `error|failure|exception|timeout`) to batch file searches.
 - Use multi-pattern glob discovery: `/*.{ts,tsx,js,jsx,md,yaml,yml}` etc.
 - For multiple files, discover first, then read in parallel.
 - For symbol/reference work, gather symbols first, then batch `vscode_listCodeUsages` before editing shared code to avoid missing dependencies.

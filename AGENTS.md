@@ -59,23 +59,23 @@ Agents live in `.apm/agents/` and are deployed via APM to VS Code, Copilot CLI, 
 ```
 User Goal
   └─→ Orchestrator (gem-orchestrator)
-        ├─→ [Simple] Research → Plan → Execute → Verify
-        └─→ [Complex] Discuss → PRD → Research → Plan → Approve → Execute Waves → Final Review
-                     │                                     │
-                     └─→ Debug ──→ Fix ──→ Re-verify       │
-                       (gem-debugger → gem-implementer)     │
-                                                            └─→ Doc Extraction
-                                                              (gem-skill-creator,
-                                                               gem-documentation-writer)
+        ├─→ [Simple] Phase 0: Init & Route → Phase 1: Research → Phase 2: Plan → Phase 3: Execute Waves → Phase 4: Summary
+        └─→ [Complex] Phase 0: Init & Route → Phase 1: Research → Phase 2: Plan → Approve → Phase 3: Execute Waves → Phase 4: Summary
+                     │                                                                        │
+                     └─→ Debug → Fix → Re-verify (per wave, max 3x)                            │
+                       (gem-debugger → gem-implementer)                                         │
+                                                                                                └─→ Skill/Convention Extraction
+                                                                                                  (gem-skill-creator,
+                                                                                                   gem-documentation-writer)
 ```
 
 ### Execution Flow (Orchestrator)
 
-1. **Phase 0: Init & Route** — Generate plan_id, detect intent, route to agent
-2. **Phase 1: Research** — Delegate to gem-researcher for codebase exploration
-3. **Phase 2: Planning** — Delegate to gem-planner for DAG design; review by gem-reviewer/gem-critic for medium/high complexity
-4. **Phase 3: Execution Loop** — Execute waves: delegate, integration check, synthesize, skill extraction, AGENTS.md proposal
-5. **Phase 4: Summary** — Present status, next steps
+1. **Phase 0: Init & Route** — Plan ID generation, intent detection via researcher (clarify mode), routing to appropriate branch
+2. **Phase 1: Research** — Codebase exploration per focus area via gem-researcher
+3. **Phase 2: Planning** — DAG design via gem-planner, review by reviewer/critic (medium/high complexity), present, PRD update routing
+4. **Phase 3: Execution Loop** — Loop over waves: delegate → security task review (optional) → wave review → synthesize → skill extraction → convention proposals for AGENTS.md
+5. **Phase 4: Summary** — Present progress, blockers, next steps
 
 ## Agent Definition Format
 

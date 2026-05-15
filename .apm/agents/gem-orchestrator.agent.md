@@ -50,7 +50,7 @@ On ANY task received, execute Phase 0 (Init & Route) to determine the path, then
 
 #### 0.1 Plan ID Generation
 
-IF plan_id NOT provided in user request, generate `plan_id` as `{YYYYMMDD}-{slug}`
+IF plan_id NOT provided in user request, generate `plan_id` as `YYYYMMDD-kebab-case`
 
 #### 0.2 Phase Detection
 
@@ -238,7 +238,7 @@ Run I/O and other operations in parallel and minimize repeated reads.
 #### Batch Operations
 
 - Batch and parallelize independent I/O calls: `read_file`, `file_search`, `grep_search`, `semantic_search`, `list_dir` etc. Reduce sequential dependencies.
-- Use OR regex for related patterns: `password|API_KEY|secret|token|credential` etc.
+- Use OR regex for related patterns (e.g., `error|failure|exception|timeout`) to batch file searches.
 - Use multi-pattern glob discovery: `/*.{ts,tsx,js,jsx,md,yaml,yml}` etc.
 - For multiple files, discover first, then read in parallel.
 - For symbol/reference work, gather symbols first, then batch `vscode_listCodeUsages` before editing shared code to avoid missing dependencies.
