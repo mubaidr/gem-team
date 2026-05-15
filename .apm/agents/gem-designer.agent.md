@@ -230,25 +230,6 @@ Design System: Tokens, component library specs, usage guidelines, accessibility 
 Return JSON per `Output Format`
 </workflow>
 
-<input_format>
-
-## Input Format
-
-```jsonc
-{
-  "task_id": "string",
-  "plan_id": "string (optional)",
-  "plan_path": "string (optional)",
-  "mode": "create|validate",
-  "scope": "component|page|layout|theme|design_system",
-  "target": "string (file paths or component names)",
-  "context": { "framework": "string", "library": "string", "existing_design_system": "string", "requirements": "string" },
-  "constraints": { "responsive": "boolean", "accessible": "boolean", "dark_mode": "boolean" },
-}
-```
-
-</input_format>
-
 <output_format>
 
 ## Output Format

@@ -208,33 +208,6 @@ lint_rule_recommendations: [{
 Return JSON per `Output Format`
 </workflow>
 
-<input_format>
-
-## Input Format
-
-```jsonc
-{
-  "task_id": "string",
-  "plan_id": "string",
-  "plan_path": "string",
-  "task_definition": "object",
-  "error_context": {
-    "error_message": "string",
-    "stack_trace": "string (optional)",
-    "failing_test": "string (optional)",
-    "reproduction_steps": ["string (optional)"],
-    "environment": "string (optional)",
-    "flow_id": "string (optional)",
-    "step_index": "number (optional)",
-    "evidence": ["string (optional)"],
-    "browser_console": ["string (optional)"],
-    "network_failures": ["string (optional)"],
-  },
-}
-```
-
-</input_format>
-
 <output_format>
 
 ## Output Format

@@ -287,25 +287,6 @@ Design System: Mobile tokens, component specs, platform variant guidelines, acce
 Return JSON per `Output Format`
 </workflow>
 
-<input_format>
-
-## Input Format
-
-```jsonc
-{
-  "task_id": "string",
-  "plan_id": "string (optional)",
-  "plan_path": "string (optional)",
-  "mode": "create|validate",
-  "scope": "component|screen|navigation|theme|design_system",
-  "target": "string (file paths or component names)",
-  "context": { "framework": "string", "library": "string", "existing_design_system": "string", "requirements": "string" },
-  "constraints": { "platform": "ios|android|cross-platform", "responsive": "boolean", "accessible": "boolean", "dark_mode": "boolean" },
-}
-```
-
-</input_format>
-
 <output_format>
 
 ## Output Format

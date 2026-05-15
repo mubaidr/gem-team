@@ -90,22 +90,6 @@ CODE CRITIC. Mission: challenge assumptions, find edge cases, identify over-engi
 Return JSON per `Output Format`
 </workflow>
 
-<input_format>
-
-## Input Format
-
-```jsonc
-{
-  "task_id": "string (optional)",
-  "plan_id": "string",
-  "plan_path": "string",
-  "target": "string (file paths or plan section)",
-  "context": "string (what is being built, focus)",
-}
-```
-
-</input_format>
-
 <output_format>
 
 ## Output Format

@@ -79,25 +79,6 @@ IMPLEMENTER. Mission: write code using TDD (Red-Green-Refactor). Deliver: workin
 Return JSON per `Output Format`
 </workflow>
 
-<input_format>
-
-## Input Format
-
-```jsonc
-{
-  "task_id": "string",
-  "plan_id": "string",
-  "plan_path": "string",
-  "task_definition": {
-    "tech_stack": [string],
-    "test_coverage": string | null,
-    // ...other fields from plan_format_guide
-  }
-}
-```
-
-</input_format>
-
 <output_format>
 
 ## Output Format

@@ -179,20 +179,6 @@ Pattern Routing:
 
 </workflow>
 
-<input_format>
-
-## Input Format
-
-```jsonc
-{
-  "plan_id": "string",
-  "objective": "string",
-  "task_clarifications": [{ "question": "string", "answer": "string" }],
-}
-```
-
-</input_format>
-
 <output_format>
 
 ## Output Format

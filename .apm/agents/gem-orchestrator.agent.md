@@ -177,10 +177,254 @@ CRITICAL: Execute ALL waves/ tasks WITHOUT pausing between them.
 #### 4.1 Present Summary
 
 - Present summary to user with:
-  - Status Summary Format
+  - Status Summary as per <status_summary_format>
   - Next recommended steps (if any)
 
 </workflow>
+
+<agent_input_reference>
+
+## Agent Input Reference
+
+When delegating to subagents, pass these fields (extracted from plan.yaml / plan context / task data):
+
+### gem-researcher
+
+```jsonc
+{
+  "plan_id": "string",
+  "objective": "string",
+  "focus_area": "string",
+  "mode": "clarify|research",
+  "task_clarifications": [{ "question": "string", "answer": "string" }],
+}
+```
+
+### gem-planner
+
+```jsonc
+{
+  "plan_id": "string",
+  "objective": "string",
+  "task_clarifications": [{ "question": "string", "answer": "string" }],
+}
+```
+
+### gem-implementer
+
+```jsonc
+{
+  "task_id": "string",
+  "plan_id": "string",
+  "plan_path": "string",
+  "task_definition": { "tech_stack": [string], "test_coverage": "string | null" },
+}
+```
+
+### gem-implementer-mobile
+
+```jsonc
+{
+  "task_id": "string",
+  "plan_id": "string",
+  "plan_path": "string",
+  "task_definition": "object",
+}
+```
+
+### gem-reviewer
+
+```jsonc
+{
+  "review_scope": "plan|task|wave|final",
+  "task_id": "string (for task scope)",
+  "plan_id": "string",
+  "plan_path": "string",
+  "wave_tasks": ["string (for wave scope)"],
+  "changed_files": ["string (for final scope)"],
+  "task_definition": "object (for task scope)",
+  "review_depth": "full|standard|lightweight",
+  "review_security_sensitive": "boolean",
+  "review_criteria": "object",
+  "task_clarifications": [{ "question": "string", "answer": "string" }],
+}
+```
+
+### gem-debugger
+
+```jsonc
+{
+  "task_id": "string",
+  "plan_id": "string",
+  "plan_path": "string",
+  "task_definition": "object",
+  "error_context": {
+    "error_message": "string",
+    "stack_trace": "string (optional)",
+    "failing_test": "string (optional)",
+    "reproduction_steps": ["string (optional)"],
+    "environment": "string (optional)",
+    "flow_id": "string (optional)",
+    "step_index": "number (optional)",
+    "evidence": ["string (optional)"],
+    "browser_console": ["string (optional)"],
+    "network_failures": ["string (optional)"],
+  },
+}
+```
+
+### gem-critic
+
+```jsonc
+{
+  "task_id": "string (optional)",
+  "plan_id": "string",
+  "plan_path": "string",
+  "target": "string (file paths or plan section)",
+  "context": "string (what is being built, focus)",
+}
+```
+
+### gem-code-simplifier
+
+```jsonc
+{
+  "task_id": "string",
+  "plan_id": "string (optional)",
+  "plan_path": "string (optional)",
+  "scope": "single_file|multiple_files|project_wide",
+  "targets": ["string (file paths or patterns)"],
+  "focus": "dead_code|complexity|duplication|naming|all",
+  "constraints": { "preserve_api": "boolean", "run_tests": "boolean", "max_changes": "number" },
+}
+```
+
+### gem-browser-tester
+
+```jsonc
+{
+  "task_id": "string",
+  "plan_id": "string",
+  "plan_path": "string",
+  "task_definition": {
+    "validation_matrix": [...],
+    "flows": [...],
+    "fixtures": {...},
+    "visual_regression": {...},
+    "contracts": [...]
+  }
+}
+```
+
+### gem-mobile-tester
+
+```jsonc
+{
+  "task_id": "string",
+  "plan_id": "string",
+  "plan_path": "string",
+  "task_definition": {
+    "platforms": ["ios", "android"] | ["ios"] | ["android"],
+    "test_framework": "detox | maestro | appium",
+    "test_suite": { "flows": [...], "scenarios": [...], "gestures": [...], "app_lifecycle": [...], "push_notifications": [...] },
+    "device_farm": { "provider": "browserstack | saucelabs", "credentials": {...} },
+    "performance_baseline": {...},
+    "fixtures": {...},
+    "cleanup": "boolean"
+  }
+}
+```
+
+### gem-devops
+
+```jsonc
+{
+  "task_id": "string",
+  "plan_id": "string",
+  "plan_path": "string",
+  "task_definition": {
+    "environment": "development|staging|production",
+    "requires_approval": "boolean",
+    "devops_security_sensitive": "boolean",
+  },
+}
+```
+
+### gem-documentation-writer
+
+```jsonc
+{
+  "task_id": "string",
+  "plan_id": "string",
+  "plan_path": "string",
+  "task_definition": "object",
+  "task_type": "documentation | update | prd | agents_md",
+  "audience": "developers | end_users | stakeholders",
+  "coverage_matrix": ["string"],
+  "action": "create_prd | update_prd | update_agents_md",
+  "task_clarifications": [{ "question": "string", "answer": "string" }],
+  "architectural_decisions": [{ "decision": "string", "rationale": "string" }],
+  "findings": [{ "type": "string", "content": "string" }],
+  "overview": "string",
+  "tasks_completed": ["string"],
+  "outcomes": "string",
+  "next_steps": ["string"],
+  "acceptance_criteria": ["string"],
+}
+```
+
+### gem-skill-creator
+
+```jsonc
+{
+  "task_id": "string",
+  "plan_id": "string",
+  "plan_path": "string",
+  "patterns": [
+    {
+      "name": "string",
+      "when_to_apply": "string",
+      "code_example": "string",
+      "anti_pattern": "string",
+      "context": "string",
+      "confidence": "number",
+    },
+  ],
+  "source_task_id": "string",
+}
+```
+
+### gem-designer
+
+```jsonc
+{
+  "task_id": "string",
+  "plan_id": "string (optional)",
+  "plan_path": "string (optional)",
+  "mode": "create|validate",
+  "scope": "component|page|layout|theme|design_system",
+  "target": "string (file paths or component names)",
+  "context": { "framework": "string", "library": "string", "existing_design_system": "string", "requirements": "string" },
+  "constraints": { "responsive": "boolean", "accessible": "boolean", "dark_mode": "boolean" },
+}
+```
+
+### gem-designer-mobile
+
+```jsonc
+{
+  "task_id": "string",
+  "plan_id": "string (optional)",
+  "plan_path": "string (optional)",
+  "mode": "create|validate",
+  "scope": "component|screen|navigation|theme|design_system",
+  "target": "string (file paths or component names)",
+  "context": { "framework": "string", "library": "string", "existing_design_system": "string", "requirements": "string" },
+  "constraints": { "platform": "ios|android|cross-platform", "responsive": "boolean", "accessible": "boolean", "dark_mode": "boolean" },
+}
+```
+
+</agent_input_reference>
 
 <status_summary_format>
 
@@ -207,7 +451,9 @@ Blocked tasks: task_id, why blocked, how long waiting
 
 - Use `vscode_askQuestions` or similar tool for user input
 - Read orchestration metadata: plan.yaml, PRD.yaml, AGENTS.md, agent outputs, Memory
-- Delegate ALL validation, research, analysis to subagents
+- Delegate:
+  - ALL validation, research, analysis to subagents
+  - use <agent_input_reference> for fields to pass when delegating
 - Batch independent delegations (up to 4 parallel)
 - Retry: 3x
 
@@ -241,7 +487,7 @@ Run I/O and other operations in parallel and minimize repeated reads.
 - Use OR regex for related patterns (e.g., `error|failure|exception|timeout`) to batch file searches.
 - Use multi-pattern glob discovery: `/*.{ts,tsx,js,jsx,md,yaml,yml}` etc.
 - For multiple files, discover first, then read in parallel.
-- For symbol/reference work, gather symbols first, then batch `vscode_listCodeUsages` before editing shared code to avoid missing dependencies.
+- For symbol/reference work, gather symbols first, then batch `vscode_listCodeUsages` or similar tools before editing shared code to avoid missing dependencies.
 
 #### Read Efficiently
 

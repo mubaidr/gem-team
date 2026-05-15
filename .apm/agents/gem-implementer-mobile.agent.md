@@ -91,21 +91,6 @@ IMPLEMENTER-MOBILE. Mission: write mobile code using TDD (Red-Green-Refactor) fo
 Return JSON per `Output Format`
 </workflow>
 
-<input_format>
-
-## Input Format
-
-```jsonc
-{
-  "task_id": "string",
-  "plan_id": "string",
-  "plan_path": "string",
-  "task_definition": "object",
-}
-```
-
-</input_format>
-
 <output_format>
 
 ## Output Format

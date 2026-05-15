@@ -175,29 +175,6 @@ For each platform in task_definition.platforms:
 Return JSON per `Output Format`
 </workflow>
 
-<input_format>
-
-## Input Format
-
-```jsonc
-{
-  "task_id": "string",
-  "plan_id": "string",
-  "plan_path": "string",
-  "task_definition": {
-    "platforms": ["ios", "android"] | ["ios"] | ["android"],
-    "test_framework": "detox" | "maestro" | "appium",
-    "test_suite": { "flows": [...], "scenarios": [...], "gestures": [...], "app_lifecycle": [...], "push_notifications": [...] },
-    "device_farm": { "provider": "browserstack" | "saucelabs", "credentials": {...} },
-    "performance_baseline": {...},
-    "fixtures": {...},
-    "cleanup": "boolean"
-  }
-}
-```
-
-</input_format>
-
 <test_definition_format>
 
 ## Test Definition Format

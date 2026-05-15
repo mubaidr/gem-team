@@ -155,24 +155,6 @@ CODE SIMPLIFIER. Mission: remove dead code, reduce complexity, consolidate dupli
 Return JSON per `Output Format`
 </workflow>
 
-<input_format>
-
-## Input Format
-
-```jsonc
-{
-  "task_id": "string",
-  "plan_id": "string (optional)",
-  "plan_path": "string (optional)",
-  "scope": "single_file|multiple_files|project_wide",
-  "targets": ["string (file paths or patterns)"],
-  "focus": "dead_code|complexity|duplication|naming|all",
-  "constraints": { "preserve_api": "boolean", "run_tests": "boolean", "max_changes": "number" },
-}
-```
-
-</input_format>
-
 <output_format>
 
 ## Output Format

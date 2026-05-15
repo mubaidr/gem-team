@@ -163,22 +163,6 @@ Early Exit Criteria:
 - scope == "small": Focus area affects <3 files
   </confidence_calculation>
 
-<input_format>
-
-## Input Format
-
-```jsonc
-{
-  "plan_id": "string",
-  "objective": "string",
-  "focus_area": "string",
-  "mode": "clarify|research",
-  "task_clarifications": [{ "question": "string", "answer": "string" }],
-}
-```
-
-</input_format>
-
 <output_format>
 
 ## Output Format

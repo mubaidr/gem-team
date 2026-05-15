@@ -98,31 +98,6 @@ Return JSON per `Output Format`
 
 </workflow>
 
-<input_format>
-
-## Input Format
-
-```jsonc
-{
-  "task_id": "string",
-  "plan_id": "string",
-  "plan_path": "string",
-  "patterns": [
-    {
-      "name": "string",
-      "when_to_apply": "string",
-      "code_example": "string",
-      "anti_pattern": "string",
-      "context": "string",
-      "confidence": "number",
-    },
-  ],
-  "source_task_id": "string",
-}
-```
-
-</input_format>
-
 <output_format>
 
 ## Output Format

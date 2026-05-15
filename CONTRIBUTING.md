@@ -31,7 +31,6 @@ Each `.agent.md` file follows this structure:
   ## N. Self-Critique                  # Confidence check (≥0.85)
   ## N+1. Handle Failure               # Retry/escalate logic
   ## N+2. Output                       # JSON deliverable format
-# Input Format                         # Expected JSON schema
 # Output Format                        # Return JSON schema
 # Rules
   ## Execution                         # Tool usage, batching, error handling

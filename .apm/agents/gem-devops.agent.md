@@ -167,25 +167,6 @@ Production Readiness:
 Return JSON per `Output Format`
 </workflow>
 
-<input_format>
-
-## Input Format
-
-```jsonc
-{
-  "task_id": "string",
-  "plan_id": "string",
-  "plan_path": "string",
-  "task_definition": {
-    "environment": "development|staging|production",
-    "requires_approval": "boolean",
-    "devops_security_sensitive": "boolean",
-  },
-}
-```
-
-</input_format>
-
 <output_format>
 
 ## Output Format

@@ -92,35 +92,6 @@ Return JSON per `Output Format`
 
 </workflow>
 
-<input_format>
-
-## Input Format
-
-```jsonc
-{
-  "task_id": "string",
-  "plan_id": "string",
-  "plan_path": "string",
-  "task_definition": "object",
-  "task_type": "documentation | update | prd | agents_md",
-  "audience": "developers|end_users|stakeholders",
-  "coverage_matrix": ["string"],
-  // PRD/AGENTS.md specific:
-  "action": "create_prd|update_prd|update_agents_md",
-  "task_clarifications": [{ "question": "string", "answer": "string" }],
-  "architectural_decisions": [{ "decision": "string", "rationale": "string" }],
-  "findings": [{ "type": "string", "content": "string" }],
-  // Walkthrough specific:
-  "overview": "string",
-  "tasks_completed": ["string"],
-  "outcomes": "string",
-  "next_steps": ["string"],
-  "acceptance_criteria": ["string"],
-}
-```
-
-</input_format>
-
 <output_format>
 
 ## Output Format

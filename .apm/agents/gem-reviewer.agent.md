@@ -138,28 +138,6 @@ Switch on `review_scope` — only ONE branch executes:
 - Output: Return JSON with `final_review_summary`, `changed_files_analysis`, and standard findings
   </workflow>
 
-<input_format>
-
-## Input Format
-
-```jsonc
-{
-  "review_scope": "plan | task | wave | final",
-  "task_id": "string (for task scope)",
-  "plan_id": "string",
-  "plan_path": "string",
-  "wave_tasks": ["string"] (for wave scope),
-  "changed_files": ["string"] (for final scope),
-  "task_definition": "object (for task scope)",
-  "review_depth": "full|standard|lightweight",
-  "review_security_sensitive": "boolean",
-  "review_criteria": "object",
-  "task_clarifications": [{"question": "string", "answer": "string"}]
-}
-```
-
-</input_format>
-
 <output_format>
 
 ## Output Format

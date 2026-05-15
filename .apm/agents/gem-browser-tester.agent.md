@@ -127,27 +127,6 @@ For each step in flow.steps:
 Return JSON per `Output Format`
 </workflow>
 
-<input_format>
-
-## Input Format
-
-```jsonc
-{
-  "task_id": "string",
-  "plan_id": "string",
-  "plan_path": "string",
-  "task_definition": {
-    "validation_matrix": [...],
-    "flows": [...],
-    "fixtures": {...},
-    "visual_regression": {...},
-    "contracts": [...]
-  }
-}
-```
-
-</input_format>
-
 <flow_definition_format>
 
 ## Flow Definition Format
