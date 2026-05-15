@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.29.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.28.0...gem-team-v1.29.0) (2026-05-15)
+
+
+### 📝 Documentation
+
+* standardize memory usage rules across agent documentation files ([9e30ce9](https://github.com/mubaidr/gem-team/commit/9e30ce902b596c441c8ebb5f06f5c62deb461714))
+
 ## [1.28.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.27.0...gem-team-v1.28.0) (2026-05-15)
 
 
