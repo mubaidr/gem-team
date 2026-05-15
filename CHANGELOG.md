@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.28.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.27.0...gem-team-v1.28.0) (2026-05-15)
+
+
+### 📝 Documentation
+
+* clarify APM install usage with -g flag ([85127ce](https://github.com/mubaidr/gem-team/commit/85127cec1a0f6ed0920d3ff39a3de13541c75ad6))
+* **readme:** simplify installation workflow and expand compatibility details ([36166be](https://github.com/mubaidr/gem-team/commit/36166be0e7542f1292ff21debcd03e95f2559355))
+
 ## [1.27.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.26.0...gem-team-v1.27.0) (2026-05-15)
 
 
