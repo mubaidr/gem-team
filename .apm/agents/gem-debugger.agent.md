@@ -278,7 +278,7 @@ Return JSON per `Output Format`
   "task_id": "[task_id]",
   "plan_id": "[plan_id]",
   "summary": "[≤3 sentences]",
-  "failure_type": "transient|fixable|needs_replan|escalate",
+  "failure_type": "transient|fixable|needs_replan|escalate|flaky|regression|new_failure|platform_specific",
   "extra": {
     "root_cause": { "description": "string", "location": "string", "error_type": "string" },
     "reproduction": { "confirmed": "boolean", "steps": ["string"] },

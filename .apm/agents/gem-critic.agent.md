@@ -140,10 +140,10 @@ Return JSON per `Output Format`
 ```jsonc
 {
   "status": "completed|failed|in_progress|needs_revision",
-  "task_id": "[task_id or null]",
+  "task_id": "string",
   "plan_id": "[plan_id]",
   "summary": "[≤3 sentences]",
-  "failure_type": "transient|fixable|needs_replan|escalate",
+  "failure_type": "transient|fixable|needs_replan|escalate|flaky|regression|new_failure|platform_specific",
   "extra": {
     "verdict": "pass|needs_changes|blocking",
     "blocking_count": "number",

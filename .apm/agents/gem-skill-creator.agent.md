@@ -137,7 +137,7 @@ Return JSON per `Output Format`
   "task_id": "[task_id]",
   "plan_id": "[plan_id]",
   "summary": "[≤3 sentences]",
-  "failure_type": "transient|fixable|needs_replan|escalate",
+  "failure_type": "transient|fixable|needs_replan|escalate|flaky|regression|new_failure|platform_specific",
   "extra": {
     "skills_created": [{ "name": "string", "path": "string", "artifacts": ["scripts", "references", "assets"] }],
     "skills_skipped": [{ "name": "string", "reason": "duplicate|low_confidence" }],

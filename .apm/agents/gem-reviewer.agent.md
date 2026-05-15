@@ -228,7 +228,7 @@ Return JSON with `final_review_summary`, `changed_files_analysis`, and standard 
   "task_id": "[task_id]",
   "plan_id": "[plan_id]",
   "summary": "[≤3 sentences]",
-  "failure_type": "transient|fixable|needs_replan|escalate",
+  "failure_type": "transient|fixable|needs_replan|escalate|flaky|regression|new_failure|platform_specific",
   "extra": {
     "review_scope": "plan|task|wave|final",
     "findings": [{"category": "string", "severity": "string", "description": "string"}],

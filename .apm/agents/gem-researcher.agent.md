@@ -180,7 +180,7 @@ def calculate_confidence_from_results():
   "task_id": null,
   "plan_id": "[plan_id]",
   "summary": "[≤3 sentences]",
-  "failure_type": "transient|fixable|needs_replan|escalate",
+  "failure_type": "transient|fixable|needs_replan|escalate|flaky|regression|new_failure|platform_specific",
   "extra": {
     "user_intent": "continue_plan|modify_plan|new_task",
     "gray_areas": ["string"], // max 3

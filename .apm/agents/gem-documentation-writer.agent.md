@@ -135,7 +135,7 @@ Return JSON per `Output Format`
   "task_id": "[task_id]",
   "plan_id": "[plan_id]",
   "summary": "[≤3 sentences]",
-  "failure_type": "transient|fixable|needs_replan|escalate",
+  "failure_type": "transient|fixable|needs_replan|escalate|flaky|regression|new_failure|platform_specific",
   "extra": {
     "docs_created": [{ "path": "string", "title": "string", "type": "string" }],
     "docs_updated": [{ "path": "string", "title": "string", "changes": "string" }],

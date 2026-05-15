@@ -159,7 +159,7 @@ Dark Mode Transformation:
 - Check existing design system for reusable patterns
 - Identify constraints: framework, library, existing tokens
 - Review PRD for UX goals
-- Ask clarifying questions using `ask_user_question` when requirements are ambiguous, incomplete, or need refinement (target audience, brand personality, specific functionality, constraints)
+- Ask clarifying questions using ask questions tool when requirements are ambiguous, incomplete, or need refinement (target audience, brand personality, specific functionality, constraints)
 
 #### 2.2 Design Proposal
 
@@ -263,7 +263,7 @@ Return JSON per `Output Format`
   "task_id": "[task_id]",
   "plan_id": "[plan_id or null]",
   "summary": "[≤3 sentences]",
-  "failure_type": "transient|fixable|needs_replan|escalate",
+  "failure_type": "transient|fixable|needs_replan|escalate|flaky|regression|new_failure|platform_specific",
   "confidence": "number (0-1)",
   "extra": {
     "mode": "create|validate",

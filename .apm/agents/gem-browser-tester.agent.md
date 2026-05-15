@@ -191,7 +191,7 @@ Use `${fixtures.field.path}` for variable interpolation.
   "task_id": "[task_id]",
   "plan_id": "[plan_id]",
   "summary": "[≤3 sentences]",
-  "failure_type": "transient|flaky|regression|new_failure|fixable|needs_replan|escalate",
+  "failure_type": "transient|fixable|needs_replan|escalate|flaky|regression|new_failure|platform_specific",
   "extra": {
     "console_errors": "number",
     "console_warnings": "number",

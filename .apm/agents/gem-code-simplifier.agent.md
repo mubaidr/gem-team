@@ -187,7 +187,7 @@ Return JSON per `Output Format`
   "task_id": "[task_id]",
   "plan_id": "[plan_id or null]",
   "summary": "[≤3 sentences]",
-  "failure_type": "transient|fixable|needs_replan|escalate",
+  "failure_type": "transient|fixable|needs_replan|escalate|flaky|regression|new_failure|platform_specific",
   "extra": {
     "changes_made": [{ "type": "string", "file": "string", "description": "string", "lines_removed": "number", "lines_changed": "number" }],
     "tests_passed": "boolean",
