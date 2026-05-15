@@ -5,7 +5,7 @@ Self-Learning Multi-agent orchestration harness for spec-driven development and 
 ## Quick Start
 
 ```bash
-apm install mubaidr/gem-team
+apm install -g mubaidr/gem-team
 ```
 
 APM auto-detects your tools and deploys gem-team agents everywhere — VS Code, Claude Code, Cursor, OpenCode, Codex CLI, Gemini CLI, Windsurf, and GitHub Copilot CLI. See the [compatible tools table](#compatible-tools) for details.
