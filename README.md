@@ -93,21 +93,14 @@ Raw reasoning isn't enough in single-pass chat. Gem-Team wraps your preferred LL
 
 Gem Team includes specialized design agents with anti-"AI slop" guidelines for distinctive, modern and unique aesthetics with accessibility compliance.
 
-### Triple Learning System
+### Knowledge Layers
 
-| Type                 | Storage                    | 1-liner                                                                     |
-| :------------------- | :------------------------- | :-------------------------------------------------------------------------- |
-| **Memory**           | `MEMORY://user/`           | Facts & user preferences (auto-save)                                        |
-| - **Research Cache** | `MEMORY://repo/research/`  | Architecture patterns cached per topic. Researcher self-validates staleness |
-| **Diagnosis**        | `MEMORY://repo/diagnoses/` | Bug root-cause analyses. Reused on pattern match >0.8                       |
-| **Review**           | `MEMORY://repo/reviews/`   | Review findings per module. Cross-plan consistency                          |
-| **Decisions**        | `MEMORY://repo/decisions/` | Architecture decisions, rationale, alternatives                             |
-| **Patterns**         | `MEMORY://repo/patterns/`  | Codebase conventions, anti-patterns, outcomes                               |
-| **Infra**            | `MEMORY://repo/infra/`     | Deployment config, rollback history                                         |
-| **Flaky**            | `MEMORY://repo/flaky/`     | Known flaky tests per suite                                                 |
-| **Memory**           | `MEMORY://user/`           | Facts & user preferences (auto-save)                                        |
-| **Skills**           | `docs/skills/`             | Procedures with code examples                                               |
-| **Conventions**      | `AGENTS.md`                | Static rules (requires approval)                                            |
+| Type          | Storage         | 1-liner                                                                                                  |
+| :------------ | :-------------- | :------------------------------------------------------------------------------------------------------- |
+| **Memory**    | memory tool     | Facts, preferences, research, diagnoses, decisions, patterns — self-validated and reused across sessions |
+| **Skills**    | `docs/skills/`  | Reusable procedures with code examples, extracted from high-confidence patterns                          |
+| **PRD**       | `docs/PRD.yaml` | Product requirements spec — drives agent planning, implementation, and verification                      |
+| **AGENTS.md** | `AGENTS.md`     | Static conventions, rules, and agent definitions (requires approval)                                     |
 
 ---
 
