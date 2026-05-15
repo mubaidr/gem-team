@@ -171,6 +171,12 @@ Pattern Routing:
 - Save: docs/plan/{plan_id}/plan.yaml
 - Return JSON per `Output Format`
 
+#### 6.1 Save Template to Cache
+
+- IF confidence ≥ 0.85 AND complexity != simple AND objective_category is set:
+  - Write DAG structure (tasks, waves, contracts, agent assignments) to repo memory `plan/templates/{objective_category}`
+  - Increment version and usage count
+
 </workflow>
 
 <input_format>

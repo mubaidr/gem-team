@@ -113,7 +113,8 @@ All agent definitions include these rule sets:
 | Anti-Rationalization table    | gem-implementer, gem-implementer-mobile, gem-browser-tester                      |
 | Skills/Guidelines (embedded)  | gem-debugger, gem-devops, gem-designer, gem-designer-mobile, gem-code-simplifier |
 | Confidence Calculation Helper | gem-researcher                                                                   |
-| Flow Definition Format        | gem-browser-tester, gem-mobile-tester                                            |
+| Flow Definition Format        | gem-browser-tester                                                               |
+| Test Definition Format        | gem-mobile-tester                                                                |
 | Research Format Guide         | gem-researcher                                                                   |
 | Plan Format Guide             | gem-planner                                                                      |
 | PRD Format Guide              | gem-documentation-writer                                                         |
