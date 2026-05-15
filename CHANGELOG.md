@@ -1,5 +1,30 @@
 # Changelog
 
+## [1.30.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.29.0...gem-team-v1.30.0) (2026-05-15)
+
+
+### 🚀 New Agents & Features
+
+* **agents:** add learnings metadata to output schema ([400b761](https://github.com/mubaidr/gem-team/commit/400b761f3699a4e4d0842e79b9b592a8e766d618))
+* **agents:** add template cache save step for high‑confidence plans- Persist the generated DAG (tasks, waves, contracts, agent assignments) to   `plan/templates/{objective_category}` when confidence ≥ 0.85 and complexity ([d03a59e](https://github.com/mubaidr/gem-team/commit/d03a59e4555f27697f345a9f5a4cc17d68533253))
+* **cache:** add same‑bug and template cache bypasses ([7460420](https://github.com/mubaidr/gem-team/commit/74604203d8eeb7744ec81fa8874c76f1b809e96d))
+* **status:** add needs_approval to status values ([9d55069](https://github.com/mubaidr/gem-team/commit/9d5506908edfe18436827cca3f2ab5ce1fe6dcad))
+
+
+### 🛠️ Bug Fixes
+
+* https://github.com/mubaidr/gem-team/issues/75 ([aab8bad](https://github.com/mubaidr/gem-team/commit/aab8bad532b03cdf3bfe640186df58738cae483b))
+
+
+### 📝 Documentation
+
+* add AGENTS.md with detailed Gem Team agent instructions and project overview ([8475310](https://github.com/mubaidr/gem-team/commit/84753104dcd3f9067ba766ed9d4a39dfda6a1020))
+* add integration check for security-sensitive task review and wave validation ([830b795](https://github.com/mubaidr/gem-team/commit/830b79542aae15074aeb470b893cf68e118040d9))
+* fix formatting bullet capitalization and enforce max items rule in agent documentation files ([f8ace95](https://github.com/mubaidr/gem-team/commit/f8ace959e915c3dd121ec03e8ab7cf60f174b36b))
+* improve OR regex examples in batch operations documentation ([f489a52](https://github.com/mubaidr/gem-team/commit/f489a52838739f829c3e8bca02b0dbb549ac7a42))
+* update TDD red step description to indicate test should not be run yet ([9b319df](https://github.com/mubaidr/gem-team/commit/9b319dff4a53794af3ab894667c5538a9f8fe122))
+* update Team Lead Personality description to explicitly mention status updates ([35af539](https://github.com/mubaidr/gem-team/commit/35af53916dc28f641454085b8a8a300d8e21bac0))
+
 ## [1.29.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.28.0...gem-team-v1.29.0) (2026-05-15)
 
 
