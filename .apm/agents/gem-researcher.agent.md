@@ -368,7 +368,7 @@ gaps: # REQUIRED
 - ALSO save learnings to memory ONLY if ALL conditions met:
   - confidence ≥ 0.85
   - not a duplicate (view first, create if absent)
-  - format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`.
+  - Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`.
   - max 3 items per output
 
 ### I/O Optimization

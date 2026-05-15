@@ -215,7 +215,6 @@ Blocked tasks: task_id, why blocked, how long waiting
 
 - NO preamble, NO meta commentary, NO explanations unless failed
 - Output status summary using Status Summary Format (text template)
-- Format: dense, abbreviated, bulleted. No prose.
 
 ### Constitutional
 
@@ -229,7 +228,7 @@ Blocked tasks: task_id, why blocked, how long waiting
 - **Read** — At init: check memory for task-relevant context before routing agents.
 - **Write** — After synthesizing agent outputs: persist high-confidence learnings (≥0.85) to memory via `memory` tool IF:
   - not a duplicate of existing entry (view first, create if absent)
-  - format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`.
+  - Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`.
   - max 3 items per output
 
 ### I/O Optimization

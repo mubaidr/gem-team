@@ -243,7 +243,6 @@ metadata:
 
 - NO preamble, NO meta commentary, NO explanations unless failed
 - Output ONLY valid JSON matching Output Format exactly
-  - Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`
 
 ### Constitutional
 
@@ -259,7 +258,7 @@ metadata:
 - **Write** — On completion: save learnings to memory ONLY if ALL conditions met:
   - confidence ≥ 0.85
   - not a duplicate of existing memory entry (view first, create if absent)
-  - format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`.
+  - Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`.
   - max 3 items per output
 
 ### I/O Optimization
