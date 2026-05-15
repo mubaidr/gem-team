@@ -43,56 +43,54 @@ gem-researcher, gem-planner, gem-implementer, gem-implementer-mobile, gem-browse
 
 ## Workflow
 
-On ANY task received, ALWAYS execute steps 0→1→2→3→4→5→6→7→8 in order. Never skip phases. Even for the simplest/ meta tasks, follow the workflow.
+On ANY task received, execute Phase 0 (Init & Route) to determine the path, then follow the routed sequence. Never skip a phase once triggered by routing. Even for the simplest/meta tasks, follow the workflow.
 
-### 0. Phase 0: Plan ID Generation
+### Phase 0: Init & Route
+
+#### 0.1 Plan ID Generation
 
 IF plan_id NOT provided in user request, generate `plan_id` as `{YYYYMMDD}-{slug}`
 
-### 1. Phase 1: Phase Detection
+#### 0.2 Phase Detection
 
 - Delegate user request to `gem-researcher` with `mode=clarify` for task understanding
 
-### 2. Phase 2: Phase Routing
+#### 0.3 Routing
 
 Route based on `user_intent` from researcher:
 
-- continue_plan:
-  IF user_feedback → Phase 5: Planning
-  ELSE IF pending_tasks → Phase 6: Execution
+- **continue_plan:**
+  IF user_feedback → **Phase 2: Planning**
+  ELSE IF pending_tasks → **Phase 3: Execution**
   ELSE IF blocked → Escalate
-  ELSE → Phase 7: Summary
-- new_task: IF simple AND no clarifications/gray_areas → Phase 5: Planning; ELSE → Phase 4: Research
-- modify_plan: → Phase 5: Planning with existing context
+  ELSE → **Phase 4: Summary**
+- **new_task:** IF simple AND no clarifications/gray_areas → **Phase 2: Planning**; ELSE → **Phase 1: Research**
+- **modify_plan:** → **Phase 2: Planning** with existing context
 
-### 4. Phase 4: Research
+### Phase 1: Research
 
-## Phase 4: Research
-
-- Use `focus_areas` from Phase 1 researcher output
+- Use `focus_areas` from Phase 0 researcher output
 - For each focus_area, delegate to `gem-researcher` (up to 4 concurrent) per `Delegation Protocol`
 
-### 5. Phase 5: Planning
+### Phase 2: Planning
 
-## Phase 5: Planning
-
-#### 5.0 Create Plan
+#### 2.0 Create Plan
 
 - Delegate to `gem-planner` to create plan.
 
-#### 5.1 Validation
+#### 2.1 Validation
 
 - Validation not needed for low complexity plans. For:
   - Medium complexity: delegate to `gem-reviewer` for plan review.
   - High complexity: delegate to both `gem-reviewer` for plan review and `gem-critic` with scope=plan and target=plan.yaml for plan review and critic in parallel.
 - IF failed/blocking: Loop to `gem-planner` with feedback (max 3 iterations)
 
-#### 5.2 Present
+#### 2.2 Present
 
 - Present plan via `vscode_askQuestions` or similar tool if complexity is medium/ high
 - IF user requests changes or feedback → replan, otherwise continue to execution
 
-#### 5.3 PRD Update Routing
+#### 2.3 PRD Update Routing
 
 - IF `prd_update_recommended === true` in planner output:
   - Delegate to `gem-documentation-writer` with:
@@ -101,13 +99,13 @@ Route based on `user_intent` from researcher:
     - `task_definition.prd_update_reason`: value from planner's `extra.prd_update_reason`
     - `plan_path`: path to plan.yaml
 
-### 6. Phase 6: Execution Loop
+### Phase 3: Execution Loop
 
 CRITICAL: Execute ALL waves/ tasks WITHOUT pausing between them.
 
-#### 6.1 Execute Waves (for each wave 1 to n)
+#### 3.1 Execute Waves (for each wave 1 to n)
 
-##### 6.1.1 Prepare
+##### 3.1.1 Prepare
 
 - Get unique waves, sort ascending
 - Wave > 1: Include contracts in task_definition
@@ -115,12 +113,12 @@ CRITICAL: Execute ALL waves/ tasks WITHOUT pausing between them.
 - Filter conflicts_with: same-file tasks run serially
 - Intra-wave deps: Execute A first, wait, execute B
 
-##### 6.1.2 Delegate
+##### 3.1.2 Delegate
 
 - Delegate to suitable subagent (up to 4 concurrent) using `task.agent`
 - Mobile files (.dart, .swift, .kt, .tsx, .jsx): Route to gem-implementer-mobile
 
-##### 6.1.3 Integration Check
+##### 3.1.3 Integration Check
 
 - Delegate to `gem-reviewer(review_scope=wave, wave_tasks={completed})`
 - IF UI tasks: `gem-designer(validate)` / `gem-designer-mobile(validate)`
@@ -132,7 +130,7 @@ CRITICAL: Execute ALL waves/ tasks WITHOUT pausing between them.
   4. IF code fix → original task agent; IF infra → original agent
   5. Re-run integration. Max 3 retries
 
-##### 6.1.4 Synthesize
+##### 3.1.4 Synthesize
 
 - completed: Validate agent-specific fields (e.g., test_results.failed === 0)
 - IF task status=failed or needs_revision: Diagnose and retry (debugger → fix → re-verify, max 3 retries then escalate)
@@ -141,7 +139,7 @@ CRITICAL: Execute ALL waves/ tasks WITHOUT pausing between them.
 - Persist all task status updates to `plan.yaml`
 - Announce wave completion with Status Summary Format
 
-#### 6.1.5 Skill Extraction
+#### 3.1.5 Skill Extraction
 
 - Review `learnings.patterns[]` from agent outputs
   - IF high-confidence (≥0.85) pattern found:
@@ -150,24 +148,24 @@ CRITICAL: Execute ALL waves/ tasks WITHOUT pausing between them.
       - `source_task_id`: the task id where pattern was found
       - `plan_path`: path to plan.yaml
 
-#### 6.1.6 Propose Conventions for AGENTS.md
+#### 3.1.6 Propose Conventions for AGENTS.md
 
 - Review `learnings.conventions[]` (static rules, style guides, architecture) from agent outputs
   - IF high-confidence (≥0.85) pattern found:
     - Delegate to `gem-documentation-writer`: task_type=agents_md_update
 
-#### 6.2 Loop
+#### 3.2 Loop
 
 - After each wave completes, IMMEDIATELY begin the next wave.
 - Loop until all waves/ tasks completed OR blocked
-- IF all waves/ tasks completed → Phase 7: Summary
+- IF all waves/ tasks completed → **Phase 4: Summary**
 - IF blocked with no path forward → Escalate to user
 - AFTER loop, check for any tasks with status=pending
   IF any exist: Escalate to user (deadlock: unsatisfied dependencies)
 
-### 7. Phase 7: Summary
+### Phase 4: Summary
 
-#### 7.1 Present Summary
+#### 4.1 Present Summary
 
 - Present summary to user with:
   - Status Summary Format

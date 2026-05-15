@@ -70,7 +70,7 @@ IMPLEMENTER-MOBILE. Mission: write mobile code using TDD (Red-Green-Refactor) fo
 - get_errors (syntax only)
 - Verify against acceptance_criteria
 - Platform sanity: Metro clean, no redbox
-- SKIP: lint, unit tests, build verification (Reviewer owns per 6.1.3)
+- SKIP: lint, unit tests, build verification (Reviewer owns per Phase 3.1.3)
 
 ### 4. Error Recovery
 

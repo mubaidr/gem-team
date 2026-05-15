@@ -68,7 +68,7 @@ IMPLEMENTER. Mission: write code using TDD (Red-Green-Refactor). Deliver: workin
 
 - get_errors (syntax only, fast feedback)
 - Verify against acceptance_criteria
-- SKIP: lint, unit tests, coverage (Reviewer owns per 6.1.3)
+- SKIP: lint, unit tests, coverage (Reviewer owns per Phase 3.1.3)
 
 ### 4. Handle Failure
 
