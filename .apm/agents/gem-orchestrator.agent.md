@@ -117,6 +117,14 @@ CRITICAL: Execute ALL waves/ tasks WITHOUT pausing between them.
 
 ##### 3.1.3 Integration Check
 
+###### 3.1.3.1 Task Review (optional | security-sensitive)
+
+- IF any completed task has `review_security_sensitive: true` in plan:
+  - Delegate to `gem-reviewer(review_scope=task, task_id={task.id}, task_definition={task.definition}, review_depth=full|standard|lightweight)`
+  - IF reviewer returns `failed` or `needs_revision`: route to debugger → fix → re-verify (max 3x)
+
+###### 3.1.3.2 Wave Review
+
 - Delegate to `gem-reviewer(review_scope=wave, wave_tasks={completed})`
 - IF UI tasks: `gem-designer(validate)` / `gem-designer-mobile(validate)`
 - Validate task success: Check `success_criteria` predicates when defined (e.g., `test_results.failed === 0`, `coverage >= 80%`)
