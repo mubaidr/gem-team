@@ -64,6 +64,21 @@ Analyze codebase, extract facts, map patterns/dependencies, identify gaps.
 - Factor task_clarifications into scope
 - Read PRD for in_scope/out_of_scope
 
+#### 0.5 Memory Bypass (Fast Path)
+
+BEFORE entering research passes:
+CHECK repo memory key `research/{focus_area}`:
+IF ≥3 high-confidence facts exist for current focus_area
+AND confidence ≥ 0.85
+AND last updated < 30d
+THEN:
+→ Use memory as research base. Set `base_confidence = 0.7`.
+→ SKIP Phases 2.0-2.2 entirely.
+→ GOTO Phase 2.3 (Detailed Examination) with memory as starting point.
+→ Include `memory_sourced: true` in output metadata.
+ELSE:
+→ Full research passes as normal.
+
 #### 2.0 Pattern Discovery
 
 Search similar implementations, document in `patterns_found`
@@ -333,10 +348,26 @@ gaps: # REQUIRED
 
 ### Memory Usage
 
-- **Read** — At init: check memory for task-relevant conventions, patterns, gotchas.
-- **Write** — On completion: save learnings to memory ONLY if ALL conditions met:
+#### Read (Optimized Bypass)
+
+- **Fast-path:** Check repo memory for focus_area knowledge BEFORE Phase 2.0:
+  - IF ≥3 high-confidence facts exist for current focus_area AND updated < 30d:
+    → Use memory as research base. Set `base_confidence = 0.7`.
+    → SKIP Phases 2.0-2.2 entirely. GOTO Phase 2.3 (delta research only).
+    → Include `memory_sourced: true` in output.
+  - ELSE: Full research passes as normal.
+- **Fallback:** If no memory available for focus_area, read general memory at init for conventions/patterns/gotchas.
+
+#### Write (Structured Knowledge)
+
+- Save findings to TWO targets:
+  1. Task-specific: `docs/plan/{plan_id}/research_findings_{focus_area}.yaml`
+  2. Project knowledge: repo memory key `research/{focus_area}`:
+     - architecture facts, framework versions, directory layout, discovered patterns
+     - confidence ≥ 0.85, max 5 bullets, include `last_updated`
+- ALSO save learnings to memory ONLY if ALL conditions met:
   - confidence ≥ 0.85
-  - not a duplicate of existing memory entry (view first, create if absent)
+  - not a duplicate (view first, create if absent)
   - format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`.
   - max 3 items per output
 

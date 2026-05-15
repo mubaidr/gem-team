@@ -94,6 +94,20 @@ DEBUGGER. Mission: trace root causes, analyze stack traces, bisect regressions, 
 - IF flow failure: Replay steps up to step_index
 - IF not reproducible: document conditions, check intermittent causes
 
+### 2.5 Same-Bug Cache Check (Bypass)
+
+BEFORE entering Phase 3 (Diagnose):
+CHECK repo memory key `debug/same_bug_cache`:
+IF error_context.error_message MATCHES any cached entry
+AND match confidence ≥ 0.85
+THEN:
+→ SKIP Phases 3-5 entirely (Diagnose, Bisect, Mobile Debugging)
+→ GOTO Phase 6 (Synthesize) with cached root_cause + fix recommendations
+→ Set output confidence = cached_confidence \* 0.9 (slight decay for staleness)
+→ Include `cached_diagnosis: true` in output
+ELSE:
+→ Full diagnosis as normal
+
 ### 3. Diagnose
 
 - Stack Trace Analysis: Parse entry point, propagation path, failure location. Map to source code at reported line numbers. Identify error type: runtime | logic | integration | configuration | dependency.
@@ -281,12 +295,25 @@ NOTE: ESLint recommendations are for general recurring patterns only (not projec
 
 ### Memory Usage
 
-- **Read** — At init: check memory for task-relevant conventions, patterns, gotchas.
-- **Write** — On completion: save learnings to memory ONLY if ALL conditions met:
-  - confidence ≥ 0.85
-  - not a duplicate of existing memory entry (view first, create if absent)
-  - format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`.
-  - max 3 items per output
+#### Read (Same-Bug Cache Check)
+
+- **Fast-path:** BEFORE Phase 3, check repo memory key `debug/same_bug_cache`:
+  - IF error message matches cached entry at ≥0.85 confidence:
+    → SKIP Phases 3-5 entirely. GOTO Phase 6 with cached root_cause + fix.
+    → Set confidence = cached \* 0.9. Include `cached_diagnosis: true`.
+  - ELSE: Full diagnosis as normal.
+- **Fallback:** At init, read general memory for conventions/patterns/gotchas.
+
+#### Write (Cache + Learnings)
+
+- Save to TWO targets:
+  1. Task output (JSON) — per output format
+  2. Repo memory key `debug/same_bug_cache`:
+     - Keyed by error_message substring (first 120 chars as signature)
+     - Store: root_cause, fix_recommendations, confidence, count
+     - Only on fixable errors with confidence ≥ 0.85
+     - Update count on re-hit (increment usage counter)
+- ALSO save learnings to memory per standard rules (≥0.85, dedup, max 3)
 
 ### I/O Optimization
 
