@@ -126,7 +126,7 @@ Every agent returns a JSON response with the same top-level shape:
 
 ```jsonc
 {
-  "status": "completed|failed|in_progress|needs_revision",
+  "status": "completed|failed|in_progress|needs_revision|needs_approval",
   "task_id": "string",
   "plan_id": "string",
   "summary": "≤3 sentences",
@@ -173,7 +173,7 @@ grep "gem-" .apm/agents/gem-orchestrator.agent.md | grep -o "gem-[a-z-]*" | sort
 - **Output format**: JSON only, no preamble/commentary. Dense, abbreviated, bulleted.
 - **Memory format**: YAML frontmatter with `updatedAt`, dense bullets, max 3 items per write.
 - **Failure types**: Use exact enum values: `transient|fixable|needs_replan|escalate|flaky|regression|new_failure|platform_specific`
-- **Status values**: `completed|failed|in_progress|needs_revision`
+- **Status values**: `completed|failed|in_progress|needs_revision|needs_approval`
 - **Confidence**: Always include 0-1 confidence on learnings/outputs
 
 ## Testing Instructions
