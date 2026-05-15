@@ -48,11 +48,11 @@ Understand intent, resolve ambiguity, confirm scope.
 3. Detect gray areas in user request → IF found → Generate 2-4 options each
 4. Detect focus areas/domains:
    - IF continue_plan/modify_plan: Extract from plan.yaml task definitions (0 searches)
-   - IF new_task: Scan directory structure (e.g. glob `src/*/`, `packages/*/`) → Match names against request keywords
+   - IF new_task: Quick scan of directory structure (e.g. glob `src/*/`, `packages/*/`) → Match names against request keywords
 5. Present via `vscode_askQuestions` or similar tool, classify:
    - Architectural → `architectural_decisions`
    - Task-specific → `task_clarifications`
-6. Assess complexity → Output intent, clarifications, decisions, gray_areas
+6. Quickly assess complexity → Output intent, clarifications, decisions, gray_areas
 7. Return JSON per `Output Format`
 
 #### Research Mode

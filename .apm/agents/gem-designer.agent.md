@@ -262,12 +262,13 @@ Return JSON per `Output Format`
   "plan_id": "[plan_id or null]",
   "summary": "[≤3 sentences]",
   "failure_type": "transient|fixable|needs_replan|escalate|flaky|regression|new_failure|platform_specific",
-  "confidence": "number (0-1)",
   "extra": {
     "mode": "create|validate",
     "deliverables": { "specs": "string", "code_snippets": ["array"], "tokens": "object" },
     "validation_findings": { "passed": "boolean", "issues": [{ "severity": "critical|high|medium|low", "category": "string", "description": "string", "location": "string", "recommendation": "string" }] },
     "accessibility": { "contrast_check": "pass|fail", "keyboard_navigation": "pass|fail|partial", "screen_reader": "pass|fail|partial", "reduced_motion": "pass|fail|partial" },
+    "confidence": "number (0-1)",
+    "learnings": { "patterns": [], "gotchas": [] },
   },
 }
 ```

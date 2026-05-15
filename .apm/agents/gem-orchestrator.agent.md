@@ -202,8 +202,8 @@ Blocked tasks: task_id, why blocked, how long waiting
 ### Output
 
 - NO preamble, NO meta commentary, NO explanations unless failed
-- Output ONLY valid JSON matching Status Summary Format exactly
-- Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`
+- Output status summary using Status Summary Format (text template)
+- Format: dense, abbreviated, bulleted. No prose.
 
 ### Constitutional
 

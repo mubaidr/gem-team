@@ -201,6 +201,7 @@ Return JSON per `Output Format`
   "failure_type": "transient|fixable|needs_replan|escalate|flaky|regression|new_failure|platform_specific",
   "extra": {
     "confidence": "number (0-1)",
+    "learnings": { "patterns": [], "gotchas": [] },
   },
 }
 ```

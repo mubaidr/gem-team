@@ -192,6 +192,7 @@ Return JSON per `Output Format`
     "validation_output": "string",
     "preserved_behavior": "boolean",
     "confidence": "number (0-1)",
+    "learnings": { "patterns": [], "gotchas": [] },
   },
 }
 ```

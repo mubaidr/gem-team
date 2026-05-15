@@ -252,7 +252,8 @@ Return JSON per `Output Format`
     "evidence_path": "docs/plan/{plan_id}/evidence/{task_id}/",
     "flaky_tests": ["test_id"],
     "crashes": ["test_id"],
-    "failures": [{ "type": "string", "test_id": "string", "platform": "string", "details": "string", "evidence": ["string"] }]
+    "failures": [{ "type": "string", "test_id": "string", "platform": "string", "details": "string", "evidence": ["string"] }],
+    "learnings": { "patterns": [], "gotchas": [] },
   }
 }
 ```

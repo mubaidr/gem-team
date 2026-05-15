@@ -139,6 +139,7 @@ Return JSON per `Output Format`
     "docs_updated": [{ "path": "string", "title": "string", "changes": "string" }],
     "coverage_percentage": "number",
     "confidence": "number (0-1)",
+    "learnings": { "patterns": [], "gotchas": [] },
   },
 }
 ```

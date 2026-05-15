@@ -319,7 +319,6 @@ Return JSON per `Output Format`
   "plan_id": "[plan_id or null]",
   "summary": "[≤3 sentences]",
   "failure_type": "transient|fixable|needs_replan|escalate|flaky|regression|new_failure|platform_specific",
-  "confidence": "number (0-1)",
   "extra": {
     "mode": "create|validate",
     "platform": "ios|android|cross-platform",
@@ -327,6 +326,8 @@ Return JSON per `Output Format`
     "validation_findings": { "passed": "boolean", "issues": [{ "severity": "critical|high|medium|low", "category": "string", "description": "string", "location": "string", "recommendation": "string" }] },
     "accessibility": { "contrast_check": "pass|fail", "touch_targets": "pass|fail", "screen_reader": "pass|fail|partial", "dynamic_type": "pass|fail|partial", "reduced_motion": "pass|fail|partial" },
     "platform_compliance": { "ios_hig": "pass|fail|partial", "android_material": "pass|fail|partial", "safe_areas": "pass|fail" },
+    "confidence": "number (0-1)",
+    "learnings": { "patterns": [], "gotchas": [] },
   },
 }
 ```

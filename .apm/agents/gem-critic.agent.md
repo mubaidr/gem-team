@@ -150,6 +150,7 @@ Return JSON per `Output Format`
     "findings": [{ "severity": "string", "category": "string", "description": "string", "location": "string", "recommendation": "string", "alternative": "string" }],
     "what_works": ["string"],
     "confidence": "number (0-1)",
+    "learnings": { "patterns": [], "gotchas": [] },
   },
 }
 ```
