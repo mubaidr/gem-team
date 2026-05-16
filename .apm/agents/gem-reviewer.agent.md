@@ -79,9 +79,11 @@ Switch on `review_scope` — only ONE branch executes:
 #### review_scope=task (Task Scope)
 
 - Analyze: Read plan.yaml, PRD.yaml. Validate task aligns with PRD decisions, state_machines, features. Identify scope with semantic_search, prioritize security/logic/requirements
-- Execute (depth: full | standard | lightweight):
-  - Performance (UI tasks): LCP ≤2.5s, INP ≤200ms, CLS ≤0.1
-  - Budget: JS <200KB, CSS <50KB, images <200KB, API <200ms p95
+- Execute depth: full (all checks) | standard (security + logic) | lightweight (grep only)
+  - full: All checks + performance metrics + mobile vectors
+  - standard: Security scan (grep + semantic) + PRD compliance
+  - lightweight: grep_search secrets, PII, SQLi, XSS only
+- Default: standard unless task_clarifications specify depth
 - Scan: Security: grep_search (secrets, PII, SQLi, XSS) FIRST, then semantic
 - Mobile Security (if mobile detected):
 
@@ -123,31 +125,33 @@ Switch on `review_scope` — only ONE branch executes:
 
 ## Output Format
 
-// Be concise: omit nulls, empty arrays, verbose fields. Prefer: numbers over strings, status words over objects.
+Return ONLY valid JSON. Omit nulls and empty arrays. Severity: critical > high > medium > low.
 
-```jsonc
+```json
 {
-  "status": "completed|failed|in_progress|needs_revision",
-  "task_id": "[task_id]",
-  "failure_type": "transient|fixable|needs_replan|escalate|flaky|regression|new_failure|platform_specific",
-  "extra": {
-    "review_scope": "plan|task|wave",
-    "findings": [{"category": "string", "severity": "string", "description": "string"}],
-    "security_issues": [{"type": "string", "location": "string"}],
-    "prd_compliance_issues": [{"criterion": "string", "status": "pass|fail"}],
-    "task_completion_check": {...},
-    "final_review_summary": {"files_reviewed": "number", "prd_compliance_score": "number"},
-    "contract_checks": [{"from_task": "string", "to_task": "string"}],
-    "changed_files_analysis": {"planned_vs_actual": [{"planned": "string", "status": "string"}]},
-    "confidence": "number (0-1)",
-    "security_findings": {"critical": "number", "high": "number"},
-    "compliance": {"prd_alignment": "pass|fail"},
-    "learnings": {"patterns": [{ "name": "string", "description": "string", "confidence": "number" }], "gotchas": ["string"]}
+  "status": "completed | failed | in_progress | needs_revision",
+  "task_id": "string",
+  "failure_type": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
+  "review_scope": "plan | wave | task",
+  "confidence": 0.0-1.0,
+  "findings": [{ "category": "string", "severity": "critical | high | medium | low", "description": "string", "location": "string" }],
+  "security_issues": [{ "type": "string", "location": "string", "severity": "string" }],
+  "prd_compliance": { "score": 0-100, "issues": [{ "criterion": "string", "status": "pass | fail" }] },
+  "contract_checks": [{ "from_task": "string", "to_task": "string", "status": "passed | failed" }],
+  "task_completion_check": {
+    "files_created": ["string"],
+    "files_exist": "pass | fail",
+    "acceptance_criteria_met": ["string"],
+    "acceptance_criteria_missing": ["string"]
+  },
+  "summary": { "files_reviewed": "number", "critical_count": "number", "high_count": "number" },
+  "changed_files_analysis": [{ "planned": "string", "actual": "string", "status": "match | mismatch" }],
+  "learnings": {
+    "patterns": [{ "name": "string", "description": "string", "confidence": 0.0-1.0 }],
+    "gotchas": ["string"]
   }
 }
 ```
-
-NOTE: `architectural_checks` removed — gem-critic owns architecture critique per separation of concerns.
 
 </output_format>
 

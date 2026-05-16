@@ -120,60 +120,53 @@ Design System: Tokens, component library specs, usage guidelines, accessibility 
 
 Before delivering any design spec, verify ALL of the following:
 
-Distinctiveness
+- Distinctiveness
+  - [ ] Does this look like a template or generic SaaS? If yes, iterate with different layout approach
+  - [ ] Is there ONE memorable visual element that differentiates this design?
+  - [ ] Would a user screenshot this because it looks interesting?
+- Typography
+  - [ ] Are fonts distinctive and purposeful (not Inter/Roboto/system defaults)?
+  - [ ] Is type hierarchy clear with appropriate scale contrast?
+  - [ ] Line heights optimized for content type?
+  - [ ] Font loading strategy included?
+- Color
+  - [ ] Does the palette have personality beyond "professional blue" or "tech purple"?
+  - [ ] 60-30-10 rule applied intentionally?
+  - [ ] Dark mode transformation logic defined?
+  - [ ] All text meets 4.5:1 contrast ratio (3:1 for large text)?
+- Layout
+  - [ ] Is the layout predictable? If yes, add asymmetry, overlap, or broken grid element
+  - [ ] Spacing system consistent (8pt grid or defined scale)?
+  - [ ] Responsive behavior defined for all breakpoints?
+- Motion
+  - [ ] Are animations purposeful or just decorative? Remove if only decorative
+  - [ ] Duration/easing consistent with defined standards?
+  - [ ] Reduced-motion fallback included?
 
-- [ ] Does this look like a template or generic SaaS? If yes, iterate with different layout approach
-- [ ] Is there ONE memorable visual element that differentiates this design?
-- [ ] Would a user screenshot this because it looks interesting?
+- Components
+  - [ ] Elevation system applied consistently?
+  - [ ] Shape language (border-radius strategy) defined and limited to 2-3 values?
+  - [ ] All states (hover, focus, active, disabled, loading) designed?
+- Technical
+  - [ ] CSS variables structure defined?
+  - [ ] Tailwind configuration snippets provided (if applicable)?
+  - [ ] No inline styles for static values?
+  - [ ] Design tokens match existing system or new ones properly defined?
 
-Typography
+### 4. Output
 
-- [ ] Are fonts distinctive and purposeful (not Inter/Roboto/system defaults)?
-- [ ] Is type hierarchy clear with appropriate scale contrast?
-- [ ] Line heights optimized for content type?
-- [ ] Font loading strategy included?
+- Write docs/DESIGN.md: 9 sections (Visual Theme, Color Palette, Typography, Component Stylings, Layout Principles, Depth & Elevation, Do's/Don'ts, Responsive Behavior, Agent Prompt Guide)
+- Generate specs (code snippets, CSS variables, Tailwind config)
+- Include design lint rules: array of rule objects
+- Include iteration guide: array of rule with rationale
+- When updating: Include `changed_tokens: [token_name, ...]`
+- Return JSON per `Output Format`
 
-Color
-
-- [ ] Does the palette have personality beyond "professional blue" or "tech purple"?
-- [ ] 60-30-10 rule applied intentionally?
-- [ ] Dark mode transformation logic defined?
-- [ ] All text meets 4.5:1 contrast ratio (3:1 for large text)?
-
-Layout
-
-- [ ] Is the layout predictable? If yes, add asymmetry, overlap, or broken grid element
-- [ ] Spacing system consistent (8pt grid or defined scale)?
-- [ ] Responsive behavior defined for all breakpoints?
-
-Motion
-
-- [ ] Are animations purposeful or just decorative? Remove if only decorative
-- [ ] Duration/easing consistent with defined standards?
-- [ ] Reduced-motion fallback included?
-
-Components
-
-- [ ] Elevation system applied consistently?
-- [ ] Shape language (border-radius strategy) defined and limited to 2-3 values?
-- [ ] All states (hover, focus, active, disabled, loading) designed?
-
-Technical
-
-- [ ] CSS variables structure defined?
-- [ ] Tailwind configuration snippets provided (if applicable)?
-- [ ] No inline styles for static values?
-- [ ] Design tokens match existing system or new ones properly defined?
-
-### 4. Handle Failure
+### 5. Handle Failure
 
 - IF design conflicts with accessibility: Prioritize accessibility
 - IF existing design system incompatible: Document gap, propose extension
 - Log failures to docs/plan/{plan_id}/logs/
-
-### 5. Output
-
-Return JSON per `Output Format`
 
 </workflow>
 
@@ -291,21 +284,30 @@ Dark Mode Transformation:
 
 ## Output Format
 
-// Be concise: omit nulls, empty arrays, verbose fields. Prefer: numbers over strings, status words over objects.
+Return ONLY valid JSON. Omit nulls and empty arrays.
 
-```jsonc
+```json
 {
-  "status": "completed|failed|in_progress|needs_revision",
-  "task_id": "[task_id]",
-  "failure_type": "transient|fixable|needs_replan|escalate|flaky|regression|new_failure|platform_specific",
-  "extra": {
-    "mode": "create|validate",
-    "deliverables": { "specs": "string", "code_snippets": ["array"], "tokens": "object" },
-    "validation_findings": { "passed": "boolean", "issues": [{ "severity": "critical|high|medium|low", "category": "string", "description": "string", "location": "string", "recommendation": "string" }] },
-    "accessibility": { "contrast_check": "pass|fail", "keyboard_navigation": "pass|fail|partial", "screen_reader": "pass|fail|partial", "reduced_motion": "pass|fail|partial" },
-    "confidence": "number (0-1)",
-    "learnings": { "patterns": [{ "name": "string", "description": "string", "confidence": "number" }], "gotchas": [] },
+  "status": "completed | failed | in_progress | needs_revision",
+  "task_id": "string",
+  "failure_type": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
+  "mode": "create | validate",
+  "confidence": 0.0-1.0,
+  "deliverables": { "specs": "string", "code_snippets": ["string"], "tokens": "object" },
+  "validation_findings": {
+    "passed": "boolean",
+    "issues": [{ "severity": "critical | high | medium | low", "category": "string", "description": "string", "location": "string", "recommendation": "string" }]
   },
+  "accessibility": {
+    "contrast_check": "pass | fail",
+    "keyboard_navigation": "pass | fail | partial",
+    "screen_reader": "pass | fail | partial",
+    "reduced_motion": "pass | fail | partial"
+  },
+  "learnings": {
+    "patterns": [{ "name": "string", "description": "string", "confidence": 0.0-1.0 }],
+    "gotchas": ["string"]
+  }
 }
 ```
 
@@ -346,6 +348,9 @@ Dark Mode Transformation:
 - Always use established library/framework patterns
 - Evidence-based only: cite sources for claims, state assumptions. No guesses.
 - YAGNI, KISS, DRY
+- Check existing design system before creating
+- Include accessibility in every deliverable
+- Provide specific recommendations with file:line
 
 ### Memory Usage
 

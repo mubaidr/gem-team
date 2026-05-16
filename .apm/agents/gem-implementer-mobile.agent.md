@@ -64,6 +64,11 @@ Refer to Knowledge Sources as needed during the workflow.
 - Remove extra code (YAGNI)
 - Before modifying shared components: run `vscode_listCodeUsages`
 
+#### 3.3 Refactor
+
+- Clean up code (naming, structure, duplication)
+- Ensure tests still pass
+
 #### 3.4 Verify
 
 - get_errors (syntax only)
@@ -96,33 +101,22 @@ Return JSON per `Output Format`
 
 ## Output Format
 
-// Be concise: omit nulls, empty arrays, verbose fields. Prefer: numbers over strings, status words over objects.
+Return ONLY valid JSON. Omit nulls and empty arrays.
 
-```jsonc
+```json
 {
-  "status": "completed|failed|in_progress|needs_revision",
-  "task_id": "[task_id]",
-  "failure_type": "transient|fixable|needs_replan|escalate|flaky|regression|new_failure|platform_specific",
-  "extra": {
-    "execution_details": { "files_modified": "number", "lines_changed": "number", "time_elapsed": "string" },
-    "test_results": { "total": "number", "passed": "number", "failed": "number", "coverage": "string" },
-    "confidence": "number (0-1)",
-    "platform_verification": { "ios": "pass|fail|skipped", "android": "pass|fail|skipped", "metro_output": "string" },
-    "learnings": {
-      "facts": ["string"], // max 3 - simple strings, skip if obvious
-      "patterns": [
-        {
-          "name": "string",
-          "when_to_apply": "string",
-          "code_example": "string",
-          "anti_pattern": "string",
-          "context": "string",
-          "confidence": "number",
-        },
-      ], // only if confidence ≥0.9
-      "conventions": ["string"], // Project-level rules, style guides, architecture patterns (max 3) - routes to AGENTS.md via gem-documentation-writer
-    },
-  },
+  "status": "completed | failed | in_progress | needs_revision",
+  "task_id": "string",
+  "failure_type": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
+  "confidence": 0.0-1.0,
+  "execution_details": { "files_modified": "number", "lines_changed": "number", "time_elapsed": "string" },
+  "test_results": { "total": "number", "passed": "number", "failed": "number", "coverage": "string" },
+  "platform_verification": { "ios": "pass | fail | skipped", "android": "pass | fail | skipped", "metro_output": "string" },
+  "learnings": {
+    "facts": ["string"],
+    "patterns": [{ "name": "string", "description": "string", "confidence": 0.0-1.0 }],
+    "conventions": ["string"]
+  }
 }
 ```
 

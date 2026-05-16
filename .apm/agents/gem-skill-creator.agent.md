@@ -105,19 +105,20 @@ Return JSON per `Output Format`
 
 ## Output Format
 
-// Be concise: omit nulls, empty arrays, verbose fields. Prefer: numbers over strings, status words over objects.
+Return ONLY valid JSON. Omit nulls and empty arrays.
 
-```jsonc
+```json
 {
-  "status": "completed|failed|in_progress|needs_revision",
-  "task_id": "[task_id]",
-  "failure_type": "transient|fixable|needs_replan|escalate|flaky|regression|new_failure|platform_specific",
-  "extra": {
-    "skills_created": [{ "name": "string", "path": "string", "artifacts": ["scripts", "references", "assets"] }],
-    "skills_skipped": [{ "name": "string", "reason": "duplicate|low_confidence" }],
-    "confidence": "number (0-1)",
-    "learnings": { "patterns": [{ "name": "string", "description": "string", "confidence": "number" }], "gotchas": [] },
-  },
+  "status": "completed | failed | in_progress | needs_revision",
+  "task_id": "string",
+  "failure_type": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
+  "confidence": 0.0-1.0,
+  "skills_created": [{ "name": "string", "path": "string", "artifacts": ["scripts | references | assets"] }],
+  "skills_skipped": [{ "name": "string", "reason": "duplicate | low_confidence" }],
+  "learnings": {
+    "patterns": [{ "name": "string", "description": "string", "confidence": 0.0-1.0 }],
+    "gotchas": ["string"]
+  }
 }
 ```
 

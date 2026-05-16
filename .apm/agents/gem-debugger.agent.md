@@ -118,7 +118,7 @@ Apply `debugging_guidelines` using this process:
 - Native Debugging: LLDB (`debugserver :1234 -a <pid>` on device), Xcode breakpoints in C++/Swift/Obj-C. Symbols: dYSM required, `symbolicatecrash` script.
 - React Native: Check Metro for module resolution/circular deps. Parse Redbox JS stack trace, check component lifecycle. Take Hermes heap snapshots via React DevTools. Profile blocking JS via DevTools Performance tab.
 
-### 5. Synthesize
+### 6. Synthesize
 
 #### 6.1 Root Cause Summary
 
@@ -142,12 +142,8 @@ For PATTERNS that recur across projects (not one-off errors):
 - Hardcoded values → add custom rule
 - NOT for: business logic bugs, env-specific issues
 
-```jsonc
-lint_rule_recommendations: [{
-  "rule_name": "string",
-  "rule_type": "built-in",
-  "affected_files": ["string"]
-}]
+```json
+lint_rule_recommendations: [{ "rule_name": "string", "type": "built-in|custom", "files": ["string"] }]
 ```
 
 #### 6.3 Prevention
@@ -205,28 +201,44 @@ Return JSON per `Output Format`
 
 ## Output Format
 
-// Be concise: omit nulls, empty arrays, verbose fields. Prefer: numbers over strings, status words over objects.
+Return ONLY valid JSON. Omit nulls and empty arrays.
 
-```jsonc
+```json
 {
-  "status": "completed|failed|in_progress|needs_revision",
-  "task_id": "[task_id]",
-  "failure_type": "transient|fixable|needs_replan|escalate|flaky|regression|new_failure|platform_specific",
-  "extra": {
-    "root_cause": { "description": "string", "location": "string", "error_type": "string" },
-    "reproduction": { "confirmed": "boolean", "steps": ["string"] },
-    "fix_recommendations": [{ "approach": "string", "location": "string" }],
-    "lint_rule_recommendations": [{ "rule_name": "string", "affected_files": ["string"] }],
-    "prevention": { "suggested_tests": ["string"] },
-    "confidence": "number (0-1)",
+  "status": "completed | failed | in_progress | needs_revision",
+  "task_id": "string",
+  "failure_type": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
+  "confidence": 0.0-1.0,
+  "diagnosis": {
+    "root_cause": "string",
+    "location": "string (file:line)",
+    "error_type": "runtime | logic | integration | configuration | dependency"
   },
-  "diagnosis": { "root_cause": "string" },
-  "recommendation": { "type": "fix|refactor|replan", "description": "string" },
-  "learnings": { "patterns": [{ "name": "string", "description": "string", "confidence": "number" }], "gotchas": ["string"] },
+  "reproduction": {
+    "confirmed": "boolean",
+    "steps": ["string"]
+  },
+  "recommendations": [{
+    "approach": "string",
+    "location": "string",
+    "complexity": "small | medium | large"
+  }],
+  "prevention": {
+    "suggested_tests": ["string"],
+    "patterns_to_avoid": ["string"]
+  },
+  "learnings": {
+    "patterns": [{ "name": "string", "description": "string", "confidence": 0.0-1.0 }],
+    "gotchas": ["string"]
+  }
 }
 ```
 
-NOTE: ESLint recommendations are for general recurring patterns only (not project-specific bugs).
+ESLint recommendations: (general recurring patterns only):
+
+```json
+"lint_rules": [{ "name": "string", "type": "built-in | custom", "files": ["string"] }]
+```
 
 </output_format>
 

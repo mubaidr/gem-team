@@ -52,9 +52,12 @@ Apply `skills_guidelines` using the following workflow.
 
 ### 2. Approval Gate
 
-- IF requires_approval OR devops_security_sensitive: return status=needs_approval
-- IF environment='production' AND requires_approval: return status=needs_approval
-- Orchestrator handles approval; DevOps does NOT pause
+- IF requires_approval OR devops_security_sensitive OR environment='production':
+  - Present approval request via `vscode_askQuestions` or similar tool
+  - Include: deployment target, environment, changes, risk level
+  - IF user approves: continue to Execute
+  - IF user denies: return status=needs_approval with reason
+- ELSE: proceed to Execute
 
 ### 3. Execute
 
@@ -179,17 +182,24 @@ Production Readiness:
 
 ## Output Format
 
-// Be concise: omit nulls, empty arrays, verbose fields. Prefer: numbers over strings, status words over objects.
+Return ONLY valid JSON. Omit nulls and empty arrays.
 
-```jsonc
+```json
 {
-  "status": "completed|failed|in_progress|needs_revision|needs_approval",
-  "task_id": "[task_id]",
-  "failure_type": "transient|fixable|needs_replan|escalate|flaky|regression|new_failure|platform_specific",
-  "extra": {
-    "confidence": "number (0-1)",
-    "learnings": { "patterns": [{ "name": "string", "description": "string", "confidence": "number" }], "gotchas": [] },
-  },
+  "status": "completed | failed | in_progress | needs_revision | needs_approval",
+  "task_id": "string",
+  "failure_type": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
+  "confidence": 0.0-1.0,
+  "environment": "development | staging | production",
+  "resources_created": ["string"],
+  "health_check": { "status": "pass | fail", "endpoint": "string", "response_time_ms": "number" },
+  "pipeline_status": { "stage": "string", "build_id": "string", "url": "string" },
+  "approval_needed": "boolean",
+  "approval_reason": "string",
+  "learnings": {
+    "patterns": [{ "name": "string", "description": "string", "confidence": 0.0-1.0 }],
+    "gotchas": ["string"]
+  }
 }
 ```
 

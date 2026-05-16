@@ -75,7 +75,7 @@ For each flow:
   - Wait using step wait_strategy
   - Verify immediate result
   - Extract needed values into context
-  - On transient failure, retry with bounded backoff
+  - On transient failure, retry
   - On hard assertion failure, stop and capture evidence
 - Verify flow.expected_state
 - Execute flow.teardown if defined
@@ -134,33 +134,38 @@ Per page:
 
 ## Output Format
 
-// Be concise: omit nulls, empty arrays, verbose fields. Prefer: numbers over strings, status words over objects.
+Return ONLY valid JSON. Omit nulls and empty arrays.
 
-```jsonc
+```json
 {
-  "status": "completed|failed|in_progress|needs_revision",
-  "task_id": "[task_id]",
-  "failure_type": "transient|fixable|needs_replan|escalate|flaky|regression|new_failure|platform_specific",
-  "extra": {
+  "status": "completed | failed | in_progress | needs_revision",
+  "task_id": "string",
+  "failure_type": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific | test_bug",
+  "confidence": 0.0-1.0,
+  "summary": {
+    "flows_executed": "number",
+    "flows_passed": "number",
+    "scenarios_executed": "number",
+    "scenarios_passed": "number"
+  },
+  "metrics": {
     "console_errors": "number",
     "console_warnings": "number",
     "network_failures": "number",
     "retries_attempted": "number",
     "accessibility_issues": "number",
-    "lighthouse_scores": { "accessibility": "number", "seo": "number", "best_practices": "number" },
-    "evidence_path": "docs/plan/{plan_id}/evidence/{task_id}/",
-    "flows_executed": "number",
-    "flows_passed": "number",
-    "scenarios_executed": "number",
-    "scenarios_passed": "number",
     "visual_regressions": "number",
-    "flaky_tests": ["scenario_id"],
-    "failures": [{ "type": "string", "criteria": "string", "details": "string", "flow_id": "string", "scenario": "string", "step_index": "number", "evidence": ["string"] }],
-    "flow_results": [{ "flow_id": "string", "status": "passed|failed", "steps_completed": "number", "steps_total": "number", "duration_ms": "number" }],
-    "confidence": "number (0-1)",
-    "learnings": { "patterns": [{ "name": "string", "description": "string", "confidence": "number" }], "gotchas": [] },
-    "assumptions": ["string"],
+    "lighthouse_scores": { "accessibility": "number", "seo": "number", "best_practices": "number" }
   },
+  "evidence_path": "docs/plan/{plan_id}/evidence/{task_id}/",
+  "flow_results": [{ "flow_id": "string", "status": "passed | failed", "steps_completed": "number", "steps_total": "number", "duration_ms": "number" }],
+  "failures": [{ "type": "string", "criteria": "string", "details": "string", "flow_id": "string", "scenario": "string", "step_index": "number", "evidence": ["string"] }],
+  "flaky_tests": ["scenario_id"],
+  "assumptions": ["string"],
+  "learnings": {
+    "patterns": [{ "name": "string", "description": "string", "confidence": 0.0-1.0 }],
+    "gotchas": ["string"]
+  }
 }
 ```
 

@@ -138,15 +138,13 @@ CRITICAL: Execute ALL waves/ tasks WITHOUT pausing or waiting for approval betwe
   4. IF code fix → original task agent; IF infra → original agent
   5. Re-run integration. Max 3 retries
 
-##### 4.1.4 Synthesize
+###### 4.1.3.3 Synthesize
 
 - completed: Validate agent-specific fields (e.g., test_results.failed === 0)
 - escalate: Mark blocked, escalate to user
 - needs_replan: Delegate to gem-planner
 - Persist all task status updates to `plan.yaml`
 - Announce wave completion with Status Summary Format
-
-Failure handling: See 4.1.3.2 for diagnose/retry/escalate pattern.
 
 #### 4.2 Loop
 
@@ -440,8 +438,6 @@ When delegating to subagents, pass these fields (extracted from plan.yaml / plan
 <status_summary_format>
 
 ## Status Summary Format
-
-// Be concise: omit nulls, empty arrays, verbose fields. Prefer: numbers over strings, status words over objects.
 
 ```
 Plan: {plan_id} | {plan_objective}

@@ -68,11 +68,11 @@ Analyze codebase, extract facts, map patterns/dependencies, identify gaps.
 - Factor task_clarifications into scope
 - Read PRD for in_scope/out_of_scope
 
-#### 2.0.5 Pattern Discovery
+#### 2.1 Pattern Discovery
 
 Search similar implementations, document in `patterns_found`
 
-#### 2.1 Discovery
+#### 2.2 Discovery
 
 semantic_search + grep_search, merge results
 confidence_score = calculate_confidence_from_results()
@@ -80,17 +80,18 @@ confidence_score = calculate_confidence_from_results()
 ##### Early Exit Check
 
 IF confidence_score >= 0.85:
-→ SKIP Phases 2.2-2.3 entirely
+→ SKIP Phases 2.3-2.4 entirely
 → GOTO Phase 3 (Synthesize YAML Report)
 IF decision_blockers resolved AND confidence_score >= 0.8:
-→ SKIP Phases 2.2-2.3 entirely
+→ SKIP Phases 2.3-2.4 entirely
 → GOTO Phase 3 (Synthesize YAML Report)
+ELSE: Continue to Relationship Discovery
 
-#### 2.2 Relationship Discovery
+#### 2.3 Relationship Discovery
 
 Map dependencies, dependents, callers, callees
 
-#### 2.3 Detailed Examination
+#### 2.4 Detailed Examination
 
 read_file, Context7 for external libs, identify gaps
 
@@ -105,15 +106,10 @@ NO suggestions/recommendations
 - Confidence ≥0.85, factual only
 - IF gaps remain: document as gaps in output, do not re-run
 
-### 5. Handle Failure
+### 5. Output
 
-- IF research cannot proceed: document what's missing, recommend next steps
-- Log failures to `docs/plan/{plan_id}/logs/` OR `docs/logs/`
-
-### 6. Output
-
-- Memory: Save generalizable codebase knowledge (architecture, conventions, file maps) to repo memory. Task-specific findings go to YAML below.
-- Save: `docs/plan/{plan_id}/research_findings_{focus_area}.yaml`
+- Save YAML: `docs/plan/{plan_id}/research_findings_{focus_area}.yaml`
+- Save repo memory: generalizable knowledge (architecture, conventions) for future agent runs
 - Return JSON per `Output Format`
 
 </workflow>
@@ -162,23 +158,26 @@ Early Exit Criteria:
 
 ## Output Format
 
-// Be concise: omit nulls, empty arrays, verbose fields. Prefer: numbers over strings, status words over objects.
+Return ONLY valid JSON. Omit nulls and empty arrays.
 
-```jsonc
+```json
 {
-  "status": "completed|failed|in_progress|needs_revision",
-  "task_id": null,
-  "failure_type": "transient|fixable|needs_replan|escalate|flaky|regression|new_failure|platform_specific",
-  "extra": {
-    "user_intent": "continue_plan|modify_plan|new_task",
-    "gray_areas": ["string"], // max 3
-    "learnings": { "patterns": [{ "name": "string", "description": "string", "confidence": "number" }], "gaps": ["string"] }, // EMPTY IS OK - max 3 items
-    "complexity": "simple|medium|complex",
-    "confidence": "number (0-1)",
-    "task_clarifications": [{ "question": "string", "answer": "string" }], // omit if none
-    "architectural_decisions": [{ "decision": "string", "affects": "string" }], // omit rationale
-    "focus_areas": ["string"], // if multiple identified, else omit
+  "status": "completed | failed | in_progress | needs_revision",
+  "task_id": "string | omit if unknown",
+  "failure_type": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
+  "mode": "clarify | research",
+  "confidence": 0.0-1.0,
+  "complexity": "simple | medium | complex",
+  "user_intent": "continue_plan | modify_plan | new_task",
+  "gray_areas": ["string"],
+  "focus_areas": ["string"],
+  "task_clarifications": [{ "question": "string", "answer": "string" }],
+  "architectural_decisions": [{ "decision": "string", "affects": "string" }],
+  "learnings": {
+    "patterns": [{ "name": "string", "description": "string", "confidence": 0.0-1.0 }],
+    "gaps": ["string"]
   },
+  "yaml_saved": "docs/plan/{plan_id}/research_findings_{focus_area}.yaml"
 }
 ```
 

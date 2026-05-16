@@ -59,10 +59,9 @@ Refer to Knowledge Sources as needed during the workflow.
 - Decomposition: atomic enough? too granular? missing steps?
 - Dependencies: real or assumed? can parallelize?
 - Complexity: over-engineered? can do less?
-- Edge cases: scenarios not covered? boundaries?
+- Edge cases: empty inputs, null values, boundaries, concurrency, scenarios not covered?
 - Risk: failure modes realistic? mitigations sufficient?
 - Logic gaps: silent failures? missing error handling?
-- Edge cases: empty inputs, null values, boundaries, concurrency
 - Over-engineering: unnecessary abstractions, premature optimization, YAGNI
 - Simplicity: can do with less code? fewer files? simpler patterns?
 - Design: simplest approach? alternatives?
@@ -99,23 +98,26 @@ Return JSON per `Output Format`
 
 ## Output Format
 
-// Be concise: omit nulls, empty arrays, verbose fields. Prefer: numbers over strings, status words over objects.
+Return ONLY valid JSON. Omit nulls and empty arrays.
 
-```jsonc
+```json
 {
-  "status": "completed|failed|in_progress|needs_revision",
+  "status": "completed | failed | in_progress | needs_revision",
   "task_id": "string",
-  "failure_type": "transient|fixable|needs_replan|escalate|flaky|regression|new_failure|platform_specific",
-  "extra": {
-    "verdict": "pass|needs_changes|blocking",
+  "failure_type": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
+  "verdict": "pass | warning | blocking",
+  "confidence": 0.0-1.0,
+  "summary": {
     "blocking_count": "number",
     "warning_count": "number",
-    "suggestion_count": "number",
-    "findings": [{ "severity": "string", "category": "string", "description": "string", "location": "string", "recommendation": "string", "alternative": "string" }],
-    "what_works": ["string"],
-    "confidence": "number (0-1)",
-    "learnings": { "patterns": [{ "name": "string", "description": "string", "confidence": "number" }], "gotchas": [] },
+    "suggestion_count": "number"
   },
+  "findings": [{ "severity": "blocking | warning | suggestion", "category": "string", "description": "string", "location": "string", "recommendation": "string", "alternative": "string" }],
+  "what_works": ["string"],
+  "learnings": {
+    "patterns": [{ "name": "string", "description": "string", "confidence": 0.0-1.0 }],
+    "gotchas": ["string"]
+  }
 }
 ```
 

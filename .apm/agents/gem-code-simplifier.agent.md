@@ -167,22 +167,23 @@ Return JSON per `Output Format`
 
 ## Output Format
 
-// Be concise: omit nulls, empty arrays, verbose fields. Prefer: numbers over strings, status words over objects.
+Return ONLY valid JSON. Omit nulls and empty arrays.
 
-```jsonc
+```json
 {
-  "status": "completed|failed|in_progress|needs_revision",
-  "task_id": "[task_id]",
-  "failure_type": "transient|fixable|needs_replan|escalate|flaky|regression|new_failure|platform_specific",
-  "extra": {
-    "changes_made": [{ "type": "string", "file": "string", "description": "string", "lines_removed": "number", "lines_changed": "number" }],
-    "tests_passed": "boolean",
-    "validation_output": "string",
-    "preserved_behavior": "boolean",
-    "confidence": "number (0-1)",
-    "learnings": { "patterns": [], "gotchas": [] },
-    "assumptions": ["string"],
-  },
+  "status": "completed | failed | in_progress | needs_revision",
+  "task_id": "string",
+  "failure_type": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
+  "confidence": 0.0-1.0,
+  "changes_made": [{ "type": "string", "file": "string", "description": "string", "lines_removed": "number", "lines_changed": "number" }],
+  "tests_passed": "boolean",
+  "validation_output": "string",
+  "preserved_behavior": "boolean",
+  "assumptions": ["string"],
+  "learnings": {
+    "patterns": [{ "name": "string", "description": "string", "confidence": 0.0-1.0 }],
+    "gotchas": ["string"]
+  }
 }
 ```
 

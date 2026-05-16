@@ -99,20 +99,26 @@ Return JSON per `Output Format`
 
 ## Output Format
 
-// Be concise: omit nulls, empty arrays, verbose fields. Prefer: numbers over strings, status words over objects.
+Return ONLY valid JSON. Omit nulls and empty arrays.
 
-```jsonc
+```json
 {
-  "status": "completed|failed|in_progress|needs_revision",
-  "task_id": "[task_id]",
-  "failure_type": "transient|fixable|needs_replan|escalate|flaky|regression|new_failure|platform_specific",
-  "extra": {
-    "docs_created": [{ "path": "string", "title": "string", "type": "string" }],
-    "docs_updated": [{ "path": "string", "title": "string", "changes": "string" }],
-    "coverage_percentage": "number",
-    "confidence": "number (0-1)",
-    "learnings": { "patterns": [{ "name": "string", "description": "string", "confidence": "number" }], "gotchas": [] },
+  "status": "completed | failed | in_progress | needs_revision",
+  "task_id": "string",
+  "failure_type": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
+  "confidence": 0.0-1.0,
+  "docs_created": [{ "path": "string", "title": "string", "type": "string" }],
+  "docs_updated": [{ "path": "string", "title": "string", "changes": "string" }],
+  "verification": {
+    "parity_check": "passed | failed | partial",
+    "walkthrough_verified": "boolean",
+    "issues_found": ["string"]
   },
+  "coverage_percentage": 0-100,
+  "learnings": {
+    "patterns": [{ "name": "string", "description": "string", "confidence": 0.0-1.0 }],
+    "gotchas": ["string"]
+  }
 }
 ```
 

@@ -63,7 +63,7 @@ gem-researcher, gem-planner, gem-implementer, gem-implementer-mobile, gem-browse
 
 ### 2. Design
 
-#### 2.0 Synthesize DAG
+#### 2.0 Pattern Discovery
 
 Search similar implementations, document in `patterns_found`
 
@@ -167,21 +167,22 @@ Pattern Routing:
 
 ## Output Format
 
-// Be concise: omit nulls, empty arrays, verbose fields. Prefer: numbers over strings, status words over objects.
+Return ONLY valid JSON. Omit nulls and empty arrays.
 
-```jsonc
+```json
 {
-  "status": "completed|failed|in_progress|needs_revision",
+  "status": "completed | failed | in_progress | needs_revision",
   "task_id": "string",
-  "failure_type": "transient|fixable|needs_replan|escalate|flaky|regression|new_failure|platform_specific",
-  "extra": {
-    "complexity": "simple|medium|complex",
-    "confidence": "number (0-1)",
-    "prd_update_recommended": "boolean", // if true, orchestrator routes PRD update to doc-writer
-    "prd_update_reason": "string | null", // why PRD update is needed (scope change, new feature, architectural shift)
-  },
-  "metrics": "object", // omit if not needed
-  "learnings": { "risks": ["string"], "patterns": [{ "name": "string", "description": "string", "confidence": "number" }] }, // EMPTY IS OK - max 3 items
+  "failure_type": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
+  "confidence": 0.0-1.0,
+  "complexity": "simple | medium | complex",
+  "prd_update_recommended": "boolean",
+  "prd_update_reason": "string | null",
+  "metrics": { "wave_1_task_count": "number", "total_dependencies": "number", "risk_score": "low | medium | high" },
+  "learnings": {
+    "risks": ["string"],
+    "patterns": [{ "name": "string", "description": "string", "confidence": 0.0-1.0 }]
+  }
 }
 ```
 

@@ -318,14 +318,14 @@ copilot plugin list          # GitHub Copilot CLI
 
 ### Specialized
 
-| Role                    | Description                                                      | Sources                  | Recommended LLM                                                                                                      |
-| :---------------------- | :--------------------------------------------------------------- | :----------------------- | :------------------------------------------------------------------------------------------------------------------- |
-| **DEVOPS**              | Infrastructure deployment, CI/CD pipelines, container management | AGENTS.md, infra configs | **Closed:** GPT-5.4, Gemini 3.1 Pro, Claude Sonnet 4.6<br>**Open:** DeepSeek-V3.2, GLM-5, Qwen3.5                    |
-| **DOCUMENTATION**       | Technical documentation, README files, API docs, diagrams        | AGENTS.md, source code   | **Closed:** Claude Sonnet 4.6, Gemini 3.1 Flash, GPT-5.4 Mini<br>**Open:** Llama 4 Scout, Qwen3.5-9B, MiniMax M2.7   |
-| **DESIGNER**            | UI/UX design — layouts, themes, color schemes, accessibility     | PRD, codebase, AGENTS.md | **Closed:** GPT-5.4, Gemini 3.1 Pro, Claude Sonnet 4.6<br>**Open:** Qwen3.5, GLM-5, MiniMax M2.7                     |
-| **IMPLEMENTER- MOBILE** | Mobile implementation — React Native, Expo, Flutter              | codebase, AGENTS.md      | **Closed:** Claude Opus 4.6, GPT-5.4, Gemini 3.1 Pro<br>**Open:** DeepSeek-V3.2, GLM-5, Qwen3- Coder-Next            |
-| **DESIGNER- MOBILE**    | Mobile UI/UX — HIG, Material Design, safe areas                  | PRD, codebase, AGENTS.md | **Closed:** GPT-5.4, Gemini 3.1 Pro, Claude Sonnet 4.6<br>**Open:** Qwen3.5, GLM-5, MiniMax M2.7                     |
-| **MOBILE TESTER**       | Mobile E2E testing — Detox, Maestro, iOS/Android                 | PRD, AGENTS.md           | **Closed:** GPT-5.4, Claude Sonnet 4.6, Gemini 3.1 Flash<br>**Open:** Llama 4 Maverick, Qwen3.5- Flash, MiniMax M2.7 |
+| Role                   | Description                                                      | Sources                  | Recommended LLM                                                                                                      |
+| :--------------------- | :--------------------------------------------------------------- | :----------------------- | :------------------------------------------------------------------------------------------------------------------- |
+| **DEVOPS**             | Infrastructure deployment, CI/CD pipelines, container management | AGENTS.md, infra configs | **Closed:** GPT-5.4, Gemini 3.1 Pro, Claude Sonnet 4.6<br>**Open:** DeepSeek-V3.2, GLM-5, Qwen3.5                    |
+| **DOCUMENTATION**      | Technical documentation, README files, API docs, diagrams        | AGENTS.md, source code   | **Closed:** Claude Sonnet 4.6, Gemini 3.1 Flash, GPT-5.4 Mini<br>**Open:** Llama 4 Scout, Qwen3.5-9B, MiniMax M2.7   |
+| **DESIGNER**           | UI/UX design — layouts, themes, color schemes, accessibility     | PRD, codebase, AGENTS.md | **Closed:** GPT-5.4, Gemini 3.1 Pro, Claude Sonnet 4.6<br>**Open:** Qwen3.5, GLM-5, MiniMax M2.7                     |
+| **IMPLEMENTER-MOBILE** | Mobile implementation — React Native, Expo, Flutter              | codebase, AGENTS.md      | **Closed:** Claude Opus 4.6, GPT-5.4, Gemini 3.1 Pro<br>**Open:** DeepSeek-V3.2, GLM-5, Qwen3- Coder-Next            |
+| **DESIGNER-MOBILE**    | Mobile UI/UX — HIG, Material Design, safe areas                  | PRD, codebase, AGENTS.md | **Closed:** GPT-5.4, Gemini 3.1 Pro, Claude Sonnet 4.6<br>**Open:** Qwen3.5, GLM-5, MiniMax M2.7                     |
+| **MOBILE TESTER**      | Mobile E2E testing — Detox, Maestro, iOS/Android                 | PRD, AGENTS.md           | **Closed:** GPT-5.4, Claude Sonnet 4.6, Gemini 3.1 Flash<br>**Open:** Llama 4 Maverick, Qwen3.5- Flash, MiniMax M2.7 |
 
 ---
 

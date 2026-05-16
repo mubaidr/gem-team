@@ -128,68 +128,58 @@ Design System: Mobile tokens, component specs, platform variant guidelines, acce
 
 Before delivering any mobile design spec, verify ALL of the following:
 
-Distinctiveness
+- Distinctiveness
+  - [ ] Does this look like a template app? If yes, iterate with custom layout approach
+  - [ ] Is there ONE memorable visual element that differentiates this design?
+  - [ ] Does the design leverage platform capabilities (haptics, gestures, native feel)?
+- Typography
+  - [ ] Are fonts appropriate for platform (SF Pro iOS, Roboto Android) with custom display for brand?
+  - [ ] Type scale uses mobile-optimized ratio (1.2, not 1.25)?
+  - [ ] Dynamic Type/accessibility scaling supported?
+  - [ ] Font loading strategy included?
+- Color
+  - [ ] Does palette have personality beyond system defaults?
+  - [ ] 60-30-10 rule applied for mobile constraints?
+  - [ ] Dark mode uses true black (#000000) for OLED power savings?
+  - [ ] All text meets 4.5:1 contrast ratio (3:1 for large text)?
+- Layout
+  - [ ] Layout is predictable? If yes, add asymmetry or horizontal scroll sections
+  - [ ] Spacing system consistent (8pt grid)?
+  - [ ] Safe areas respected (notch, dynamic island, home indicator)?
+- Motion
+  - [ ] Animations are gesture-driven where applicable?
+  - [ ] Duration standards followed (100-400ms for mobile)?
+  - [ ] Haptic feedback paired with visual changes?
+  - [ ] Reduced-motion fallback included?
+- Components
+  - [ ] Elevation system applied with platform differences (shadow iOS, elevation Android)?
+  - [ ] Border-radius strategy defined (2-3 values max)?
+  - [ ] Touch targets meet minimums (44pt/48dp)?
+  - [ ] All states (pressed, disabled, loading) designed with platform conventions?
+- Platform Compliance
+  - [ ] iOS: HIG navigation patterns, system icons, gesture support?
+  - [ ] Android: Material 3 patterns, ripple feedback, elevation?
+  - [ ] Cross-platform: Platform.select used appropriately?
+- Technical
+  - [ ] Color tokens defined for both platforms?
+  - [ ] StyleSheet examples provided for React Native / Flutter?
+  - [ ] No inline styles for static values?
+  - [ ] Safe area implementation included?
 
-- [ ] Does this look like a template app? If yes, iterate with custom layout approach
-- [ ] Is there ONE memorable visual element that differentiates this design?
-- [ ] Does the design leverage platform capabilities (haptics, gestures, native feel)?
+### 4. Output
 
-Typography
+- Write docs/DESIGN.md: 9 sections (Visual Theme, Color Palette, Typography, Component Stylings, Layout Principles, Depth & Elevation, Do's/Don'ts, Responsive Behavior, Agent Prompt Guide)
+- Include platform-specific specs: iOS (HIG), Android (Material 3), cross-platform (unified with Platform.select)
+- Include design lint rules
+- Include iteration guide
+- When updating: Include `changed_tokens: [...]`
+- Return JSON per `Output Format`
 
-- [ ] Are fonts appropriate for platform (SF Pro iOS, Roboto Android) with custom display for brand?
-- [ ] Type scale uses mobile-optimized ratio (1.2, not 1.25)?
-- [ ] Dynamic Type/accessibility scaling supported?
-- [ ] Font loading strategy included?
-
-Color
-
-- [ ] Does palette have personality beyond system defaults?
-- [ ] 60-30-10 rule applied for mobile constraints?
-- [ ] Dark mode uses true black (#000000) for OLED power savings?
-- [ ] All text meets 4.5:1 contrast ratio (3:1 for large text)?
-
-Layout
-
-- [ ] Layout is predictable? If yes, add asymmetry or horizontal scroll sections
-- [ ] Spacing system consistent (8pt grid)?
-- [ ] Safe areas respected (notch, dynamic island, home indicator)?
-
-Motion
-
-- [ ] Animations are gesture-driven where applicable?
-- [ ] Duration standards followed (100-400ms for mobile)?
-- [ ] Haptic feedback paired with visual changes?
-- [ ] Reduced-motion fallback included?
-
-Components
-
-- [ ] Elevation system applied with platform differences (shadow iOS, elevation Android)?
-- [ ] Border-radius strategy defined (2-3 values max)?
-- [ ] Touch targets meet minimums (44pt/48dp)?
-- [ ] All states (pressed, disabled, loading) designed with platform conventions?
-
-Platform Compliance
-
-- [ ] iOS: HIG navigation patterns, system icons, gesture support?
-- [ ] Android: Material 3 patterns, ripple feedback, elevation?
-- [ ] Cross-platform: Platform.select used appropriately?
-
-Technical
-
-- [ ] Color tokens defined for both platforms?
-- [ ] StyleSheet examples provided for React Native / Flutter?
-- [ ] No inline styles for static values?
-- [ ] Safe area implementation included?
-
-### 4. Handle Failure
+### 5. Handle Failure
 
 - IF design violates platform guidelines: Flag and propose compliant alternative
 - IF touch targets below minimum: Block — must meet 44pt iOS / 48dp Android
 - Log failures to docs/plan/{plan_id}/logs/
-
-### 5. Output
-
-Return JSON per `Output Format`
 
 </workflow>
 
@@ -356,23 +346,37 @@ Apply distinctive aesthetics within platform constraints. Each includes iOS/Andr
 
 ## Output Format
 
-// Be concise: omit nulls, empty arrays, verbose fields. Prefer: numbers over strings, status words over objects.
+Return ONLY valid JSON. Omit nulls and empty arrays.
 
-```jsonc
+```json
 {
-  "status": "completed|failed|in_progress|needs_revision",
-  "task_id": "[task_id]",
-  "failure_type": "transient|fixable|needs_replan|escalate|flaky|regression|new_failure|platform_specific",
-  "extra": {
-    "mode": "create|validate",
-    "platform": "ios|android|cross-platform",
-    "deliverables": { "specs": "string", "code_snippets": ["array"], "tokens": "object" },
-    "validation_findings": { "passed": "boolean", "issues": [{ "severity": "critical|high|medium|low", "category": "string", "description": "string", "location": "string", "recommendation": "string" }] },
-    "accessibility": { "contrast_check": "pass|fail", "touch_targets": "pass|fail", "screen_reader": "pass|fail|partial", "dynamic_type": "pass|fail|partial", "reduced_motion": "pass|fail|partial" },
-    "platform_compliance": { "ios_hig": "pass|fail|partial", "android_material": "pass|fail|partial", "safe_areas": "pass|fail" },
-    "confidence": "number (0-1)",
-    "learnings": { "patterns": [{ "name": "string", "description": "string", "confidence": "number" }], "gotchas": [] },
+  "status": "completed | failed | in_progress | needs_revision",
+  "task_id": "string",
+  "failure_type": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
+  "mode": "create | validate",
+  "platform": "ios | android | cross-platform",
+  "confidence": 0.0-1.0,
+  "deliverables": { "specs": "string", "code_snippets": ["string"], "tokens": "object" },
+  "validation_findings": {
+    "passed": "boolean",
+    "issues": [{ "severity": "critical | high | medium | low", "category": "string", "description": "string", "location": "string", "recommendation": "string" }]
   },
+  "accessibility": {
+    "contrast_check": "pass | fail",
+    "touch_targets": "pass | fail",
+    "screen_reader": "pass | fail | partial",
+    "dynamic_type": "pass | fail | partial",
+    "reduced_motion": "pass | fail | partial"
+  },
+  "platform_compliance": {
+    "ios_hig": "pass | fail | partial",
+    "android_material": "pass | fail | partial",
+    "safe_areas": "pass | fail"
+  },
+  "learnings": {
+    "patterns": [{ "name": "string", "description": "string", "confidence": 0.0-1.0 }],
+    "gotchas": ["string"]
+  }
 }
 ```
 

@@ -161,12 +161,13 @@ For each platform in task_definition.platforms:
 
 ### 7. Error Recovery
 
-| Error                  | Recovery                                                                            |
-| ---------------------- | ----------------------------------------------------------------------------------- |
-| Metro error            | `npx react-native start --reset-cache`                                              |
-| iOS build fail         | Check Xcode logs, `xcodebuild clean`, rebuild                                       |
-| Android build fail     | Check Gradle, `./gradlew clean`, rebuild                                            |
-| Simulator unresponsive | iOS: `xcrun simctl shutdown all && xcrun simctl boot all` / Android: `adb emu kill` |
+| Error                  | Recovery                                                  |
+| ---------------------- | --------------------------------------------------------- |
+| Metro error            | `npx react-native start --reset-cache`                    |
+| iOS build fail         | Check Xcode logs, `xcodebuild clean`, rebuild             |
+| Android build fail     | Check Gradle, `./gradlew clean`, rebuild                  |
+| Simulator unresponsive | iOS: `xcrun simctl shutdown all && xcrun simctl boot all` |
+|                        | Android: `adb emu kill`                                   |
 
 ### 8. Cleanup
 
@@ -184,27 +185,22 @@ Return JSON per `Output Format`
 
 ## Test Definition Format
 
-```jsonc
+```json
 {
-  "flows": [{
-    "flow_id": "string",
-    "description": "string",
-    "platform": "both" | "ios" | "android",
-    "setup": [...],
-    "steps": [
-      { "type": "launch", "cold_start": true },
-      { "type": "gesture", "action": "swipe", "direction": "left", "element": "#id" },
-      { "type": "gesture", "action": "tap", "element": "#id" },
-      { "type": "assert", "element": "#id", "visible": true },
-      { "type": "input", "element": "#id", "value": "${fixtures.user.email}" },
-      { "type": "wait", "strategy": "waitForElement", "element": "#id" }
-    ],
-    "expected_state": { "element_visible": "#id" },
-    "teardown": [...]
-  }],
-  "scenarios": [{ "scenario_id": "string", "description": "string", "platform": "string", "steps": [...] }],
-  "gestures": [{ "gesture_id": "string", "description": "string", "steps": [...] }],
-  "app_lifecycle": [{ "scenario_id": "string", "description": "string", "steps": [...] }]
+  "flows": [
+    {
+      "flow_id": "string",
+      "description": "string",
+      "platform": "both | ios | android",
+      "setup": ["string"],
+      "steps": [{ "type": "launch | gesture | assert | input | wait", "cold_start": "boolean", "action": "string", "direction": "string", "element": "string", "visible": "boolean", "value": "string", "strategy": "string" }],
+      "expected_state": { "element_visible": "string" },
+      "teardown": ["string"]
+    }
+  ],
+  "scenarios": [{ "scenario_id": "string", "description": "string", "platform": "string", "steps": ["string"] }],
+  "gestures": [{ "gesture_id": "string", "description": "string", "steps": ["string"] }],
+  "app_lifecycle": [{ "scenario_id": "string", "description": "string", "steps": ["string"] }]
 }
 ```
 
@@ -214,26 +210,27 @@ Return JSON per `Output Format`
 
 ## Output Format
 
-// Be concise: omit nulls, empty arrays, verbose fields. Prefer: numbers over strings, status words over objects.
+Return ONLY valid JSON. Omit nulls and empty arrays.
 
-```jsonc
+```json
 {
-  "status": "completed|failed|in_progress|needs_revision",
-  "task_id": "[task_id]",
-  "failure_type": "transient|fixable|needs_replan|escalate|flaky|regression|new_failure|platform_specific",
-  "extra": {
-    "execution_details": { "platforms_tested": ["ios", "android"], "framework": "string", "tests_total": "number", "time_elapsed": "string" },
-    "test_results": { "ios": { "total": "number", "passed": "number", "failed": "number", "skipped": "number" }, "android": {...} },
-    "confidence": "number (0-1)",
-    "performance_metrics": { "cold_start_ms": {...}, "memory_mb": {...}, "bundle_size_kb": "number" },
-    "gesture_results": [{ "gesture_id": "string", "status": "passed|failed", "platform": "string" }],
-    "push_notification_results": [{ "scenario_id": "string", "status": "passed|failed", "platform": "string" }],
-    "device_farm_results": { "provider": "string", "tests_run": "number", "tests_passed": "number" },
-    "evidence_path": "docs/plan/{plan_id}/evidence/{task_id}/",
-    "flaky_tests": ["test_id"],
-    "crashes": ["test_id"],
-    "failures": [{ "type": "string", "test_id": "string", "platform": "string", "details": "string", "evidence": ["string"] }],
-    "learnings": { "patterns": [{ "name": "string", "description": "string", "confidence": "number" }], "gotchas": [] },
+  "status": "completed | failed | in_progress | needs_revision",
+  "task_id": "string",
+  "failure_type": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
+  "confidence": 0.0-1.0,
+  "execution_details": { "platforms_tested": ["ios", "android"], "framework": "string", "tests_total": "number", "time_elapsed": "string" },
+  "test_results": { "ios": { "total": "number", "passed": "number", "failed": "number", "skipped": "number" }, "android": { "total": "number", "passed": "number", "failed": "number", "skipped": "number" } },
+  "performance_metrics": { "cold_start_ms": "object", "memory_mb": "object", "bundle_size_kb": "number" },
+  "gesture_results": [{ "gesture_id": "string", "status": "passed | failed", "platform": "string" }],
+  "push_notification_results": [{ "scenario_id": "string", "status": "passed | failed", "platform": "string" }],
+  "device_farm_results": { "provider": "string", "tests_run": "number", "tests_passed": "number" },
+  "evidence_path": "docs/plan/{plan_id}/evidence/{task_id}/",
+  "flaky_tests": ["string"],
+  "crashes": ["string"],
+  "failures": [{ "type": "string", "test_id": "string", "platform": "string", "details": "string", "evidence": ["string"] }],
+  "learnings": {
+    "patterns": [{ "name": "string", "description": "string", "confidence": 0.0-1.0 }],
+    "gotchas": ["string"]
   }
 }
 ```

@@ -62,7 +62,7 @@ hidden: true
 ---
 ```
 
-Required sections per agent: Role, Knowledge Sources, Workflow, Input Format, Output Format, Rules.
+Required sections per agent: Role, Knowledge Sources, Workflow, Input Format (defined in orchestrator's `<agent_input_reference>`), Output Format, Rules.
 
 ## Build & Test Commands
 
@@ -122,14 +122,3 @@ Gem Team is distributed via APM (Azure Package Manager) as a universal package. 
 | Codex CLI             | `.codex/agents/`          |
 | Gemini CLI            | Compiled into `GEMINI.md` |
 | Windsurf              | `.windsurf/skills/`       |
-
-## Knowledge Sources (Priority Order)
-
-When agents need information, consult in this order:
-
-1. **PRD** — `docs/PRD.yaml` (product requirements, scope, acceptance criteria)
-2. **Codebase** — Direct file reading, semantic search, grep
-3. **AGENTS.md** — This file (conventions, rules, instructions)
-4. **Memory** — Persistent memory tool (facts, patterns, gotchas)
-5. **Context7** — Official library docs via `mcp_io_github_ups_query-docs`
-6. **Online docs** — Web search, official documentation, llms.txt
