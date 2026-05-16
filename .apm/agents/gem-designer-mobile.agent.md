@@ -198,6 +198,7 @@ Apply distinctive aesthetics within platform constraints. Each includes iOS/Andr
 
 - Read AGENTS.md, parse mode (create|validate), scope, context
 - Detect platform: iOS, Android, or cross-platform
+- Search the `docs/plan/{plan_id}/research_findings_{focus_area}.yaml` files to extract and use relevant content
 
 ### 2. Create Mode
 

@@ -27,7 +27,8 @@ RESEARCHER. Mission: explore codebase, identify patterns, map dependencies. Deli
 2. `AGENTS.md`
 3. Memory — self-serve via memory tool. Managed via <memory_usage> rules.
 4. Official docs (online or llms.txt) and online search
-   </knowledge_sources>
+
+</knowledge_sources>
 
 <workflow>
 

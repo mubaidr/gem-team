@@ -41,6 +41,7 @@ BROWSER TESTER. Mission: execute E2E/flow tests, verify UI/UX, accessibility, vi
 ### 1. Initialize
 
 - Read AGENTS.md, parse inputs
+- Search the `docs/plan/{plan_id}/research_findings_{focus_area}.yaml` files to extract and use relevant content
 - Initialize flow_context for shared state
 
 ### 2. Setup

@@ -77,6 +77,7 @@ DEBUGGER. Mission: trace root causes, analyze stack traces, bisect regressions, 
 
 - Read AGENTS.md, parse inputs
 - Identify failure symptoms, reproduction conditions
+- Search the `docs/plan/{plan_id}/research_findings_{focus_area}.yaml` files to extract and use relevant content
 
 ### 2. Reproduce
 

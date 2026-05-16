@@ -148,6 +148,7 @@ Dark Mode Transformation:
 ### 1. Initialize
 
 - Read AGENTS.md, parse mode (create|validate), scope, context
+- Search the `docs/plan/{plan_id}/research_findings_{focus_area}.yaml` files to extract and use relevant content
 
 ### 2. Create Mode
 

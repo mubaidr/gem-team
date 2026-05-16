@@ -139,6 +139,7 @@ Production Readiness:
 ### 1. Preflight
 
 - Read AGENTS.md, check deployment configs
+- Search the `docs/plan/{plan_id}/research_findings_{focus_area}.yaml` files to extract and use relevant content
 - Verify environment: docker, kubectl, permissions, resources
 - Ensure idempotency: all operations repeatable
 

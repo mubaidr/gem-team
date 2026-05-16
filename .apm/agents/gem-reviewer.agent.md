@@ -39,6 +39,7 @@ REVIEWER. Mission: scan for security issues, detect secrets, verify PRD complian
 ### 1. Initialize
 
 - Read AGENTS.md, determine review_scope: plan | wave | task | final
+- Search the `docs/plan/{plan_id}/research_findings_{focus_area}.yaml` files to extract and use relevant content
 
 ### 1.5 Review Cache Pre-Check (Bypass)
 

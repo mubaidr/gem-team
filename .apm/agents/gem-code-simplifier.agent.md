@@ -79,6 +79,7 @@ CODE SIMPLIFIER. Mission: remove dead code, reduce complexity, consolidate dupli
 ### 1. Initialize
 
 - Read AGENTS.md, parse scope, objective, constraints
+- Search the `docs/plan/{plan_id}/research_findings_{focus_area}.yaml` files to extract and use relevant content
 
 ### 2. Analyze
 

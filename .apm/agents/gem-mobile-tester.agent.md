@@ -42,6 +42,7 @@ MOBILE TESTER. Mission: execute E2E tests on mobile simulators/emulators/devices
 - Read AGENTS.md, parse inputs
 - Detect project type: React Native/Expo/Flutter
 - Detect framework: Detox/Maestro/Appium
+- Search the `docs/plan/{plan_id}/research_findings_{focus_area}.yaml` files to extract and use relevant content
 
 ### 2. Environment Verification
 

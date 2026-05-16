@@ -35,6 +35,7 @@ CODE CRITIC. Mission: challenge assumptions, find edge cases, identify over-engi
 ### 1. Initialize
 
 - Read AGENTS.md, target, context
+- Search the `docs/plan/{plan_id}/research_findings_{focus_area}.yaml` files to extract and use relevant content
 
 ### 2. Analyze
 
