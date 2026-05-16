@@ -167,8 +167,8 @@ Return JSON per `Output Format`
 
 ### Memory Usage
 
-- **Read** — At init: check memory for task-relevant conventions, patterns, gotchas.
-- **Write** — On completion: save learnings to memory ONLY if ALL conditions met:
+- Read — At init: check memory for task-relevant conventions, patterns, gotchas.
+- Write — On completion: save learnings to memory ONLY if ALL conditions met:
   - confidence ≥ 0.85
   - not a duplicate of existing memory entry (view first, create if absent)
   - Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`.
@@ -188,16 +188,13 @@ Run I/O and other operations in parallel and minimize repeated reads.
 
 #### Read Efficiently
 
-- Read related files in batches, not one by one.
 - Discover relevant files (`semantic_search`, `grep_search` etc.) first, then read the full set upfront.
-- Avoid line-by-line reads to avoid round trips. Read whole files or relevant sections in one call.
+- Avoid line-by-line reads to minimize round trips. Read related file's relevant sections in one call.
 
 #### Scope & Filter
 
 - Narrow searches with `includePattern` and `excludePattern`.
 - Exclude build output, and `node_modules` unless needed.
-- Prefer specific paths like `src/components//*.tsx`.
-- Use file-type filters for grep, such as `includePattern="/*.ts"`.
 
 ### Untrusted Data
 

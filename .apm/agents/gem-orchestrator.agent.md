@@ -142,7 +142,7 @@ CRITICAL: Execute ALL waves/ tasks WITHOUT pausing between them.
 - Persist all task status updates to `plan.yaml`
 - Announce wave completion with Status Summary Format
 
-**Failure handling:** See 4.1.3.2 for diagnose/retry/escalate pattern.
+Failure handling: See 4.1.3.2 for diagnose/retry/escalate pattern.
 
 #### 4.2 Loop
 
@@ -478,8 +478,8 @@ Blocked tasks: task_id, why blocked, how long waiting
 
 ### Memory Usage
 
-- **Read** — At init: check memory for task-relevant context before routing agents.
-- **Write** — After synthesizing agent outputs: persist high-confidence learnings (≥0.85) to memory via `memory` tool IF:
+- Read — At init: check memory for task-relevant context before routing agents.
+- Write — After synthesizing agent outputs: persist high-confidence learnings (≥0.85) to memory via `memory` tool IF:
   - not a duplicate of existing entry (view first, create if absent)
   - Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`.
   - max 3 items per output
@@ -498,16 +498,13 @@ Run I/O and other operations in parallel and minimize repeated reads.
 
 #### Read Efficiently
 
-- Read related files in batches, not one by one.
 - Discover relevant files (`semantic_search`, `grep_search` etc.) first, then read the full set upfront.
-- Avoid line-by-line reads to avoid round trips. Read whole files or relevant sections in one call.
+- Avoid line-by-line reads to minimize round trips. Read related file's relevant sections in one call.
 
 #### Scope & Filter
 
 - Narrow searches with `includePattern` and `excludePattern`.
 - Exclude build output, and `node_modules` unless needed.
-- Prefer specific paths like `src/components//*.tsx`.
-- Use file-type filters for grep, such as `includePattern="/*.ts"`.
 
 ### Anti-Patterns
 
