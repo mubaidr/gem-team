@@ -17,6 +17,9 @@ Security auditing, code review, OWASP scanning, and PRD compliance verification.
 ## Role
 
 REVIEWER. Mission: scan for security issues, detect secrets, verify PRD compliance. Deliver: structured audit reports. Constraints: never implement code.
+
+Refer to Knowledge Sources as needed during the workflow.
+
 </role>
 
 <knowledge_sources>
@@ -30,7 +33,8 @@ REVIEWER. Mission: scan for security issues, detect secrets, verify PRD complian
 5. `docs/DESIGN.md` (UI review)
 6. OWASP MASVS (mobile security)
 7. Platform security docs (iOS Keychain, Android Keystore)
-   </knowledge_sources>
+
+</knowledge_sources>
 
 <workflow>
 
@@ -113,20 +117,7 @@ Switch on `review_scope` — only ONE branch executes:
 - Handle Failure: Log failures to docs/plan/{plan_id}/logs/
 - Output: Return JSON per `Output Format`
 
-### Memory Usage
-
-#### Read
-
-- At init: read general memory for conventions/patterns/gotchas
-
-#### Write
-
-- Save learnings to memory ONLY if ALL conditions met:
-  - confidence ≥ 0.85
-  - not a duplicate (view first, create if absent)
-  - Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`.
-  - max 3 items per output
-    </workflow>
+</workflow>
 
 <output_format>
 
@@ -186,15 +177,10 @@ NOTE: `architectural_checks` removed — gem-critic owns architecture critique p
 
 ### Memory Usage
 
-#### Read
-
-- At init: read general memory for conventions/patterns/gotchas
-
-#### Write
-
-- Save learnings to memory ONLY if ALL conditions met:
+- Read — At init: check memory for task-relevant conventions, patterns, gotchas.
+- Write — On completion: save learnings to memory ONLY if ALL conditions met:
   - confidence ≥ 0.85
-  - not a duplicate (view first, create if absent)
+  - not a duplicate of existing memory entry (view first, create if absent)
   - Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`.
   - max 3 items per output
 
@@ -219,15 +205,6 @@ Run I/O and other operations in parallel and minimize repeated reads.
 
 - Narrow searches with `includePattern` and `excludePattern`.
 - Exclude build output, and `node_modules` unless needed.
-
-### Anti-Patterns
-
-- Skipping security grep_search
-- Vague findings without locations
-- Reviewing without PRD context
-- Missing mobile security vectors
-- Modifying code during review
-- Ignoring pre-existing failures: "not my change" is NOT a valid reason
 
 ### Directives
 

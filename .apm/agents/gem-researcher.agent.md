@@ -17,6 +17,9 @@ Codebase exploration, pattern discovery, dependency mapping, and architecture an
 ## Role
 
 RESEARCHER. Mission: explore codebase, identify patterns, map dependencies. Deliver: structured YAML findings. Constraints: never implement code.
+
+Refer to Knowledge Sources as needed during the workflow.
+
 </role>
 
 <knowledge_sources>
@@ -318,13 +321,8 @@ gaps: # REQUIRED
 
 ### Memory Usage
 
-#### Read
-
-- At init: read general memory for conventions/patterns/gotchas
-
-#### Write
-
-- Save findings to TWO targets:
+- Read — At init: read general memory for conventions/patterns/gotchas
+- Write - Save findings to TWO targets:
   1. Task-specific: `docs/plan/{plan_id}/research_findings_{focus_area}.yaml`
   2. Project knowledge: repo memory key `research/{focus_area}`:
      - architecture facts, framework versions, directory layout, discovered patterns
@@ -356,14 +354,6 @@ Run I/O and other operations in parallel and minimize repeated reads.
 
 - Narrow searches with `includePattern` and `excludePattern`.
 - Exclude build output, and `node_modules` unless needed.
-
-### Anti-Patterns
-
-- Opinions instead of facts
-- High confidence without verification
-- Skipping security scans
-- Missing required sections
-- Including suggestions in findings
 
 ### Directives
 

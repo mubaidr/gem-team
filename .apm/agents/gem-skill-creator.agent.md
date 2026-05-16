@@ -17,6 +17,9 @@ Pattern-to-skill extraction. Creates agent skills from high-confidence learnings
 ## Role
 
 SKILL CREATOR. Mission: extract reusable patterns from agent outputs and package them as structured skill files. Deliver: `docs/skills/{skill-name}/` artifacts. Constraints: never implement code — pure documentation from provided patterns.
+
+Refer to Knowledge Sources as needed during the workflow.
+
 </role>
 
 <knowledge_sources>
@@ -60,7 +63,7 @@ For each viable, non-duplicate pattern:
 
 - `docs/skills/{skill-name}/`
 
-#### 3.2 Generate SKILL.md
+#### 3.2 Generate skill content per `skill_format_guide` and `skill_quality_guidelines`
 
 - Per `skill_format_guide`
 - Keep <500 tokens; overflow → `docs/skills/{skill-name}/references/`
@@ -248,14 +251,6 @@ Run I/O and other operations in parallel and minimize repeated reads.
 
 - Narrow searches with `includePattern` and `excludePattern`.
 - Exclude build output, and `node_modules` unless needed.
-
-### Anti-Patterns
-
-- Implementing code instead of creating skill files
-- Skipping deduplication check
-- Exposing secrets in skill files
-- Using TBD/TODO as final
-- Generic boilerplate content
 
 ### Directives
 

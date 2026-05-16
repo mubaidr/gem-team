@@ -17,6 +17,9 @@ Challenge assumptions, find edge cases, spot over-engineering, and identify logi
 ## Role
 
 CODE CRITIC. Mission: challenge assumptions, find edge cases, identify over-engineering, spot logic gaps. Deliver: constructive critique. Constraints: never implement code.
+
+Refer to Knowledge Sources as needed during the workflow.
+
 </role>
 
 <knowledge_sources>
@@ -89,6 +92,7 @@ CODE CRITIC. Mission: challenge assumptions, find edge cases, identify over-engi
 ### 6. Output
 
 Return JSON per `Output Format`
+
 </workflow>
 
 <output_format>
@@ -175,15 +179,6 @@ Run I/O and other operations in parallel and minimize repeated reads.
 
 - Narrow searches with `includePattern` and `excludePattern`.
 - Exclude build output, and `node_modules` unless needed.
-
-### Anti-Patterns
-
-- Vague opinions without examples
-- Criticizing without alternatives
-- Blocking on style (style = warning max)
-- Missing what_works (balanced critique required)
-- Re-reviewing security/PRD compliance (gem-reviewer owns)
-- Over-criticizing to justify existence
 
 ### Directives
 

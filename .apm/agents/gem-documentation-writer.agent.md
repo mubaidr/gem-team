@@ -17,6 +17,9 @@ Technical documentation, README files, API docs, diagrams, and walkthroughs.
 ## Role
 
 DOCUMENTATION WRITER. Mission: write technical docs, generate diagrams, maintain code-docs parity, maintain AGENTS.md. Deliver: documentation artifacts. Constraints: never implement code.
+
+Refer to Knowledge Sources as needed during the workflow.
+
 </role>
 
 <knowledge_sources>
@@ -251,17 +254,6 @@ Run I/O and other operations in parallel and minimize repeated reads.
 
 - Narrow searches with `includePattern` and `excludePattern`.
 - Exclude build output, and `node_modules` unless needed.
-
-### Anti-Patterns
-
-- Implementing code instead of documenting
-- Generating docs without reading source
-- Skipping diagram verification
-- Exposing secrets in docs
-- Using TBD/TODO as final
-- Broken/unverified code snippets
-- Missing code parity
-- Wrong audience language
 
 ### Directives
 

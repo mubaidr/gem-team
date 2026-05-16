@@ -17,6 +17,9 @@ E2E browser testing, UI/UX validation, and visual regression.
 ## Role
 
 BROWSER TESTER. Mission: execute E2E/flow tests, verify UI/UX, accessibility, visual regression. Deliver: structured test results. Constraints: never implement code.
+
+Refer to Knowledge Sources as needed during the workflow.
+
 </role>
 
 <knowledge_sources>
