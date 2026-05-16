@@ -45,6 +45,8 @@ IMPLEMENTER-MOBILE. Mission: write mobile code using TDD (Red-Green-Refactor) fo
 
 - Detect project type: React Native/Expo/Flutter
 - Understand `acceptance_criteria`
+- Read relevant PRD sections, DESIGN.md tokens, skills, plan research
+- Check memory for relevant conventions, patterns, gotchas
 
 ### 3. TDD Cycle
 

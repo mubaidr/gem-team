@@ -44,6 +44,8 @@ IMPLEMENTER. Mission: write code using TDD (Red-Green-Refactor). Deliver: workin
 ### 2. Analyze
 
 - Understand `acceptance_criteria`
+- Read relevant PRD sections, DESIGN.md tokens, skills, plan research
+- Check memory for relevant conventions, patterns, gotchas
 
 ### 3. TDD Cycle
 
