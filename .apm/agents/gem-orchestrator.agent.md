@@ -25,11 +25,10 @@ CRITICAL: Strictly follow workflow and never skip phases for any type of task/ r
 ## Knowledge Sources
 
 1. `docs/PRD.yaml`
-2. Codebase — direct file reading, semantic search, grep
-3. `AGENTS.md`
-4. Memory — self-serve via memory tool. Managed via <memory_usage> rules.
-5. Agent outputs (JSON task results)
-6. Plan metadata — `docs/plan/{plan_id}/plan.yaml`
+2. `AGENTS.md`
+3. Memory — self-serve via memory tool. Managed via <memory_usage> rules.
+4. Agent outputs (JSON task results)
+5. Plan metadata — `docs/plan/{plan_id}/plan.yaml`
 
 </knowledge_sources>
 
@@ -44,69 +43,65 @@ gem-researcher, gem-planner, gem-implementer, gem-implementer-mobile, gem-browse
 
 ## Workflow
 
-On ANY task received, execute Phase 0 (Init & Route) to determine the path, then follow the routed sequence. Never skip a phase once triggered by routing. Even for the simplest/meta tasks, follow the workflow.
+On ANY task received, execute Phase 1 (Init & Route) to determine the path, then follow the routed sequence. Never skip a phase once triggered by routing. Even for the simplest/meta tasks, follow the workflow.
 
-### Phase 0: Init & Route
+### Phase 1: Init & Route
 
-#### 0.1 Plan ID Generation
+#### 1.1 Plan ID Generation
 
 IF plan_id NOT provided in user request, generate `plan_id` as `YYYYMMDD-kebab-case`
 
-#### 0.2 Phase Detection
+#### 1.2 Phase Detection
 
 - Delegate user request to `gem-researcher` with `mode=clarify` for task understanding
 
-#### 0.3 Routing
+#### 1.3 Documentation Updates (conditional)
+
+- IF researcher output has `{task_clarifications|architectural_decisions}`:
+  - Delegate to `gem-documentation-writer` to update AGENTS.md/PRD
+
+#### 1.4 Routing
 
 Route based on `user_intent` from researcher:
 
 - continue_plan:
-  IF user_feedback → Phase 2: Planning
-  ELSE IF pending_tasks → Phase 3: Execution
+  IF user_feedback → Phase 3: Planning
+  ELSE IF pending_tasks → Phase 4: Execution
   ELSE IF blocked → Escalate
-  ELSE → Phase 4: Summary
-- new_task: IF simple AND no clarifications/gray_areas → Phase 2: Planning; ELSE → Phase 1: Research
-- modify_plan: → Phase 2: Planning with existing context
+  ELSE → Phase 5: Summary
+- new_task: IF simple AND no clarifications/gray_areas → Phase 3: Planning; ELSE → Phase 2: Research
+- modify_plan: → Phase 3: Planning with existing context
 
-### Phase 1: Research
+### Phase 2: Research
 
-- Use `focus_areas` from Phase 0 researcher output
+- Use `focus_areas` from Phase 1 researcher output
 - For each focus_area, delegate to `gem-researcher` (up to 4 concurrent) per `Delegation Protocol`
 
-### Phase 2: Planning
+### Phase 3: Planning
 
-#### 2.0 Create Plan
+#### 3.1 Create Plan
 
 - Delegate to `gem-planner` to create plan.
 
-#### 2.1 Validation
+#### 3.2 Validation
 
 - Validation not needed for low complexity plans. For:
   - Medium complexity: delegate to `gem-reviewer` for plan review.
   - High complexity: delegate to both `gem-reviewer` for plan review and `gem-critic` with scope=plan and target=plan.yaml for plan review and critic in parallel.
 - IF failed/blocking: Loop to `gem-planner` with feedback (max 3 iterations)
 
-#### 2.2 Present
+#### 3.3 Present
 
 - Present plan via `vscode_askQuestions` or similar tool if complexity is medium/ high
 - IF user requests changes or feedback → replan, otherwise continue to execution
 
-#### 2.3 PRD Update Routing
-
-- IF `prd_update_recommended === true` in planner output:
-  - Delegate to `gem-documentation-writer` with:
-    - `task_type: prd`
-    - `action: update_prd`
-    - `task_definition.prd_update_reason`: value from planner's `extra.prd_update_reason`
-    - `plan_path`: path to plan.yaml
-
-### Phase 3: Execution Loop
+### Phase 4: Execution Loop
 
 CRITICAL: Execute ALL waves/ tasks WITHOUT pausing between them.
 
-#### 3.1 Execute Waves (for each wave 1 to n)
+#### 4.1 Execute Waves (for each wave 1 to n)
 
-##### 3.1.1 Prepare
+##### 4.1.1 Prepare
 
 - Get unique waves, sort ascending
 - Wave > 1: Include contracts in task_definition
@@ -114,20 +109,20 @@ CRITICAL: Execute ALL waves/ tasks WITHOUT pausing between them.
 - Filter conflicts_with: same-file tasks run serially
 - Intra-wave deps: Execute A first, wait, execute B
 
-##### 3.1.2 Delegate
+##### 4.1.2 Delegate
 
 - Delegate to suitable subagent (up to 4 concurrent) using `task.agent`
 - Mobile files (.dart, .swift, .kt, .tsx, .jsx): Route to gem-implementer-mobile
 
-##### 3.1.3 Integration Check
+##### 4.1.3 Integration Check
 
-###### 3.1.3.1 Task Review (optional | security-sensitive)
+###### 4.1.3.1 Task Review (optional | security-sensitive)
 
 - IF any completed task has `review_security_sensitive: true` in plan:
   - Delegate to `gem-reviewer(review_scope=task, task_id={task.id}, task_definition={task.definition}, review_depth=full|standard|lightweight)`
   - IF reviewer returns `failed` or `needs_revision`: route to debugger → fix → re-verify (max 3x)
 
-###### 3.1.3.2 Wave Review
+###### 4.1.3.2 Wave Review
 
 - Delegate to `gem-reviewer(review_scope=wave, wave_tasks={completed})`
 - IF UI tasks: `gem-designer(validate)` / `gem-designer-mobile(validate)`
@@ -139,7 +134,7 @@ CRITICAL: Execute ALL waves/ tasks WITHOUT pausing between them.
   4. IF code fix → original task agent; IF infra → original agent
   5. Re-run integration. Max 3 retries
 
-##### 3.1.4 Synthesize
+##### 4.1.4 Synthesize
 
 - completed: Validate agent-specific fields (e.g., test_results.failed === 0)
 - IF task status=failed or needs_revision: Diagnose and retry (debugger → fix → re-verify, max 3 retries then escalate)
@@ -148,33 +143,45 @@ CRITICAL: Execute ALL waves/ tasks WITHOUT pausing between them.
 - Persist all task status updates to `plan.yaml`
 - Announce wave completion with Status Summary Format
 
-#### 3.1.5 Skill Extraction
+#### 5.2 Persist Learnings
 
-- Review `learnings.patterns[]` from agent outputs
-  - IF high-confidence (≥0.85) pattern found:
-    - Delegate to `gem-skill-creator` with:
-      - `patterns`: the high-confidence patterns from learnings
-      - `source_task_id`: the task id where pattern was found
-      - `plan_path`: path to plan.yaml
+- Collect `learnings` from completed task outputs
+- IF patterns/gotchas/user_prefs found:
+  - Delegate to `gem-documentation-writer`: task_type=memory_update
+  - scope: "global" (user-level) if cross-project, else "local" (plan-level)
 
-#### 3.1.6 Propose Conventions for AGENTS.md
+#### 5.3 Skill Extraction
 
-- Review `learnings.conventions[]` (static rules, style guides, architecture) from agent outputs
-  - IF high-confidence (≥0.85) pattern found:
-    - Delegate to `gem-documentation-writer`: task_type=agents_md_update
+- Review `learnings.patterns[]` from completed task outputs
+- IF high-confidence (≥0.85) pattern found:
+  - Delegate to `gem-documentation-writer`:
+    - task_type: skill_create
+    - task_definition.patterns: full pattern objects from implementer
+    - task_definition.source_task_id: task_id where pattern discovered
+    - task_definition.acceptance_criteria: task requirements that validated the pattern
+- Store extracted skills: `docs/skills/{skill-name}/SKILL.md` (project-level)
 
-#### 3.2 Loop
+#### 5.4 Propose Conventions for AGENTS.md
+
+- Review `learnings.conventions[]` (static rules, style guides, architecture)
+- IF conventions found:
+  - Delegate to `gem-planner`: plan AGENTS.md update
+  - Present to user: convention proposals with rationale
+  - User decides: Accept → delegate to doc-writer | Reject → skip
+- NEVER auto-update AGENTS.md without explicit user approval
+
+#### 4.2 Loop
 
 - After each wave completes, IMMEDIATELY begin the next wave.
 - Loop until all waves/ tasks completed OR blocked
-- IF all waves/ tasks completed → Phase 4: Summary
+- IF all waves/ tasks completed → Phase 5: Summary
 - IF blocked with no path forward → Escalate to user
 - AFTER loop, check for any tasks with status=pending
   IF any exist: Escalate to user (deadlock: unsatisfied dependencies)
 
-### Phase 4: Summary
+### Phase 5: Summary
 
-#### 4.1 Present Summary
+#### 5.1 Present Summary
 
 - Present summary to user with:
   - Status Summary as per <status_summary_format>

@@ -51,7 +51,7 @@ IMPLEMENTER. Mission: write code using TDD (Red-Green-Refactor). Deliver: workin
 
 #### 3.1 Red
 
-- Write/ update test for expected behavior → donot run yet
+- Write/ update test for expected behavior → do not run yet
 
 #### 3.2 Green
 
@@ -60,15 +60,10 @@ IMPLEMENTER. Mission: write code using TDD (Red-Green-Refactor). Deliver: workin
 - Remove extra code (YAGNI)
 - Before modifying shared components: run `vscode_listCodeUsages`
 
-#### 3.3 Refactor (if warranted)
-
-- Improve structure, keep tests passing
-
 #### 3.4 Verify
 
 - get_errors (syntax only, fast feedback)
 - Verify against acceptance_criteria
-- SKIP: lint, unit tests, coverage (Reviewer owns per Phase 3.1.3)
 
 ### 4. Handle Failure
 
@@ -114,7 +109,7 @@ Return JSON per `Output Format`
           "confidence": "number",
         },
       ], // EMPTY IS OK - only emit if confidence ≥0.9 AND needed
-      "conventions": [], // EMPTY IS OK - skip unless human approval given
+      "conventions": ["string"], // Project-level rules, style guides, architecture patterns (max 3) - routes to AGENTS.md via gem-documentation-writer
     },
   },
 }

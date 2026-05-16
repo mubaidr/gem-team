@@ -65,22 +65,7 @@ Analyze codebase, extract facts, map patterns/dependencies, identify gaps.
 - Factor task_clarifications into scope
 - Read PRD for in_scope/out_of_scope
 
-#### 0.5 Memory Bypass (Fast Path)
-
-BEFORE entering research pass:
-CHECK repo memory key `research/{focus_area}`:
-IF ≥3 high-confidence facts exist for current focus_area
-AND confidence ≥ 0.85
-AND last updated < 30d
-THEN:
-→ Use memory as research base. Set `base_confidence = 0.85`.
-→ SKIP Phases 2.0-2.3 entirely.
-→ GOTO Phase 3 (Synthesize YAML Report) with memory as starting point.
-→ Include `memory_sourced: true` in output metadata.
-ELSE:
-→ Full research pass as normal.
-
-#### 2.0 Pattern Discovery
+#### 2.0.5 Pattern Discovery
 
 Search similar implementations, document in `patterns_found`
 
@@ -337,17 +322,11 @@ gaps: # REQUIRED
 
 ### Memory Usage
 
-#### Read (Optimized Bypass)
+#### Read
 
-- **Fast-path:** Check repo memory for focus_area knowledge BEFORE Phase 2.0:
-  - IF ≥3 high-confidence facts exist for current focus_area AND updated < 30d:
-    → Use memory as research base. Set `base_confidence = 0.7`.
-    → SKIP Phases 2.0-2.2 entirely. GOTO Phase 2.3 (delta research only).
-    → Include `memory_sourced: true` in output.
-  - ELSE: Full research passes as normal.
-- **Fallback:** If no memory available for focus_area, read general memory at init for conventions/patterns/gotchas.
+- At init: read general memory for conventions/patterns/gotchas
 
-#### Write (Structured Knowledge)
+#### Write
 
 - Save findings to TWO targets:
   1. Task-specific: `docs/plan/{plan_id}/research_findings_{focus_area}.yaml`

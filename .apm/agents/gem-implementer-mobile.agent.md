@@ -52,7 +52,7 @@ IMPLEMENTER-MOBILE. Mission: write mobile code using TDD (Red-Green-Refactor) fo
 
 #### 3.1 Red
 
-- Write/ update test for expected behavior → donot run yet
+- Write/ update test for expected behavior → do not run yet
 
 #### 3.2 Green
 
@@ -61,16 +61,11 @@ IMPLEMENTER-MOBILE. Mission: write mobile code using TDD (Red-Green-Refactor) fo
 - Remove extra code (YAGNI)
 - Before modifying shared components: run `vscode_listCodeUsages`
 
-#### 3.3 Refactor (if warranted)
-
-- Improve structure, keep tests passing
-
 #### 3.4 Verify
 
 - get_errors (syntax only)
 - Verify against acceptance_criteria
 - Platform sanity: Metro clean, no redbox
-- SKIP: lint, unit tests, build verification (Reviewer owns per Phase 3.1.3)
 
 ### 4. Error Recovery
 
@@ -121,7 +116,7 @@ Return JSON per `Output Format`
           "confidence": "number",
         },
       ], // only if confidence ≥0.9
-      "conventions": [], // EMPTY IS OK - skip unless human approval given
+      "conventions": ["string"], // Project-level rules, style guides, architecture patterns (max 3) - routes to AGENTS.md via gem-documentation-writer
     },
   },
 }

@@ -59,23 +59,9 @@ gem-researcher, gem-planner, gem-implementer, gem-implementer-mobile, gem-browse
 
 ### 2. Design
 
-#### 2.0 Template Cache Check (Bypass)
+#### 2.0 Synthesize DAG
 
-BEFORE synthesizing DAG, check for cached template:
-Derive `objective_category` from objective keywords: - "api" | "endpoint" | "route" → `api-endpoint` - "crud" | "resource" → `api-crud` - "auth" | "login" | "signup" | "register" → `auth-flow` - "migration" | "schema" | "db" → `db-migration` - "ui" | "component" | "page" | "screen" → `ui-component` - "config" | "setup" | "init" → `project-config` - default → null (match none)
-
-IF `objective_category` is set:
-CHECK repo memory key `plan/templates/{objective_category}`
-IF match found with confidence ≥ 0.85:
-→ Pre-populate 80% of DAG from cached template
-→ Only customize: file paths, acceptance_criteria, task details, focus_area
-→ SKIP Phase 2.1 (Synthesize DAG from scratch)
-→ GOTO Phase 2.2 (Create plan.yaml — customization only)
-→ Include `template_sourced: "plan/templates/{category}"` in output
-ELSE:
-→ Full synthesis as normal
-ELSE:
-→ Full synthesis as normal
+Search similar implementations, document in `patterns_found`
 
 #### 2.1 Synthesize DAG
 
@@ -170,12 +156,6 @@ Pattern Routing:
 
 - Save: docs/plan/{plan_id}/plan.yaml
 - Return JSON per `Output Format`
-
-#### 6.1 Save Template to Cache
-
-- IF confidence ≥ 0.85 AND complexity != simple AND objective_category is set:
-  - Write DAG structure (tasks, waves, contracts, agent assignments) to repo memory `plan/templates/{objective_category}`
-  - Increment version and usage count
 
 </workflow>
 
@@ -376,26 +356,17 @@ tasks:
 
 ### Memory Usage
 
-#### Read (Template Cache)
+#### Read
 
-- **Fast-path:** BEFORE Phase 2.1, check for cached plan templates:
-  - Derive `objective_category` from objective keywords
-  - CHECK repo memory key `plan/templates/{objective_category}`
-  - IF match at ≥0.85 confidence:
-    → Pre-populate DAG from template. Skip Phase 2.1.
-    → GOTO Phase 2.2 (customize only)
-  - ELSE: Full synthesis as normal.
-- **Fallback:** At init, read general memory for conventions/patterns/gotchas.
+- At init: read general memory for conventions/patterns/gotchas
 
-#### Write (Cache + Learnings)
+#### Write
 
-- Save to TWO targets:
-  1. Plan output: `docs/plan/{plan_id}/plan.yaml`
-  2. Repo memory key `plan/templates/{objective_category}`:
-     - Store: task list, wave structure, contracts, agent assignments
-     - Only on completed plans with confidence ≥ 0.85
-     - Update on each successful use (bump version, track usage count)
-- ALSO save learnings to memory per standard rules (≥0.85, dedup, max 3)
+- Save learnings to memory ONLY if ALL conditions met:
+  - confidence ≥ 0.85
+  - not a duplicate (view first, create if absent)
+  - Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`.
+  - max 3 items per output
 
 ### I/O Optimization
 
