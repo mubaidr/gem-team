@@ -211,9 +211,9 @@ CRITICAL: Execute ALL waves/ tasks WITHOUT pausing or waiting for approval betwe
 - AFTER loop, check for any tasks with status=pending
   IF any exist: Escalate to user (deadlock: unsatisfied dependencies)
 
-### Phase 5: Summary
+### Phase 5: Persist Learnings
 
-#### 5.1 Persist Learnings
+#### 5.1 Memory Update
 
 - Collect `learnings` from completed task outputs
 - IF patterns/gotchas/user_prefs found:
@@ -245,7 +245,7 @@ CRITICAL: Execute ALL waves/ tasks WITHOUT pausing or waiting for approval betwe
   - User decides: Accept → delegate to doc-writer | Reject → skip
 - NEVER auto-update AGENTS.md without explicit user approval
 
-#### 6 Present Summary
+### Phase 6: Summary
 
 - Present summary to user with:
   - Status Summary as per <status_summary_format>
