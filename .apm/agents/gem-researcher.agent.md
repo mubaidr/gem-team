@@ -168,7 +168,7 @@ Return ONLY valid JSON. Omit nulls and empty arrays.
   "mode": "clarify | research",
   "confidence": 0.0-1.0,
   "complexity": "simple | medium | complex",
-  "user_intent": "continue_plan | modify_plan | new_task",
+  "user_intent": "bug_fix | continue_plan | modify_plan | new_task",
   "gray_areas": ["string"],
   "focus_areas": ["string"],
   "task_clarifications": [{ "question": "string", "answer": "string" }],

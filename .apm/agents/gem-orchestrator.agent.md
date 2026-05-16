@@ -76,7 +76,7 @@ Route based on `user_intent` from researcher and signal detection:
   IF user_feedback → Phase 3: Planning
   ELSE IF pending_tasks → Phase 4: Execution
   ELSE IF blocked → Escalate
-  ELSE → Phase 5: Summary
+  ELSE → Phase 6: Summary
 - new_task: IF simple AND no clarifications/gray_areas → Phase 3: Planning; ELSE → Phase 2: Research
 - modify_plan: → Phase 3: Planning with existing context
 
@@ -213,20 +213,14 @@ CRITICAL: Execute ALL waves/ tasks WITHOUT pausing or waiting for approval betwe
 
 ### Phase 5: Summary
 
-#### 5.1 Present Summary
-
-- Present summary to user with:
-  - Status Summary as per <status_summary_format>
-  - Next recommended steps (if any)
-
-#### 5.2 Persist Learnings
+#### 5.1 Persist Learnings
 
 - Collect `learnings` from completed task outputs
 - IF patterns/gotchas/user_prefs found:
   - Delegate to `gem-documentation-writer`: task_type=memory_update
   - scope: "global" (user-level) if cross-project, else "local" (plan-level)
 
-#### 5.3 Persist Context Bundle (Bug-Fix Tasks)
+#### 5.2 Persist Context Bundle (Bug-Fix Tasks)
 
 - For bug-fix tasks: persist diagnosis + learnings to `docs/plan/{plan_id}/context_bundle.yaml`
 - Include: root_cause, affected_files, commands_run, tests_run, known_failed_attempts, next_recommended_action
@@ -250,6 +244,12 @@ CRITICAL: Execute ALL waves/ tasks WITHOUT pausing or waiting for approval betwe
   - Present to user: convention proposals with rationale
   - User decides: Accept → delegate to doc-writer | Reject → skip
 - NEVER auto-update AGENTS.md without explicit user approval
+
+#### 6 Present Summary
+
+- Present summary to user with:
+  - Status Summary as per <status_summary_format>
+  - Next recommended steps (if any)
 
 </workflow>
 

@@ -280,6 +280,13 @@ tasks:
     # gem-implementer:
     tech_stack: [string]
     test_coverage: string | null
+    debugger_diagnosis: object | null # from bug-fix fast path
+    implementation_handoff:
+      do_not_reinvestigate: [string]
+      required_test_first: string
+      target_files: [string]
+      minimal_change: string
+      acceptance_checks: [string]
     research_sources: [string] # research_findings_*.yaml files that informed this task
     # gem-reviewer:
     requires_review: boolean
