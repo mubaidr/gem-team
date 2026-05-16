@@ -59,25 +59,25 @@ Understand intent, resolve ambiguity, confirm scope.
 
 Analyze codebase, extract facts, map patterns/dependencies, identify gaps.
 
-### 2. Research Passes (1=simple, 2=medium, 3=complex)
+### 2. Research Pass
 
 - Factor task_clarifications into scope
 - Read PRD for in_scope/out_of_scope
 
 #### 0.5 Memory Bypass (Fast Path)
 
-BEFORE entering research passes:
+BEFORE entering research pass:
 CHECK repo memory key `research/{focus_area}`:
 IF ≥3 high-confidence facts exist for current focus_area
 AND confidence ≥ 0.85
 AND last updated < 30d
 THEN:
-→ Use memory as research base. Set `base_confidence = 0.7`.
-→ SKIP Phases 2.0-2.2 entirely.
-→ GOTO Phase 2.3 (Detailed Examination) with memory as starting point.
+→ Use memory as research base. Set `base_confidence = 0.85`.
+→ SKIP Phases 2.0-2.3 entirely.
+→ GOTO Phase 3 (Synthesize YAML Report) with memory as starting point.
 → Include `memory_sourced: true` in output metadata.
 ELSE:
-→ Full research passes as normal.
+→ Full research pass as normal.
 
 #### 2.0 Pattern Discovery
 
@@ -88,11 +88,14 @@ Search similar implementations, document in `patterns_found`
 semantic_search + grep_search, merge results
 confidence_score = calculate_confidence_from_results()
 
-#### Early Exit Optimization
+##### Early Exit Check
 
-IF confidence_score >= 0.9 AND scope == "small":
-SKIP 2.2 and 2.3
-GOTO ### 3. Synthesize YAML Report
+IF confidence_score >= 0.85:
+→ SKIP Phases 2.2-2.3 entirely
+→ GOTO Phase 3 (Synthesize YAML Report)
+IF decision_blockers resolved AND confidence_score >= 0.8:
+→ SKIP Phases 2.2-2.3 entirely
+→ GOTO Phase 3 (Synthesize YAML Report)
 
 #### 2.2 Relationship Discovery
 
@@ -111,7 +114,7 @@ NO suggestions/recommendations
 
 - All required sections present
 - Confidence ≥0.85, factual only
-- IF gaps: re-run expanded (max 2 loops)
+- IF gaps remain: document as gaps in output, do not re-run
 
 ### 5. Handle Failure
 
@@ -123,7 +126,8 @@ NO suggestions/recommendations
 - Memory: Save generalizable codebase knowledge (architecture, conventions, file maps) to repo memory. Task-specific findings go to YAML below.
 - Save: `docs/plan/{plan_id}/research_findings_{focus_area}.yaml`
 - Return JSON per `Output Format`
-  </workflow>
+
+</workflow>
 
 <confidence_calculation>
 
@@ -131,7 +135,7 @@ NO suggestions/recommendations
 
 ```python
 def calculate_confidence_from_results():
-  # Base confidence from result quality (default 0, set to 0.7 via Memory Bypass)
+  # Base confidence from result quality (default 0, set to 0.85 via Memory Bypass)
   files_analyzed_count = len(files_analyzed)
   patterns_found_count = len(patterns_found)
 
@@ -159,9 +163,11 @@ def calculate_confidence_from_results():
 
 Early Exit Criteria:
 
-- confidence ≥ 0.9: High certainty, skip detailed passes
-- scope == "small": Focus area affects <3 files
-  </confidence_calculation>
+- confidence ≥ 0.85: Sufficient certainty, exit to Synthesize
+- confidence ≥ 0.8 AND decision_blockers resolved: Early exit possible
+- decision_blockers resolved: Can stop at any phase boundary
+
+</confidence_calculation>
 
 <output_format>
 
