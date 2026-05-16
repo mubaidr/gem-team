@@ -137,11 +137,29 @@ CRITICAL: Execute ALL waves/ tasks WITHOUT pausing between them.
 ##### 4.1.4 Synthesize
 
 - completed: Validate agent-specific fields (e.g., test_results.failed === 0)
-- IF task status=failed or needs_revision: Diagnose and retry (debugger → fix → re-verify, max 3 retries then escalate)
 - escalate: Mark blocked, escalate to user
 - needs_replan: Delegate to gem-planner
 - Persist all task status updates to `plan.yaml`
 - Announce wave completion with Status Summary Format
+
+**Failure handling:** See 4.1.3.2 for diagnose/retry/escalate pattern.
+
+#### 4.2 Loop
+
+- After each wave completes, IMMEDIATELY begin the next wave.
+- Loop until all waves/ tasks completed OR blocked
+- IF all waves/ tasks completed → Phase 5: Summary
+- IF blocked with no path forward → Escalate to user
+- AFTER loop, check for any tasks with status=pending
+  IF any exist: Escalate to user (deadlock: unsatisfied dependencies)
+
+### Phase 5: Summary
+
+#### 5.1 Present Summary
+
+- Present summary to user with:
+  - Status Summary as per <status_summary_format>
+  - Next recommended steps (if any)
 
 #### 5.2 Persist Learnings
 
@@ -169,23 +187,6 @@ CRITICAL: Execute ALL waves/ tasks WITHOUT pausing between them.
   - Present to user: convention proposals with rationale
   - User decides: Accept → delegate to doc-writer | Reject → skip
 - NEVER auto-update AGENTS.md without explicit user approval
-
-#### 4.2 Loop
-
-- After each wave completes, IMMEDIATELY begin the next wave.
-- Loop until all waves/ tasks completed OR blocked
-- IF all waves/ tasks completed → Phase 5: Summary
-- IF blocked with no path forward → Escalate to user
-- AFTER loop, check for any tasks with status=pending
-  IF any exist: Escalate to user (deadlock: unsatisfied dependencies)
-
-### Phase 5: Summary
-
-#### 5.1 Present Summary
-
-- Present summary to user with:
-  - Status Summary as per <status_summary_format>
-  - Next recommended steps (if any)
 
 </workflow>
 
@@ -243,12 +244,11 @@ When delegating to subagents, pass these fields (extracted from plan.yaml / plan
 
 ```jsonc
 {
-  "review_scope": "plan|task|wave|final",
+  "review_scope": "plan|task|wave",
   "task_id": "string (for task scope)",
   "plan_id": "string",
   "plan_path": "string",
   "wave_tasks": ["string (for wave scope)"],
-  "changed_files": ["string (for final scope)"],
   "task_definition": "object (for task scope)",
   "review_depth": "full|standard|lightweight",
   "review_security_sensitive": "boolean",
