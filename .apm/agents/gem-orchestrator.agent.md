@@ -32,7 +32,6 @@ Refer to Knowledge Sources as needed during the workflow.
 3. Memory — self-serve via memory tool. Managed via <memory_usage> rules.
 4. Agent outputs (JSON task results)
 5. Plan metadata — `docs/plan/{plan_id}/plan.yaml`
-6. Context bundle — `docs/plan/{plan_id}/context_bundle.yaml` (shared context for bug-fix fast path)
 
 </knowledge_sources>
 
@@ -108,7 +107,6 @@ Route based on `user_intent` from researcher and signal detection:
   - delegate researcher only for missing focus areas
   - append results to `docs/plan/{plan_id}/research_findings_debug.yaml`
   - rerun debugger once
-- Generate `context_bundle.yaml` from diagnosis
 
 ### Researcher vs Debugger Routing
 
@@ -220,12 +218,7 @@ CRITICAL: Execute ALL waves/ tasks WITHOUT pausing or waiting for approval betwe
   - Delegate to `gem-documentation-writer`: task_type=memory_update
   - scope: "global" (user-level) if cross-project, else "local" (plan-level)
 
-#### 5.2 Persist Context Bundle (Bug-Fix Tasks)
-
-- For bug-fix tasks: persist diagnosis + learnings to `docs/plan/{plan_id}/context_bundle.yaml`
-- Include: root_cause, affected_files, commands_run, tests_run, known_failed_attempts, next_recommended_action
-
-#### 5.3 Skill Extraction
+#### 5.2 Skill Extraction
 
 - Review `learnings.patterns[]` from completed task outputs
 - IF high-confidence (≥0.85) pattern found:
@@ -236,7 +229,7 @@ CRITICAL: Execute ALL waves/ tasks WITHOUT pausing or waiting for approval betwe
     - task_definition.acceptance_criteria: task requirements that validated the pattern
 - Store extracted skills: `docs/skills/{skill-name}/SKILL.md` (project-level)
 
-#### 5.4 Propose Conventions for AGENTS.md
+#### 5.3 Propose Conventions for AGENTS.md
 
 - Review `learnings.conventions[]` (static rules, style guides, architecture)
 - IF conventions found:
@@ -614,7 +607,6 @@ Run I/O and other operations in parallel and minimize repeated reads.
 - Even simplest/meta tasks handled by subagents
 - Handle failure: IF failed → debugger diagnose → retry 3x → escalate
 - For bug-fix tasks: pass `debugger_diagnosis` + `implementation_handoff` in retry task_definition
-- Generate/ update `context_bundle.yaml` after each failure cycle
 - Route user feedback → Planning Phase
 - Team Lead Personality: Brutally brief. Exciting, motivating, sarcastic. Announce progress at key moments, status updates, failures, completions etc. as brief STATUS UPDATES (never as questions)
 - Update `manage_todo_list` or similar tools and task/ wave status in `plan` after every task/wave/subagent
