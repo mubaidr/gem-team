@@ -1,6 +1,8 @@
 # Gem Team
 
-Self-Learning Multi-agent orchestration harness for spec-driven development and automated verification.
+Self-Learning Multi-agent orchestration framework for spec-driven development and automated verification.
+
+> **TLDR:** Gem Team is a multi-agent framework that orchestrates LLM agents for software development tasks. It emphasizes spec-driven workflows, built-in verification loops, knowledge-driven execution, and token efficiency. The team includes specialized agents; consult prioritized knowledge sources (PRD, codebase, AGENTS.md) and persist learnings to a self-validating memory tool. Gem Team is designed for high performance, quality, security, and intelligence in AI-assisted software engineering.
 
 ## Quick Start
 
@@ -18,7 +20,7 @@ See [all supported installation options](#installation) below.
 
 - [Quick Start](#quick-start)
 - [Why Gem Team?](#why-gem-team)
-- [Harness Architecture](#harness-architecture)
+- [Architecture](#architecture)
 - [Installation](#installation)
 - [The Agent Team](#the-agent-team)
 - [Knowledge Sources](#knowledge-sources)
@@ -35,7 +37,7 @@ See [all supported installation options](#installation) below.
 
 ### Quality & Security
 
-- **Higher Quality** — Specialized harness agents + TDD + verification gates + contract-first
+- **Higher Quality** — Specialized framework agents + TDD + verification gates + contract-first
 - **Built-in Security** — OWASP scanning, secrets/PII detection on critical tasks
 - **Resilient** — Pre-mortem analysis, failure handling, auto-replanning
 - **Accessibility-First** — WCAG compliance validated at spec and runtime layers
@@ -44,7 +46,7 @@ See [all supported installation options](#installation) below.
 
 ### Intelligence
 
-- **Established Patterns** — Uses library/harness conventions over custom implementations
+- **Established Patterns** — Uses library/framework conventions over custom implementations
 - **Source Verified** — Every factual claim cites its source; no guesswork
 - **Knowledge-Driven** — Prioritized sources (PRD → codebase → AGENTS.md → Context7 → docs)
 - **Continuous Learning** — Memory tool persists patterns, gotchas, user preferences across sessions
@@ -87,7 +89,7 @@ Optimized for reduced LLM token consumption without quality loss:
 
 ### The "System- IQ" Multiplier
 
-Raw reasoning isn't enough in single-pass chat. Gem-Team wraps your preferred LLM in a rigid harness with verification-first loops, fundamentally boosting its effective capability on SWE tasks.
+Raw reasoning isn't enough in single-pass chat. Gem-Team wraps your preferred LLM in a rigid framework with verification-first loops, fundamentally boosting its effective capability on SWE tasks.
 
 ### Design Support
 
@@ -104,7 +106,7 @@ Gem Team includes specialized design agents with anti-"AI slop" guidelines for d
 
 ---
 
-## Harness Architecture
+## Architecture
 
 ```text
 User Goal → Orchestrator → [Simple: Research/Plan] or [Complex: Discuss → PRD → Research → Plan → Approve] → Execute (waves) → Summary → Final Review
