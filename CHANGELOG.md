@@ -1,5 +1,35 @@
 # Changelog
 
+## [1.31.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.30.0...gem-team-v1.31.0) (2026-05-16)
+
+
+### 🚀 New Agents & Features
+
+* add research findings yaml search to agent initialization stepsThe diff introduces a new step in each agent’s initialization to search the `docs/plan/{plan_id}/research_findings_{focus_area}.yaml` files and extract relevant content. This enables agents to leverage documented research findings directly during their workflow. Additionally, the `gem-researcher.agent.md` file now properly closes the `<knowledge_sources>` section. ([62dd93a](https://github.com/mubaidr/gem-team/commit/62dd93ab4105707b4bc9f0d6bed067f8fb15ad11))
+* enhance JSON output format with confidence, summary, and detailed metrics ([3fdbee5](https://github.com/mubaidr/gem-team/commit/3fdbee5df6827172fe8c798ac0d2e3185175493f))
+* enhance user intent handling and restructure summary phases ([45cbe3a](https://github.com/mubaidr/gem-team/commit/45cbe3abe34ef0aaf09c6ca7a70a34faa5d8a1ba))
+* **orchestrator:** add loop handling and failure management ([869f300](https://github.com/mubaidr/gem-team/commit/869f300fe2531ef1b9886842518f5a891ac15b41))
+
+
+### 🛠️ Bug Fixes
+
+* https://github.com/mubaidr/gem-team/issues/76 ([aaa8957](https://github.com/mubaidr/gem-team/commit/aaa89575a4d3c60be6a96e77c9deee3e3f8f3172))
+
+
+### 📝 Documentation
+
+* add detailed bug‑fix mode steps and update retry policy documentation across agents ([28ea1c4](https://github.com/mubaidr/gem-team/commit/28ea1c4e49ddec8eeeec14c8e9dda57009d2ca94))
+* add Knowledge Sources reference to role descriptions in agent documentation ([620b15b](https://github.com/mubaidr/gem-team/commit/620b15b540b22ed5286699971f67bf3c81830dd3))
+* add skip rule for simple refactor in gem-implementer.agent.md ([1e0ced0](https://github.com/mubaidr/gem-team/commit/1e0ced04201d7c82e6d1994711251b34f54ac06e))
+* **agent:** improve readability and ordering of memory, execution, and anti-pattern sections ([f3156e3](https://github.com/mubaidr/gem-team/commit/f3156e327c8f8652948c7a3e2590a9f8e991bfda))
+* **readme:** enhance documentation with new structure, emojis, and detailed agent team overview ([8dbdbec](https://github.com/mubaidr/gem-team/commit/8dbdbecf89fa23ba1bc350df276c6e37dd08a2cd))
+* **readme:** replace "harness" with "framework" and rename "Harness Architecture" to "Architecture" throughout the README. Additionally, update related references to reflect the terminology change and adjust heading titles accordingly. ([ad8e98f](https://github.com/mubaidr/gem-team/commit/ad8e98fee3fe3e8eaf0d63a2593ca0cf6bc7982c))
+* refine Memory Usage sections in agent documentation to standardize tier descriptions, skip criteria, and formatting conventions ([becf73a](https://github.com/mubaidr/gem-team/commit/becf73a326b8c6f558a896c76a90df4f31753dcd))
+* remove deprecated cache bypass sections and simplify memory usage documentation ([f0bba1a](https://github.com/mubaidr/gem-team/commit/f0bba1aabf5356fbccd8e0bc8ac2eff57f31920f))
+* rename phases 4‑6 and restructure Persist Learnings section in gem‑orchestrator agent documentation ([62ff624](https://github.com/mubaidr/gem-team/commit/62ff6240ec0dd3e78e7d85717f3804309c3829d9))
+* revise browser tester workflow steps and documentation ([63401e9](https://github.com/mubaidr/gem-team/commit/63401e9aed694a9bb69dbebd9d84b5f126158ba6))
+* standardize agent documentation to evidence‑based only guidance ([cbe2a11](https://github.com/mubaidr/gem-team/commit/cbe2a11b083231bba62c886cbfb799a4ef9d6f80))
+
 ## [1.30.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.29.0...gem-team-v1.30.0) (2026-05-15)
 
 
