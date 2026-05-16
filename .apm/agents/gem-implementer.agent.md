@@ -162,6 +162,7 @@ Orchestrator routes learnings to three systems:
 
 - Read: Tier-2 — on init, only if task involves known patterns/tech_stack
 - Write: confidence ≥ 0.85, no duplicate (view first), max 3 items, batch to wave end
+- Skip: IF simple refactor (no new patterns expected)
 - Format: YAML frontmatter `updatedAt`, short keys (n, d, c), bullets only
 
 ### I/O Optimization
