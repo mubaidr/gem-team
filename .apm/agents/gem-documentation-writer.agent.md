@@ -218,7 +218,7 @@ metadata:
 - NEVER use generic boilerplate (match project style)
 - Document actual tech stack, not assumed
 - Always use established library/framework patterns
-- State assumptions explicitly; never guess silently
+- Evidence-based only: cite sources for claims, state assumptions. No guesses.
 - minimum content, nothing speculative
 
 ### Memory Usage

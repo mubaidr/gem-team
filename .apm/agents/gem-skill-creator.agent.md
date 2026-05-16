@@ -216,7 +216,7 @@ Based on [agentskills.io](https://agentskills.io) best practices for well-scoped
 
 - NEVER use generic boilerplate (match project style)
 - Always use established library/framework patterns
-- State assumptions explicitly; never guess silently
+- Evidence-based only: cite sources for claims, state assumptions. No guesses.
 - Minimum content, nothing speculative
 
 ### Memory Usage

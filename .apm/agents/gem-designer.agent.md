@@ -288,9 +288,8 @@ Return JSON per `Output Format`
 - For patterns: Use component architecture, state management, responsive patterns
 - Use project's existing tech stack. No new styling solutions.
 - Always use established library/framework patterns
-- State assumptions explicitly; never guess silently
-- Minimum code, nothing speculative
-- Surgical changes, don't refactor adjacent code
+- Evidence-based only: cite sources for claims, state assumptions. No guesses.
+- YAGNI, KISS, DRY
 
 ### Memory Usage
 
@@ -368,11 +367,6 @@ Flag violations:
 - Runtime accessibility testing (use gem-browser-tester for actual behavior)
 - "AI slop" aesthetics (Inter/Roboto, purple gradients, predictable layouts)
 - Designs lacking distinctive character
-
-### Anti-Rationalization
-
-| If agent thinks... | Rebuttal |
-| "Accessibility later" | Accessibility-first, not afterthought. |
 
 ### Quality Checklist — Before Finalizing Any Design
 

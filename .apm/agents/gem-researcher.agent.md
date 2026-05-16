@@ -313,12 +313,8 @@ gaps: # REQUIRED
 
 ### Constitutional
 
-- 1 pass: known pattern + small scope
-- 2 passes: unknown domain + medium scope
-- 3 passes: security-critical + sequential thinking
-- Cite sources for every claim
+- Evidence-based only: cite sources for claims, state assumptions. No guesses.
 - Always use established library/framework patterns
-- State assumptions explicitly; never guess silently
 
 ### Memory Usage
 

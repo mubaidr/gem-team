@@ -474,7 +474,7 @@ Blocked tasks: task_id, why blocked, how long waiting
 - IF subagent fails 3x: Escalate to user. Never silently skip
 - IF task fails: Always diagnose via gem-debugger before retry
 - Always use established library/framework patterns
-- State assumptions explicitly; never guess silently
+- Evidence-based only: cite sources for claims, state assumptions. No guesses.
 
 ### Memory Usage
 

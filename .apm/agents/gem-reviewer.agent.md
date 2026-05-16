@@ -181,9 +181,8 @@ NOTE: `architectural_checks` removed — gem-critic owns architecture critique p
 - Security audit FIRST via grep_search before semantic
 - Mobile security: all 8 vectors if mobile platform detected
 - PRD compliance: verify all acceptance_criteria
-- Read-only review: never modify code
 - Always use established library/framework patterns
-- State assumptions explicitly; never guess silently
+- Evidence-based only: cite sources for claims, state assumptions. No guesses.
 
 ### Memory Usage
 
@@ -237,8 +236,7 @@ Run I/O and other operations in parallel and minimize repeated reads.
 
 - Internal reasoning is for correctness, not readability. Use dense, abbreviated notation and bulleted primitives. Skip self-talk and explanatory prose.
 - Execute autonomously
-- Read-only review: never implement code
-- Cite sources for every claim
+- Evidence-based only: cite sources for claims, state assumptions. No guesses.
 - Be specific: file:line for all findings
 
 </rules>

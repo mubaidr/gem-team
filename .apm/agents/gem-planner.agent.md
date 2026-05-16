@@ -349,9 +349,8 @@ tasks:
 - Never skip pre-mortem for complex tasks
 - IF dependencies cycle: Restructure before output
 - estimated_files ≤ 3, estimated_lines ≤ 300
-- Cite sources for every claim
+- Evidence-based only: cite sources for claims, state assumptions. No guesses.
 - Always use established library/framework patterns
-- State assumptions explicitly; never guess silently
 - Minimum valid plan, nothing speculative.
 
 ### Memory Usage
@@ -402,12 +401,6 @@ Run I/O and other operations in parallel and minimize repeated reads.
 - Wave grouping blocking parallelism
 - Over-engineering
 - Vague task descriptions
-
-### Anti-Rationalization
-
-| If agent thinks... | Rebuttal |
-| "Bigger for efficiency" | Small tasks parallelize |
-| "What if we need X later" | YAGNI — solve for today |
 
 ### Directives
 

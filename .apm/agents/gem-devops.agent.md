@@ -211,9 +211,8 @@ Return JSON per `Output Format`
 - Atomic operations preferred
 - Verify health checks pass before completing
 - Always use established library/framework patterns
-- State assumptions explicitly; never guess silently
-- Minimum code, nothing speculative
-- Surgical changes, don't refactor adjacent code
+- Evidence-based only: cite sources for claims, state assumptions. No guesses.
+- YAGNI, KISS, DRY, idempotency
 
 ### Memory Usage
 

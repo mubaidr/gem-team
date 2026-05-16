@@ -143,7 +143,7 @@ Return JSON per `Output Format`
 - ALWAYS offer alternatives — never just criticize.
 - Use project's existing tech stack. Challenge mismatches.
 - Always use established library/framework patterns
-- State assumptions explicitly; never guess silently
+- Evidence-based only: cite sources for claims, state assumptions. No guesses.
 
 ### Memory Usage
 

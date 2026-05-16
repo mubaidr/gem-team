@@ -247,9 +247,8 @@ NOTE: ESLint recommendations are for general recurring patterns only (not projec
 - IF regression: Bisect to find introducing commit
 - IF reproduction fails: Document, recommend next steps — never guess root cause
 - NEVER implement fixes — only diagnose and recommend
-- Cite sources for every claim
+- Evidence-based only: cite sources for claims, state assumptions. No guesses.
 - Always use established library/framework patterns
-- State assumptions explicitly; never guess silently
 
 ### Memory Usage
 

@@ -203,7 +203,7 @@ Per page:
 - NEVER skip wait after navigation
 - NEVER fail without re-taking snapshot on element not found
 - Always use established library/framework patterns
-- State assumptions explicitly; never guess silently
+- Evidence-based only: cite sources for claims, state assumptions. No guesses.
 
 ### Memory Usage
 
@@ -253,11 +253,6 @@ Run I/O and other operations in parallel and minimize repeated reads.
 - Breaking flow continuity
 - Fixed timeouts instead of wait strategies
 - Ignoring flaky test signals
-
-### Anti-Rationalization
-
-| If agent thinks... | Rebuttal |
-| "Flaky test passed, move on" | Flaky tests hide bugs. Log for investigation. |
 
 ### Directives
 

@@ -161,11 +161,9 @@ Return JSON per `Output Format`
 - Dependencies: prefer explicit contracts
 - MUST meet all acceptance criteria
 - Use existing tech stack, test frameworks, build tools
-- Cite sources for every claim
+- Evidence-based only: cite sources for claims, state assumptions. No guesses.
 - Always use established library/framework patterns
-- State assumptions explicitly; never guess silently
-- Minimum code, nothing speculative
-- Surgical changes, don't refactor adjacent code
+- YAGNI, KISS, DRY, Functional Programming
 
 ### Memory Usage
 
@@ -218,15 +216,6 @@ Run I/O and other operations in parallel and minimize repeated reads.
 - setTimeout for animations (use Reanimated)
 - Skipping platform testing
 - Ignoring pre-existing failures: "not my change" is NOT a valid reason
-
-### Anti-Rationalization
-
-| If agent thinks... | Rebuttal |
-| "Add tests later" | Tests ARE the spec. |
-| "Skip edge cases" | Bugs hide in edge cases. |
-| "Clean up adjacent code" | NOTICED BUT NOT TOUCHING. |
-| "ScrollView is fine" | Lists grow. Start with FlatList. |
-| "Inline style is just one property" | Creates new object every render. |
 
 ### Directives
 

@@ -264,7 +264,7 @@ Return JSON per `Output Format`
 - NEVER skip app lifecycle testing
 - NEVER test simulator only if device farm required
 - Always use established library/framework patterns
-- State assumptions explicitly; never guess silently
+- Evidence-based only: cite sources for claims, state assumptions. No guesses.
 
 ### Memory Usage
 
@@ -317,15 +317,6 @@ Run I/O and other operations in parallel and minimize repeated reads.
 - Fixed timeouts instead of waitForElement
 - Not capturing evidence on failures
 - Skipping performance benchmarking
-
-### Anti-Rationalization
-
-| If agent thinks... | Rebuttal |
-| "iOS works, Android fine" | Platform differences cause failures. Test both. |
-| "Gesture works on one device" | Screen sizes affect detection. Test multiple. |
-| "Push works foreground" | Background/terminated different. Test all. |
-| "Simulator fine, real device fine" | Real device resources limited. Test on device farm. |
-| "Performance is fine" | Measure baseline first. |
 
 ### Directives
 

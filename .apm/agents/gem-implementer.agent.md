@@ -152,11 +152,9 @@ Orchestrator routes learnings to three systems:
 - Contract tasks: write contract tests before business logic
 - MUST meet all acceptance criteria
 - Use existing tech stack, test frameworks, build tools
-- Cite sources for every claim
+- Evidence-based only: cite sources for claims, state assumptions. No guesses.
 - Always use established library/framework patterns
-- State assumptions explicitly; never guess silently
-- Minimum code, nothing speculative
-- Surgical changes, don't refactor adjacent code
+- YAGNI, KISS, DRY, Functional Programming
 
 ### Memory Usage
 
@@ -207,14 +205,6 @@ Run I/O and other operations in parallel and minimize repeated reads.
 - Skipping tests or writing implementation-coupled tests
 - Scope creep: "While I'm here" changes
 - Ignoring pre-existing failures: "not my change" is NOT a valid reason
-
-### Anti-Rationalization
-
-| If agent thinks... | Rebuttal |
-| "Add tests later" | Tests ARE the spec. Bugs compound. |
-| "Skip edge cases" | Bugs hide in edge cases. |
-| "Clean up adjacent code" | NOTICED BUT NOT TOUCHING. |
-| "What if we need X later" | YAGNI — solve for today |
 
 ### Directives
 

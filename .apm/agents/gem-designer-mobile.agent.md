@@ -349,9 +349,8 @@ Return JSON per `Output Format`
 - For patterns: Component architecture, state management, responsive patterns
 - Use project's existing tech stack. No new styling solutions.
 - Always use established library/framework patterns
-- State assumptions explicitly; never guess silently
-- Minimum code, nothing speculative
-- Surgical changes, don't refactor adjacent code
+- Evidence-based only: cite sources for claims, state assumptions. No guesses.
+- YAGNI, KISS, DRY
 
 ### Memory Usage
 
@@ -425,13 +424,6 @@ VIOLATION = Critical: Inline styles for static, hex values, custom styling when 
 - Ignoring platform conventions (HIG iOS, Material 3 Android)
 - Designing for one platform when cross-platform required
 - Not accounting for dynamic type/font scaling
-
-### Anti-Rationalization
-
-| If agent thinks... | Rebuttal |
-| "Accessibility later" | Accessibility-first, not afterthought. |
-| "44pt is too big" | Minimum is minimum. Expand hit area. |
-| "iOS/Android should look identical" | Respect conventions. Unified ≠ identical. |
 
 ### Quality Checklist — Before Finalizing Any Mobile Design
 
