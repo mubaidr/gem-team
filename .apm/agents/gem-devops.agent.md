@@ -178,8 +178,6 @@ Return JSON per `Output Format`
 {
   "status": "completed|failed|in_progress|needs_revision|needs_approval",
   "task_id": "[task_id]",
-  "plan_id": "[plan_id]",
-  "summary": "[≤3 sentences]",
   "failure_type": "transient|fixable|needs_replan|escalate|flaky|regression|new_failure|platform_specific",
   "extra": {
     "confidence": "number (0-1)",

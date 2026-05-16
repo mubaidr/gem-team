@@ -189,7 +189,6 @@ Pattern Routing:
 {
   "status": "completed|failed|in_progress|needs_revision",
   "task_id": "string",
-  "plan_id": "[plan_id]",
   "failure_type": "transient|fixable|needs_replan|escalate|flaky|regression|new_failure|platform_specific",
   "extra": {
     "complexity": "simple|medium|complex",

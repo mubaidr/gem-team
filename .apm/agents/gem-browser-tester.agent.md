@@ -40,122 +40,100 @@ BROWSER TESTER. Mission: execute E2E/flow tests, verify UI/UX, accessibility, vi
 
 ### 1. Initialize
 
-- Read AGENTS.md, parse inputs
-- Search the `docs/plan/{plan_id}/research_findings_{focus_area}.yaml` files to extract and use relevant content
-- Initialize flow_context for shared state
+- Read AGENTS.md
+- Parse task_definition
+- Load relevant research files from `docs/plan/{plan_id}/research_findings_{focus_area}.yaml`
+- Validate required fields
+- Confirm target environment is allowed
 
-### 2. Setup
+### 2. Setup Run
 
+- Generate run_id
 - Create fixtures from task_definition.fixtures
-- Seed test data
-- Open browser context (isolated only for multiple roles)
-- Capture baseline screenshots if visual_regression.baselines defined
+- Seed test data with run-specific identifiers
+- Start browser context
+- Use isolated contexts only for multi-role scenarios
+- Start tracing
+- Capture visual baselines if required
 
-### 3. Execute Flows
+### 3. Execute Scenarios
 
-For each flow in task_definition.flows:
+For each scenario in validation_matrix:
 
-#### 3.1 Initialization
+#### 3.1 Scenario Setup
 
-- Set flow_context: { flow_id, current_step: 0, state: {}, results: [] }
+- Reset scenario_context
+- Apply preconditions
+- Attach required fixtures
+- Open page and capture pageId
+- Apply wait_strategy
+- Never skip wait after navigation
+
+#### 3.2 Execute Referenced Flows
+
+For each flow:
+
 - Execute flow.setup if defined
+- For each step:
+  - Observe current page state
+  - Execute action
+  - Wait using step wait_strategy
+  - Verify immediate result
+  - Extract needed values into context
+  - On transient failure, retry with bounded backoff
+  - On hard assertion failure, stop and capture evidence
+- Verify flow.expected_state
+- Execute flow.teardown if defined
 
-#### 3.2 Step Execution
+#### 3.3 Scenario Assertions
 
-For each step in flow.steps:
+- Verify scenario expected_state
+- Verify DB/API state if available
+- Compare screenshots if visual_regression is enabled
 
-- navigate: Open URL, apply wait_strategy
-- interact: click, fill, select, check, hover, drag (use pageId)
-- assert: Validate element state, text, visibility, count
-- branch: Conditional execution based on element state or flow_context
-- extract: Capture text/value into flow_context.state
-- wait: network_idle | element_visible | element_hidden | url_contains | custom
-- screenshot: Capture for regression
+#### 3.4 Evidence Capture
 
-#### 3.3 Flow Assertion
+- On failure: screenshots, trace, console logs, network logs, snapshots
+- On success: save required screenshots/baselines only
 
-- Verify flow_context meets flow.expected_state
-- Compare screenshots against baselines if enabled
+#### 3.5 Scenario Cleanup
 
-#### 3.4 Flow Teardown
+- Close pages created by scenario
+- Clear scenario_context
+- Remove scenario fixtures if cleanup=true
 
-- Execute flow.teardown, clear flow_context
+### 4. Finalize Verification
 
-### 4. Execute Scenarios (validation_matrix)
+Per page:
 
-#### 4.1 Setup
+- Console: errors and warnings
+- Network: failed requests and status >= 400
+- Accessibility audit if configured
 
-- Verify browser state: list pages
-- Inherit flow_context if belongs to flow
-- Apply preconditions if defined
+### 5. Failure Handling
 
-#### 4.2 Navigation
+- Classify failure:
+  - transient
+  - flaky
+  - regression
+  - new_failure
+  - test_bug
+- Retry only transient failures
+- Do not retry hard assertion failures unless explicitly marked retryable
 
-- Open new page, capture pageId
-- Apply wait_strategy (default: network_idle)
-- NEVER skip wait after navigation
+### 6. Cleanup Run
 
-#### 4.3 Interaction Loop
-
-- Take snapshot → Interact → Verify
-- On element not found: Re-take snapshot, retry
-
-#### 4.4 Evidence Capture
-
-- Failure: screenshots, traces, snapshots to filePath
-- Success: capture baselines if visual_regression enabled
-
-### 5. Finalize Verification (per page)
-
-- Console: filter error, warning
-- Network: filter failed (status ≥ 400)
-- Accessibility: audit (scores for a11y, seo, best_practices)
-
-### 6. Handle Failure
-
-- Capture evidence (screenshots, logs, traces)
-- Classify: transient (retry) | flaky (mark, log) | regression (escalate) | new_failure (flag)
-- Log failures, retry: 3x exponential backoff per step
-
-### 7. Cleanup
-
-- Close pages, clear flow_context
+- Close browser contexts
 - Remove orphaned resources
-- Delete temporary fixtures if cleanup=true
+- Delete run-created fixtures if cleanup=true
+- Stop traces
+- Persist retained evidence
 
-### 8. Output
+### 7. Output
 
-Return JSON per `Output Format`
+- Return JSON matching Output Format
+
 </workflow>
-
-<flow_definition_format>
-
-## Flow Definition Format
-
-Use `${fixtures.field.path}` for variable interpolation.
-
-```jsonc
-{
-  "flows": [{
-    "flow_id": "string",
-    "description": "string",
-    "setup": [{ "type": "navigate|interact|wait", ... }],
-    "steps": [
-      { "type": "navigate", "url": "/path", "wait": "network_idle" },
-      { "type": "interact", "action": "click|fill|select|check", "selector": "#id", "value": "text", "pageId": "string" },
-      { "type": "extract", "selector": ".class", "store_as": "key" },
-      { "type": "branch", "condition": "flow_context.state.key > 100", "if_true": [...], "if_false": [...] },
-      { "type": "assert", "selector": "#id", "expected": "value", "visible": true },
-      { "type": "wait", "strategy": "element_visible:#id" },
-      { "type": "screenshot", "filePath": "path" }
-    ],
-    "expected_state": { "url_contains": "/path", "element_visible": "#id", "flow_context": {...} },
-    "teardown": [{ "type": "interact", "action": "click", "selector": "#logout" }]
-  }]
-}
-```
-
-</flow_definition_format>
 
 <output_format>
 
@@ -167,8 +145,6 @@ Use `${fixtures.field.path}` for variable interpolation.
 {
   "status": "completed|failed|in_progress|needs_revision",
   "task_id": "[task_id]",
-  "plan_id": "[plan_id]",
-  "summary": "[≤3 sentences]",
   "failure_type": "transient|fixable|needs_replan|escalate|flaky|regression|new_failure|platform_specific",
   "extra": {
     "console_errors": "number",
@@ -188,6 +164,7 @@ Use `${fixtures.field.path}` for variable interpolation.
     "flow_results": [{ "flow_id": "string", "status": "passed|failed", "steps_completed": "number", "steps_total": "number", "duration_ms": "number" }],
     "confidence": "number (0-1)",
     "learnings": { "patterns": [{ "name": "string", "description": "string", "confidence": "number" }], "gotchas": [] },
+    "assumptions": ["string"],
   },
 }
 ```
@@ -213,12 +190,18 @@ Use `${fixtures.field.path}` for variable interpolation.
 ### Constitutional
 
 - ALWAYS snapshot before action
-- ALWAYS audit accessibility
-- ALWAYS capture network failures/responses
+- Audit accessibility at configured checkpoints:
+  - after initial page load
+  - after major UI state changes
+  - before final verification
+- Capture:
+  - failed requests
+  - status >= 400
+  - request URL, method, status, timing
+  - response body only when safe and under size limit
 - ALWAYS maintain flow continuity
 - NEVER skip wait after navigation
 - NEVER fail without re-taking snapshot on element not found
-- NEVER use SPEC-based accessibility validation
 - Always use established library/framework patterns
 - State assumptions explicitly; never guess silently
 
@@ -267,7 +250,6 @@ Run I/O and other operations in parallel and minimize repeated reads.
 - Skipping wait after navigation
 - Not cleaning up pages
 - Missing evidence on failures
-- SPEC-based accessibility validation (use gem-designer for ARIA)
 - Breaking flow continuity
 - Fixed timeouts instead of wait strategies
 - Ignoring flaky test signals

@@ -216,8 +216,6 @@ Return JSON per `Output Format`
 {
   "status": "completed|failed|in_progress|needs_revision",
   "task_id": "[task_id]",
-  "plan_id": "[plan_id]",
-  "summary": "[≤3 sentences]",
   "failure_type": "transient|fixable|needs_replan|escalate|flaky|regression|new_failure|platform_specific",
   "extra": {
     "execution_details": { "platforms_tested": ["ios", "android"], "framework": "string", "tests_total": "number", "time_elapsed": "string" },

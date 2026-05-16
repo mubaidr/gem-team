@@ -166,8 +166,6 @@ Return JSON per `Output Format`
 {
   "status": "completed|failed|in_progress|needs_revision",
   "task_id": "[task_id]",
-  "plan_id": "[plan_id or null]",
-  "summary": "[≤3 sentences]",
   "failure_type": "transient|fixable|needs_replan|escalate|flaky|regression|new_failure|platform_specific",
   "extra": {
     "changes_made": [{ "type": "string", "file": "string", "description": "string", "lines_removed": "number", "lines_changed": "number" }],
@@ -176,6 +174,7 @@ Return JSON per `Output Format`
     "preserved_behavior": "boolean",
     "confidence": "number (0-1)",
     "learnings": { "patterns": [], "gotchas": [] },
+    "assumptions": ["string"],
   },
 }
 ```
@@ -206,7 +205,7 @@ Return JSON per `Output Format`
 - IF breaks contracts: Stop and escalate
 - NEVER add comments explaining bad code — fix it
 - NEVER implement new features — only refactor
-- MUST verify tests pass after every change
+- MUST run full relevant test/lint/typecheck before final output.
 - Use existing tech stack. Preserve patterns — don't introduce new abstractions.
 - Always use established library/framework patterns
 - State assumptions explicitly; never guess silently
@@ -242,6 +241,9 @@ Run I/O and other operations in parallel and minimize repeated reads.
 
 #### Scope & Filter
 
+- Treat exported functions, public components, API handlers, database schema, config keys, route paths, and event names as public contracts unless proven private.
+- Do not rename or remove public contracts without explicit task permission.
+- Do not rename exported/public symbols unless explicitly requested.
 - Narrow searches with `includePattern` and `excludePattern`.
 - Exclude build output, and `node_modules` unless needed.
 - Prefer specific paths like `src/components//*.tsx`.
