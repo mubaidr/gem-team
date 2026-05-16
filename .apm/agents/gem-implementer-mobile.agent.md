@@ -126,12 +126,22 @@ Return ONLY valid JSON. Omit nulls and empty arrays.
 
 ## Rules
 
+### Bug-Fix Mode
+
+IF task_definition contains `debugger_diagnosis`:
+
+- Do NOT repeat root-cause investigation unless the diagnosis conflicts with source code or tests
+- Read only: target_files, required test file(s), directly referenced contracts/docs
+- Start with `required_test_first`
+- Implement `minimal_change`
+- If diagnosis appears wrong, stop and return `needs_revision` with contradiction evidence
+
 ### Execution
 
 - Priority order: Tools > Tasks > Scripts > CLI
 - Batch independent calls, prioritize I/O-bound
-- Retry: 3x
-- Output: code + JSON, no summaries unless failed
+- Retry: 2x for transient tool/command failures only (NOT failed fix strategies)
+- Do not retry failed fix strategies — return `failed` or `needs_revision` with evidence
 
 ### Output
 

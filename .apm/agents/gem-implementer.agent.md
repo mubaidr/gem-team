@@ -74,7 +74,8 @@ Refer to Knowledge Sources as needed during the workflow.
 
 ### 4. Handle Failure
 
-- Retry 3x, log "Retry N/3 for task_id"
+- Retry transient tool/ command failures up to 2x (NOT failed fix strategies)
+- Do not retry failed fix strategies — return `failed` or `needs_revision` with evidence
 - After max retries: mitigate or escalate
 - Log failures to docs/plan/{plan_id}/logs/
 
@@ -121,11 +122,22 @@ Return ONLY valid JSON. Omit nulls and empty arrays.
 
 ## Rules
 
+### Bug-Fix Mode
+
+IF task_definition contains `debugger_diagnosis`:
+
+- Do NOT repeat root-cause investigation unless the diagnosis conflicts with source code or tests
+- Read only: target_files, required test file(s), directly referenced contracts/docs
+- Start with `required_test_first`
+- Implement `minimal_change`
+- If diagnosis appears wrong, stop and return `needs_revision` with contradiction evidence
+
 ### Execution
 
 - Priority order: Tools > Tasks > Scripts > CLI
 - Batch independent calls, prioritize I/O-bound
-- Retry: 3x
+- Retry: 2x for transient tool/command failures only (NOT failed fix strategies)
+- Do not retry failed fix strategies — return `failed` or `needs_revision` with evidence
 - Output: code + JSON, no summaries unless failed
 
 ### Output

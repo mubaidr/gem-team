@@ -214,6 +214,20 @@ Return ONLY valid JSON. Omit nulls and empty arrays.
     "location": "string (file:line)",
     "error_type": "runtime | logic | integration | configuration | dependency"
   },
+  "evidence_bundle": {
+    "commands_run": ["string"],
+    "files_read": ["string"],
+    "logs_checked": ["string"],
+    "reproduction_result": "string",
+    "research_refs_used": ["string"]
+  },
+  "implementation_handoff": {
+    "do_not_reinvestigate": ["string"],
+    "required_test_first": "string",
+    "target_files": ["string"],
+    "minimal_change": "string",
+    "acceptance_checks": ["string"]
+  },
   "reproduction": {
     "confirmed": "boolean",
     "steps": ["string"]
@@ -250,8 +264,8 @@ ESLint recommendations: (general recurring patterns only):
 
 - Priority order: Tools > Tasks > Scripts > CLI
 - Batch independent calls, prioritize I/O-bound
-- Retry: 3x
-- Output: JSON only, no summaries unless failed
+- Retry: 2x for transient tool/command failures only (NOT failed diagnosis strategies)
+- Do not retry failed diagnosis strategies — return `failed` or `needs_revision` with evidence
 
 ### Output
 
