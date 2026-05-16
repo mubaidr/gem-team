@@ -50,6 +50,7 @@ See [all supported installation options](#installation) below.
 - **Source Verified** — Every factual claim cites its source; no guesswork
 - **Knowledge-Driven** — Prioritized sources (PRD → codebase → AGENTS.md → Context7 → docs)
 - **Continuous Learning** — Memory tool persists patterns, gotchas, user preferences across sessions
+- **Memory Optimization** — Tiered read/write (Tier-1 always, Tier-2 on init, Tier-3 rarely). Skip rules: unknown domain → skip, confidence ≥ 0.85 → skip read. Batch writes at wave end. Short keys format (n, d, c)
 - **Agent Memory Contracts** — Every agent reads/writes structured memory autonomously. Researcher caches, debugger logs, planner aggregates, reviewers persist
 - **Self-Validating Cache** — Researcher checks memory before searching. Validates (file checks, import resolve, git log). IF stale: re-research, DELETE old, WRITE new
 - **Diagnosis History** — Debugger saves root-causes. Same bug pattern >0.8 match: cached diagnosis
@@ -75,8 +76,7 @@ Optimized for reduced LLM token consumption without quality loss:
 - **Empty is OK** — Skip empty arrays, nulls, verbose fields where not needed
 - **File-Based** — Researcher/Planner save to YAML files (not all in JSON output)
 - **Learnings** — Empty patterns/conventions unless critical
-
-> **Result:** ~40-60% reduction on output tokens while maintaining quality.
+- **Memory Skip** — Agents skip redundant reads when cache has high-confidence findings
 
 ### Design
 
@@ -97,12 +97,13 @@ Gem Team includes specialized design agents with anti-"AI slop" guidelines for d
 
 ### Knowledge Layers
 
-| Type          | Storage         | 1-liner                                                                                                  |
-| :------------ | :-------------- | :------------------------------------------------------------------------------------------------------- |
-| **Memory**    | memory tool     | Facts, preferences, research, diagnoses, decisions, patterns — self-validated and reused across sessions |
-| **Skills**    | `docs/skills/`  | Reusable procedures with code examples, extracted from high-confidence patterns                          |
-| **PRD**       | `docs/PRD.yaml` | Product requirements spec — drives agent planning, implementation, and verification                      |
-| **AGENTS.md** | `AGENTS.md`     | Static conventions, rules, and agent definitions (requires approval)                                     |
+| Type             | Storage         | 1-liner                                                                                                                                  |
+| :--------------- | :-------------- | :--------------------------------------------------------------------------------------------------------------------------------------- |
+| **Memory**       | memory tool     | Facts, preferences, research, diagnoses, decisions, patterns — self-validated and reused across sessions                                 |
+| **Memory Tiers** | /memories/      | Tier-1 (orchest/ researcher/ planner): Always read/write. Tier-2 (impl/debug/simplifier): On init. Tier-3 (reviewer/ critic/doc): Rarely |
+| **Skills**       | `docs/skills/`  | Reusable procedures with code examples, extracted from high-confidence patterns                                                          |
+| **PRD**          | `docs/PRD.yaml` | Product requirements spec — drives agent planning, implementation, and verification                                                      |
+| **AGENTS.md**    | `AGENTS.md`     | Static conventions, rules, and agent definitions (requires approval)                                                                     |
 
 ---
 

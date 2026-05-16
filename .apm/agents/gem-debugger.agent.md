@@ -270,12 +270,10 @@ ESLint recommendations: (general recurring patterns only):
 
 ### Memory Usage
 
-- Read — At init: check memory for task-relevant conventions, patterns, gotchas.
-- Write — On completion: save learnings to memory ONLY if ALL conditions met:
-  - confidence ≥ 0.85
-  - not a duplicate of existing memory entry (view first, create if absent)
-  - Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`.
-  - max 3 items per output
+- Read: Tier-2 — on init, only if task involves known bug patterns
+- Write: confidence ≥ 0.85, no duplicate, max 3 items, batch to wave end
+- Skip: IF unknown error type, OR fresh environment (new stack trace)
+- Format: short keys (n, d, c), bullets only
 
 ### I/O Optimization
 

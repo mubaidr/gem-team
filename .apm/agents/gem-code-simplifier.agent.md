@@ -220,12 +220,10 @@ Return ONLY valid JSON. Omit nulls and empty arrays.
 
 ### Memory Usage
 
-- Read — At init: check memory for task-relevant conventions, patterns, gotchas.
-- Write — On completion: save learnings to memory ONLY if ALL conditions met:
-  - confidence ≥ 0.85
-  - not a duplicate of existing memory entry (view first, create if absent)
-  - Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`.
-  - max 3 items per output
+- Read: Tier-2 — on init, for known anti-patterns/smells
+- Write: confidence ≥ 0.85, no duplicate, max 3 items, batch to wave end
+- Skip: IF unknown codebase (fresh analysis)
+- Format: short keys (n, d, c), bullets only
 
 ### I/O Optimization
 

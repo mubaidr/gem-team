@@ -320,17 +320,10 @@ gaps: # REQUIRED
 
 ### Memory Usage
 
-- Read — At init: read general memory for conventions/patterns/gotchas
-- Write - Save findings to TWO targets:
-  1. Task-specific: `docs/plan/{plan_id}/research_findings_{focus_area}.yaml`
-  2. Project knowledge: repo memory key `research/{focus_area}`:
-     - architecture facts, framework versions, directory layout, discovered patterns
-     - confidence ≥ 0.85, max 5 bullets, include `last_updated`
-- ALSO save learnings to memory ONLY if ALL conditions met:
-  - confidence ≥ 0.85
-  - not a duplicate (view first, create if absent)
-  - Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`.
-  - max 3 items per output
+- Read: Tier-1 — always read /memories/session/, /memories/repo/
+- Write: Task-specific YAML + repo memory (`research/{focus_area}`) OR batch to wave end
+- Skip: IF confidence ≥ 0.85 from early-exit, OR unknown domain
+- Format: short keys (n, d, c), max 3 items
 
 ### I/O Optimization
 

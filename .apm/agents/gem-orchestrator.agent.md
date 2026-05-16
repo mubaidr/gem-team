@@ -78,8 +78,13 @@ Route based on `user_intent` from researcher:
 
 ### Phase 2: Research
 
-- Use `focus_areas` from Phase 1 researcher output
-- For each focus_area, delegate to `gem-researcher` (up to 4 concurrent) per `Delegation Protocol`
+- Check memory cache FIRST for `focus_area` or other findings related to the task objective
+- IF memory has focus_area findings AND confidence ≥ 0.85:
+  - SKIP delegation to gem-researcher
+  - USE cached findings
+  - Set researcher_output.confidence from memory
+- ELSE: Use `focus_areas` from Phase 1 researcher output
+  - For each focus_area, delegate to `gem-researcher` (up to 4 concurrent)
 
 ### Phase 3: Planning
 
@@ -102,6 +107,12 @@ Route based on `user_intent` from researcher:
 ### Phase 4: Execution Loop
 
 CRITICAL: Execute ALL waves/ tasks WITHOUT pausing or waiting for approval between them.
+
+#### 4.0 Pre-Wave Memory Check
+
+- Check task cache: IF similar task completed < 7 days ago AND status=completed:
+  - PROMPT user: "Similar task completed {date}. Skip or redo?"
+  - OR auto-apply if bug-fix pattern matches
 
 #### 4.1 Execute Waves (for each wave 1 to n)
 
@@ -478,11 +489,19 @@ Blocked tasks: task_id, why blocked, how long waiting
 
 ### Memory Usage
 
-- Read — At init: check memory for task-relevant context before routing agents.
-- Write — After synthesizing agent outputs: persist high-confidence learnings (≥0.85) to memory via `memory` tool IF:
-  - not a duplicate of existing entry (view first, create if absent)
-  - Format: dense, abbreviated, bulleted. No prose. Include YAML frontmatter with `updatedAt`.
-  - max 3 items per output
+Read — Tiered by scope:
+
+- Tier-1 (orchestrator, researcher, planner): ALWAYS read /memories/session/, /memories/repo/
+- Tier-2 (implementer, debugger, simplifier): On init, only if task involves known patterns
+- Tier-3 (reviewer, critic, doc-writer): Rarely
+
+Write — Batch at wave end:
+
+- Collect learnings from completed wave tasks
+- Deduplicate across tasks
+- Write single memory entry per scope (max 3 items)
+- Skip if: confidence < 0.85 OR duplicate exists
+- Format: YAML frontmatter with `updatedAt`, short keys (n, d, c)
 
 ### I/O Optimization
 

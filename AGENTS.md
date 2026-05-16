@@ -101,6 +101,65 @@ grep "gem-" .apm/agents/gem-orchestrator.agent.md | grep -o "gem-[a-z-]*" | sort
 - **Status values**: `completed|failed|in_progress|needs_revision|needs_approval`
 - **Confidence**: Always include 0-1 confidence on learnings/outputs
 
+## Memory Optimization (Referenced by All Agents)
+
+### Memory Tiers
+
+| Tier | Agents                                                 | Read Priority | Write Scope |
+| ---- | ------------------------------------------------------ | ------------- | ----------- |
+| 1    | orchestrator, researcher, planner                      | Always        | user/repo   |
+| 2    | implementer, debugger, simplifier                      | On init       | repo        |
+| 3    | reviewer, critic, doc-writer, designer, tester, devops | Rarely        | repo        |
+
+### Skip Rules (Agent-Level Decision)
+
+```yaml
+# BEFORE memory read:
+IF task involves unknown domain → SKIP memory (nothing relevant)
+IF confidence already high (≥0.85) → SKIP memory read
+IF session has fresh context → USE session, SKIP repo/user
+
+# Memory read batching: Combine with file discovery in same parallel call
+PARALLEL:
+  - memory(view relevant scopes)
+  - semantic_search(target)
+  - file_search(patterns)
+
+# BEFORE memory write:
+IF confidence < 0.85 → SKIP write
+IF duplicate exists → SKIP write (view first)
+IF partial success → BATCH to wave end, let orchestrator handle
+
+# Write format (LLM-targeted, concise):
+# - Short keys: n=name, d=description, c=confidence
+# - No prose, bullets only, max 3 items
+```
+
+### Scope Rules
+
+- **user** (`/memories/`): Cross-project patterns, conventions, user prefs
+- **repo** (`/memories/repo/`): Project-specific architecture, patterns, gotchas
+- **session** (`/memories/session/`): Task context, in-progress notes, transient state
+- **plan** (`docs/plan/{id}/`): Task-specific learnings, research findings
+
+### Result Caching (Agent-Level)
+
+```yaml
+# Generate cache key from: objective + tech_stack[] + files_hash + ac_hash
+# Cache key format: task:{agent}:{sha256_80chars}
+#
+# BEFORE execution:
+IF memory.has(cache_key) AND cached.status == completed:
+  PROMPT user: "Similar task completed {date}. Apply same solution?"
+  # OR auto-apply if pattern matches bug fix
+```
+
+### Deduplication
+
+- Check existence before create: `memory(view path)` → IF exists SKIP
+- Tag entries for invalidation: `{ scope, invalidation_hints: [file_paths] }`
+- Batch writes: Defer to wave end, orchestrator handles deduplication
+
 ## Testing Instructions
 
 - Agent definitions are validated by YAML frontmatter parsers and Markdown renderers.
