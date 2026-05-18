@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.32.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.31.0...gem-team-v1.32.0) (2026-05-17)
+
+
+### 🚀 New Agents & Features
+
+* **agents:** enforce strict phase ordering in multi-agent workflow ([d79872b](https://github.com/mubaidr/gem-team/commit/d79872b4574b55f805c9d425c4953fd4ac628355))
+
 ## [1.31.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.30.0...gem-team-v1.31.0) (2026-05-16)
 
 
