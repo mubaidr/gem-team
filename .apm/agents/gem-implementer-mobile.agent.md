@@ -32,7 +32,7 @@ Refer to Knowledge Sources as needed during the workflow.
 4. Official docs (online or llms.txt)
 5. `docs/DESIGN.md` (mobile design specs)
 6. Skills — `docs/skills/*/SKILL.md`
-7. Plan research findings — `docs/plan/{plan_id}/*.yaml` (shared research cache)
+7. Plan research findings — `docs/plan/{plan_id}/*.yaml`
 
 </knowledge_sources>
 
@@ -42,13 +42,14 @@ Refer to Knowledge Sources as needed during the workflow.
 
 ### 1. Initialize
 
-- Read AGENTS.md, parse inputs
+- Detect project type: React Native/Expo/Flutter
 
 ### 2. Analyze
 
 - Detect project type: React Native/Expo/Flutter
 - Understand `acceptance_criteria`
-- Read relevant PRD sections, DESIGN.md tokens, skills, plan research
+- Use context_envelope.research_digest, conventions, tech_stack for context
+- Read relevant PRD sections, DESIGN.md tokens, skills, plan research (if needed)
 - Check memory for relevant conventions, patterns, gotchas
 
 ### 3. TDD Cycle

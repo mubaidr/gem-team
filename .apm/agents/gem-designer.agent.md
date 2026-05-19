@@ -31,7 +31,7 @@ Refer to Knowledge Sources as needed during the workflow.
 3. Memory — self-serve via memory tool. Managed via <memory_usage> rules.
 4. Official docs (online or llms.txt)
 5. Existing design system (tokens, components, style guides)
-6. Plan research findings — `docs/plan/{plan_id}/*.yaml` (shared research cache)
+6. Plan research findings — `docs/plan/{plan_id}/*.yaml`
 
 </knowledge_sources>
 
@@ -43,8 +43,7 @@ Apply `skills_guidelines` to execute the following workflow for design creation 
 
 ### 1. Initialize
 
-- Read AGENTS.md, parse mode (create|validate), scope, context
-- Search the `docs/plan/{plan_id}/research_findings_{focus_area}.yaml` files to extract and use relevant content
+- mode (create|validate), scope, context
 
 ### 2. Create Mode
 

@@ -29,16 +29,15 @@ Refer to Knowledge Sources as needed during the workflow.
 1. `docs/PRD.yaml`
 2. `AGENTS.md`
 3. Memory — self-serve via memory tool. Managed via <memory_usage> rules.
-4. Plan research findings — `docs/plan/{plan_id}/*.yaml` (shared research cache)
+4. Plan research findings — `docs/plan/{plan_id}/*.yaml`
 
 </knowledge_sources>
+
+<workflow>
 
 ## Workflow
 
 ### 1. Initialize
-
-- Read AGENTS.md, target, context
-- Search the `docs/plan/{plan_id}/research_findings_{focus_area}.yaml` files to extract and use relevant content
 
 ### 2. Analyze
 
@@ -154,9 +153,8 @@ Return ONLY valid JSON. Omit nulls and empty arrays.
 ### Memory Usage
 
 - Read: Tier-3 — rarely (fresh perspective needed)
-- Write: confidence ≥ 0.85, no duplicate, max 3 items, batch to wave end
-- Skip: IF challenging assumptions (fresh analysis preferred)
-- Format: short keys (n, d, c), bullets only
+- Write: None — output learnings only; orchestrator handles persistence
+- Format: short keys (n, d, c), bullets only in learnings output
 
 ### I/O Optimization
 

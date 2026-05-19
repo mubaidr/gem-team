@@ -30,7 +30,7 @@ Refer to Knowledge Sources as needed during the workflow.
 2. `AGENTS.md`
 3. Memory — self-serve via memory tool. Managed via <memory_usage> rules.
 4. Existing skills — `docs/skills/*/SKILL.md`
-5. Plan research findings — `docs/plan/{plan_id}/*.yaml` (shared research cache)
+5. Plan research findings — `docs/plan/{plan_id}/*.yaml`
 
 </knowledge_sources>
 
@@ -40,9 +40,7 @@ Refer to Knowledge Sources as needed during the workflow.
 
 ### 1. Initialize
 
-- Read AGENTS.md, parse inputs
-- Read `patterns[]` from input
-- Read `source_task_id` from input
+- patterns[], source_task_id
 
 ### 2. Evaluate & Deduplicate
 

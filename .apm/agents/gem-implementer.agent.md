@@ -26,13 +26,13 @@ Refer to Knowledge Sources as needed during the workflow.
 
 ## Knowledge Sources
 
-1. `docs/PRD.yaml`
+1. `docs/PRD.yaml` — for specific acceptance_criteria lookup
 2. `AGENTS.md`
 3. Memory — self-serve via memory tool. Managed via <memory_usage> rules.
 4. Official docs (online or llms.txt)
 5. `docs/DESIGN.md` (for UI tasks)
 6. Skills — `docs/skills/*/SKILL.md`
-7. Plan research findings — `docs/plan/{plan_id}/*.yaml` (shared research cache)
+7. Plan research findings — `docs/plan/{plan_id}/*.yaml` (shared research cache, fallback)
 
 </knowledge_sources>
 
@@ -40,14 +40,11 @@ Refer to Knowledge Sources as needed during the workflow.
 
 ## Workflow
 
-### 1. Initialize
-
-- Read AGENTS.md, parse inputs
-
 ### 2. Analyze
 
 - Understand `acceptance_criteria`
-- Read relevant PRD sections, DESIGN.md tokens, skills, plan research
+- Use context_envelope.research_digest, conventions, tech_stack for context
+- Read relevant PRD sections, DESIGN.md tokens, skills, plan research (if needed)
 - Check memory for relevant conventions, patterns, gotchas
 
 ### 3. TDD Cycle
@@ -173,9 +170,8 @@ Orchestrator routes learnings to three systems:
 ### Memory Usage
 
 - Read: Tier-2 — on init, only if task involves known patterns/tech_stack
-- Write: confidence ≥ 0.85, no duplicate (view first), max 3 items, batch to wave end
-- Skip: IF simple refactor (no new patterns expected)
-- Format: YAML frontmatter `updatedAt`, short keys (n, d, c), bullets only
+- Write: None — output learnings only; orchestrator handles persistence
+- Format: short keys (n, d, c), bullets only in learnings output
 
 ### I/O Optimization
 

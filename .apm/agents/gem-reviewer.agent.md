@@ -42,8 +42,7 @@ Refer to Knowledge Sources as needed during the workflow.
 
 ### 1. Initialize
 
-- Read AGENTS.md, determine review_scope: plan | wave | task
-- Search the `docs/plan/{plan_id}/research_findings_{focus_area}.yaml` files to extract and use relevant content
+- Determine review_scope: plan | wave | task
 
 ### 2. Scope Switch
 
@@ -67,53 +66,30 @@ Switch on `review_scope` — only ONE branch executes:
 #### review_scope=wave (Wave Scope)
 
 - Analyze: Read plan.yaml, identify completed wave via wave_tasks
+- IF `security_sensitive_tasks[]` provided: run full per-task security scan (grep + semantic) on each flagged task, same depth as task scope
 - Integration Checks:
   - Contract checks: from_task → to_task interfaces satisfied
   - Edge case scan: empty states, null inputs, boundary conditions
-  - Lightweight security scan: grep_search secrets, PII, SQLi, XSS
+  - Lightweight security scan: grep_search secrets, PII, SQLi, XSS across all changed files
   - Integration/contract tests only (NOT unit tests — implementer already ran those)
   - Report ALL failures
-- Report: Per-check status, affected files, error summaries. Include contract_checks: from_task, to_task, status
+- Report: Per-check status, affected files, error summaries. Include contract_checks: from_task, to_task, status. Include per-task security findings for sensitive tasks.
 - Determine Status: Any check fails → failed | All pass → completed
 
-#### review_scope=task (Task Scope)
+For mobile platform projects:
 
-- Analyze: Read plan.yaml, PRD.yaml. Validate task aligns with PRD decisions, state_machines, features. Identify scope with semantic_search, prioritize security/logic/requirements
-- Execute depth: full (all checks) | standard (security + logic) | lightweight (grep only)
-  - full: All checks + performance metrics + mobile vectors
-  - standard: Security scan (grep + semantic) + PRD compliance
-  - lightweight: grep_search secrets, PII, SQLi, XSS only
-- Default: standard unless task_clarifications specify depth
-- Scan: Security: grep_search (secrets, PII, SQLi, XSS) FIRST, then semantic
-- Mobile Security (if mobile detected):
+| Vector              | Search                                              | Verify                                             | Flag                      |
+| ------------------- | --------------------------------------------------- | -------------------------------------------------- | ------------------------- |
+| Keychain/Keystore   | `Keychain`, `SecItemAdd`, `Keystore`                | access control, biometric gating                   | hardcoded keys            |
+| Certificate Pinning | `pinning`, `SSLPinning`, `TrustManager`             | configured for sensitive endpoints                 | disabled SSL validation   |
+| Jailbreak/Root      | `jailbroken`, `rooted`, `Cydia`, `Magisk`           | detection in sensitive flows                       | bypass via Frida/Xposed   |
+| Deep Links          | `Linking.openURL`, `intent-filter`                  | URL validation, no sensitive data in params        | no signature verification |
+| Secure Storage      | `AsyncStorage`, `MMKV`, `Realm`, `UserDefaults`     | sensitive data NOT in plain storage                | tokens unencrypted        |
+| Biometric Auth      | `LocalAuthentication`, `BiometricPrompt`            | fallback enforced, prompt on foreground            | no passcode prerequisite  |
+| Network Security    | `NSAppTransportSecurity`, `network_security_config` | no `NSAllowsArbitraryLoads`/`usesCleartextTraffic` | TLS not enforced          |
+| Data Transmission   | `fetch`, `XMLHttpRequest`, `axios`                  | HTTPS only, no PII in query params                 | logging sensitive data    |
 
-  Detect: React Native/Expo, Flutter, iOS native, Android native
-
-  | Vector              | Search                                              | Verify                                             | Flag                      |
-  | ------------------- | --------------------------------------------------- | -------------------------------------------------- | ------------------------- |
-  | Keychain/Keystore   | `Keychain`, `SecItemAdd`, `Keystore`                | access control, biometric gating                   | hardcoded keys            |
-  | Certificate Pinning | `pinning`, `SSLPinning`, `TrustManager`             | configured for sensitive endpoints                 | disabled SSL validation   |
-  | Jailbreak/Root      | `jailbroken`, `rooted`, `Cydia`, `Magisk`           | detection in sensitive flows                       | bypass via Frida/Xposed   |
-  | Deep Links          | `Linking.openURL`, `intent-filter`                  | URL validation, no sensitive data in params        | no signature verification |
-  | Secure Storage      | `AsyncStorage`, `MMKV`, `Realm`, `UserDefaults`     | sensitive data NOT in plain storage                | tokens unencrypted        |
-  | Biometric Auth      | `LocalAuthentication`, `BiometricPrompt`            | fallback enforced, prompt on foreground            | no passcode prerequisite  |
-  | Network Security    | `NSAppTransportSecurity`, `network_security_config` | no `NSAllowsArbitraryLoads`/`usesCleartextTraffic` | TLS not enforced          |
-  | Data Transmission   | `fetch`, `XMLHttpRequest`, `axios`                  | HTTPS only, no PII in query params                 | logging sensitive data    |
-
-- Audit: Trace dependencies via vscode_listCodeUsages. Verify logic against spec and PRD (including error codes)
-- Verify: Include task_completion_check in output:
-
-  ```jsonc
-  extra: {
-    task_completion_check: {
-      files_created: [string],
-      files_exist: pass | fail,
-      coverage_status: {...},
-      acceptance_criteria_met: [string],
-      acceptance_criteria_missing: [string]
-    }
-  }
-  ```
+### 3. Subagent Handoff
 
 - Determine Status: Critical → failed | Non-critical → needs_revision | No issues → completed
 - Handle Failure: Log failures to docs/plan/{plan_id}/logs/
@@ -182,9 +158,8 @@ Return ONLY valid JSON. Omit nulls and empty arrays. Severity: critical > high >
 ### Memory Usage
 
 - Read: Tier-3 — rarely (security patterns usually fresh scan)
-- Write: confidence ≥ 0.85, no duplicate, max 3 items, batch to wave end
-- Skip: IF security-sensitive task (fresh scan required)
-- Format: short keys (n, d, c), bullets only
+- Write: None — output learnings only; orchestrator handles persistence
+- Format: short keys (n, d, c), bullets only in learnings output
 
 ### I/O Optimization
 

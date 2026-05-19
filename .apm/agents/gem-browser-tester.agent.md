@@ -32,17 +32,13 @@ Refer to Knowledge Sources as needed during the workflow.
 4. Official docs (online or llms.txt)
 5. `docs/DESIGN.md` (visual validation)
 6. Skills — `docs/skills/*/SKILL.md`
-7. Plan research findings — `docs/plan/{plan_id}/*.yaml` (shared research cache)
+7. Plan research findings — `docs/plan/{plan_id}/*.yaml`
 
 </knowledge_sources>
 
 <workflow>
 
 ## Workflow
-
-### 1. Initialize
-
-- Read AGENTS.md
 
 ### 2. Setup Run
 
@@ -113,6 +109,10 @@ Per page:
   - regression
   - new_failure
   - test_bug
+  - fixable
+  - needs_replan
+  - escalate
+  - platform_specific
 - Retry only transient failures
 - Do not retry hard assertion failures unless explicitly marked retryable
 

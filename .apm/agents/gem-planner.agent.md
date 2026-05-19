@@ -48,14 +48,13 @@ gem-researcher, gem-planner, gem-implementer, gem-implementer-mobile, gem-browse
 
 #### 1.1 Initialize
 
-- Read AGENTS.md, parse objective
+- Parse objective + context_envelope
 - Mode: Initial | Replan (failure/changed) | Extension (additive)
 
 #### 1.2 Research Consumption
 
-- Read PRD: user_stories, scope, acceptance_criteria
-- Read all research files from `docs/plan/{plan_id}/research_findings_{focus_area}.yaml`
-- Check researcher's `open_questions`
+- context_envelope provides research_digest, architecture_snapshot, tech_stack, conventions
+- Fallback: read research*findings*\*.yaml directly if something is missing
 
 #### 1.3 Apply Clarifications
 
@@ -63,9 +62,10 @@ gem-researcher, gem-planner, gem-implementer, gem-implementer-mobile, gem-browse
 
 ### 2. Design
 
-#### 2.0 Pattern Discovery
+#### 2.0 Consume Research Patterns
 
-Search similar implementations, document in `patterns_found`
+- Use patterns from context_envelope.research_digest.patterns_found
+- Do NOT re-scan codebase for already-discovered patterns
 
 #### 2.1 Synthesize DAG
 
@@ -106,6 +106,14 @@ Pattern Routing:
 - Target: ~100 lines/task
 - Split if >300 lines: vertical slice, file group, or horizontal
 - Each task completable in single session
+
+##### 2.1.3 Implementation Handoff (ALL tasks, not just bug-fix)
+
+For every implementation task, populate `implementation_handoff`:
+
+- `do_not_reinvestigate`: List what's already known from context_envelope (e.g., "project structure", "tech stack", "naming conventions", "related files")
+- `target_files`: Specific files from context_envelope.research_digest.relevant_files
+- `acceptance_checks`: Derived from task acceptance_criteria
 
 #### 2.2 Create plan.yaml (per `plan_format_guide`)
 
@@ -362,9 +370,8 @@ tasks:
 ### Memory Usage
 
 - Read: Tier-1 — always read /memories/session/, /memories/repo/ for conventions/patterns
-- Write: confidence ≥ 0.85, no duplicate, max 3 items, batch to wave end
-- Skip: IF task involves unknown domain, OR session has fresh context
-- Format: short keys (n, d, c), bullets only
+- Write: None — output learnings only; orchestrator handles persistence
+- Format: short keys (n, d, c), bullets only in learnings output
 
 ### I/O Optimization
 

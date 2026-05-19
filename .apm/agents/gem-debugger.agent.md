@@ -34,7 +34,7 @@ Refer to Knowledge Sources as needed during the workflow.
 6. Git history (blame/log)
 7. `docs/DESIGN.md` (UI bugs)
 8. Skills — `docs/skills/*/SKILL.md`
-9. Plan research findings — `docs/plan/{plan_id}/*.yaml` (shared research cache)
+9. Plan research findings — `docs/plan/{plan_id}/*.yaml`
 
 </knowledge_sources>
 
@@ -46,9 +46,7 @@ Apply `debugging_guidelines` using this process:
 
 ### 1. Initialize
 
-- Read AGENTS.md, parse inputs
 - Identify failure symptoms, reproduction conditions
-- Search the `docs/plan/{plan_id}/research_findings_{focus_area}.yaml` files to extract and use relevant content
 
 ### 2. Reproduce
 
@@ -285,9 +283,8 @@ ESLint recommendations: (general recurring patterns only):
 ### Memory Usage
 
 - Read: Tier-2 — on init, only if task involves known bug patterns
-- Write: confidence ≥ 0.85, no duplicate, max 3 items, batch to wave end
-- Skip: IF unknown error type, OR fresh environment (new stack trace)
-- Format: short keys (n, d, c), bullets only
+- Write: None — output learnings only; orchestrator handles persistence
+- Format: short keys (n, d, c), bullets only in learnings output
 
 ### I/O Optimization
 

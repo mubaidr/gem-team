@@ -62,7 +62,7 @@ hidden: true
 ---
 ```
 
-Required sections per agent: Role, Knowledge Sources, Workflow, Input Format (defined in orchestrator's `<agent_input_reference>`), Output Format, Rules.
+Required sections per agent: Role, Knowledge Sources, Workflow, Output Format, Rules. Input formats are centralized in the orchestrator's `<agent_input_reference>` — subagents receive structured JSON from the orchestrator, never raw user prompts.
 
 ## Build & Test Commands
 
@@ -74,15 +74,53 @@ Required sections per agent: Role, Knowledge Sources, Workflow, Input Format (de
 ### Validation
 
 ```bash
-# Validate YAML frontmatter in all agent files
+# 1. Check all 16 agent files exist
+find .apm/agents -maxdepth 1 -name '*.agent.md' -print | wc -l
+# Expected: 16
+
+# 2. Check YAML frontmatter in all files
 grep -r "^---" .apm/agents/*.agent.md -l | wc -l
-# Expected: 16 (all agent files)
+# Expected: 16
 
-# Check for missing required sections
-grep -L "<role>" .apm/agents/*.agent.md
+# 3. Check all required YAML frontmatter keys present in every file
+for key in description name argument-hint disable-model-invocation user-invocable mode hidden; do
+  missing=$(grep -L "^$key:" .apm/agents/*.agent.md 2>/dev/null)
+  if [ -n "$missing" ]; then echo "MISSING $key in: $missing"; fi
+done
 
-# Verify all agents referenced in orchestrator exist
-grep "gem-" .apm/agents/gem-orchestrator.agent.md | grep -o "gem-[a-z-]*" | sort -u
+# 4. Check all required section tags present
+for tag in role knowledge_sources workflow output_format rules; do
+  missing=$(grep -L "<$tag>" .apm/agents/*.agent.md 2>/dev/null)
+  if [ -n "$missing" ]; then echo "MISSING <$tag> in: $missing"; fi
+done
+
+# 5. Check balanced section tags (each open has matching close)
+for tag in role knowledge_sources workflow output_format rules; do
+  for f in .apm/agents/*.agent.md; do
+    open=$(grep -c "<$tag>" "$f" 2>/dev/null || echo 0)
+    close=$(grep -c "</$tag>" "$f" 2>/dev/null || echo 0)
+    if [ "$open" -ne "$close" ] && [ "$open" -gt 0 ]; then
+      echo "UNBALANCED <$tag> in $f ($open opens, $close closes)"
+    fi
+  done
+done
+
+# 6. Check failure type enum consistency (all agents match global)
+# Global: transient|fixable|needs_replan|escalate|flaky|regression|new_failure|platform_specific|test_bug
+grep "failure_type" .apm/agents/*.agent.md | grep -v "test_bug" && echo "WARN: agent missing test_bug in failure_type"
+
+# 7. Check no agent self-references in its own available_agents
+for f in .apm/agents/*.agent.md; do
+  agent_name=$(grep "^name:" "$f" | head -1 | awk '{print $2}')
+  if grep -q "$agent_name" <(sed -n '/<available_agents>/,/<\/available_agents>/p' "$f" 2>/dev/null); then
+    echo "SELF-REF $f lists itself in available_agents"
+  fi
+done
+
+# 8. Verify all orchestrator-referenced agents exist
+grep "gem-" .apm/agents/gem-orchestrator.agent.md | grep -o "gem-[a-z-]*" | sort -u | while read -r agent; do
+  test -f ".apm/agents/$agent.agent.md" || echo "MISSING: $agent.agent.md"
+done
 ```
 
 ### Release
@@ -97,21 +135,25 @@ grep "gem-" .apm/agents/gem-orchestrator.agent.md | grep -o "gem-[a-z-]*" | sort
 - **Agent definitions**: YAML frontmatter + Markdown. Keep sections concise.
 - **Output format**: JSON only, no preamble/commentary. Dense, abbreviated, bulleted.
 - **Memory format**: YAML frontmatter with `updatedAt`, dense bullets, max 3 items per write.
-- **Failure types**: Use exact enum values: `transient|fixable|needs_replan|escalate|flaky|regression|new_failure|platform_specific`
+- **Failure types**: Use exact enum values: `transient|fixable|needs_replan|escalate|flaky|regression|new_failure|platform_specific|test_bug`
 - **Status values**: `completed|failed|in_progress|needs_revision|needs_approval`
 - **Confidence**: Always include 0-1 confidence on learnings/outputs
 
 ## Memory Optimization (Referenced by All Agents)
 
+### Memory Ownership (Single Writer)
+
+Only the **orchestrator** writes to memory (via `memory` tool at Phase 5). Subagents output `learnings` in their JSON response — the orchestrator collects, deduplicates, and persists them. This prevents duplicate writes, inconsistent deduplication, and skipped persistence.
+
 ### Memory Tiers
 
-| Tier | Agents                                                 | Read Priority | Write Scope |
-| ---- | ------------------------------------------------------ | ------------- | ----------- |
-| 1    | orchestrator, researcher, planner                      | Always        | user/repo   |
-| 2    | implementer, debugger, simplifier                      | On init       | repo        |
-| 3    | reviewer, critic, doc-writer, designer, tester, devops | Rarely        | repo        |
+| Tier | Agents                                                 | Read Priority |
+| ---- | ------------------------------------------------------ | ------------- |
+| 1    | orchestrator, researcher, planner                      | Always        |
+| 2    | implementer, debugger, simplifier                      | On init       |
+| 3    | reviewer, critic, doc-writer, designer, tester, devops | Rarely        |
 
-### Skip Rules (Agent-Level Decision)
+### Read Rules (Agent-Level Decision)
 
 ```yaml
 # BEFORE memory read:
@@ -125,14 +167,14 @@ PARALLEL:
   - semantic_search(target)
   - file_search(patterns)
 
-# BEFORE memory write:
-IF confidence < 0.85 → SKIP write
-IF duplicate exists → SKIP write (view first)
-IF partial success → BATCH to wave end, let orchestrator handle
+# BEFORE memory write (orchestrator only):
+IF any subagent learnings have confidence < 0.85 → SKIP those
+IF duplicate exists (view first) → SKIP
+IF partial success → BATCH until Phase 5, then write
 
-# Write format (LLM-targeted, concise):
+# Write format (orchestrator only):
 # - Short keys: n=name, d=description, c=confidence
-# - No prose, bullets only, max 3 items
+# - No prose, bullets only, max 3 items per write
 ```
 
 ### Scope Rules

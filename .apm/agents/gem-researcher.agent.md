@@ -40,7 +40,7 @@ Refer to Knowledge Sources as needed during the workflow.
 ### 1. Initialize & Select Mode
 
 - Read AGENTS.md, parse inputs, identify focus_area
-- Determine mode from input: `clarify` | `research`
+- Determine mode from input: `clarify` | `research` | `compact`
 - Branch based on mode:
 
 #### Clarify Mode
@@ -58,6 +58,38 @@ Understand intent, resolve ambiguity, confirm scope.
    - Task-specific → `task_clarifications`
 6. Quickly assess complexity → Output intent, clarifications, decisions, gray_areas
 7. Return JSON per `Output Format`
+
+#### Compact Mode
+
+Compress research findings into a token-efficient `context_envelope` for downstream agents. This avoids context bloat in the orchestrator and eliminates redundant file reads by subagents.
+
+1. Read all YAML files from `research_yaml_paths` input
+2. Read AGENTS.md (project conventions) and PRD.yaml (scope, tech_stack) — extract only key fields
+3. IF `debugger_diagnosis` provided: incorporate root cause, affected files, fix strategy
+4. Merge and deduplicate across all research files:
+   - Combine `files_analyzed` → deduplicate by path, keep purpose + key_elements
+   - Combine `patterns_found` → deduplicate by pattern name, keep highest-prevalence
+   - Merge `related_architecture` → flatten to key components list
+   - Merge `related_technology_stack` → flatten to arrays
+   - Merge `related_conventions` → flatten to string list
+   - Merge `related_dependencies` → deduplicate
+   - Collect all `open_questions` and `gaps`
+5. Compact into `context_envelope` (target: max ~2000 tokens):
+   - `project_summary`: 2-3 lines from PRD objective/description
+   - `tech_stack`: flat array from research + PRD
+   - `conventions`: flat array of naming/structure/error_handling patterns
+   - `architecture_snapshot.key_dirs`: map of directory → purpose (max 10)
+   - `architecture_snapshot.patterns`: array of pattern names (max 10)
+   - `architecture_snapshot.key_components`: array of {name, location, responsibility} (max 10)
+   - `research_digest.relevant_files`: array of {path, purpose} (max 20)
+   - `research_digest.patterns_found`: array of {name, category, example_location} (max 10)
+   - `research_digest.dependencies`: {internal: [], external: []}
+   - `research_digest.gotchas`: array of strings (max 5)
+   - `research_digest.open_questions`: array of strings (max 5)
+   - `prior_decisions`: from task_clarifications + architectural_decisions
+   - `do_not_re_read`: ["AGENTS.md", "PRD.yaml", "research_findings_*.yaml"]
+6. Save: `docs/plan/{plan_id}/context_envelope.yaml`
+7. Return JSON per `Output Format` with `context_envelope` field
 
 #### Research Mode
 
@@ -165,7 +197,7 @@ Return ONLY valid JSON. Omit nulls and empty arrays.
   "status": "completed | failed | in_progress | needs_revision",
   "task_id": "string | omit if unknown",
   "failure_type": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
-  "mode": "clarify | research",
+  "mode": "clarify | research | compact",
   "confidence": 0.0-1.0,
   "complexity": "simple | medium | complex",
   "user_intent": "bug_fix | continue_plan | modify_plan | new_task",
@@ -173,11 +205,12 @@ Return ONLY valid JSON. Omit nulls and empty arrays.
   "focus_areas": ["string"],
   "task_clarifications": [{ "question": "string", "answer": "string" }],
   "architectural_decisions": [{ "decision": "string", "affects": "string" }],
+  "context_envelope": "object (compact mode only — see context_envelope schema)",
   "learnings": {
     "patterns": [{ "name": "string", "description": "string", "confidence": 0.0-1.0 }],
     "gaps": ["string"]
   },
-  "yaml_saved": "docs/plan/{plan_id}/research_findings_{focus_area}.yaml"
+  "yaml_saved": "docs/plan/{plan_id}/research_findings_{focus_area}.yaml | docs/plan/{plan_id}/context_envelope.yaml"
 }
 ```
 
@@ -321,7 +354,7 @@ gaps: # REQUIRED
 ### Memory Usage
 
 - Read: Tier-1 — always read /memories/session/, /memories/repo/
-- Write: Task-specific YAML + repo memory (`research/{focus_area}`) OR batch to wave end
+- Write: Task-specific YAML files only — repo memory writes handled by orchestrator
 - Skip: IF confidence ≥ 0.85 from early-exit, OR unknown domain
 - Format: short keys (n, d, c), max 3 items
 

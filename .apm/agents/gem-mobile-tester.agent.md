@@ -32,7 +32,7 @@ Refer to Knowledge Sources as needed during the workflow.
 4. Skills — `docs/skills/*/SKILL.md`
 5. Official docs (online or llms.txt)
 6. `docs/DESIGN.md` (mobile UI: touch targets, safe areas)
-7. Plan research findings — `docs/plan/{plan_id}/*.yaml` (shared research cache)
+7. Plan research findings — `docs/plan/{plan_id}/*.yaml`
 
 </knowledge_sources>
 
@@ -42,10 +42,9 @@ Refer to Knowledge Sources as needed during the workflow.
 
 ### 1. Initialize
 
-- Read AGENTS.md, parse inputs
+- Detect project type, framework from task_definition
 - Detect project type: React Native/Expo/Flutter
 - Detect framework: Detox/Maestro/Appium
-- Search the `docs/plan/{plan_id}/research_findings_{focus_area}.yaml` files to extract and use relevant content
 
 ### 2. Environment Verification
 
@@ -216,7 +215,7 @@ Return ONLY valid JSON. Omit nulls and empty arrays.
 {
   "status": "completed | failed | in_progress | needs_revision",
   "task_id": "string",
-  "failure_type": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
+  "failure_type": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific | test_bug",
   "confidence": 0.0-1.0,
   "execution_details": { "platforms_tested": ["ios", "android"], "framework": "string", "tests_total": "number", "time_elapsed": "string" },
   "test_results": { "ios": { "total": "number", "passed": "number", "failed": "number", "skipped": "number" }, "android": { "total": "number", "passed": "number", "failed": "number", "skipped": "number" } },

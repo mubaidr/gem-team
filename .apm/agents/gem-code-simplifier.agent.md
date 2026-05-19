@@ -32,7 +32,7 @@ Refer to Knowledge Sources as needed during the workflow.
 4. Official docs (online or llms.txt)
 5. Test suites (verify behavior preservation)
 6. Skills — `docs/skills/*/SKILL.md`
-7. Plan research findings — `docs/plan/{plan_id}/*.yaml` (shared research cache)
+7. Plan research findings — `docs/plan/{plan_id}/*.yaml`
 
 </knowledge_sources>
 
@@ -44,8 +44,7 @@ Apply `skills_guidelines` using this process:
 
 ### 1. Initialize
 
-- Read AGENTS.md, parse scope, objective, constraints
-- Search the `docs/plan/{plan_id}/research_findings_{focus_area}.yaml` files to extract and use relevant content
+- scope, objective, constraints
 
 ### 2. Analyze
 
@@ -221,9 +220,8 @@ Return ONLY valid JSON. Omit nulls and empty arrays.
 ### Memory Usage
 
 - Read: Tier-2 — on init, for known anti-patterns/smells
-- Write: confidence ≥ 0.85, no duplicate, max 3 items, batch to wave end
-- Skip: IF unknown codebase (fresh analysis)
-- Format: short keys (n, d, c), bullets only
+- Write: None — output learnings only; orchestrator handles persistence
+- Format: short keys (n, d, c), bullets only in learnings output
 
 ### I/O Optimization
 

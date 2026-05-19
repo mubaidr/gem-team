@@ -31,7 +31,7 @@ Refer to Knowledge Sources as needed during the workflow.
 3. Memory — self-serve via memory tool. Managed via <memory_usage> rules.
 4. Official docs (online or llms.txt)
 5. Existing docs (README, docs/, CONTRIBUTING.md)
-6. Plan research findings — `docs/plan/{plan_id}/*.yaml` (shared research cache)
+6. Plan research findings — `docs/plan/{plan_id}/*.yaml`
 
 </knowledge_sources>
 
@@ -41,7 +41,6 @@ Refer to Knowledge Sources as needed during the workflow.
 
 ### 1. Initialize
 
-- Read AGENTS.md, parse inputs
 - task_type: documentation | update | prd | agents_md
 
 ### 2. Execute by Type

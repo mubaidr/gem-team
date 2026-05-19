@@ -33,7 +33,7 @@ Refer to Knowledge Sources as needed during the workflow.
 5. Official docs (online or llms.txt)
 6. Cloud docs (AWS, GCP, Azure, Vercel)
 7. Skills — `docs/skills/*/SKILL.md`
-8. Plan research findings — `docs/plan/{plan_id}/*.yaml` (shared research cache)
+8. Plan research findings — `docs/plan/{plan_id}/*.yaml`
 
 </knowledge_sources>
 
@@ -45,8 +45,6 @@ Apply `skills_guidelines` using the following workflow.
 
 ### 1. Preflight
 
-- Read AGENTS.md, check deployment configs
-- Search the `docs/plan/{plan_id}/research_findings_{focus_area}.yaml` files to extract and use relevant content
 - Verify environment: docker, kubectl, permissions, resources
 - Ensure idempotency: all operations repeatable
 
