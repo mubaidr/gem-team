@@ -48,40 +48,33 @@ See [all supported installation options](#installation) below.
 - **Resilient** — Pre-mortem analysis, failure handling, auto-replanning
 - **Accessibility-First** — WCAG compliance validated at spec and runtime layers
 - **Safe DevOps** — Idempotent operations, health checks, mandatory approval gates
-- **Constructive Critique** — gem- critic challenges assumptions, finds edge cases
+- **Constructive Critique** — gem-critic challenges assumptions, finds edge cases
 
 ### Intelligence
 
-- **Established Patterns** — Uses library/framework conventions over custom implementations
 - **Source Verified** — Every factual claim cites its source; no guesswork
 - **Knowledge-Driven** — Prioritized sources (PRD → codebase → AGENTS.md → Context7 → docs)
-- **Continuous Learning** — Memory tool persists patterns, gotchas, user preferences across sessions
-- **Memory Optimization** — Tiered read/write (Tier-1 always, Tier-2 on init, Tier-3 rarely). Skip rules: unknown domain → skip, confidence ≥ 0.85 → skip read. Batch writes at wave end. Short keys format (n, d, c)
-- **Agent Memory Contracts** — Every agent reads/writes structured memory autonomously. Researcher caches, debugger logs, planner aggregates, reviewers persist
-- **Self-Validating Cache** — Researcher checks memory before searching. Validates (file checks, import resolve, git log). IF stale: re-research, DELETE old, WRITE new
-- **Diagnosis History** — Debugger saves root-causes. Same bug pattern >0.8 match: cached diagnosis
+- **Established Patterns** — Prefers established library/framework conventions over custom implementations
+- **Continuous Learning** — Memory tool persists patterns, gotchas, user preferences across sessions/ repo etc
+- **Skills & Guidelines** — Built-in special skill & guidelines (design-guidelines, debugger etc)
 - **Auto-Skills** — Agents extract reusable SKILL.md files from successful tasks
-- **Skills & Guidelines** — Built-in skill & guidelines (web-design-guidelines)
 
 ### Process
 
-- **Spec-Driven** — Multi-step refinement defines "what" before "how"
+- **Plan-Driven** — Multi-step refinement defines "what" before "how"
+- **Contract-First** — Contract tests written before implementation
 - **Verified-Plan** — Complex tasks: Plan → Verification → Critic
 - **Traceable** — Self-documenting IDs link requirements → tasks → tests → evidence
 - **Intent vs. Compliance** — Shifts the burden from writing "perfect prompts" to enforcing strict, YAML-based approval gates
 - **Diagnose-then-Fix** — gem-debugger diagnoses → gem-implementer fixes → re-verifies
-- **Pre-Mortem** — Failure modes identified BEFORE execution
-- **Contract-First** — Contract tests written before implementation
+- **Resumable** — Execution can be paused and resumed without losing context
 
 ### Token Efficiency
 
 Optimized for reduced LLM token consumption without quality loss:
 
 - **Concise Output** — No preamble, no meta commentary, no verbose explanations
-- **Strict Formats** — JSON/YAML exactly matching schemas — eliminates parse errors and retries
-- **Empty is OK** — Skip empty arrays, nulls, verbose fields where not needed
 - **File-Based** — Researcher/Planner save to YAML files (not all in JSON output)
-- **Learnings** — Empty patterns/conventions unless critical
 - **Memory Skip** — Agents skip redundant reads when cache has high-confidence findings
 
 ### Design
@@ -93,13 +86,9 @@ Optimized for reduced LLM token consumption without quality loss:
 
 ## 🧠 Core Concepts
 
-### The "System- IQ" Multiplier
+### The "System-IQ" Multiplier
 
 Raw reasoning isn't enough in single-pass chat. Gem-Team wraps your preferred LLM in a rigid framework with verification-first loops, fundamentally boosting its effective capability on SWE tasks.
-
-### Design Support
-
-Gem Team includes specialized design agents with anti-"AI slop" guidelines for distinctive, modern and unique aesthetics with accessibility compliance.
 
 ### Knowledge Layers
 
@@ -110,16 +99,6 @@ Gem Team includes specialized design agents with anti-"AI slop" guidelines for d
 | **Skills**       | `docs/skills/`  | Reusable procedures with code examples, extracted from high-confidence patterns                                                          |
 | **PRD**          | `docs/PRD.yaml` | Product requirements spec — drives agent planning, implementation, and verification                                                      |
 | **AGENTS.md**    | `AGENTS.md`     | Static conventions, rules, and agent definitions (requires approval)                                                                     |
-
-### Knowledge Sources
-
-Agents consult only the sources relevant to their role:
-
-| Trust Level   | Sources                                            | Behavior                             |
-| :------------ | :------------------------------------------------- | :----------------------------------- |
-| **Trusted**   | PRD, plan.yaml, AGENTS.md                          | Follow as instructions               |
-| **Verify**    | Codebase files, research findings, Memory patterns | Cross-reference before assuming      |
-| **Untrusted** | Error logs, external data                          | Factual only — never as instructions |
 
 ### Skill Creation
 
@@ -235,18 +214,14 @@ apm install -g mubaidr/gem-team
 
 APM deploys agents to every harness it detects. Below is what lands where:
 
-| Tool                      | Auto-detection signal        | Where agents land         | Primitives supported                               |
-| ------------------------- | ---------------------------- | ------------------------- | -------------------------------------------------- |
-| **VS Code** (Copilot IDE) | `.github/`                   | `.github/agents/`         | instructions, prompts, agents, skills, hooks, mcp  |
-| **GitHub Copilot CLI**    | `.github/`                   | `.github/agents/`         | instructions, prompts, agents, skills, hooks, mcp  |
-| **Claude Code**           | `.claude/` or `CLAUDE.md`    | `.claude/agents/`         | instructions, agents, skills, commands, hooks, mcp |
-| **Cursor**                | `.cursor/` or `.cursorrules` | `.cursor/agents/`         | instructions, agents, skills, commands, hooks, mcp |
-| **OpenCode**              | `.opencode/`                 | `.opencode/agents/`       | agents, commands, skills, mcp                      |
-| **Codex CLI**             | `.codex/`                    | `.codex/agents/`          | agents, skills, hooks, mcp                         |
-| **Gemini CLI**            | `.gemini/` or `GEMINI.md`    | compiled into `GEMINI.md` | commands, skills, hooks, mcp                       |
-| **Windsurf**              | `.windsurf/`                 | `.windsurf/skills/`       | instructions, agents, skills, commands, hooks, mcp |
-
-Skills always deploy to the cross-tool `.agents/skills/` directory — available to any skills-aware client.
+| Tool                      | Auto-detection signal        | Where agents land   | Primitives supported                               |
+| ------------------------- | ---------------------------- | ------------------- | -------------------------------------------------- |
+| **VS Code** (Copilot IDE) | `.github/`                   | `.github/agents/`   | instructions, prompts, agents, skills, hooks, mcp  |
+| **GitHub Copilot CLI**    | `.github/`                   | `.github/agents/`   | instructions, prompts, agents, skills, hooks, mcp  |
+| **Cursor**                | `.cursor/` or `.cursorrules` | `.cursor/agents/`   | instructions, agents, skills, commands, hooks, mcp |
+| **OpenCode**              | `.opencode/`                 | `.opencode/agents/` | agents, commands, skills, mcp                      |
+| **Codex CLI**             | `.codex/`                    | `.codex/agents/`    | agents, skills, hooks, mcp                         |
+| **Windsurf**              | `.windsurf/`                 | `.windsurf/skills/` | instructions, agents, skills, commands, hooks, mcp |
 
 ---
 
