@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.34.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.33.0...gem-team-v1.34.0) (2026-05-20)
+
+
+### 📝 Documentation
+
+* enforce strict phase adherence in gem-orchestrator.agent.md ([47ad415](https://github.com/mubaidr/gem-team/commit/47ad4154617825e66702f8525b23abbe82e13507))
+
 ## [1.33.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.32.0...gem-team-v1.33.0) (2026-05-20)
 
 
