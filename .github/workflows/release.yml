@@ -33,6 +33,6 @@ jobs:
           echo "- ${{ steps.release.outputs.release_type }}" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Changed Components" >> $GITHUB_STEP_SUMMARY
-          ls -1 *.agent.md 2>/dev/null | while read file; do
+          ls -1 .apm/agents/*.agent.md 2>/dev/null | while read file; do
             echo "- $file" >> $GITHUB_STEP_SUMMARY
           done
