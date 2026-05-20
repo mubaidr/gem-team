@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.33.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.32.0...gem-team-v1.33.0) (2026-05-20)
+
+
+### 🚀 New Agents & Features
+
+* Clarify and optimize memory management for Researcher, Planner, Orchestrator agents. ([10e958e](https://github.com/mubaidr/gem-team/commit/10e958e6df97951ff635ce9aec08f45eac757d9e))
+* **claude-plugin:** add gem-team plugin and update marketplace metadata and release config ([07b4ebf](https://github.com/mubaidr/gem-team/commit/07b4ebfdccbb5efb8b1821fe21076ef0a408e469))
+* **claude-plugin:** add gem-team plugin and update marketplace metadata and release config ([174ab39](https://github.com/mubaidr/gem-team/commit/174ab395bbf3541b72d2d64f6810d6c19057bf2f))
+* Optimize memory management + Routing ([c27239d](https://github.com/mubaidr/gem-team/commit/c27239df3df7ca97512ac8a48a1a5716824a1493))
+
+
+### 📝 Documentation
+
+* refactor knowledge-source enumeration and simplify agent initialization ([49528df](https://github.com/mubaidr/gem-team/commit/49528df757160eba2433ea3c99735195ea0ab9da))
+* refine agent markdown specifications and simplify output instructions ([2316e3f](https://github.com/mubaidr/gem-team/commit/2316e3fdbccb640b4aefe2c036bfc9554bb52b48))
+
 ## [1.32.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.31.0...gem-team-v1.32.0) (2026-05-17)
 
 
