@@ -40,89 +40,40 @@ Refer to Knowledge Sources as needed during the workflow.
 
 ## Workflow
 
+### 1. Parse Input
+
+Understand flow definitions or validation_matrix. Identify scenarios, steps, expected outcomes, evidence requirements.
+
 ### 2. Setup Run
 
 - Create fixtures from task_definition.fixtures
-- Seed test data with run-specific identifiers, if needed
-- Start browser context
-- Use isolated contexts only for multi-role scenarios, if needed
 
 ### 3. Execute Scenarios
 
 For each scenario in validation_matrix:
 
-#### 3.1 Scenario Setup
+- Setup: open page, apply preconditions, attach fixtures
+- Execute flows: per step — observe state, perform action, verify expected_state
+- Assert: verify expected state, DB/API state, visual regression
+- Evidence: on failure → screenshots, trace, console/network logs, snapshots. On success → baselines only
+- Cleanup: close pages, clear context, remove fixtures if cleanup=true
 
-- Reset scenario_context
-- Apply preconditions
-- Attach required fixtures
-- Open page and capture pageId
-- Apply wait_strategy
-- Never skip wait after navigation
-
-#### 3.2 Execute Referenced Flows
-
-For each flow:
-
-- Execute flow.setup if defined
-- For each step:
-  - Observe current page state
-  - Execute action
-  - Wait using step wait_strategy
-  - Verify immediate result
-  - Extract needed values into context
-  - On transient failure, retry
-  - On hard assertion failure, stop and capture evidence
-- Verify flow.expected_state
-- Execute flow.teardown if defined
-
-#### 3.3 Scenario Assertions
-
-- Verify scenario expected_state
-- Verify DB/API state if available
-- Compare screenshots if visual_regression is enabled
-
-#### 3.4 Evidence Capture
-
-- On failure: screenshots, trace, console logs, network logs, snapshots
-- On success: save required screenshots/baselines only
-
-#### 3.5 Scenario Cleanup
-
-- Close pages created by scenario
-- Clear scenario_context
-- Remove scenario fixtures if cleanup=true
-
-### 4. Finalize Verification
+### 4. Finalize
 
 Per page:
 
-- Console: errors and warnings
-- Network: failed requests and status >= 400
+- Console: errors + warnings
+- Network: failed requests + status >= 400
 - Accessibility audit if configured
 
 ### 5. Failure Handling
 
-- Classify failure:
-  - transient
-  - flaky
-  - regression
-  - new_failure
-  - test_bug
-  - fixable
-  - needs_replan
-  - escalate
-  - platform_specific
-- Retry only transient failures
-- Do not retry hard assertion failures unless explicitly marked retryable
+- Classify: transient | flaky | regression | new_failure | test_bug | fixable | needs_replan | escalate | platform_specific
+- Retry only transient; skip hard assertion failures unless marked retryable
 
 ### 6. Cleanup Run
 
-- Close browser contexts
-- Remove orphaned resources
-- Delete run-created fixtures if cleanup=true
-- Stop traces
-- Persist retained evidence
+Close browser contexts, remove orphaned resources, stop traces, persist retained evidence.
 
 ### 7. Output
 
@@ -142,12 +93,6 @@ Return ONLY valid JSON. Omit nulls and empty arrays.
   "task_id": "string",
   "failure_type": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific | test_bug",
   "confidence": 0.0-1.0,
-  "summary": {
-    "flows_executed": "number",
-    "flows_passed": "number",
-    "scenarios_executed": "number",
-    "scenarios_passed": "number"
-  },
   "metrics": {
     "console_errors": "number",
     "console_warnings": "number",
@@ -160,7 +105,6 @@ Return ONLY valid JSON. Omit nulls and empty arrays.
   "evidence_path": "docs/plan/{plan_id}/evidence/{task_id}/",
   "flow_results": [{ "flow_id": "string", "status": "passed | failed", "steps_completed": "number", "steps_total": "number", "duration_ms": "number" }],
   "failures": [{ "type": "string", "criteria": "string", "details": "string", "flow_id": "string", "scenario": "string", "step_index": "number", "evidence": ["string"] }],
-  "flaky_tests": ["scenario_id"],
   "assumptions": ["string"],
   "learnings": {
     "patterns": [{ "name": "string", "description": "string", "confidence": 0.0-1.0 }],
