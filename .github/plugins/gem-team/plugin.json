@@ -1,0 +1,43 @@
+{
+  "agents": [
+    ".apm/agents/gem-browser-tester.md",
+    ".apm/agents/gem-code-simplifier.md",
+    ".apm/agents/gem-critic.md",
+    ".apm/agents/gem-debugger.md",
+    ".apm/agents/gem-designer-mobile.md",
+    ".apm/agents/gem-designer.md",
+    ".apm/agents/gem-devops.md",
+    ".apm/agents/gem-documentation-writer.md",
+    ".apm/agents/gem-implementer-mobile.md",
+    ".apm/agents/gem-implementer.md",
+    ".apm/agents/gem-mobile-tester.md",
+    ".apm/agents/gem-orchestrator.md",
+    ".apm/agents/gem-planner.md",
+    ".apm/agents/gem-researcher.md",
+    ".apm/agents/gem-reviewer.md",
+    ".apm/agents/gem-skill-creator.agent.md"
+  ],
+  "author": {
+    "email": "mubaidr@gmail.com",
+    "name": "mubaidr",
+    "url": "https://github.com/mubaidr"
+  },
+  "description": "Self-Learning Multi-agent orchestration framework for spec-driven development and automated verification.",
+  "homepage": "https://github.com/mubaidr/gem-team",
+  "keywords": [
+    "multi-agent",
+    "orchestration",
+    "tdd",
+    "testing",
+    "e2e",
+    "devops",
+    "security-audit",
+    "code-review",
+    "prd",
+    "mobile"
+  ],
+  "license": "Apache-2.0",
+  "name": "gem-team",
+  "repository": "https://github.com/mubaidr/gem-team",
+  "version": "1.32.0"
+}

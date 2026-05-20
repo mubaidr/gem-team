@@ -1,18 +1,21 @@
 {
-  "name": "gem-team",
-  "owner": {
-    "name": "mubaidr",
-    "email": "mubaidr@gmail.com",
-    "url": "https://github.com/mubaidr"
-  },
   "metadata": {
     "homepage": "https://github.com/mubaidr/gem-team"
   },
+  "name": "gem-team",
+  "owner": {
+    "email": "mubaidr@gmail.com",
+    "name": "mubaidr",
+    "url": "https://github.com/mubaidr"
+  },
   "plugins": [
     {
+      "description": "Self-Learning Multi-agent orchestration framework for spec-driven development and automated verification",
       "name": "gem-team",
-      "description": "Self-Learning Multi-agent orchestration harness for spec-driven development and automated verification",
-      "version": "1.19.0",
+      "source": {
+        "repo": "mubaidr/gem-team",
+        "source": "github"
+      },
       "tags": [
         "multi-agent",
         "orchestration",
@@ -25,12 +28,7 @@
         "prd",
         "mobile"
       ],
-      "source": {
-        "source": "github",
-        "repo": "mubaidr/gem-team",
-        "ref": "gem-team-v1.19.0",
-        "sha": "0cf0c240b28b86a627cf80a58586ff36d001917d"
-      }
+      "version": "1.32.0"
     }
   ]
 }
