@@ -77,7 +77,7 @@ Close browser contexts, remove orphaned resources, stop traces, persist retained
 
 ### 7. Output
 
-- Return JSON matching Output Format
+Return JSON matching Output Format
 
 </workflow>
 

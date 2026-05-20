@@ -39,15 +39,11 @@ Refer to Knowledge Sources as needed during the workflow.
 
 ### 1. Initialize
 
-### 2. Analyze
-
-#### 2.1 Context
-
-- Read target (plan.yaml, code files, architecture docs)
+- Read target (plan.yaml, architecture docs)
 - Read PRD for scope boundaries
 - Read task_clarifications (resolved decisions — do NOT challenge)
 
-#### 2.2 Assumption Audit
+### 2. Analyze
 
 - Identify explicit and implicit assumptions
 - For each: stated? valid? what if wrong?
@@ -84,7 +80,6 @@ Refer to Knowledge Sources as needed during the workflow.
 
 ### 5. Handle Failure
 
-- IF cannot read target: document what's missing
 - Log failures to docs/plan/{plan_id}/logs/
 
 ### 6. Output

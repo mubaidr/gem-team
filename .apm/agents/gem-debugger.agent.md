@@ -50,19 +50,9 @@ Apply `debugging_guidelines` using this process:
 
 ### 2. Reproduce
 
-#### 2.1 Gather Evidence
+Attempt to reproduce the error based on provided context, if not already confirmed or provided:
 
 - Read error logs, stack traces, failing test output
-- Identify reproduction steps
-- Check console, network requests, build logs
-- IF flow_id in error_context: analyze flow step failures, browser console, network, screenshots
-
-#### 2.2 Confirm Reproducibility
-
-- Run failing test or reproduction steps
-- Capture exact error state: message, stack trace, environment
-- IF flow failure: Replay steps up to step_index
-- IF not reproducible: document conditions, check intermittent causes
 
 ### 3. Diagnose
 
