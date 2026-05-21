@@ -8,7 +8,7 @@ Static conventions, rules, and agent definitions for the Gem Team multi-agent fr
 
 ## Core
 
-- **`gem-orchestrator`** — Team lead. Orchestrates research → plan → implement → verify. Never executes directly; delegates to sub-agents. User-facing primary agent.
+- **`gem-orchestrator`** — Team lead. Orchestrates research → plan → implement → verify. Never executes or validates work directly; delegates to sub-agents. User-facing primary agent.
   - Args: `objective`, `plan_id` (if resuming)
   - Sources: PRD, AGENTS.md
 
@@ -24,7 +24,7 @@ Static conventions, rules, and agent definitions for the Gem Team multi-agent fr
 ## Quality & Review
 
 - **`gem-reviewer`** — Zero-hallucination filter. Security auditing, OWASP scanning, PRD compliance, code review.
-  - Args: `task_id`, `plan_id`, `plan_path`, `review_scope` (plan\|task\|wave), review criteria
+  - Args: `task_id`, `plan_id`, `plan_path`, `review_scope` (plan\|wave), review criteria
 
 - **`gem-critic`** — Challenges assumptions, finds edge cases, detects over-engineering and logic gaps.
   - Args: `plan_id`, `plan_path`, `target`
@@ -68,8 +68,8 @@ Static conventions, rules, and agent definitions for the Gem Team multi-agent fr
 ## Key Rules
 
 1. **Knowledge priority**: PRD → codebase → AGENTS.md → Context7 → docs
-2. **Memory tiers**: Tier-1 (orchestrator/researcher/planner) — always R/W. Tier-2 (implementer/debugger/simplifier) — on init. Tier-3 (reviewer/critic/doc) — rarely.
-3. **Orchestrator never executes** code directly — always delegates.
+2. **Memory tiers**: Tier-1 (orchestrator/researcher/planner) — read on init; orchestrator owns writes. Tier-2 (implementer/debugger/simplifier) — read on init. Tier-3 (reviewer/critic/doc) — rarely. Subagents return `learnings`; orchestrator persists only deduped, high-confidence, reusable entries.
+3. **Orchestrator never executes or validates** work directly — always delegates execution, plan validation, code review, and verification.
 4. **Implementer never reviews** own work — reviewer/critic handle verification.
 5. **Diagnose-then-fix**: debugger diagnoses → implementer fixes → re-verify.
 6. **Contract-first**: contract tests written before implementation.
