@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/logo.svg" alt="Gem Team Logo" width="120" height="120">
+</p>
+
 # Gem Team
 
 <p align="center">
