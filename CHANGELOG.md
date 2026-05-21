@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.35.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.34.0...gem-team-v1.35.0) (2026-05-21)
+
+
+### 🚀 New Agents & Features
+
+* add gem team logo to README and asset ([8f0996a](https://github.com/mubaidr/gem-team/commit/8f0996ab5fb81701d010143a5e8ea371bccf700a))
+
+
+### 🛠️ Bug Fixes
+
+* https://github.com/mubaidr/gem-team/issues/89 ([d8fbf63](https://github.com/mubaidr/gem-team/commit/d8fbf63996ff5eafcf92fa2b5894b82857c7e27e))
+
+
+### 📝 Documentation
+
+* add Script Usage section with guidelines to agent documentation files ([d8fbf63](https://github.com/mubaidr/gem-team/commit/d8fbf63996ff5eafcf92fa2b5894b82857c7e27e))
+
 ## [1.34.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.33.0...gem-team-v1.34.0) (2026-05-21)
 
 
