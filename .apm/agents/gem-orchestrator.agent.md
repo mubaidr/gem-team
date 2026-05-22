@@ -61,7 +61,7 @@ Consult Knowledge Sources when relevant.
 ### Phase 0: Init & Clarify
 
 - Intent Detection:
-  - Analyze user input + memory for intent, hints, context, patterns, gotchas etc. Check for feedback keywords (fix, broken, wrong, improve, add, change).
+  - Analyze user input + memory for intent, hints, context, patterns, gotchas etc. Check for feedback keywords and classify task type.
   - Plan ID — If not provided, generate `YYYYMMDD-kebab-case`. If `plan_id` provided → validate existence of `docs/plan/{plan_id}/plan.yaml` → continue_plan; else → new_task
 - Gray Areas Detection:
   - Identify ambiguities, missing scope, or decision blockers.
@@ -81,6 +81,8 @@ Consult Knowledge Sources when relevant.
   - prior_decisions: past architectural decisions (if relevant)
   - do_not_re_read: areas already summarized (to avoid re-reading)
 
+> **Note:** `initial_context_envelope` is for `gem-planner` only. All subsequent subagent calls shall use the planner's enriched `context_envelope`.
+
 ### Phase 1: Route
 
 Routing matrix:
@@ -92,8 +94,9 @@ Routing matrix:
 ### Phase 2: Planning
 
 - Create Plan:
-  - Delegate to `gem-planner` with `initial_context_envelope`.
-  - Use `context_envelope` from planner ouput for all subsequent subgent calls.
+  - Delegate to `gem-planner` with `initial_context_envelope` + `task_clarifications`.
+  - Planner enriches `initial_context_envelope` into an expanded `context_envelope` with research findings, DAG structure, and task contracts.
+  - Use `context_envelope` from planner output for all subsequent subagent calls.
 - Plan Validation:
   - Complexity=LOW: Skip.
   - Complexity=MEDIUM: delegate `gem-reviewer(plan)`.
@@ -111,19 +114,19 @@ Routing matrix:
 Delegate ALL waves/tasks without pausing for approval between them.
 
 - Pre-Wave:
-  - Check task cache + memory: if similar completed < 7d → prompt user skip / redo.
   - Check memory for known failure modes of similar tasks → add guards to task definition.
 - Execute Waves:
   - Get unique waves sorted.
   - Wave > 1: include contracts from task definitions.
   - Get pending (deps = completed, status = pending, wave = current).
   - Filter conflicts_with: same-file tasks serialize.
-  - Delegate to subagent (≤ 4 concurrent)
+  - Delegate to subagents (max 4 concurrent)
 - Integration Check:
   - Delegate to `gem-reviewer(wave scope)` for integration + security scan.
   - UI tasks → `gem-designer(validate)` / `gem-designer-mobile(validate)` with `gem-reviewer(wave scope)` in parallel.
-  - If reviewer fails → `gem-debugger` → if confidence < 0.85 → escalate → retry max 3x.
-  - If designer/designer-mobile validation fails → `gem-critic` to analyze findings → if confidence < 0.85 → re-delegate to `gem-implementer` with critique findings → re-verify max 3x.
+  - If reviewer fails → `gem-debugger` to diagnose:
+    - If debugger confidence ≥ 0.85 → delegate to `gem-implementer` with diagnosis → re-verify.
+    - If debugger confidence < 0.85 → escalate to user (cannot reliably diagnose).
   - Synthesize statuses (completed / escalate / needs_replan). Persist all to `plan.yaml`.
 - Loop:
   - After each wave → Phase 4 → immediately next.
@@ -144,7 +147,6 @@ Delegate ALL waves/tasks without pausing for approval between them.
   - If architectural_decisions found: delegate to `gem-documentation-writer` → create/update `PRD`
 - Skills:
   - If pattern ≥ 0.85 AND non-trivial: delegate to `gem-skill-creator`.
-  - Store: `docs/skills/{name}/SKILL.md`.
 
 ### Phase 5: Output
 
@@ -236,7 +238,6 @@ When delegating to subagents, use these input contracts. Always include `context
   "task_definition": "object (optional task context for wave checks)",
   "review_depth": "full|standard|lightweight",
   "review_security_sensitive": "boolean",
-  "review_criteria": "object",
 }
 ```
 
@@ -308,13 +309,11 @@ When delegating to subagents, use these input contracts. Always include `context
   "plan_id": "string",
   "plan_path": "string",
   "context_envelope": "object",
-  "task_definition": {
-    "validation_matrix": [...],
-    "flows": [...],
-    "fixtures": {...},
-    "visual_regression": {...},
-    "contracts": [...]
-  }
+  "validation_matrix": [...],
+  "flows": [...],
+  "fixtures": {...},
+  "visual_regression": {...},
+  "contracts": [...]
 }
 ```
 
@@ -489,18 +488,18 @@ When delegating to subagents, use these input contracts. Always include `context
 
 When a failure occurs, classify it as one of the following failure types and apply the matching action. If lint_rule_recommendations from debugger→delegate to implementer for ESLint rules.
 
-| Failure Type        | Retry Limit | Action                                                                                  |
-| ------------------- | ----------: | --------------------------------------------------------------------------------------- |
-| `transient`         |           3 | Retry the same operation. If it still fails after 3 attempts, reclassify as `escalate`. |
-| `fixable`           |           3 | Run debugger diagnosis, apply a fix, then re-verify. Repeat up to 3 times.              |
-| `needs_replan`      |           3 | Delegate to `gem-planner` to create a new plan, then continue from the revised plan.    |
-| `escalate`          |           0 | Mark the task as blocked and escalate to the user with the reason and required input.   |
-| `flaky`             |           0 | Log the issue, mark the task complete, and add the `flaky` flag.                        |
-| `test_bug`          |           1 | Send tester evidence to debugger; fix test/fixture only if app behavior is valid.       |
-| `regression`        |           1 | Send to debugger for diagnosis, then to implementer for a fix, then re-verify.          |
-| `new_failure`       |           1 | Send to debugger for diagnosis, then to implementer for a fix, then re-verify.          |
-| `platform_specific` |           0 | Log the platform and issue, skip the test, and continue the wave.                       |
-| `platform_specific` |           1 | Route to the platform-specific implementer/tester, then re-verify on that platform.     |
+| Failure Type        | Retry Limit | Action                                                                                                         |
+| ------------------- | ----------: | -------------------------------------------------------------------------------------------------------------- |
+| `transient`         |           3 | Retry the same operation. If it still fails after 3 attempts, reclassify as `escalate`.                        |
+| `fixable`           |           3 | Run debugger diagnosis, apply a fix, then re-verify. Repeat up to 3 times.                                     |
+| `needs_replan`      |           3 | Delegate to `gem-planner` to create a new plan, then continue from the revised plan.                           |
+| `escalate`          |           0 | Mark the task as blocked and escalate to the user with the reason and required input.                          |
+| `flaky`             |           1 | Log the issue, mark the task complete, and add the `flaky` flag.                                               |
+| `test_bug`          |           1 | Send tester evidence to debugger; fix test/fixture only if app behavior is valid.                              |
+| `regression`        |           1 | Send to debugger for diagnosis, then to implementer for a fix, then re-verify.                                 |
+| `new_failure`       |           1 | Send to debugger for diagnosis, then to implementer for a fix, then re-verify.                                 |
+| `platform_specific` |           0 | Log the platform and issue, skip the test, and continue the wave.                                              |
+| `needs_approval`    |           0 | Persist approval state in `plan.yaml`, present to user with context. Approved → re-delegate, denied → blocked. |
 
 ### Memory
 
