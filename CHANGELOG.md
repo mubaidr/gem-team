@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.38.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.37.0...gem-team-v1.38.0) (2026-05-22)
+
+
+### 🚀 New Agents & Features
+
+* **orchestrator:** streamline subagent delegation and failure handling ([224dfe4](https://github.com/mubaidr/gem-team/commit/224dfe491e654d59bf96f2947f7511763a5b7b56))
+* replace raster logo with inline SVG for improved scalability and branding ([c8e77fb](https://github.com/mubaidr/gem-team/commit/c8e77fb4e069944ee0c4089c1562f742d2325963))
+
+
+### 🛠️ Bug Fixes
+
+* correct typo in validation step ([a1294f2](https://github.com/mubaidr/gem-team/commit/a1294f2a102e8fa0eea3d11e9b69e6e94c1730a1))
+
+
+### 📝 Documentation
+
+* expand gem-orchestrator.agent.md with revised workflow phases, introducing Init & Clarify (Phase 0) and detailed routing logic ([b049d5c](https://github.com/mubaidr/gem-team/commit/b049d5cbc5c5087b53ba1de2b8b152f8af900b72))
+
 ## [1.37.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.36.0...gem-team-v1.37.0) (2026-05-22)
 
 
