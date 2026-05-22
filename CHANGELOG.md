@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.36.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.35.0...gem-team-v1.36.0) (2026-05-22)
+
+
+### 📝 Documentation
+
+* fix typo in Merge instruction (Donot → Don't) ([64f9380](https://github.com/mubaidr/gem-team/commit/64f93801253574bb7c245667a0a3d23278a37e32))
+* **readme:** refine TLDR, add Scriptable bullet, and restructure Knowledge Layers ([e902d9e](https://github.com/mubaidr/gem-team/commit/e902d9e4862f19baa690e9bf5d4a5c6e06b359b0))
+
 ## [1.35.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.34.0...gem-team-v1.35.0) (2026-05-21)
 
 
