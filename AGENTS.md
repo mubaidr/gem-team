@@ -8,7 +8,7 @@ Static conventions, rules, and agent definitions for the Gem Team multi-agent fr
 
 ## Core
 
-- **`gem-orchestrator`** — Team lead. Orchestrates research → plan → implement → verify. Never executes or validates work directly; delegates to sub-agents. User-facing primary agent.
+- **`gem-orchestrator`** — Team lead. Orchestrates plan → implement → verify. Never executes or validates work directly; delegates to sub-agents. User-facing primary agent.
   - Args: `objective`, `plan_id` (if resuming)
   - Sources: PRD, AGENTS.md
 
