@@ -111,12 +111,12 @@ Delegate ALL waves/tasks without pausing for approval between them.
   - If reviewer fails → `gem-debugger` → if confidence < 0.85 → escalate → retry max 3x.
   - Synthesize statuses (completed / escalate / needs_replan). Persist all to `plan.yaml`.
 - Loop:
-  - After each wave → Phase 4A → immediately next.
+  - After each wave → Phase 4 → immediately next.
   - Blocked → Escalate.
   - Present status as per `output_format`.
   - All done → Phase 5.
 
-#### Phase 4: Persist Learnings
+### Phase 4: Persist Learnings
 
 - Memory:
   - Collect learnings from completed tasks.
@@ -143,7 +143,7 @@ Present status as per `output_format`.
 
 When delegating to subagents, pass these fields (extracted from `plan.yaml` / plan context / task data):
 
-CRITICAL: Always include `context_envelope` in every delegation.
+CRITICAL: Always include `context_envelope` in every delegation except for initial planning phase.
 
 ### gem-researcher
 
@@ -167,7 +167,6 @@ CRITICAL: Always include `context_envelope` in every delegation.
   "plan_id": "string",
   "objective": "string",
   "task_clarifications": [{ "question": "string", "answer": "string" }],
-  "context_envelope": "object — from Phase 2",
 }
 ```
 

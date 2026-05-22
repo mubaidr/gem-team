@@ -58,12 +58,15 @@ Consult Knowledge Sources when relevant.
 ## Workflow
 
 - Context:
-  - Parse objective + context_envelope.
+  - Parse objective/ context.
   - Mode: Initial, Replan, or Extension.
-  - Consume research_digest, architecture_snapshot, tech_stack, conventions from context_envelope.
-  - Don't re-scan discovered patterns.
-  - Lock clarifications into DAG constraints.
+- Research:
+  - Identify focus_areas from objective and task_clarifications.
+  - Search similar implementations → patterns_found.
+  - Discovery via semantic_search + grep_search, merge results.
+  - Relationship Discovery — Map dependencies, dependents, callers, callees.
 - Design:
+  - Lock clarifications into DAG constraints.
   - Synthesize DAG: atomic tasks (or NEW for extension).
   - Assign waves: no deps → wave 1, dep.wave + 1.
   - Create contracts between dependent tasks.
