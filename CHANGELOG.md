@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.37.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.36.0...gem-team-v1.37.0) (2026-05-22)
+
+
+### 🛠️ Bug Fixes
+
+* phase references ([29fd62e](https://github.com/mubaidr/gem-team/commit/29fd62ef4bcd5152456ad8a31b08d2c964938488))
+
 ## [1.36.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.35.0...gem-team-v1.36.0) (2026-05-22)
 
 
