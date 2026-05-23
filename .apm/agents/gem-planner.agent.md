@@ -99,7 +99,7 @@ Consult Knowledge Sources when relevant.
   - Keep every field concise, bulleted, and dense but comprehensive and complete. Avoid fluff, filler, and verbosity. Evidence paths over explanation.
   - Create for future agent reuse: include durable facts, decisions, constraints, and evidence paths needed to avoid re-discovery.
   - Omit no context.
-  - Save Context Envelope: `docs/plan/{plan_id}/context_envelope.yaml`.
+  - Save Context Envelope: `docs/plan/{plan_id}/context_envelope.json`.
 - Validation — Verify as per `Plan Verification Criteria`.
 - Failure — Log error, return status=failed w/ reason. Log to `docs/plan/{plan_id}/logs/`.
 - Output
@@ -271,23 +271,77 @@ tasks:
 ```jsonc
 {
   "context_envelope": {
+    "meta": {
+      "plan_id": "string",
+      "last_updated": "ISO-8601 string",
+      "source": ["string"],
+    },
+    "scope": {
+      "purpose": ["Reusable implementation context for future agents/calls.", "Helps agents avoid re-discovery and implement asks with better quality."],
+      "applies_to": ["string"],
+      "non_goals": ["string"],
+    },
     "project_summary": ["string"],
     "tech_stack": ["string"],
     "conventions": ["string"],
+    "constraints": {
+      "hard": ["string"],
+      "soft": ["string"],
+      "compatibility": ["string"],
+    },
     "architecture_snapshot": {
-      "key_dirs": { "path": ["string"] },
+      "key_dirs": {
+        "path": ["string"],
+      },
       "patterns": ["string"],
-      "key_components": [{ "name": "string", "location": "string", "responsibility": ["string"] }],
+      "key_components": [
+        {
+          "name": "string",
+          "location": "string",
+          "responsibility": ["string"],
+        },
+      ],
     },
     "research_digest": {
-      "relevant_files": [{ "path": "string", "purpose": ["string"] }],
-      "patterns_found": [{ "name": "string", "category": "string", "example_location": ["string"] }],
-      "dependencies": { "internal": ["string"], "external": ["string"] },
+      "relevant_files": [
+        {
+          "path": "string",
+          "purpose": ["string"],
+          "why_relevant": ["string"],
+        },
+      ],
+      "patterns_found": [
+        {
+          "name": "string",
+          "category": "string",
+          "example_location": ["string"],
+        },
+      ],
+      "dependencies": {
+        "internal": ["string"],
+        "external": ["string"],
+      },
       "gotchas": ["string"],
       "open_questions": ["string"],
     },
-    "prior_decisions": [{ "decision": "string", "rationale": ["string"] }],
-    "do_not_re_read": ["string"],
+    "prior_decisions": [
+      {
+        "decision": "string",
+        "rationale": ["string"],
+        "evidence": ["path:string"],
+      },
+    ],
+    "evidence_map": [
+      {
+        "claim": "string",
+        "evidence_paths": ["string"],
+      },
+    ],
+    "reuse_notes": {
+      "do_not_re_read": ["string"],
+      "safe_to_assume": ["string"],
+      "verify_before_use": ["string"],
+    },
   },
 }
 ```
