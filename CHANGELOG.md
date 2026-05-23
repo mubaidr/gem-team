@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.40.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.39.0...gem-team-v1.40.0) (2026-05-23)
+
+
+### 🚀 New Agents & Features
+
+* enrich gem-planner agent documentation with detailed planning context and reusable metadata ([91ffe08](https://github.com/mubaidr/gem-team/commit/91ffe08c21cf9807215760e9ea0fd104edcb3403))
+
+
+### 📝 Documentation
+
+* refine TDD cycle, error handling, and retry logic across agent documentation ([2b71a96](https://github.com/mubaidr/gem-team/commit/2b71a96be7500d94a7a9fb60a65c6b5b64a09a02))
+
 ## [1.39.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.38.0...gem-team-v1.39.0) (2026-05-23)
 
 
