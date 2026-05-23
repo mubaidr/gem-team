@@ -96,7 +96,9 @@ Consult Knowledge Sources when relevant.
   - Save Plan `docs/plan/{plan_id}/plan.yaml`
 - Create context envelope `context_envelope.yaml` as per `context_envelope_format_guide`
   - Use `initial_context_envelope` as seed and augment with research findings.
-  - Add research_digest: condense researcher's `patterns_found` → (name, category, example_location), `files_analyzed` → relevant_files (path, purpose), `related_dependencies` → dependencies, `gaps` → open_questions, include any gotchas from learnings.
+  - Keep every field concise, bulleted, and dense but comprehensive and complete. Avoid fluff, filler, and verbosity. Evidence paths over explanation.
+  - Create for future agent reuse: include durable facts, decisions, constraints, and evidence paths needed to avoid re-discovery.
+  - Omit no context.
   - Save Context Envelope: `docs/plan/{plan_id}/context_envelope.yaml`.
 - Validation — Verify as per `Plan Verification Criteria`.
 - Failure — Log error, return status=failed w/ reason. Log to `docs/plan/{plan_id}/logs/`.
@@ -266,31 +268,26 @@ tasks:
 
 ## Context Envelope Format Guide
 
-- Keep every field concise, bulleted, and dense
-- Evidence paths over explanation.
-- Preserve high-confidence, task-relevant context first
-- Omit boilerplate, duplicate paths, generic restatement, and low-confidence notes before trimming useful coverage.
-
 ```jsonc
 {
   "context_envelope": {
-    "project_summary": ["string — 5-8 dense bullet lines: product, architecture, current objective"],
+    "project_summary": ["string"],
     "tech_stack": ["string"],
-    "conventions": ["string — terse naming/structure/pattern rule"],
+    "conventions": ["string"],
     "architecture_snapshot": {
-      "key_dirs": { "path": "terse purpose — up to 40 entries" },
-      "patterns": ["string — terse high-confidence architecture/pattern note, up to 40"],
-      "key_components": [{ "name": "string", "location": "string", "responsibility": "terse responsibility — up to 40 entries" }],
+      "key_dirs": { "path": ["string"] },
+      "patterns": ["string"],
+      "key_components": [{ "name": "string", "location": "string", "responsibility": ["string"] }],
     },
     "research_digest": {
-      "relevant_files": [{ "path": "string", "purpose": "terse purpose — up to 100 files" }],
-      "patterns_found": [{ "name": "string", "category": "string", "example_location": "string — up to 40 entries" }],
+      "relevant_files": [{ "path": "string", "purpose": ["string"] }],
+      "patterns_found": [{ "name": "string", "category": "string", "example_location": ["string"] }],
       "dependencies": { "internal": ["string"], "external": ["string"] },
-      "gotchas": ["string — terse gotcha + evidence path, up to 25"],
-      "open_questions": ["string — terse question + affected area, up to 25"],
+      "gotchas": ["string"],
+      "open_questions": ["string"],
     },
-    "prior_decisions": [{ "decision": "string", "rationale": "terse rationale — up to 25 entries" }],
-    "do_not_re_read": ["string — path/area already summarized, up to 80"],
+    "prior_decisions": [{ "decision": "string", "rationale": ["string"] }],
+    "do_not_re_read": ["string"],
   },
 }
 ```
