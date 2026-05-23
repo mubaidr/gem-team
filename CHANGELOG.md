@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.39.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.38.0...gem-team-v1.39.0) (2026-05-23)
+
+
+### 🚀 New Agents & Features
+
+* **orchestrator:** restructure planning flow and validation logic ([53415ce](https://github.com/mubaidr/gem-team/commit/53415ce498c7e14c660d091a23df8eef38bb41ea))
+
 ## [1.38.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.37.0...gem-team-v1.38.0) (2026-05-22)
 
 
