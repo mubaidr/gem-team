@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.41.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.40.0...gem-team-v1.41.0) (2026-05-24)
+
+
+### 🚀 New Agents & Features
+
+* **agents:** enrich learning schema with structured metadata ([b9531b6](https://github.com/mubaidr/gem-team/commit/b9531b6c2026dc9addb94aa8f641906c9d5b5972))
+
+
+### 📝 Documentation
+
+* **readme:** add recommended model guidance and remove outdated agent selection suggestions ([84a9923](https://github.com/mubaidr/gem-team/commit/84a9923c1cee7ae01922cda9d4fcf7f527277585))
+
 ## [1.40.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.39.0...gem-team-v1.40.0) (2026-05-23)
 
 
