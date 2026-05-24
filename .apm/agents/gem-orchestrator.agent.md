@@ -60,6 +60,8 @@ Consult Knowledge Sources when relevant.
 
 ### Phase 0: Init & Clarify
 
+IMPORTANT: On receiving user input, immediately anounce and execute the following steps in order:
+
 - Delegate to a generic subagent for intent detection with following instructions:
   - Analyze user input + memory for intent, hints, context, patterns, gotchas etc. Check for feedback keywords and classify task type.
   - Plan ID — If not provided, generate `YYYYMMDD-kebab-case`. If `plan_id` provided → validate existence of `docs/plan/{plan_id}/plan.yaml` → continue_plan; else → new_task
@@ -126,7 +128,7 @@ Delegate ALL waves/tasks without pausing for approval between them.
 ### Phase 4: Persist Learnings
 
 - Collect & Merge:
-  - Gather `learnings` from all completed tasks in the wave including `context_envelope` data.
+  - Gather `learnings` from all completed tasks in the wave including `docs/plan/{plan_id}/context_envelope.json` data.
   - Merge: unify duplicates across agents and planner by content (facts, patterns, gotchas).
   - Cross-reference: when a `gotcha` matches a `failure_mode` symptom, link them.
   - Promote: `gotchas` recurring ≥ 3× across plans → `patterns`. `failure_modes` recurring ≥ 2× → elevate severity.
@@ -148,8 +150,6 @@ Present status as per `output_format`.
 <agent_input_reference>
 
 ## Agent Input Reference
-
-IMPORTANT: When delegating to subagents, use these input contracts. Always include `context_envelope` to provide necessary context for subagents.
 
 ### gem-researcher
 
@@ -177,7 +177,6 @@ IMPORTANT: When delegating to subagents, use these input contracts. Always inclu
   "task_id": "string",
   "plan_id": "string",
   "plan_path": "string",
-  "context_envelope": "object",
   "task_definition": {
     "tech_stack": ["string"],
     "test_coverage": "string | null",
@@ -200,7 +199,6 @@ IMPORTANT: When delegating to subagents, use these input contracts. Always inclu
   "task_id": "string",
   "plan_id": "string",
   "plan_path": "string",
-  "context_envelope": "object",
   "task_definition": {
     "platforms": ["ios", "android"],
     "debugger_diagnosis": "object (for bug-fix mode)",
@@ -222,7 +220,6 @@ IMPORTANT: When delegating to subagents, use these input contracts. Always inclu
   "review_scope": "plan|wave",
   "plan_id": "string",
   "plan_path": "string",
-  "context_envelope": "object",
   "wave_tasks": ["string (for wave scope)"],
   "security_sensitive_tasks": ["string — task IDs requiring per-task deep scan (merged into wave review)"],
   "task_definition": "object (optional task context for wave checks)",
@@ -238,7 +235,6 @@ IMPORTANT: When delegating to subagents, use these input contracts. Always inclu
   "task_id": "string",
   "plan_id": "string",
   "plan_path": "string",
-  "context_envelope": "object",
   "task_definition": "object",
   "debugger_diagnosis": "object (for retry after failed fix)",
   "implementation_handoff": {
@@ -270,7 +266,6 @@ IMPORTANT: When delegating to subagents, use these input contracts. Always inclu
   "task_id": "string (optional)",
   "plan_id": "string",
   "plan_path": "string",
-  "context_envelope": "object",
   "target": "string (file paths or plan section)",
   "context": "string (what is being built, focus)",
 }
@@ -283,7 +278,6 @@ IMPORTANT: When delegating to subagents, use these input contracts. Always inclu
   "task_id": "string",
   "plan_id": "string (optional)",
   "plan_path": "string (optional)",
-  "context_envelope": "object",
   "scope": "single_file|multiple_files|project_wide",
   "targets": ["string (file paths or patterns)"],
   "focus": "dead_code|complexity|duplication|naming|all",
@@ -298,7 +292,6 @@ IMPORTANT: When delegating to subagents, use these input contracts. Always inclu
   "task_id": "string",
   "plan_id": "string",
   "plan_path": "string",
-  "context_envelope": "object",
   "validation_matrix": [...],
   "flows": [...],
   "fixtures": {...},
@@ -314,7 +307,6 @@ IMPORTANT: When delegating to subagents, use these input contracts. Always inclu
   "task_id": "string",
   "plan_id": "string",
   "plan_path": "string",
-  "context_envelope": "object",
   "task_definition": {
     "platforms": ["ios", "android"] | ["ios"] | ["android"],
     "test_framework": "detox | maestro | appium",
@@ -334,7 +326,6 @@ IMPORTANT: When delegating to subagents, use these input contracts. Always inclu
   "task_id": "string",
   "plan_id": "string",
   "plan_path": "string",
-  "context_envelope": "object",
   "task_definition": {
     "environment": "development|staging|production",
     "requires_approval": "boolean",
@@ -350,7 +341,6 @@ IMPORTANT: When delegating to subagents, use these input contracts. Always inclu
   "task_id": "string",
   "plan_id": "string",
   "plan_path": "string",
-  "context_envelope": "object",
   "task_definition": "object",
   "task_type": "documentation | update | prd | agents_md",
   "audience": "developers | end_users | stakeholders",
@@ -373,7 +363,6 @@ IMPORTANT: When delegating to subagents, use these input contracts. Always inclu
   "task_id": "string",
   "plan_id": "string",
   "plan_path": "string",
-  "context_envelope": "object",
   "patterns": [
     {
       "name": "string",
@@ -395,7 +384,6 @@ IMPORTANT: When delegating to subagents, use these input contracts. Always inclu
   "task_id": "string",
   "plan_id": "string (optional)",
   "plan_path": "string (optional)",
-  "context_envelope": "object",
   "mode": "create|validate",
   "scope": "component|page|layout|theme|design_system",
   "target": "string (file paths or component names)",
@@ -411,7 +399,6 @@ IMPORTANT: When delegating to subagents, use these input contracts. Always inclu
   "task_id": "string",
   "plan_id": "string (optional)",
   "plan_path": "string (optional)",
-  "context_envelope": "object",
   "mode": "create|validate",
   "scope": "component|screen|navigation|theme|design_system",
   "target": "string (file paths or component names)",

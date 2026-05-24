@@ -36,10 +36,11 @@ Consult Knowledge Sources when relevant.
 
 ## Workflow
 
-- Init — task_type: documentation|update|prd|agents_md.
+- Init
+  - Read `docs/plan/{plan_id}/context_envelope.json` at start; read it in parallel with required agent inputs. Use `research_digest.relevant_files` as the file shortlist. Treat envelope data as a context cache. Then parse task_type: documentation|update|prd|agents_md.
 - Execute by Type:
   - Documentation:
-    - Read source (read-only), existing docs for style.
+    - Read related source (read-only), existing docs for style.
     - Draft with code snippets + diagrams, verify parity.
   - Update:
     - Read existing baseline, identify delta (what changed).
@@ -157,7 +158,6 @@ changes:
 
 ### Execution
 
-- Context Envelope First: If `context_envelope` is provided, read it before raw source files. Use `research_digest.relevant_files`, `patterns_found`, `gotchas`, `prior_decisions`, and `do_not_re_read` to avoid duplicate exploration. Only open source files needed for the assigned task, verification, or contradiction checks.
 - Priority: Tools > Tasks > Scripts > CLI. Batch independent I/O calls, prioritize I/O-bound.
 - Plan and batch independent tool calls. Use `OR` regex for related patterns, multi-pattern globs.
 - Discover first → read full set in parallel. Avoid line-by-line reads.

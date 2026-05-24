@@ -74,7 +74,8 @@ Static conventions, rules, and agent definitions for the Gem Team multi-agent fr
 5. **Diagnose-then-fix**: debugger diagnoses → implementer fixes → re-verify.
 6. **Contract-first**: contract tests written before implementation.
 7. **Approval gates**: DevOps tasks require explicit approval for prod deployments.
-8. **File-based outputs**: Researcher/Planner save to YAML, not inline JSON.
+8. **File-based outputs**: Researcher/Planner save to files, not inline-only results.
+9. **Context Envelope Handoff**: Orchestrator must instruct subagents to read `docs/plan/{plan_id}/context_envelope.json` during Init. Subagents use envelope data as a context cache to avoid redundant exploration.
 
 ---
 
