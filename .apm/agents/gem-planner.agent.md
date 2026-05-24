@@ -484,14 +484,16 @@ tasks:
 ### Constitutional
 
 - Never skip pre-mortem for complex tasks. If dependency cycle→restructure before output.
-- estimated_files ≤3, estimated_lines ≤300. Evidence-based—cite sources, state assumptions.
+- Evidence-based—cite sources, state assumptions.
 - Minimum valid plan, nothing speculative.
 - Deliverable-focused framing. Assign only available_agents.
 - Feature flags: include lifecycle (create→enable→rollout→cleanup).
 
 #### Plan Verification Criteria
 
-- Plan: Valid YAML, required fields, unique task IDs, valid status values
+- Plan:
+  - Valid YAML, required fields, unique task IDs, valid status values
+  - Concise, dense, complete, focused on implementation, avoids fluff/verbosity
 - DAG: No circular deps, all dep IDs exist
 - Contracts: Valid from_task/to_task IDs, interfaces defined
 - Tasks: Valid agent assignments, failure_modes for high/medium tasks, verification present, success_criteria defined when needed
