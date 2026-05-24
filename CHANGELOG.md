@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.42.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.41.0...gem-team-v1.42.0) (2026-05-24)
+
+
+### 🚀 New Agents & Features
+
+* **context:** implement envelope update and versioning ([4988876](https://github.com/mubaidr/gem-team/commit/4988876cee5040c75a97b56696b2e338ff17f9d2))
+
 ## [1.41.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.40.0...gem-team-v1.41.0) (2026-05-24)
 
 
