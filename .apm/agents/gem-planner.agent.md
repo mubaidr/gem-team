@@ -97,6 +97,7 @@ Consult Knowledge Sources when relevant.
   - Save Plan `docs/plan/{plan_id}/plan.yaml`
 - Create context envelope `context_envelope.json` as per `context_envelope_format_guide`
   - Use provided context as seed and augment with research findings.
+  - If `memory_seed` provided, merge its high confidence items/ contents into the envelope
   - Keep every field concise, bulleted, and dense but comprehensive and complete. Avoid fluff, filler, and verbosity. Evidence paths over explanation.
   - Create for future agent reuse: include durable facts, decisions, constraints, and evidence paths needed to avoid re-discovery.
   - Omit no context.

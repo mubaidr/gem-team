@@ -68,14 +68,14 @@ Static conventions, rules, and agent definitions for the Gem Team multi-agent fr
 ## Key Rules
 
 1. **Knowledge priority**: PRD → codebase → AGENTS.md → Context7 → docs
-2. **Memory tiers**: Tier-1 (orchestrator/researcher/planner) — read on init; orchestrator owns writes. Tier-2 (implementer/debugger/simplifier) — read on init. Tier-3 (reviewer/critic/doc) — rarely. Subagents return `learnings`; orchestrator persists only deduped, high-confidence, reusable entries.
+2. **Memory ownership**: Only the orchestrator reads and writes memory. Memory is the orchestrator's durable store for cross-session bias: routing hints, pre-wave guard injection, and deduped `facts`, `patterns`, `gotchas`, `failure_modes`, `decisions`, `conventions`. Subagents **never read memory directly** — they receive cross-session knowledge via the context envelope, which the orchestrator seeds with relevant memory entries when creating a new plan (Phase 2) and progressively enriches between waves (Phase 4). Subagents return `learnings`; orchestrator dedups and persists only high-confidence, reusable entries.
 3. **Orchestrator never executes or validates** work directly — always delegates execution, plan validation, code review, and verification.
 4. **Implementer never reviews** own work — reviewer/critic handle verification.
 5. **Diagnose-then-fix**: debugger diagnoses → implementer fixes → re-verify.
 6. **Contract-first**: contract tests written before implementation.
 7. **Approval gates**: DevOps tasks require explicit approval for prod deployments.
 8. **File-based outputs**: Researcher/Planner save to files, not inline-only results.
-9. **Context Envelope Handoff**: Orchestrator must instruct subagents to read `docs/plan/{plan_id}/context_envelope.json` during Init. Subagents use envelope data as a context cache to avoid redundant exploration.
+9. **Context Envelope Handoff**: Orchestrator must instruct subagents to read `docs/plan/{plan_id}/context_envelope.json` during Init. Subagents use envelope data as a context cache to avoid redundant exploration. The envelope is **progressively enriched** between waves — after each wave, the orchestrator delegates to `gem-documentation-writer` (`task_type: update_context_envelope`) to merge new learnings (facts, patterns, gotchas, failure_modes, decisions, conventions) into the envelope, bumping `meta.version`. Subsequent waves thus read an increasingly accurate cache.
 
 ---
 

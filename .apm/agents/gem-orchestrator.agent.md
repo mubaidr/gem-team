@@ -86,8 +86,11 @@ Routing matrix:
 
 ### Phase 2: Planning
 
+- Seed Memory:
+  - Read memory from repo/ session/ global for durable cross-session `facts`, `patterns`, `gotchas`, `failure_modes`, `decisions`, `conventions`.
+  - Package relevant entries into `memory_seed` object to pass to planner for envelope seeding.
 - Create Plan:
-  - Delegate to `gem-planner` with `task_clarifications` and all available context.
+  - Delegate to `gem-planner` with `task_clarifications`, all available context, and the `memory_seed`.
 - Plan Validation:
   - Complexity=LOW: Skip validation.
   - Complexity=MEDIUM: delegate to `gem-reviewer(plan)`.
@@ -134,6 +137,9 @@ Delegate ALL waves/tasks without pausing for approval between them.
   - Promote: `gotchas` recurring ≥ 3× across plans → `patterns`. `failure_modes` recurring ≥ 2× → elevate severity.
 - Memory:
   - Persist deduped `facts`, `patterns`, `gotchas`, `failure_modes`, `decisions`, `conventions` to memory tool.
+- Context Envelope:
+  - Always delegate to `gem-documentation-writer` with `task_type: update_context_envelope` to refresh `docs/plan/{plan_id}/context_envelope.json` with merged learnings from the wave.
+  - Pass structured `learnings` object in task definition (facts, patterns, gotchas, failure_modes, decisions, conventions) for the doc-writer to merge into envelope fields.
 - Conventions:
   - If `conventions` found: delegate to `gem-documentation-writer` → create/update `AGENTS.md`
 - Decisions:
@@ -167,6 +173,14 @@ Present status as per `output_format`.
 {
   "plan_id": "string",
   "objective": "string",
+  "memory_seed": {
+    "facts": [{ "statement": "string", "category": "string" }],
+    "patterns": [{ "name": "string", "description": "string", "confidence": "number (0.0-1.0)" }],
+    "gotchas": ["string"],
+    "failure_modes": [{ "scenario": "string", "symptoms": ["string"], "mitigation": "string" }],
+    "decisions": [{ "decision": "string", "rationale": ["string"] }],
+    "conventions": ["string"],
+  },
 }
 ```
 
@@ -341,11 +355,20 @@ Present status as per `output_format`.
   "task_id": "string",
   "plan_id": "string",
   "plan_path": "string",
-  "task_definition": "object",
-  "task_type": "documentation | update | prd | agents_md",
+  "task_definition": {
+    "learnings": {
+      "facts": [{ "statement": "string", "category": "string" }],
+      "patterns": [{ "name": "string", "description": "string", "confidence": 0.0-1.0 }],
+      "gotchas": ["string"],
+      "failure_modes": [{ "scenario": "string", "symptoms": ["string"], "mitigation": "string" }],
+      "decisions": [{ "decision": "string", "rationale": ["string"], "evidence": ["string"] }],
+      "conventions": ["string"],
+    },
+  },
+  "task_type": "documentation | update | prd | agents_md | update_context_envelope",
   "audience": "developers | end_users | stakeholders",
   "coverage_matrix": ["string"],
-  "action": "create_prd | update_prd | update_agents_md",
+  "action": "create_prd | update_prd | update_agents_md | update_context_envelope",
   "architectural_decisions": [{ "decision": "string", "rationale": "string" }],
   "findings": [{ "type": "string", "content": "string" }],
   "overview": "string",
@@ -477,13 +500,5 @@ When a failure occurs, classify it as one of the following failure types and app
 | `new_failure`       |           1 | Send to debugger for diagnosis, then to implementer for a fix, then re-verify.                                 |
 | `platform_specific` |           0 | Log the platform and issue, skip the test, and continue the wave.                                              |
 | `needs_approval`    |           0 | Persist approval state in `plan.yaml`, present to user with context. Approved → re-delegate, denied → blocked. |
-
-### Memory
-
-- Read:
-  - Tier-1 (orchestrator/researcher/planner): always /memories/session/, /memories/repo/.
-    - Use to bias routing, feed cache checks, inform pre-wave guards.
-  - Tier-2 (implementer/debugger/simplifier): on init.
-  - Tier-3 (reviewer/critic/doc-writer): as needed.
 
 </rules>

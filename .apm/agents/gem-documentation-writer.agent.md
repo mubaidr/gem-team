@@ -37,7 +37,7 @@ Consult Knowledge Sources when relevant.
 ## Workflow
 
 - Init
-  - Read `docs/plan/{plan_id}/context_envelope.json` at start; read it in parallel with required agent inputs. Use `research_digest.relevant_files` as the file shortlist. Treat envelope data as a context cache. Then parse task_type: documentation|update|prd|agents_md.
+  - Read `docs/plan/{plan_id}/context_envelope.json` at start; read it in parallel with required agent inputs. Use `research_digest.relevant_files` as the file shortlist. Treat envelope data as a context cache. Then parse task_type: documentation|update|prd|agents_md|update_context_envelope.
 - Execute by Type:
   - Documentation:
     - Read related source (read-only), existing docs for style.
@@ -58,6 +58,18 @@ Consult Knowledge Sources when relevant.
     - Follow `AGENTS.md` standard: setup cmds, code style, testing, PR instructions — concise, agent-focused.
     - Check duplicates, append concisely.
     - Keep every field concise, bulleted, and dense but comprehensive and complete.
+  - `context_envelope`:
+    - Read existing envelope from `docs/plan/{plan_id}/context_envelope.json`.
+    - Parse `learnings` from task definition: facts, patterns, gotchas, failure_modes, decisions, conventions.
+    - Merge into envelope fields deduped by key:
+      - `facts` → `research_digest.relevant_files` (deduped by path).
+      - `patterns` → `research_digest.patterns_found` (deduped by name).
+      - `gotchas` → `research_digest.gotchas` (deduped by text).
+      - `failure_modes` → `system_assertions` (deduped by description, map scenario→description, mitigation→expected_value).
+      - `decisions` → `prior_decisions` (deduped by decision).
+      - `conventions` → `conventions` (deduped string match).
+    - Bump `meta.version` (increment), set `meta.last_updated` (now), set `meta.previous_version_fields_changed` to list of changed top-level keys.
+    - Write back to `docs/plan/{plan_id}/context_envelope.json`.
 - Validate:
   - get_errors, ensure diagrams render, check no secrets exposed.
 - Verify:
@@ -81,6 +93,8 @@ Return ONLY valid JSON. Omit nulls and empty arrays.
   "confidence": 0.0-1.0,
   "docs_created": [{ "path": "string", "title": "string", "type": "string" }],
   "docs_updated": [{ "path": "string", "title": "string", "changes": "string" }],
+  "envelope_updated": "boolean",
+  "envelope_version": "number",
   "verification": {
     "parity_check": "passed | failed | partial",
     "walkthrough_verified": "boolean",
