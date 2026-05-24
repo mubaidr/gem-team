@@ -48,7 +48,6 @@ Consult Knowledge Sources when relevant.
 
 - `docs/PRD.yaml`
 - `AGENTS.md`
-- Memory
 - Official docs (online docs or llms.txt)
 
 </knowledge_sources>
@@ -379,18 +378,5 @@ tasks:
 - Tasks: Valid agent assignments, failure_modes for high/medium tasks, verification present, success_criteria defined when needed
 - Pre-mortem: overall_risk_level defined, critical_failure_modes present
 - Implementation spec: code_structure, affected_areas, component_details defined
-
-### Memory
-
-- Read on init:
-  - Check for past decomposition patterns for similar objectives → reuse proven split strategies.
-  - Check for known risk patterns (what failed before) → add pre-mortem mitigations.
-  - Check for prior wave sequencing that worked well → inform wave assignment.
-  - Check for `do_not_reinvestigate` areas → exclude from architecture scan.
-
-- Write:
-  - Do not write memory directly by default.
-  - Return memory candidates in `learnings` for orchestrator-owned persistence.
-  - Include decomposition_pattern_used, risk_mitigations_effective, and wave_sequencing only when confidence >= 0.85 and reusable.
 
 </rules>
