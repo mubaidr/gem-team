@@ -123,8 +123,12 @@ Return ONLY valid JSON. Omit nulls and empty arrays.
   "prd_update_reason": "string | null",
   "metrics": { "wave_1_task_count": "number", "total_dependencies": "number", "risk_score": "low | medium | high" },
   "learnings": {
-    "risks": ["string"],
-    "patterns": [{ "name": "string", "description": "string", "confidence": 0.0-1.0 }]
+    "patterns": [{ "name": "string", "description": "string", "confidence": 0.0-1.0 }],
+    "gotchas": ["string"],
+    "facts": [{ "statement": "string", "category": "string" }],
+    "failure_modes": [{ "scenario": "string", "symptoms": ["string"], "mitigation": "string" }],
+    "decisions": [{ "decision": "string", "rationale": ["string"] }],
+    "conventions": ["string"]
   },
   "context_envelope": "object — see context_envelope_format_guide"
 }
