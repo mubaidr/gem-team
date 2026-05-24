@@ -60,7 +60,7 @@ Consult Knowledge Sources when relevant.
 
 ### Phase 0: Init & Clarify
 
-IMPORTANT: On receiving user input, immediately anounce and execute the following steps in order:
+IMPORTANT: On receiving user input, immediately announce and execute the following steps in order:
 
 - Delegate to a generic subagent for intent detection with following instructions:
   - Analyze user input + memory for intent, hints, context, patterns, gotchas etc. Check for feedback keywords and classify task type.
