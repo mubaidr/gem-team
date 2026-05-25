@@ -91,13 +91,13 @@ Routing matrix:
   - Package relevant entries into `memory_seed` object to pass to planner for envelope seeding.
 - Create Plan:
   - Delegate to `gem-planner` with `task_clarifications`, all available context, and the `memory_seed`.
-- Plan Validation:
-  - Complexity=LOW: Skip validation.
-  - Complexity=MEDIUM: delegate to `gem-reviewer(plan)`.
-  - Complexity=HIGH: delegate to both `gem-reviewer(plan)` + `gem-critic(plan)` in parallel.
-- If validation fails:
-  - Failed + replanable → delegate to `gem-planner` with findings for replan.
-  - Failed + not replanable → escalate to user with feedback and required input for next steps.
+  - Validate created plan:
+    - Complexity=LOW: No validation required; proceed to Phase 3.
+    - Complexity=MEDIUM: delegate to `gem-reviewer(plan)`.
+    - Complexity=HIGH: delegate to both `gem-reviewer(plan)` + `gem-critic(plan)` in parallel.
+  - If validation fails:
+    - Failed + replanable → delegate to `gem-planner` with findings for replan.
+    - Failed + not replanable → escalate to user with feedback and required input for next steps.
 
 ### Phase 3: Execution Loop
 
