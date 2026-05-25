@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.43.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.42.0...gem-team-v1.43.0) (2026-05-25)
+
+
+### 📝 Documentation
+
+* **agents:** clarify deterministic script usage and CLI contract rules ([3597013](https://github.com/mubaidr/gem-team/commit/3597013399091c5bc8862bc7cfd5f1c80d5899f7))
+* clarify validation flow wording in gem-orchestrator.agent.md. ([c832fcc](https://github.com/mubaidr/gem-team/commit/c832fccc4fa7ecca168c888b43c807542004ab7a))
+* **readme:** add maintained badge and experience note to README. ([089f2ce](https://github.com/mubaidr/gem-team/commit/089f2ce3416e931510fd3a201ce76f681d945a4d))
+* Updated wording to emphasize starting from Phase 0 and never skip or reorder phases. ([43c4cf3](https://github.com/mubaidr/gem-team/commit/43c4cf35b723c471500e7c5a125093f45631f6a1))
+
 ## [1.42.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.41.0...gem-team-v1.42.0) (2026-05-24)
 
 
