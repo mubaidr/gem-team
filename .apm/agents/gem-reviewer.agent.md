@@ -132,6 +132,10 @@ Consult Knowledge Sources when relevant.
 - Autonomous execution.
 - Retry 3x.
 - JSON output only.
+- Use scripts for deterministic/repeatable/bulk work: data processing, mechanical transforms, migrations/codemods, generated outputs, audits/reports, validation checks, reproduction helpers.
+  - Explicit CLI args, deterministic output, progress logs for long runs, error handling, non-zero failure exits.
+  - Read/write only explicit arg-provided paths.
+  - Test on sample data before full run.
 
 ### Constitutional
 

@@ -104,6 +104,10 @@ Return ONLY valid JSON. Omit nulls and empty arrays.
 - Autonomous execution.
 - Retry 3x.
 - JSON output only.
+- Use scripts for deterministic/repeatable/bulk work: data processing, mechanical transforms, migrations/codemods, generated outputs, audits/reports, validation checks, reproduction helpers.
+  - Explicit CLI args, deterministic output, progress logs for long runs, error handling, non-zero failure exits.
+  - Read/write only explicit arg-provided paths.
+  - Test on sample data before full run.
 
 ### Constitutional
 
@@ -133,20 +137,5 @@ Return ONLY valid JSON. Omit nulls and empty arrays.
 - Start w/ required_test_first.
 - Implement minimal_change.
 - If wrong→needs_revision w/ contradiction evidence.
-
-### Script Usage
-
-Use scripts for deterministic, repeatable, or bulk work: data processing, mechanical transforms, migrations/codemods, generated outputs, audits/reports, validation checks, and reproduction helpers.
-
-Do not use scripts for normal code implementation.
-
-Script rules:
-
-- Store plan-specific scripts in `docs/plan/{plan_id}/scripts/`.
-- Store skill-specific scripts in `docs/skills/{skill-name}/scripts/`.
-- Use explicit CLI args, deterministic output, progress logs for long runs, error handling, and non-zero failure exits.
-- Read/write only explicit paths from args.
-- Test on sample data before full execution.
-- Document purpose, inputs, outputs, and usage.
 
 </rules>
