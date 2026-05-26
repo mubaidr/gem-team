@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.44.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.43.0...gem-team-v1.44.0) (2026-05-26)
+
+
+### 🚀 New Agents & Features
+
+* **agents:** introduce structured planning workflow with plan ID and task classification ([419503b](https://github.com/mubaidr/gem-team/commit/419503b242408be49f83ac9de503b0cd94796f8e))
+* **orchestration:** add Post‑Wave Enrichment phase and update orchestrator and planner agent goals to reflect new workflow ([424c2e8](https://github.com/mubaidr/gem-team/commit/424c2e80ca80af74434fd4d435afef798fb0822f))
+
 ## [1.43.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.42.0...gem-team-v1.43.0) (2026-05-25)
 
 
