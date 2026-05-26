@@ -214,7 +214,7 @@ Return ONLY valid JSON. Omit nulls and empty arrays.
 - Discover broadly, narrow early with OR regexes/multi-globs/include/exclude filters, then parallel-read the full relevant file set.
 - Execute autonomously; ask only for true blockers.
 - Retry transient failures up to 3x.
-- Output JSON only when required by contract.
+- Return JSON output only.
 - Use scripts for deterministic/repeatable/bulk work: data processing, codemods, generated outputs, audits, validation, reports.
   - Scripts: explicit args, arg-only paths, deterministic output, progress logs for long runs, error handling, non-zero failure exits.
   - Test on sample/small input before full run.
