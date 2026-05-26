@@ -96,7 +96,7 @@ FAST_TRACK Mode:
   - complexity = LOW
   - task_type in (bug-fix, typo, config, docs)
   - confidence ≥ 0.85
-- Goal: Skip Phase 2 and Phase 4. Create minimal inline single-task plan. Execute directly in Phase 3.
+- Goal: Skip Phase 2. Create plan. Execute directly using Phase 3.
 
 ### Phase 2: Planning
 
@@ -133,33 +133,33 @@ Delegate ALL waves/tasks without pausing for approval between them.
     - If debugger confidence < 0.85 → escalate to user (cannot reliably diagnose).
   - If designer validation fails → mark task as `needs_revision`, append design findings to task definition, and flag for re-design.
   - Synthesize statuses (completed / escalate / needs_replan). Persist all to `plan.yaml`.
+- Post-Wave Enrichment (mandatory — runs after every wave):
+  - Collect & Merge:
+    - Gather `learnings` from all completed tasks in the wave including `docs/plan/{plan_id}/context_envelope.json` data.
+    - Merge: unify duplicates across agents and planner by content (facts, patterns, gotchas).
+    - Cross-reference: when a `gotcha` matches a `failure_mode` symptom, link them.
+    - Promote: `gotchas` recurring ≥ 3× across plans → `patterns`. `failure_modes` recurring ≥ 2× → elevate severity.
+    - High confidence patterns (confidence ≥ 0.85) with significant impact → candidate for persistence.
+  - Context Envelope (greedy — always updated):
+    - Always delegate to `gem-documentation-writer` with `task_type: update_context_envelope` to refresh `docs/plan/{plan_id}/context_envelope.json` with merged learnings from the wave.
+  - Memory (picky — confidence gate):
+    - Only persist items with confidence ≥ 0.80. Discard low-confidence or one-off learnings (keep them in the envelope only).
+    - Persist deduped `facts`, `patterns`, `gotchas`, `failure_modes`, `decisions`, `conventions` to memory tool.
+  - Conventions (picky — recurrence gate):
+    - If same convention recurs ≥ 3× across tasks in this plan: delegate to `gem-documentation-writer` → create/update `AGENTS.md`
+    - Otherwise: keep in envelope only.
+  - Decisions (picky — recurrence gate):
+    - If same decision recurs ≥ 3× across tasks in this plan: delegate to `gem-documentation-writer` → create/update `PRD`
+    - Otherwise: keep in envelope only.
+  - Skills (picky — confidence gate):
+    - If `patterns` with confidence ≥ 0.9 AND non-trivial: delegate to `gem-skill-creator`.
 - Loop:
-  - After each wave → Phase 4 → immediately next.
+  - After each wave → run Post-Wave Enrichment → immediately next.
   - Blocked → Escalate.
   - Present status as per `output_format`.
-  - All done → Phase 5.
+  - All done → Phase 4.
 
-### Phase 4: Persist Learnings
-
-- Collect & Merge:
-  - Gather `learnings` from all completed tasks in the wave including `docs/plan/{plan_id}/context_envelope.json` data.
-  - Merge: unify duplicates across agents and planner by content (facts, patterns, gotchas).
-  - Cross-reference: when a `gotcha` matches a `failure_mode` symptom, link them.
-  - Promote: `gotchas` recurring ≥ 3× across plans → `patterns`. `failure_modes` recurring ≥ 2× → elevate severity.
-  - High confidence patterns (confidence ≥ 0.85) with significant impact → candidate for persistence.
-- Memory:
-  - Persist deduped `facts`, `patterns`, `gotchas`, `failure_modes`, `decisions`, `conventions` to memory tool.
-- Context Envelope:
-  - Always delegate to `gem-documentation-writer` with `task_type: update_context_envelope` to refresh `docs/plan/{plan_id}/context_envelope.json` with merged learnings from the wave.
-  - Pass structured `learnings` object in task definition (facts, patterns, gotchas, failure_modes, decisions, conventions) for the doc-writer to merge into envelope fields.
-- Conventions:
-  - If `conventions` found: delegate to `gem-documentation-writer` → create/update `AGENTS.md`
-- Decisions:
-  - If `decisions` found: delegate to `gem-documentation-writer` → create/update `PRD`
-- Skills:
-  - If `patterns` with confidence ≥ 0.85 AND non-trivial: delegate to `gem-skill-creator`.
-
-### Phase 5: Output
+### Phase 4: Output
 
 Present status as per `output_format`.
 

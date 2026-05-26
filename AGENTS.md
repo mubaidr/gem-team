@@ -68,14 +68,14 @@ Static conventions, rules, and agent definitions for the Gem Team multi-agent fr
 ## Key Rules
 
 1. **Knowledge priority**: PRD → codebase → AGENTS.md → Context7 → docs
-2. **Memory ownership**: The orchestrator reads and writes memory. The orchestrator reads memory during Phase 2 and passes relevant entries as `memory_seed` to the planner for envelope seeding. The planner never reads memory directly. All other subagents **never read memory directly** — they receive cross-session knowledge via the context envelope. Memory is the orchestrator's durable store for cross-session bias: routing hints, pre-wave guard injection, and deduped `facts`, `patterns`, `gotchas`, `failure_modes`, `decisions`, `conventions`. The orchestrator seeds the envelope with relevant memory entries when creating a new plan (Phase 2) and progressively enriches it between waves (Phase 4). Subagents return `learnings`; orchestrator dedups and persists only high-confidence, reusable entries.
+2. **Memory ownership**: Orchestrator owns memory. It reads memory during planning and seeds the planner's context envelope. Planner never reads memory directly. All other subagents receive cross-session knowledge via the context envelope only. Memory stores: routing hints, pre-wave guards, facts, patterns, gotchas, failure_modes, decisions, conventions. Orchestrator progressively enriches the envelope between waves via `gem-documentation-writer` (`task_type: update_context_envelope`). Subagents return `learnings`; orchestrator dedups and persists only high-confidence, reusable entries.
 3. **Orchestrator never executes or validates** work directly — always delegates execution, plan validation, code review, and verification.
 4. **Implementer never reviews** own work — reviewer/critic handle verification.
 5. **Diagnose-then-fix**: debugger diagnoses → implementer fixes → re-verify.
 6. **Contract-first**: contract tests written before implementation.
 7. **Approval gates**: DevOps tasks require explicit approval for prod deployments.
 8. **File-based outputs**: Researcher/Planner save to files, not inline-only results.
-9. **Context Envelope Handoff**: Orchestrator must instruct subagents to read `docs/plan/{plan_id}/context_envelope.json` during Init. Subagents use envelope data as a context cache to avoid redundant exploration. The envelope is **progressively enriched** between waves — after each wave, the orchestrator delegates to `gem-documentation-writer` (`task_type: update_context_envelope`) to merge new learnings (facts, patterns, gotchas, failure_modes, decisions, conventions) into the envelope, bumping `meta.version`. Subsequent waves thus read an increasingly accurate cache. The orchestrator maintains an in-memory cache of the envelope during a session; disk is read once at session start and written after each wave update, avoiding stale reads and read-write races.
+9. **Context Envelope Handoff**: Orchestrator must instruct subagents to read `docs/plan/{plan_id}/context_envelope.json` during Init. Envelope is a progressive cache — enriched after each wave. Orchestrator maintains in-memory cache during session; reads from disk once at start, writes after each wave update to avoid stale reads/races.
 
 ---
 

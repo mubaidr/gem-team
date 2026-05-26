@@ -49,8 +49,13 @@ Consult Knowledge Sources when relevant.
   - Atomicity (≤ 300 lines/task).
   - No circular deps, all IDs exist.
   - Wave parallelism, conflicts_with not parallel.
+  - Wave assignment: tasks with no dependencies are in wave 1.
   - Tasks have verification + acceptance_criteria.
+  - Test file inclusion: if acceptance_criteria mentions tests (contains 'test' or 'tests'), target_files must include corresponding test file paths.
   - PRD alignment, valid agents.
+  - Tech stack: context_envelope.tech_stack exists and is non-empty.
+  - Contracts (recommended for all plans; REQUIRED for HIGH complexity plans).
+  - Diagnose-then-fix: every debugger task has a paired implementer task in a later wave.
 - Status:
   - Critical → failed.
   - Non-critical → needs_revision.
