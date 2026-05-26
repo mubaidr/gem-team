@@ -110,7 +110,7 @@ FAST_TRACK Mode:
     - Complexity=MEDIUM: delegate to `gem-reviewer(plan)`.
     - Complexity=HIGH: delegate to both `gem-reviewer(plan)` + `gem-critic(plan)` in parallel.
   - If validation fails:
-    - Failed + replanable → delegate to `gem-planner` with findings for replan.
+    - Failed + replanable → delegate to `gem-planner` with findings for replan/ adjustments.
     - Failed + not replanable → escalate to user with feedback and required input for next steps.
 
 ### Phase 3: Execution Loop
