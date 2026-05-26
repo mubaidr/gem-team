@@ -62,27 +62,41 @@ IMPORTANT: On receiving user input, immediately announce and execute the followi
 
 ### Phase 0: Init & Clarify
 
-- Delegate to a generic subagent for intent detection with following instructions:
-  - Analyze user input + memory for intent, hints, context, patterns, gotchas etc. Check for feedback keywords and classify task type.
-  - Plan ID — If not provided, generate `YYYYMMDD-kebab-case`. If `plan_id` provided → validate existence of `docs/plan/{plan_id}/plan.yaml` → continue_plan; else → new_task
-  - Gray Areas Detection:
-    - Identify ambiguities, missing scope, or decision blockers.
-    - Identify focus_areas from request keywords.
-    - Generate clarification options if needed.
-    - Ask user for clarification if gray areas exist, architectural decisions, design requirements etc.
-  - Complexity Assessment:
-    - LOW: single file/small change, known patterns. Minimal blast radius.
-    - MEDIUM: multiple files, new patterns, moderate scope. Some blast radius.
-    - HIGH: architectural change, multiple domains, unknown patterns. Significant blast radius.
+- Plan ID — If not provided, generate `YYYYMMDD-kebab-case`. If `plan_id` provided → validate existence of `docs/plan/{plan_id}/plan.yaml` → continue_plan; else → new_task
+- Task Type Classification — classify task_type from request keywords:
+  - `bug-fix`: error, stack trace, regression, fix, broken, crash
+  - `feature`: new, add, implement, build, create
+  - `refactor`: simplify, clean up, restructure, extract, rename
+  - `docs`: document, readme, comment, write docs, update docs
+  - `config`: configure, setup, install, config, settings
+  - `typo`: typo, spelling, grammar, rename trivial
+  - `unknown`: none of the above match
+- Complexity Assessment:
+  - LOW: single file/small change, known patterns. Minimal blast radius.
+  - MEDIUM: multiple files, new patterns, moderate scope. Some blast radius.
+  - HIGH: architectural change, multiple domains, unknown patterns. Significant blast radius.
+- Gray Areas Detection:
+  - Identify ambiguities, missing scope, or decision blockers.
+  - Identify focus_areas from request keywords.
+  - Clarification Gate: Only ask user for clarification if ambiguity_score > 0.5 AND the question is a decision_blocker. For non-blocking gray areas, document assumptions and proceed.
 - If architectural_decisions found: delegate to `gem-documentation-writer` → create/update `PRD`
 
 ### Phase 1: Route
 
 Routing matrix:
 
+- new_task + FAST_TRACK → skip to Phase 3
 - new_task → Phase 2
 - continue_plan + feedback → Phase 2 (adjust plan based on feedback)
 - continue_plan + no feedback → Phase 3
+
+FAST_TRACK Mode:
+
+- Eligibility (all conditions must be true):
+  - complexity = LOW
+  - task_type in (bug-fix, typo, config, docs)
+  - confidence ≥ 0.85
+- Goal: Skip Phase 2 and Phase 4. Create minimal inline single-task plan. Execute directly in Phase 3.
 
 ### Phase 2: Planning
 
@@ -132,12 +146,12 @@ Delegate ALL waves/tasks without pausing for approval between them.
   - Merge: unify duplicates across agents and planner by content (facts, patterns, gotchas).
   - Cross-reference: when a `gotcha` matches a `failure_mode` symptom, link them.
   - Promote: `gotchas` recurring ≥ 3× across plans → `patterns`. `failure_modes` recurring ≥ 2× → elevate severity.
+  - High confidence patterns (confidence ≥ 0.85) with significant impact → candidate for persistence.
 - Memory:
   - Persist deduped `facts`, `patterns`, `gotchas`, `failure_modes`, `decisions`, `conventions` to memory tool.
 - Context Envelope:
   - Always delegate to `gem-documentation-writer` with `task_type: update_context_envelope` to refresh `docs/plan/{plan_id}/context_envelope.json` with merged learnings from the wave.
   - Pass structured `learnings` object in task definition (facts, patterns, gotchas, failure_modes, decisions, conventions) for the doc-writer to merge into envelope fields.
-  - After write-back, update in-memory cache with the new envelope to avoid stale reads in subsequent waves.
 - Conventions:
   - If `conventions` found: delegate to `gem-documentation-writer` → create/update `AGENTS.md`
 - Decisions:

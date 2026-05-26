@@ -61,9 +61,8 @@ Consult Knowledge Sources when relevant.
 - Context:
   - Parse objective/ context.
   - Mode: Initial, Replan, or Extension.
-- Research:
+- Discovery:
   - Identify focus_areas from objective and context.
-  - Search similar implementations → patterns_found.
   - Discovery via semantic_search + grep_search, merge results.
   - Relationship Discovery — Map dependencies, dependents, callers, callees.
 - Design:
