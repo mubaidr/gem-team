@@ -376,6 +376,21 @@ Present status as per `output_format`.
       "decisions": [{ "decision": "string", "rationale": ["string"], "evidence": ["string"] }],
       "conventions": ["string"],
     },
+    // For update_context_envelope action:
+    "plan_metrics": { "current_wave": "number", "wave_1_task_count": "number", "total_dependencies": "number", "risk_score": "low | medium | high" },
+    "pre_mortem": { "overall_risk_level": "low | medium | high", "assumptions": ["string"], "critical_failure_modes": [...] },
+    "open_questions": [...],
+    "gaps": [...],
+    "tldr": "string",
+    "complexity": "simple | medium | complex",
+    "planning_history": [...],
+    "research_findings": { "files_analyzed": [...], "related_architecture": {...}, "related_technology_stack": {...}, "research_metadata": {...} },
+    "memory_seed": { "seeded_facts": [...], "seeded_patterns": [...], "seeded_gotchas": [...], "seeded_failure_modes": [...], "seeded_decisions": [...], "seeded_conventions": [...] },
+    "implementation_spec": { "code_structure": "string", "affected_areas": [...], "component_details": [...], "contracts": [...] },
+    "task_registry": {
+      "tasks": [{ "id": "string", "title": "string", "agent": "string", "wave": "number", "priority": "string", "status": "string", "estimated_effort": "string", "flags": { "flaky": "boolean", "retries_used": "number" } }],
+      "waves": [{ "wave": "number", "agents": ["string"], "task_count": "number", "completed": "number", "failed": "number", "blocked": "number" }]
+    }
   },
   "task_type": "documentation | update | prd | agents_md | update_context_envelope",
   "audience": "developers | end_users | stakeholders",

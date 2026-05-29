@@ -59,17 +59,9 @@ Consult Knowledge Sources when relevant.
     - Check duplicates, append concisely.
     - Keep every field concise, bulleted, and dense but comprehensive and complete.
   - `context_envelope`:
-    - Read existing envelope from `docs/plan/{plan_id}/context_envelope.json`.
-    - Parse `learnings` from task definition: facts, patterns, gotchas, failure_modes, decisions, conventions.
-    - Merge into envelope fields deduped by key:
-      - `facts` → `research_digest.relevant_files` (deduped by path).
-      - `patterns` → `research_digest.patterns_found` (deduped by name).
-      - `gotchas` → `research_digest.gotchas` (deduped by text).
-      - `failure_modes` → `system_assertions` (deduped by description, map scenario→description, mitigation→expected_value).
-      - `decisions` → `prior_decisions` (deduped by decision).
-      - `conventions` → `conventions` (deduped string match).
-    - Bump `meta.version` (increment), set `meta.last_updated` (now), set `meta.previous_version_fields_changed` to list of changed top-level keys.
-    - Write back to `docs/plan/{plan_id}/context_envelope.json`.
+    - Update existing envelope from `docs/plan/{plan_id}/context_envelope.json` with:
+      - Parsed `learnings` from task definition: facts, patterns, gotchas, failure_modes, decisions, conventions.
+      - Bump `meta.version` (increment), set `meta.last_updated` (now), set `meta.previous_version_fields_changed` to list of changed top-level keys.
 - Validate:
   - get_errors, ensure diagrams render, check no secrets exposed.
 - Verify:

@@ -455,6 +455,260 @@ tasks:
       "safe_to_assume": ["string"],
       "verify_before_use": ["string"],
     },
+    // NEW: Plan-level execution metadata from plan.yaml
+    "plan_metadata": {
+      "tldr": "string — one-line plan summary",
+      "complexity": "simple | medium | complex",
+      "risk_score": "low | medium | high",
+      "wave_1_task_count": "number",
+      "total_dependencies": "number",
+      "prd_update_recommended": "boolean",
+      "prd_update_reason": "string | null",
+      "pre_mortem": {
+        "overall_risk_level": "low | medium | high",
+        "assumptions": ["string"],
+        "critical_failure_modes": [
+          {
+            "scenario": "string",
+            "likelihood": "low | medium | high",
+            "impact": "low | medium | high | critical",
+            "mitigation": "string",
+          },
+        ],
+      },
+      "open_questions": [
+        {
+          "question": "string",
+          "context": "string",
+          "type": "decision_blocker | research | nice_to_know",
+          "affects": ["string"],
+        },
+      ],
+      "gaps": [
+        {
+          "description": "string",
+          "refinement_requests": [
+            {
+              "query": "string",
+              "source_hint": "string",
+            },
+          ],
+        },
+      ],
+      "planning_history": [
+        {
+          "pass": "number",
+          "reason": "string",
+          "timestamp": "ISO-8601 string",
+        },
+      ],
+    },
+    // NEW: Researcher output — full findings, not just digest
+    "research_findings": {
+      "files_analyzed": [
+        {
+          "file": "string",
+          "path": "string",
+          "purpose": "string",
+          "key_elements": [
+            {
+              "element": "string",
+              "type": "function | class | variable | pattern",
+              "location": "string — file:line",
+              "description": "string",
+              "language": "string",
+            },
+          ],
+          "lines": "number",
+        },
+      ],
+      "related_architecture": {
+        "components_relevant_to_domain": [
+          {
+            "component": "string",
+            "responsibility": "string",
+            "location": "string",
+            "relationship_to_domain": "string",
+          },
+        ],
+        "interfaces_used_by_domain": [
+          {
+            "interface": "string",
+            "location": "string",
+            "usage_pattern": "string",
+          },
+        ],
+        "data_flow_involving_domain": "string",
+        "key_relationships_to_domain": [
+          {
+            "from": "string",
+            "to": "string",
+            "relationship": "imports | calls | inherits | composes",
+          },
+        ],
+      },
+      "related_technology_stack": {
+        "languages_used_in_domain": ["string"],
+        "frameworks_used_in_domain": [
+          {
+            "name": "string",
+            "usage_in_domain": "string",
+          },
+        ],
+        "libraries_used_in_domain": [
+          {
+            "name": "string",
+            "purpose_in_domain": "string",
+          },
+        ],
+        "external_apis_used_in_domain": [
+          {
+            "name": "string",
+            "integration_point": "string",
+          },
+        ],
+      },
+      "related_conventions": {
+        "naming_patterns_in_domain": "string",
+        "structure_of_domain": "string",
+        "error_handling_in_domain": "string",
+        "testing_in_domain": "string",
+        "documentation_in_domain": "string",
+      },
+      "related_dependencies": {
+        "internal": [
+          {
+            "component": "string",
+            "relationship_to_domain": "string",
+            "direction": "inbound | outbound | bidirectional",
+          },
+        ],
+        "external": [
+          {
+            "name": "string",
+            "purpose_for_domain": "string",
+          },
+        ],
+      },
+      "domain_security_considerations": {
+        "sensitive_areas": [
+          {
+            "area": "string",
+            "location": "string",
+            "concern": "string",
+          },
+        ],
+        "authentication_patterns_in_domain": "string",
+        "authorization_patterns_in_domain": "string",
+        "data_validation_in_domain": "string",
+      },
+      "testing_patterns": {
+        "framework": "string",
+        "coverage_areas": ["string"],
+        "test_organization": "string",
+        "mock_patterns": ["string"],
+      },
+      "research_metadata": {
+        "methodology": "string — e.g., semantic_search+grep_search, Context7",
+        "scope": "string",
+        "confidence_level": "high | medium | low",
+        "coverage_percent": "number",
+        "decision_blockers": "number",
+        "research_blockers": "number",
+      },
+    },
+    // NEW: Execution state for future agents
+    "task_registry": {
+      "waves": [
+        {
+          "wave": "number",
+          "agents": ["string"],
+          "task_count": "number",
+          "completed": "number",
+          "failed": "number",
+          "blocked": "number",
+        },
+      ],
+      "tasks": [
+        {
+          "id": "string",
+          "title": "string",
+          "agent": "string",
+          "wave": "number",
+          "priority": "high | medium | low",
+          "status": "pending | in_progress | completed | failed | blocked | needs_revision",
+          "estimated_effort": "small | medium | large",
+          "estimated_files": "number",
+          "estimated_lines": "number",
+          "flags": {
+            "flaky": "boolean",
+            "retries_used": "number",
+          },
+          "conflicts_with": ["string"],
+          "focus_area": "string | null",
+        },
+      ],
+    },
+    // NEW: Trace what was seeded vs discovered
+    "memory_seed_trace": {
+      "seeded_facts": [
+        {
+          "statement": "string",
+          "category": "string",
+          "confidence": "number (0.0-1.0)",
+        },
+      ],
+      "seeded_patterns": [
+        {
+          "name": "string",
+          "description": "string",
+          "confidence": "number (0.0-1.0)",
+        },
+      ],
+      "seeded_gotchas": ["string"],
+      "seeded_failure_modes": [
+        {
+          "scenario": "string",
+          "symptoms": ["string"],
+          "mitigation": "string",
+        },
+      ],
+      "seeded_decisions": [
+        {
+          "decision": "string",
+          "rationale": ["string"],
+        },
+      ],
+      "seeded_conventions": ["string"],
+      "merged_confidence": "number (0.0-1.0)",
+    },
+    // NEW: Implementation specification from plan.yaml
+    "implementation_spec": {
+      "code_structure": "string",
+      "affected_areas": ["string"],
+      "component_details": [
+        {
+          "component": "string",
+          "responsibility": "string",
+          "interfaces": ["string"],
+          "dependencies": [
+            {
+              "component": "string",
+              "relationship": "string",
+            },
+          ],
+          "integration_points": ["string"],
+        },
+      ],
+      "contracts": [
+        {
+          "from_task": "string",
+          "to_task": "string",
+          "interface": "string",
+          "format": "string",
+        },
+      ],
+    },
   },
 }
 ```
