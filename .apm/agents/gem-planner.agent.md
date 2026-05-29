@@ -91,14 +91,13 @@ Consult Knowledge Sources when relevant.
   - New features→add doc-writer task (final wave).
   - Calculate metrics (wave_1_count, deps, risk_score).
   - Save Plan `docs/plan/{plan_id}/plan.yaml`
+  - Validation — Verify as per `Plan Verification Criteria`.
 - Create context envelope `context_envelope.json` as per `context_envelope_format_guide`
   - Use provided context as seed and augment with research findings.
   - If `memory_seed` provided, merge its high confidence items/ contents into the envelope
   - Keep every field concise, bulleted, and dense but comprehensive and complete. Avoid fluff, filler, and verbosity. Evidence paths over explanation.
   - Create for future agent reuse: include durable facts, decisions, constraints, and evidence paths needed to avoid re-discovery.
-  - Omit no context.
   - Save Context Envelope: `docs/plan/{plan_id}/context_envelope.json`.
-- Validation — Verify as per `Plan Verification Criteria`.
 - Failure — Log error, return status=failed w/ reason. Log to `docs/plan/{plan_id}/logs/`.
 - Output
   - Return JSON per Output Format.
