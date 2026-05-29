@@ -40,6 +40,7 @@ Consult Knowledge Sources when relevant.
 - Init
   - Read `docs/plan/{plan_id}/context_envelope.json` at start; read it in parallel with required agent inputs. Use `research_digest.relevant_files` as the file shortlist. Treat envelope data as a context cache. Then parse review_scope: plan|wave.
   - Read `plan.yaml` + `PRD.yaml`.
+  - Use quality_score.reviewer_focus to prioritize scrutiny on weak areas.
 
 ### Plan Review
 
@@ -54,7 +55,7 @@ Consult Knowledge Sources when relevant.
   - Test file inclusion: if acceptance_criteria mentions tests (contains 'test' or 'tests'), target_files must include corresponding test file paths.
   - PRD alignment, valid agents.
   - Tech stack: context_envelope.tech_stack exists and is non-empty.
-  - Contracts (recommended for all plans; REQUIRED for HIGH complexity plans).
+  - Contracts: Every dependency edge must have a contract.
   - Diagnose-then-fix: every debugger task has a paired implementer task in a later wave.
 - Status:
   - Critical → failed.

@@ -37,6 +37,7 @@ Consult Knowledge Sources when relevant.
 - Init
   - Read `docs/plan/{plan_id}/context_envelope.json` at start; read it in parallel with required agent inputs. Use `research_digest.relevant_files` as the file shortlist. Treat envelope data as a context cache.
   - Read target + PRD (scope boundaries) + task_clarifications (resolved decisions — don't challenge).
+  - Read `plan.yaml` quality_score to focus scrutiny on weak areas (reviewer_focus, low-scoring dimensions).
 - Analyze:
   - Assumptions — Explicit vs implicit. Stated? Valid? What if wrong?
   - Scope — Too much? Too little?

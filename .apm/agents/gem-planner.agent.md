@@ -65,6 +65,14 @@ Consult Knowledge Sources when relevant.
   - Identify focus_areas from objective and context.
   - Discovery via semantic_search + grep_search, merge results.
   - Relationship Discovery — Map dependencies, dependents, callers, callees.
+  - Codebase Structure Mapping — Identify:
+    - key_dirs (actual directory structure via list_dir)
+    - key_components (files + their responsibilities)
+    - existing patterns (via semantic_search of code patterns)
+  - Ground-truth population — Populate context_envelope with actual findings, not assumptions:
+    - tech_stack: verified from package.json, requirements.txt, or actual files
+    - conventions: extracted from existing code, not assumed
+    - constraints: based on actual codebase, not generic
 - Design:
   - Lock clarifications into DAG constraints.
   - Synthesize DAG: atomic tasks (or NEW for extension).
@@ -90,8 +98,13 @@ Consult Knowledge Sources when relevant.
   - Assess PRD update need (new features, scope shifts, ADR deviations, new stories, AC changes→set prd_update_recommended).
   - New features→add doc-writer task (final wave).
   - Calculate metrics (wave_1_count, deps, risk_score).
+  - Calculate quality_score (overall, breakdown by dimension, blocking_issues, warnings).
+  - Generate reviewer_focus: list dimensions with score < 0.9 for targeted scrutiny.
+  - Pre-Flight Validation:
+    - Validate plan.yaml against Plan Verification Criteria before saving
+    - If validation fails → fix issues inline, re-validate, then save
+    - Do NOT save and output a broken plan
   - Save Plan `docs/plan/{plan_id}/plan.yaml`
-  - Validation — Verify as per `Plan Verification Criteria`.
 - Create context envelope `context_envelope.json` as per `context_envelope_format_guide`
   - Use provided context as seed and augment with research findings.
   - If `memory_seed` provided, merge its high confidence items/ contents into the envelope
@@ -120,6 +133,15 @@ Return ONLY valid JSON. Omit nulls and empty arrays.
   "prd_update_recommended": "boolean",
   "prd_update_reason": "string | null",
   "metrics": { "wave_1_task_count": "number", "total_dependencies": "number", "risk_score": "low | medium | high" },
+  "quality_score": {
+    "overall": "number (0.0-1.0)",
+    "prd_coverage": "number (0.0-1.0)",
+    "target_files_verified": "number (0.0-1.0)",
+    "contracts_complete": "number (0.0-1.0)",
+    "wave_assignment_valid": "number (0.0-1.0)",
+    "blocking_issues": "number",
+    "warnings": "number"
+  },
   "learnings": {
     "patterns": [{ "name": "string", "description": "string", "confidence": 0.0-1.0 }],
     "gotchas": ["string"],
@@ -148,6 +170,17 @@ plan_metrics:
   wave_1_task_count: number
   total_dependencies: number
   risk_score: low | medium | high
+quality_score:
+  overall: number (0.0-1.0)
+  breakdown:
+    prd_coverage: number (0.0-1.0)
+    target_files_verified: number (0.0-1.0)
+    contracts_complete: number (0.0-1.0)
+    wave_assignment_valid: number (0.0-1.0)
+  blocking_issues: number
+  warnings: number
+  # Reviewer guidance: areas needing extra scrutiny based on lower scores
+  reviewer_focus: [string]
 tldr: |
 open_questions:
   - question: string
@@ -708,6 +741,24 @@ tasks:
         },
       ],
     },
+    // Ground-truth validation results from Discovery phase
+    "codebase_validation": {
+      "verified_at": "ISO-8601 string",
+      "target_files_exist": {
+        "T01": ["src/config.ts"],
+        "T02": ["src/api/client.ts"],
+      },
+      "dependency_graph_valid": true,
+      "no_circular_deps": true,
+      "wave_assignment_valid": true,
+      "all_contracts_defined": true,
+      "tech_stack_populated": true,
+      "prd_alignment": {
+        "requirements_mapped": ["REQ-001", "REQ-002"],
+        "unmapped_requirements": [],
+        "coverage_percent": 100,
+      },
+    },
   },
 }
 ```
@@ -740,13 +791,16 @@ tasks:
 
 #### Plan Verification Criteria
 
+Run these checks BEFORE saving plan.yaml. Fix all failures inline.
+
 - Plan:
   - Valid YAML, required fields, unique task IDs, valid status values
   - Concise, dense, complete, focused on implementation, avoids fluff/verbosity
-- DAG: No circular deps, all dep IDs exist
-- Contracts: Valid from_task/to_task IDs, interfaces defined (enforced for HIGH complexity; recommended otherwise)
+- DAG: No circular deps, all dep IDs exist, no_deps → wave_1
+- Contracts: Valid from_task/to_task IDs, interfaces defined (required for ALL complexity)
 - Tasks: Valid agent assignments, failure_modes for high/medium tasks, verification present, success_criteria defined when needed
   - Every debugger task has a paired implementer task (wave N+1 or later)
+  - If acceptance_criteria mentions tests → target_files must include test file paths
 - Pre-mortem: overall_risk_level defined, critical_failure_modes present
 - Implementation spec: code_structure, affected_areas, component_details defined
 
