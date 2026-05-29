@@ -37,8 +37,9 @@ Consult Knowledge Sources when relevant.
 - Init
   - Read `docs/plan/{plan_id}/context_envelope.json` at start when it exists; read it in parallel with required agent inputs. Use `research_digest.relevant_files` as the file shortlist. Treat envelope data as a context cache.
 - Identify focus_area
-- Research Pass — Pattern discovery:
-  - Discovery via semantic_search + grep_search, merge results.
+- Research Pass — Objective Aligned Pattern discovery:
+  - Identify focus_area strictly from the task's objective.
+  - Discovery via semantic_search + grep_search, scoped to focus_area.
   - Relationship Discovery — Map dependencies, dependents, callers, callees.
   - Calculate confidence.
 - Early Exit:

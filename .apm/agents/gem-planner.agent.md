@@ -61,9 +61,10 @@ Consult Knowledge Sources when relevant.
 - Context:
   - Parse objective/ context.
   - Mode: Initial, Replan, or Extension.
-- Discovery:
-  - Identify focus_areas from objective and context.
-  - Discovery via semantic_search + grep_search, merge results.
+- Discovery (OBJECTIVE-ALIGNED — no random exploration):
+  - Identify focus_areas strictly from objective and context.
+  - All searches MUST target focus_areas; no exploratory/off-target searching.
+  - Discovery via semantic_search + grep_search, scoped to focus_areas.
   - Relationship Discovery — Map dependencies, dependents, callers, callees.
   - Codebase Structure Mapping — Identify:
     - key_dirs (actual directory structure via list_dir)
