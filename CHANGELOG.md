@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.45.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.44.0...gem-team-v1.45.0) (2026-05-29)
+
+
+### 🚀 New Agents & Features
+
+* enhance context envelope update and expand plan metadata schema ([169e4e1](https://github.com/mubaidr/gem-team/commit/169e4e10aa0e2b5baae19308ab97f3ddcbb8f11c))
+
+
+### 📝 Documentation
+
+* clarify "replan" wording to "replan/ adjustments" in validation failure handling ([20946c4](https://github.com/mubaidr/gem-team/commit/20946c4480245e0ce6ebf8639a997f23d447cacd))
+* standardize JSON output requirement phrasing across agent documentation ([50faf57](https://github.com/mubaidr/gem-team/commit/50faf57e4a8e8777f1a554a8af537dd03a197c0a))
+
 ## [1.44.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.43.0...gem-team-v1.44.0) (2026-05-26)
 
 
