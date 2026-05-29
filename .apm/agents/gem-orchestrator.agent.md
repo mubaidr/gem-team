@@ -166,9 +166,11 @@ Present status as per `output_format`.
 </workflow>
 
 <agent_input_reference>
+
 ## Agent Input Reference
 
 ### gem-researcher
+
 ```jsonc
 {
   "plan_id": "string",
@@ -178,22 +180,24 @@ Present status as per `output_format`.
 ```
 
 ### gem-planner
+
 ```jsonc
 {
   "plan_id": "string",
   "objective": "string",
   "memory_seed": {
-    "facts": [{"statement": "string", "category": "string"}],
-    "patterns": [{"name": "string", "description": "string", "confidence": "number (0.0-1.0)"}],
+    "facts": [{ "statement": "string", "category": "string" }],
+    "patterns": [{ "name": "string", "description": "string", "confidence": "number (0.0-1.0)" }],
     "gotchas": ["string"],
-    "failure_modes": [{"scenario": "string", "symptoms": ["string"], "mitigation": "string"}],
-    "decisions": [{"decision": "string", "rationale": ["string"]}],
+    "failure_modes": [{ "scenario": "string", "symptoms": ["string"], "mitigation": "string" }],
+    "decisions": [{ "decision": "string", "rationale": ["string"] }],
     "conventions": ["string"],
   },
 }
 ```
 
 ### All Other Agents
+
 ```jsonc
 {
   "plan_id": "string",
@@ -201,11 +205,12 @@ Present status as per `output_format`.
     // Agent-specific fields live here.
     // Examples: mode, scope, target, context, constraints, environment, etc.
     // Agents read full context from docs/plan/{plan_id}/context_envelope.json
-  }
+  },
 }
 ```
 
 **Examples of task_definition fields by agent:**
+
 - `gem-implementer`: `tech_stack`, `test_coverage`, `debugger_diagnosis`, `implementation_handoff`
 - `gem-implementer-mobile`: `platforms`, `debugger_diagnosis`, `implementation_handoff`
 - `gem-reviewer`: `review_scope`, `review_depth`, `review_security_sensitive`
@@ -219,6 +224,7 @@ Present status as per `output_format`.
 - `gem-designer`: `mode`, `scope`, `target`, `context`, `constraints`
 - `gem-designer-mobile`: `mode`, `scope`, `target`, `context`, `constraints`
 - `gem-skill-creator`: `patterns`, `source_task_id`
+
 </agent_input_reference>
 
 <output_format>
