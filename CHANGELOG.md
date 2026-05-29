@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.46.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.45.0...gem-team-v1.46.0) (2026-05-29)
+
+
+### 🚀 New Agents & Features
+
+* add quality_score, reviewer_focus, and codebase validation to planning and critiquing agents ([3f9cfbf](https://github.com/mubaidr/gem-team/commit/3f9cfbf4b62c8a4d8c8568232590c7fd265447f2))
+* **agents:** make discovery strictly objective‑aligned ([d46d091](https://github.com/mubaidr/gem-team/commit/d46d0918db3915f7c5c2b9572a9e6552466fa447))
+
+
+### 📝 Documentation
+
+* add Agent Input Reference and improve JSON formatting ([010578e](https://github.com/mubaidr/gem-team/commit/010578ea57692e766b7283e411965069d2a05e85))
+* add validation verification step to gem-planner agent markdown ([ecb04d2](https://github.com/mubaidr/gem-team/commit/ecb04d21678b3b674641640b6e3a1f715de283ed))
+
 ## [1.45.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.44.0...gem-team-v1.45.0) (2026-05-29)
 
 
