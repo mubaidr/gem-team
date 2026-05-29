@@ -166,11 +166,9 @@ Present status as per `output_format`.
 </workflow>
 
 <agent_input_reference>
-
 ## Agent Input Reference
 
 ### gem-researcher
-
 ```jsonc
 {
   "plan_id": "string",
@@ -180,283 +178,47 @@ Present status as per `output_format`.
 ```
 
 ### gem-planner
-
 ```jsonc
 {
   "plan_id": "string",
   "objective": "string",
   "memory_seed": {
-    "facts": [{ "statement": "string", "category": "string" }],
-    "patterns": [{ "name": "string", "description": "string", "confidence": "number (0.0-1.0)" }],
+    "facts": [{"statement": "string", "category": "string"}],
+    "patterns": [{"name": "string", "description": "string", "confidence": "number (0.0-1.0)"}],
     "gotchas": ["string"],
-    "failure_modes": [{ "scenario": "string", "symptoms": ["string"], "mitigation": "string" }],
-    "decisions": [{ "decision": "string", "rationale": ["string"] }],
+    "failure_modes": [{"scenario": "string", "symptoms": ["string"], "mitigation": "string"}],
+    "decisions": [{"decision": "string", "rationale": ["string"]}],
     "conventions": ["string"],
   },
 }
 ```
 
-### gem-implementer
-
+### All Other Agents
 ```jsonc
 {
-  "task_id": "string",
   "plan_id": "string",
-  "plan_path": "string",
   "task_definition": {
-    "tech_stack": ["string"],
-    "test_coverage": "string | null",
-    "debugger_diagnosis": "object (for bug-fix mode)",
-    "implementation_handoff": {
-      "do_not_reinvestigate": ["string"],
-      "required_test_first": "string",
-      "target_files": ["string"],
-      "minimal_change": "string",
-      "acceptance_checks": ["string"],
-    },
-  },
-}
-```
-
-### gem-implementer-mobile
-
-```jsonc
-{
-  "task_id": "string",
-  "plan_id": "string",
-  "plan_path": "string",
-  "task_definition": {
-    "platforms": ["ios", "android"],
-    "debugger_diagnosis": "object (for bug-fix mode)",
-    "implementation_handoff": {
-      "do_not_reinvestigate": ["string"],
-      "required_test_first": "string",
-      "target_files": ["string"],
-      "minimal_change": "string",
-      "acceptance_checks": ["string"],
-    },
-  },
-}
-```
-
-### gem-reviewer
-
-```jsonc
-{
-  "review_scope": "plan|wave",
-  "plan_id": "string",
-  "plan_path": "string",
-  "wave_tasks": ["string (for wave scope)"],
-  "security_sensitive_tasks": ["string — task IDs requiring per-task deep scan (merged into wave review)"],
-  "task_definition": "object (optional task context for wave checks)",
-  "review_depth": "full|standard|lightweight",
-  "review_security_sensitive": "boolean",
-}
-```
-
-### gem-debugger
-
-```jsonc
-{
-  "task_id": "string",
-  "plan_id": "string",
-  "plan_path": "string",
-  "task_definition": "object",
-  "debugger_diagnosis": "object (for retry after failed fix)",
-  "implementation_handoff": {
-    "do_not_reinvestigate": ["string"],
-    "required_test_first": "string",
-    "target_files": ["string"],
-    "minimal_change": "string",
-    "acceptance_checks": ["string"],
-  },
-  "error_context": {
-    "error_message": "string",
-    "stack_trace": "string (optional)",
-    "failing_test": "string (optional)",
-    "reproduction_steps": ["string (optional)"],
-    "environment": "string (optional)",
-    "flow_id": "string (optional)",
-    "step_index": "number (optional)",
-    "evidence": ["string (optional)"],
-    "browser_console": ["string (optional)"],
-    "network_failures": ["string (optional)"],
-  },
-}
-```
-
-### gem-critic
-
-```jsonc
-{
-  "task_id": "string (optional)",
-  "plan_id": "string",
-  "plan_path": "string",
-  "target": "string (file paths or plan section)",
-  "context": "string (what is being built, focus)",
-}
-```
-
-### gem-code-simplifier
-
-```jsonc
-{
-  "task_id": "string",
-  "plan_id": "string (optional)",
-  "plan_path": "string (optional)",
-  "scope": "single_file|multiple_files|project_wide",
-  "targets": ["string (file paths or patterns)"],
-  "focus": "dead_code|complexity|duplication|naming|all",
-  "constraints": { "preserve_api": "boolean", "run_tests": "boolean", "max_changes": "number" },
-}
-```
-
-### gem-browser-tester
-
-```jsonc
-{
-  "task_id": "string",
-  "plan_id": "string",
-  "plan_path": "string",
-  "validation_matrix": [...],
-  "flows": [...],
-  "fixtures": {...},
-  "visual_regression": {...},
-  "contracts": [...]
-}
-```
-
-### gem-mobile-tester
-
-```jsonc
-{
-  "task_id": "string",
-  "plan_id": "string",
-  "plan_path": "string",
-  "task_definition": {
-    "platforms": ["ios", "android"] | ["ios"] | ["android"],
-    "test_framework": "detox | maestro | appium",
-    "test_suite": { "flows": [...], "scenarios": [...], "gestures": [...], "app_lifecycle": [...], "push_notifications": [...] },
-    "device_farm": { "provider": "browserstack | saucelabs", "credentials": {...} },
-    "performance_baseline": {...},
-    "fixtures": {...},
-    "cleanup": "boolean"
+    // Agent-specific fields live here.
+    // Examples: mode, scope, target, context, constraints, environment, etc.
+    // Agents read full context from docs/plan/{plan_id}/context_envelope.json
   }
 }
 ```
 
-### gem-devops
-
-```jsonc
-{
-  "task_id": "string",
-  "plan_id": "string",
-  "plan_path": "string",
-  "task_definition": {
-    "environment": "development|staging|production",
-    "requires_approval": "boolean",
-    "devops_security_sensitive": "boolean",
-  },
-}
-```
-
-### gem-documentation-writer
-
-```jsonc
-{
-  "task_id": "string",
-  "plan_id": "string",
-  "plan_path": "string",
-  "task_definition": {
-    "learnings": {
-      "facts": [{ "statement": "string", "category": "string" }],
-      "patterns": [{ "name": "string", "description": "string", "confidence": 0.0-1.0 }],
-      "gotchas": ["string"],
-      "failure_modes": [{ "scenario": "string", "symptoms": ["string"], "mitigation": "string" }],
-      "decisions": [{ "decision": "string", "rationale": ["string"], "evidence": ["string"] }],
-      "conventions": ["string"],
-    },
-    // For update_context_envelope action:
-    "plan_metrics": { "current_wave": "number", "wave_1_task_count": "number", "total_dependencies": "number", "risk_score": "low | medium | high" },
-    "pre_mortem": { "overall_risk_level": "low | medium | high", "assumptions": ["string"], "critical_failure_modes": [...] },
-    "open_questions": [...],
-    "gaps": [...],
-    "tldr": "string",
-    "complexity": "simple | medium | complex",
-    "planning_history": [...],
-    "research_findings": { "files_analyzed": [...], "related_architecture": {...}, "related_technology_stack": {...}, "research_metadata": {...} },
-    "memory_seed": { "seeded_facts": [...], "seeded_patterns": [...], "seeded_gotchas": [...], "seeded_failure_modes": [...], "seeded_decisions": [...], "seeded_conventions": [...] },
-    "implementation_spec": { "code_structure": "string", "affected_areas": [...], "component_details": [...], "contracts": [...] },
-    "task_registry": {
-      "tasks": [{ "id": "string", "title": "string", "agent": "string", "wave": "number", "priority": "string", "status": "string", "estimated_effort": "string", "flags": { "flaky": "boolean", "retries_used": "number" } }],
-      "waves": [{ "wave": "number", "agents": ["string"], "task_count": "number", "completed": "number", "failed": "number", "blocked": "number" }]
-    }
-  },
-  "task_type": "documentation | update | prd | agents_md | update_context_envelope",
-  "audience": "developers | end_users | stakeholders",
-  "coverage_matrix": ["string"],
-  "action": "create_prd | update_prd | update_agents_md | update_context_envelope",
-  "architectural_decisions": [{ "decision": "string", "rationale": "string" }],
-  "findings": [{ "type": "string", "content": "string" }],
-  "overview": "string",
-  "tasks_completed": ["string"],
-  "outcomes": "string",
-  "next_steps": ["string"],
-  "acceptance_criteria": ["string"],
-}
-```
-
-### gem-skill-creator
-
-```jsonc
-{
-  "task_id": "string",
-  "plan_id": "string",
-  "plan_path": "string",
-  "patterns": [
-    {
-      "name": "string",
-      "when_to_apply": "string",
-      "code_example": "string",
-      "anti_pattern": "string",
-      "context": "string",
-      "confidence": "number",
-    },
-  ],
-  "source_task_id": "string",
-}
-```
-
-### gem-designer
-
-```jsonc
-{
-  "task_id": "string",
-  "plan_id": "string (optional)",
-  "plan_path": "string (optional)",
-  "mode": "create|validate",
-  "scope": "component|page|layout|theme|design_system",
-  "target": "string (file paths or component names)",
-  "context": { "framework": "string", "library": "string", "existing_design_system": "string", "requirements": "string" },
-  "constraints": { "responsive": "boolean", "accessible": "boolean", "dark_mode": "boolean" },
-}
-```
-
-### gem-designer-mobile
-
-```jsonc
-{
-  "task_id": "string",
-  "plan_id": "string (optional)",
-  "plan_path": "string (optional)",
-  "mode": "create|validate",
-  "scope": "component|screen|navigation|theme|design_system",
-  "target": "string (file paths or component names)",
-  "context": { "framework": "string", "library": "string", "existing_design_system": "string", "requirements": "string" },
-  "constraints": { "platform": "ios|android|cross-platform", "responsive": "boolean", "accessible": "boolean", "dark_mode": "boolean" },
-}
-```
-
+**Examples of task_definition fields by agent:**
+- `gem-implementer`: `tech_stack`, `test_coverage`, `debugger_diagnosis`, `implementation_handoff`
+- `gem-implementer-mobile`: `platforms`, `debugger_diagnosis`, `implementation_handoff`
+- `gem-reviewer`: `review_scope`, `review_depth`, `review_security_sensitive`
+- `gem-debugger`: `error_context`, `debugger_diagnosis`, `implementation_handoff`
+- `gem-critic`: `target`, `context`
+- `gem-code-simplifier`: `scope`, `targets`, `focus`, `constraints`
+- `gem-browser-tester`: `validation_matrix`, `flows`, `fixtures`, `visual_regression`, `contracts`
+- `gem-mobile-tester`: `platforms`, `test_framework`, `test_suite`, `device_farm`
+- `gem-devops`: `environment`, `requires_approval`, `devops_security_sensitive`
+- `gem-documentation-writer`: `task_type`, `audience`, `coverage_matrix`, `action`, `learnings`, `findings`
+- `gem-designer`: `mode`, `scope`, `target`, `context`, `constraints`
+- `gem-designer-mobile`: `mode`, `scope`, `target`, `context`, `constraints`
+- `gem-skill-creator`: `patterns`, `source_task_id`
 </agent_input_reference>
 
 <output_format>
