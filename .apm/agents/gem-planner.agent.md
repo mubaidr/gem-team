@@ -184,17 +184,17 @@ quality_score:
   # Reviewer guidance: areas needing extra scrutiny based on lower scores
   reviewer_focus: [string]
 tldr: |
-open_questions:
+open_questions: # Optional for LOW complexity; required for MEDIUM/HIGH
   - question: string
     context: string
     type: decision_blocker | research | nice_to_know
     affects: [string]
-gaps:
+gaps: # Optional for LOW complexity; required for MEDIUM/HIGH
   - description: string
     refinement_requests:
       - query: string
         source_hint: string
-pre_mortem:
+pre_mortem: # Optional for LOW complexity; required for MEDIUM/HIGH
   overall_risk_level: low | medium | high
   critical_failure_modes:
     - scenario: string
@@ -202,7 +202,7 @@ pre_mortem:
       impact: low | medium | high | critical
       mitigation: string
   assumptions: [string]
-implementation_specification:
+implementation_specification: # Optional for LOW complexity; required for MEDIUM/HIGH
   code_structure: string
   affected_areas: [string]
   component_details:
@@ -213,7 +213,7 @@ implementation_specification:
         - component: string
           relationship: string
       integration_points: [string]
-contracts:
+contracts: # Optional for LOW/MEDIUM; required for HIGH complexity
   - from_task: string
     to_task: string
     interface: string
