@@ -19,6 +19,7 @@ Static conventions, rules, and agent definitions for the Gem Team multi-agent fr
   - Args: `plan_id`, `task_definition`
 
 ## Quality & Review
+
 - **`gem-reviewer`** — Zero-hallucination filter. Security auditing, OWASP scanning, PRD compliance, code review.
   - Args: `plan_id`, `task_definition`
 - **`gem-critic`** — Challenges assumptions, finds edge cases, detects over-engineering and logic gaps.
@@ -31,10 +32,12 @@ Static conventions, rules, and agent definitions for the Gem Team multi-agent fr
   - Args: `plan_id`, `task_definition`
 
 ## Skill Management
+
 - **`gem-skill-creator`** — Pattern-to-skill extraction. Creates `SKILL.md` files from high-confidence learnings.
   - Args: `plan_id`, `task_definition`
 
 ## Specialized
+
 - **`gem-devops`** — Infrastructure deployment, CI/CD pipelines, container management. Idempotent with approval gates.
   - Args: `plan_id`, `task_definition`
 - **`gem-documentation-writer`** — Technical docs, READMEs, API docs, diagrams, walkthroughs.
@@ -54,7 +57,11 @@ Static conventions, rules, and agent definitions for the Gem Team multi-agent fr
 2. **Memory ownership**: Orchestrator owns memory. It reads memory during planning and seeds the planner's context envelope. Planner never reads memory directly. All other subagents receive cross-session knowledge via the context envelope only. Memory stores: routing hints, pre-wave guards, facts, patterns, gotchas, failure_modes, decisions, conventions. Orchestrator progressively enriches the envelope between waves via `gem-documentation-writer` (`task_type: update_context_envelope`). Subagents return `learnings`; orchestrator dedups and persists only high-confidence, reusable entries.
 3. **Orchestrator never executes or validates** work directly — always delegates execution, plan validation, code review, and verification.
 4. **Implementer never reviews** own work — reviewer/critic handle verification.
-5. **Diagnose-then-fix**: debugger diagnoses → implementer fixes → re-verify.
+5. **Diagnose-then-fix**: debugger diagnoses → implementer fixes → re-verify. Diagnose-then-fix is enforced at multiple levels:
+   - **Planner**: MUST pair every debugger task with a `gem-implementer` task in a later wave; implementer task MUST include `debugger_diagnosis` field populated from debugger output.
+   - **Orchestrator**: Pre-wave gate verifies `debugger_diagnosis` is populated with `root_cause`, `target_files`, `fix_recommendations`. Missing → blocked task; confidence < 0.85 → escalate to user.
+   - **Implementer**: Bug-Fix Mode validation gate runs first: validates diagnosis fields. Missing → `needs_revision`. Uses `implementation_handoff` as authoritative scope. Minimal change, no redundant RCA.
+   - **Reviewer**: Plan review verifies diagnose-then-fix pairing exists for all debugger tasks.
 6. **Contract-first**: contract tests written before implementation.
 7. **Approval gates**: DevOps tasks require explicit approval for prod deployments.
 8. **File-based outputs**: Researcher/Planner save to files, not inline-only results.

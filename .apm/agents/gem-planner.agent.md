@@ -83,6 +83,7 @@ Consult Knowledge Sources when relevant.
   - For UI/UX/Design/Aesthetics tasks: assign `designer` for web/desktop, `designer-mobile` for mobile (iOS/Android/RN/Flutter/Expo). If cross-platform, split into separate web + mobile tasks.
   - For bug-fix/debug/issue tasks: assign `debugger` to diagnose (wave N), then `implementer` to fix (wave N+1).
     - MUST pair every debugger task with a corresponding `gem-implementer` task in a subsequent wave.
+    - The implementer task MUST include `debugger_diagnosis` field (populated from debugger's output) in its task_definition.
   - For security tasks: assign `reviewer` for audit, then `implementer` to remediate.
   - For refactoring/simplification tasks: assign `code-simplifier`.
   - For documentation: assign `doc-writer`.
@@ -259,7 +260,7 @@ tasks:
     # gem-implementer:
     tech_stack: [string]
     test_coverage: string | null
-    debugger_diagnosis: object | null # from bug-fix fast path
+    debugger_diagnosis: object | null # REQUIRED when paired with a debugger task; null otherwise
     implementation_handoff:
       do_not_reinvestigate: [string]
       required_test_first: string
