@@ -66,6 +66,7 @@ Static conventions, rules, and agent definitions for the Gem Team multi-agent fr
 7. **Approval gates**: DevOps tasks require explicit approval for prod deployments.
 8. **File-based outputs**: Researcher/Planner save to files, not inline-only results.
 9. **Context Envelope Handoff**: Orchestrator must instruct subagents to read `docs/plan/{plan_id}/context_envelope.json` during Init. Envelope is a progressive cache — enriched after each wave. Orchestrator maintains in-memory cache during session; reads from disk once at start, writes after each wave update to avoid stale reads/races.
+10. **Standard Output Contract**: All task-level agents (implementer, reviewer, debugger, etc.) return JSON with required fields: `plan_id`, `task_id`, `status`, `confidence`, `failure_type`. Planner returns `plan_id` only (runs before tasks exist). Researcher can return `task_id: null` when running standalone. Orchestrator returns markdown (human-readable).
 
 ---
 
