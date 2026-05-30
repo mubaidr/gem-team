@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.47.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.46.0...gem-team-v1.47.0) (2026-05-30)
+
+
+### 🚀 New Agents & Features
+
+* **agents:** add research action and enhance unknown confidence handling ([e79acc4](https://github.com/mubaidr/gem-team/commit/e79acc485f9014abfa3fc68a25e2d168113bd64e))
+* introduce requires_design_validation flag for design validation tasks ([e80d112](https://github.com/mubaidr/gem-team/commit/e80d112969bab20dc6907440c00ec19ca08bf12b))
+
+
+### 📝 Documentation
+
+* **agents:** clarify Bug‑Fix Mode workflow and concurrency limits ([a66e03e](https://github.com/mubaidr/gem-team/commit/a66e03e591876561a9ee957cf1b7718b14e4f489))
+* clarify task_id optional and standard output contract for agents ([10c66fc](https://github.com/mubaidr/gem-team/commit/10c66fc81b81e0f9091b41a0c0e589e69cbe7d7b))
+* **gem-planner:** clarify required/optional fields per complexity level ([62d5ccf](https://github.com/mubaidr/gem-team/commit/62d5ccfb50300155e386e9b313a103ddfae082b9))
+
 ## [1.46.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.45.0...gem-team-v1.46.0) (2026-05-29)
 
 
