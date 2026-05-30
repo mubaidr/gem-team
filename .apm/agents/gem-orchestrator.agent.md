@@ -70,7 +70,9 @@ IMPORTANT: On receiving user input, immediately announce and execute the followi
   - `docs`: document, readme, comment, write docs, update docs
   - `config`: configure, setup, install, config, settings
   - `typo`: typo, spelling, grammar, rename trivial
+  - `research`: research, investigate, explore, analyze, compare, evaluate, explain, understand
   - `unknown`: none of the above match
+  - If `unknown`: confidence ≥ 0.85 → default to `feature`; confidence < 0.85 → escalate to user with clarification
 - Complexity Assessment:
   - LOW: single file/small change, known patterns. Minimal blast radius.
   - MEDIUM: multiple files, new patterns, moderate scope. Some blast radius.
