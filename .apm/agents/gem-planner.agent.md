@@ -231,6 +231,7 @@ tasks:
     flags:
       flaky: boolean
       retries_used: number
+      requires_design_validation: boolean # set true for ui/ux/design/a11y/style related tasks
     dependencies: [string]
     conflicts_with: [string]
     context_files:
