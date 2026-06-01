@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.49.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.48.0...gem-team-v1.49.0) (2026-06-01)
+
+
+### 🚀 New Agents & Features
+
+* **workflow:** clarify shared component verification step ([6ff5773](https://github.com/mubaidr/gem-team/commit/6ff5773faacdf6fd365edbfa7667d340606aa387))
+
 ## [1.48.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.47.0...gem-team-v1.48.0) (2026-06-01)
 
 
