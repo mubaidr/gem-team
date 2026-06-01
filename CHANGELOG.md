@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.48.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.47.0...gem-team-v1.48.0) (2026-06-01)
+
+
+### 🚀 New Agents & Features
+
+* **workflow:** detail context envelope initialization steps ([667ab90](https://github.com/mubaidr/gem-team/commit/667ab901332274685cbae4c1bad5d7bfd14ecf8a))
+
 ## [1.47.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.46.0...gem-team-v1.47.0) (2026-05-30)
 
 
