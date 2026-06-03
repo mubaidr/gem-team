@@ -142,8 +142,8 @@ Delegate ALL waves/tasks without pausing for approval between them.
     - Cross-reference: when a `gotcha` matches a `failure_mode` symptom, link them.
     - Promote: `gotchas` recurring ≥ 3× across plans → `patterns`. `failure_modes` recurring ≥ 2× → elevate severity.
     - High confidence patterns (confidence ≥ 0.85) with significant impact → candidate for persistence.
-  - Context Envelope (greedy — always updated):
-    - Always delegate to `gem-documentation-writer` with `task_type: update_context_envelope` to refresh `docs/plan/{plan_id}/context_envelope.json` with merged learnings from the wave.
+  - Context Envelope:
+    - If required; delegate to `gem-documentation-writer` with `task_type: update_context_envelope` to refresh `docs/plan/{plan_id}/context_envelope.json` with merged learnings from the wave.
   - Memory (picky — confidence gate):
     - Only persist items with confidence ≥ 0.80. Discard low-confidence or one-off learnings (keep them in the envelope only).
     - Persist deduped `facts`, `patterns`, `gotchas`, `failure_modes`, `decisions`, `conventions` or other items to memory tool, which can help during future planning/ execution.

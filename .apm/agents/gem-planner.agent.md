@@ -125,7 +125,7 @@ Consult Knowledge Sources when relevant.
     - Do NOT save and output a broken plan
   - Save Plan `docs/plan/{plan_id}/plan.yaml`
 - Create context envelope `context_envelope.json` as per `context_envelope_format_guide`
-  - Use provided context as seed and augment with research findings.
+  - Use provided context as seed and augment with research findings from plan.
   - If `memory_seed` provided, merge its high confidence items/ contents into the envelope
   - Keep every field concise, bulleted, and dense but comprehensive and complete. Avoid fluff, filler, and verbosity. Evidence paths over explanation.
   - Create for future agent reuse: include durable facts, decisions, constraints, and evidence paths needed to avoid re-discovery.
@@ -265,8 +265,8 @@ tasks:
         timestamp: string
     estimated_effort: small | medium | large
     estimated_files: number # max 3
-    estimated_lines: number # max 300
-    focus_area: string | null
+    estimated_lines: number | null # max 300; optional — set only for HIGH complexity tasks
+    focus_area: string | null # optional — set only when task spans multiple focus areas
     verification: [string]
     acceptance_criteria: [string]
     success_criteria: [string] # machine-checkable predicates (e.g., "test_results.failed === 0", "coverage >= 80%")
@@ -372,80 +372,7 @@ tasks:
         },
       ],
     },
-    "quality_metrics": {
-      "test_coverage_overall": "number (0.0-1.0)",
-      "test_coverage_by_component": [{ "component": "string", "coverage": "number (0.0-1.0)" }],
-      "known_test_gaps": ["string"],
-      "cyclomatic_complexity_avg": "number",
-      "code_duplication_percent": "number",
-    },
-    "operations": {
-      "environments": [
-        {
-          "name": "string",
-          "url": "string",
-          "deployment_frequency": "string",
-          "rollback_procedure": "string",
-          "health_check_endpoint": "string",
-        },
-      ],
-      "ci_cd": {
-        "pipeline_path": "string",
-        "approval_required": ["string"],
-        "automated_tests": ["string"],
-      },
-      "monitoring": {
-        "tools": ["string"],
-        "key_metrics": ["string"],
-        "alert_channels": ["string"],
-      },
-    },
-    "data_model": {
-      "core_entities": [
-        {
-          "name": "string",
-          "fields": [{ "name": "string", "type": "string", "constraints": ["string"] }],
-          "relationships": ["string"],
-        },
-      ],
-      "api_contracts": [
-        {
-          "endpoint": "string",
-          "method": "string",
-          "auth": "string",
-          "request_schema": "string",
-          "response_schema": "string",
-          "error_codes": ["number"],
-        },
-      ],
-    },
-    "performance": {
-      "slas": {
-        "api_response_p95_ms": "number",
-        "api_throughput_rps": "number",
-      },
-      "bottlenecks_known": ["string"],
-      "resource_usage": {
-        "memory_per_request_mb": "number",
-        "cpu_per_request_cores": "number",
-      },
-      "scaling": "horizontal | vertical | both",
-      "caching_strategy": "string",
-    },
-    "domain": {
-      "primary_users": [{ "persona": "string", "goals": ["string"] }],
-      "business_concepts": [{ "term": "string", "definition": "string", "owner": "string" }],
-      "compliance": ["string"],
-      "priority_weights": { "string": "string" },
-    },
-    "system_assertions": [
-      {
-        "description": "string",
-        "predicate": "string (machine-checkable expression)",
-        "expected_value": "any",
-        "last_checked": "ISO-8601 string (optional)",
-      },
-    ],
+
     "research_digest": {
       "relevant_files": [
         {
@@ -507,7 +434,7 @@ tasks:
       "safe_to_assume": ["string"],
       "verify_before_use": ["string"],
     },
-    // NEW: Plan-level execution metadata from plan.yaml
+    // Source: plan.yaml — authoritative copy lives in docs/plan/{plan_id}/plan.yaml
     "plan_metadata": {
       "tldr": "string — one-line plan summary",
       "complexity": "simple | medium | complex",
@@ -669,7 +596,7 @@ tasks:
         "research_blockers": "number",
       },
     },
-    // NEW: Execution state for future agents
+    // Source: plan.yaml — authoritative copy lives in docs/plan/{plan_id}/plan.yaml
     "task_registry": {
       "waves": [
         {
@@ -701,40 +628,8 @@ tasks:
         },
       ],
     },
-    // NEW: Trace what was seeded vs discovered
-    "memory_seed_trace": {
-      "seeded_facts": [
-        {
-          "statement": "string",
-          "category": "string",
-          "confidence": "number (0.0-1.0)",
-        },
-      ],
-      "seeded_patterns": [
-        {
-          "name": "string",
-          "description": "string",
-          "confidence": "number (0.0-1.0)",
-        },
-      ],
-      "seeded_gotchas": ["string"],
-      "seeded_failure_modes": [
-        {
-          "scenario": "string",
-          "symptoms": ["string"],
-          "mitigation": "string",
-        },
-      ],
-      "seeded_decisions": [
-        {
-          "decision": "string",
-          "rationale": ["string"],
-        },
-      ],
-      "seeded_conventions": ["string"],
-      "merged_confidence": "number (0.0-1.0)",
-    },
-    // NEW: Implementation specification from plan.yaml
+
+    // Source: plan.yaml — authoritative copy lives in docs/plan/{plan_id}/plan.yaml
     "implementation_spec": {
       "code_structure": "string",
       "affected_areas": ["string"],
@@ -761,7 +656,7 @@ tasks:
         },
       ],
     },
-    // Ground-truth validation results from Discovery phase
+    // Source: plan.yaml — authoritative copy lives in docs/plan/{plan_id}/plan.yaml
     "codebase_validation": {
       "verified_at": "ISO-8601 string",
       "target_files_exist": {
