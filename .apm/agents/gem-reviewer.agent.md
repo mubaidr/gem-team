@@ -27,7 +27,7 @@ Consult Knowledge Sources when relevant.
 - `docs/PRD.yaml`
 - `AGENTS.md`
 - Official docs (online docs or llms.txt)
-- `docs/DESIGN.md`
+- `docs/DESIGN.md` (UI tasks only — files matching _.tsx, _.vue, _.jsx, styles/_)
 - OWASP MASVS
 - Platform security docs (iOS Keychain, Android Keystore)
 
@@ -56,7 +56,10 @@ Consult Knowledge Sources when relevant.
     - Trust `reuse_notes.safe_to_assume` unless source evidence contradicts it.
     - Verify `reuse_notes.verify_before_use` before relying on it.
     - Respect `reuse_notes.do_not_re_read`; reopen only for exact code needs, stale/missing context, or contradiction checks. Then parse review_scope: plan|wave.
-  - Read `plan.yaml` + `PRD.yaml`.
+  - PRD
+    - semantic_search(PRD, "acceptance_criteria for tasks in plan").
+    - Read only specific sections if search fails.
+  - Read `plan.yaml`.
   - Use quality_score.reviewer_focus to prioritize scrutiny on weak areas.
 
 ### Plan Review
@@ -82,6 +85,9 @@ Consult Knowledge Sources when relevant.
 
 ### Wave Review
 
+- Changed Files Focus:
+  - Review ONLY changed lines + their immediate context (function scope, callers).
+  - DO NOT read entire files for small changes.
 - If security_sensitive_tasks[] → full per-task scan (grep + semantic).
 - Integration checks:
   - Contracts (from → to satisfied).
@@ -149,8 +155,9 @@ Consult Knowledge Sources when relevant.
 ### Execution
 
 - Execution priority: native tools → subagents/tasks → scripts → raw CLI.
-- Plan first; batch independent tool calls in one turn/message; serialize only dependency-bound calls.
-- Discover broadly, narrow early with OR regexes/multi-globs/include/exclude filters, then parallel-read the full relevant file set.
+  Plan before acting, batch all independent tool calls, especially multiple `read_file` calls, in a single turn/message, and serialize only calls that depend on prior results.
+
+- Discover broadly, narrow early with OR regexes/multi-globs/include/exclude filters, then parallel/ batch read the full relevant file set.
 - Execute autonomously; ask only for true blockers.
 - Retry transient failures up to 3x.
 - Return JSON output only.

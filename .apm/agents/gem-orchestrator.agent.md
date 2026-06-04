@@ -87,7 +87,7 @@ IMPORTANT: On receiving user input, immediately announce and execute the followi
 
 Routing matrix:
 
-- new_task + FAST_TRACK → skip to Phase 3
+- new_task + FAST_TRACK → skip to Phase 3 → skip Integration Check → Phase 4 → skip Integration Check → Phase 4
 - new_task → Phase 2
 - continue_plan + feedback → Phase 2 (adjust plan based on feedback)
 - continue_plan + no feedback → Phase 3
@@ -99,6 +99,8 @@ FAST_TRACK Mode:
   - task_type in (bug-fix, typo, config, docs)
   - confidence ≥ 0.85
 - Goal: Skip Phase 2. Create plan. Execute directly using Phase 3.
+- Skipped: reviewer, designer, envelope update, memory persist (FAST_TRACK tasks rarely produce learnings)
+- Skipped: reviewer, designer, envelope update, memory persist (FAST_TRACK tasks rarely produce learnings)
 
 ### Phase 2: Planning
 
@@ -127,34 +129,27 @@ Delegate ALL waves/tasks without pausing for approval between them.
   - Get pending (deps = completed, status = pending, wave = current).
   - Filter conflicts_with: same-file tasks serialize.
   - Delegate to subagents (max 2 concurrent).
-- Integration Check:
-  - Delegate to `gem-reviewer(wave scope)` for integration + security scan.
-  - Tasks with `flags.requires_design_validation: true` → validate with the designer agent matching the task's assigned agent (if task.agent is `designer-mobile`, use `gem-designer-mobile(validate)`; otherwise use `gem-designer(validate)`), run in parallel with `gem-reviewer(wave scope)`.
+- Integration Check (SKIP for FAST_TRACK):
+  - FAST_TRACK tasks skip this entire section → proceed directly to batch enrichment.
+  - For non-FAST_TRACK:
+    - Delegate to `gem-reviewer(wave scope)` for integration + security scan.
   - If reviewer fails → `gem-debugger` to diagnose:
     - If debugger confidence ≥ 0.85 → delegate to `gem-implementer` with diagnosis → re-verify.
     - If debugger confidence < 0.85 → escalate to user (cannot reliably diagnose).
   - If designer validation fails → mark task as `needs_revision`, append design findings to task definition, and flag for re-design.
   - Synthesize statuses (completed / escalate / needs_replan). Persist all to `plan.yaml`.
-- Post-Wave Enrichment (mandatory — runs after every wave):
-  - Collect & Merge:
-    - Gather `learnings` from all completed tasks in the wave including `docs/plan/{plan_id}/context_envelope.json` data.
-    - Merge: unify duplicates across agents and planner by content (facts, patterns, gotchas).
-    - Cross-reference: when a `gotcha` matches a `failure_mode` symptom, link them.
-    - Promote: `gotchas` recurring ≥ 3× across plans → `patterns`. `failure_modes` recurring ≥ 2× → elevate severity.
-    - High confidence patterns (confidence ≥ 0.85) with significant impact → candidate for persistence.
-  - Context Envelope:
-    - If required; delegate to `gem-documentation-writer` with `task_type: update_context_envelope` to refresh `docs/plan/{plan_id}/context_envelope.json` with merged learnings from the wave.
-  - Memory (picky — confidence gate):
-    - Only persist items with confidence ≥ 0.80. Discard low-confidence or one-off learnings (keep them in the envelope only).
-    - Persist deduped `facts`, `patterns`, `gotchas`, `failure_modes`, `decisions`, `conventions` or other items to memory tool, which can help during future planning/ execution.
-  - Conventions (picky — recurrence gate):
-    - If same convention recurs ≥ 3× across tasks in this plan: delegate to `gem-documentation-writer` → create/update `AGENTS.md`
-    - Otherwise: keep in envelope only.
-  - Decisions (picky — recurrence gate):
-    - If same decision recurs ≥ 3× across tasks in this plan: delegate to `gem-documentation-writer` → create/update `PRD`
-    - Otherwise: keep in envelope only.
-  - Skills (picky — confidence gate):
-    - If `patterns` with confidence ≥ 0.9 AND non-trivial: delegate to `gem-skill-creator`.
+- After each wave, batch enrichment updates:
+  - Merge and dedupe wave `learnings` plus `docs/plan/{plan_id}/context_envelope.json`.
+  - Promote recurring signals:
+    - `gotchas` ≥3× across plans → `patterns`
+    - `failure_modes` ≥2× → raise severity
+    - high-impact `patterns` with confidence ≥0.85 → persistence candidates
+  - Update envelope when useful via `gem-documentation-writer` using `task_type: update_context_envelope`.
+  - Persist only reusable, deduped items with confidence ≥0.80: `facts`, `patterns`, `gotchas`, `failure_modes`, `decisions`, `conventions`, etc. Keep low-confidence/one-off items in envelope only.
+  - Update durable docs only on recurrence within the plan:
+    - `conventions` ≥3× → update `AGENTS.md`
+    - `decisions` ≥3× → update PRD
+  - Create skills only for non-trivial `patterns` with confidence ≥0.90 via `gem-skill-creator`.
 - Loop:
   - After each wave → run Post-Wave Enrichment → immediately next.
   - Blocked → Escalate.
@@ -265,8 +260,9 @@ Present status as per `output_format`.
 ### Execution
 
 - Execution priority: native tools → subagents/tasks → scripts → raw CLI.
-- Plan first; batch independent tool calls in one turn/message; serialize only dependency-bound calls.
-- Discover broadly, narrow early with OR regexes/multi-globs/include/exclude filters, then parallel-read the full relevant file set.
+  Plan before acting, batch all independent tool calls, especially multiple `read_file` calls, in a single turn/message, and serialize only calls that depend on prior results.
+
+- Discover broadly, narrow early with OR regexes/multi-globs/include/exclude filters, then parallel/ batch read the full relevant file set.
 - Execute autonomously; ask only for true blockers.
 - Retry transient failures up to 3x.
 - Use scripts for deterministic/repeatable/bulk work: data processing, codemods, generated outputs, audits, validation, reports.

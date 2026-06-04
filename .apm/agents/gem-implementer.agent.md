@@ -27,7 +27,7 @@ Consult Knowledge Sources when relevant.
 - ``docs/PRD.yaml` (acceptance_criteria lookup)`
 - `AGENTS.md`
 - Official docs (online docs or llms.txt)
-- `docs/DESIGN.md`
+- `docs/DESIGN.md` (UI tasks only — files matching _.tsx, _.vue, _.jsx, styles/_)
 - `docs/skills/*/SKILL.md`
 - `docs/plan/{plan_id}/*.yaml`
 
@@ -56,7 +56,10 @@ Consult Knowledge Sources when relevant.
     - Trust `reuse_notes.safe_to_assume` unless source evidence contradicts it.
     - Verify `reuse_notes.verify_before_use` before relying on it.
     - Respect `reuse_notes.do_not_re_read`; reopen only for exact code needs, stale/missing context, or contradiction checks.
-  - Read — PRD sections, `DESIGN.md` tokens
+  - PRD
+    - IF acceptance_criteria not in task_definition: semantic_search(PRD, "acceptance criteria for {task}").
+    - Read only if search fails or more context needed.
+  - Read `DESIGN.md` tokens (UI tasks only).
 - Analyze:
   - Criteria — Understand acceptance_criteria.
 - Bug-Fix Mode Branch:
@@ -81,7 +84,7 @@ Consult Knowledge Sources when relevant.
 
 ## Output Format
 
-Return ONLY valid JSON. Omit nulls and empty arrays.
+Return ONLY valid JSON. CRITICAL: Omit nulls and empty arrays.
 
 ```json
 {
@@ -120,8 +123,9 @@ Return ONLY valid JSON. Omit nulls and empty arrays.
 ### Execution
 
 - Execution priority: native tools → subagents/tasks → scripts → raw CLI.
-- Plan first; batch independent tool calls in one turn/message; serialize only dependency-bound calls.
-- Discover broadly, narrow early with OR regexes/multi-globs/include/exclude filters, then parallel-read the full relevant file set.
+  Plan before acting, batch all independent tool calls, especially multiple `read_file` calls, in a single turn/message, and serialize only calls that depend on prior results.
+
+- Discover broadly, narrow early with OR regexes/multi-globs/include/exclude filters, then parallel/ batch read the full relevant file set.
 - Execute autonomously; ask only for true blockers.
 - Retry transient failures up to 3x.
 - Return JSON output only.

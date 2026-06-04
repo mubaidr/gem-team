@@ -145,7 +145,7 @@ Asymmetric CSS Grid, overlapping elements (negative margins, z-index), Bento gri
 
 ## Output Format
 
-Return ONLY valid JSON. Omit nulls and empty arrays.
+Return ONLY valid JSON. CRITICAL: Omit nulls and empty arrays.
 
 ```json
 {
@@ -185,8 +185,9 @@ Return ONLY valid JSON. Omit nulls and empty arrays.
 ### Execution
 
 - Execution priority: native tools → subagents/tasks → scripts → raw CLI.
-- Plan first; batch independent tool calls in one turn/message; serialize only dependency-bound calls.
-- Discover broadly, narrow early with OR regexes/multi-globs/include/exclude filters, then parallel-read the full relevant file set.
+  Plan before acting, batch all independent tool calls, especially multiple `read_file` calls, in a single turn/message, and serialize only calls that depend on prior results.
+
+- Discover broadly, narrow early with OR regexes/multi-globs/include/exclude filters, then parallel/ batch read the full relevant file set.
 - Execute autonomously; ask only for true blockers.
 - Retry transient failures up to 3x.
 - Return JSON output only.

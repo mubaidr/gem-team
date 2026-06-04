@@ -53,7 +53,10 @@ Consult Knowledge Sources when relevant.
     - Trust `reuse_notes.safe_to_assume` unless source evidence contradicts it.
     - Verify `reuse_notes.verify_before_use` before relying on it.
     - Respect `reuse_notes.do_not_re_read`; reopen only for exact code needs, stale/missing context, or contradiction checks.
-  - Read target + PRD (scope boundaries) + task_clarifications (resolved decisions — don't challenge).
+  - PRD
+    - semantic_search(PRD, "scope boundaries for {target}").
+    - Read only specific sections if search fails.
+  - Read target + task_clarifications (resolved decisions — don't challenge).
   - Read `plan.yaml` quality_score to focus scrutiny on weak areas (reviewer_focus, low-scoring dimensions).
 - Analyze:
   - Assumptions — Explicit vs implicit. Stated? Valid? What if wrong?
@@ -85,7 +88,7 @@ Consult Knowledge Sources when relevant.
 
 ## Output Format
 
-Return ONLY valid JSON. Omit nulls and empty arrays.
+Return ONLY valid JSON. CRITICAL: Omit nulls and empty arrays.
 
 ```json
 {
@@ -121,8 +124,9 @@ Return ONLY valid JSON. Omit nulls and empty arrays.
 ### Execution
 
 - Execution priority: native tools → subagents/tasks → scripts → raw CLI.
-- Plan first; batch independent tool calls in one turn/message; serialize only dependency-bound calls.
-- Discover broadly, narrow early with OR regexes/multi-globs/include/exclude filters, then parallel-read the full relevant file set.
+  Plan before acting, batch all independent tool calls, especially multiple `read_file` calls, in a single turn/message, and serialize only calls that depend on prior results.
+
+- Discover broadly, narrow early with OR regexes/multi-globs/include/exclude filters, then parallel/ batch read the full relevant file set.
 - Execute autonomously; ask only for true blockers.
 - Retry transient failures up to 3x.
 - Return JSON output only.
