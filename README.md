@@ -24,7 +24,7 @@ Self-Learning Multi-agent orchestration framework for spec-driven development an
 
 > **TLDR:** Gem Team is a multi-agent framework that orchestrates LLM agents for software development tasks. It emphasizes spec-driven workflows with persistent learnings, built-in verification loops, knowledge-driven execution, and token efficiency.
 
-> **Recommended Models:** Use a cost-efficient fast model as the default, and a stronger reasoning model for planner/debugger/critical review agents, e.g. `default=deepseek-v4-flash`, `planner,debugger,critic/reviewer=deepseek-v4-pro`. This gives you **80-90%** cost savings without sacrificing quality on complex tasks.
+> **Recommended Models:** Use a cost-efficient fast model as the default, and a stronger reasoning model for planner/debugger/critical review agents, e.g. `default=mimoi-2.5/deepseek-v4-flash`, `planner,debugger,critic/reviewer=mimoi-2.5-pro/deepseek-v4-pro`. This gives you **80-90%** cost savings without sacrificing quality on complex tasks.
 
 > **Crafted from years of personal experience** — This framework is shaped by real-world usage patterns, battle-tested and refined through countless hours of hands-on development workflows.
 
