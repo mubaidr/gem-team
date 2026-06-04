@@ -38,30 +38,14 @@ Consult Knowledge Sources when relevant.
 ## Workflow
 
 - Init
-  - Read `docs/plan/{plan_id}/context_envelope.json` at start; read it in parallel with required agent inputs. Use `research_digest.relevant_files` as the file shortlist. Context envelope init:
-    - Read `docs/plan/{plan_id}/context_envelope.json` at start, in parallel with required inputs.
-    - Treat it as active execution context/cache, not advisory background.
-    - Apply before raw source reads:
-      - `conventions`
-      - `constraints`
-      - `prior_decisions`
-      - `implementation_spec`
-      - `plan_metadata`
-      - `task_registry`
-      - `codebase_validation`
-      - `research_findings`
-      - `research_digest`
-      - `reuse_notes`
+  - Treat the `context_envelope_snapshot` as active execution context and apply it before raw source reads.
     - Use `research_digest.relevant_files` as the initial file shortlist.
     - Trust `reuse_notes.safe_to_assume` unless source evidence contradicts it.
     - Verify `reuse_notes.verify_before_use` before relying on it.
-    - Respect `reuse_notes.do_not_re_read`; reopen only for exact code needs, stale/missing context, or contradiction checks. Then detect project: RN/Expo/Flutter.
-  - PRD
-    - IF acceptance_criteria not in task_definition: semantic_search(PRD, "acceptance criteria for {task}").
-    - Read only if search fails or more context needed.
-  - Read `DESIGN.md` tokens (UI tasks only).
-- Analyze:
-  - Criteria — Understand acceptance_criteria.
+    - Honor `reuse_notes.do_not_re_read` by skipping listed files by default; re-read only for stale/missing context recovery or contradiction checks.
+  - Then detect project: RN/Expo/Flutter.
+  - Read tokens from `DESIGN.md` (UI tasks only).
+  - Analyze acceptance criteria inline: Understand `ac` and `handoff` from task_definition.
 - TDD Cycle (Red → Green → Refactor → Verify):
   - Red — Write/update test for new & correct expected behavior.
   - Green — Minimal code to pass.
@@ -88,25 +72,18 @@ Consult Knowledge Sources when relevant.
 
 ## Output Format
 
-Return ONLY valid JSON. CRITICAL: Omit nulls and empty arrays.
+Return ONLY valid JSON. CRITICAL: Omit nulls, empty arrays, zero values.
 
 ```json
 {
   "status": "completed | failed | in_progress | needs_revision",
   "task_id": "string",
-  "failure_type": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
-  "confidence": 0.0-1.0,
-  "execution_details": { "files_modified": "number", "lines_changed": "number", "time_elapsed": "string" },
-  "test_results": { "total": "number", "passed": "number", "failed": "number", "coverage": "string" },
-  "platform_verification": { "ios": "pass | fail | skipped", "android": "pass | fail | skipped", "metro_output": "string" },
-  "learnings": {
-    "patterns": [{ "name": "string", "description": "string", "confidence": 0.0-1.0 }],
-    "gotchas": ["string"],
-    "facts": [{ "statement": "string", "category": "string" }],
-    "failure_modes": [{ "scenario": "string", "symptoms": ["string"], "mitigation": "string" }],
-    "decisions": [{ "decision": "string", "rationale": ["string"] }],
-    "conventions": ["string"]
-  }
+  "fail": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
+  "conf": 0.0-1.0,
+  "files": { "modified": "number", "created": "number" },
+  "tests": { "passed": "number", "failed": "number" },
+  "platforms": { "ios": "pass | fail | skipped", "android": "pass | fail | skipped" },
+  "learn": ["string — max 5"]
 }
 ```
 
@@ -120,7 +97,6 @@ Return ONLY valid JSON. CRITICAL: Omit nulls and empty arrays.
 
 - Execution priority: native tools → subagents/tasks → scripts → raw CLI.
   Plan before acting, batch all independent tool calls, especially multiple `read_file` calls, in a single turn/message, and serialize only calls that depend on prior results.
-
 - Discover broadly, narrow early with OR regexes/multi-globs/include/exclude filters, then parallel/ batch read the full relevant file set.
 - Execute autonomously; ask only for true blockers.
 - Retry transient failures up to 3x.

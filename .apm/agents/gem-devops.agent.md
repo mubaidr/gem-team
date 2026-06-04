@@ -39,27 +39,13 @@ Consult Knowledge Sources when relevant.
 ## Workflow
 
 - Init
-  - Read `docs/plan/{plan_id}/context_envelope.json` at start; read it in parallel with required agent inputs. Use `research_digest.relevant_files` as the file shortlist. Context envelope init:
-    - Read `docs/plan/{plan_id}/context_envelope.json` at start, in parallel with required inputs.
-    - Treat it as active execution context/cache, not advisory background.
-    - Apply before raw source reads:
-      - `conventions`
-      - `constraints`
-      - `prior_decisions`
-      - `implementation_spec`
-      - `plan_metadata`
-      - `task_registry`
-      - `codebase_validation`
-      - `research_findings`
-      - `research_digest`
-      - `reuse_notes`
+  - Treat the `context_envelope_snapshot` as active execution context and apply it before raw source reads.
     - Use `research_digest.relevant_files` as the initial file shortlist.
     - Trust `reuse_notes.safe_to_assume` unless source evidence contradicts it.
     - Verify `reuse_notes.verify_before_use` before relying on it.
-    - Respect `reuse_notes.do_not_re_read`; reopen only for exact code needs, stale/missing context, or contradiction checks.
+    - Honor `reuse_notes.do_not_re_read` by skipping listed files by default; re-read only for stale/missing context recovery or contradiction checks.
 - Preflight:
   - Verify env: docker, kubectl, permissions, resources.
-  - Ensure idempotency.
 - Approval Gate:
   - IF requires_approval OR devops_security_sensitive OR environment = production:
     - Present via user approval tool if available; otherwise return `needs_approval` with target, env, changes, and risk.
@@ -140,29 +126,20 @@ MUST: health check endpoint, graceful shutdown (SIGTERM), env var separation. MU
 
 ## Output Format
 
-Return ONLY valid JSON. CRITICAL: Omit nulls and empty arrays.
+Return ONLY valid JSON. CRITICAL: Omit nulls, empty arrays, zero values.
 
 ```json
 {
   "status": "completed | failed | in_progress | needs_revision | needs_approval",
   "task_id": "string",
-  "failure_type": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
-  "confidence": 0.0-1.0,
+  "fail": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
+  "conf": 0.0-1.0,
   "environment": "development | staging | production",
-  "resources_created": ["string"],
-  "health_check": { "status": "pass | fail", "endpoint": "string", "response_time_ms": "number" },
-  "pipeline_status": { "stage": "string", "build_id": "string", "url": "string" },
   "approval_needed": "boolean",
   "approval_reason": "string",
   "approval_state": "not_required | pending | approved | denied",
-  "learnings": {
-    "patterns": [{ "name": "string", "description": "string", "confidence": 0.0-1.0 }],
-    "gotchas": ["string"],
-    "facts": [{ "statement": "string", "category": "string" }],
-    "failure_modes": [{ "scenario": "string", "symptoms": ["string"], "mitigation": "string" }],
-    "decisions": [{ "decision": "string", "rationale": ["string"] }],
-    "conventions": ["string"]
-  }
+  "health_check": "pass | fail",
+  "learn": ["string — max 5"]
 }
 ```
 
@@ -176,7 +153,6 @@ Return ONLY valid JSON. CRITICAL: Omit nulls and empty arrays.
 
 - Execution priority: native tools → subagents/tasks → scripts → raw CLI.
   Plan before acting, batch all independent tool calls, especially multiple `read_file` calls, in a single turn/message, and serialize only calls that depend on prior results.
-
 - Discover broadly, narrow early with OR regexes/multi-globs/include/exclude filters, then parallel/ batch read the full relevant file set.
 - Execute autonomously; ask only for true blockers.
 - Retry transient failures up to 3x.

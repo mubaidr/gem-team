@@ -57,27 +57,12 @@ Consult Knowledge Sources when relevant.
 ## Workflow
 
 - Init
-  - If `docs/plan/{plan_id}/context_envelope.json` already exists for replan or extension mode, read it at start; read it in parallel with required planning inputs. Context envelope init:
-    - Read `docs/plan/{plan_id}/context_envelope.json` at start, in parallel with required inputs.
-    - Treat it as active execution context/cache, not advisory background.
-    - Apply before raw source reads:
-      - `conventions`
-      - `constraints`
-      - `prior_decisions`
-      - `implementation_spec`
-      - `plan_metadata`
-      - `task_registry`
-      - `codebase_validation`
-      - `research_findings`
-      - `research_digest`
-      - `reuse_notes`
+  - Treat the `context_envelope_snapshot` as active execution context and apply it before raw source reads.
     - Use `research_digest.relevant_files` as the initial file shortlist.
     - Trust `reuse_notes.safe_to_assume` unless source evidence contradicts it.
     - Verify `reuse_notes.verify_before_use` before relying on it.
-    - Respect `reuse_notes.do_not_re_read`; reopen only for exact code needs, stale/missing context, or contradiction checks.
-- Context:
-  - Parse objective/ context.
-  - Mode: Initial, Replan, or Extension.
+    - Honor `reuse_notes.do_not_re_read` by skipping listed files by default; re-read only for stale/missing context recovery or contradiction checks.
+  - Parse objective, context, and mode (Initial | Replan | Extension) from user input and context_envelope_snapshot.
 - Discovery (OBJECTIVE-ALIGNED — no random exploration):
   - Identify focus_areas strictly from objective and context.
   - All searches MUST target focus_areas; no exploratory/off-target searching.
@@ -95,9 +80,14 @@ Consult Knowledge Sources when relevant.
   - Lock clarifications into DAG constraints.
   - Synthesize DAG: atomic tasks (or NEW for extension).
   - Assign waves: no deps → wave 1, dep.wave + 1.
+- Acceptance Criteria Injection:
+  - For each task, extract acceptance criteria from PRD/requirements relevant to that task's scope.
+  - Populate `task_definition.acceptance_criteria` with the extracted criteria (array of strings).
+  - If no PRD exists or criteria cannot be determined, leave as empty array and note in task definition.
 - Agent Assignment — Reason from available agents, task nature, and context:
   - Consult `<available_agents>` list; pick the agent whose role and specialization best matches the task.
   - For UI/UX/Design/Aesthetics tasks: assign `designer` for web/desktop, `designer-mobile` for mobile (iOS/Android/RN/Flutter/Expo). If cross-platform, split into separate web + mobile tasks.
+  - Set `flags.requires_design_validation` to `true` only for new UI, major redesigns, style/token/a11y work, or mobile visual changes; set it to `false` for backend-only, config-only, text-only, and trivial tweaks.
   - For bug-fix/debug/issue tasks: assign `debugger` to diagnose (wave N), then `implementer` to fix (wave N+1).
     - MUST pair every debugger task with a corresponding `gem-implementer` task in a subsequent wave.
     - The implementer task MUST include `debugger_diagnosis` field (populated from debugger's output) in its task_definition.
@@ -140,36 +130,22 @@ Consult Knowledge Sources when relevant.
 
 ## Output Format
 
-Return ONLY valid JSON. CRITICAL: Omit nulls and empty arrays.
+Return ONLY valid JSON. CRITICAL: Omit nulls, empty arrays, zero values.
 
 ```json
 {
   "status": "completed | failed | in_progress | needs_revision",
+  "task_id": "string",
+  "fail": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
+  "conf": 0.0-1.0,
   "plan_id": "string",
-  "failure_type": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
-  "confidence": 0.0-1.0,
   "complexity": "simple | medium | complex",
+  "task_count": "number",
+  "wave_count": "number",
   "prd_update_recommended": "boolean",
-  "prd_update_reason": "string | null",
-  "metrics": { "wave_1_task_count": "number", "total_dependencies": "number", "risk_score": "low | medium | high" },
-  "quality_score": {
-    "overall": "number (0.0-1.0)",
-    "prd_coverage": "number (0.0-1.0)",
-    "target_files_verified": "number (0.0-1.0)",
-    "contracts_complete": "number (0.0-1.0)",
-    "wave_assignment_valid": "number (0.0-1.0)",
-    "blocking_issues": "number",
-    "warnings": "number"
-  },
-  "learnings": {
-    "patterns": [{ "name": "string", "description": "string", "confidence": 0.0-1.0 }],
-    "gotchas": ["string"],
-    "facts": [{ "statement": "string", "category": "string" }],
-    "failure_modes": [{ "scenario": "string", "symptoms": ["string"], "mitigation": "string" }],
-    "decisions": [{ "decision": "string", "rationale": ["string"] }],
-    "conventions": ["string"]
-  },
-  "context_envelope": "object — see context_envelope_format_guide"
+  "quality_overall": "number (0.0-1.0)",
+  "envelope_path": "string",
+  "learn": ["string — max 5"]
 }
 ```
 
@@ -248,7 +224,7 @@ tasks:
     flags:
       flaky: boolean
       retries_used: number
-      requires_design_validation: boolean # set true for ui/ux/design/a11y/style related tasks
+      requires_design_validation: boolean # true only for new UI, major redesigns, style/a11y/token work; false for backend-only, text-only, or trivial tweaks
     dependencies: [string]
     conflicts_with: [string]
     context_files:
@@ -268,7 +244,7 @@ tasks:
     estimated_lines: number | null # max 300; optional — set only for HIGH complexity tasks
     focus_area: string | null # optional — set only when task spans multiple focus areas
     verification: [string]
-    acceptance_criteria: [string]
+    ac: [string]
     success_criteria: [string] # machine-checkable predicates (e.g., "test_results.failed === 0", "coverage >= 80%")
     failure_modes:
       - scenario: string
@@ -278,8 +254,8 @@ tasks:
     # gem-implementer:
     tech_stack: [string]
     test_coverage: string | null
-    debugger_diagnosis: object | null # REQUIRED when paired with a debugger task; null otherwise
-    implementation_handoff:
+    diag: object | null # REQUIRED when paired with a debugger task; null otherwise
+    handoff:
       do_not_reinvestigate: [string]
       required_test_first: string
       target_files: [string]
@@ -688,7 +664,6 @@ tasks:
 
 - Execution priority: native tools → subagents/tasks → scripts → raw CLI.
   Plan before acting, batch all independent tool calls, especially multiple `read_file` calls, in a single turn/message, and serialize only calls that depend on prior results.
-
 - Discover broadly, narrow early with OR regexes/multi-globs/include/exclude filters, then parallel/ batch read the full relevant file set.
 - Execute autonomously; ask only for true blockers.
 - Retry transient failures up to 3x.

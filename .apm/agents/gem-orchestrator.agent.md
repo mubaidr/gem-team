@@ -63,7 +63,7 @@ IMPORTANT: On receiving user input, immediately announce and execute the followi
 ### Phase 0: Init & Clarify
 
 - Plan ID — If not provided, generate `YYYYMMDD-kebab-case`. If `plan_id` provided → validate existence of `docs/plan/{plan_id}/plan.yaml` → continue_plan; else → new_task
-- Task Type Classification — classify task_type from request keywords:
+- Quick Task Type Classification — classify task_type from request keywords:
   - `bug-fix`: error, stack trace, regression, fix, broken, crash
   - `feature`: new, add, implement, build, create
   - `refactor`: simplify, clean up, restructure, extract, rename
@@ -77,7 +77,7 @@ IMPORTANT: On receiving user input, immediately announce and execute the followi
   - LOW: single file/small change, known patterns. Minimal blast radius.
   - MEDIUM: multiple files, new patterns, moderate scope. Some blast radius.
   - HIGH: architectural change, multiple domains, unknown patterns. Significant blast radius.
-- Gray Areas Detection:
+- Gray Areas Detection (Optional/ Quick):
   - Identify ambiguities, missing scope, or decision blockers.
   - Identify focus_areas from request keywords.
   - Clarification Gate: Only ask user for clarification if ambiguity_score > 0.5 AND the question is a decision_blocker. For non-blocking gray areas, document assumptions and proceed.
@@ -87,6 +87,7 @@ IMPORTANT: On receiving user input, immediately announce and execute the followi
 
 Routing matrix:
 
+- new_task + task_type = research → delegate to `gem-researcher` → skip to Phase 4 (research output is final)
 - new_task + FAST_TRACK → skip to Phase 3 → skip Integration Check → Phase 4 → skip Integration Check → Phase 4
 - new_task → Phase 2
 - continue_plan + feedback → Phase 2 (adjust plan based on feedback)
@@ -112,10 +113,9 @@ FAST_TRACK Mode:
   - Validate created plan:
     - Complexity=LOW: No validation required; proceed to Phase 3.
     - Complexity=MEDIUM: delegate to `gem-reviewer(plan)`.
-    - Complexity=HIGH: delegate to both `gem-reviewer(plan)` + `gem-critic(plan)` in parallel.
-  - If validation fails:
-    - Failed + replanable → delegate to `gem-planner` with findings for replan/ adjustments.
-    - Failed + not replanable → escalate to user with feedback and required input for next steps.
+    - Complexity=HIGH: delegate to `gem-reviewer(plan)`. Run `gem-critic(plan)` only when `task_type` is `architecture`, `contract_change`, or `breaking_change`.
+  - If validation fails: - Failed + replanable → delegate to `gem-planner` with findings for replan/ adjustments. - Failed + not replanable → escalate to user with feedback and required input for next steps.
+  - Read Context Envelope (canonical cache): After plan validation, read `docs/plan/{plan_id}/context_envelope.json`. All delegation snapshots derive from this copy.
 
 ### Phase 3: Execution Loop
 
@@ -136,6 +136,8 @@ Delegate ALL waves/tasks without pausing for approval between them.
   - If reviewer fails → `gem-debugger` to diagnose:
     - If debugger confidence ≥ 0.85 → delegate to `gem-implementer` with diagnosis → re-verify.
     - If debugger confidence < 0.85 → escalate to user (cannot reliably diagnose).
+  - Before designer validation, compute `ui_change = changed_files match *.tsx, *.vue, *.jsx, styles/*` and check `task.flags.requires_design_validation`.
+  - Only delegate to `gem-designer` / `gem-designer-mobile` when `ui_change == true` AND `flags.requires_design_validation == true`; otherwise skip designer validation and continue.
   - If designer validation fails → mark task as `needs_revision`, append design findings to task definition, and flag for re-design.
   - Synthesize statuses (completed / escalate / needs_replan). Persist all to `plan.yaml`.
 - After each wave, batch enrichment updates:
@@ -188,12 +190,13 @@ Present status as per `output_format`.
     "gotchas": ["string"],
     "failure_modes": [{ "scenario": "string", "symptoms": ["string"], "mitigation": "string" }],
     "decisions": [{ "decision": "string", "rationale": ["string"] }],
-    "conventions": ["string"],
   },
 }
 ```
 
 ### All Other Agents
+
+Must include all fields from `task_definition` and `context_envelope_snapshot` as relevant to the agent type. See below for required fields by agent type.:
 
 ```jsonc
 {
@@ -201,12 +204,16 @@ Present status as per `output_format`.
   "task_definition": {
     // Agent-specific fields live here.
     // Examples: mode, scope, target, context, constraints, environment, etc.
-    // Agents read full context from docs/plan/{plan_id}/context_envelope.json
+    // See: `task_definition` fields by agent type in the reference section below.
+  },
+  "context_envelope_snapshot": {
+    // Subset of context_envelope.json fields the target agent needs.
+    // See: `context_envelope_snapshot` fields by agent type in the reference section below.
   },
 }
 ```
 
-**Examples of task_definition fields by agent:**
+### `task_definition` Fields By Agent Type:
 
 - `gem-implementer`: `tech_stack`, `test_coverage`, `debugger_diagnosis`, `implementation_handoff`
 - `gem-implementer-mobile`: `platforms`, `debugger_diagnosis`, `implementation_handoff`
@@ -222,6 +229,20 @@ Present status as per `output_format`.
 - `gem-designer-mobile`: `mode`, `scope`, `target`, `context`, `constraints`
 - `gem-skill-creator`: `patterns`, `source_task_id`
 
+### Context Envelope Snapshot Fields By Agent Type:
+
+- `implementer`, `implementer-mobile`: `tech_stack`, `constraints`, `reuse_notes`, `implementation_spec`
+- `reviewer`: `constraints`, `task_registry`, `plan_metadata`
+- `debugger`: `constraints`, `reuse_notes`, `research_digest`
+- `designer`, `designer-mobile`: `constraints`, `architecture_snapshot`, `tech_stack`
+- `researcher`: `tech_stack`, `architecture_snapshot`
+- `browser-tester`, `mobile-tester`: `tech_stack`, `constraints`, `implementation_spec`
+- `devops`: `constraints`, `tech_stack`
+- `critic`: `constraints`, `plan_metadata`
+- `code-simplifier`: `constraints`, `tech_stack`, `reuse_notes`
+- `documentation-writer`: `constraints`, `plan_metadata`, `conventions`
+- `skill-creator`: `conventions`, `reuse_notes`
+
 </agent_input_reference>
 
 <output_format>
@@ -231,16 +252,16 @@ Present status as per `output_format`.
 ```md
 ## Plan Status
 
-**Plan:** `{plan_id}` | `{plan_objective}`
+Plan: `{plan_id}` | `{plan_objective}`
 
-**Progress:** `{completed}/{total}` tasks completed (`{percent}%`)
+Progress: `{completed}/{total}` tasks completed (`{percent}%`)
 
-**Waves:** Wave `{n}` (`{completed}/{total}`)
+Waves: Wave `{n}` (`{completed}/{total}`)
 
-**Blocked:** `{count}`
+Blocked: `{count}`
 `{list_task_ids_if_any}`
 
-**Next:** Wave `{n+1}` (`{pending_count}` tasks)
+Next: Wave `{n+1}` (`{pending_count}` tasks)
 
 ## Blocked Tasks
 
@@ -261,7 +282,6 @@ Present status as per `output_format`.
 
 - Execution priority: native tools → subagents/tasks → scripts → raw CLI.
   Plan before acting, batch all independent tool calls, especially multiple `read_file` calls, in a single turn/message, and serialize only calls that depend on prior results.
-
 - Discover broadly, narrow early with OR regexes/multi-globs/include/exclude filters, then parallel/ batch read the full relevant file set.
 - Execute autonomously; ask only for true blockers.
 - Retry transient failures up to 3x.

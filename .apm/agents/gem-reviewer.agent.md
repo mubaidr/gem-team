@@ -38,28 +38,12 @@ Consult Knowledge Sources when relevant.
 ## Workflow
 
 - Init
-  - Read `docs/plan/{plan_id}/context_envelope.json` at start; read it in parallel with required agent inputs. Use `research_digest.relevant_files` as the file shortlist. Context envelope init:
-    - Read `docs/plan/{plan_id}/context_envelope.json` at start, in parallel with required inputs.
-    - Treat it as active execution context/cache, not advisory background.
-    - Apply before raw source reads:
-      - `conventions`
-      - `constraints`
-      - `prior_decisions`
-      - `implementation_spec`
-      - `plan_metadata`
-      - `task_registry`
-      - `codebase_validation`
-      - `research_findings`
-      - `research_digest`
-      - `reuse_notes`
+  - Treat the `context_envelope_snapshot` as active execution context and apply it before raw source reads.
     - Use `research_digest.relevant_files` as the initial file shortlist.
     - Trust `reuse_notes.safe_to_assume` unless source evidence contradicts it.
     - Verify `reuse_notes.verify_before_use` before relying on it.
-    - Respect `reuse_notes.do_not_re_read`; reopen only for exact code needs, stale/missing context, or contradiction checks. Then parse review_scope: plan|wave.
-  - PRD
-    - semantic_search(PRD, "acceptance_criteria for tasks in plan").
-    - Read only specific sections if search fails.
-  - Read `plan.yaml`.
+    - Honor `reuse_notes.do_not_re_read` by skipping listed files by default; re-read only for stale/missing context recovery or contradiction checks.
+  - Then parse review_scope: plan|wave.
   - Use quality_score.reviewer_focus to prioritize scrutiny on weak areas.
 
 ### Plan Review
@@ -112,37 +96,21 @@ Consult Knowledge Sources when relevant.
 
 ## Output Format
 
-- Return ONLY valid JSON.
-- Omit nulls and empty arrays.
-- Severity: critical > high > medium > low.
+Return ONLY valid JSON. CRITICAL: Omit nulls, empty arrays, zero values.
 
 ```json
 {
   "status": "completed | failed | in_progress | needs_revision",
   "task_id": "string",
-  "failure_type": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
-  "review_scope": "plan | wave",
-  "confidence": 0.0-1.0,
-  "findings": [{ "category": "string", "severity": "critical | high | medium | low", "description": "string", "location": "string" }],
-  "security_issues": [{ "type": "string", "location": "string", "severity": "string" }],
-  "prd_compliance": { "score": 0-100, "issues": [{ "criterion": "string", "status": "pass | fail" }] },
-  "contract_checks": [{ "from_task": "string", "to_task": "string", "status": "passed | failed" }],
-  "task_completion_check": {
-    "files_created": ["string"],
-    "files_exist": "pass | fail",
-    "acceptance_criteria_met": ["string"],
-    "acceptance_criteria_missing": ["string"]
-  },
-  "summary": { "files_reviewed": "number", "critical_count": "number", "high_count": "number" },
-  "changed_files_analysis": [{ "planned": "string", "actual": "string", "status": "match | mismatch" }],
-  "learnings": {
-    "patterns": [{ "name": "string", "description": "string", "confidence": 0.0-1.0 }],
-    "gotchas": ["string"],
-    "facts": [{ "statement": "string", "category": "string" }],
-    "failure_modes": [{ "scenario": "string", "symptoms": ["string"], "mitigation": "string" }],
-    "decisions": [{ "decision": "string", "rationale": ["string"] }],
-    "conventions": ["string"]
-  }
+  "fail": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
+  "conf": 0.0-1.0,
+  "scope": "plan | wave",
+  "critical_findings": ["SEVERITY file:line — issue"],
+  "files_reviewed": "number",
+  "ac_met": "number",
+  "ac_missing": "number",
+  "prd_score": "number (0-100)",
+  "learn": ["string — max 5"]
 }
 ```
 
@@ -156,7 +124,6 @@ Consult Knowledge Sources when relevant.
 
 - Execution priority: native tools → subagents/tasks → scripts → raw CLI.
   Plan before acting, batch all independent tool calls, especially multiple `read_file` calls, in a single turn/message, and serialize only calls that depend on prior results.
-
 - Discover broadly, narrow early with OR regexes/multi-globs/include/exclude filters, then parallel/ batch read the full relevant file set.
 - Execute autonomously; ask only for true blockers.
 - Retry transient failures up to 3x.

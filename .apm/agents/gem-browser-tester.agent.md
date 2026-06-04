@@ -38,25 +38,12 @@ Consult Knowledge Sources when relevant.
 ## Workflow
 
 - Init
-  - Read `docs/plan/{plan_id}/context_envelope.json` at start; read it in parallel with required agent inputs. Use `research_digest.relevant_files` as the file shortlist. Context envelope init:
-    - Read `docs/plan/{plan_id}/context_envelope.json` at start, in parallel with required inputs.
-    - Treat it as active execution context/cache, not advisory background.
-    - Apply before raw source reads:
-      - `conventions`
-      - `constraints`
-      - `prior_decisions`
-      - `implementation_spec`
-      - `plan_metadata`
-      - `task_registry`
-      - `codebase_validation`
-      - `research_findings`
-      - `research_digest`
-      - `reuse_notes`
+  - Treat the `context_envelope_snapshot` as active execution context and apply it before raw source reads.
     - Use `research_digest.relevant_files` as the initial file shortlist.
     - Trust `reuse_notes.safe_to_assume` unless source evidence contradicts it.
     - Verify `reuse_notes.verify_before_use` before relying on it.
-    - Respect `reuse_notes.do_not_re_read`; reopen only for exact code needs, stale/missing context, or contradiction checks.
-- Parse — Identify validation_matrix/flows, scenarios, steps, expectations, evidence needs.
+    - Honor `reuse_notes.do_not_re_read` by skipping listed files by default; re-read only for stale/missing context recovery or contradiction checks.
+  - Parse task_definition inline: identify validation_matrix/flows, scenarios, steps, expectations, and evidence needs.
 - Setup — Create fixtures per task_definition.fixtures.
 - Execute — For each scenario:
   - Open — Navigate to target page.
@@ -80,35 +67,21 @@ Consult Knowledge Sources when relevant.
 
 ## Output Format
 
-Return ONLY valid JSON. CRITICAL: Omit nulls and empty arrays.
+Return ONLY valid JSON. CRITICAL: Omit nulls, empty arrays, zero values.
 
 ```json
 {
   "status": "completed | failed | in_progress | needs_revision",
   "task_id": "string",
-  "failure_type": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific | test_bug",
-  "confidence": 0.0-1.0,
-  "metrics": {
-    "console_errors": "number",
-    "console_warnings": "number",
-    "network_failures": "number",
-    "retries_attempted": "number",
-    "accessibility_issues": "number",
-    "visual_regressions": "number",
-    "lighthouse_scores": { "accessibility": "number", "seo": "number", "best_practices": "number" }
-  },
-  "evidence_path": "docs/plan/{plan_id}/evidence/{task_id}/",
-  "flow_results": [{ "flow_id": "string", "status": "passed | failed", "steps_completed": "number", "steps_total": "number", "duration_ms": "number" }],
-  "failures": [{ "type": "string", "criteria": "string", "details": "string", "flow_id": "string", "scenario": "string", "step_index": "number", "evidence": ["string"] }],
-  "assumptions": ["string"],
-  "learnings": {
-    "patterns": [{ "name": "string", "description": "string", "confidence": 0.0-1.0 }],
-    "gotchas": ["string"],
-    "facts": [{ "statement": "string", "category": "string" }],
-    "failure_modes": [{ "scenario": "string", "symptoms": ["string"], "mitigation": "string" }],
-    "decisions": [{ "decision": "string", "rationale": ["string"] }],
-    "conventions": ["string"]
-  }
+  "fail": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific | test_bug",
+  "conf": 0.0-1.0,
+  "flows": { "passed": "number", "failed": "number" },
+  "console_errors": "number",
+  "network_failures": "number",
+  "a11y_issues": "number",
+  "failures": ["string — max 3"],
+  "evidence_path": "string",
+  "learn": ["string — max 5"]
 }
 ```
 
@@ -122,7 +95,6 @@ Return ONLY valid JSON. CRITICAL: Omit nulls and empty arrays.
 
 - Execution priority: native tools → subagents/tasks → scripts → raw CLI.
   Plan before acting, batch all independent tool calls, especially multiple `read_file` calls, in a single turn/message, and serialize only calls that depend on prior results.
-
 - Discover broadly, narrow early with OR regexes/multi-globs/include/exclude filters, then parallel/ batch read the full relevant file set.
 - Execute autonomously; ask only for true blockers.
 - Retry transient failures up to 3x.
