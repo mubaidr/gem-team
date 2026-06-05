@@ -88,6 +88,10 @@ See [all supported installation options](#installation) below.
 - **Diagnose-then-Fix** — gem-debugger diagnoses → gem-implementer fixes → re-verifies
 - **Resumable** — Execution can be paused and resumed without losing context
 - **Scriptable** — Use scripts for deterministic, repeatable, or bulk work (data processing, mechanical transforms, migrations/codemods, generated outputs, audits/reports, validation checks, reproduction helpers)
+- **Fast-Path Modes** — MICRO_TRACK (trivial typo fixes) and FAST_TRACK (low-complexity tasks) skip phases for efficiency
+- **Task Classification** — Automatic 7-type classification (bug-fix, feature, refactor, docs, config, typo, research) with complexity assessment (LOW/MEDIUM/HIGH)
+- **Smart Routing** — Research tasks skip to output; bug-fix/typo/docs with LOW complexity use FAST_TRACK; trivial typos use MICRO_TRACK
+- **Context Envelope** — Progressive cache enriched after each wave; all agents receive snapshot for consistent context
 
 ### Token Efficiency
 
@@ -149,7 +153,7 @@ Phase 3: Execution Loop
     Pre-Wave: Check memory for failure_modes/gotchas → add guards
     ↓
     ┌─ Wave Execution ──────────────┐
-    │ • Delegate tasks (≤4 concurrent)│
+    │ • Delegate tasks (≤2 concurrent)│
     └─────────────┬─────────────────┘
                   ↓
     ┌─ Integration Check ──────────┐
@@ -181,12 +185,12 @@ Phase 5: Output
 
 ### Core Agents
 
-| Agent            | Description                                                                      | Sources                        |
-| :--------------- | :------------------------------------------------------------------------------- | :----------------------------- |
-| **ORCHESTRATOR** | The team lead: Orchestrates research, planning, implementation, and verification | PRD, AGENTS.md                 |
-| **RESEARCHER**   | Codebase exploration — patterns, dependencies, architecture discovery            | PRD, codebase, AGENTS.md, docs |
-| **PLANNER**      | DAG-based execution plans — task decomposition, wave scheduling, risk analysis   | PRD, codebase, AGENTS.md       |
-| **IMPLEMENTER**  | TDD code implementation — features, bugs, refactoring. Never reviews own work    | codebase, AGENTS.md, DESIGN.md |
+| Agent            | Description                                                                      | Sources                               |
+| :--------------- | :------------------------------------------------------------------------------- | :------------------------------------ |
+| **ORCHESTRATOR** | The team lead: Orchestrates research, planning, implementation, and verification | PRD, AGENTS.md, Memory                |
+| **RESEARCHER**   | Codebase exploration — patterns, dependencies, architecture discovery            | PRD, codebase, AGENTS.md, docs        |
+| **PLANNER**      | DAG-based execution plans — task decomposition, wave scheduling, risk analysis   | PRD, codebase, AGENTS.md, Memory seed |
+| **IMPLEMENTER**  | TDD code implementation — features, bugs, refactoring. Never reviews own work    | codebase, AGENTS.md, DESIGN.md        |
 
 ### Quality & Review
 
