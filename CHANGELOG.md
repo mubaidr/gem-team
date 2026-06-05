@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.51.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.50.0...gem-team-v1.51.0) (2026-06-05)
+
+
+### 🧹 Housekeeping
+
+* **docs:** simplify Phase 0 workflow by removing task type classification ([cd574a5](https://github.com/mubaidr/gem-team/commit/cd574a5df95e4bfd0db3dc54483ec79284044f97))
+
 ## [1.50.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.49.0...gem-team-v1.50.0) (2026-06-05)
 
 
