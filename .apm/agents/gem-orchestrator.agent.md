@@ -58,6 +58,8 @@ Consult Knowledge Sources when relevant.
 
 ## Workflow
 
+Batch/join dependency-free steps; serialize only true dependencies while still covering every listed concern.
+
 IMPORTANT: On receiving user input, immediately announce and execute the following steps in order:
 
 ### Phase 0: Init & Clarify
