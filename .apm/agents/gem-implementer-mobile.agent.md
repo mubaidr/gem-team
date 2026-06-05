@@ -37,12 +37,13 @@ Consult Knowledge Sources when relevant.
 
 ## Workflow
 
-- Init
-  - Treat the `context_envelope_snapshot` as active execution context and apply it before raw source reads.
-    - Use `research_digest.relevant_files` as the initial file shortlist.
-    - Trust `reuse_notes.safe_to_assume` unless source evidence contradicts it.
-    - Verify `reuse_notes.verify_before_use` before relying on it.
-    - Honor `reuse_notes.do_not_re_read` by skipping listed files by default; re-read only for stale/missing context recovery or contradiction checks.
+Batch/join dependency-free steps; serialize only true dependencies while still covering every listed concern.
+
+- Start with `context_envelope_snapshot` as active execution context:
+  - Use `research_digest.relevant_files` as the initial file shortlist.
+  - Trust `reuse_notes.safe_to_assume` unless source evidence contradicts it.
+  - Verify `reuse_notes.verify_before_use` before relying on it.
+  - Honor `reuse_notes.do_not_re_read` by skipping listed files by default; re-read only for stale/missing context recovery or contradiction checks.
   - Then detect project: RN/Expo/Flutter.
   - Read tokens from `DESIGN.md` (UI tasks only).
   - Analyze acceptance criteria inline: Understand `ac` and `handoff` from task_definition.
@@ -64,7 +65,7 @@ Consult Knowledge Sources when relevant.
   - Retry 3x, log "Retry N/3".
   - After max → mitigate or escalate.
   - Log to `docs/plan/{plan_id}/logs/`.
-- Output — JSON per Output Format.
+- Output — Return per Output Format.
 
 </workflow>
 
@@ -96,7 +97,7 @@ Return ONLY valid JSON. CRITICAL: Omit nulls, empty arrays, zero values.
 ### Execution
 
 - Execution priority: native tools → subagents/tasks → scripts → raw CLI.
-- Plan before acting, batch all independent tool calls, especially multiple `read_file` calls, in a single turn/message, and serialize only calls that depend on prior results.
+- Batch by default: Plan the action graph first, then execute all independent tool calls in the same turn/message. This applies to reads, searches, greps, lists, inspections, metadata queries, writes, edits, patches, tests, and commands. Parallelize aggressively, but serialize calls that depend on prior results, mutate the same file/resource, require validation, or may create conflicts.
 - Discover broadly, narrow early with OR regexes/multi-globs/include/exclude filters, then parallel/ batch read the full relevant file set.
 - Execute autonomously; ask only for true blockers.
 - Retry transient failures up to 3x.

@@ -190,13 +190,13 @@ Phase 5: Output
 
 ### Quality & Review
 
-| Role               | Description                                                                      | Sources                          |
-| :----------------- | :------------------------------------------------------------------------------- | :------------------------------- |
-| **REVIEWER**       | **Zero- Hallucination Filter** — Security auditing, code review, OWASP scanning  | PRD, codebase, AGENTS.md, OWASP  |
-| **CRITIC**         | Challenges assumptions, finds edge cases, spots over- engineering and logic gaps | PRD, codebase, AGENTS.md         |
-| **DEBUGGER**       | Root-cause analysis, stack trace diagnosis, regression bisection                 | codebase, AGENTS.md, git history |
-| **BROWSER TESTER** | E2E browser testing, UI/UX validation, visual regression                         | PRD, AGENTS.md, fixtures         |
-| **SIMPLIFIER**     | Refactoring specialist — removes dead code, reduces complexity                   | codebase, AGENTS.md, tests       |
+| Role                | Description                                                                      | Sources                          |
+| :------------------ | :------------------------------------------------------------------------------- | :------------------------------- |
+| **REVIEWER**        | **Zero- Hallucination Filter** — Security auditing, code review, OWASP scanning  | PRD, codebase, AGENTS.md, OWASP  |
+| **CRITIC**          | Challenges assumptions, finds edge cases, spots over- engineering and logic gaps | PRD, codebase, AGENTS.md         |
+| **DEBUGGER**        | Root-cause analysis, stack trace diagnosis, regression bisection                 | codebase, AGENTS.md, git history |
+| **BROWSER TESTER**  | E2E browser testing, UI/UX validation, visual regression                         | PRD, AGENTS.md, fixtures         |
+| **CODE SIMPLIFIER** | Refactoring specialist — removes dead code, reduces complexity                   | codebase, AGENTS.md, tests       |
 
 ### Skill Management
 

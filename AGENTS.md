@@ -10,18 +10,22 @@ Static conventions, rules, and agent definitions for the Gem Team multi-agent fr
 
 - `gem-orchestrator` — Team lead. Orchestrates plan → implement → verify. Never executes or validates work directly; delegates to sub-agents. User-facing primary agent.
   - Args: `objective`, `plan_id` (if resuming)
-  - Sources: PRD, AGENTS.md
+  - Sources: PRD, AGENTS.md, Memory
 
 - `gem-planner` — DAG execution plans. Decomposes tasks, schedules waves, analyzes risk. Outputs `plan.yaml`. Special seed interface — receives direct objective + memory seed from orchestrator.
-  - Args: `plan_id`, `objective`, `task_clarifications`
+  - Args: `plan_id`, `objective`, `task_clarifications`, `memory_seed`
 
-- All other agents — Uniform input reference: `plan_id` + `task_definition`. All mode, scope, target, constraints, and other fields live inside `task_definition`. Agents hydrate their full context from `docs/plan/{plan_id}/context_envelope.json`.
-  - Args: `plan_id`, `task_definition`
+- `gem-researcher` — Codebase exploration. Discovers patterns, dependencies, architecture. Returns structured JSON findings.
+  - Args: `plan_id`, `objective`, `focus_area` (optional)
+
+- All other agents — Uniform input reference: `plan_id` + `task_definition` + `context_envelope_snapshot`. All mode, scope, target, constraints, and other fields live inside `task_definition`. Agents hydrate their full context from `docs/plan/{plan_id}/context_envelope.json`.
+  - Args: `plan_id`, `task_definition`, `context_envelope_snapshot`
 
 ## Quality & Review
 
 - `gem-reviewer` — Zero-hallucination filter. Security auditing, OWASP scanning, PRD compliance, code review.
   - Args: `plan_id`, `task_definition`
+  - Review scopes: `plan` | `wave`
 - `gem-critic` — Challenges assumptions, finds edge cases, detects over-engineering and logic gaps.
   - Args: `plan_id`, `task_definition`
 - `gem-debugger` — Root-cause analysis, stack-trace diagnosis, regression bisection, error reproduction.

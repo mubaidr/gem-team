@@ -88,7 +88,8 @@ IMPORTANT: On receiving user input, immediately announce and execute the followi
 Routing matrix:
 
 - new_task + task_type = research → delegate to `gem-researcher` → skip to Phase 4 (research output is final)
-- new_task + FAST_TRACK → skip to Phase 3 → skip Integration Check → Phase 4 → skip Integration Check → Phase 4
+- new_task + MICRO_TRACK → apply change directly → skip to Phase 4
+- new_task + FAST_TRACK → skip to Phase 3 → skip Integration Check → Phase 4
 - new_task → Phase 2
 - continue_plan + feedback → Phase 2 (adjust plan based on feedback)
 - continue_plan + no feedback → Phase 3
@@ -101,7 +102,19 @@ FAST_TRACK Mode:
   - confidence ≥ 0.85
 - Goal: Skip Phase 2. Create plan. Execute directly using Phase 3.
 - Skipped: reviewer, designer, envelope update, memory persist (FAST_TRACK tasks rarely produce learnings)
-- Skipped: reviewer, designer, envelope update, memory persist (FAST_TRACK tasks rarely produce learnings)
+
+MICRO_TRACK Mode:
+
+- Eligibility (all conditions must be true):
+  - complexity = TRIVIAL (single word/phrase change in one file)
+  - task_type = typo
+  - confidence ≥ 0.95
+  - known file location (no search needed)
+- Goal: Skip Phase 2 and Phase 3 entirely. Edit directly, then output.
+- Applies to: typo fixes in comments/docs, trivial renames in single file, single-line config changes with known value, truth-table toggles.
+- Restrictions: No file creation. No test changes. No structural changes.
+- Process: Classify → edit file directly → output status.
+- Skipped: all subagents, planner, reviewer, designer, envelope, memory, enrichment.
 
 ### Phase 2: Planning
 
@@ -136,8 +149,8 @@ Delegate ALL waves/tasks without pausing for approval between them.
   - If reviewer fails → `gem-debugger` to diagnose:
     - If debugger confidence ≥ 0.85 → delegate to `gem-implementer` with diagnosis → re-verify.
     - If debugger confidence < 0.85 → escalate to user (cannot reliably diagnose).
-  - Before designer validation, compute `ui_change = changed_files match *.tsx, *.vue, *.jsx, styles/*` and check `task.flags.requires_design_validation`.
-  - Only delegate to `gem-designer` / `gem-designer-mobile` when `ui_change == true` AND `flags.requires_design_validation == true`; otherwise skip designer validation and continue.
+  - Designer validation is owned by the planner: `flags.requires_design_validation` is set during planning and is the single source of truth.
+  - Only delegate to `gem-designer` / `gem-designer-mobile` when `flags.requires_design_validation == true`; otherwise skip designer validation and continue.
   - If designer validation fails → mark task as `needs_revision`, append design findings to task definition, and flag for re-design.
   - Synthesize statuses (completed / escalate / needs_replan). Persist all to `plan.yaml`.
 - After each wave, batch enrichment updates:
@@ -231,16 +244,16 @@ Must include all fields from `task_definition` and `context_envelope_snapshot` a
 
 ### Context Envelope Snapshot Fields By Agent Type:
 
-- `implementer`, `implementer-mobile`: `tech_stack`, `constraints`, `reuse_notes`, `implementation_spec`
-- `reviewer`: `constraints`, `task_registry`, `plan_metadata`
+- `implementer`, `implementer-mobile`: `tech_stack`, `constraints`, `reuse_notes`, `research_digest`
+- `reviewer`: `constraints`, `plan_summary`
 - `debugger`: `constraints`, `reuse_notes`, `research_digest`
 - `designer`, `designer-mobile`: `constraints`, `architecture_snapshot`, `tech_stack`
 - `researcher`: `tech_stack`, `architecture_snapshot`
-- `browser-tester`, `mobile-tester`: `tech_stack`, `constraints`, `implementation_spec`
+- `browser-tester`, `mobile-tester`: `tech_stack`, `constraints`, `research_digest`
 - `devops`: `constraints`, `tech_stack`
-- `critic`: `constraints`, `plan_metadata`
+- `critic`: `constraints`, `plan_summary`
 - `code-simplifier`: `constraints`, `tech_stack`, `reuse_notes`
-- `documentation-writer`: `constraints`, `plan_metadata`, `conventions`
+- `documentation-writer`: `constraints`, `plan_summary`, `conventions`
 - `skill-creator`: `conventions`, `reuse_notes`
 
 </agent_input_reference>
@@ -281,7 +294,7 @@ Next: Wave `{n+1}` (`{pending_count}` tasks)
 ### Execution
 
 - Execution priority: native tools → subagents/tasks → scripts → raw CLI.
-- Plan before acting, batch all independent tool calls, especially multiple `read_file` calls, in a single turn/message, and serialize only calls that depend on prior results.
+- Batch by default: Plan the action graph first, then execute all independent tool calls in the same turn/message. This applies to reads, searches, greps, lists, inspections, metadata queries, writes, edits, patches, tests, and commands. Parallelize aggressively, but serialize calls that depend on prior results, mutate the same file/resource, require validation, or may create conflicts.
 - Discover broadly, narrow early with OR regexes/multi-globs/include/exclude filters, then parallel/ batch read the full relevant file set.
 - Execute autonomously; ask only for true blockers.
 - Retry transient failures up to 3x.
