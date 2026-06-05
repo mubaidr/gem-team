@@ -113,7 +113,6 @@ Batch/join dependency-free steps; serialize only true dependencies while still c
   - Schema Validation (syntax check only — semantic validation is delegated to `gem-reviewer(plan)`):
     - Validate plan.yaml: valid YAML, all required top-level fields non-null, task IDs unique, wave numbers are integers, no circular deps
     - If schema invalid → fix inline and re-validate
-    - Semantic checks (PRD coverage, agent validity, contracts, quality scoring) are the reviewer's responsibility
   - Save Plan `docs/plan/{plan_id}/plan.yaml`
 - Create context envelope `context_envelope.json` as per `context_envelope_format_guide`
   - Use provided context as seed and augment with research findings from plan.
