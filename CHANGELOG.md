@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.52.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.51.0...gem-team-v1.52.0) (2026-06-05)
+
+
+### 🧹 Housekeeping
+
+* **docs:** remove redundant semantic checks note from workflow description ([f1e478a](https://github.com/mubaidr/gem-team/commit/f1e478acb0ca88725c21322dd6c25872e8a24e08))
+* **docs:** streamline context envelope read directives and remove redundant retry notes across agent definitions ([e16a3b7](https://github.com/mubaidr/gem-team/commit/e16a3b7439f4e3fbeaa3954e742aa3f8bcae411e))
+
 ## [1.51.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.50.0...gem-team-v1.51.0) (2026-06-05)
 
 
