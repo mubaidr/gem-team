@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.50.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.49.0...gem-team-v1.50.0) (2026-06-05)
+
+
+### 🧹 Housekeeping
+
+* **config:** unhide Housekeeping section in changelog ([e392b2a](https://github.com/mubaidr/gem-team/commit/e392b2a4dd6a1cf4f39519c4041ac2d76a433487))
+* **docs:** add batching note to workflow description ([21f50bc](https://github.com/mubaidr/gem-team/commit/21f50bca05241326bc7cf4bc0ac3d9dd48279b90))
+* **docs:** add Fast-Path Modes, Task Classification, Smart Routing, Context Envelope to Process; update concurrency limit; reformat Core Agents table ([cc07749](https://github.com/mubaidr/gem-team/commit/cc07749ec8ada043baaadd48ac1a8918cd70d9ea))
+* **docs:** refine context envelope update condition and planner task field comments ([a1119b6](https://github.com/mubaidr/gem-team/commit/a1119b6dced16d251f8b6671c1bba8d6efca7dab))
+* **docs:** simplify agent configurations and output format definitions ([cb46bea](https://github.com/mubaidr/gem-team/commit/cb46bea365961190cce2b68c3881f7adca7e61b2))
+* **docs:** standardize execution bullet from '-' to '+' across agent documentation files ([ca315ad](https://github.com/mubaidr/gem-team/commit/ca315adac3872f3a7011f3db0c2529f85b24fefa))
+* **docs:** standardize execution guidance and JSON output requirements across all agent documentation ([62d6b3a](https://github.com/mubaidr/gem-team/commit/62d6b3aa9c5184105994e385c7868877936f816a))
+* **docs:** update recommended model identifiers in README ([1fc675b](https://github.com/mubaidr/gem-team/commit/1fc675bfedb50d921c5a9525cbfb04b8c836a9d2))
+* improve workflow documentation and batching guidance in gem-browser-tester and gem-code-simplifier agents ([43aec22](https://github.com/mubaidr/gem-team/commit/43aec22d7f05ff39ad0fe81263133a8de8f27844))
+
 ## [1.49.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.48.0...gem-team-v1.49.0) (2026-06-01)
 
 
