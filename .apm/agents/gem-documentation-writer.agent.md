@@ -157,7 +157,7 @@ changes:
 ### Execution
 
 - Execution priority: native tools → subagents/tasks → scripts → raw CLI.
-  Plan before acting, batch all independent tool calls, especially multiple `read_file` calls, in a single turn/message, and serialize only calls that depend on prior results.
+- Plan before acting, batch all independent tool calls, especially multiple `read_file` calls, in a single turn/message, and serialize only calls that depend on prior results.
 - Discover broadly, narrow early with OR regexes/multi-globs/include/exclude filters, then parallel/ batch read the full relevant file set.
 - Execute autonomously; ask only for true blockers.
 - Retry transient failures up to 3x.
