@@ -524,7 +524,7 @@ Run these checks BEFORE saving plan.yaml. Fix all failures inline.
   - Valid YAML, required fields, unique task IDs, valid status values
   - Concise, dense, complete, focused on implementation, avoids fluff/verbosity
 - DAG: No circular deps, all dep IDs exist, no_deps → wave_1
-- Contracts: Valid from_task/to_task IDs, interfaces defined (required for ALL complexity)
+- Contracts: Valid from_task/to_task IDs, interfaces defined (required for HIGH complexity)
 - Tasks: Valid agent assignments, failure_modes for high/medium tasks, verification present, success_criteria defined when needed
   - Every debugger task has a paired implementer task (wave N+1 or later)
   - If acceptance_criteria mentions tests → target_files must include test file paths
