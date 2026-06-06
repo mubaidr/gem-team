@@ -204,15 +204,15 @@ Must include all fields from `task_definition` and `context_envelope_snapshot` a
 
 ### Context Envelope Snapshot Fields By Agent Type:
 
-- `implementer`, `implementer-mobile`: `tech_stack`, `constraints`, `reuse_notes`, `research_digest`
-- `reviewer`: `constraints`, `plan_summary`
-- `debugger`: `constraints`, `reuse_notes`, `research_digest`
-- `designer`, `designer-mobile`: `constraints`, `architecture_snapshot`, `tech_stack`
-- `researcher`: `tech_stack`, `architecture_snapshot`
-- `browser-tester`, `mobile-tester`: `tech_stack`, `constraints`, `research_digest`
-- `devops`: `constraints`, `tech_stack`
-- `critic`: `constraints`, `plan_summary`
-- `code-simplifier`: `constraints`, `tech_stack`, `reuse_notes`
+- `gem-implementer`, `gem-implementer-mobile`: `tech_stack`, `constraints`, `reuse_notes`, `research_digest`
+- `gem-reviewer`: `constraints`, `plan_summary`
+- `gem-debugger`: `constraints`, `reuse_notes`, `research_digest`
+- `gem-designer`, `gem-designer-mobile`: `constraints`, `architecture_snapshot`, `tech_stack`
+- `gem-researcher`: `tech_stack`, `architecture_snapshot`
+- `gem-browser-tester`, `gem-mobile-tester`: `tech_stack`, `constraints`, `research_digest`
+- `gem-devops`: `constraints`, `tech_stack`
+- `gem-critic`: `constraints`, `plan_summary`
+- `gem-code-simplifier`: `constraints`, `tech_stack`, `reuse_notes`
 - `documentation-writer`: `constraints`, `plan_summary`, `conventions`
 - `skill-creator`: `conventions`, `reuse_notes`
 
