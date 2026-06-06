@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.53.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.52.0...gem-team-v1.53.0) (2026-06-06)
+
+
+### 🧹 Housekeeping
+
+* **agents:** Optimize orchstrator workflow ([a2bf720](https://github.com/mubaidr/gem-team/commit/a2bf7207388347bf1d7635b75d01e4fe94c562bc))
+* **agents:** prefix context envelope snapshot fields with gem- and fix task_id type in gem-researcher ([f81dda6](https://github.com/mubaidr/gem-team/commit/f81dda643a0c9735b73f7e0716e41181b2394d02))
+* **docs:** add update_context_envelope to argument hint ([8b48e41](https://github.com/mubaidr/gem-team/commit/8b48e4152a209c44d3030e0a14ab69329a81b6df))
+* **docs:** update contracts requirement to HIGH complexity ([9dcfab6](https://github.com/mubaidr/gem-team/commit/9dcfab63c133d79719cfc13370338d0d7f587c05))
+
 ## [1.52.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.51.0...gem-team-v1.52.0) (2026-06-05)
 
 
