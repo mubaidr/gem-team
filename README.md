@@ -15,6 +15,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/APM-mubaidr/gem--team-blue?style=flat-square" alt="APM">
   <img src="https://img.shields.io/github/v/release/mubaidr/gem-team?style=flat-square&color=important" alt="Version">
+  <img src="https://img.shields.io/github/actions/workflow/status/mubaidr/gem-team/Release.yml?style=flat-square" alt="CI">
   <img src="https://img.shields.io/badge/License-Apache%202.0-green?style=flat-square" alt="License">
   <img src="https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square" alt="PRs Welcome">
   <img src="https://img.shields.io/badge/Maintained%3F-yes-green?style=flat-square" alt="Maintained">
@@ -46,7 +47,7 @@ See [all supported installation options](#installation) below.
 - [🎯 Why Gem Team?](#why-gem-team)
 - [🧠 Core Concepts](#core-concepts)
 - [🏗️ Architecture](#architecture)
-- [� The Agent Team](#the-agent-team)
+- [👥 The Agent Team](#the-agent-team)
 - [📦 Installation](#installation)
 - [🤝 Contributing](#contributing)
 
@@ -194,13 +195,13 @@ Phase 5: Output
 
 ### Quality & Review
 
-| Role                | Description                                                                      | Sources                          |
-| :------------------ | :------------------------------------------------------------------------------- | :------------------------------- |
-| **REVIEWER**        | **Zero- Hallucination Filter** — Security auditing, code review, OWASP scanning  | PRD, codebase, AGENTS.md, OWASP  |
-| **CRITIC**          | Challenges assumptions, finds edge cases, spots over- engineering and logic gaps | PRD, codebase, AGENTS.md         |
-| **DEBUGGER**        | Root-cause analysis, stack trace diagnosis, regression bisection                 | codebase, AGENTS.md, git history |
-| **BROWSER TESTER**  | E2E browser testing, UI/UX validation, visual regression                         | PRD, AGENTS.md, fixtures         |
-| **CODE SIMPLIFIER** | Refactoring specialist — removes dead code, reduces complexity                   | codebase, AGENTS.md, tests       |
+| Role                | Description                                                      | Sources                          |
+| :------------------ | :--------------------------------------------------------------- | :------------------------------- |
+| **REVIEWER**        | Security auditing, code review, OWASP scanning                   | PRD, codebase, AGENTS.md, OWASP  |
+| **CRITIC**          | Challenges assumptions, finds edge cases, spots over-engineering | PRD, codebase, AGENTS.md         |
+| **DEBUGGER**        | Root-cause analysis, stack trace diagnosis, regression bisection | codebase, AGENTS.md, git history |
+| **BROWSER TESTER**  | E2E browser testing, UI/UX validation, visual regression         | PRD, AGENTS.md, fixtures         |
+| **CODE SIMPLIFIER** | Refactoring specialist — removes dead code, reduces complexity   | codebase, AGENTS.md, tests       |
 
 ### Skill Management
 
