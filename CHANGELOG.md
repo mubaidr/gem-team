@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.54.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.53.0...gem-team-v1.54.0) (2026-06-07)
+
+
+### 🧹 Housekeeping
+
+* **agents:** refine orchestrator role description and agent input reference ([0dc9b4c](https://github.com/mubaidr/gem-team/commit/0dc9b4c535b39b065103396405591834d8da5fc8))
+* **agents:** streamline orchestrator phase initialization and complexity handling ([25b601d](https://github.com/mubaidr/gem-team/commit/25b601d9869548deb1b83e082624a6e74893f209))
+
 ## [1.53.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.52.0...gem-team-v1.53.0) (2026-06-06)
 
 
