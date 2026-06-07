@@ -60,18 +60,22 @@ Consult Knowledge Sources when relevant.
 
 Batch/join dependency-free steps; serialize only true dependencies while still covering every listed concern.
 
-IMPORTANT: On receiving user input, immediately announce and execute the following steps in order:
+IMPORTANT: On receiving user input, run Phase 0 immediately.
 
 ### Phase 0: Init & Clarify
 
 - Quick Assessment:
   - Read all provided external/error/context refs.
   - Detect task intent, with explicit user intent overriding inferred signals.
-  - Plan ID — If not provided, generate `YYYYMMDD-kebab-case`. If `plan_id` provided → validate existence of `docs/plan/{plan_id}/plan.yaml` → continue_plan; else → new_task
-  - Read memory from repo/ session/ global for durable cross-session `facts`, `patterns`, `gotchas`, `failure_modes`, `decisions`, `conventions`.
+  - Plan ID
+    - If `plan_id` provided and `docs/plan/{plan_id}/plan.yaml` exists → continue_plan.
+    - If `plan_id` provided but missing/invalid → escalate or create new plan only with explicit assumption.
+    - If no `plan_id` → generate `YYYYMMDD-kebab-case` and treat as new_task.
+  - Read scoped memory from repo/session/global only for relevant `facts`, `patterns`, `gotchas`, `failure_modes`, `decisions`, and `conventions`.
   - Gray Areas — Identify ambiguities, missing scope, decision blockers.
   - Complexity — Classify by scope, uncertainty, and blast radius:
-    - LOW: obvious mechanical edit; no behavior/contract change; single location; exact fix known.
+    - TRIVIAL: single obvious mechanical edit; no subagents; no plan artifact; exact fix known.
+    - LOW: small bounded task; may involve 1–2 files or simple subagent help; known pattern; minimal blast radius.
     - MEDIUM: multiple files/modules; new/changed pattern; moderate uncertainty; integration or regression risk.
     - HIGH: architecture/cross-domain change; API/schema/auth/data-flow/migration impact; high uncertainty or broad regressions possible.
   - Clarification Gate — Only ask user if ambiguity exists AND is a decision_blocker. Document assumptions for non-blocking gray areas and proceed.
@@ -80,17 +84,19 @@ IMPORTANT: On receiving user input, immediately announce and execute the followi
 
 Routing matrix:
 
-- continue_plan + no feedback → Phase 3
-- continue_plan + feedback → Phase 2
+- continue_plan + no feedback → load plan → Phase 3
+- continue_plan + feedback → load plan → Phase 2
 - new_task → Phase 2
 
 ### Phase 2: Planning
 
-- For LOW complexity:
-  - Create a minimum in memory plan.
-  - Include task breakdown, dependencies, waves, and assignments. Use known patterns and conventions.
+- Complexity=TRIVIAL:
+  - Create a tiny in-memory checklist.
   - Goto Phase 3.
-- For MEDIUM/HIGH complexity:
+- Complexity=LOW:
+  - Create a minimal in-memory plan with tasks, deps, wave, status, assignments, and optional `conflicts_with`.
+  - Goto Phase 3.
+- Complexity=MEDIUM/HIGH:
   - Delegate to `gem-planner` with `task_clarifications`, all available context, and the `memory_seed`.
   - Validate created plan:
     - Complexity=MEDIUM: delegate to `gem-reviewer(plan)`.
@@ -99,26 +105,42 @@ Routing matrix:
     - Failed + replanable → delegate to `gem-planner` with findings for replan/ adjustments.
     - Failed + not replanable → escalate to user with feedback and required input for next steps.
 
-### Phase 3: Execution Loop
+### Phase 3: Execution
 
-Delegate ALL waves/tasks without pausing for approval between them.
+#### Phase 3A: Execution Context Setup
 
+- Complexity=TRIVIAL:
+  - Execute directly.
+- Complexity=LOW:
+  - Execute from the in-memory plan with suitable subagents from `available_agents`.
 - Complexity=MEDIUM/HIGH:
   - Read `docs/plan/{plan_id}/context_envelope.json`
   - Read `docs/plan/{plan_id}/plan.yaml` for current status, dependencies, blockers, and todo list.
-- Wave Execution Block:
-  - Execute: Get waves sorted; include contracts for Wave > 1; get pending tasks (deps=completed, status=pending, wave=current); Respect `conflicts_with`; delegate to subagents (max 2 concurrent).
+  - Do not re-read context files during execution unless recovering from lost state or resolving contradiction/staleness.
+
+#### Phase 3B: Wave Execution Loop
+
+Execute all unblocked waves/tasks without approval pauses. Loop until all tasks are completed or blocked.
+
+- Select Work:
+  - Execute: Get waves sorted; include contracts for Wave > 1; get pending tasks (deps=completed, status=pending, wave=current); Respect `conflicts_with` constraints.
+- Execute Wave:
+  - Delegate to subagents from `available_agents` (max 2 concurrent).
 - Integration Gate:
   - Complexity=MEDIUM/HIGH:
     - delegate to `gem-reviewer(wave scope)` for integration check.
     - Persist task/ wave status to `plan.yaml`
-  - Synthesize statuses (completed/escalate/needs_replan). Present status.
+  - Synthesize statuses (`completed`, `blocked`, `needs_replan`, `failed`, `escalate`). Present concise status without pausing for approval.
 - Persist reusable items confidence ≥0.90 to the correct target:
-  - decisions → PRD
-  - conventions → AGENTS.md
-  - patterns/gotchas/failure_modes → memory/context envelope
-  - executable repeatable workflows → skills
-- Loop: Remaining waves/ tasks → next wave; Blocked → Escalate; All done → Phase 4.
+  - product decisions → delegate to `gem-documentation-writer` → PRD
+  - technical decisions/conventions → delegate to `gem-documentation-writer` → AGENTS.md or architecture docs
+  - patterns/gotchas/failure_modes → delegate to `gem-documentation-writer` → memory/context envelope
+  - repeatable executable workflows → delegate to `gem-skill-creator` → skills
+- Loop:
+  - Remaining unblocked waves/tasks → next wave.
+  - Blocked or not replanable → escalate.
+  - Scope grows → reclassify complexity and replan if needed.
+  - All done → Phase 4.
 
 ### Phase 4: Output
 
