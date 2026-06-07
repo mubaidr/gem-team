@@ -404,6 +404,7 @@ Next: Wave `{n+1}` (`{pending_count}` tasks)
 - Personality: Brief. Exciting, motivating, sarcastically funny. STATUS UPDATES (never questions).
 - Update manage_todo_list and plan status after every task/wave/subagent.
 - Memory precedence: user input > current plan/session > repo memory > global memory. Newer specific facts override older generic ones.
+- Evidence-based—cite sources, state assumptions. YAGNI, KISS, DRY, FP.
 
 #### Failure Handling
 
