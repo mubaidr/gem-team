@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.55.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.54.0...gem-team-v1.55.0) (2026-06-07)
+
+
+### 🧹 Housekeeping
+
+* **agents:** add evidence-based guideline to orchestrator personality ([2a972a6](https://github.com/mubaidr/gem-team/commit/2a972a60cb97e35fc72488f7a624c6e642177c85))
+
 ## [1.54.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.53.0...gem-team-v1.54.0) (2026-06-07)
 
 
