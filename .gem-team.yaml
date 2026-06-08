@@ -1,0 +1,56 @@
+# gem-team configuration
+# This file contains user-configurable settings for gem-team behavior.
+# See https://github.com/mubaidr/gem-team#configuration
+
+# ═══════════════════════════════════════════════════════════
+# ORCHESTRATOR BEHAVIOR
+# ═══════════════════════════════════════════════════════════
+orchestrator:
+  # Maximum number of agents that can run in parallel
+  # Higher = faster execution, but more rps/ rpm usage
+  max_concurrent_agents: 2
+
+  # Force all tasks to this complexity level; 'auto' = let orchestrator decide
+  # TRIVIAL/LOW = faster, fewer steps | MEDIUM/HIGH = more thorough planning & review
+  default_complexity_threshold: auto
+
+# ═══════════════════════════════════════════════════════════
+# PLANNING & WORKFLOW
+# ═══════════════════════════════════════════════════════════
+planning:
+  # Run gem-critic (challenge assumptions, find edge cases) for these complexities
+  # TRIVIAL/LOW/MEDIUM/HIGH
+  enable_critic_for: [HIGH]
+
+# ═══════════════════════════════════════════════════════════
+# QUALITY & VERIFICATION
+# ═══════════════════════════════════════════════════════════
+quality:
+  # Enable visual regression testing (screenshot comparison)
+  visual_regression_enabled: true
+
+  # Screenshot difference threshold (higher = stricter)
+  # 0.99 = very strict | 0.95 = balanced | 0.90 = lenient
+  visual_diff_threshold: 0.95
+
+  # Accessibility audit depth (used by gem-browser-tester)
+  # none | basic | full
+  a11y_audit_level: basic
+
+# ═══════════════════════════════════════════════════════════
+# DEVOPS & DEPLOYMENT
+# ═══════════════════════════════════════════════════════════
+devops:
+  # Require explicit approval for these environments
+  # staging/production | empty array = no approval required
+  approval_required_for: [production]
+
+  # Automatically rollback deployment on failure
+  auto_rollback_on_failure: false
+
+# ═══════════════════════════════════════════════════════════
+# TESTING
+# ═══════════════════════════════════════════════════════════
+testing:
+  # Capture screenshots on test failures
+  screenshot_on_failure: true
