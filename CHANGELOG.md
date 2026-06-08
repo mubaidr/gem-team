@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.57.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.56.0...gem-team-v1.57.0) (2026-06-08)
+
+
+### 🧹 Housekeeping
+
+* fix README anchor links and dash typography ([ea62610](https://github.com/mubaidr/gem-team/commit/ea626109f0aa653a8c4d564604e974cf32f3061c))
+* fix README anchor links and typography ([68cc84e](https://github.com/mubaidr/gem-team/commit/68cc84e6179de65a273d84d5662606d549f7a4b2))
+
 ## [1.56.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.55.0...gem-team-v1.56.0) (2026-06-08)
 
 
