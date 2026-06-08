@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.56.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.55.0...gem-team-v1.56.0) (2026-06-08)
+
+
+### 🚀 New Agents & Features
+
+* Add runtime config support worklfow/ agent behavior customization ([4b7a405](https://github.com/mubaidr/gem-team/commit/4b7a405a63b7ee08ee3775959cb7e5b8f2f95a46))
+
+
+### 🛠️ Bug Fixes
+
+* https://github.com/mubaidr/gem-team/issues/101 ([4b7a405](https://github.com/mubaidr/gem-team/commit/4b7a405a63b7ee08ee3775959cb7e5b8f2f95a46))
+
 ## [1.55.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.54.0...gem-team-v1.55.0) (2026-06-07)
 
 
