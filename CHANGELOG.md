@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.58.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.57.0...gem-team-v1.58.0) (2026-06-09)
+
+
+### 🧹 Housekeeping
+
+* add tagline and Comparison section to README ([f0b4b3b](https://github.com/mubaidr/gem-team/commit/f0b4b3bea4cf20374b6dc589f4ffdb2033372ad6))
+* clarify orchestrator role and execution constraints ([583afa7](https://github.com/mubaidr/gem-team/commit/583afa706e2edf945247a60c5f841f118482d032))
+
 ## [1.57.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.56.0...gem-team-v1.57.0) (2026-06-09)
 
 
