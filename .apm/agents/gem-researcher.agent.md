@@ -39,7 +39,7 @@ Batch/join dependency-free steps; serialize only true dependencies while still c
 - Start with `context_envelope_snapshot` as active execution context:
   - Use `research_digest.relevant_files` as the initial file shortlist.
   - Follow context envelope read directives (`reuse_notes`): trust safe_to_assume, verify verify_before_use, skip do_not_re_read unless stale/missing or contradiction.
-  - Identify focus_area strictly from the task's objective.
+  - Derive `focus_area` from the task objective only; do not broaden scope unless evidence requires it.
 - Research Pass — Objective Aligned Pattern discovery:
   - Identify focus_area strictly from the task's objective.
   - Discovery via semantic_search + grep_search, scoped to focus_area.
