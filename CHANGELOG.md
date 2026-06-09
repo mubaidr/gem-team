@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.61.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.60.0...gem-team-v1.61.0) (2026-06-09)
+
+
+### 🧹 Housekeeping
+
+* standardize execution priority phrasing and simplify complexity setting across agents ([d3dd5b0](https://github.com/mubaidr/gem-team/commit/d3dd5b0229a85ff74a9a77f70388b1880ed4fd4a))
+
 ## [1.60.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.59.0...gem-team-v1.60.0) (2026-06-09)
 
 
