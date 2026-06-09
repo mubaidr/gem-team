@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.59.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.58.0...gem-team-v1.59.0) (2026-06-09)
+
+
+### 🧹 Housekeeping
+
+* clarify orchestrator role and execution constraints ([3816804](https://github.com/mubaidr/gem-team/commit/381680428d6a813b60115fa2775520fa700c83b0))
+
 ## [1.58.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.57.0...gem-team-v1.58.0) (2026-06-09)
 
 
