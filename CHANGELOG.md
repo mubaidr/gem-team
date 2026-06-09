@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.60.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.59.0...gem-team-v1.60.0) (2026-06-09)
+
+
+### 🧹 Housekeeping
+
+* clarify focus_area derivation in gem-researcher agent ([1b24a95](https://github.com/mubaidr/gem-team/commit/1b24a95e16bfad7d0379f74adc246c45e8add945))
+
 ## [1.59.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.58.0...gem-team-v1.59.0) (2026-06-09)
 
 
