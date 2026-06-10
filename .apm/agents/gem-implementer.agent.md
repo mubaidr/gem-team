@@ -42,6 +42,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
   - Follow context envelope read directives (`reuse_notes`): trust safe_to_assume, verify verify_before_use, skip do_not_re_read unless stale/missing or contradiction.
   - Read tokens from `DESIGN.md` (UI tasks only).
   - Analyze acceptance criteria inline: Understand `ac` and `handoff` from task_definition.
+  - Skill Invocation: If `task_definition.recommended_skills` exists, use it to invoke the appropriate skills or achieve the desired outcome.
 - Bug-Fix Mode Branch:
   - If `task_definition.debugger_diagnosis` exists → follow Bug-Fix Mode (see Rules). Validation gate runs first.
 - TDD Cycle (Red → Green → Refactor → Verify) for standard/feature tasks:
