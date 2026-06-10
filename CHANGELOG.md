@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.62.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.61.0...gem-team-v1.62.0) (2026-06-10)
+
+
+### 🚀 New Agents & Features
+
+* Add exploration_mode to gem-researcher and integrate with planner/orchestrator ([8aeed91](https://github.com/mubaidr/gem-team/commit/8aeed915da2b4c22564f7bf62a2243692e9ebd97))
+
 ## [1.61.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.60.0...gem-team-v1.61.0) (2026-06-09)
 
 
