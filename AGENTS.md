@@ -19,9 +19,9 @@ Static conventions, rules, and agent definitions for the Gem Team multi-agent fr
   - Argument-hint: `Plan_id, objective.`
   - Sources: PRD, AGENTS.md, Official docs, Memory seed from orchestrator
 
-- `gem-researcher` — Codebase exploration. Discovers patterns, dependencies, architecture. Returns structured JSON findings.
+- `gem-researcher` — Codebase exploration. Discovers patterns, dependencies, architecture. Supports modes (scan/deep/audit/trace/question) with budget controls. Returns structured JSON findings.
   - Mode: `subagent` (hidden)
-  - Argument-hint: `Enter plan_id, objective, focus_area (optional), and context_envelope_snapshot.`
+  - Argument-hint: `Enter plan_id, objective, focus_area (optional), exploration_mode (optional), and context_envelope_snapshot.`
 
 - `gem-implementer` — TDD code implementation (features, bugs, refactoring). Never reviews own work.
   - Mode: `subagent` (hidden)
