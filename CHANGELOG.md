@@ -6,6 +6,12 @@
 ### 🚀 New Agents & Features
 
 * Add exploration_mode to gem-researcher and integrate with planner/orchestrator ([8aeed91](https://github.com/mubaidr/gem-team/commit/8aeed915da2b4c22564f7bf62a2243692e9ebd97))
+* add skill invocation and matching to gem-implementer and gem-planner agents ([74e413e](https://github.com/mubaidr/gem-team/commit/74e413ee07521efebac5f1e073abf1bb74fece3e))
+
+
+### 🛠️ Bug Fixes
+
+* https://github.com/mubaidr/gem-team/issues/122 ([74e413e](https://github.com/mubaidr/gem-team/commit/74e413ee07521efebac5f1e073abf1bb74fece3e))
 
 ## [1.61.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.60.0...gem-team-v1.61.0) (2026-06-09)
 
