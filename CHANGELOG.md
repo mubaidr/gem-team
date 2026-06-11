@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.63.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.62.0...gem-team-v1.63.0) (2026-06-11)
+
+
+### 🧹 Housekeeping
+
+* add mandatory execution rule to all agent documentation files ([4978f23](https://github.com/mubaidr/gem-team/commit/4978f23efe61f3a0765a7560a4200b4e9e54d2c5))
+* **main:** release gem-team 1.62.0 ([e46ff5a](https://github.com/mubaidr/gem-team/commit/e46ff5a7a8d9bf19702945efde58d1d27e778e75))
+* **main:** release gem-team 1.62.0 ([e20a914](https://github.com/mubaidr/gem-team/commit/e20a91462373a6c82371dafb78187ebe53bfb585))
+
 ## [1.62.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.61.0...gem-team-v1.62.0) (2026-06-10)
 
 
