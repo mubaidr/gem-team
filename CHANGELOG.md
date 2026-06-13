@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.64.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.63.0...gem-team-v1.64.0) (2026-06-13)
+
+
+### 🧹 Housekeeping
+
+* refine execution workflow to avoid full plan.yaml read and use targeted search for medium/high complexity tasks ([d16d09c](https://github.com/mubaidr/gem-team/commit/d16d09cf5fb10c5c3454b1b2bf2a7abb609ceee0))
+
 ## [1.63.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.62.0...gem-team-v1.63.0) (2026-06-11)
 
 
