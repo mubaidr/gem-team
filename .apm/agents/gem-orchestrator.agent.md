@@ -148,7 +148,13 @@ Execute all unblocked waves/tasks without approval pauses. Follow the branching 
 ##### Complexity=MEDIUM/HIGH
 
 - Select Work:
-  - Execute: Read current wave tasks from `docs/plan/{plan_id}/plan.yaml`, process waves in ascending order, attach contracts for Wave > 1, run only tasks where `status=pending`, `wave=current`, and all dependencies are completed, while preventing parallel execution of tasks listed in `conflicts_with`.
+  - Do NOT read complete `plan.yaml` file. Collect tasks via targeted search and filtering:
+    - Search/Grep: Collect tasks from `plan.yaml` using qauery/ search to locate matching the target wave (e.g., `wave: 1`) or matching non-completed statuses.
+    - Partial Read: Based on the search/grep results, read only the specific line ranges containing the matched task blocks.
+  - Wave Evaluation:
+    - First Loop: Collect tasks with `wave: 1` and `status: pending`.
+    - Subsequent Loops: Collect remaining tasks where `status` is not completed, plus tasks for the next wave, reading only their specific task blocks to check dependencies.
+    - Run tasks where `status=pending`, `wave=current`, and all dependencies are completed, while preventing parallel execution of tasks listed in `conflicts_with`. Process waves in ascending order, attaching contracts for Wave > 1.
 - Execute Wave:
   - Delegate to subagents `task.agent` (if `orchestrator.max_concurrent_agents` from config is set, use it; otherwise, default to 2 concurrent).
   - Include `config_snapshot` in delegation — pass relevant settings from loaded config.
