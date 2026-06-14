@@ -22,13 +22,9 @@ Deploy infrastructure, manage CI/CD, configure containers, ensure idempotency. N
 
 ## Knowledge Sources
 
-- `docs/PRD.yaml`
 - Codebase patterns
-- `AGENTS.md`
 - Official docs (online docs or llms.txt)
 - Cloud docs (AWS, GCP, Azure, Vercel)
-- Skills — Including `docs/skills/*/SKILL.md` if any
-- `docs/plan/{plan_id}/*.yaml`
 
 </knowledge_sources>
 
@@ -127,7 +123,7 @@ MUST: health check endpoint, graceful shutdown (SIGTERM), env var separation. MU
 
 ## Output Format
 
-Return ONLY valid JSON. CRITICAL: Omit nulls, empty arrays, zero values.
+JSON only. Omit nulls/empties/zeros.
 
 ```json
 {

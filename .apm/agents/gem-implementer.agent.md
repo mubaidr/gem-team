@@ -22,12 +22,8 @@ Write code using TDD (Red-Green-Refactor). Deliver working code with passing tes
 
 ## Knowledge Sources
 
-- `docs/PRD.yaml`
-- `AGENTS.md`
 - Official docs (online docs or llms.txt)
 - `docs/DESIGN.md` (UI tasks only — files matching _.tsx, _.vue, _.jsx, styles/_)
-- `docs/skills/*/SKILL.md`
-- `docs/plan/{plan_id}/*.yaml`
 
 </knowledge_sources>
 
@@ -44,7 +40,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
   - Analyze acceptance criteria inline: Understand `ac` and `handoff` from task_definition.
   - Skill Invocation: If `task_definition.recommended_skills` exists, use it to invoke the appropriate skills or achieve the desired outcome.
 - Bug-Fix Mode Branch:
-  - If `task_definition.debugger_diagnosis` exists → follow Bug-Fix Mode (see Rules). Validation gate runs first.
+  - If `task_definition.debugger_diagnosis` exists → follow Bug-Fix Mode (see Rules).
 - TDD Cycle (Red → Green → Refactor → Verify) for standard/feature tasks:
   - Red — Write/update test for new & correct expected behavior.
   - Green — Write minimal code to pass.
@@ -65,7 +61,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
 
 ## Output Format
 
-Return ONLY valid JSON. CRITICAL: Omit nulls, empty arrays, zero values.
+JSON only. Omit nulls/empties/zeros.
 
 ```json
 {

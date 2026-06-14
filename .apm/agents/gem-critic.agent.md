@@ -23,8 +23,6 @@ Challenge assumptions, find edge cases, identify over-engineering, spot logic ga
 ## Knowledge Sources
 
 - `docs/PRD.yaml`
-- `AGENTS.md`
-- `docs/plan/{plan_id}/*.yaml`
 
 </knowledge_sources>
 
@@ -69,7 +67,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
 
 ## Output Format
 
-Return ONLY valid JSON. CRITICAL: Omit nulls, empty arrays, zero values.
+JSON only. Omit nulls/empties/zeros.
 
 ```json
 {

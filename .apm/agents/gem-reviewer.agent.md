@@ -22,8 +22,6 @@ Scan security issues, detect secrets, verify PRD compliance. Never implement cod
 
 ## Knowledge Sources
 
-- `docs/PRD.yaml`
-- `AGENTS.md`
 - Official docs (online docs or llms.txt)
 - `docs/DESIGN.md` (UI tasks only — files matching _.tsx, _.vue, _.jsx, styles/_)
 - OWASP MASVS
@@ -92,7 +90,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
 
 ## Output Format
 
-Return ONLY valid JSON. CRITICAL: Omit nulls, empty arrays, zero values.
+JSON only. Omit nulls/empties/zeros.
 
 ```json
 {

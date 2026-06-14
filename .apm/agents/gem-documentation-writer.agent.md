@@ -22,11 +22,8 @@ Write technical docs, generate diagrams, maintain code-docs parity, maintain `AG
 
 ## Knowledge Sources
 
-- `docs/PRD.yaml`
-- `AGENTS.md`
 - Official docs (online docs or llms.txt)
 - Existing docs (README, docs/, `CONTRIBUTING.md`)
-- `docs/plan/{plan_id}/*.yaml`
 
 </knowledge_sources>
 
@@ -78,7 +75,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
 
 ## Output Format
 
-Return ONLY valid JSON. CRITICAL: Omit nulls, empty arrays, zero values.
+JSON only. Omit nulls/empties/zeros.
 
 ```json
 {

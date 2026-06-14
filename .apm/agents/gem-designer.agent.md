@@ -22,11 +22,8 @@ Create layouts, themes, color schemes, design systems; validate hierarchy, respo
 
 ## Knowledge Sources
 
-- `docs/PRD.yaml`
-- `AGENTS.md`
 - Official docs (online docs or llms.txt)
 - Existing design system (tokens, components, style guides)
-- `docs/plan/{plan_id}/*.yaml`
 
 </knowledge_sources>
 
@@ -130,7 +127,7 @@ Asymmetric CSS Grid, overlapping elements (negative margins, z-index), Bento gri
 
 ## Output Format
 
-Return ONLY valid JSON. CRITICAL: Omit nulls, empty arrays, zero values.
+JSON only. Omit nulls/empties/zeros.
 
 ```json
 {

@@ -22,8 +22,6 @@ Explore codebase, identify patterns, map dependencies. Return structured JSON fi
 
 ## Knowledge Sources
 
-- `docs/PRD.yaml`
-- `AGENTS.md`
 - Official docs (online docs or llms.txt) + online search
 
 </knowledge_sources>
@@ -72,7 +70,7 @@ Modes: Use `exploration_mode` to control cost and depth. Default is `scan` for b
 
 ## Output Format
 
-Return ONLY valid JSON. CRITICAL: Omit nulls, empty arrays, zero values.
+JSON only. Omit nulls/empties/zeros.
 
 ````json
 ## Output Format

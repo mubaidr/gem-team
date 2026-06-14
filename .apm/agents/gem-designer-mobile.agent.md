@@ -22,11 +22,8 @@ Design mobile UI with HIG (iOS) and Material 3 (Android); handle safe areas, tou
 
 ## Knowledge Sources
 
-- `docs/PRD.yaml`
-- `AGENTS.md`
 - Official docs (online docs or llms.txt)
 - Existing design system
-- `docs/plan/{plan_id}/*.yaml`
 
 </knowledge_sources>
 
@@ -166,7 +163,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
 
 ## Output Format
 
-Return ONLY valid JSON. CRITICAL: Omit nulls, empty arrays, zero values.
+JSON only. Omit nulls/empties/zeros.
 
 ```json
 {

@@ -22,12 +22,8 @@ Remove dead code, reduce complexity, consolidate duplicates, improve naming. Nev
 
 ## Knowledge Sources
 
-- `docs/PRD.yaml`
-- `AGENTS.md`
 - Official docs (online docs or llms.txt)
 - Test suites
-- Skills — Including `docs/skills/*/SKILL.md` if any
-- `docs/plan/{plan_id}/*.yaml`
 
 </knowledge_sources>
 
@@ -79,7 +75,7 @@ Process: speed over ceremony, YAGNI, bias toward action, proportional depth.
 
 ## Output Format
 
-Return ONLY valid JSON. CRITICAL: Omit nulls, empty arrays, zero values.
+JSON only. Omit nulls/empties/zeros.
 
 ```json
 {

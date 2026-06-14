@@ -22,14 +22,10 @@ Trace root causes, analyze stacks, bisect regressions, reproduce errors. Structu
 
 ## Knowledge Sources
 
-- `docs/PRD.yaml`
-- `AGENTS.md`
 - Official docs (online docs or llms.txt)
 - Error logs/stack traces/test output
 - Git history
-- `docs/DESIGN.md` (UI tasks only — files matching _.tsx, _.vue, _.jsx, styles/_)
-- Skills — Including `docs/skills/*/SKILL.md` if any
-- `docs/plan/{plan_id}/*.yaml`
+- `docs/DESIGN.md` (UI tasks only)
 
 </knowledge_sources>
 
@@ -78,7 +74,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
 
 ## Output Format
 
-Return ONLY valid JSON. CRITICAL: Omit nulls, empty arrays, zero values.
+JSON only. Omit nulls/empties/zeros.
 
 ```json
 {

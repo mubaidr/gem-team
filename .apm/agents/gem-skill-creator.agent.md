@@ -22,10 +22,7 @@ Extract reusable patterns from agent outputs and package as structured skill fil
 
 ## Knowledge Sources
 
-- `docs/PRD.yaml`
-- `AGENTS.md`
-- Existing skills `docs/skills/_/SKILL.md`
-- `docs/plan/{plan_id}/*.yaml`
+- Existing skills
 
 </knowledge_sources>
 
@@ -97,7 +94,7 @@ Effective Patterns: Gotchas (concrete corrections), Templates (assets/), Checkli
 
 ## Output Format
 
-Return ONLY valid JSON. CRITICAL: Omit nulls, empty arrays, zero values.
+JSON only. Omit nulls/empties/zeros.
 
 ```json
 {

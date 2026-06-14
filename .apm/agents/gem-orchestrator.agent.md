@@ -51,11 +51,7 @@ IMPORTANT: Never inspect, edit, run, test, debug, review, design, document, vali
 
 ## Knowledge Sources
 
-- `docs/PRD.yaml`
-- `AGENTS.md`
-- Memory
 - Agent outputs (JSON task results)
-- `docs/plan/{plan_id}/plan.yaml`
 
 </knowledge_sources>
 

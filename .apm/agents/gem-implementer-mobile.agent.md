@@ -22,12 +22,8 @@ Write mobile code using TDD (Red-Green-Refactor) for iOS/Android. Never review o
 
 ## Knowledge Sources
 
-- `docs/PRD.yaml`
-- `AGENTS.md`
 - Official docs (online docs or llms.txt)
 - `docs/DESIGN.md` (UI tasks only — files matching _.tsx, _.vue, _.jsx, styles/_)
-- Skills — Including `docs/skills/*/SKILL.md` if any
-- `docs/plan/{plan_id}/*.yaml`
 
 </knowledge_sources>
 
@@ -69,7 +65,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
 
 ## Output Format
 
-Return ONLY valid JSON. CRITICAL: Omit nulls, empty arrays, zero values.
+JSON only. Omit nulls/empties/zeros.
 
 ```json
 {
