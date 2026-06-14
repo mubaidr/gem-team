@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.66.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.65.0...gem-team-v1.66.0) (2026-06-14)
+
+
+### 🧹 Housekeeping
+
+* add Execution guidance and related best practice bullets to agent documentation ([e78945f](https://github.com/mubaidr/gem-team/commit/e78945f7152457e76eb364d79ded1bf65d3ca60d))
+
 ## [1.65.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.64.0...gem-team-v1.65.0) (2026-06-14)
 
 
