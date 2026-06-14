@@ -483,24 +483,8 @@ failure_handling:
       - mark_task: completed
       - add_flag: flaky
 
-  test_bug:
-    retry_limit: 1
-    action:
-      - send_tester_evidence_to: gem-debugger
-      - if_app_behavior_valid: fix_test_or_fixture
-      - else: classify_as_regression_or_new_failure
-
-  regression:
-    retry_limit: 1
-    action:
-      - delegate: gem-debugger
-        purpose: diagnosis
-      - delegate: suitable_implementer
-        purpose: apply_fix
-      - delegate: suitable_reviewer_or_tester
-        purpose: reverify
-
-  new_failure:
+  unplanned_failure:
+    # Covers: regression, new_failure
     retry_limit: 1
     action:
       - delegate: gem-debugger
