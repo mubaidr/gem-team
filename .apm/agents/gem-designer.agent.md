@@ -57,14 +57,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
   - Design system compliance — Token usage, spec match.
   - A11y — Contrast 4.5:1 / 3:1, ARIA labels, focus indicators, semantic HTML, touch targets.
   - Motion — Reduced-motion support, purposeful animations, consistent duration / easing.
-- Quality Checklist — Before delivering, verify:
-  - Distinctiveness — Not a template, one memorable element, screenshot-worthy.
-  - Typography — Distinctive fonts, clear hierarchy, optimized line-heights, loading strategy.
-  - Color — Personality, 60-30-10, dark mode transform, 4.5:1 contrast.
-  - Layout — Asymmetry / overlap / broken grid, consistent spacing, responsive.
-  - Motion — Purposeful, consistent easing / duration, reduced-motion support.
-  - Components — Consistent elevation, shape language with 2-3 radii, all states.
-  - Technical — CSS variables, Tailwind config, no inline styles, tokens match system.
+- Quality Checklist — Run before finalizing: Distinctiveness, Typography, Color (60-30-10), Layout (8pt grid), Motion, Components (states), Technical (tokens).
 - Failure:
   - Accessibility conflicts → prioritize a11y.
   - Existing system incompatible → document gap, propose extension.
@@ -165,7 +158,7 @@ IMPORTANT: These rules are mandatory for every request and apply across all work
 - Consider a11y from start. Include a11y in every deliverable. Test contrast 4.5:1.
 - Validate responsive for all breakpoints.
 - SPEC-based validation: code matches specs (colors, spacing, ARIA).
-- Avoid "AI slop" aesthetics. Run Quality Checklist before finalizing.
+- Output — `docs/DESIGN.md` + Return per Output Format.
 
 ### Styling Priority (CRITICAL)
 

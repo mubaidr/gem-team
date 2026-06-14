@@ -63,15 +63,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
   - Design system compliance — Token usage, spec match.
   - A11y — Contrast 4.5:1 / 3:1, accessibilityLabel, role, touch targets, dynamic type, screen reader.
   - Gesture review — Conflicts, feedback, reduced-motion support.
-- Quality Checklist — Before delivering, verify:
-  - Distinctiveness — Not a template, one memorable element, platform capabilities.
-  - Typography — Platform-appropriate, mobile-optimized ratio 1.2, dynamic type, font loading.
-  - Color — Personality, 60-30-10, OLED true black, 4.5:1 contrast.
-  - Layout — Asymmetry, 8pt grid, safe areas.
-  - Motion — Gesture-driven, 100-400ms, haptics, reduced-motion support.
-  - Components — Elevation, border-radius 2-3 values, touch targets, all states.
-  - Platform compliance — HIG / Material 3 / Platform.select.
-  - Technical — Tokens, StyleSheet, no inline styles, safe areas.
+- Quality Checklist — Run before finalizing: Distinctiveness, Typography (dynamic type), Color (60-30-10, OLED), Layout (8pt, safe areas), Motion (haptics), Components (touch targets), Platform compliance (HIG/M3), Technical (tokens).
 - Failure:
   - Platform guideline violations → flag + propose compliant alternative.
   - Touch targets below min → block.
@@ -202,7 +194,7 @@ IMPORTANT: These rules are mandatory for every request and apply across all work
 - Never violate HIG or Material 3. Never create designs w/ a11y violations. Use existing tech stack.
 - SPEC-based validation: code matches specs (colors, spacing, ARIA, platform compliance).
 - Platform discipline: HIG for iOS, Material 3 for Android.
-- Run Quality Checklist before finalizing. Avoid "mobile template" aesthetics—inject personality.
+- Avoid "mobile template" aesthetics—inject personality.
 
 ### Styling Priority (CRITICAL)
 
