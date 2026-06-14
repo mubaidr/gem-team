@@ -94,21 +94,19 @@ IMPORTANT: These rules are mandatory for every request and apply across all work
 
 ### Execution
 
-- Tool Execution priority: native tools → workspace tasks → scripts → raw CLI.
-- Batch by default: Plan the action graph first, then execute all independent workflow steps and tool calls in the same turn/message. This applies to reads, searches, greps, lists, inspections, metadata queries, writes, edits, patches, tests, and commands. Parallelize aggressively; serialize only when calls depend on prior results, mutate the same file/resource, require validation, or may create conflicts.
-- Do not drip-feed tool calls: collect likely-needed reads/searches/inspections upfront, batch them, then continue from the combined results.
-- Discover broadly, narrow early with OR regexes/multi-globs/include/exclude filters, then parallel/ batch read the full relevant file set. Prefer one broad discovery pass over repeated narrow search/read loops.
-- Execute autonomously; ask only for true blockers.
-- Use scripts for deterministic/repeatable/bulk work: data processing, codemods, generated outputs, audits, validation, reports.
-  - Scripts: explicit args, arg-only paths, deterministic output, progress logs for long runs, error handling, non-zero failure exits.
-  - Test on sample/small input before full run.
+- **Batch aggressively** — plan action graph first, execute all independent calls (reads/searches/greps/writes/edits/tests/commands) in one turn. Serialize only for: dependent results, same-file mutations, validation needs, or conflict risk. Prefer native tools → workspace tasks → scripts → raw CLI.
+- **Discover broadly, narrow early** — one broad pass with OR regexes/multi-globs/include-exclude filters, collect likely-needed reads/searches/inspections upfront, then batch-read full relevant file set. No drip-feeding; no repeated narrow loops.
+- **Execute autonomously** — ask only for true blockers. Scripts for repeatable/bulk work (data processing, codemods, audits, reports): explicit args, arg-only paths, deterministic output, progress logs for long runs, error handling, non-zero failure exits. Test on small input first. Retry transient failures 3×.
 
 ### Constitutional
 
+- Surgical edits only—minimal fix, no refactoring or adjacent changes.
+- After each fix: run regression tests on both iOS and Android before concluding.
 - TDD: Red→Green→Refactor. Test behavior, not implementation.
 - YAGNI, KISS, DRY, FP. No TBD/TODO as final.
-- Document out-of-scope items in task notes for future reference.
+- Must meet all acceptance_criteria. Use existing tech stack.
 - Performance: Measure→Apply→Re-measure→Validate.
+- Document out-of-scope items in task notes for future reference.
 
 #### Mobile
 
@@ -116,20 +114,16 @@ IMPORTANT: These rules are mandatory for every request and apply across all work
 - Animate only transform/opacity (GPU). Use Reanimated. Memo list items (React.memo+useCallback).
 - Test on both iOS and Android. Never inline styles (StyleSheet.create). Never hardcode dimensions (flex/Dimensions API/useWindowDimensions).
 - Never waitFor/setTimeout for animations (Reanimated timing). Don't skip platform testing. Cleanup subscriptions in useEffect.
-- Interface: sync/async, req-resp/event. Data: validate at boundaries, never trust input. State: match complexity.
 - UI: use `DESIGN.md` tokens, never hardcode colors/spacing/shadows.
-- Must meet all acceptance_criteria. Use existing tech stack. Evidence-based. YAGNI, KISS, DRY, FP.
 - Interface: sync/async, req-resp/event. Data: validate at boundaries, never trust input. State: match complexity. Errors: plan paths first.
 - Contract tasks: write contract tests before business logic.
-- Evidence-based—cite sources, state assumptions. YAGNI, KISS, DRY, FP.
-- TDD: Red→Green→Refactor. Test behavior, not implementation.
 
 #### Bug-Fix Mode
 
-- IF debugger_diagnosis present: don't repeat RCA unless diagnosis conflicts w/ source/tests.
-- Read only: target_files, required test file, directly referenced contracts.
-- Start w/ required_test_first.
-- Implement minimal_change.
-- If wrong→needs_revision w/ contradiction evidence.
+- IF debugger_diagnosis present: validate it contains `root_cause`, `target_files`, `fix_recommendations`.
+- Update/create test that reproduces the bug (asserts correct behavior) for both iOS and Android.
+- Verify test fails before fix.
+- Implement minimal_change to pass the test.
+- Run regression tests on both iOS and Android—verify fix doesn't break existing functionality.
 
 </rules>

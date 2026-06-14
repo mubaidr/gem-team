@@ -89,25 +89,19 @@ IMPORTANT: These rules are mandatory for every request and apply across all work
 
 ### Execution
 
-- Tool Execution priority: native tools → workspace tasks → scripts → raw CLI.
-- Batch by default: Plan the action graph first, then execute all independent workflow steps and tool calls in the same turn/message. This applies to reads, searches, greps, lists, inspections, metadata queries, writes, edits, patches, tests, and commands. Parallelize aggressively; serialize only when calls depend on prior results, mutate the same file/resource, require validation, or may create conflicts.
-- Do not drip-feed tool calls: collect likely-needed reads/searches/inspections upfront, batch them, then continue from the combined results.
-- Discover broadly, narrow early with OR regexes/multi-globs/include/exclude filters, then parallel/ batch read the full relevant file set. Prefer one broad discovery pass over repeated narrow search/read loops.
-- Execute autonomously; ask only for true blockers.
-- Use scripts for deterministic/repeatable/bulk work: data processing, codemods, generated outputs, audits, validation, reports.
-  - Scripts: explicit args, arg-only paths, deterministic output, progress logs for long runs, error handling, non-zero failure exits.
-  - Test on sample/small input before full run.
+- **Batch aggressively** — plan action graph first, execute all independent calls (reads/searches/greps/writes/edits/tests/commands) in one turn. Serialize only for: dependent results, same-file mutations, validation needs, or conflict risk. Prefer native tools → workspace tasks → scripts → raw CLI.
+- **Discover broadly, narrow early** — one broad pass with OR regexes/multi-globs/include-exclude filters, collect likely-needed reads/searches/inspections upfront, then batch-read full relevant file set. No drip-feeding; no repeated narrow loops.
+- **Execute autonomously** — ask only for true blockers. Scripts for repeatable/bulk work (data processing, codemods, audits, reports): explicit args, arg-only paths, deterministic output, progress logs for long runs, error handling, non-zero failure exits. Test on small input first. Retry transient failures 3×.
 
 ### Constitutional
 
+- Surgical edits only—no refactoring or adjacent fixes (preserve reviewability).
+- After each fix: run regression tests before concluding.
 - Interface: sync/async, req-resp/event. Data: validate at boundaries, never trust input. State: match complexity. Errors: plan paths first.
 - UI: use `DESIGN.md` tokens, never hardcode colors/spacing. Dependencies: explicit contracts.
 - Contract tasks: write contract tests before business logic.
-- Must meet all acceptance_criteria. Use existing tech stack.
-- Evidence-based—cite sources, state assumptions. YAGNI, KISS, DRY, FP.
-- TDD: Red→Green→Refactor. Test behavior, not implementation.
+- Must meet all acceptance_criteria. Use existing tech stack. YAGNI, KISS, DRY, FP.
 - Scope discipline: track out-of-scope items in task notes for future reference.
-- Document out-of-scope items in task notes for future reference.
 
 #### Bug-Fix Mode
 
@@ -115,13 +109,12 @@ When `task_definition.debugger_diagnosis` exists (diagnose-then-fix paired task)
 
 - Validation Gate (run first):
   - Validate diagnosis contains: `root_cause`, `target_files`, `fix_recommendations`.
-  - If any field missing → return `needs_revision` immediately. Do NOT proceed with TDD.
+  - If any field missing → return `needs_revision` immediately. Do NOT proceed.
   - Use `implementation_handoff` as the authoritative work scope.
 - Execution:
-  - Don't repeat RCA unless diagnosis conflicts with source/tests.
-  - Read only: target_files, required test file, directly referenced contracts/docs.
-  - Start w/ required_test_first.
-  - Implement minimal_change.
-  - If diagnosis is wrong → return `needs_revision` with contradiction evidence.
+  - Update/create test that reproduces the bug (asserts correct behavior).
+  - Verify test fails before fix.
+  - Implement minimal_change to pass the test.
+  - Run regression tests—verify fix doesn't break existing functionality.
 
 </rules>

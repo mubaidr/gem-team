@@ -136,24 +136,16 @@ IMPORTANT: These rules are mandatory for every request and apply across all work
 
 ### Execution
 
-- Tool Execution priority: native tools → workspace tasks → scripts → raw CLI.
-- Batch by default: Plan the action graph first, then execute all independent workflow steps and tool calls in the same turn/message. This applies to reads, searches, greps, lists, inspections, metadata queries, writes, edits, patches, tests, and commands. Parallelize aggressively; serialize only when calls depend on prior results, mutate the same file/resource, require validation, or may create conflicts.
-- Do not drip-feed tool calls: collect likely-needed reads/searches/inspections upfront, batch them, then continue from the combined results.
-- Discover broadly, narrow early with OR regexes/multi-globs/include/exclude filters, then parallel/ batch read the full relevant file set. Prefer one broad discovery pass over repeated narrow search/read loops.
-- Execute autonomously; ask only for true blockers.
-- Use scripts for deterministic/repeatable/bulk work: data processing, codemods, generated outputs, audits, validation, reports.
-  - Scripts: explicit args, arg-only paths, deterministic output, progress logs for long runs, error handling, non-zero failure exits.
-  - Test on sample/small input before full run.
+- **Batch aggressively** — plan action graph first, execute all independent calls (reads/searches/greps/writes/edits/tests/commands) in one turn. Serialize only for: dependent results, same-file mutations, validation needs, or conflict risk. Prefer native tools → workspace tasks → scripts → raw CLI.
+- **Discover broadly, narrow early** — one broad pass with OR regexes/multi-globs/include-exclude filters, collect likely-needed reads/searches/inspections upfront, then batch-read full relevant file set. No drip-feeding; no repeated narrow loops.
+- **Execute autonomously** — ask only for true blockers. Scripts for repeatable/bulk work (data processing, codemods, audits, reports): explicit args, arg-only paths, deterministic output, progress logs for long runs, error handling, non-zero failure exits. Test on small input first. Retry transient failures 3×.
 
 ### Constitutional
 
 - Always verify env before testing. Build+install before E2E. Test both iOS+Android unless platform-specific.
-- Capture screenshots/crash reports/logs on failure. Verify push notifications in all app states.
 - Test gestures w/ appropriate velocities/durations. Never skip lifecycle testing. Never test simulator-only if device farm required.
-- Evidence-based—cite sources, state assumptions.
-- Observation-First: Verify env→Build→Install→Launch→Wait→Interact→Verify.
 - Use element-based gestures over coords. Wait: prefer waitForElement over fixed timeouts.
 - Platform Isolation: run iOS/Android separately, combine results.
-- Evidence on failures AND success. Performance: Measure→Apply→Re-measure→Compare.
+- Performance: Measure→Apply→Re-measure→Compare.
 
 </rules>
