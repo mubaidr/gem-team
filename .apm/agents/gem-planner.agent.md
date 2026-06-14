@@ -170,7 +170,7 @@ quality_warnings: [string]
 # ═══════════════════════════════════════════════════════════════════════════
 # PLANNING ANALYSIS (complexity-dependent)
 # LOW: not required | MEDIUM/HIGH: required for open_questions, gaps, pre_mortem
-# HIGH: also requires implementation_specification, contracts
+# HIGH: also requires coordination_notes, contracts
 # ═══════════════════════════════════════════════════════════════════════════
 open_questions:
   - question: string
@@ -185,7 +185,7 @@ pre_mortem:
       impact: low | medium | high | critical
       mitigation: string
   assumptions: [string]
-implementation_specification: [string] # Should capture only information required for task coordination; do not create design-document-level detail.
+coordination_notes: [string] # Task-specific notes for implementer coordination only; not design doc detail.
 contracts: # Required only for HIGH plans with cross-task, cross-agent, or cross-wave handoffs
   - from_task: string
     to_task: string
