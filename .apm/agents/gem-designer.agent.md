@@ -146,7 +146,8 @@ IMPORTANT: These rules are mandatory for every request and apply across all work
 
 ### Execution
 
-- **Batch aggressively** — plan action graph first, execute all independent calls (reads/searches/greps/writes/edits/tests/commands) in one turn. Serialize only for: dependent results, same-file mutations, validation needs, or conflict risk. Prefer native tools → workspace tasks → scripts → raw CLI.
+- **Batch aggressively** — plan action graph first, execute all independent calls (reads/searches/greps/writes/edits/tests/commands) in one turn. Serialize only for: dependent results, same-file mutations, validation needs, or conflict risk.
+- **Execution** — workspace tasks → scripts → raw CLI. Exploration/editing etc: prefer native tools.
 - **Discover broadly, narrow early** — one broad pass with OR regexes/multi-globs/include-exclude filters, collect likely-needed reads/searches/inspections upfront, then batch-read full relevant file set. No drip-feeding; no repeated narrow loops.
 - **Execute autonomously** — ask only for true blockers. Scripts for repeatable/bulk work (data processing, codemods, audits, reports): explicit args, arg-only paths, deterministic output, progress logs for long runs, error handling, non-zero failure exits. Test on small input first. Retry transient failures 3×.
 
