@@ -82,7 +82,6 @@ JSON only. Omit nulls/empties/zeros.
   "status": "completed | failed | in_progress | needs_revision",
   "task_id": "string",
   "fail": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
-  "confidence": 0.0-1.0,
   "files_changed": "number",
   "lines_removed": "number",
   "lines_changed": "number",

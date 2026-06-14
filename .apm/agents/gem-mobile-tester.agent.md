@@ -88,7 +88,6 @@ JSON only. Omit nulls/empties/zeros.
   "status": "completed | failed | in_progress | needs_revision",
   "task_id": "string",
   "fail": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific | test_bug",
-  "confidence": 0.0-1.0,
   "tests": { "ios": { "passed": "number", "failed": "number" }, "android": { "passed": "number", "failed": "number" } },
   "failures": ["string — max 3"],
   "crashes": "number",

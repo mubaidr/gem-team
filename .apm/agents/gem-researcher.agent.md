@@ -78,7 +78,6 @@ JSON only. Omit nulls/empties/zeros.
   "plan_id": "string",
   "task_id": "string",
   "mode": "scan | deep | audit | trace | question",
-  "confidence": 0.0,
   "workflow_complexity_hint": "TRIVIAL | LOW | MEDIUM | HIGH",
   "tldr": "string — dense 1-3 bullet summary",
   "evidence": [
