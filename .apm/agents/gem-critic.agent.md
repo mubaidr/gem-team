@@ -34,7 +34,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
 
 - Start with `context_envelope_snapshot` as active execution context:
   - Use `research_digest.relevant_files` as the initial file shortlist.
-  - Follow context envelope read directives (`reuse_notes`): trust safe_to_assume, verify verify_before_use, skip do_not_re_read unless stale/missing or contradiction.
+  - Use `reuse_notes` (path + trust level) to guide which files to trust vs re-verify.
   - Read target + task_clarifications (resolved decisions — don't challenge).
   - Read `plan.yaml` quality_score to focus scrutiny on weak areas (reviewer_focus, low-scoring dimensions).
   - Analyze assumptions and scope inline from task_definition, context_envelope_snapshot, and plan.yaml.

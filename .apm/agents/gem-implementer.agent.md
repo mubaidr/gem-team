@@ -35,7 +35,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
 
 - Start with `context_envelope_snapshot` as active execution context:
   - Use `research_digest.relevant_files` as the initial file shortlist.
-  - Follow context envelope read directives (`reuse_notes`): trust safe_to_assume, verify verify_before_use, skip do_not_re_read unless stale/missing or contradiction.
+  - Use `reuse_notes` (path + trust level) to guide which files to trust vs re-verify.
   - Read tokens from `DESIGN.md` (UI tasks only).
   - Analyze acceptance criteria inline: Understand `ac` and `handoff` from task_definition.
   - Skill Invocation: If `task_definition.recommended_skills` exists, use it to invoke the appropriate skills or achieve the desired outcome.

@@ -42,7 +42,7 @@ Modes: Use `exploration_mode` to control cost and depth. Default is `scan` for b
 
 - Start with `context_envelope_snapshot` as active execution context:
   - Use `research_digest.relevant_files` as the initial file shortlist.
-  - Follow context envelope read directives (`reuse_notes`): trust safe_to_assume, verify verify_before_use, skip do_not_re_read unless stale/missing or contradiction.
+  - Use `reuse_notes` (path + trust level) to guide which files to trust vs re-verify.
   - Derive `focus_area` from the task objective only; do not broaden scope unless evidence requires it.
 - Determine mode from `task_definition.exploration_mode`:
   - Default: `scan` if not specified (preserves backward compatibility)

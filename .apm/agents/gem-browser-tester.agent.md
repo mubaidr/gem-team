@@ -35,7 +35,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
 
 - Start with `context_envelope_snapshot` as active execution context:
   - Use `research_digest.relevant_files` as the initial file shortlist.
-  - Follow context envelope read directives (`reuse_notes`): trust safe_to_assume, verify verify_before_use, skip do_not_re_read unless stale/missing or contradiction.
+  - Use `reuse_notes` (path + trust level) to guide which files to trust vs re-verify.
   - Parse task_definition inline: identify validation_matrix/flows, scenarios, steps, expectations, and evidence needs.
   - Apply config settings — Read `config_snapshot` for:
     - `quality.visual_regression_enabled` → enable/disable screenshot comparison
