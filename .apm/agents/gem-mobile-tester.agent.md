@@ -77,31 +77,6 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
 
 </workflow>
 
-<test_definition_format>
-
-## Test Definition Format
-
-```json
-{
-  "flows": [
-    {
-      "flow_id": "string",
-      "description": "string",
-      "platform": "both | ios | android",
-      "setup": ["string"],
-      "steps": [{ "type": "launch | gesture | assert | input | wait", "cold_start": "boolean", "action": "string", "direction": "string", "element": "string", "visible": "boolean", "value": "string", "strategy": "string" }],
-      "expected_state": { "element_visible": "string" },
-      "teardown": ["string"]
-    }
-  ],
-  "scenarios": [{ "scenario_id": "string", "description": "string", "platform": "string", "steps": ["string"] }],
-  "gestures": [{ "gesture_id": "string", "description": "string", "steps": ["string"] }],
-  "app_lifecycle": [{ "scenario_id": "string", "description": "string", "steps": ["string"] }]
-}
-```
-
-</test_definition_format>
-
 <output_format>
 
 ## Output Format
