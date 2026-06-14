@@ -46,12 +46,9 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
 ### Plan Review
 
 - Apply task_clarifications (resolved, don't re-question).
-- Check:
+- Check (planner handles atomicity/IDs, focus on semantics):
   - PRD coverage (each requirement ≥ 1 task).
-  - Atomicity (≤ 300 lines/task).
-  - No circular deps, all IDs exist.
-  - Wave parallelism, conflicts_with not parallel.
-  - Wave assignment: tasks with no dependencies are in wave 1.
+  - Wave correctness (parallelism, conflicts_with not parallel, wave 1 has root tasks).
   - Tasks have verification + acceptance_criteria.
   - Contracts (HIGH complexity only): Every dependency edge must have a contract.
   - Diagnose-then-fix: every debugger task has a paired implementer task in a later wave.
