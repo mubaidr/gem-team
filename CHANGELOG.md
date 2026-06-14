@@ -1,5 +1,27 @@
 # Changelog
 
+## [1.65.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.64.0...gem-team-v1.65.0) (2026-06-14)
+
+
+### 🚀 New Agents & Features
+
+* add unplanned_failure handling ([b6c63a8](https://github.com/mubaidr/gem-team/commit/b6c63a8cd3f433303eb1b33959e44a99b79dff88))
+
+
+### 🧹 Housekeeping
+
+* add atomicity and dependency constraints ([be012eb](https://github.com/mubaidr/gem-team/commit/be012ebbc01efed857e59557e953a4f865815e72))
+* add reuse_notes (path + trust level) guidance and config settings for planning and devops ([9ec6ab2](https://github.com/mubaidr/gem-team/commit/9ec6ab26ddc7f5deab796f525b5005ecd2869525))
+* consolidate shared execution rules and reduce duplication across agent definitions ([569b8b3](https://github.com/mubaidr/gem-team/commit/569b8b3c2d0be4ac38295242eb426ecde9cb9ca2))
+* refine agent knowledge sources and output format ([c0a31cf](https://github.com/mubaidr/gem-team/commit/c0a31cf90a1bffd90543ff00d8aeb2c88e65ef32))
+* refine skill creator agent documentation and format ([4632f22](https://github.com/mubaidr/gem-team/commit/4632f22accc898cdb967c0921c10adc4422f1523))
+* remove output format section from gem-researcher agent documentation ([2b2c584](https://github.com/mubaidr/gem-team/commit/2b2c584400c54ca89cae94842aa44f7bb420adc8))
+* remove redundant fields and duplicate content from agent definition files ([c59c704](https://github.com/mubaidr/gem-team/commit/c59c704b6b29c87f979d71cb006845e145e15098))
+* remove test definition format and output format from gem-mobile-tester agent ([30ddb42](https://github.com/mubaidr/gem-team/commit/30ddb42d028ccb6c1130c892c0226021549e2a5c))
+* replace implementation_specification with coordination_notes ([b171f29](https://github.com/mubaidr/gem-team/commit/b171f29ac4c207bc2084d0c267e03f0dacc659d3))
+* simplify PRD format guide and set version to semver ([0dc4b9e](https://github.com/mubaidr/gem-team/commit/0dc4b9e8e5ddbcde53ece00a902f5e7938c73111))
+* simplify quality checklist and remove failure section ([0bcd521](https://github.com/mubaidr/gem-team/commit/0bcd521fd3459e253cc766e1b4c673c906657b2e))
+
 ## [1.64.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.63.0...gem-team-v1.64.0) (2026-06-13)
 
 
