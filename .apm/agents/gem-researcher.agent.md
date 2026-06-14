@@ -72,11 +72,6 @@ Modes: Use `exploration_mode` to control cost and depth. Default is `scan` for b
 
 JSON only. Omit nulls/empties/zeros.
 
-````json
-## Output Format
-
-Return ONLY valid JSON. Omit nulls, empty arrays, false booleans, and zero values.
-
 ```json
 {
   "status": "completed | failed | needs_revision",
@@ -104,7 +99,7 @@ Return ONLY valid JSON. Omit nulls, empty arrays, false booleans, and zero value
   },
   "fail": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific"
 }
-````
+```
 
 Rules:
 
