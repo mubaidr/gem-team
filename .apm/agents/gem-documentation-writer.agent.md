@@ -99,48 +99,16 @@ JSON only. Omit nulls/empties/zeros.
 
 ```yaml
 prd_id: string
-version: string # semver
-user_stories:
-  - as_a: string
-    i_want: string
-    so_that: string
-scope:
-  in_scope: [string]
-  out_of_scope: [string]
-acceptance_criteria:
-  - criterion: string
-    verification: string
-needs_clarification:
-  - question: string
-    context: string
-    impact: string
-    status: open|resolved|deferred
-    owner: string
-features:
-  - name: string
-    overview: string
-    status: planned|in_progress|complete
-state_machines:
-  - name: string
-    states: [string]
-    transitions:
-      - from: string
-        to: string
-        trigger: string
-errors:
-  - code: string # e.g., ERR_AUTH_001
-    message: string
-decisions:
-  - id: string # ADR-001
-    status: proposed|accepted|superseded|deprecated
-    decision: string
-    rationale: string
-    alternatives: [string]
-    consequences: [string]
-    superseded_by: string
-changes:
-  - version: string
-    change: string
+version: semver
+user_stories: [{ as_a, i_want, so_that }]
+scope: { in_scope: [], out_of_scope: [] }
+acceptance_criteria: [{ criterion, verification }]
+needs_clarification: [{ question, context, impact, status, owner }]
+features: [{ name, overview, status }]
+state_machines: [{ name, states, transitions }]
+errors: [{ code, message }]
+decisions: [{ id, status, decision, rationale, alternatives, consequences }]
+changes: [{ version, change }]
 ```
 
 </prd_format_guide>
