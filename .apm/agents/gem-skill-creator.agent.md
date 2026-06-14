@@ -50,15 +50,27 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
 - Create Skill Files — Per viable pattern:
   - Use `skills_guidelines`
   - Create `docs/skills/{name}/` folder.
-  - Generate SKILL.md per `skill_format_guide` + `skill_quality_guidelines`. Keep < 500 tokens; overflow → references/DETAIL.md.
-  - Create:
-    - `references/` (if > 500 tokens).
-    - `scripts/` (if executables needed).
-    - `assets/` (if templates / resources).
+  - **Identify reusable commands** — extract repeatable commands/scripts from the pattern
+  - Generate SKILL.md per `skill_format_guide`:
+    - `## Instructions` — prose approach (teach)
+    - `## Commands` — executable code blocks (do)
+    - `## Scripts` — if scripts are needed, create `scripts/{name}.sh` with proper shebang, args, error handling
+  - Keep < 500 tokens; overflow → references/DETAIL.md.
+  - Create supporting folders:
+    - `references/` (if > 500 tokens)
+    - `scripts/` (if executables needed) — make executable with `chmod +x`
+    - `assets/` (if templates/resources)
   - Cross-link with relative paths.
+- Script requirements:
+  - Shebang: `#!/bin/bash` or `#!/usr/bin/env node`
+  - Args: `--arg value` with usage/--help
+  - Error handling: `set -e`, exit non-zero on failure
+  - Progress logs for long runs
+  - Validate with test input before finalizing
 - Validate:
   - Deduplicate (skip if exists).
   - get_errors. No secrets exposed.
+  - Test scripts with dry-run or `--help`.
 - Failure:
   - Retry 3x, log "Retry N/3".
   - After max → escalate.
@@ -72,21 +84,12 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
 
 ### Quality Guidelines
 
-- Spend Context Wisely: Add what agent lacks, omit what it knows.
-- Keep <500 tokens; overflow→references/DETAIL.md.
-- Cut if agent handles task fine without it.
-
-- Coherent Scoping: One coherent unit.
-- Too narrow→overhead.
-- Too broad→activation imprecision.
-
-Favor Procedures: Teach how to approach a problem class, not what to produce for one instance. Exception: output format templates.
-Calibrate Control: Flexible (describe why)→Prescriptive (exact commands for fragile). Provide defaults, not menus.
-Effective Patterns: Gotchas (concrete corrections), Templates (assets/), Checklists (multi-step), Validation loops, Plan-validate-execute.
-
-- Refine via Execution: Run vs real tasks, feed results back.
-- Read execution traces, not just outputs.
-- Add corrections to Gotchas.
+- **Context budget**: Add what agent lacks, omit what it knows. Keep <500 tokens; overflow→references/DETAIL.md.
+- **Scoping**: One coherent unit. Too narrow→overhead; too broad→activation imprecision.
+- **Teach vs Do**: Instructions teach approach; Commands are executable code blocks.
+- **Control calibration**: Flexible (describe why) for general; Prescriptive (exact commands) for fragile.
+- **Effective patterns**: Gotchas, Templates (assets/), Checklists, Validation loops.
+- **Refine via execution**: Run vs real tasks, read traces, add corrections to Gotchas.
 
 </skill_quality_guidelines>
 
@@ -124,19 +127,22 @@ metadata:
   confidence: high|medium
   source: task-{source_task_id}
   usages: 0
+tools: [npm, git, docker] # tools this skill uses
 ---
 
-## When to Apply
+## When to Apply # Context/triggers for this skill
 
-## Steps
+## Instructions # How to approach (teach — prose, not code)
 
-## Example
+## Commands # Executable code blocks (do — real commands)
 
-## Common Edge Cases
+## Scripts # Script invocations if any (path/to/script.sh)
 
-## References
+## Example # Working example with inputs/outputs
 
-- See [references/DETAIL.md] for extended docs (if >500 tokens)
+## Common Edge Cases # Gotchas and workarounds
+
+- Extended docs → [references/DETAIL.md] (if >500 tokens)
 ```
 
 </skill_format_guide>
