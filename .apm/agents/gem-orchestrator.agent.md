@@ -77,7 +77,6 @@ IMPORTANT: On receiving user input, run Phase 0 immediately.
   - Gray Areas — Identify ambiguities, missing scope, decision blockers.
   - Complexity
     - Classify by actual scope, uncertainty, and blast radius.
-    - If project facts are required to classify confidently, delegate to `gem-researcher` with (`exploration_mode=scan`) mode.
     - If `orchestrator.default_complexity_threshold` is set, treat it as the minimum complexity floor, not the final classification.
     - TRIVIAL: single obvious mechanical task; direct delegation target is obvious; no durable plan artifact; minimal blast radius.
     - LOW: small bounded task; may involve 1–2 files or simple subagent help; known pattern; minimal blast radius; uses in-memory plan only.
