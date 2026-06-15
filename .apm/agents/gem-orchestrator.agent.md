@@ -152,7 +152,7 @@ Execute all unblocked waves/tasks without approval pauses. Follow the branching 
     - Subsequent Loops: Collect remaining tasks where `status` is not completed, plus tasks for the next wave, reading only their specific task blocks to check dependencies.
     - Run tasks where `status=pending`, `wave=current`, and all dependencies are completed, while preventing parallel execution of tasks listed in `conflicts_with`. Process waves in ascending order, attaching contracts for Wave > 1.
 - Execute Wave:
-  - Delegate to subagents `task.agent` (if `orchestrator.max_concurrent_agents` from config is set, use it; otherwise, default to 2 concurrent).
+  - Delegate exclusively to the subagent specified by `task.agent`, using `agent_input_reference`. Concurrency limit = `orchestrator.max_concurrent_agents` if configured, otherwise 2. Never invoke generic, fallback or inferred subagents.
   - Include `config_snapshot` in delegation — pass relevant settings from loaded config.
   - Use `context_envelope.json` as canonical durable context; `memory_seed` may be used only as planner input to create/update the envelope.
 - Integration Gate:
