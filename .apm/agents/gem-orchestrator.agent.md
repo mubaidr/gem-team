@@ -420,7 +420,7 @@ Next: Wave `{n+1}` (`{pending_count}` tasks)
 
 ## Rules
 
-IMPORTANT: These rules are mandatory for every request and apply across all workflow phases.
+CRITICAL: These rules are mandatory for every request and apply across all workflow phases.
 
 ### Execution
 

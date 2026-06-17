@@ -116,7 +116,7 @@ changes: [{ version, change }]
 
 ## Rules
 
-IMPORTANT: These rules are mandatory for every request and apply across all workflow phases.
+CRITICAL: These rules are mandatory for every request and apply across all workflow phases.
 
 ### Execution
 
