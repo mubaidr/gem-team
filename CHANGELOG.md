@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.67.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.66.0...gem-team-v1.67.0) (2026-06-17)
+
+
+### 🧹 Housekeeping
+
+* add Delegation First Policy bullet to constitutional rules ([f18eff2](https://github.com/mubaidr/gem-team/commit/f18eff231ceebea83baa2c81c2ffaed915dea40e))
+* **agents:** add mandatory workflow adherence requirement ([bf45d7c](https://github.com/mubaidr/gem-team/commit/bf45d7ca14d4c8d6918ae322d56982adb7e0c0fb))
+* update agent files to replace IMPORTANT with CRITICAL in rule headings ([704f333](https://github.com/mubaidr/gem-team/commit/704f3330b49ef4d7e80076359b40becec1ee94de))
+
 ## [1.66.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.65.0...gem-team-v1.66.0) (2026-06-14)
 
 
