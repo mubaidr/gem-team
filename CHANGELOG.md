@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.68.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.67.0...gem-team-v1.68.0) (2026-06-17)
+
+
+### 🧹 Housekeeping
+
+* add terse execution rule to agent documentation ([6bde601](https://github.com/mubaidr/gem-team/commit/6bde6010071dc1bbdb3dc4afcd0809cbe2b0239d))
+
 ## [1.67.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.66.0...gem-team-v1.67.0) (2026-06-17)
 
 
