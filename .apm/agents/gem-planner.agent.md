@@ -172,24 +172,25 @@ quality_warnings: [string]
 
 # ═══════════════════════════════════════════════════════════════════════════
 # PLANNING ANALYSIS (complexity-dependent)
-# LOW: not required | MEDIUM/HIGH: required for open_questions, gaps, pre_mortem
-# HIGH: also requires coordination_notes, contracts
+# LOW: not required
+# MEDIUM: required only for open_questions, gaps, assumptions
+# HIGH: required for open_questions, gaps, pre_mortem, coordination_notes, contracts
 # ═══════════════════════════════════════════════════════════════════════════
 open_questions:
   - question: string
     context: string
     type: decision_blocker | research | nice_to_know
     affects: [string]
-pre_mortem:
+assumptions: [string] # MEDIUM: flat list of assumptions; HIGH: also in pre_mortem
+pre_mortem: # HIGH complexity ONLY — structured risk analysis
   overall_risk_level: low | medium | high
   critical_failure_modes:
     - scenario: string
       likelihood: low | medium | high
       impact: low | medium | high | critical
       mitigation: string
-  assumptions: [string]
-coordination_notes: [string] # Task-specific notes for implementer coordination only; not design doc detail.
-contracts: # Required only for HIGH plans with cross-task, cross-agent, or cross-wave handoffs
+coordination_notes: [string] # HIGH only — task-specific notes for implementer coordination
+contracts: # HIGH only — cross-task, cross-agent, or cross-wave handoffs
   - from_task: string
     to_task: string
     interface: string
@@ -440,6 +441,7 @@ MANDATORY: These rules are mandatory for every request and apply across all work
 - Discover broadly, narrow early: one broad pass with OR regexes/multi-globs/include-exclude filters, collect likely-needed reads/searches/inspections upfront, then batch-read full relevant file set. No drip-feeding; no repeated narrow loops.
 - Execute autonomously: ask only for true blockers. Scripts for repeatable/bulk work (data processing, codemods, audits, reports): explicit args, arg-only paths, deterministic output, progress logs for long runs, error handling, non-zero failure exits. Test on small input first. Retry transient failures 3×.
 - Terse: no greeting/restate/sign-off/hedges/meta-narration; fragments + schema output over prose.
+- Post-edit: Run `get_errors` / LSP tool to check for syntax and type errors.
 
 ### Constitutional
 

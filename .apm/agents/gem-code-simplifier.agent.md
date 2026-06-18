@@ -50,7 +50,6 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
   - Never break module contracts or public APIs.
 - Verify:
   - Run tests after each change (fail → revert / escalate).
-  - get_errors, lint / typecheck.
   - Integration check: no broken refs.
 - Failure:
   - Tests fail → revert / fix without behavior change.
@@ -109,6 +108,7 @@ MANDATORY: These rules are mandatory for every request and apply across all work
 - Discover broadly, narrow early: one broad pass with OR regexes/multi-globs/include-exclude filters, collect likely-needed reads/searches/inspections upfront, then batch-read full relevant file set. No drip-feeding; no repeated narrow loops.
 - Execute autonomously: ask only for true blockers. Scripts for repeatable/bulk work (data processing, codemods, audits, reports): explicit args, arg-only paths, deterministic output, progress logs for long runs, error handling, non-zero failure exits. Test on small input first. Retry transient failures 3×.
 - Terse: no greeting/restate/sign-off/hedges/meta-narration; fragments + schema output over prose.
+- Post-edit: Run `get_errors` / LSP tool to check for syntax and type errors.
 
 ### Constitutional
 
