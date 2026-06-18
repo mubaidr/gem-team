@@ -163,11 +163,11 @@ Execute all unblocked waves/tasks without approval pauses. Follow the branching 
     - Non-final wave → gate ONLY if any task in this wave has `conflicts_with` entries OR any contract in `plan.yaml` references a task in this wave as `from_task` (i.e., downstream waves depend on this wave's output).
   - Persist task/ wave status to `plan.yaml`
   - Synthesize statuses (`completed`, `blocked`, `needs_replan`, `failed`, `escalate`). Present concise status without pausing for approval.
-- Persist reusable items confidence ≥0.90 to the correct target:
-  - product decisions → delegate to `gem-documentation-writer` → PRD
-  - technical decisions/conventions → delegate to `gem-documentation-writer` → AGENTS.md or architecture docs
-  - patterns/gotchas/failure_modes → delegate to `gem-documentation-writer` → memory/context envelope
-  - repeatable executable workflows → delegate to `gem-skill-creator` → skills
+- Persist reusable items where confidence ≥0.95 to the correct target (batch delegation):
+  - If product decisions → delegate to `gem-documentation-writer` → PRD
+  - If technical decisions/conventions → delegate to `gem-documentation-writer` → AGENTS.md or architecture docs
+  - If patterns/gotchas/failure_modes → delegate to `gem-documentation-writer` → memory/context envelope
+  - If repeatable executable workflows → delegate to `gem-skill-creator` → skills
 - Loop:
   - Remaining unblocked waves/tasks → next wave.
   - Blocked or not replanable → escalate.
