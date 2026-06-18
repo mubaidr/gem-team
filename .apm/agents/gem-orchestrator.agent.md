@@ -157,7 +157,10 @@ Execute all unblocked waves/tasks without approval pauses. Follow the branching 
   - Include `config_snapshot` in delegation: pass relevant settings from loaded config.
   - Use `context_envelope.json` as canonical durable context; `memory_seed` may be used only as planner input to create/update the envelope.
 - Integration Gate:
-  - delegate to `gem-reviewer(wave)` for integration check.
+  - Complexity=HIGH: delegate to `gem-reviewer(wave)` for integration check after every wave.
+  - Complexity=MEDIUM: delegate to `gem-reviewer(wave)` only when integration risk exists:
+    - Final wave → always gate (catches all accumulated issues).
+    - Non-final wave → gate ONLY if any task in this wave has `conflicts_with` entries OR any contract in `plan.yaml` references a task in this wave as `from_task` (i.e., downstream waves depend on this wave's output).
   - Persist task/ wave status to `plan.yaml`
   - Synthesize statuses (`completed`, `blocked`, `needs_replan`, `failed`, `escalate`). Present concise status without pausing for approval.
 - Persist reusable items confidence ≥0.90 to the correct target:
