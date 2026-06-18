@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.69.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.68.0...gem-team-v1.69.0) (2026-06-18)
+
+
+### 🚀 New Agents & Features
+
+* add complexity‑based integration gating ([698f596](https://github.com/mubaidr/gem-team/commit/698f59693aa8833dc18e9d4f782f1a525dc20108))
+
+
+### 📝 Documentation
+
+* **agents:** Add post-edit step to run get_errors/LSP checks ([504b2da](https://github.com/mubaidr/gem-team/commit/504b2da86bc81970e1ccd1bdba253d7b2049bf47))
+* **gem-researcher:** Update confidence tier description and early exit criteria ([f86c447](https://github.com/mubaidr/gem-team/commit/f86c447ced9d9d74dd884cc55447b6dc63fc6c2e))
+* update agent documentation to adjust confidence thresholds for batch delegation ([8ad1c00](https://github.com/mubaidr/gem-team/commit/8ad1c00e0bd4faa100d5431cd4e648ddf85d6ecc))
+
 ## [1.68.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.67.0...gem-team-v1.68.0) (2026-06-17)
 
 
