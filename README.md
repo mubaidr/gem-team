@@ -63,30 +63,30 @@ After the first install, commit the generated APM files that belong to your repo
 
 ### Better delivery flow
 
-- **Spec-driven execution** — turns goals into scoped plans, tasks, checks, and evidence.
-- **Wave-based execution** — runs independent work in parallel while serializing true dependencies.
-- **Verification loops** — uses reviewers, testers, critics, and debuggers before final output.
-- **Resumable plans** — plan IDs, task artifacts, and context files make long tasks easier to pause, inspect, and continue.
+- **Spec-driven execution**: turns goals into scoped plans, tasks, checks, and evidence.
+- **Wave-based execution**: runs independent work in parallel while serializing true dependencies.
+- **Verification loops**: uses reviewers, testers, critics, and debuggers before final output.
+- **Resumable plans**: plan IDs, task artifacts, and context files make long tasks easier to pause, inspect, and continue.
 
 ### Better code quality
 
-- **Specialist agents** — planning, implementation, debugging, review, testing, documentation, design, and DevOps are handled by focused roles.
-- **Pattern reuse** — researchers inspect the codebase first so agents follow existing architecture instead of inventing new patterns.
-- **Contract-first mindset** — encourages requirements, API contracts, tests, and acceptance criteria before implementation.
-- **Security-aware reviews** — reviewer and DevOps roles check for common security, secrets, PII, and deployment risks.
+- **Specialist agents**: planning, implementation, debugging, review, testing, documentation, design, and DevOps are handled by focused roles.
+- **Pattern reuse**: researchers inspect the codebase first so agents follow existing architecture instead of inventing new patterns.
+- **Contract-first mindset**: encourages requirements, API contracts, tests, and acceptance criteria before implementation.
+- **Security-aware reviews**: reviewer and DevOps roles check for common security, secrets, PII, and deployment risks.
 
 ### Better context management
 
-- **Context envelope** — stores the active project summary, constraints, architecture notes, task registry, prior decisions, and reusable findings.
-- **File-based knowledge** — important outputs are written to durable files instead of being trapped in a single chat turn.
-- **Skill extraction** — high-confidence repeated workflows can become reusable `SKILL.md` playbooks.
-- **Memory discipline** — durable learnings are persisted only when useful and sufficiently reliable.
+- **Context envelope**: stores the active project summary, constraints, architecture notes, task registry, prior decisions, and reusable findings.
+- **File-based knowledge**: important outputs are written to durable files instead of being trapped in a single chat turn.
+- **Skill extraction**: high-confidence repeated workflows can become reusable `SKILL.md` playbooks.
+- **Memory discipline**: durable learnings are persisted only when useful and sufficiently reliable.
 
 ### Better cost control
 
-- **Model routing** — routine agents can use a fast cost-efficient model while planner, debugger, critic, and reviewer roles can use stronger reasoning models.
-- **Reduced redundant reading** — the context envelope and research digest prevent repeated source reads.
-- **Concise agent outputs** — agents are instructed to return actionable artifacts rather than verbose commentary.
+- **Model routing**: routine agents can use a fast cost-efficient model while planner, debugger, critic, and reviewer roles can use stronger reasoning models.
+- **Reduced redundant reading**: the context envelope and research digest prevent repeated source reads.
+- **Concise agent outputs**: agents are instructed to return actionable artifacts rather than verbose commentary.
 
 ## Comparison
 
