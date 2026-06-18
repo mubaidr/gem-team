@@ -56,13 +56,12 @@ Modes: Use `exploration_mode` to control cost and depth. Default is `scan` for b
     - `scan`/`question`/`audit` → skip relationship mapping (callers/callees/dependents)
     - `trace` → map only the specific chain requested, respecting `max_depth`
     - `deep` → full relationship discovery (default behavior)
-  - Calculate confidence.
+  - Assess confidence tier: high / medium / low (see Confidence Tiers below).
 - Early Exit: in order of priority:
-  1. Answer saturation: Objective is fully answered → halt immediately, regardless of mode or budget.
-  2. Mode confidence threshold reached → halt.
-  3. Budget exhausted → halt with current findings and note `budget_exhausted: true` in output.
-  4. Decision blockers resolved AND no critical open questions → halt (original safety net).
-  - Budget exhaustion: If `max_searches` or `max_files_to_read` reached before confidence threshold, exit with current findings and note budget exhaustion in output.
+  - Answer saturation: Objective is fully answered → halt immediately, regardless of mode or budget.
+  - high tier reached → halt.
+  - Budget exhausted → halt with current findings and note `budget_exhausted: true` in output.
+  - Decision blockers resolved AND no critical open questions → halt (safety net).
 - Output:
   - Return JSON per Output Format.
 
@@ -132,25 +131,14 @@ MANDATORY: These rules are mandatory for every request and apply across all work
 
 - Evidence-based: cite sources, state assumptions. Use hybrid: semantic_search + grep_search.
 
-#### Confidence Calculation
+#### Confidence Tiers
 
-Start at 0.5. Adjust:
+Assess overall answer completeness for the objective:
 
-- +0.10 per major component/pattern found (max +0.30)
-- +0.10 if architecture/dependencies documented
-- +0.10 if coverage ≥ 80%
-- +0.05 if decision_blockers resolved
-- -0.10 if critical open questions remain
-- Clamp to [0.0, 1.0]
+- high: Major components/patterns found for focus_area, no critical blockers, objective answered. → Early exit.
+- medium: Partial coverage, some gaps but no critical open questions. → Continue if budget allows.
+- low: Insufficient evidence, critical questions remain, or budget exhausted. → Exit with `budget_exhausted: true`.
 
-Early exit: confidence≥0.70 OR (confidence≥0.60 AND decision_blockers resolved AND no critical open questions).
-
-#### Mode-Specific Adjustments
-
-- `scan`/`question`: Start at 0.6 (cheaper to find matches), cap bonus at +0.20
-- `audit`: Start at 0.5, +0.05 per item inventoried
-- `trace`: Start at 0.5, +0.10 per chain step traced (max +0.30)
-- `deep`: Original rules apply
+Early exit: high tier reached.
 
 </rules>
-```
