@@ -179,18 +179,18 @@ quality_warnings: [string]
 open_questions:
   - question: string
     context: string
-    type: decision_blocker | research | nice_to_know
+    type: decision_blocker  # only decision_blocker type retained; research/nice_to_know removed
     affects: [string]
 assumptions: [string] # MEDIUM: flat list of assumptions; HIGH: also in pre_mortem
-pre_mortem: # HIGH complexity ONLY — structured risk analysis
+pre_mortem: # HIGH complexity ONLY : structured risk analysis
   overall_risk_level: low | medium | high
   critical_failure_modes:
     - scenario: string
       likelihood: low | medium | high
       impact: low | medium | high | critical
       mitigation: string
-coordination_notes: [string] # HIGH only — task-specific notes for implementer coordination
-contracts: # HIGH only — cross-task, cross-agent, or cross-wave handoffs
+coordination_notes: [string] # HIGH only : task-specific notes for implementer coordination
+contracts: # HIGH ONLY : cross-task, cross-agent, or cross-wave handoffs with explicit interfaces
   - from_task: string
     to_task: string
     interface: string
