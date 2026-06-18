@@ -107,9 +107,8 @@ Routing matrix:
   - Request plan validation:
     - Complexity=MEDIUM:
       - Delegate to `gem-reviewer(plan)` with `review_depth: lightweight`.
-    - Complexity=HIGH:
-      - Delegate to `gem-reviewer(plan)` with `review_depth: full`.
-      - In parallel, delegate to `gem-critic(plan)` when any high-risk signal exists: `architecture`, `contract_change`, `breaking_change`, `api_change`, `schema_change`, `auth_change`, `data_flow_change`, `migration`, `security_sensitive`, or `cross_domain_impact`.
+    - Complexity=HIGH or `planner.enable_critic_for` satisfies:
+      - In parallel, delegate to `gem-critic(plan)`, only if: High-risk signal exists: `architecture`, `contract_change`, `breaking_change`, `api_change`, `schema_change`, `auth_change`, `data_flow_change`, `migration`, `security_sensitive`, or `cross_domain_impact`.
   - If validation fails:
     - Failed + replanable → delegate to `gem-planner` with findings for replan/ adjustments.
     - Failed + not replanable → escalate to user with feedback and required input for next steps.
