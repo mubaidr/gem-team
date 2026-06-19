@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.70.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.69.0...gem-team-v1.70.0) (2026-06-19)
+
+
+### 📝 Documentation
+
+* **.apm/agents:** update gem-planner.agent.md ([9489af9](https://github.com/mubaidr/gem-team/commit/9489af94c6f55f28d130466b8abaac2badaaaa67))
+
 ## [1.69.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.68.0...gem-team-v1.69.0) (2026-06-18)
 
 
