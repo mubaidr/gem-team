@@ -14,6 +14,10 @@ orchestrator:
   # TRIVIAL/LOW = faster, fewer steps | MEDIUM/HIGH = more thorough planning & review
   default_complexity_threshold: auto
 
+  # Git commit wave output on integration gate pass
+  # Clean audit trail per wave; skip if not desired
+  git_commit_on_gate_pass: true
+
 # ═══════════════════════════════════════════════════════════
 # PLANNING & WORKFLOW
 # ═══════════════════════════════════════════════════════════
