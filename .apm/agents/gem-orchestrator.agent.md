@@ -153,8 +153,8 @@ Execute all unblocked waves/tasks without approval pauses. Follow the branching 
     - Run tasks where `status=pending`, `wave=current`, and all dependencies are completed, while preventing parallel execution of tasks listed in `conflicts_with`. Process waves in ascending order, attaching contracts for Wave > 1.
 - Execute Wave:
   - Delegate exclusively to the subagent specified by `task.agent`, using `agent_input_reference`. Concurrency limit = `orchestrator.max_concurrent_agents` if configured, otherwise 2. Never invoke generic, fallback or inferred subagents.
-  - Include `config_snapshot` in delegation: pass relevant settings from loaded config.
-  - Construct `context_snapshot` from the envelope using only the agent's `context_snapshot_fields` in `agent_input_reference`. Skip irrelevant sections. Keep it optimized.
+  - Pass relevant settings from loaded config.
+  - Include `context_snapshot_fields` in `agent_input_reference` based on target (delegation) agent. Skip irrelevant sections. Keep it optimized.
 - Integration Gate:
   - Complexity=HIGH: delegate to `gem-reviewer(wave)` for integration check after every wave.
   - Complexity=MEDIUM: delegate to `gem-reviewer(wave)` only when integration risk exists:
