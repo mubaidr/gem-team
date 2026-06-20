@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.72.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.71.0...gem-team-v1.72.0) (2026-06-20)
+
+
+### 📝 Documentation
+
+* add Two Batched Phases workflow and output hygiene ([d25a146](https://github.com/mubaidr/gem-team/commit/d25a14652ca901a8eec4a1e0eb7c0f558058db2b))
+* add Why Gem Team section and Quick Start installation guide ([9eef999](https://github.com/mubaidr/gem-team/commit/9eef99991c4bd71fd88197e3d9f79227579e9347))
+* add workflow optimization task list ([ab65546](https://github.com/mubaidr/gem-team/commit/ab65546706407fc16210e142ccd3f781d6e0ce4d))
+* fix bullet formatting in gem-planner.agent.md ([9e595d0](https://github.com/mubaidr/gem-team/commit/9e595d0195a33fc7aa03ce6c0345ef5a268e0008))
+* update orchestrator agent context snapshot and delegation rules ([2ba7b16](https://github.com/mubaidr/gem-team/commit/2ba7b16929079e3a1383884d210594d6ff0b2eaf))
+
 ## [1.71.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.70.0...gem-team-v1.71.0) (2026-06-20)
 
 
