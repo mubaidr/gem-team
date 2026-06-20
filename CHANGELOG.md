@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.71.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.70.0...gem-team-v1.71.0) (2026-06-20)
+
+
+### 📝 Documentation
+
+* add Two Batched Phases workflow and execution refinements ([02c7e3c](https://github.com/mubaidr/gem-team/commit/02c7e3c568bf3b0b407112d820ba99f11a1a9c7f))
+
 ## [1.70.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.69.0...gem-team-v1.70.0) (2026-06-19)
 
 
