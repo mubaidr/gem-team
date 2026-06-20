@@ -273,6 +273,7 @@ tasks:
 
 Design Principle:
 
+- Extremely dense. Bulleted.
 - Cache-worthy, cross-session reusable context. Pure duplicates of plan.yaml are removed: agents read plan.yaml directly for task registry, implementation spec, validation status; store references/summaries only when reuse value is clear.
 - Context envelope must justify each populated section by future reuse value.
 - If a section is unlikely to save future discovery effort, omit it.
