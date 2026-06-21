@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.74.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.73.0...gem-team-v1.74.0) (2026-06-21)
+
+
+### 🧹 Housekeeping
+
+* add cache usage to debugger/ planner ([85d8a35](https://github.com/mubaidr/gem-team/commit/85d8a35f1a66beffd99f6cd97eeb1a1c9e09d841))
+
 ## [1.73.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.72.0...gem-team-v1.73.0) (2026-06-21)
 
 
