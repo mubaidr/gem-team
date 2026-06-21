@@ -98,9 +98,11 @@ Routing matrix:
 
 - Complexity=TRIVIAL:
   - Create a tiny in-memory orchestration checklist only.
+  - If the detected intent is bug-fix/debug/issue: the checklist MUST contain two sequential steps — first delegate to `gem-debugger` for diagnosis (wave 1), then forward `debugger_diagnosis` to `gem-implementer` for the fix (wave 2).
   - Goto Phase 3.
 - Complexity=LOW:
   - Create a minimal in-memory orchestration plan using relevant context, and the `memory_seed`: with tasks, deps, wave, status, assignments, and optional `conflicts_with`.
+  - If the objective is bug-fix/debug/issue: assign `gem-debugger` for diagnosis (wave 1) and `gem-implementer` for the fix (wave 2). The in-memory plan MUST include `debugger_diagnosis` as a dependency handoff from wave 1 to wave 2.
   - Goto Phase 3.
 - Complexity=MEDIUM/HIGH:
   - Delegate to `gem-planner` with `task_clarifications`, relevant context, `memory_seed`, and `config_snapshot`.
@@ -124,15 +126,7 @@ Routing matrix:
 
 Execute all unblocked waves/tasks without approval pauses. Follow the branching logic based on complexity level.
 
-#### Complexity=TRIVIAL
-
-- Delegate directly to the single most suitable agent from `available_agents`.
-- Loop:
-  - Blocked or not replanable → escalate.
-  - Scope grows → reclassify complexity and replan if needed.
-  - All done → Phase 4.
-
-#### Complexity=LOW
+#### Complexity=TRIVIAL/LOW
 
 - Delegate to most suitable agents from `available_agents` (if `orchestrator.max_concurrent_agents` from config is set, use it; otherwise, default to 2 concurrent).
 - Loop:
