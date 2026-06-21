@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.73.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.72.0...gem-team-v1.73.0) (2026-06-21)
+
+
+### 📝 Documentation
+
+* add explicit bug-fix/debug steps for TRIVIAL and LOW complexity in orchestrator workflow ([3c0be7b](https://github.com/mubaidr/gem-team/commit/3c0be7bbe41af8ed5b7e0f2c1897d2e46729bb94))
+* add phase compliance reminder and Failure Handling header ([677b111](https://github.com/mubaidr/gem-team/commit/677b1116bbfa78bbe7015e307e0021dede3a7181))
+
 ## [1.72.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.71.0...gem-team-v1.72.0) (2026-06-20)
 
 
