@@ -42,7 +42,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
   - Read tokens from `DESIGN.md` (UI tasks only).
   - Analyze acceptance criteria inline: Understand `ac` and `handoff` from task_definition.
 - TDD Cycle (Red → Green → Refactor → Verify):
-  - Red: Write/update test for new & correct expected behavior.
+  - Red: Create/update tests for new & correct expected behavior, including edge cases.
   - Green: Minimal code to pass.
     - Surgical only. Remove extra code (YAGNI).
     - Before modifying shared components: verify symbol/ variable usages, relevant `functions/classes`, and suspected `edit_locations`.

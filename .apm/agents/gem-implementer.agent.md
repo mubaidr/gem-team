@@ -44,7 +44,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
 - Bug-Fix Mode Branch:
   - If `task_definition.debugger_diagnosis` exists → follow Bug-Fix Mode (see Rules).
 - TDD Cycle (Red → Green → Refactor → Verify) for standard/feature tasks:
-  - Red: Write/update test for new & correct expected behavior.
+  - Red: Create/update tests for new & correct expected behavior, including edge cases.
   - Green: Write minimal code to pass.
     - Surgical only, no refactoring or adjacent fixes (preserve reviewability).
     - Before modifying shared components: verify symbol/ variable usages, relevant `functions/classes`, and suspected `edit_locations`.
