@@ -15,12 +15,12 @@ Turn AI coding into an orchestrated loop: plan, build, review, debug, learn.
 
 ## Why Gem Team?
 
-Gem Team wraps your AI with a disciplined engineering delivery system — plan, build, review, debug, learn. The [Features](#features) section below covers every capability in detail. Here's the gist:
+Gem Team wraps your AI with a disciplined engineering delivery system: plan, build, review, debug, learn. The [Features](#features) section below covers every capability in detail. Here's the gist:
 
-- **Better delivery flow** — spec-driven execution, wave-based parallelism, verification gates, resumable plans.
-- **Better code quality** — 16 specialist agents, TDD by default, diagnose-then-fix, security and accessibility audits.
-- **Better context management** — progressive context envelope, three-tier memory, skill extraction, PRD management.
-- **Better cost control** — model routing, output hygiene, context pruning, discovery depth scaling.
+- **Better delivery flow**: spec-driven execution, wave-based parallelism, verification gates, resumable plans.
+- **Better code quality**: 16 specialist agents, TDD by default, diagnose-then-fix, security and accessibility audits.
+- **Better context management**: progressive context envelope, three-tier memory, skill extraction, PRD management.
+- **Better cost control**: model routing, output hygiene, context pruning, discovery depth scaling.
 
 ## Quick Start
 
@@ -80,13 +80,13 @@ After the first install, commit the generated APM files that belong to your repo
 
 ### Specialist Agent Team
 
-- **16 focused agents**: Planner, Researcher, Implementer, Implementer-Mobile, Reviewer, Critic, Debugger, Browser Tester, Mobile Tester, Devops, Documentation Writer, Designer, Designer-Mobile, Code Simplifier, Skill Creator — plus the Orchestrator who coordinates them all.
+- **16 focused agents**: Planner, Researcher, Implementer, Implementer-Mobile, Reviewer, Critic, Debugger, Browser Tester, Mobile Tester, Devops, Documentation Writer, Designer, Designer-Mobile, Code Simplifier, Skill Creator: plus the Orchestrator who coordinates them all.
 - **TDD by default**: Implementers follow Red-Green-Refactor. Bug-fix mode requires debugger diagnosis before touching code.
 - **Diagnose-then-fix**: Debugger diagnoses → Implementer fixes → Reviewer re-verifies. Enforced at planner, orchestrator, implementer, and reviewer levels.
 
 ### Context & Knowledge Management
 
-- **Context envelope**: Progressive cache shared across all agents. Tech stack, conventions, constraints, architecture snapshot, research digest, prior decisions — enriched after each wave.
+- **Context envelope**: Progressive cache shared across all agents. Tech stack, conventions, constraints, architecture snapshot, research digest, prior decisions: enriched after each wave.
 - **Three-tier memory**: Repo (workspace-scoped), session (conversation-scoped), global (user-scoped). Confidence-gated persistence (≥0.85).
 - **Stable cache**: High-confidence facts (≥0.90, stable, ≥3 uses) promoted to durable cache. Auto-eviction after 90 days unused.
 - **Reuse notes**: Trusted file paths and patterns that agents skip re-verifying.
@@ -96,7 +96,7 @@ After the first install, commit the generated APM files that belong to your repo
 ### Quality & Verification
 
 - **Plan validation**: Reviewer checks plan correctness, temporal paradoxes, wave ordering, and contract integrity.
-- **Critic review**: Challenges assumptions, finds edge cases, flags over-engineering — for HIGH complexity and architecture-impacting changes.
+- **Critic review**: Challenges assumptions, finds edge cases, flags over-engineering: for HIGH complexity and architecture-impacting changes.
 - **Per-wave integration checks**: Reviewer verifies contracts, conflicts, and integration points after each wave.
 - **Security audits**: OWASP scanning, secrets/PII detection, mobile 8-vector scan (keychain, cert pinning, deep links, biometric auth, network security).
 - **Accessibility audits**: WCAG 2.1 AA contrast checks, ARIA labels, focus indicators, touch targets, reduced-motion support.
@@ -258,7 +258,7 @@ Replace these with equivalent models from your own provider if needed.
 | **CRITIC**          | Challenges assumptions, finds edge cases, flags over-engineering or missed constraints. Evaluates decomposition, dependencies, complexity, coupling, and future-proofing. Offers alternatives, not just criticism.                            |
 | **DEBUGGER**        | Root-cause analysis, stack trace diagnosis, regression bisection, error reproduction. Prove-It pattern (reproduction test first). Never implements fixes.                                                                                     |
 | **BROWSER TESTER**  | E2E browser checks, UI flow validation, visual regression (screenshot comparison), console/network capture, a11y audit. Configurable thresholds.                                                                                              |
-| **CODE SIMPLIFIER** | Removes dead code, reduces cyclomatic complexity, consolidates duplicates, improves naming. Preserves behavior — runs tests after each change. Chesterton's Fence principle.                                                                  |
+| **CODE SIMPLIFIER** | Removes dead code, reduces cyclomatic complexity, consolidates duplicates, improves naming. Preserves behavior: runs tests after each change. Chesterton's Fence principle.                                                                   |
 
 ### Specialized agents
 

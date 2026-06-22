@@ -42,11 +42,11 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
   - Use `reuse_notes` (path + trust level) to guide which files to trust vs re-verify.
   - Then identify failure symptoms and reproduction conditions.
 - Reproduce: Read error logs, stack traces, failing test output.
-- Diagnose:
+- Diagnose (bounded to error context only: no open-ended exploration):
   - Stack trace: Parse entry → propagation → failure location, map to source.
   - Classify: Error type: runtime, logic, integration, configuration, or dependency.
-  - Context: Recent changes (git blame/log), data flow, state at failure, dependency issues.
-  - Pattern match: Grep similar errors, check known failure modes.
+  - Context: git blame/log only on files directly in stack trace. Data flow scoped to the failing path only.
+  - Pattern match: Grep only the exact error message/symbol. No broad pattern searches.
 - Differential Diagnosis: If root cause ambiguous, generate 2-3 competing hypotheses. For each: what would confirm it, what would rule it out. Run cheapest check first. Eliminate until one remains.
 - Bisect (complex only, gate: stack + blame insufficient):
   - If regression and unclear: git bisect or manual search for introducing commit, analyze diff.

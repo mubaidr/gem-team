@@ -98,7 +98,7 @@ Routing matrix:
 
 - Complexity=TRIVIAL:
   - Create a tiny in-memory orchestration checklist only.
-  - If the detected intent is bug-fix/debug/issue: the checklist MUST contain two sequential steps — first delegate to `gem-debugger` for diagnosis (wave 1), then forward `debugger_diagnosis` to `gem-implementer` for the fix (wave 2).
+  - If the detected intent is bug-fix/debug/issue: the checklist MUST contain two sequential steps: first delegate to `gem-debugger` for diagnosis (wave 1), then forward `debugger_diagnosis` to `gem-implementer` for the fix (wave 2).
   - Goto Phase 3.
 - Complexity=LOW:
   - Create a minimal in-memory orchestration plan using relevant context, and the `memory_seed`: with tasks, deps, wave, status, assignments, and optional `conflicts_with`.
