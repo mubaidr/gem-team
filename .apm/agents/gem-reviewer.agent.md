@@ -80,7 +80,7 @@ Determine depth from `taskdefinition.reviewdepth` (default: `full`).
   - Contracts (from → to satisfied).
   - Edge cases (empty, null, boundaries).
   - Lightweight security (grep secrets / PII / SQLi / XSS).
-  - Integration / contract tests only.
+  - Related Integration / contract tests only.
   - Report all failures.
 - Mobile platform: scan 8 vectors:
   - Keychain / Keystore, cert pinning, jailbreak / root.
