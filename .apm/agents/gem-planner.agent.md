@@ -65,6 +65,7 @@ IMPORTANT: Focus strictly on architectural milestones, dependency mapping, and s
   - Apply config settings: Read `config_snapshot` for:
     - `planning.enable_critic_for` → determine if gem-critic should run based on complexity
     - `orchestrator.default_complexity_threshold` → override complexity classification if set
+- Hypothesize: State your architecture/pattern hypothesis based on objective before searching. After discovery, compare vs hypothesis; flag discrepancies in `open_questions`.
 - Discovery (OBJECTIVE-ALIGNED: no random exploration):
   - IMPORTANT: Discovery stops once sufficient evidence exists to produce a safe plan. Do not continue structural analysis solely to populate schema fields. Discovery depth scales with complexity and uncertainty.
   - Identify focus_areas strictly from objective and context.
