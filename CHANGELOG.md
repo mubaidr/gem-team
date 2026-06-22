@@ -1,5 +1,36 @@
 # Changelog
 
+## [1.75.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.74.0...gem-team-v1.75.0) (2026-06-22)
+
+
+### 🚀 New Agents & Features
+
+* add quality.visual_diff_threshold, quality.a11y_audit_level, testing.screenshot_on_failure and pre‑flight verification steps ([6791f2e](https://github.com/mubaidr/gem-team/commit/6791f2ef4d12a4b32ee26eed3216615df27a22cc))
+
+
+### 📝 Documentation
+
+* **gem-designer-mobile:** add parsing mode description ([828e2a0](https://github.com/mubaidr/gem-team/commit/828e2a0257f04ec51e123205f398f7748ad436a2))
+* update agent documentation with impact triage and scope discipline ([2cbc7b3](https://github.com/mubaidr/gem-team/commit/2cbc7b30960105af20c401b3d6139bfad2c2a5e1))
+
+
+### 🧹 Housekeeping
+
+* add A11y cache using page snapshot hash and result reuse ([e4bf52b](https://github.com/mubaidr/gem-team/commit/e4bf52b451cc3c0b91fbaa5370c30ea1050ae7fd))
+* add constraint priority, app readiness, and scope conflict handling ([d4f41b9](https://github.com/mubaidr/gem-team/commit/d4f41b9db20bc0ddc4f35107c5c78acab19e3d49))
+* add contradictions and incomplete reasoning validation to agent rules ([0b6df5d](https://github.com/mubaidr/gem-team/commit/0b6df5d714a78d7808cec22266af1fd0ce24e3fa))
+* add Devil's Advocate step and Personality bullet to agent definitions ([f9827ad](https://github.com/mubaidr/gem-team/commit/f9827ad47582a800621a2e2fc2c28ae66f5d88f5))
+* add Differential Diagnosis and Minimal reproduction steps to gem-debugger workflow ([52d5715](https://github.com/mubaidr/gem-team/commit/52d5715564bff395df347dd3c09523a3417045a3))
+* add hypothesis step to gem-planner workflow ([298ff66](https://github.com/mubaidr/gem-team/commit/298ff66321aca81a037bef60aa22d1bd0e4f8266))
+* add ownership principle to agent definitions and budget enforcement to researcher ([fc14507](https://github.com/mubaidr/gem-team/commit/fc14507e8ff57085710edc273bfbd5aecbcddbaa))
+* add scope discipline rule to gem-implementer-mobile workflow ([a658586](https://github.com/mubaidr/gem-team/commit/a6585869a5289c75c23184ed72380d0659affc2f))
+* add step-by-step validation reminder to agent rules ([3bda9ce](https://github.com/mubaidr/gem-team/commit/3bda9ce4d4d47ea42c41c5088b0f97f52f4351f2))
+* correct typo in gem-reviewer agent workflow description ([fbf24f3](https://github.com/mubaidr/gem-team/commit/fbf24f3eb246879968b20f3a32e9b045a32f4f85))
+* refine debugger workflow details and orchestrator checklist step wording ([f43412d](https://github.com/mubaidr/gem-team/commit/f43412d2f72c8cec4a38239ab47c5a018943855f))
+* require documentation writer to read source code and flag speculation ([32606ea](https://github.com/mubaidr/gem-team/commit/32606ea2c33fab67128b51fdffcfecab565b0a45))
+* revise gem-researcher workflow description and early exit criteria ([3052aee](https://github.com/mubaidr/gem-team/commit/3052aee792aaad45691f872153b1c284e595d1b6))
+* update Red step to include edge cases ([6dd3850](https://github.com/mubaidr/gem-team/commit/6dd38500ef2a924ae6af8ab73d9ce28b5abfa74d))
+
 ## [1.74.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.73.0...gem-team-v1.74.0) (2026-06-21)
 
 
