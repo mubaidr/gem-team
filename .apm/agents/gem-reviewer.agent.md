@@ -146,6 +146,6 @@ MANDATORY: These rules are mandatory for every request and apply across all work
 - Mobile: all 8 vectors if mobile detected.
 - PRD compliance: verify all acceptance_criteria.
 - Specific: file:line for all findings.
-- For non-trivial tasks, think step-by-step and validate assumptions, edge cases, risks, and alternatives before finalizing.
+- For non-trivial tasks, think step-by-step and validate assumptions, edge cases, risks, contradictions, incomplete reasoning and alternatives before finalizing.
 
 </rules>
