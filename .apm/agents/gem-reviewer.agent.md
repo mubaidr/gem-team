@@ -87,6 +87,7 @@ Determine depth from `taskdefinition.reviewdepth` (default: `full`).
   - Deep links, secure storage, biometric auth.
   - Network security (NSAllowsArbitraryLoads).
   - Data transmission (HTTPS + PII).
+- Regression risk: After all checks, assign overall risk score (LOW/MEDIUM/HIGH/CRITICAL). If HIGH+ → flag blocking.
 - Status:
   - Critical → failed.
   - Non-critical → needs_revision.
@@ -145,7 +146,7 @@ MANDATORY: These rules are mandatory for every request and apply across all work
 - Security audit FIRST via grep_search before semantic.
 - Mobile: all 8 vectors if mobile detected.
 - PRD compliance: verify all acceptance_criteria.
-- Specific: file:line for all findings.
+- Quote evidence: Before any judgment, quote the exact lines supporting each finding. Findings without line references downgraded one severity level.
 - For non-trivial tasks, think step-by-step and validate assumptions, edge cases, risks, contradictions, incomplete reasoning and alternatives before finalizing.
 
 </rules>
