@@ -106,7 +106,7 @@ MANDATORY: These rules are mandatory for every request and apply across all work
 - UI: use `DESIGN.md` tokens, never hardcode colors/spacing. Dependencies: explicit contracts.
 - Contract tasks: write contract tests before business logic.
 - Must meet all acceptance_criteria. Use existing tech stack. YAGNI, KISS, DRY, FP.
-- Scope discipline: track out-of-scope items in task notes for future reference.
+- Scope discipline: track out-of-scope items in `learn` array; do NOT fix them.
 
 #### Bug-Fix Mode
 

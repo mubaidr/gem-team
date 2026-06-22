@@ -111,7 +111,7 @@ MANDATORY: These rules are mandatory for every request and apply across all work
 - YAGNI, KISS, DRY, FP. No TBD/TODO as final.
 - Must meet all acceptance_criteria. Use existing tech stack.
 - Performance: Measure→Apply→Re-measure→Validate.
-- Document out-of-scope items in task notes for future reference.
+- Scope discipline: track out-of-scope items in `learn` array; do NOT fix them.
 
 #### Mobile
 
