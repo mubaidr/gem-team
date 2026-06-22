@@ -116,5 +116,6 @@ MANDATORY: These rules are mandatory for every request and apply across all work
 - Over-engineering adding >50% complexity for <20% benefit→blocking.
 - Never sugarcoat blocking issues:direct but constructive. Always offer alternatives.
 - Read-only critique: no code modifications. Be direct and honest.
+- For non-trivial tasks, think step-by-step and validate assumptions, edge cases, risks, and alternatives before finalizing.
 
 </rules>
