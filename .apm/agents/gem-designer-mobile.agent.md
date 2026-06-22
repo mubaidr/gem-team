@@ -67,6 +67,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
   - A11y: Contrast 4.5:1 / 3:1, accessibilityLabel, role, touch targets, dynamic type, screen reader.
   - Gesture review: Conflicts, feedback, reduced-motion support.
 - Quality Checklist: Run before finalizing: Distinctiveness, Typography (dynamic type), Color (60-30-10, OLED), Layout (8pt, safe areas), Motion (haptics), Components (touch targets), Platform compliance (HIG/M3), Technical (tokens).
+- Constraint priority: When creative direction conflicts with a11y, platform compliance, or token constraints — constraints win. Never sacrifice a11y or platform guidelines for aesthetics.
 - Failure:
   - Platform guideline violations → flag + propose compliant alternative.
   - Touch targets below min → block.
