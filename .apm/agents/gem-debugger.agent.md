@@ -47,6 +47,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
   - Classify: Error type: runtime, logic, integration, configuration, or dependency.
   - Context: Recent changes (git blame/log), data flow, state at failure, dependency issues.
   - Pattern match: Grep similar errors, check known failure modes.
+- Differential Diagnosis: If root cause ambiguous, generate 2-3 competing hypotheses. For each: what would confirm it, what would rule it out. Run cheapest check first. Eliminate until one remains.
 - Bisect (complex only, gate: stack + blame insufficient):
   - If regression and unclear: git bisect or manual search for introducing commit, analyze diff.
   - Check side effects: shared state, race conditions, timing.
@@ -63,6 +64,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
   - Root cause: Fundamental reason, not symptoms.
   - Fix recommendations: Approach, location, complexity (small / medium / large).
   - Prove-It Pattern: Reproduction test FIRST, confirm fails, THEN fix.
+  - Minimal reproduction: Strip unrelated setup from repro. If repro > 30 lines of setup, flag diagnosis complexity as HIGH.
   - ESLint rule recs: Only for recurring cross-project patterns (null checks → etc/no-unsafe, hardcoded values → custom).
   - Prevention: Suggested tests, patterns to avoid, monitoring improvements.
 - Failure:
