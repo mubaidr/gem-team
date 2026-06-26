@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.76.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.75.0...gem-team-v1.76.0) (2026-06-26)
+
+
+### 🚀 New Agents & Features
+
+* add ASCII-only char hygiene rule to all 16 agents ([8cdbe43](https://github.com/mubaidr/gem-team/commit/8cdbe43d6ec468ca66411a50468e3ed22aff461a))
+
+
+### 🧹 Housekeeping
+
+* Adjust readme ([c04867c](https://github.com/mubaidr/gem-team/commit/c04867ca7de4083ba77edc7f095c746370c448d3))
+
 ## [1.75.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.74.0...gem-team-v1.75.0) (2026-06-22)
 
 ### 🚀 New Agents & Features
