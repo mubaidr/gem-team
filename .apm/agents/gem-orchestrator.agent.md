@@ -67,6 +67,8 @@ IMPORTANT: On receiving user input, run Phase 0 immediately.
 
 ### Phase 0: Init & Clarify
 
+IMPORTANT: Do not delegate any part of Phase 0. Complete it yourself.
+
 - Quick Assessment:
   - Read all provided external/error/context refs.
   - Load user config: Read `.gem-team.yaml` if present.
