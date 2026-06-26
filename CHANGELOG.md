@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.77.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.76.0...gem-team-v1.77.0) (2026-06-26)
+
+
+### 🧹 Housekeeping
+
+* **.apm/agents:** add “etc” to the list of independent calls in agent documentation ([c239e51](https://github.com/mubaidr/gem-team/commit/c239e51c4dcf51e2273d1d43fc8b6b41ea2502ac))
+
 ## [1.76.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.75.0...gem-team-v1.76.0) (2026-06-26)
 
 
