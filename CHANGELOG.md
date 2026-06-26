@@ -2,636 +2,554 @@
 
 ## [1.75.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.74.0...gem-team-v1.75.0) (2026-06-22)
 
-
 ### 🚀 New Agents & Features
 
-* add quality.visual_diff_threshold, quality.a11y_audit_level, testing.screenshot_on_failure and pre‑flight verification steps ([6791f2e](https://github.com/mubaidr/gem-team/commit/6791f2ef4d12a4b32ee26eed3216615df27a22cc))
-
+- add quality.visual_diff_threshold, quality.a11y_audit_level, testing.screenshot_on_failure and pre‑flight verification steps ([6791f2e](https://github.com/mubaidr/gem-team/commit/6791f2ef4d12a4b32ee26eed3216615df27a22cc))
 
 ### 📝 Documentation
 
-* **gem-designer-mobile:** add parsing mode description ([828e2a0](https://github.com/mubaidr/gem-team/commit/828e2a0257f04ec51e123205f398f7748ad436a2))
-* update agent documentation with impact triage and scope discipline ([2cbc7b3](https://github.com/mubaidr/gem-team/commit/2cbc7b30960105af20c401b3d6139bfad2c2a5e1))
-
+- **gem-designer-mobile:** add parsing mode description ([828e2a0](https://github.com/mubaidr/gem-team/commit/828e2a0257f04ec51e123205f398f7748ad436a2))
+- update agent documentation with impact triage and scope discipline ([2cbc7b3](https://github.com/mubaidr/gem-team/commit/2cbc7b30960105af20c401b3d6139bfad2c2a5e1))
 
 ### 🧹 Housekeeping
 
-* add A11y cache using page snapshot hash and result reuse ([e4bf52b](https://github.com/mubaidr/gem-team/commit/e4bf52b451cc3c0b91fbaa5370c30ea1050ae7fd))
-* add constraint priority, app readiness, and scope conflict handling ([d4f41b9](https://github.com/mubaidr/gem-team/commit/d4f41b9db20bc0ddc4f35107c5c78acab19e3d49))
-* add contradictions and incomplete reasoning validation to agent rules ([0b6df5d](https://github.com/mubaidr/gem-team/commit/0b6df5d714a78d7808cec22266af1fd0ce24e3fa))
-* add Devil's Advocate step and Personality bullet to agent definitions ([f9827ad](https://github.com/mubaidr/gem-team/commit/f9827ad47582a800621a2e2fc2c28ae66f5d88f5))
-* add Differential Diagnosis and Minimal reproduction steps to gem-debugger workflow ([52d5715](https://github.com/mubaidr/gem-team/commit/52d5715564bff395df347dd3c09523a3417045a3))
-* add hypothesis step to gem-planner workflow ([298ff66](https://github.com/mubaidr/gem-team/commit/298ff66321aca81a037bef60aa22d1bd0e4f8266))
-* add ownership principle to agent definitions and budget enforcement to researcher ([fc14507](https://github.com/mubaidr/gem-team/commit/fc14507e8ff57085710edc273bfbd5aecbcddbaa))
-* add scope discipline rule to gem-implementer-mobile workflow ([a658586](https://github.com/mubaidr/gem-team/commit/a6585869a5289c75c23184ed72380d0659affc2f))
-* add step-by-step validation reminder to agent rules ([3bda9ce](https://github.com/mubaidr/gem-team/commit/3bda9ce4d4d47ea42c41c5088b0f97f52f4351f2))
-* correct typo in gem-reviewer agent workflow description ([fbf24f3](https://github.com/mubaidr/gem-team/commit/fbf24f3eb246879968b20f3a32e9b045a32f4f85))
-* refine debugger workflow details and orchestrator checklist step wording ([f43412d](https://github.com/mubaidr/gem-team/commit/f43412d2f72c8cec4a38239ab47c5a018943855f))
-* require documentation writer to read source code and flag speculation ([32606ea](https://github.com/mubaidr/gem-team/commit/32606ea2c33fab67128b51fdffcfecab565b0a45))
-* revise gem-researcher workflow description and early exit criteria ([3052aee](https://github.com/mubaidr/gem-team/commit/3052aee792aaad45691f872153b1c284e595d1b6))
-* update Red step to include edge cases ([6dd3850](https://github.com/mubaidr/gem-team/commit/6dd38500ef2a924ae6af8ab73d9ce28b5abfa74d))
+- add A11y cache using page snapshot hash and result reuse ([e4bf52b](https://github.com/mubaidr/gem-team/commit/e4bf52b451cc3c0b91fbaa5370c30ea1050ae7fd))
+- add constraint priority, app readiness, and scope conflict handling ([d4f41b9](https://github.com/mubaidr/gem-team/commit/d4f41b9db20bc0ddc4f35107c5c78acab19e3d49))
+- add contradictions and incomplete reasoning validation to agent rules ([0b6df5d](https://github.com/mubaidr/gem-team/commit/0b6df5d714a78d7808cec22266af1fd0ce24e3fa))
+- add Devil's Advocate step and Personality bullet to agent definitions ([f9827ad](https://github.com/mubaidr/gem-team/commit/f9827ad47582a800621a2e2fc2c28ae66f5d88f5))
+- add Differential Diagnosis and Minimal reproduction steps to gem-debugger workflow ([52d5715](https://github.com/mubaidr/gem-team/commit/52d5715564bff395df347dd3c09523a3417045a3))
+- add hypothesis step to gem-planner workflow ([298ff66](https://github.com/mubaidr/gem-team/commit/298ff66321aca81a037bef60aa22d1bd0e4f8266))
+- add ownership principle to agent definitions and budget enforcement to researcher ([fc14507](https://github.com/mubaidr/gem-team/commit/fc14507e8ff57085710edc273bfbd5aecbcddbaa))
+- add scope discipline rule to gem-implementer-mobile workflow ([a658586](https://github.com/mubaidr/gem-team/commit/a6585869a5289c75c23184ed72380d0659affc2f))
+- add step-by-step validation reminder to agent rules ([3bda9ce](https://github.com/mubaidr/gem-team/commit/3bda9ce4d4d47ea42c41c5088b0f97f52f4351f2))
+- correct typo in gem-reviewer agent workflow description ([fbf24f3](https://github.com/mubaidr/gem-team/commit/fbf24f3eb246879968b20f3a32e9b045a32f4f85))
+- refine debugger workflow details and orchestrator checklist step wording ([f43412d](https://github.com/mubaidr/gem-team/commit/f43412d2f72c8cec4a38239ab47c5a018943855f))
+- require documentation writer to read source code and flag speculation ([32606ea](https://github.com/mubaidr/gem-team/commit/32606ea2c33fab67128b51fdffcfecab565b0a45))
+- revise gem-researcher workflow description and early exit criteria ([3052aee](https://github.com/mubaidr/gem-team/commit/3052aee792aaad45691f872153b1c284e595d1b6))
+- update Red step to include edge cases ([6dd3850](https://github.com/mubaidr/gem-team/commit/6dd38500ef2a924ae6af8ab73d9ce28b5abfa74d))
 
 ## [1.74.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.73.0...gem-team-v1.74.0) (2026-06-21)
 
-
 ### 🧹 Housekeeping
 
-* add cache usage to debugger/ planner ([85d8a35](https://github.com/mubaidr/gem-team/commit/85d8a35f1a66beffd99f6cd97eeb1a1c9e09d841))
+- add cache usage to debugger/ planner ([85d8a35](https://github.com/mubaidr/gem-team/commit/85d8a35f1a66beffd99f6cd97eeb1a1c9e09d841))
 
 ## [1.73.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.72.0...gem-team-v1.73.0) (2026-06-21)
 
-
 ### 📝 Documentation
 
-* add explicit bug-fix/debug steps for TRIVIAL and LOW complexity in orchestrator workflow ([3c0be7b](https://github.com/mubaidr/gem-team/commit/3c0be7bbe41af8ed5b7e0f2c1897d2e46729bb94))
-* add phase compliance reminder and Failure Handling header ([677b111](https://github.com/mubaidr/gem-team/commit/677b1116bbfa78bbe7015e307e0021dede3a7181))
+- add explicit bug-fix/debug steps for TRIVIAL and LOW complexity in orchestrator workflow ([3c0be7b](https://github.com/mubaidr/gem-team/commit/3c0be7bbe41af8ed5b7e0f2c1897d2e46729bb94))
+- add phase compliance reminder and Failure Handling header ([677b111](https://github.com/mubaidr/gem-team/commit/677b1116bbfa78bbe7015e307e0021dede3a7181))
 
 ## [1.72.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.71.0...gem-team-v1.72.0) (2026-06-20)
 
-
 ### 📝 Documentation
 
-* add Two Batched Phases workflow and output hygiene ([d25a146](https://github.com/mubaidr/gem-team/commit/d25a14652ca901a8eec4a1e0eb7c0f558058db2b))
-* add Why Gem Team section and Quick Start installation guide ([9eef999](https://github.com/mubaidr/gem-team/commit/9eef99991c4bd71fd88197e3d9f79227579e9347))
-* add workflow optimization task list ([ab65546](https://github.com/mubaidr/gem-team/commit/ab65546706407fc16210e142ccd3f781d6e0ce4d))
-* fix bullet formatting in gem-planner.agent.md ([9e595d0](https://github.com/mubaidr/gem-team/commit/9e595d0195a33fc7aa03ce6c0345ef5a268e0008))
-* update orchestrator agent context snapshot and delegation rules ([2ba7b16](https://github.com/mubaidr/gem-team/commit/2ba7b16929079e3a1383884d210594d6ff0b2eaf))
+- add Two Batched Phases workflow and output hygiene ([d25a146](https://github.com/mubaidr/gem-team/commit/d25a14652ca901a8eec4a1e0eb7c0f558058db2b))
+- add Why Gem Team section and Quick Start installation guide ([9eef999](https://github.com/mubaidr/gem-team/commit/9eef99991c4bd71fd88197e3d9f79227579e9347))
+- add workflow optimization task list ([ab65546](https://github.com/mubaidr/gem-team/commit/ab65546706407fc16210e142ccd3f781d6e0ce4d))
+- fix bullet formatting in gem-planner.agent.md ([9e595d0](https://github.com/mubaidr/gem-team/commit/9e595d0195a33fc7aa03ce6c0345ef5a268e0008))
+- update orchestrator agent context snapshot and delegation rules ([2ba7b16](https://github.com/mubaidr/gem-team/commit/2ba7b16929079e3a1383884d210594d6ff0b2eaf))
 
 ## [1.71.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.70.0...gem-team-v1.71.0) (2026-06-20)
 
-
 ### 📝 Documentation
 
-* add Two Batched Phases workflow and execution refinements ([02c7e3c](https://github.com/mubaidr/gem-team/commit/02c7e3c568bf3b0b407112d820ba99f11a1a9c7f))
+- add Two Batched Phases workflow and execution refinements ([02c7e3c](https://github.com/mubaidr/gem-team/commit/02c7e3c568bf3b0b407112d820ba99f11a1a9c7f))
 
 ## [1.70.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.69.0...gem-team-v1.70.0) (2026-06-19)
 
-
 ### 📝 Documentation
 
-* **.apm/agents:** update gem-planner.agent.md ([9489af9](https://github.com/mubaidr/gem-team/commit/9489af94c6f55f28d130466b8abaac2badaaaa67))
+- **.apm/agents:** update gem-planner.agent.md ([9489af9](https://github.com/mubaidr/gem-team/commit/9489af94c6f55f28d130466b8abaac2badaaaa67))
 
 ## [1.69.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.68.0...gem-team-v1.69.0) (2026-06-18)
 
-
 ### 🚀 New Agents & Features
 
-* add complexity‑based integration gating ([698f596](https://github.com/mubaidr/gem-team/commit/698f59693aa8833dc18e9d4f782f1a525dc20108))
-
+- add complexity‑based integration gating ([698f596](https://github.com/mubaidr/gem-team/commit/698f59693aa8833dc18e9d4f782f1a525dc20108))
 
 ### 📝 Documentation
 
-* **agents:** Add post-edit step to run get_errors/LSP checks ([504b2da](https://github.com/mubaidr/gem-team/commit/504b2da86bc81970e1ccd1bdba253d7b2049bf47))
-* **gem-researcher:** Update confidence tier description and early exit criteria ([f86c447](https://github.com/mubaidr/gem-team/commit/f86c447ced9d9d74dd884cc55447b6dc63fc6c2e))
-* update agent documentation to adjust confidence thresholds for batch delegation ([8ad1c00](https://github.com/mubaidr/gem-team/commit/8ad1c00e0bd4faa100d5431cd4e648ddf85d6ecc))
+- **agents:** Add post-edit step to run get_errors/LSP checks ([504b2da](https://github.com/mubaidr/gem-team/commit/504b2da86bc81970e1ccd1bdba253d7b2049bf47))
+- **gem-researcher:** Update confidence tier description and early exit criteria ([f86c447](https://github.com/mubaidr/gem-team/commit/f86c447ced9d9d74dd884cc55447b6dc63fc6c2e))
+- update agent documentation to adjust confidence thresholds for batch delegation ([8ad1c00](https://github.com/mubaidr/gem-team/commit/8ad1c00e0bd4faa100d5431cd4e648ddf85d6ecc))
 
 ## [1.68.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.67.0...gem-team-v1.68.0) (2026-06-17)
 
-
 ### 🧹 Housekeeping
 
-* add terse execution rule to agent documentation ([6bde601](https://github.com/mubaidr/gem-team/commit/6bde6010071dc1bbdb3dc4afcd0809cbe2b0239d))
+- add terse execution rule to agent documentation ([6bde601](https://github.com/mubaidr/gem-team/commit/6bde6010071dc1bbdb3dc4afcd0809cbe2b0239d))
 
 ## [1.67.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.66.0...gem-team-v1.67.0) (2026-06-17)
 
-
 ### 🧹 Housekeeping
 
-* add Delegation First Policy bullet to constitutional rules ([f18eff2](https://github.com/mubaidr/gem-team/commit/f18eff231ceebea83baa2c81c2ffaed915dea40e))
-* **agents:** add mandatory workflow adherence requirement ([bf45d7c](https://github.com/mubaidr/gem-team/commit/bf45d7ca14d4c8d6918ae322d56982adb7e0c0fb))
-* update agent files to replace IMPORTANT with CRITICAL in rule headings ([704f333](https://github.com/mubaidr/gem-team/commit/704f3330b49ef4d7e80076359b40becec1ee94de))
+- add Delegation First Policy bullet to constitutional rules ([f18eff2](https://github.com/mubaidr/gem-team/commit/f18eff231ceebea83baa2c81c2ffaed915dea40e))
+- **agents:** add mandatory workflow adherence requirement ([bf45d7c](https://github.com/mubaidr/gem-team/commit/bf45d7ca14d4c8d6918ae322d56982adb7e0c0fb))
+- update agent files to replace IMPORTANT with CRITICAL in rule headings ([704f333](https://github.com/mubaidr/gem-team/commit/704f3330b49ef4d7e80076359b40becec1ee94de))
 
 ## [1.66.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.65.0...gem-team-v1.66.0) (2026-06-14)
 
-
 ### 🧹 Housekeeping
 
-* add Execution guidance and related best practice bullets to agent documentation ([e78945f](https://github.com/mubaidr/gem-team/commit/e78945f7152457e76eb364d79ded1bf65d3ca60d))
+- add Execution guidance and related best practice bullets to agent documentation ([e78945f](https://github.com/mubaidr/gem-team/commit/e78945f7152457e76eb364d79ded1bf65d3ca60d))
 
 ## [1.65.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.64.0...gem-team-v1.65.0) (2026-06-14)
 
-
 ### 🚀 New Agents & Features
 
-* add unplanned_failure handling ([b6c63a8](https://github.com/mubaidr/gem-team/commit/b6c63a8cd3f433303eb1b33959e44a99b79dff88))
-
+- add unplanned_failure handling ([b6c63a8](https://github.com/mubaidr/gem-team/commit/b6c63a8cd3f433303eb1b33959e44a99b79dff88))
 
 ### 🧹 Housekeeping
 
-* add atomicity and dependency constraints ([be012eb](https://github.com/mubaidr/gem-team/commit/be012ebbc01efed857e59557e953a4f865815e72))
-* add reuse_notes (path + trust level) guidance and config settings for planning and devops ([9ec6ab2](https://github.com/mubaidr/gem-team/commit/9ec6ab26ddc7f5deab796f525b5005ecd2869525))
-* consolidate shared execution rules and reduce duplication across agent definitions ([569b8b3](https://github.com/mubaidr/gem-team/commit/569b8b3c2d0be4ac38295242eb426ecde9cb9ca2))
-* refine agent knowledge sources and output format ([c0a31cf](https://github.com/mubaidr/gem-team/commit/c0a31cf90a1bffd90543ff00d8aeb2c88e65ef32))
-* refine skill creator agent documentation and format ([4632f22](https://github.com/mubaidr/gem-team/commit/4632f22accc898cdb967c0921c10adc4422f1523))
-* remove output format section from gem-researcher agent documentation ([2b2c584](https://github.com/mubaidr/gem-team/commit/2b2c584400c54ca89cae94842aa44f7bb420adc8))
-* remove redundant fields and duplicate content from agent definition files ([c59c704](https://github.com/mubaidr/gem-team/commit/c59c704b6b29c87f979d71cb006845e145e15098))
-* remove test definition format and output format from gem-mobile-tester agent ([30ddb42](https://github.com/mubaidr/gem-team/commit/30ddb42d028ccb6c1130c892c0226021549e2a5c))
-* replace implementation_specification with coordination_notes ([b171f29](https://github.com/mubaidr/gem-team/commit/b171f29ac4c207bc2084d0c267e03f0dacc659d3))
-* simplify PRD format guide and set version to semver ([0dc4b9e](https://github.com/mubaidr/gem-team/commit/0dc4b9e8e5ddbcde53ece00a902f5e7938c73111))
-* simplify quality checklist and remove failure section ([0bcd521](https://github.com/mubaidr/gem-team/commit/0bcd521fd3459e253cc766e1b4c673c906657b2e))
+- add atomicity and dependency constraints ([be012eb](https://github.com/mubaidr/gem-team/commit/be012ebbc01efed857e59557e953a4f865815e72))
+- add reuse_notes (path + trust level) guidance and config settings for planning and devops ([9ec6ab2](https://github.com/mubaidr/gem-team/commit/9ec6ab26ddc7f5deab796f525b5005ecd2869525))
+- consolidate shared execution rules and reduce duplication across agent definitions ([569b8b3](https://github.com/mubaidr/gem-team/commit/569b8b3c2d0be4ac38295242eb426ecde9cb9ca2))
+- refine agent knowledge sources and output format ([c0a31cf](https://github.com/mubaidr/gem-team/commit/c0a31cf90a1bffd90543ff00d8aeb2c88e65ef32))
+- refine skill creator agent documentation and format ([4632f22](https://github.com/mubaidr/gem-team/commit/4632f22accc898cdb967c0921c10adc4422f1523))
+- remove output format section from gem-researcher agent documentation ([2b2c584](https://github.com/mubaidr/gem-team/commit/2b2c584400c54ca89cae94842aa44f7bb420adc8))
+- remove redundant fields and duplicate content from agent definition files ([c59c704](https://github.com/mubaidr/gem-team/commit/c59c704b6b29c87f979d71cb006845e145e15098))
+- remove test definition format and output format from gem-mobile-tester agent ([30ddb42](https://github.com/mubaidr/gem-team/commit/30ddb42d028ccb6c1130c892c0226021549e2a5c))
+- replace implementation_specification with coordination_notes ([b171f29](https://github.com/mubaidr/gem-team/commit/b171f29ac4c207bc2084d0c267e03f0dacc659d3))
+- simplify PRD format guide and set version to semver ([0dc4b9e](https://github.com/mubaidr/gem-team/commit/0dc4b9e8e5ddbcde53ece00a902f5e7938c73111))
+- simplify quality checklist and remove failure section ([0bcd521](https://github.com/mubaidr/gem-team/commit/0bcd521fd3459e253cc766e1b4c673c906657b2e))
 
 ## [1.64.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.63.0...gem-team-v1.64.0) (2026-06-13)
 
-
 ### 🧹 Housekeeping
 
-* refine execution workflow to avoid full plan.yaml read and use targeted search for medium/high complexity tasks ([d16d09c](https://github.com/mubaidr/gem-team/commit/d16d09cf5fb10c5c3454b1b2bf2a7abb609ceee0))
+- refine execution workflow to avoid full plan.yaml read and use targeted search for medium/high complexity tasks ([d16d09c](https://github.com/mubaidr/gem-team/commit/d16d09cf5fb10c5c3454b1b2bf2a7abb609ceee0))
 
 ## [1.63.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.62.0...gem-team-v1.63.0) (2026-06-11)
 
-
 ### 🧹 Housekeeping
 
-* add mandatory execution rule to all agent documentation files ([4978f23](https://github.com/mubaidr/gem-team/commit/4978f23efe61f3a0765a7560a4200b4e9e54d2c5))
-* **main:** release gem-team 1.62.0 ([e46ff5a](https://github.com/mubaidr/gem-team/commit/e46ff5a7a8d9bf19702945efde58d1d27e778e75))
-* **main:** release gem-team 1.62.0 ([e20a914](https://github.com/mubaidr/gem-team/commit/e20a91462373a6c82371dafb78187ebe53bfb585))
+- add mandatory execution rule to all agent documentation files ([4978f23](https://github.com/mubaidr/gem-team/commit/4978f23efe61f3a0765a7560a4200b4e9e54d2c5))
+- **main:** release gem-team 1.62.0 ([e46ff5a](https://github.com/mubaidr/gem-team/commit/e46ff5a7a8d9bf19702945efde58d1d27e778e75))
+- **main:** release gem-team 1.62.0 ([e20a914](https://github.com/mubaidr/gem-team/commit/e20a91462373a6c82371dafb78187ebe53bfb585))
 
 ## [1.62.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.61.0...gem-team-v1.62.0) (2026-06-10)
 
-
 ### 🚀 New Agents & Features
 
-* Add exploration_mode to gem-researcher and integrate with planner/orchestrator ([8aeed91](https://github.com/mubaidr/gem-team/commit/8aeed915da2b4c22564f7bf62a2243692e9ebd97))
-* add skill invocation and matching to gem-implementer and gem-planner agents ([74e413e](https://github.com/mubaidr/gem-team/commit/74e413ee07521efebac5f1e073abf1bb74fece3e))
-
+- Add exploration_mode to gem-researcher and integrate with planner/orchestrator ([8aeed91](https://github.com/mubaidr/gem-team/commit/8aeed915da2b4c22564f7bf62a2243692e9ebd97))
+- add skill invocation and matching to gem-implementer and gem-planner agents ([74e413e](https://github.com/mubaidr/gem-team/commit/74e413ee07521efebac5f1e073abf1bb74fece3e))
 
 ### 🛠️ Bug Fixes
 
-* https://github.com/mubaidr/gem-team/issues/122 ([74e413e](https://github.com/mubaidr/gem-team/commit/74e413ee07521efebac5f1e073abf1bb74fece3e))
+- https://github.com/mubaidr/gem-team/issues/122 ([74e413e](https://github.com/mubaidr/gem-team/commit/74e413ee07521efebac5f1e073abf1bb74fece3e))
 
 ## [1.61.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.60.0...gem-team-v1.61.0) (2026-06-09)
 
-
 ### 🧹 Housekeeping
 
-* standardize execution priority phrasing and simplify complexity setting across agents ([d3dd5b0](https://github.com/mubaidr/gem-team/commit/d3dd5b0229a85ff74a9a77f70388b1880ed4fd4a))
+- standardize execution priority phrasing and simplify complexity setting across agents ([d3dd5b0](https://github.com/mubaidr/gem-team/commit/d3dd5b0229a85ff74a9a77f70388b1880ed4fd4a))
 
 ## [1.60.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.59.0...gem-team-v1.60.0) (2026-06-09)
 
-
 ### 🧹 Housekeeping
 
-* clarify focus_area derivation in gem-researcher agent ([1b24a95](https://github.com/mubaidr/gem-team/commit/1b24a95e16bfad7d0379f74adc246c45e8add945))
+- clarify focus_area derivation in gem-researcher agent ([1b24a95](https://github.com/mubaidr/gem-team/commit/1b24a95e16bfad7d0379f74adc246c45e8add945))
 
 ## [1.59.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.58.0...gem-team-v1.59.0) (2026-06-09)
 
-
 ### 🧹 Housekeeping
 
-* clarify orchestrator role and execution constraints ([3816804](https://github.com/mubaidr/gem-team/commit/381680428d6a813b60115fa2775520fa700c83b0))
+- clarify orchestrator role and execution constraints ([3816804](https://github.com/mubaidr/gem-team/commit/381680428d6a813b60115fa2775520fa700c83b0))
 
 ## [1.58.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.57.0...gem-team-v1.58.0) (2026-06-09)
 
-
 ### 🧹 Housekeeping
 
-* add tagline and Comparison section to README ([f0b4b3b](https://github.com/mubaidr/gem-team/commit/f0b4b3bea4cf20374b6dc589f4ffdb2033372ad6))
-* clarify orchestrator role and execution constraints ([583afa7](https://github.com/mubaidr/gem-team/commit/583afa706e2edf945247a60c5f841f118482d032))
+- add tagline and Comparison section to README ([f0b4b3b](https://github.com/mubaidr/gem-team/commit/f0b4b3bea4cf20374b6dc589f4ffdb2033372ad6))
+- clarify orchestrator role and execution constraints ([583afa7](https://github.com/mubaidr/gem-team/commit/583afa706e2edf945247a60c5f841f118482d032))
 
 ## [1.57.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.56.0...gem-team-v1.57.0) (2026-06-09)
 
-
 ### 🧹 Housekeeping
 
-* fix README anchor links and dash typography ([ea62610](https://github.com/mubaidr/gem-team/commit/ea626109f0aa653a8c4d564604e974cf32f3061c))
-* fix README anchor links and typography ([68cc84e](https://github.com/mubaidr/gem-team/commit/68cc84e6179de65a273d84d5662606d549f7a4b2))
-* update README with new branding SVG and revised introductory text ([9a40b85](https://github.com/mubaidr/gem-team/commit/9a40b850c62b334fe95ae0d4d87c0bc08ef95686))
+- fix README anchor links and dash typography ([ea62610](https://github.com/mubaidr/gem-team/commit/ea626109f0aa653a8c4d564604e974cf32f3061c))
+- fix README anchor links and typography ([68cc84e](https://github.com/mubaidr/gem-team/commit/68cc84e6179de65a273d84d5662606d549f7a4b2))
+- update README with new branding SVG and revised introductory text ([9a40b85](https://github.com/mubaidr/gem-team/commit/9a40b850c62b334fe95ae0d4d87c0bc08ef95686))
 
 ## [1.56.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.55.0...gem-team-v1.56.0) (2026-06-08)
 
-
 ### 🚀 New Agents & Features
 
-* Add runtime config support worklfow/ agent behavior customization ([4b7a405](https://github.com/mubaidr/gem-team/commit/4b7a405a63b7ee08ee3775959cb7e5b8f2f95a46))
-
+- Add runtime config support worklfow/ agent behavior customization ([4b7a405](https://github.com/mubaidr/gem-team/commit/4b7a405a63b7ee08ee3775959cb7e5b8f2f95a46))
 
 ### 🛠️ Bug Fixes
 
-* https://github.com/mubaidr/gem-team/issues/101 ([4b7a405](https://github.com/mubaidr/gem-team/commit/4b7a405a63b7ee08ee3775959cb7e5b8f2f95a46))
+- https://github.com/mubaidr/gem-team/issues/101 ([4b7a405](https://github.com/mubaidr/gem-team/commit/4b7a405a63b7ee08ee3775959cb7e5b8f2f95a46))
 
 ## [1.55.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.54.0...gem-team-v1.55.0) (2026-06-07)
 
-
 ### 🧹 Housekeeping
 
-* **agents:** add evidence-based guideline to orchestrator personality ([2a972a6](https://github.com/mubaidr/gem-team/commit/2a972a60cb97e35fc72488f7a624c6e642177c85))
+- **agents:** add evidence-based guideline to orchestrator personality ([2a972a6](https://github.com/mubaidr/gem-team/commit/2a972a60cb97e35fc72488f7a624c6e642177c85))
 
 ## [1.54.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.53.0...gem-team-v1.54.0) (2026-06-07)
 
-
 ### 🧹 Housekeeping
 
-* **agents:** refine orchestrator role description and agent input reference ([0dc9b4c](https://github.com/mubaidr/gem-team/commit/0dc9b4c535b39b065103396405591834d8da5fc8))
-* **agents:** streamline orchestrator phase initialization and complexity handling ([25b601d](https://github.com/mubaidr/gem-team/commit/25b601d9869548deb1b83e082624a6e74893f209))
+- **agents:** refine orchestrator role description and agent input reference ([0dc9b4c](https://github.com/mubaidr/gem-team/commit/0dc9b4c535b39b065103396405591834d8da5fc8))
+- **agents:** streamline orchestrator phase initialization and complexity handling ([25b601d](https://github.com/mubaidr/gem-team/commit/25b601d9869548deb1b83e082624a6e74893f209))
 
 ## [1.53.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.52.0...gem-team-v1.53.0) (2026-06-06)
 
-
 ### 🧹 Housekeeping
 
-* **agents:** Optimize orchstrator workflow ([a2bf720](https://github.com/mubaidr/gem-team/commit/a2bf7207388347bf1d7635b75d01e4fe94c562bc))
-* **agents:** prefix context envelope snapshot fields with gem- and fix task_id type in gem-researcher ([f81dda6](https://github.com/mubaidr/gem-team/commit/f81dda643a0c9735b73f7e0716e41181b2394d02))
-* **docs:** add update_context_envelope to argument hint ([8b48e41](https://github.com/mubaidr/gem-team/commit/8b48e4152a209c44d3030e0a14ab69329a81b6df))
-* **docs:** update contracts requirement to HIGH complexity ([9dcfab6](https://github.com/mubaidr/gem-team/commit/9dcfab63c133d79719cfc13370338d0d7f587c05))
+- **agents:** Optimize orchstrator workflow ([a2bf720](https://github.com/mubaidr/gem-team/commit/a2bf7207388347bf1d7635b75d01e4fe94c562bc))
+- **agents:** prefix context envelope snapshot fields with gem- and fix task_id type in gem-researcher ([f81dda6](https://github.com/mubaidr/gem-team/commit/f81dda643a0c9735b73f7e0716e41181b2394d02))
+- **docs:** add update_context_envelope to argument hint ([8b48e41](https://github.com/mubaidr/gem-team/commit/8b48e4152a209c44d3030e0a14ab69329a81b6df))
+- **docs:** update contracts requirement to HIGH complexity ([9dcfab6](https://github.com/mubaidr/gem-team/commit/9dcfab63c133d79719cfc13370338d0d7f587c05))
 
 ## [1.52.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.51.0...gem-team-v1.52.0) (2026-06-05)
 
-
 ### 🧹 Housekeeping
 
-* **docs:** remove redundant semantic checks note from workflow description ([f1e478a](https://github.com/mubaidr/gem-team/commit/f1e478acb0ca88725c21322dd6c25872e8a24e08))
-* **docs:** streamline context envelope read directives and remove redundant retry notes across agent definitions ([e16a3b7](https://github.com/mubaidr/gem-team/commit/e16a3b7439f4e3fbeaa3954e742aa3f8bcae411e))
+- **docs:** remove redundant semantic checks note from workflow description ([f1e478a](https://github.com/mubaidr/gem-team/commit/f1e478acb0ca88725c21322dd6c25872e8a24e08))
+- **docs:** streamline context envelope read directives and remove redundant retry notes across agent definitions ([e16a3b7](https://github.com/mubaidr/gem-team/commit/e16a3b7439f4e3fbeaa3954e742aa3f8bcae411e))
 
 ## [1.51.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.50.0...gem-team-v1.51.0) (2026-06-05)
 
-
 ### 🧹 Housekeeping
 
-* **docs:** simplify Phase 0 workflow by removing task type classification ([cd574a5](https://github.com/mubaidr/gem-team/commit/cd574a5df95e4bfd0db3dc54483ec79284044f97))
+- **docs:** simplify Phase 0 workflow by removing task type classification ([cd574a5](https://github.com/mubaidr/gem-team/commit/cd574a5df95e4bfd0db3dc54483ec79284044f97))
 
 ## [1.50.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.49.0...gem-team-v1.50.0) (2026-06-05)
 
-
 ### 🧹 Housekeeping
 
-* **config:** unhide Housekeeping section in changelog ([e392b2a](https://github.com/mubaidr/gem-team/commit/e392b2a4dd6a1cf4f39519c4041ac2d76a433487))
-* **docs:** add batching note to workflow description ([21f50bc](https://github.com/mubaidr/gem-team/commit/21f50bca05241326bc7cf4bc0ac3d9dd48279b90))
-* **docs:** add Fast-Path Modes, Task Classification, Smart Routing, Context Envelope to Process; update concurrency limit; reformat Core Agents table ([cc07749](https://github.com/mubaidr/gem-team/commit/cc07749ec8ada043baaadd48ac1a8918cd70d9ea))
-* **docs:** refine context envelope update condition and planner task field comments ([a1119b6](https://github.com/mubaidr/gem-team/commit/a1119b6dced16d251f8b6671c1bba8d6efca7dab))
-* **docs:** simplify agent configurations and output format definitions ([cb46bea](https://github.com/mubaidr/gem-team/commit/cb46bea365961190cce2b68c3881f7adca7e61b2))
-* **docs:** standardize execution bullet from '-' to '+' across agent documentation files ([ca315ad](https://github.com/mubaidr/gem-team/commit/ca315adac3872f3a7011f3db0c2529f85b24fefa))
-* **docs:** standardize execution guidance and JSON output requirements across all agent documentation ([62d6b3a](https://github.com/mubaidr/gem-team/commit/62d6b3aa9c5184105994e385c7868877936f816a))
-* **docs:** update recommended model identifiers in README ([1fc675b](https://github.com/mubaidr/gem-team/commit/1fc675bfedb50d921c5a9525cbfb04b8c836a9d2))
-* improve workflow documentation and batching guidance in gem-browser-tester and gem-code-simplifier agents ([43aec22](https://github.com/mubaidr/gem-team/commit/43aec22d7f05ff39ad0fe81263133a8de8f27844))
+- **config:** unhide Housekeeping section in changelog ([e392b2a](https://github.com/mubaidr/gem-team/commit/e392b2a4dd6a1cf4f39519c4041ac2d76a433487))
+- **docs:** add batching note to workflow description ([21f50bc](https://github.com/mubaidr/gem-team/commit/21f50bca05241326bc7cf4bc0ac3d9dd48279b90))
+- **docs:** add Fast-Path Modes, Task Classification, Smart Routing, Context Envelope to Process; update concurrency limit; reformat Core Agents table ([cc07749](https://github.com/mubaidr/gem-team/commit/cc07749ec8ada043baaadd48ac1a8918cd70d9ea))
+- **docs:** refine context envelope update condition and planner task field comments ([a1119b6](https://github.com/mubaidr/gem-team/commit/a1119b6dced16d251f8b6671c1bba8d6efca7dab))
+- **docs:** simplify agent configurations and output format definitions ([cb46bea](https://github.com/mubaidr/gem-team/commit/cb46bea365961190cce2b68c3881f7adca7e61b2))
+- **docs:** standardize execution bullet from '-' to '+' across agent documentation files ([ca315ad](https://github.com/mubaidr/gem-team/commit/ca315adac3872f3a7011f3db0c2529f85b24fefa))
+- **docs:** standardize execution guidance and JSON output requirements across all agent documentation ([62d6b3a](https://github.com/mubaidr/gem-team/commit/62d6b3aa9c5184105994e385c7868877936f816a))
+- **docs:** update recommended model identifiers in README ([1fc675b](https://github.com/mubaidr/gem-team/commit/1fc675bfedb50d921c5a9525cbfb04b8c836a9d2))
+- improve workflow documentation and batching guidance in gem-browser-tester and gem-code-simplifier agents ([43aec22](https://github.com/mubaidr/gem-team/commit/43aec22d7f05ff39ad0fe81263133a8de8f27844))
 
 ## [1.49.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.48.0...gem-team-v1.49.0) (2026-06-01)
 
-
 ### 🚀 New Agents & Features
 
-* **workflow:** clarify shared component verification step ([6ff5773](https://github.com/mubaidr/gem-team/commit/6ff5773faacdf6fd365edbfa7667d340606aa387))
+- **workflow:** clarify shared component verification step ([6ff5773](https://github.com/mubaidr/gem-team/commit/6ff5773faacdf6fd365edbfa7667d340606aa387))
 
 ## [1.48.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.47.0...gem-team-v1.48.0) (2026-06-01)
 
-
 ### 🚀 New Agents & Features
 
-* **workflow:** detail context envelope initialization steps ([667ab90](https://github.com/mubaidr/gem-team/commit/667ab901332274685cbae4c1bad5d7bfd14ecf8a))
+- **workflow:** detail context envelope initialization steps ([667ab90](https://github.com/mubaidr/gem-team/commit/667ab901332274685cbae4c1bad5d7bfd14ecf8a))
 
 ## [1.47.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.46.0...gem-team-v1.47.0) (2026-05-30)
 
-
 ### 🚀 New Agents & Features
 
-* **agents:** add research action and enhance unknown confidence handling ([e79acc4](https://github.com/mubaidr/gem-team/commit/e79acc485f9014abfa3fc68a25e2d168113bd64e))
-* introduce requires_design_validation flag for design validation tasks ([e80d112](https://github.com/mubaidr/gem-team/commit/e80d112969bab20dc6907440c00ec19ca08bf12b))
-
+- **agents:** add research action and enhance unknown confidence handling ([e79acc4](https://github.com/mubaidr/gem-team/commit/e79acc485f9014abfa3fc68a25e2d168113bd64e))
+- introduce requires_design_validation flag for design validation tasks ([e80d112](https://github.com/mubaidr/gem-team/commit/e80d112969bab20dc6907440c00ec19ca08bf12b))
 
 ### 📝 Documentation
 
-* **agents:** clarify Bug‑Fix Mode workflow and concurrency limits ([a66e03e](https://github.com/mubaidr/gem-team/commit/a66e03e591876561a9ee957cf1b7718b14e4f489))
-* clarify task_id optional and standard output contract for agents ([10c66fc](https://github.com/mubaidr/gem-team/commit/10c66fc81b81e0f9091b41a0c0e589e69cbe7d7b))
-* **gem-planner:** clarify required/optional fields per complexity level ([62d5ccf](https://github.com/mubaidr/gem-team/commit/62d5ccfb50300155e386e9b313a103ddfae082b9))
+- **agents:** clarify Bug‑Fix Mode workflow and concurrency limits ([a66e03e](https://github.com/mubaidr/gem-team/commit/a66e03e591876561a9ee957cf1b7718b14e4f489))
+- clarify task_id optional and standard output contract for agents ([10c66fc](https://github.com/mubaidr/gem-team/commit/10c66fc81b81e0f9091b41a0c0e589e69cbe7d7b))
+- **gem-planner:** clarify required/optional fields per complexity level ([62d5ccf](https://github.com/mubaidr/gem-team/commit/62d5ccfb50300155e386e9b313a103ddfae082b9))
 
 ## [1.46.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.45.0...gem-team-v1.46.0) (2026-05-29)
 
-
 ### 🚀 New Agents & Features
 
-* add quality_score, reviewer_focus, and codebase validation to planning and critiquing agents ([3f9cfbf](https://github.com/mubaidr/gem-team/commit/3f9cfbf4b62c8a4d8c8568232590c7fd265447f2))
-* **agents:** make discovery strictly objective‑aligned ([d46d091](https://github.com/mubaidr/gem-team/commit/d46d0918db3915f7c5c2b9572a9e6552466fa447))
-
+- add quality_score, reviewer_focus, and codebase validation to planning and critiquing agents ([3f9cfbf](https://github.com/mubaidr/gem-team/commit/3f9cfbf4b62c8a4d8c8568232590c7fd265447f2))
+- **agents:** make discovery strictly objective‑aligned ([d46d091](https://github.com/mubaidr/gem-team/commit/d46d0918db3915f7c5c2b9572a9e6552466fa447))
 
 ### 📝 Documentation
 
-* add Agent Input Reference and improve JSON formatting ([010578e](https://github.com/mubaidr/gem-team/commit/010578ea57692e766b7283e411965069d2a05e85))
-* add validation verification step to gem-planner agent markdown ([ecb04d2](https://github.com/mubaidr/gem-team/commit/ecb04d21678b3b674641640b6e3a1f715de283ed))
+- add Agent Input Reference and improve JSON formatting ([010578e](https://github.com/mubaidr/gem-team/commit/010578ea57692e766b7283e411965069d2a05e85))
+- add validation verification step to gem-planner agent markdown ([ecb04d2](https://github.com/mubaidr/gem-team/commit/ecb04d21678b3b674641640b6e3a1f715de283ed))
 
 ## [1.45.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.44.0...gem-team-v1.45.0) (2026-05-29)
 
-
 ### 🚀 New Agents & Features
 
-* enhance context envelope update and expand plan metadata schema ([169e4e1](https://github.com/mubaidr/gem-team/commit/169e4e10aa0e2b5baae19308ab97f3ddcbb8f11c))
-
+- enhance context envelope update and expand plan metadata schema ([169e4e1](https://github.com/mubaidr/gem-team/commit/169e4e10aa0e2b5baae19308ab97f3ddcbb8f11c))
 
 ### 📝 Documentation
 
-* clarify "replan" wording to "replan/ adjustments" in validation failure handling ([20946c4](https://github.com/mubaidr/gem-team/commit/20946c4480245e0ce6ebf8639a997f23d447cacd))
-* standardize JSON output requirement phrasing across agent documentation ([50faf57](https://github.com/mubaidr/gem-team/commit/50faf57e4a8e8777f1a554a8af537dd03a197c0a))
+- clarify "replan" wording to "replan/ adjustments" in validation failure handling ([20946c4](https://github.com/mubaidr/gem-team/commit/20946c4480245e0ce6ebf8639a997f23d447cacd))
+- standardize JSON output requirement phrasing across agent documentation ([50faf57](https://github.com/mubaidr/gem-team/commit/50faf57e4a8e8777f1a554a8af537dd03a197c0a))
 
 ## [1.44.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.43.0...gem-team-v1.44.0) (2026-05-26)
 
-
 ### 🚀 New Agents & Features
 
-* **agents:** introduce structured planning workflow with plan ID and task classification ([419503b](https://github.com/mubaidr/gem-team/commit/419503b242408be49f83ac9de503b0cd94796f8e))
-* **orchestration:** add Post‑Wave Enrichment phase and update orchestrator and planner agent goals to reflect new workflow ([424c2e8](https://github.com/mubaidr/gem-team/commit/424c2e80ca80af74434fd4d435afef798fb0822f))
+- **agents:** introduce structured planning workflow with plan ID and task classification ([419503b](https://github.com/mubaidr/gem-team/commit/419503b242408be49f83ac9de503b0cd94796f8e))
+- **orchestration:** add Post‑Wave Enrichment phase and update orchestrator and planner agent goals to reflect new workflow ([424c2e8](https://github.com/mubaidr/gem-team/commit/424c2e80ca80af74434fd4d435afef798fb0822f))
 
 ## [1.43.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.42.0...gem-team-v1.43.0) (2026-05-25)
 
-
 ### 📝 Documentation
 
-* **agents:** clarify deterministic script usage and CLI contract rules ([3597013](https://github.com/mubaidr/gem-team/commit/3597013399091c5bc8862bc7cfd5f1c80d5899f7))
-* clarify validation flow wording in gem-orchestrator.agent.md. ([c832fcc](https://github.com/mubaidr/gem-team/commit/c832fccc4fa7ecca168c888b43c807542004ab7a))
-* **readme:** add maintained badge and experience note to README. ([089f2ce](https://github.com/mubaidr/gem-team/commit/089f2ce3416e931510fd3a201ce76f681d945a4d))
-* Updated wording to emphasize starting from Phase 0 and never skip or reorder phases. ([43c4cf3](https://github.com/mubaidr/gem-team/commit/43c4cf35b723c471500e7c5a125093f45631f6a1))
+- **agents:** clarify deterministic script usage and CLI contract rules ([3597013](https://github.com/mubaidr/gem-team/commit/3597013399091c5bc8862bc7cfd5f1c80d5899f7))
+- clarify validation flow wording in gem-orchestrator.agent.md. ([c832fcc](https://github.com/mubaidr/gem-team/commit/c832fccc4fa7ecca168c888b43c807542004ab7a))
+- **readme:** add maintained badge and experience note to README. ([089f2ce](https://github.com/mubaidr/gem-team/commit/089f2ce3416e931510fd3a201ce76f681d945a4d))
+- Updated wording to emphasize starting from Phase 0 and never skip or reorder phases. ([43c4cf3](https://github.com/mubaidr/gem-team/commit/43c4cf35b723c471500e7c5a125093f45631f6a1))
 
 ## [1.42.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.41.0...gem-team-v1.42.0) (2026-05-24)
 
-
 ### 🚀 New Agents & Features
 
-* **context:** implement envelope update and versioning ([4988876](https://github.com/mubaidr/gem-team/commit/4988876cee5040c75a97b56696b2e338ff17f9d2))
+- **context:** implement envelope update and versioning ([4988876](https://github.com/mubaidr/gem-team/commit/4988876cee5040c75a97b56696b2e338ff17f9d2))
 
 ## [1.41.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.40.0...gem-team-v1.41.0) (2026-05-24)
 
-
 ### 🚀 New Agents & Features
 
-* **agents:** enrich learning schema with structured metadata ([b9531b6](https://github.com/mubaidr/gem-team/commit/b9531b6c2026dc9addb94aa8f641906c9d5b5972))
-
+- **agents:** enrich learning schema with structured metadata ([b9531b6](https://github.com/mubaidr/gem-team/commit/b9531b6c2026dc9addb94aa8f641906c9d5b5972))
 
 ### 📝 Documentation
 
-* **readme:** add recommended model guidance and remove outdated agent selection suggestions ([84a9923](https://github.com/mubaidr/gem-team/commit/84a9923c1cee7ae01922cda9d4fcf7f527277585))
+- **readme:** add recommended model guidance and remove outdated agent selection suggestions ([84a9923](https://github.com/mubaidr/gem-team/commit/84a9923c1cee7ae01922cda9d4fcf7f527277585))
 
 ## [1.40.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.39.0...gem-team-v1.40.0) (2026-05-23)
 
-
 ### 🚀 New Agents & Features
 
-* enrich gem-planner agent documentation with detailed planning context and reusable metadata ([91ffe08](https://github.com/mubaidr/gem-team/commit/91ffe08c21cf9807215760e9ea0fd104edcb3403))
-
+- enrich gem-planner agent documentation with detailed planning context and reusable metadata ([91ffe08](https://github.com/mubaidr/gem-team/commit/91ffe08c21cf9807215760e9ea0fd104edcb3403))
 
 ### 📝 Documentation
 
-* refine TDD cycle, error handling, and retry logic across agent documentation ([2b71a96](https://github.com/mubaidr/gem-team/commit/2b71a96be7500d94a7a9fb60a65c6b5b64a09a02))
+- refine TDD cycle, error handling, and retry logic across agent documentation ([2b71a96](https://github.com/mubaidr/gem-team/commit/2b71a96be7500d94a7a9fb60a65c6b5b64a09a02))
 
 ## [1.39.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.38.0...gem-team-v1.39.0) (2026-05-23)
 
-
 ### 🚀 New Agents & Features
 
-* **orchestrator:** restructure planning flow and validation logic ([53415ce](https://github.com/mubaidr/gem-team/commit/53415ce498c7e14c660d091a23df8eef38bb41ea))
+- **orchestrator:** restructure planning flow and validation logic ([53415ce](https://github.com/mubaidr/gem-team/commit/53415ce498c7e14c660d091a23df8eef38bb41ea))
 
 ## [1.38.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.37.0...gem-team-v1.38.0) (2026-05-22)
 
-
 ### 🚀 New Agents & Features
 
-* **orchestrator:** streamline subagent delegation and failure handling ([224dfe4](https://github.com/mubaidr/gem-team/commit/224dfe491e654d59bf96f2947f7511763a5b7b56))
-* replace raster logo with inline SVG for improved scalability and branding ([c8e77fb](https://github.com/mubaidr/gem-team/commit/c8e77fb4e069944ee0c4089c1562f742d2325963))
-
+- **orchestrator:** streamline subagent delegation and failure handling ([224dfe4](https://github.com/mubaidr/gem-team/commit/224dfe491e654d59bf96f2947f7511763a5b7b56))
+- replace raster logo with inline SVG for improved scalability and branding ([c8e77fb](https://github.com/mubaidr/gem-team/commit/c8e77fb4e069944ee0c4089c1562f742d2325963))
 
 ### 🛠️ Bug Fixes
 
-* correct typo in validation step ([a1294f2](https://github.com/mubaidr/gem-team/commit/a1294f2a102e8fa0eea3d11e9b69e6e94c1730a1))
-
+- correct typo in validation step ([a1294f2](https://github.com/mubaidr/gem-team/commit/a1294f2a102e8fa0eea3d11e9b69e6e94c1730a1))
 
 ### 📝 Documentation
 
-* expand gem-orchestrator.agent.md with revised workflow phases, introducing Init & Clarify (Phase 0) and detailed routing logic ([b049d5c](https://github.com/mubaidr/gem-team/commit/b049d5cbc5c5087b53ba1de2b8b152f8af900b72))
+- expand gem-orchestrator.agent.md with revised workflow phases, introducing Init & Clarify (Phase 0) and detailed routing logic ([b049d5c](https://github.com/mubaidr/gem-team/commit/b049d5cbc5c5087b53ba1de2b8b152f8af900b72))
 
 ## [1.37.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.36.0...gem-team-v1.37.0) (2026-05-22)
 
-
 ### 🛠️ Bug Fixes
 
-* phase references ([29fd62e](https://github.com/mubaidr/gem-team/commit/29fd62ef4bcd5152456ad8a31b08d2c964938488))
+- phase references ([29fd62e](https://github.com/mubaidr/gem-team/commit/29fd62ef4bcd5152456ad8a31b08d2c964938488))
 
 ## [1.36.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.35.0...gem-team-v1.36.0) (2026-05-22)
 
-
 ### 📝 Documentation
 
-* clean up and correct agent documentation ([0c22e84](https://github.com/mubaidr/gem-team/commit/0c22e84a3d360d1dd5da3dd6dcdb230f59dd6171))
-* fix typo in Merge instruction (Donot → Don't) ([64f9380](https://github.com/mubaidr/gem-team/commit/64f93801253574bb7c245667a0a3d23278a37e32))
-* **readme:** refine TLDR, add Scriptable bullet, and restructure Knowledge Layers ([e902d9e](https://github.com/mubaidr/gem-team/commit/e902d9e4862f19baa690e9bf5d4a5c6e06b359b0))
+- clean up and correct agent documentation ([0c22e84](https://github.com/mubaidr/gem-team/commit/0c22e84a3d360d1dd5da3dd6dcdb230f59dd6171))
+- fix typo in Merge instruction (Donot → Don't) ([64f9380](https://github.com/mubaidr/gem-team/commit/64f93801253574bb7c245667a0a3d23278a37e32))
+- **readme:** refine TLDR, add Scriptable bullet, and restructure Knowledge Layers ([e902d9e](https://github.com/mubaidr/gem-team/commit/e902d9e4862f19baa690e9bf5d4a5c6e06b359b0))
 
 ## [1.35.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.34.0...gem-team-v1.35.0) (2026-05-21)
 
-
 ### 🚀 New Agents & Features
 
-* add gem team logo to README and asset ([8f0996a](https://github.com/mubaidr/gem-team/commit/8f0996ab5fb81701d010143a5e8ea371bccf700a))
-
+- add gem team logo to README and asset ([8f0996a](https://github.com/mubaidr/gem-team/commit/8f0996ab5fb81701d010143a5e8ea371bccf700a))
 
 ### 🛠️ Bug Fixes
 
-* https://github.com/mubaidr/gem-team/issues/89 ([d8fbf63](https://github.com/mubaidr/gem-team/commit/d8fbf63996ff5eafcf92fa2b5894b82857c7e27e))
-
+- https://github.com/mubaidr/gem-team/issues/89 ([d8fbf63](https://github.com/mubaidr/gem-team/commit/d8fbf63996ff5eafcf92fa2b5894b82857c7e27e))
 
 ### 📝 Documentation
 
-* add Script Usage section with guidelines to agent documentation files ([d8fbf63](https://github.com/mubaidr/gem-team/commit/d8fbf63996ff5eafcf92fa2b5894b82857c7e27e))
+- add Script Usage section with guidelines to agent documentation files ([d8fbf63](https://github.com/mubaidr/gem-team/commit/d8fbf63996ff5eafcf92fa2b5894b82857c7e27e))
 
 ## [1.34.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.33.0...gem-team-v1.34.0) (2026-05-21)
 
-
 ### 🛠️ Bug Fixes
 
-* https://github.com/mubaidr/gem-team/issues/85 ([b47654f](https://github.com/mubaidr/gem-team/commit/b47654fa9f6e34377aaa435a7f76f1457e8d58a7))
-
+- https://github.com/mubaidr/gem-team/issues/85 ([b47654f](https://github.com/mubaidr/gem-team/commit/b47654fa9f6e34377aaa435a7f76f1457e8d58a7))
 
 ### 📝 Documentation
 
-* enforce strict phase adherence in gem-orchestrator.agent.md ([47ad415](https://github.com/mubaidr/gem-team/commit/47ad4154617825e66702f8525b23abbe82e13507))
+- enforce strict phase adherence in gem-orchestrator.agent.md ([47ad415](https://github.com/mubaidr/gem-team/commit/47ad4154617825e66702f8525b23abbe82e13507))
 
 ## [1.33.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.32.0...gem-team-v1.33.0) (2026-05-20)
 
-
 ### 🚀 New Agents & Features
 
-* Clarify and optimize memory management for Researcher, Planner, Orchestrator agents. ([10e958e](https://github.com/mubaidr/gem-team/commit/10e958e6df97951ff635ce9aec08f45eac757d9e))
-* **claude-plugin:** add gem-team plugin and update marketplace metadata and release config ([07b4ebf](https://github.com/mubaidr/gem-team/commit/07b4ebfdccbb5efb8b1821fe21076ef0a408e469))
-* **claude-plugin:** add gem-team plugin and update marketplace metadata and release config ([174ab39](https://github.com/mubaidr/gem-team/commit/174ab395bbf3541b72d2d64f6810d6c19057bf2f))
-* Optimize memory management + Routing ([c27239d](https://github.com/mubaidr/gem-team/commit/c27239df3df7ca97512ac8a48a1a5716824a1493))
-
+- Clarify and optimize memory management for Researcher, Planner, Orchestrator agents. ([10e958e](https://github.com/mubaidr/gem-team/commit/10e958e6df97951ff635ce9aec08f45eac757d9e))
+- **claude-plugin:** add gem-team plugin and update marketplace metadata and release config ([07b4ebf](https://github.com/mubaidr/gem-team/commit/07b4ebfdccbb5efb8b1821fe21076ef0a408e469))
+- **claude-plugin:** add gem-team plugin and update marketplace metadata and release config ([174ab39](https://github.com/mubaidr/gem-team/commit/174ab395bbf3541b72d2d64f6810d6c19057bf2f))
+- Optimize memory management + Routing ([c27239d](https://github.com/mubaidr/gem-team/commit/c27239df3df7ca97512ac8a48a1a5716824a1493))
 
 ### 📝 Documentation
 
-* refactor knowledge-source enumeration and simplify agent initialization ([49528df](https://github.com/mubaidr/gem-team/commit/49528df757160eba2433ea3c99735195ea0ab9da))
-* refine agent markdown specifications and simplify output instructions ([2316e3f](https://github.com/mubaidr/gem-team/commit/2316e3fdbccb640b4aefe2c036bfc9554bb52b48))
+- refactor knowledge-source enumeration and simplify agent initialization ([49528df](https://github.com/mubaidr/gem-team/commit/49528df757160eba2433ea3c99735195ea0ab9da))
+- refine agent markdown specifications and simplify output instructions ([2316e3f](https://github.com/mubaidr/gem-team/commit/2316e3fdbccb640b4aefe2c036bfc9554bb52b48))
 
 ## [1.32.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.31.0...gem-team-v1.32.0) (2026-05-17)
 
-
 ### 🚀 New Agents & Features
 
-* **agents:** enforce strict phase ordering in multi-agent workflow ([d79872b](https://github.com/mubaidr/gem-team/commit/d79872b4574b55f805c9d425c4953fd4ac628355))
+- **agents:** enforce strict phase ordering in multi-agent workflow ([d79872b](https://github.com/mubaidr/gem-team/commit/d79872b4574b55f805c9d425c4953fd4ac628355))
 
 ## [1.31.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.30.0...gem-team-v1.31.0) (2026-05-16)
 
-
 ### 🚀 New Agents & Features
 
-* add research findings yaml search to agent initialization stepsThe diff introduces a new step in each agent’s initialization to search the `docs/plan/{plan_id}/research_findings_{focus_area}.yaml` files and extract relevant content. This enables agents to leverage documented research findings directly during their workflow. Additionally, the `gem-researcher.agent.md` file now properly closes the `<knowledge_sources>` section. ([62dd93a](https://github.com/mubaidr/gem-team/commit/62dd93ab4105707b4bc9f0d6bed067f8fb15ad11))
-* enhance JSON output format with confidence, summary, and detailed metrics ([3fdbee5](https://github.com/mubaidr/gem-team/commit/3fdbee5df6827172fe8c798ac0d2e3185175493f))
-* enhance user intent handling and restructure summary phases ([45cbe3a](https://github.com/mubaidr/gem-team/commit/45cbe3abe34ef0aaf09c6ca7a70a34faa5d8a1ba))
-* **orchestrator:** add loop handling and failure management ([869f300](https://github.com/mubaidr/gem-team/commit/869f300fe2531ef1b9886842518f5a891ac15b41))
-
+- add research findings yaml search to agent initialization stepsThe diff introduces a new step in each agent’s initialization to search the `docs/plan/{plan_id}/research_findings_{focus_area}.yaml` files and extract relevant content. This enables agents to leverage documented research findings directly during their workflow. Additionally, the `gem-researcher.agent.md` file now properly closes the `<knowledge_sources>` section. ([62dd93a](https://github.com/mubaidr/gem-team/commit/62dd93ab4105707b4bc9f0d6bed067f8fb15ad11))
+- enhance JSON output format with confidence, summary, and detailed metrics ([3fdbee5](https://github.com/mubaidr/gem-team/commit/3fdbee5df6827172fe8c798ac0d2e3185175493f))
+- enhance user intent handling and restructure summary phases ([45cbe3a](https://github.com/mubaidr/gem-team/commit/45cbe3abe34ef0aaf09c6ca7a70a34faa5d8a1ba))
+- **orchestrator:** add loop handling and failure management ([869f300](https://github.com/mubaidr/gem-team/commit/869f300fe2531ef1b9886842518f5a891ac15b41))
 
 ### 🛠️ Bug Fixes
 
-* https://github.com/mubaidr/gem-team/issues/76 ([aaa8957](https://github.com/mubaidr/gem-team/commit/aaa89575a4d3c60be6a96e77c9deee3e3f8f3172))
-
+- https://github.com/mubaidr/gem-team/issues/76 ([aaa8957](https://github.com/mubaidr/gem-team/commit/aaa89575a4d3c60be6a96e77c9deee3e3f8f3172))
 
 ### 📝 Documentation
 
-* add detailed bug‑fix mode steps and update retry policy documentation across agents ([28ea1c4](https://github.com/mubaidr/gem-team/commit/28ea1c4e49ddec8eeeec14c8e9dda57009d2ca94))
-* add Knowledge Sources reference to role descriptions in agent documentation ([620b15b](https://github.com/mubaidr/gem-team/commit/620b15b540b22ed5286699971f67bf3c81830dd3))
-* add skip rule for simple refactor in gem-implementer.agent.md ([1e0ced0](https://github.com/mubaidr/gem-team/commit/1e0ced04201d7c82e6d1994711251b34f54ac06e))
-* **agent:** improve readability and ordering of memory, execution, and anti-pattern sections ([f3156e3](https://github.com/mubaidr/gem-team/commit/f3156e327c8f8652948c7a3e2590a9f8e991bfda))
-* **readme:** enhance documentation with new structure, emojis, and detailed agent team overview ([8dbdbec](https://github.com/mubaidr/gem-team/commit/8dbdbecf89fa23ba1bc350df276c6e37dd08a2cd))
-* **readme:** replace "harness" with "framework" and rename "Harness Architecture" to "Architecture" throughout the README. Additionally, update related references to reflect the terminology change and adjust heading titles accordingly. ([ad8e98f](https://github.com/mubaidr/gem-team/commit/ad8e98fee3fe3e8eaf0d63a2593ca0cf6bc7982c))
-* refine Memory Usage sections in agent documentation to standardize tier descriptions, skip criteria, and formatting conventions ([becf73a](https://github.com/mubaidr/gem-team/commit/becf73a326b8c6f558a896c76a90df4f31753dcd))
-* remove deprecated cache bypass sections and simplify memory usage documentation ([f0bba1a](https://github.com/mubaidr/gem-team/commit/f0bba1aabf5356fbccd8e0bc8ac2eff57f31920f))
-* rename phases 4‑6 and restructure Persist Learnings section in gem‑orchestrator agent documentation ([62ff624](https://github.com/mubaidr/gem-team/commit/62ff6240ec0dd3e78e7d85717f3804309c3829d9))
-* revise browser tester workflow steps and documentation ([63401e9](https://github.com/mubaidr/gem-team/commit/63401e9aed694a9bb69dbebd9d84b5f126158ba6))
-* standardize agent documentation to evidence‑based only guidance ([cbe2a11](https://github.com/mubaidr/gem-team/commit/cbe2a11b083231bba62c886cbfb799a4ef9d6f80))
+- add detailed bug‑fix mode steps and update retry policy documentation across agents ([28ea1c4](https://github.com/mubaidr/gem-team/commit/28ea1c4e49ddec8eeeec14c8e9dda57009d2ca94))
+- add Knowledge Sources reference to role descriptions in agent documentation ([620b15b](https://github.com/mubaidr/gem-team/commit/620b15b540b22ed5286699971f67bf3c81830dd3))
+- add skip rule for simple refactor in gem-implementer.agent.md ([1e0ced0](https://github.com/mubaidr/gem-team/commit/1e0ced04201d7c82e6d1994711251b34f54ac06e))
+- **agent:** improve readability and ordering of memory, execution, and anti-pattern sections ([f3156e3](https://github.com/mubaidr/gem-team/commit/f3156e327c8f8652948c7a3e2590a9f8e991bfda))
+- **readme:** enhance documentation with new structure, emojis, and detailed agent team overview ([8dbdbec](https://github.com/mubaidr/gem-team/commit/8dbdbecf89fa23ba1bc350df276c6e37dd08a2cd))
+- **readme:** replace "harness" with "framework" and rename "Harness Architecture" to "Architecture" throughout the README. Additionally, update related references to reflect the terminology change and adjust heading titles accordingly. ([ad8e98f](https://github.com/mubaidr/gem-team/commit/ad8e98fee3fe3e8eaf0d63a2593ca0cf6bc7982c))
+- refine Memory Usage sections in agent documentation to standardize tier descriptions, skip criteria, and formatting conventions ([becf73a](https://github.com/mubaidr/gem-team/commit/becf73a326b8c6f558a896c76a90df4f31753dcd))
+- remove deprecated cache bypass sections and simplify memory usage documentation ([f0bba1a](https://github.com/mubaidr/gem-team/commit/f0bba1aabf5356fbccd8e0bc8ac2eff57f31920f))
+- rename phases 4‑6 and restructure Persist Learnings section in gem‑orchestrator agent documentation ([62ff624](https://github.com/mubaidr/gem-team/commit/62ff6240ec0dd3e78e7d85717f3804309c3829d9))
+- revise browser tester workflow steps and documentation ([63401e9](https://github.com/mubaidr/gem-team/commit/63401e9aed694a9bb69dbebd9d84b5f126158ba6))
+- standardize agent documentation to evidence‑based only guidance ([cbe2a11](https://github.com/mubaidr/gem-team/commit/cbe2a11b083231bba62c886cbfb799a4ef9d6f80))
 
 ## [1.30.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.29.0...gem-team-v1.30.0) (2026-05-15)
 
-
 ### 🚀 New Agents & Features
 
-* **agents:** add learnings metadata to output schema ([400b761](https://github.com/mubaidr/gem-team/commit/400b761f3699a4e4d0842e79b9b592a8e766d618))
-* **agents:** add template cache save step for high‑confidence plans- Persist the generated DAG (tasks, waves, contracts, agent assignments) to   `plan/templates/{objective_category}` when confidence ≥ 0.85 and complexity ([d03a59e](https://github.com/mubaidr/gem-team/commit/d03a59e4555f27697f345a9f5a4cc17d68533253))
-* **cache:** add same‑bug and template cache bypasses ([7460420](https://github.com/mubaidr/gem-team/commit/74604203d8eeb7744ec81fa8874c76f1b809e96d))
-* **status:** add needs_approval to status values ([9d55069](https://github.com/mubaidr/gem-team/commit/9d5506908edfe18436827cca3f2ab5ce1fe6dcad))
-
+- **agents:** add learnings metadata to output schema ([400b761](https://github.com/mubaidr/gem-team/commit/400b761f3699a4e4d0842e79b9b592a8e766d618))
+- **agents:** add template cache save step for high‑confidence plans- Persist the generated DAG (tasks, waves, contracts, agent assignments) to `plan/templates/{objective_category}` when confidence ≥ 0.85 and complexity ([d03a59e](https://github.com/mubaidr/gem-team/commit/d03a59e4555f27697f345a9f5a4cc17d68533253))
+- **cache:** add same‑bug and template cache bypasses ([7460420](https://github.com/mubaidr/gem-team/commit/74604203d8eeb7744ec81fa8874c76f1b809e96d))
+- **status:** add needs_approval to status values ([9d55069](https://github.com/mubaidr/gem-team/commit/9d5506908edfe18436827cca3f2ab5ce1fe6dcad))
 
 ### 🛠️ Bug Fixes
 
-* https://github.com/mubaidr/gem-team/issues/75 ([aab8bad](https://github.com/mubaidr/gem-team/commit/aab8bad532b03cdf3bfe640186df58738cae483b))
-
+- https://github.com/mubaidr/gem-team/issues/75 ([aab8bad](https://github.com/mubaidr/gem-team/commit/aab8bad532b03cdf3bfe640186df58738cae483b))
 
 ### 📝 Documentation
 
-* add AGENTS.md with detailed Gem Team agent instructions and project overview ([8475310](https://github.com/mubaidr/gem-team/commit/84753104dcd3f9067ba766ed9d4a39dfda6a1020))
-* add integration check for security-sensitive task review and wave validation ([830b795](https://github.com/mubaidr/gem-team/commit/830b79542aae15074aeb470b893cf68e118040d9))
-* fix formatting bullet capitalization and enforce max items rule in agent documentation files ([f8ace95](https://github.com/mubaidr/gem-team/commit/f8ace959e915c3dd121ec03e8ab7cf60f174b36b))
-* improve OR regex examples in batch operations documentation ([f489a52](https://github.com/mubaidr/gem-team/commit/f489a52838739f829c3e8bca02b0dbb549ac7a42))
-* update TDD red step description to indicate test should not be run yet ([9b319df](https://github.com/mubaidr/gem-team/commit/9b319dff4a53794af3ab894667c5538a9f8fe122))
-* update Team Lead Personality description to explicitly mention status updates ([35af539](https://github.com/mubaidr/gem-team/commit/35af53916dc28f641454085b8a8a300d8e21bac0))
+- add AGENTS.md with detailed Gem Team agent instructions and project overview ([8475310](https://github.com/mubaidr/gem-team/commit/84753104dcd3f9067ba766ed9d4a39dfda6a1020))
+- add integration check for security-sensitive task review and wave validation ([830b795](https://github.com/mubaidr/gem-team/commit/830b79542aae15074aeb470b893cf68e118040d9))
+- fix formatting bullet capitalization and enforce max items rule in agent documentation files ([f8ace95](https://github.com/mubaidr/gem-team/commit/f8ace959e915c3dd121ec03e8ab7cf60f174b36b))
+- improve OR regex examples in batch operations documentation ([f489a52](https://github.com/mubaidr/gem-team/commit/f489a52838739f829c3e8bca02b0dbb549ac7a42))
+- update TDD red step description to indicate test should not be run yet ([9b319df](https://github.com/mubaidr/gem-team/commit/9b319dff4a53794af3ab894667c5538a9f8fe122))
+- update Team Lead Personality description to explicitly mention status updates ([35af539](https://github.com/mubaidr/gem-team/commit/35af53916dc28f641454085b8a8a300d8e21bac0))
 
 ## [1.29.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.28.0...gem-team-v1.29.0) (2026-05-15)
 
-
 ### 📝 Documentation
 
-* standardize memory usage rules across agent documentation files ([9e30ce9](https://github.com/mubaidr/gem-team/commit/9e30ce902b596c441c8ebb5f06f5c62deb461714))
+- standardize memory usage rules across agent documentation files ([9e30ce9](https://github.com/mubaidr/gem-team/commit/9e30ce902b596c441c8ebb5f06f5c62deb461714))
 
 ## [1.28.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.27.0...gem-team-v1.28.0) (2026-05-15)
 
-
 ### 📝 Documentation
 
-* clarify APM install usage with -g flag ([85127ce](https://github.com/mubaidr/gem-team/commit/85127cec1a0f6ed0920d3ff39a3de13541c75ad6))
-* **readme:** simplify installation workflow and expand compatibility details ([36166be](https://github.com/mubaidr/gem-team/commit/36166be0e7542f1292ff21debcd03e95f2559355))
+- clarify APM install usage with -g flag ([85127ce](https://github.com/mubaidr/gem-team/commit/85127cec1a0f6ed0920d3ff39a3de13541c75ad6))
+- **readme:** simplify installation workflow and expand compatibility details ([36166be](https://github.com/mubaidr/gem-team/commit/36166be0e7542f1292ff21debcd03e95f2559355))
 
 ## [1.27.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.26.0...gem-team-v1.27.0) (2026-05-15)
 
-
 ### 📝 Documentation
 
-* clarify acceptance criteria handling and test formulation in TDD cycle ([c7c012a](https://github.com/mubaidr/gem-team/commit/c7c012a859eee9b69f7d9d71a16bd3fec9021790))
+- clarify acceptance criteria handling and test formulation in TDD cycle ([c7c012a](https://github.com/mubaidr/gem-team/commit/c7c012a859eee9b69f7d9d71a16bd3fec9021790))
 
 ## [1.26.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.25.0...gem-team-v1.26.0) (2026-05-14)
 
-
 ### 🚀 New Agents & Features
 
-* add memory self‑serve workflow and related WRITE instructions to agent documentation ([db2de08](https://github.com/mubaidr/gem-team/commit/db2de08adde81074cac9df07637edeb4bac03a97))
-* add shared research findings reference to agent knowledge sources ([dca7503](https://github.com/mubaidr/gem-team/commit/dca75037aedc214c0835031df775b9ce91d83094))
-* **agents:** unify memory tool usage and simplify agent documentation ([2d4e045](https://github.com/mubaidr/gem-team/commit/2d4e045a2b090e7a302eac84283f120abeeae78c))
-* include updatedAt frontmatter in formatted memory outputs ([f425775](https://github.com/mubaidr/gem-team/commit/f42577580e3d62e9e50fe3064464d5486a24d5b1))
-
+- add memory self‑serve workflow and related WRITE instructions to agent documentation ([db2de08](https://github.com/mubaidr/gem-team/commit/db2de08adde81074cac9df07637edeb4bac03a97))
+- add shared research findings reference to agent knowledge sources ([dca7503](https://github.com/mubaidr/gem-team/commit/dca75037aedc214c0835031df775b9ce91d83094))
+- **agents:** unify memory tool usage and simplify agent documentation ([2d4e045](https://github.com/mubaidr/gem-team/commit/2d4e045a2b090e7a302eac84283f120abeeae78c))
+- include updatedAt frontmatter in formatted memory outputs ([f425775](https://github.com/mubaidr/gem-team/commit/f42577580e3d62e9e50fe3064464d5486a24d5b1))
 
 ### 🛠️ Bug Fixes
 
-* https://github.com/mubaidr/gem-team/issues/67 ([dca7503](https://github.com/mubaidr/gem-team/commit/dca75037aedc214c0835031df775b9ce91d83094))
-* https://github.com/mubaidr/gem-team/issues/68 ([2d4e045](https://github.com/mubaidr/gem-team/commit/2d4e045a2b090e7a302eac84283f120abeeae78c))
-
+- https://github.com/mubaidr/gem-team/issues/67 ([dca7503](https://github.com/mubaidr/gem-team/commit/dca75037aedc214c0835031df775b9ce91d83094))
+- https://github.com/mubaidr/gem-team/issues/68 ([2d4e045](https://github.com/mubaidr/gem-team/commit/2d4e045a2b090e7a302eac84283f120abeeae78c))
 
 ### 📝 Documentation
 
-* restructure knowledge source sections in agent docs and add self‑cleanup and cache validation instructions ([d8d22b6](https://github.com/mubaidr/gem-team/commit/d8d22b6d1a711c1985eb5af70a72ef89af0ffdc4))
+- restructure knowledge source sections in agent docs and add self‑cleanup and cache validation instructions ([d8d22b6](https://github.com/mubaidr/gem-team/commit/d8d22b6d1a711c1985eb5af70a72ef89af0ffdc4))
 
 ## [1.25.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.24.0...gem-team-v1.25.0) (2026-05-14)
 
-
 ### 📝 Documentation
 
-* add internal reasoning constraints to agent directive documentation ([96da9a0](https://github.com/mubaidr/gem-team/commit/96da9a0478ff68121d687b35c0330f04547a66a7))
-* remove outdated failure handling and memory sections from gem-orchestrator.agent.md ([9b43f40](https://github.com/mubaidr/gem-team/commit/9b43f40414836dd8cc15a64808dcdcede909dc4b))
+- add internal reasoning constraints to agent directive documentation ([96da9a0](https://github.com/mubaidr/gem-team/commit/96da9a0478ff68121d687b35c0330f04547a66a7))
+- remove outdated failure handling and memory sections from gem-orchestrator.agent.md ([9b43f40](https://github.com/mubaidr/gem-team/commit/9b43f40414836dd8cc15a64808dcdcede909dc4b))
 
 ## [1.24.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.23.0...gem-team-v1.24.0) (2026-05-13)
 
-
 ### 📝 Documentation
 
-* refine self‑quality gate description and severity handling in implementer and orchestrator agent documentation ([68fd798](https://github.com/mubaidr/gem-team/commit/68fd798ac48b739ba4d34dd40b97bedb403b85cf))
-* reorganize Self‑Critique and Handle Failure sections in gem‑* agent documentation ([8b44937](https://github.com/mubaidr/gem-team/commit/8b44937967ee92f658bba3d80e1c89de764f0195))
+- refine self‑quality gate description and severity handling in implementer and orchestrator agent documentation ([68fd798](https://github.com/mubaidr/gem-team/commit/68fd798ac48b739ba4d34dd40b97bedb403b85cf))
+- reorganize Self‑Critique and Handle Failure sections in gem‑\* agent documentation ([8b44937](https://github.com/mubaidr/gem-team/commit/8b44937967ee92f658bba3d80e1c89de764f0195))
 
 ## [1.23.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.22.0...gem-team-v1.23.0) (2026-05-13)
 
-
 ### 📝 Documentation
 
-* **agent:** clarify bisect workflow and update documentation wording  - **gem-debugger.agent.md**: Reword the bisect section to explicitly trigger it only when both a clear stack trace and conclusive git blame are unavailable, and adjust step phrasing for consistency. ([0c4bdc9](https://github.com/mubaidr/gem-team/commit/0c4bdc9754bb0854193b569b4505fa4f7eedbad7))
+- **agent:** clarify bisect workflow and update documentation wording - **gem-debugger.agent.md**: Reword the bisect section to explicitly trigger it only when both a clear stack trace and conclusive git blame are unavailable, and adjust step phrasing for consistency. ([0c4bdc9](https://github.com/mubaidr/gem-team/commit/0c4bdc9754bb0854193b569b4505fa4f7eedbad7))
 
 ## [1.22.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.21.0...gem-team-v1.22.0) (2026-05-11)
 
-
 ### 🚀 New Agents & Features
 
-* enhance continue_plan decision flow ([9d8e85f](https://github.com/mubaidr/gem-team/commit/9d8e85f25d79f045024813a9d7841c7c5444e51a))
-* **orchestrator:** add conditional retry escalation and persist plan.yaml updates ([410a041](https://github.com/mubaidr/gem-team/commit/410a04118764c675f53569260f05da2703db1c10))
-* **research:** integrate Phase 1 focus_areas into Phase 4 research delegation workflow ([5dba132](https://github.com/mubaidr/gem-team/commit/5dba13237705b2a0fd59d72715414ba5a11c3943))
-
+- enhance continue_plan decision flow ([9d8e85f](https://github.com/mubaidr/gem-team/commit/9d8e85f25d79f045024813a9d7841c7c5444e51a))
+- **orchestrator:** add conditional retry escalation and persist plan.yaml updates ([410a041](https://github.com/mubaidr/gem-team/commit/410a04118764c675f53569260f05da2703db1c10))
+- **research:** integrate Phase 1 focus_areas into Phase 4 research delegation workflow ([5dba132](https://github.com/mubaidr/gem-team/commit/5dba13237705b2a0fd59d72715414ba5a11c3943))
 
 ### 📝 Documentation
 
-* clarify wave completion and improve task routing wording ([5abfec4](https://github.com/mubaidr/gem-team/commit/5abfec44b1cc8a7288802e4d7336c5ac1eb992f0))
-* refine escalation handling description in gem-orchestrator.agent.md ([34e9e13](https://github.com/mubaidr/gem-team/commit/34e9e138d40ede3932924c40a0b58eaa011b6d84))
+- clarify wave completion and improve task routing wording ([5abfec4](https://github.com/mubaidr/gem-team/commit/5abfec44b1cc8a7288802e4d7336c5ac1eb992f0))
+- refine escalation handling description in gem-orchestrator.agent.md ([34e9e13](https://github.com/mubaidr/gem-team/commit/34e9e138d40ede3932924c40a0b58eaa011b6d84))
 
 ## [1.21.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.20.0...gem-team-v1.21.0) (2026-05-11)
 
-
 ### 🚀 New Agents & Features
 
-* add CNAME for custom domain ([af6ba84](https://github.com/mubaidr/gem-team/commit/af6ba84320c0d8f722d2dbef026f7b0d2fa57df6))
-* **agents:** add confidence field to output objects ([78ac36e](https://github.com/mubaidr/gem-team/commit/78ac36e40375e5eda8a8533fcc86ca93f4294e12))
-* **docs:** add SEO metadata and glassmorphism CSS ([6dd51ae](https://github.com/mubaidr/gem-team/commit/6dd51aea5b6270d6cd3d1d996cd892ce82eded03))
-* improve SEO metadata and refactor documentation components ([534dcb7](https://github.com/mubaidr/gem-team/commit/534dcb7f4def10f292daa86d29232d1c362ced17))
-* **ui, docs:** add features documentation, update hero button CTA and simplify agent/contributing headings ([ce468df](https://github.com/mubaidr/gem-team/commit/ce468dfb1b4ce6c481a575fdc2a1a0363b3d5232))
-
+- add CNAME for custom domain ([af6ba84](https://github.com/mubaidr/gem-team/commit/af6ba84320c0d8f722d2dbef026f7b0d2fa57df6))
+- **agents:** add confidence field to output objects ([78ac36e](https://github.com/mubaidr/gem-team/commit/78ac36e40375e5eda8a8533fcc86ca93f4294e12))
+- **docs:** add SEO metadata and glassmorphism CSS ([6dd51ae](https://github.com/mubaidr/gem-team/commit/6dd51aea5b6270d6cd3d1d996cd892ce82eded03))
+- improve SEO metadata and refactor documentation components ([534dcb7](https://github.com/mubaidr/gem-team/commit/534dcb7f4def10f292daa86d29232d1c362ced17))
+- **ui, docs:** add features documentation, update hero button CTA and simplify agent/contributing headings ([ce468df](https://github.com/mubaidr/gem-team/commit/ce468dfb1b4ce6c481a575fdc2a1a0363b3d5232))
 
 ### 📝 Documentation
 
-* add "minimum code, nothing speculative" guideline to agent documentation ([94b786b](https://github.com/mubaidr/gem-team/commit/94b786b8577addbfcfe08a4e5c0a9caeb284c46f))
-* add "Surgical changes, don't refactor adjacent code" bullet to all agent documentation files ([5cbbe8b](https://github.com/mubaidr/gem-team/commit/5cbbe8b20a2b8ca0dd66d0b79895d8d30055356c))
-* **app.vue:** update SEO meta tags, add titleTemplate, ogSiteName, twitterCard and twitterSite, and configure useHead for language and favicon ([534dcb7](https://github.com/mubaidr/gem-team/commit/534dcb7f4def10f292daa86d29232d1c362ced17))
-* update installation docs and marketplace references for VS Code (GitHub Copilot) ([133f690](https://github.com/mubaidr/gem-team/commit/133f690c8222978cb49d15bc6e13be65bac6d95d))
+- add "minimum code, nothing speculative" guideline to agent documentation ([94b786b](https://github.com/mubaidr/gem-team/commit/94b786b8577addbfcfe08a4e5c0a9caeb284c46f))
+- add "Surgical changes, don't refactor adjacent code" bullet to all agent documentation files ([5cbbe8b](https://github.com/mubaidr/gem-team/commit/5cbbe8b20a2b8ca0dd66d0b79895d8d30055356c))
+- **app.vue:** update SEO meta tags, add titleTemplate, ogSiteName, twitterCard and twitterSite, and configure useHead for language and favicon ([534dcb7](https://github.com/mubaidr/gem-team/commit/534dcb7f4def10f292daa86d29232d1c362ced17))
+- update installation docs and marketplace references for VS Code (GitHub Copilot) ([133f690](https://github.com/mubaidr/gem-team/commit/133f690c8222978cb49d15bc6e13be65bac6d95d))
 
 ## [1.20.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.19.0...gem-team-v1.20.0) (2026-05-07)
 
-
 ### 🚀 New Agents & Features
 
-* add context7.json with configuration details ([c530aee](https://github.com/mubaidr/gem-team/commit/c530aee37b07b6bccfa6b96e7fc2462e783bdabb))
-* add marketplace metadata and install instructions for gem-team ([d867bcc](https://github.com/mubaidr/gem-team/commit/d867bcc9f3dcec8c936ea9fe2a45a2fa545870d2))
-* **install:** add one‑line command to copy agents and rename them to .mdc for cursor ([839ae63](https://github.com/mubaidr/gem-team/commit/839ae6305b8a2db7b41dc103577ef66775796a99))
-* **installation:** add detailed README installation guide and methods for gem-team plugin ([66e58c1](https://github.com/mubaidr/gem-team/commit/66e58c157184b7be78eb8c751806d5c1a83e2111))
-
+- add context7.json with configuration details ([c530aee](https://github.com/mubaidr/gem-team/commit/c530aee37b07b6bccfa6b96e7fc2462e783bdabb))
+- add marketplace metadata and install instructions for gem-team ([d867bcc](https://github.com/mubaidr/gem-team/commit/d867bcc9f3dcec8c936ea9fe2a45a2fa545870d2))
+- **install:** add one‑line command to copy agents and rename them to .mdc for cursor ([839ae63](https://github.com/mubaidr/gem-team/commit/839ae6305b8a2db7b41dc103577ef66775796a99))
+- **installation:** add detailed README installation guide and methods for gem-team plugin ([66e58c1](https://github.com/mubaidr/gem-team/commit/66e58c157184b7be78eb8c751806d5c1a83e2111))
 
 ### 📝 Documentation
 
-* improve clarity of validation rules for plan complexity ([19f6c79](https://github.com/mubaidr/gem-team/commit/19f6c79c4bfb25659477702a58eb01a160f9dbda))
-* rewrite installation with new methods guide ([c592d33](https://github.com/mubaidr/gem-team/commit/c592d33c44290bb4cc8cdc8241fee2d3f6831e73))
+- improve clarity of validation rules for plan complexity ([19f6c79](https://github.com/mubaidr/gem-team/commit/19f6c79c4bfb25659477702a58eb01a160f9dbda))
+- rewrite installation with new methods guide ([c592d33](https://github.com/mubaidr/gem-team/commit/c592d33c44290bb4cc8cdc8241fee2d3f6831e73))
 
 ## [1.19.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.18.0...gem-team-v1.19.0) (2026-05-06)
 
@@ -689,7 +607,7 @@
 
 ### 📝 Documentation
 
-- add YAGNI — solve for today entry to anti‑rationalization tables in gem‑implementer.agent.md and gem‑planner.agent.md ([e412775](https://github.com/mubaidr/gem-team/commit/e412775bec02848fef90d0c02fb87c8375a1b942))
+- add YAGNI - solve for today entry to anti‑rationalization tables in gem‑implementer.agent.md and gem‑planner.agent.md ([e412775](https://github.com/mubaidr/gem-team/commit/e412775bec02848fef90d0c02fb87c8375a1b942))
 - correct typo in delegate description ([7b37ae1](https://github.com/mubaidr/gem-team/commit/7b37ae1fcc5d537f169a506ba57d295b4b598a0e))
 - **researcher:** improve workflow description and clarify confidence calculation ([d1bb60c](https://github.com/mubaidr/gem-team/commit/d1bb60ce797dd31d3f1d5a30ed14104a31de42e9))
 

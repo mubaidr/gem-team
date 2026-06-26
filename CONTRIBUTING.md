@@ -19,7 +19,7 @@
 
 ## 🚀 Release Automation
 
-**Release Please** (Manifest Strategy) on `main`. PR titles become squash-merge commits — keep them conventional. Version auto-bumps in `version.txt` + git tags.
+**Release Please** (Manifest Strategy) on `main`. PR titles become squash-merge commits - keep them conventional. Version auto-bumps in `version.txt` + git tags.
 
 ## 🏗️ Agent Changes
 

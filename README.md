@@ -7,11 +7,11 @@
   <img src="https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square" alt="Pull requests welcome">
 </p>
 
-Turn AI coding into an orchestrated loop: plan, build, review, debug, learn.
+Turn AI coding into an orchestrated loop: plan, build, review, debug, learn - with smarter tool calling and leaner context.
 
-> Spec-driven multi-agent orchestration for software development, verification, debugging, and reusable project knowledge.
+> Spec-driven multi-agent orchestration for software development, verification, debugging, reusable knowledge, and context-bloat-free execution.
 
-**TL;DR:** Gem Team installs 16 specialist agents that turn AI coding into an engineering process. Plan, implement, review with structured waves, dependency resolution, integration gates, and progressive context management. Works with Copilot, Claude Code, Cursor, OpenCode, Codex, Gemini CLI, and Windsurf.
+**TL;DR:** Gem Team installs 16 specialist agents that turn AI coding into an engineering process. Plan, implement, review with structured waves, dependency resolution, integration gates, and progressive context management - all while avoiding context bloat, saving tokens via output hygiene and discovery depth scaling, and improving tool-calling precision through model routing and targeted context snapshots. Works with Copilot, Claude Code, Cursor, OpenCode, Codex, Gemini CLI, and Windsurf.
 
 ## Why Gem Team?
 
@@ -19,8 +19,9 @@ Gem Team wraps your AI with a disciplined engineering delivery system: plan, bui
 
 - **Better delivery flow**: spec-driven execution, wave-based parallelism, verification gates, resumable plans.
 - **Better code quality**: 16 specialist agents, TDD by default, diagnose-then-fix, security and accessibility audits.
-- **Better context management**: progressive context envelope, three-tier memory, skill extraction, PRD management.
-- **Better cost control**: model routing, output hygiene, context pruning, discovery depth scaling.
+- **Better context management**: progressive context envelope, three-tier memory, skill extraction, PRD management - context bloat avoidance built in.
+- **Better cost control**: model routing, output hygiene, context pruning, discovery depth scaling - fewer tokens, same results.
+- **Better tool calling**: targeted context snapshots per agent, output hygiene rules - precision without prompt waste.
 
 ## Quick Start
 
