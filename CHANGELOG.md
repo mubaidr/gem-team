@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.78.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.77.0...gem-team-v1.78.0) (2026-06-26)
+
+
+### 🧹 Housekeeping
+
+* **docs:** add PDNV research findings and clarify Phase 0 delegation rule ([350f9eb](https://github.com/mubaidr/gem-team/commit/350f9eb9d5bb1bd3933ce6473a58f9b849d9c71d))
+
 ## [1.77.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.76.0...gem-team-v1.77.0) (2026-06-26)
 
 
