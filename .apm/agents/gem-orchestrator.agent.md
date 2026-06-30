@@ -110,7 +110,7 @@ Routing matrix:
   - Delegate to `gem-planner` with `task_clarifications`, relevant context, `memory_seed`, and `config_snapshot`.
   - Request plan validation:
     - Complexity=MEDIUM:
-      - Delegate to `gem-reviewer(plan)` with `review_depth: lightweight`.
+      - Delegate to `gem-reviewer(plan)`.
     - Complexity=HIGH or `planner.enable_critic_for` satisfies:
       - In parallel, delegate to `gem-critic(plan)`, only if: High-risk signal exists: `architecture`, `contract_change`, `breaking_change`, `api_change`, `schema_change`, `auth_change`, `data_flow_change`, `migration`, `security_sensitive`, or `cross_domain_impact`.
   - If validation fails:
