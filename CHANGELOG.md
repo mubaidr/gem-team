@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.79.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.78.0...gem-team-v1.79.0) (2026-06-30)
+
+
+### 🧹 Housekeeping
+
+* remove lightweight review_depth from gem-reviewer delegation ([5d76efc](https://github.com/mubaidr/gem-team/commit/5d76efc79f960b89e98fac735fc39a9b2e0e37dd))
+* standardize agent output format to minimal JSON per output_format ([e759319](https://github.com/mubaidr/gem-team/commit/e7593194de6dab09965e194403d003a74347608f))
+
 ## [1.78.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.77.0...gem-team-v1.78.0) (2026-06-26)
 
 
