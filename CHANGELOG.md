@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.80.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.79.0...gem-team-v1.80.0) (2026-07-07)
+
+
+### 🧹 Housekeeping
+
+* add clarification gate to workflow and clarification_needed field to output format ([0f89199](https://github.com/mubaidr/gem-team/commit/0f891994d6f57e8d669809a831bd5584b96d6cc0))
+* add EARS syntax types to PRD format guide ([be221dc](https://github.com/mubaidr/gem-team/commit/be221dca696f7f55008ce8525bd4a658357686c6))
+* enhance TDD workflow description with comprehensive categories and bug‑fix integration ([4c79919](https://github.com/mubaidr/gem-team/commit/4c799195bed84e85503612d6c600acd2736d2aa1))
+* refine Phase 0 complexity classification description ([f059ad5](https://github.com/mubaidr/gem-team/commit/f059ad5a71c2698a3dc3d76779a3746361acb1dd))
+* refine TDD workflow description with comprehensive test categories and add requirement inconsistency analysis to planning; update PRD management to include EARS syntax ([c561e61](https://github.com/mubaidr/gem-team/commit/c561e61b1d237514bdecba2e304c2038984f5f50))
+* update gem-critic agent description to include PRD analysis ([a549161](https://github.com/mubaidr/gem-team/commit/a549161351eeb7eb8a4b1ca01399612a2a827cda))
+
 ## [1.79.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.78.0...gem-team-v1.79.0) (2026-06-30)
 
 
