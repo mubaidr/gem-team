@@ -164,7 +164,7 @@ Execute all unblocked waves/tasks without approval pauses. Follow the branching 
 - Persist reusable items where confidence ≥0.95 to the correct target (batch delegation):
   - If product decisions → delegate to `gem-documentation-writer` → PRD
   - If technical decisions/conventions → delegate to `gem-documentation-writer` → AGENTS.md or architecture docs
-  - If patterns/gotchas/failure_modes → delegate to `gem-documentation-writer` → memory/context envelope
+  - If patterns/gotchas/failure_modes → delegate to `gem-documentation-writer` → both memory and context envelope update
   - If repeatable executable workflows → delegate to `gem-skill-creator` → skills
 - Loop:
   - Remaining unblocked waves/tasks → next wave.
