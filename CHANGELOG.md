@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.81.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.80.0...gem-team-v1.81.0) (2026-07-11)
+
+
+### 🧹 Housekeeping
+
+* update patterns/gotchas/failure_modes delegation to gem-documentation-writer for both memory and context envelope ([6d9cc00](https://github.com/mubaidr/gem-team/commit/6d9cc003f1bf441f87ea1b33f5f216a4d023c719))
+
 ## [1.80.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.79.0...gem-team-v1.80.0) (2026-07-07)
 
 
