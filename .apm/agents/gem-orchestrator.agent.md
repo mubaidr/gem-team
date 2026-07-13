@@ -100,11 +100,7 @@ Routing matrix:
 
 ### Phase 2: Planning
 
-- Complexity=TRIVIAL:
-  - Create a tiny in-memory orchestration checklist only.
-  - If the detected intent is bug-fix/debug/issue: the checklist MUST contain two sequential steps: first delegate to `gem-debugger` for diagnosis (wave 1), then forward `debugger_diagnosis` to `gem-implementer` for the fix (wave 2).
-  - Goto Phase 3.
-- Complexity=LOW:
+- Complexity=TRIVIAL/LOW:
   - Create a minimal in-memory orchestration plan using relevant context, and the `memory_seed`: with tasks, deps, wave, status, assignments, and optional `conflicts_with`.
   - If the objective is bug-fix/debug/issue: assign `gem-debugger` for diagnosis (wave 1) and `gem-implementer` for the fix (wave 2). The in-memory plan MUST include `debugger_diagnosis` as a dependency handoff from wave 1 to wave 2.
   - Goto Phase 3.
@@ -461,7 +457,6 @@ When a failure occurs, classify and apply:
 - regression / new_failure → debugger → implementer → re-verify
 - platform_specific → log, skip, continue
 - needs_approval → persist approval_state in plan.yaml, present to user, delegate on approve / block on deny
-
-If lint_rule_recommendations from debugger → delegate to implementer for ESLint rules.
+- If lint_rule_recommendations from debugger → delegate to implementer for ESLint rules.
 
 </rules>
