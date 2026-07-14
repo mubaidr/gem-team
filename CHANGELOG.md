@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.82.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.81.0...gem-team-v1.82.0) (2026-07-14)
+
+
+### 🧹 Housekeeping
+
+* simplify complexity classification and clarify memory scope handling ([d2f50f5](https://github.com/mubaidr/gem-team/commit/d2f50f511347be94ecf583904685010965fa28c2))
+* simplify complexity classification and remove redundant lint rule note ([5677c88](https://github.com/mubaidr/gem-team/commit/5677c8881ed729852ac74e9c7c3db06bd2103b8c))
+
 ## [1.81.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.80.0...gem-team-v1.81.0) (2026-07-11)
 
 
