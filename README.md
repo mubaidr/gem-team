@@ -11,8 +11,6 @@ Turn AI coding into an orchestrated loop: plan, build, review, debug, learn - wi
 
 > Spec-driven multi-agent orchestration for software development, verification, debugging, reusable knowledge, and context-bloat-free execution.
 
-**TL;DR:** Gem Team installs 16 specialist agents that turn AI coding into an engineering process. Plan, implement, review with structured waves, dependency resolution, integration gates, and progressive context management - all while avoiding context bloat, saving tokens via output hygiene and discovery depth scaling, and improving tool-calling precision through model routing and targeted context snapshots. Works with Copilot, Claude Code, Cursor, OpenCode, Codex, Gemini CLI, and Windsurf.
-
 ## Why Gem Team?
 
 Gem Team wraps your AI with a disciplined engineering delivery system: plan, build, review, debug, learn. The [Features](#features) section below covers every capability in detail. Here's the gist:
@@ -22,6 +20,8 @@ Gem Team wraps your AI with a disciplined engineering delivery system: plan, bui
 - **Better context management**: progressive context envelope, three-tier memory, skill extraction, PRD management - context bloat avoidance built in.
 - **Better cost control**: model routing, output hygiene, context pruning, discovery depth scaling - fewer tokens, same results.
 - **Better tool calling**: targeted context snapshots per agent, output hygiene rules - precision without prompt waste.
+
+**TL;DR:** Gem Team installs 16 specialist agents that turn AI coding into an engineering process. Plan, implement, review with structured waves, dependency resolution, integration gates, and progressive context management - all while avoiding context bloat, saving tokens via output hygiene and discovery depth scaling, and improving tool-calling precision through model routing and targeted context snapshots. Works with Copilot, Claude Code, Cursor, OpenCode, Codex, Gemini CLI, and Windsurf.
 
 ## Quick Start
 
