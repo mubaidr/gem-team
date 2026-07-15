@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.83.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.82.0...gem-team-v1.83.0) (2026-07-15)
+
+
+### 🧹 Housekeeping
+
+* add backward reasoning step to pattern match workflow ([a5e055c](https://github.com/mubaidr/gem-team/commit/a5e055cac4235c1bd78b7bc7e087ac454c1c62c8))
+* clarify concurrency requirement in execution guidelines ([dcdb883](https://github.com/mubaidr/gem-team/commit/dcdb8838f4a0cd7e4d5fec50ef405da48b0b78c5))
+
 ## [1.82.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.81.0...gem-team-v1.82.0) (2026-07-14)
 
 
