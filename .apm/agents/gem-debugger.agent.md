@@ -48,6 +48,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
   - Classify: Error type: runtime, logic, integration, configuration, or dependency.
   - Context: git blame/log only on files directly in stack trace. Data flow scoped to the failing path only.
   - Pattern match: Grep only the exact error message/symbol. No broad pattern searches.
+  - Backward reason: Ask what state must have preceded the failure. Step back again: what caused that state? Reach the fundamental cause before proposing fixes.
 - Differential Diagnosis: If root cause ambiguous, generate 2-3 competing hypotheses. For each: what would confirm it, what would rule it out. Run cheapest check first. Eliminate until one remains.
 - Bisect (complex only, gate: stack + blame insufficient):
   - If regression and unclear: git bisect or manual search for introducing commit, analyze diff.
