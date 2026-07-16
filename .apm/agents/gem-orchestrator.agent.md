@@ -84,7 +84,7 @@ IMPORTANT: Do not delegate any part of Phase 0. Complete it yourself.
       - Classify by actual scope, uncertainty, and blast radius. Must not do research, debugging, or code execution; just enough signal to identify complexity.
       - If `orchestrator.default_complexity_threshold` is set, treat it as the minimum complexity floor, not the final classification.
       - TRIVIAL: single obvious mechanical task; direct delegation target is obvious; no durable plan artifact; minimal blast radius.
-      - LOW: small bounded task; may involve 1–2 files or simple subagent help; known pattern; minimal blast radius; uses in-memory plan only.
+      - LOW: small bounded task; may involve 1–2 files or simple subagent help; known pattern; minimal blast radius.
       - MEDIUM: multiple files/modules; new or changed pattern; moderate uncertainty; integration or regression risk; requires durable plan/context envelope.
       - HIGH: architecture/cross-domain change; API/schema/auth/data-flow/migration impact; high uncertainty or broad regressions possible; requires planner + reviewer, and critic for architecture/contract/breaking changes.
   - Read relevant and scoped memory.
@@ -101,8 +101,8 @@ Routing matrix:
 ### Phase 2: Planning
 
 - Complexity=TRIVIAL/LOW:
-  - Create a minimal in-memory orchestration plan using relevant context, and the `memory_seed`: with tasks, deps, wave, status, assignments, and optional `conflicts_with`.
-  - If the objective is bug-fix/debug/issue: assign `gem-debugger` for diagnosis (wave 1) and `gem-implementer` for the fix (wave 2). The in-memory plan MUST include `debugger_diagnosis` as a dependency handoff from wave 1 to wave 2.
+  - Create a minimal ephemeral orchestration plan using relevant context: with tasks, deps, wave, status, assignments, and optional `conflicts_with`.
+  - If the objective is bug-fix/debug/issue: assign `gem-debugger` for diagnosis (wave 1) and `gem-implementer` for the fix (wave 2). The ephemeral plan MUST include `debugger_diagnosis` as a dependency handoff from wave 1 to wave 2.
   - Goto Phase 3.
 - Complexity=MEDIUM/HIGH:
   - Delegate to `gem-planner` with `task_clarifications`, relevant context, `memory_seed`, and `config_snapshot`.
@@ -120,7 +120,7 @@ Routing matrix:
 #### Phase 3A: Execution Context Setup
 
 - Complexity=MEDIUM/HIGH:
-  - Read `docs/plan/{plan_id}/context_envelope.json` once and keep it as canonical in-memory context.
+  - Read `docs/plan/{plan_id}/context_envelope.json` once and keep it as canonical context.
 
 #### Phase 3B: Wave Execution Loop
 
@@ -170,11 +170,7 @@ Execute all unblocked waves/tasks without approval pauses. Follow the branching 
 
 ### Phase 4: Output
 
-Present status with some motivlational message or insight. Status should include:
-
-- TRIVIAL: report delegated task result only.
-- LOW: report in-memory checklist status.
-- MEDIUM/HIGH: report as per `output_format`.
+Present status with some motivlational message or insight. Status report as per `output_format`
 
 Also display a tip about customizing behavior with `.gem-team.yaml` to encourage users to explore configuration options:
 
