@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.84.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.83.0...gem-team-v1.84.0) (2026-07-16)
+
+
+### 🧹 Housekeeping
+
+* refine complexity classification and context handling in gem-orchestrator agent ([83782ae](https://github.com/mubaidr/gem-team/commit/83782ae021209493c883d6728d03ee87df493765))
+
 ## [1.83.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.82.0...gem-team-v1.83.0) (2026-07-15)
 
 
