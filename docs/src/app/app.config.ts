@@ -15,13 +15,8 @@ export default defineAppConfig({
     siteName: "Gem Team",
   },
   header: {
-    title: "Gem Team",
+    title: "",
     to: "/",
-    logo: {
-      alt: "Gem Team",
-      light: "/logo.svg",
-      dark: "/logo.svg",
-    },
     search: true,
     colorMode: true,
     links: [

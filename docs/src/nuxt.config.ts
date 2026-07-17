@@ -35,6 +35,13 @@ export default defineNuxtConfig({
 
   compatibilityDate: "2026-06-30",
 
+  site: {
+    url: "https://mubaidr.github.io/gem-team",
+    name: "Gem Team",
+    description:
+      "Spec-driven multi-agent orchestration for software development with 16 specialist agents.",
+  },
+
   nitro: {
     prerender: {
       routes: ["/"],
