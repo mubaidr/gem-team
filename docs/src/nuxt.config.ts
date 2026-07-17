@@ -1,89 +1,108 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: [
-    '@nuxt/eslint',
-    '@nuxt/image',
-    '@nuxt/ui',
-    '@nuxt/content',
-    'nuxt-og-image',
-    'nuxt-llms',
-    '@nuxtjs/mcp-toolkit'
+    "@nuxt/eslint",
+    "@nuxt/image",
+    "@nuxt/ui",
+    "@nuxt/content",
+    "nuxt-og-image",
+    "nuxt-llms",
+    "@nuxtjs/mcp-toolkit",
   ],
 
   devtools: {
-    enabled: true
+    enabled: true,
   },
 
-  css: ['~/assets/css/main.css'],
+  css: ["~/assets/css/main.css"],
 
   content: {
     build: {
       markdown: {
         toc: {
-          searchDepth: 1
-        }
-      }
+          searchDepth: 1,
+        },
+      },
     },
     experimental: {
-      sqliteConnector: 'native'
-    }
+      sqliteConnector: "native",
+    },
   },
 
   experimental: {
-    asyncContext: true
+    asyncContext: true,
   },
 
-  compatibilityDate: '2026-06-30',
+  compatibilityDate: "2026-06-30",
 
   nitro: {
     prerender: {
-      routes: [
-        '/'
-      ],
-      crawlLinks: true
-    }
+      routes: ["/"],
+      crawlLinks: true,
+    },
   },
 
   eslint: {
     config: {
       stylistic: {
-        commaDangle: 'never',
-        braceStyle: '1tbs'
-      }
-    }
+        commaDangle: "never",
+        braceStyle: "1tbs",
+      },
+    },
   },
 
   llms: {
-    domain: 'https://docs-template.nuxt.dev/',
-    title: 'Nuxt Docs Template',
-    description: 'A template for building documentation with Nuxt UI and Nuxt Content.',
+    domain: "https://github.com/mubaidr/gem-team",
+    title: "Gem Team",
+    description:
+      "Spec-driven multi-agent orchestration for software development with 16 specialist agents.",
     full: {
-      title: 'Nuxt Docs Template - Full Documentation',
-      description: 'This is the full documentation for the Nuxt Docs Template.'
+      title: "Gem Team - Full Documentation",
+      description:
+        "Complete documentation for Gem Team: multi-agent orchestration with planning, implementation, review, debugging, and learning workflows.",
     },
     sections: [
       {
-        title: 'Getting Started',
-        contentCollection: 'docs',
+        title: "Getting Started",
+        contentCollection: "docs",
         contentFilters: [
-          { field: 'path', operator: 'LIKE', value: '/getting-started%' }
-        ]
+          { field: "path", operator: "LIKE", value: "/getting-started%" },
+        ],
       },
       {
-        title: 'Essentials',
-        contentCollection: 'docs',
+        title: "Guide",
+        contentCollection: "docs",
+        contentFilters: [{ field: "path", operator: "LIKE", value: "/guide%" }],
+      },
+      {
+        title: "Agents",
+        contentCollection: "docs",
         contentFilters: [
-          { field: 'path', operator: 'LIKE', value: '/essentials%' }
-        ]
-      }
-    ]
+          { field: "path", operator: "LIKE", value: "/agents%" },
+        ],
+      },
+      {
+        title: "Configuration",
+        contentCollection: "docs",
+        contentFilters: [
+          { field: "path", operator: "LIKE", value: "/configuration%" },
+        ],
+      },
+      {
+        title: "Resources",
+        contentCollection: "docs",
+        contentFilters: [
+          { field: "path", operator: "LIKE", value: "/resources%" },
+        ],
+      },
+    ],
   },
 
   mcp: {
-    name: 'Docs template'
+    name: "Gem Team",
   },
 
   ogImage: {
-    zeroRuntime: true
-  }
-})
+    zeroRuntime: true,
+  },
+});

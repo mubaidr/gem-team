@@ -1,72 +1,76 @@
 export default defineAppConfig({
   ui: {
     colors: {
-      primary: 'green',
-      neutral: 'slate'
+      primary: "green",
+      neutral: "slate",
     },
     footer: {
       slots: {
-        root: 'border-t border-default',
-        left: 'text-sm text-muted'
-      }
-    }
+        root: "border-t border-default",
+        left: "text-sm text-muted",
+      },
+    },
   },
   seo: {
-    siteName: 'Nuxt Docs Template'
+    siteName: "Gem Team",
   },
   header: {
-    title: '',
-    to: '/',
+    title: "",
+    to: "/",
     logo: {
-      alt: '',
-      light: '',
-      dark: ''
+      alt: "Gem Team",
+      light: "/logo.svg",
+      dark: "/logo.svg",
     },
     search: true,
     colorMode: true,
-    links: [{
-      'icon': 'i-simple-icons-github',
-      'to': 'https://github.com/nuxt-ui-templates/docs',
-      'target': '_blank',
-      'aria-label': 'GitHub'
-    }]
+    links: [
+      {
+        icon: "i-simple-icons-github",
+        to: "https://github.com/mubaidr/gem-team",
+        target: "_blank",
+        "aria-label": "GitHub",
+      },
+    ],
   },
   footer: {
-    credits: `Built with Nuxt UI • © ${new Date().getFullYear()}`,
+    credits: `Gem Team \u2022 Apache 2.0 License \u2022 \u00A9 ${new Date().getFullYear()}`,
     colorMode: false,
-    links: [{
-      'icon': 'i-simple-icons-discord',
-      'to': 'https://go.nuxt.com/discord',
-      'target': '_blank',
-      'aria-label': 'Nuxt on Discord'
-    }, {
-      'icon': 'i-simple-icons-x',
-      'to': 'https://go.nuxt.com/x',
-      'target': '_blank',
-      'aria-label': 'Nuxt on X'
-    }, {
-      'icon': 'i-simple-icons-github',
-      'to': 'https://github.com/nuxt/ui',
-      'target': '_blank',
-      'aria-label': 'Nuxt UI on GitHub'
-    }]
+    links: [
+      {
+        icon: "i-simple-icons-github",
+        to: "https://github.com/mubaidr/gem-team",
+        target: "_blank",
+        "aria-label": "Gem Team on GitHub",
+      },
+      {
+        icon: "i-lucide-file-text",
+        label: "Apache 2.0",
+        to: "https://github.com/mubaidr/gem-team/blob/main/LICENSE",
+        target: "_blank",
+        "aria-label": "License",
+      },
+    ],
   },
   toc: {
-    title: 'Table of Contents',
+    title: "On This Page",
     bottom: {
-      title: 'Community',
-      edit: 'https://github.com/nuxt-ui-templates/docs/edit/main/content',
-      links: [{
-        icon: 'i-lucide-star',
-        label: 'Star on GitHub',
-        to: 'https://github.com/nuxt/ui',
-        target: '_blank'
-      }, {
-        icon: 'i-lucide-book-open',
-        label: 'Nuxt UI docs',
-        to: 'https://ui.nuxt.com/docs/getting-started/installation/nuxt',
-        target: '_blank'
-      }]
-    }
-  }
-})
+      title: "Community",
+      edit: "https://github.com/mubaidr/gem-team/edit/main/docs/src/content",
+      links: [
+        {
+          icon: "i-lucide-star",
+          label: "Star on GitHub",
+          to: "https://github.com/mubaidr/gem-team",
+          target: "_blank",
+        },
+        {
+          icon: "i-lucide-circle-dot",
+          label: "Open an Issue",
+          to: "https://github.com/mubaidr/gem-team/issues",
+          target: "_blank",
+        },
+      ],
+    },
+  },
+});
