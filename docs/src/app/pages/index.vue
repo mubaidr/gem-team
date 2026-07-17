@@ -25,6 +25,6 @@ useSeoMeta({
 <template>
   <div>
     <StarsBg />
-    <ContentRenderer v-if="page" :value="page" />
+    <ContentRenderer v-if="page" :value="page" :prose="false" />
   </div>
 </template>
