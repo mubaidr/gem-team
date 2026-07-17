@@ -5,10 +5,12 @@ const { footer } = useAppConfig();
 <template>
   <UFooter>
     <template #left>
-      {{ footer.credits }}
+      <NuxtLink to="https://mubaidr.js.org">mubaidr.js.org</NuxtLink>
     </template>
 
     <template #right>
+      <!-- {{ footer.credits }} -->
+
       <UColorModeButton v-if="footer?.colorMode" />
 
       <template v-if="footer?.links">

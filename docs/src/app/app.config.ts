@@ -37,19 +37,19 @@ export default defineAppConfig({
     credits: `Gem Team \u2022 Apache 2.0 License \u2022 \u00A9 ${new Date().getFullYear()}`,
     colorMode: false,
     links: [
-      {
-        icon: "i-simple-icons-github",
-        to: "https://github.com/mubaidr/gem-team",
-        target: "_blank",
-        "aria-label": "Gem Team on GitHub",
-      },
-      {
-        icon: "i-lucide-file-text",
-        label: "Apache 2.0",
-        to: "https://github.com/mubaidr/gem-team/blob/main/LICENSE",
-        target: "_blank",
-        "aria-label": "License",
-      },
+      // {
+      //   icon: "i-simple-icons-github",
+      //   to: "https://github.com/mubaidr/gem-team",
+      //   target: "_blank",
+      //   "aria-label": "Gem Team on GitHub",
+      // },
+      // {
+      //   icon: "i-lucide-file-text",
+      //   label: "Apache 2.0",
+      //   to: "https://github.com/mubaidr/gem-team/blob/main/LICENSE",
+      //   target: "_blank",
+      //   "aria-label": "License",
+      // },
     ],
   },
   toc: {
