@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.85.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.84.0...gem-team-v1.85.0) (2026-07-17)
+
+
+### 🧹 Housekeeping
+
+* add GitHub Pages deployment workflow, update UI colors to black/stone, and scaffold optimizations guide ([e581e35](https://github.com/mubaidr/gem-team/commit/e581e35d29fed14eb30b24a35ba13c9edb7b947c))
+* add vite.optimizeDeps include for @unhead/schema-org/vue, @vue/devtools-core, and @vue/devtools-kit ([ef95b8d](https://github.com/mubaidr/gem-team/commit/ef95b8d721e75587e160288f190e00e991964f7d))
+* drop MCP toolkit, devtools, experimental asyncContext, and MCP config from nuxt.config.ts ([4c2dc01](https://github.com/mubaidr/gem-team/commit/4c2dc018d823b8f303bb1fcdd9dfb67637d92e65))
+* migrate documentation template to Gem Team branding and update navigation configuration ([eb0decc](https://github.com/mubaidr/gem-team/commit/eb0decc3d639c55d2a34dd04d1b8d78f369536c3))
+* remove header title and logo, add site metadata ([b5174b1](https://github.com/mubaidr/gem-team/commit/b5174b13bbe903a5d1bc01f0cf1314561eea0ba5))
+* remove unused theme variables, adjust markdown heading formatting, replace nuxt-og-image with @nuxtjs/seo ([580a14a](https://github.com/mubaidr/gem-team/commit/580a14ae0e71a2f082096eeb901ee829df213153))
+* scaffold documentation template for Nuxt UI ([36f3881](https://github.com/mubaidr/gem-team/commit/36f38814690ce5f0c18f1dd5487d186de50006ca))
+* update documentation titles and wording for branding consistency ([65cfb6b](https://github.com/mubaidr/gem-team/commit/65cfb6b89c309d5b841e6b6a4f729e4eddd47d68))
+
 ## [1.84.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.83.0...gem-team-v1.84.0) (2026-07-16)
 
 
