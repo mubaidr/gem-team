@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const { data: page } = await useAsyncData("index", () =>
-  queryCollection("landing").path("/").first(),
+  queryCollection("landing").first(),
 );
 if (!page.value) {
   throw createError({
