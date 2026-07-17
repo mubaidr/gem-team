@@ -2,7 +2,7 @@ export default defineAppConfig({
   ui: {
     colors: {
       primary: "blue",
-      neutral: "stone",
+      neutral: "slate",
     },
     footer: {
       slots: {

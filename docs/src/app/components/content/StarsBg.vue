@@ -13,9 +13,9 @@ const props = withDefaults(
     size?: { min: number; max: number };
   }>(),
   {
-    starCount: 300,
+    starCount: 100,
     color: "var(--ui-primary)",
-    speed: "normal",
+    speed: "slow",
     size: () => ({
       min: 1,
       max: 3,
