@@ -1,2 +1,10 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
+
+@theme {
+  --font-sans: "Outfit", sans-serif;
+}
+
+:root {
+  --ui-radius: 0.75rem;
+}

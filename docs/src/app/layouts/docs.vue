@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { ContentNavigationItem } from '@nuxt/content'
+import type { ContentNavigationItem } from "@nuxt/content";
 
-const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
+const navigation = inject<Ref<ContentNavigationItem[]>>("navigation");
 </script>
 
 <template>
@@ -9,10 +9,7 @@ const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
     <UPage>
       <template #left>
         <UPageAside>
-          <UContentNavigation
-            highlight
-            :navigation="navigation"
-          />
+          <UContentNavigation highlight :navigation="navigation" />
         </UPageAside>
       </template>
 

@@ -30,6 +30,7 @@
   "devDependencies": {
     "@nuxt/eslint": "^1.16.0",
     "eslint": "^10.7.0",
+    "prettier": "^3.9.5",
     "typescript": "^6.0.3",
     "vue-tsc": "^3.3.7"
   },
@@ -38,7 +39,9 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
-    "lint": "eslint .",
+    "format": "prettier --write --cache --log-level error .",
+    "generate": "nuxi generate",
+    "lint": "eslint --fix --cache --quiet .",
     "postinstall": "nuxt prepare",
     "preview": "nuxt preview",
     "typecheck": "nuxt typecheck"
