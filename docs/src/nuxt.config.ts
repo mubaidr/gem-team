@@ -7,12 +7,7 @@ export default defineNuxtConfig({
     "@nuxt/content",
     "@nuxtjs/seo",
     "nuxt-llms",
-    "@nuxtjs/mcp-toolkit",
   ],
-
-  devtools: {
-    enabled: true,
-  },
 
   css: ["~/assets/css/main.css"],
 
@@ -29,10 +24,6 @@ export default defineNuxtConfig({
     },
   },
 
-  experimental: {
-    asyncContext: true,
-  },
-
   compatibilityDate: "2026-06-30",
 
   site: {
@@ -40,6 +31,10 @@ export default defineNuxtConfig({
     name: "Gem Team",
     description:
       "Spec-driven multi-agent orchestration for software development with 16 specialist agents.",
+  },
+
+  robots: {
+    robotsTxt: false,
   },
 
   nitro: {
@@ -103,10 +98,6 @@ export default defineNuxtConfig({
         ],
       },
     ],
-  },
-
-  mcp: {
-    name: "Gem Team",
   },
 
   ogImage: {

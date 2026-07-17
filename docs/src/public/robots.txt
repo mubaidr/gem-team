@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://mubaidr.github.io/gem-team/sitemap.xml
