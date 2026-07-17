@@ -36,8 +36,8 @@ const { header } = useAppConfig();
     <template #left>
       <NuxtLink :to="header?.to || '/'">
         <div class="flex gap-2">
-          <AppLogo class="w-auto h-6 shrink-0" />
-          <span v-if="header?.title" class="font-semibold">
+          <!-- <AppLogo class="w-auto h-6 shrink-0" /> -->
+          <span v-if="header?.title" class="font-semibold text-lg">
             {{ header.title }}
           </span>
         </div>
