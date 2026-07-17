@@ -52,7 +52,7 @@ export default defineNuxtConfig({
   },
 
   llms: {
-    domain: "https://github.com/mubaidr/gem-team",
+    domain: "https://mubaidr.github.io/gem-team",
     title: "Gem Team",
     description:
       "Spec-driven multi-agent orchestration for software development with 16 specialist agents.",

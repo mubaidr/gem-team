@@ -15,7 +15,7 @@ export default defineAppConfig({
     siteName: "Gem Team",
   },
   header: {
-    title: "",
+    title: "Gem Team",
     to: "/",
     logo: {
       alt: "Gem Team",
