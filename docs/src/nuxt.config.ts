@@ -103,4 +103,14 @@ export default defineNuxtConfig({
   ogImage: {
     zeroRuntime: true,
   },
+
+  vite: {
+    optimizeDeps: {
+      include: [
+        "@unhead/schema-org/vue",
+        "@vue/devtools-core",
+        "@vue/devtools-kit",
+      ],
+    },
+  },
 });
