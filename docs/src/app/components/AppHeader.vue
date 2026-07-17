@@ -14,7 +14,7 @@ const { header } = useAppConfig();
       class="w-full"
     />
 
-    <template
+    <!-- <template
       v-if="header?.logo?.dark || header?.logo?.light || header?.title"
       #title
     >
@@ -26,17 +26,24 @@ const { header } = useAppConfig();
         class="h-6 w-auto shrink-0"
       />
 
-      <span v-else-if="header?.title">
+      <span v-if="header?.title">
         {{ header.title }}
       </span>
-    </template>
-
-    <template v-else #left>
-      <NuxtLink :to="header?.to || '/'">
-        <AppLogo class="w-auto h-6 shrink-0" />
-      </NuxtLink>
 
       <TemplateMenu />
+    </template> -->
+
+    <template #left>
+      <NuxtLink :to="header?.to || '/'">
+        <div class="flex gap-2">
+          <AppLogo class="w-auto h-6 shrink-0" />
+          <span v-if="header?.title" class="font-semibold">
+            {{ header.title }}
+          </span>
+        </div>
+      </NuxtLink>
+
+      <!-- <TemplateMenu /> -->
     </template>
 
     <template #right>

@@ -1,7 +1,7 @@
 export default defineAppConfig({
   ui: {
     colors: {
-      primary: "amber",
+      primary: "blue",
       neutral: "stone",
     },
     footer: {
@@ -15,13 +15,13 @@ export default defineAppConfig({
     siteName: "Gem Team",
   },
   header: {
-    title: "",
+    title: "Gem Team",
     to: "/",
     search: true,
     colorMode: true,
     logo: {
-      light: "",
-      dark: "",
+      light: "logo.svg",
+      dark: "logo.svg",
       alt: "Gem Team",
     },
     links: [
