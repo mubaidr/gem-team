@@ -1,5 +1,30 @@
 # Changelog
 
+## [1.85.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.84.0...gem-team-v1.85.0) (2026-07-17)
+
+
+### 📝 Documentation
+
+* fix Nuxt UI theme, add Resources index page, fix ProseCardGroup usage ([af2e476](https://github.com/mubaidr/gem-team/commit/af2e476e1ce1c6f53ffb49552daebc53fd9292f6))
+
+
+### 🧹 Housekeeping
+
+* add allowScripts configuration and reorganize @nuxtjs/seo dependency ([3c29d60](https://github.com/mubaidr/gem-team/commit/3c29d6092df67dc14ce4af85970da39d79936c09))
+* add GitHub Pages deployment workflow, update UI colors to black/stone, and scaffold optimizations guide ([e581e35](https://github.com/mubaidr/gem-team/commit/e581e35d29fed14eb30b24a35ba13c9edb7b947c))
+* add vite.optimizeDeps include for @unhead/schema-org/vue, @vue/devtools-core, and @vue/devtools-kit ([ef95b8d](https://github.com/mubaidr/gem-team/commit/ef95b8d721e75587e160288f190e00e991964f7d))
+* comment out unused footer links and remove ogImage from SEO meta ([282acfa](https://github.com/mubaidr/gem-team/commit/282acfa3101ef3c07850e06c19e0177c6bbc9062))
+* drop MCP toolkit, devtools, experimental asyncContext, and MCP config from nuxt.config.ts ([4c2dc01](https://github.com/mubaidr/gem-team/commit/4c2dc018d823b8f303bb1fcdd9dfb67637d92e65))
+* migrate documentation template to Gem Team branding and update navigation configuration ([eb0decc](https://github.com/mubaidr/gem-team/commit/eb0decc3d639c55d2a34dd04d1b8d78f369536c3))
+* remove critique-content-plan.json ([3b151ba](https://github.com/mubaidr/gem-team/commit/3b151ba90f0889b8b448f1d993976a0a10c8ddf0))
+* remove header title and logo, add site metadata ([b5174b1](https://github.com/mubaidr/gem-team/commit/b5174b13bbe903a5d1bc01f0cf1314561eea0ba5))
+* remove unused theme variables, adjust markdown heading formatting, replace nuxt-og-image with @nuxtjs/seo ([580a14a](https://github.com/mubaidr/gem-team/commit/580a14ae0e71a2f082096eeb901ee829df213153))
+* scaffold documentation template for Nuxt UI ([36f3881](https://github.com/mubaidr/gem-team/commit/36f38814690ce5f0c18f1dd5487d186de50006ca))
+* set header title to "Gem Team", use logo.svg for light/dark, and simplify navigation templates ([c6862ee](https://github.com/mubaidr/gem-team/commit/c6862ee8afbab1dce65990c67861011e3f0643a1))
+* simplify header by removing placeholder AppLogo and adding text-lg to title ([98be267](https://github.com/mubaidr/gem-team/commit/98be2673c3f869303cbcb10de5c7e8d257474b64))
+* update documentation titles and wording for branding consistency ([65cfb6b](https://github.com/mubaidr/gem-team/commit/65cfb6b89c309d5b841e6b6a4f729e4eddd47d68))
+* update UI primary color to amber and standardize string quoting throughout the codebase ([e0eca0d](https://github.com/mubaidr/gem-team/commit/e0eca0d8b9608795903fe963b7d2d0493e16fe19))
+
 ## [1.84.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.83.0...gem-team-v1.84.0) (2026-07-16)
 
 
