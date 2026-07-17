@@ -18,7 +18,7 @@ const props = withDefaults(
     speed: "normal",
     size: () => ({
       min: 1,
-      max: 2,
+      max: 3,
     }),
   },
 );
