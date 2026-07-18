@@ -1,15 +1,21 @@
 # Gem Team
 
+Turn AI coding into an orchestrated loop: plan, build, review, debug, learn - with smarter tool calling and leaner context.
+
+> Spec-driven multi-agent orchestration for software development, verification, debugging, reusable knowledge, and context-bloat-free execution.
+
+<p align="center">
+  <a href="https://mubaidr.github.io/gem-team/"><b>Ship Better Code with Gem Team: Visit Homepage</b></a>
+</p>
+
+<br/>
+
 <p align="center">
   <img src="https://img.shields.io/badge/APM-mubaidr/gem--team-blue?style=flat-square" alt="APM package: mubaidr/gem-team">
   <img src="https://img.shields.io/github/v/release/mubaidr/gem-team?style=flat-square&color=important" alt="Latest release">
   <img src="https://img.shields.io/badge/license-Apache%202.0-green?style=flat-square" alt="Apache-2.0 license">
   <img src="https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square" alt="Pull requests welcome">
 </p>
-
-Turn AI coding into an orchestrated loop: plan, build, review, debug, learn - with smarter tool calling and leaner context.
-
-> Spec-driven multi-agent orchestration for software development, verification, debugging, reusable knowledge, and context-bloat-free execution.
 
 ## Why Gem Team?
 
