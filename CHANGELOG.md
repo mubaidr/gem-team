@@ -1,5 +1,48 @@
 # Changelog
 
+## [1.85.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.84.0...gem-team-v1.85.0) (2026-07-18)
+
+
+### 🛠️ Bug Fixes
+
+* **docs:** homepage tag-cloud repeat, canonical double-slug, title duplication ([757656d](https://github.com/mubaidr/gem-team/commit/757656da278ed5e730822f3251cbd07a9c6282b8))
+
+
+### 📝 Documentation
+
+* fix Nuxt UI theme, add Resources index page, fix ProseCardGroup usage ([af2e476](https://github.com/mubaidr/gem-team/commit/af2e476e1ce1c6f53ffb49552daebc53fd9292f6))
+
+
+### 🧹 Housekeeping
+
+* add allowScripts configuration and reorganize @nuxtjs/seo dependency ([3c29d60](https://github.com/mubaidr/gem-team/commit/3c29d6092df67dc14ce4af85970da39d79936c09))
+* add content source alias, introduce HeroBackground component, increase star size max, and wrap index renderer ([e1cc977](https://github.com/mubaidr/gem-team/commit/e1cc977a259cd2fd07909fb2e8cc5018c398cae8))
+* add GitHub Pages deployment workflow, update UI colors to black/stone, and scaffold optimizations guide ([e581e35](https://github.com/mubaidr/gem-team/commit/e581e35d29fed14eb30b24a35ba13c9edb7b947c))
+* add vite.optimizeDeps include for @unhead/schema-org/vue, @vue/devtools-core, and @vue/devtools-kit ([ef95b8d](https://github.com/mubaidr/gem-team/commit/ef95b8d721e75587e160288f190e00e991964f7d))
+* bump Node version to 26 and simplify setup-node configuration ([ea46b10](https://github.com/mubaidr/gem-team/commit/ea46b10f4775db4fb3ea139f54ae700b54974727))
+* comment out unused footer links and remove ogImage from SEO meta ([282acfa](https://github.com/mubaidr/gem-team/commit/282acfa3101ef3c07850e06c19e0177c6bbc9062))
+* drop MCP toolkit, devtools, experimental asyncContext, and MCP config from nuxt.config.ts ([4c2dc01](https://github.com/mubaidr/gem-team/commit/4c2dc018d823b8f303bb1fcdd9dfb67637d92e65))
+* migrate documentation template to Gem Team branding and update navigation configuration ([eb0decc](https://github.com/mubaidr/gem-team/commit/eb0decc3d639c55d2a34dd04d1b8d78f369536c3))
+* remove critique-content-plan.json ([3b151ba](https://github.com/mubaidr/gem-team/commit/3b151ba90f0889b8b448f1d993976a0a10c8ddf0))
+* remove header title and logo, add site metadata ([b5174b1](https://github.com/mubaidr/gem-team/commit/b5174b13bbe903a5d1bc01f0cf1314561eea0ba5))
+* remove HeroBackground component, update index markdown, and bump [@takumi-rs](https://github.com/takumi-rs) to 2.3.0 ([ed7e618](https://github.com/mubaidr/gem-team/commit/ed7e618768d4ec074f7eddb93efa30f1daa79dca))
+* remove unused theme variables, adjust markdown heading formatting, replace nuxt-og-image with @nuxtjs/seo ([580a14a](https://github.com/mubaidr/gem-team/commit/580a14ae0e71a2f082096eeb901ee829df213153))
+* rename package to gem-team-docs, upgrade commander to 15.0.0, add cac dev dependency, set node &gt;=22.12 ([3fbd039](https://github.com/mubaidr/gem-team/commit/3fbd039ed85df07b5d1215b2ef9a5eeb1c86fd31))
+* replace index.vue with new UPage layout and remove legacy markdown docs ([1508e84](https://github.com/mubaidr/gem-team/commit/1508e84074d446126b21c2f3ccef0bd3d50e8881))
+* scaffold documentation template for Nuxt UI ([36f3881](https://github.com/mubaidr/gem-team/commit/36f38814690ce5f0c18f1dd5487d186de50006ca))
+* set ContentRenderer :prose false, add @nuxtjs/mdc to modules, migrate index frontmatter to SEO fields ([1a7e790](https://github.com/mubaidr/gem-team/commit/1a7e790fb460a768107d993ee9af9ba2355cfd5d))
+* set header title to "Gem Team", use logo.svg for light/dark, and simplify navigation templates ([c6862ee](https://github.com/mubaidr/gem-team/commit/c6862ee8afbab1dce65990c67861011e3f0643a1))
+* simplify header by removing placeholder AppLogo and adding text-lg to title ([98be267](https://github.com/mubaidr/gem-team/commit/98be2673c3f869303cbcb10de5c7e8d257474b64))
+* simplify index markdown markup and add @vueuse/core to Vite optimizeDeps ([cf50312](https://github.com/mubaidr/gem-team/commit/cf5031286ac41d99e034812d4d018be8d9d03297))
+* streamline documentation and markup across getting-started and guide sections ([13385c7](https://github.com/mubaidr/gem-team/commit/13385c7b499e9b02fe8933274f0f69cf313f516f))
+* streamline footer links, simplify AppHeader layout, update SVG path and alt text, remove legacy TemplateMenu, increase hero spacing, and rename package ([13a548d](https://github.com/mubaidr/gem-team/commit/13a548dcfda5c30d1a2027c9a4b6b06d3fcb277c))
+* streamline index.vue description and markup, update package-lock.json by removing obsolete unhead/vue and related entries ([3ddfe00](https://github.com/mubaidr/gem-team/commit/3ddfe008ebf5a95ad3aa748da19ce8efa60d0ac7))
+* update documentation titles and wording for branding consistency ([65cfb6b](https://github.com/mubaidr/gem-team/commit/65cfb6b89c309d5b841e6b6a4f729e4eddd47d68))
+* update neutral color to slate and reduce star count with slower speed in StarsBg ([be1ccae](https://github.com/mubaidr/gem-team/commit/be1ccaefd2275203049412c6dac6d984ce07cf9d))
+* update neutral color to zinc and replace index.vue markup with marquee layout ([cdc816e](https://github.com/mubaidr/gem-team/commit/cdc816e643537e19c90a393b08493167ece4432a))
+* update UI primary color to amber and standardize string quoting throughout the codebase ([e0eca0d](https://github.com/mubaidr/gem-team/commit/e0eca0d8b9608795903fe963b7d2d0493e16fe19))
+* wrap description string in quotes in index markdown ([bc5d459](https://github.com/mubaidr/gem-team/commit/bc5d4592e635dc5b1d50eb8cdc25058f1d4f0809))
+
 ## [1.84.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.83.0...gem-team-v1.84.0) (2026-07-16)
 
 
