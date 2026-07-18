@@ -16,10 +16,9 @@ useSeoMeta({
         Ship Better Code with <span class="text-primary">Gem Team</span>
       </template>
       <template #description>
-        Spec-driven multi-agent orchestration for software development,
-        verification, debugging, reusable knowledge, and efficient context
-        usage. 16 specialist agents, wave-based parallelism, and progressive
-        context management
+        16 specialist agents, wave-based parallelism, and progressive context
+        management — spec-driven orchestration for software development
+        that plans, builds, reviews, debugs, and learns.
       </template>
       <template #links>
         <UButton
@@ -43,14 +42,12 @@ useSeoMeta({
       <template #default>
         <StarsBg />
 
-        <!-- <UPageSection>
+        <UPageSection class="pt-8">
           <UCodeGroup>
-            <p class="w-full max-w-2xl" language="bash">
-              apm install mubaidr/gem-team --target
-              copilot,claude,cursor,opencode,codex,gemini,windsurf
-            </p>
+            <pre class="w-full max-w-2xl" lang="bash">
+apm install mubaidr/gem-team --target copilot,claude,cursor,opencode,codex,gemini,windsurf</pre>
           </UCodeGroup>
-        </UPageSection> -->
+        </UPageSection>
       </template>
     </UPageHero>
 
@@ -111,54 +108,50 @@ useSeoMeta({
     <UPageSection class="py-32">
       <template #title> Works With Your Favorite Tools </template>
       <template #description>
-        Gem Team integrates with every major AI coding tool via APM.
+        Gem Team integrates with every major AI coding tool via APM — one
+        install command, all targets.
       </template>
       <template #features>
         <UPageFeature icon="i-simple-icons-githubcopilot">
           <template #title> GitHub Copilot </template>
           <template #description>
-            VS Code Copilot & GitHub Copilot CLI — `.github/agents/` and VS Code
-            MCP config.
+            VS Code Copilot & GitHub Copilot CLI with `.github/agents/`.
           </template>
         </UPageFeature>
         <UPageFeature icon="i-simple-icons-anthropic">
           <template #title> Claude Code </template>
           <template #description>
-            `.claude/agents/`, `.claude/rules/`, commands, skills, hooks, and
-            MCP config.
+            Agents, rules, commands, skills, hooks, and MCP config.
           </template>
         </UPageFeature>
         <UPageFeature icon="i-simple-icons-cursor">
           <template #title> Cursor </template>
           <template #description>
-            `.cursor/agents/`, `.cursor/rules/`, skills, commands, hooks, and
-            MCP config.
+            Agents, rules, skills, commands, hooks, and MCP config.
           </template>
         </UPageFeature>
         <UPageFeature icon="i-simple-icons-opencode">
           <template #title> OpenCode </template>
           <template #description>
-            `.opencode/agents/`, commands, skills, MCP, and compiled
-            instructions.
+            Agents, commands, skills, MCP, and compiled instructions.
           </template>
         </UPageFeature>
         <UPageFeature icon="i-simple-icons-codex">
           <template #title> Codex CLI </template>
           <template #description>
-            `.codex/agents/`, `AGENTS.md`, and Codex config.
+            Agents, `AGENTS.md`, and Codex config.
           </template>
         </UPageFeature>
         <UPageFeature icon="i-simple-icons-google">
           <template #title> Gemini CLI </template>
           <template #description>
-            `GEMINI.md`, skills/instructions, and Gemini config where supported.
+            `GEMINI.md`, skills, instructions, and config.
           </template>
         </UPageFeature>
         <UPageFeature icon="i-simple-icons-windsurf">
           <template #title> Windsurf </template>
           <template #description>
-            `.windsurf/rules/`, skills, commands, hooks, and MCP config where
-            supported.
+            Rules, skills, commands, hooks, and MCP config.
           </template>
         </UPageFeature>
       </template>
