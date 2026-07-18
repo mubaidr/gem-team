@@ -34,7 +34,7 @@
     "typescript": "^6.0.3",
     "vue-tsc": "^3.3.7"
   },
-  "name": "nuxt-ui-template-docs",
+  "name": "gem-team-docs",
   "private": true,
   "scripts": {
     "build": "nuxt build",

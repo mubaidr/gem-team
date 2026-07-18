@@ -11,7 +11,7 @@ useSeoMeta({
 
 <template>
   <UPage class="relative">
-    <UPageHero orientation="horizontal" class="py-24">
+    <UPageHero orientation="horizontal" class="py-32">
       <template #title>
         Ship Better Code with <span class="text-primary">Gem Team</span>
       </template>
