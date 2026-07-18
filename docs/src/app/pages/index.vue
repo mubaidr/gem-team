@@ -17,8 +17,8 @@ useSeoMeta({
       </template>
       <template #description>
         16 specialist agents, wave-based parallelism, and progressive context
-        management — spec-driven orchestration for software development
-        that plans, builds, reviews, debugs, and learns.
+        management — spec-driven orchestration for software development that
+        plans, builds, reviews, debugs, and learns.
       </template>
       <template #links>
         <UButton
