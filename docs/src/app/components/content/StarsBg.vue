@@ -1,27 +1,27 @@
 <script setup lang="ts">
 interface Star {
-  x: number;
-  y: number;
-  size: number;
+  x: number
+  y: number
+  size: number
 }
 
 const props = withDefaults(
   defineProps<{
-    starCount?: number;
-    color?: string;
-    speed?: "slow" | "normal" | "fast";
-    size?: { min: number; max: number };
+    starCount?: number
+    color?: string
+    speed?: 'slow' | 'normal' | 'fast'
+    size?: { min: number, max: number }
   }>(),
   {
     starCount: 100,
-    color: "var(--ui-primary)",
-    speed: "slow",
+    color: 'var(--ui-primary)',
+    speed: 'slow',
     size: () => ({
       min: 1,
-      max: 3,
-    }),
-  },
-);
+      max: 3
+    })
+  }
+)
 
 // Generate random star positions and sizes
 const generateStars = (count: number): Star[] => {
@@ -29,39 +29,39 @@ const generateStars = (count: number): Star[] => {
     x: Math.floor(Math.random() * 2000),
     y: Math.floor(Math.random() * 2000),
     size:
-      typeof props.size === "number"
+      typeof props.size === 'number'
         ? props.size
-        : Math.random() * (props.size.max - props.size.min) + props.size.min,
-  }));
-};
+        : Math.random() * (props.size.max - props.size.min) + props.size.min
+  }))
+}
 
 // Define speed configurations once
 const speedMap = {
   slow: { duration: 200, opacity: 0.5, ratio: 0.3 },
   normal: { duration: 150, opacity: 0.75, ratio: 0.3 },
-  fast: { duration: 100, opacity: 1, ratio: 0.4 },
-};
+  fast: { duration: 100, opacity: 1, ratio: 0.4 }
+}
 
 // Use a more efficient approach to generate and store stars
-const stars = useState<{ slow: Star[]; normal: Star[]; fast: Star[] }>(
-  "stars",
+const stars = useState<{ slow: Star[], normal: Star[], fast: Star[] }>(
+  'stars',
   () => {
     return {
       slow: generateStars(Math.floor(props.starCount * speedMap.slow.ratio)),
       normal: generateStars(
-        Math.floor(props.starCount * speedMap.normal.ratio),
+        Math.floor(props.starCount * speedMap.normal.ratio)
       ),
-      fast: generateStars(Math.floor(props.starCount * speedMap.fast.ratio)),
-    };
-  },
-);
+      fast: generateStars(Math.floor(props.starCount * speedMap.fast.ratio))
+    }
+  }
+)
 
 // Compute star layers with different speeds and opacities
 const starLayers = computed(() => [
   { stars: stars.value.fast, ...speedMap.fast },
   { stars: stars.value.normal, ...speedMap.normal },
-  { stars: stars.value.slow, ...speedMap.slow },
-]);
+  { stars: stars.value.slow, ...speedMap.slow }
+])
 </script>
 
 <template>
@@ -119,7 +119,7 @@ const starLayers = computed(() => [
         :style="{
           '--star-duration': `${layer.duration}s`,
           '--star-opacity': layer.opacity,
-          '--star-color': color,
+          '--star-color': color
         }"
       >
         <div
@@ -132,7 +132,7 @@ const starLayers = computed(() => [
             width: `${star.size}px`,
             height: `${star.size}px`,
             backgroundColor: 'var(--star-color)',
-            opacity: 'var(--star-opacity)',
+            opacity: 'var(--star-opacity)'
           }"
         />
       </div>

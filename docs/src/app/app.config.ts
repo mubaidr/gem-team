@@ -1,62 +1,62 @@
 export default defineAppConfig({
   ui: {
     colors: {
-      primary: "blue",
-      neutral: "zinc",
+      primary: 'blue',
+      neutral: 'zinc'
     },
     footer: {
       slots: {
-        root: "border-t border-default",
-        left: "text-sm text-muted",
-      },
-    },
+        root: 'border-t border-default',
+        left: 'text-sm text-muted'
+      }
+    }
   },
   seo: {
-    siteName: "Gem Team",
+    siteName: 'Gem Team'
   },
   header: {
-    title: "Gem Team",
-    to: "/",
+    title: 'Gem Team',
+    to: '/',
     search: true,
     colorMode: true,
     logo: {
-      light: "logo.svg",
-      dark: "logo.svg",
-      alt: "Gem Team",
+      light: 'logo.svg',
+      dark: 'logo.svg',
+      alt: 'Gem Team'
     },
     links: [
       {
-        icon: "i-simple-icons-github",
-        to: "https://github.com/mubaidr/gem-team",
-        target: "_blank",
-        "aria-label": "GitHub",
-      },
-    ],
+        'icon': 'i-simple-icons-github',
+        'to': 'https://github.com/mubaidr/gem-team',
+        'target': '_blank',
+        'aria-label': 'GitHub'
+      }
+    ]
   },
   footer: {
     credits: `Gem Team \u2022 Apache 2.0 License \u2022 \u00A9 ${new Date().getFullYear()}`,
     colorMode: false,
-    links: [],
+    links: []
   },
   toc: {
-    title: "On This Page",
+    title: 'On This Page',
     bottom: {
-      title: "Community",
-      edit: "https://github.com/mubaidr/gem-team/edit/main/docs/src/content",
+      title: 'Community',
+      edit: 'https://github.com/mubaidr/gem-team/edit/main/docs/src/content',
       links: [
         {
-          icon: "i-lucide-star",
-          label: "Star on GitHub",
-          to: "https://github.com/mubaidr/gem-team",
-          target: "_blank",
+          icon: 'i-lucide-star',
+          label: 'Star on GitHub',
+          to: 'https://github.com/mubaidr/gem-team',
+          target: '_blank'
         },
         {
-          icon: "i-lucide-circle-dot",
-          label: "Open an Issue",
-          to: "https://github.com/mubaidr/gem-team/issues",
-          target: "_blank",
-        },
-      ],
-    },
-  },
-});
+          icon: 'i-lucide-circle-dot',
+          label: 'Open an Issue',
+          to: 'https://github.com/mubaidr/gem-team/issues',
+          target: '_blank'
+        }
+      ]
+    }
+  }
+})
