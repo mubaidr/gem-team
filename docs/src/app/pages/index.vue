@@ -54,7 +54,7 @@ useSeoMeta({
       </template>
     </UPageHero>
 
-    <UPageSection class="dark:bg-neutral-950">
+    <UPageSection class="dark:bg-neutral-950 py-32">
       <template #title> Why Gem Team? </template>
       <template #description>
         Gem Team wraps your AI with a disciplined engineering delivery system —
@@ -108,7 +108,7 @@ useSeoMeta({
       </template>
     </UPageSection>
 
-    <UPageSection>
+    <UPageSection class="py-32">
       <template #title> Works With Your Favorite Tools </template>
       <template #description>
         Gem Team integrates with every major AI coding tool via APM.
