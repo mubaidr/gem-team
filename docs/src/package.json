@@ -29,6 +29,8 @@
   },
   "devDependencies": {
     "@nuxt/eslint": "^1.16.0",
+    "cac": "^7.0.0",
+    "commander": "^15.0.0",
     "eslint": "^10.7.0",
     "prettier": "^3.9.5",
     "typescript": "^6.0.3",
