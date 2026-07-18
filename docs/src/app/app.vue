@@ -1,34 +1,40 @@
 <script setup lang="ts">
-const { seo } = useAppConfig()
+const { seo } = useAppConfig();
 
-const { data: navigation } = await useAsyncData('navigation', () =>
-  queryCollectionNavigation('docs')
-)
+const { data: navigation } = await useAsyncData("navigation", () =>
+  queryCollectionNavigation("docs"),
+);
 const { data: files } = useLazyAsyncData(
-  'search',
-  () => queryCollectionSearchSections('docs'),
+  "search",
+  () => queryCollectionSearchSections("docs"),
   {
-    server: false
-  }
-)
+    server: false,
+  },
+);
 
 useHead({
-  meta: [{ name: 'viewport', content: 'width=device-width, initial-scale=1' }],
-  link: [{ rel: 'icon', href: '/logo.svg', type: 'image/svg+xml' }],
+  meta: [
+    { name: "viewport", content: "width=device-width, initial-scale=1" },
+    {
+      name: "google-site-verification",
+      content: "Att722IPv6JXXr7hY-un7qZTjrQYNioBYlaSTMGn3f4",
+    },
+  ],
+  link: [{ rel: "icon", href: "/logo.svg", type: "image/svg+xml" }],
   htmlAttrs: {
-    lang: 'en'
-  }
-})
+    lang: "en",
+  },
+});
 
 useSeoMeta({
   titleTemplate: `%s - ${seo?.siteName}`,
   ogSiteName: seo?.siteName,
   ogImage:
-    'https://raw.githubusercontent.com/mubaidr/gem-team/main/assets/logo.svg',
-  twitterCard: 'summary_large_image'
-})
+    "https://raw.githubusercontent.com/mubaidr/gem-team/main/assets/logo.svg",
+  twitterCard: "summary_large_image",
+});
 
-provide('navigation', navigation)
+provide("navigation", navigation);
 </script>
 
 <template>
