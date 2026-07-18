@@ -42,12 +42,37 @@ useSeoMeta({
       <template #default>
         <StarsBg />
 
-        <UPageSection class="pt-8">
-          <UCodeGroup>
-            <pre class="w-full max-w-2xl" lang="bash">
-apm install mubaidr/gem-team --target copilot,claude,cursor,opencode,codex,gemini,windsurf</pre>
-          </UCodeGroup>
-        </UPageSection>
+        <div class="space-y-12">
+          <UMarquee>
+            <span>testing</span>
+            <span>devops</span>
+            <span>security-audit</span>
+            <span>automation</span>
+            <span>tdd</span>
+            <span>opencode</span>
+            <span>orchestration</span>
+            <span>multi-agent</span>
+            <span>developer-tools</span>
+            <span>code-review</span>
+            <span>cursor</span>
+            <span>harness</span>
+            <span>mobile-development</span>
+            <span>ai-agents</span>
+            <span>e2e-testing</span>
+            <span>windsurf</span>
+            <span>playwright</span>
+            <span>github-copilot</span>
+            <span>claude-code</span>
+            <span>spec-driven-development</span>
+          </UMarquee>
+          <div
+            class="not-prose w-full overflow-x-auto rounded-tl-xl rounded-tr-xl border border-default bg-elevated p-8 scrollbar-thin"
+          >
+            <pre
+              class="text-sm leading-relaxed"
+            ><code class="text-default">apm install mubaidr/gem-team --target copilot,claude,cursor,opencode,codex,gemini,windsurf</code></pre>
+          </div>
+        </div>
       </template>
     </UPageHero>
 
