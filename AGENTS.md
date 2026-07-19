@@ -2,14 +2,14 @@
 
 ## Project Overview
 
-Gem Team is a self-learning multi-agent orchestration harness for spec-driven development and automated verification. It wraps AI coding with a disciplined engineering delivery system: plan, build, review, debug, learn.
+Gem Team turns AI coding into an engineering process. It provides agent definitions that enforce good software engineering: optimizing cost, time, and quality.
 
 ### Key Features
 
-- **Phase-based predictable pipeline**: Init → Route → Plan → Execute → Output
-- **16 specialist agents**: Planner, Researcher, Implementer, Reviewer, Critic, Debugger, and more
-- **TDD by default**: Red-Green-Refactor with 6-category test coverage
-- **Context management**: Progressive context envelope, three-tier memory, skill extraction
+- **Quality by Default**: TDD, code reviews, and security audits happen automatically
+- **Smart & Efficient**: Fewer tokens, lower costs, no context bloat
+- **Works With Your Tools**: Copilot, Claude, Cursor, Codex, Gemini, Windsurf
+- **Learns & Improves**: Remembers what works, extracts reusable skills
 
 ## Setup Commands
 

@@ -1,28 +1,28 @@
 <script setup lang="ts">
 useHead({
-  titleTemplate: '%s'
-})
+  titleTemplate: "%s",
+});
 
 useSeoMeta({
-  title: 'Gem Team',
-  ogTitle: 'Gem Team',
+  title: "Gem Team",
+  ogTitle: "Gem Team",
   description:
-    'Turn AI coding into an orchestrated loop — plan, build, review, debug, learn — with smarter tool calling and leaner context.',
+    "Turn AI coding into an engineering process: agent definitions that enforce good software engineering.",
   ogDescription:
-    'Turn AI coding into an orchestrated loop — plan, build, review, debug, learn — with smarter tool calling and leaner context.'
-})
+    "Turn AI coding into an engineering process: agent definitions that enforce good software engineering.",
+});
 </script>
 
 <template>
   <UPage class="relative">
-    <UPageHero orientation="horizontal" class="py-32">
+    <UPageHero orientation="horizontal" class="py-16">
       <template #title>
-        Ship Better Code with <span class="text-primary">Gem Team</span>
+        Turn AI Coding Into an
+        <span class="text-primary">Engineering Process</span>
       </template>
       <template #description>
-        16 specialist agents, wave-based parallelism, and progressive context
-        management — spec-driven orchestration for software development that
-        plans, builds, reviews, debugs, and learns.
+        Agent definitions that enforce good software engineering: optimizing
+        cost, time, and quality.
       </template>
       <template #links>
         <UButton
@@ -30,7 +30,7 @@ useSeoMeta({
           size="xl"
           trailing-icon="i-lucide-arrow-right"
         >
-          Getting Started
+          Get Started
         </UButton>
         <UButton
           icon="i-simple-icons-github"
@@ -48,26 +48,16 @@ useSeoMeta({
 
         <div class="space-y-12">
           <UMarquee :repeat="2">
-            <span>testing</span>
-            <span>devops</span>
-            <span>security-audit</span>
-            <span>automation</span>
-            <span>tdd</span>
-            <span>opencode</span>
-            <span>orchestration</span>
-            <span>multi-agent</span>
-            <span>developer-tools</span>
-            <span>code-review</span>
-            <span>cursor</span>
-            <span>harness</span>
-            <span>mobile-development</span>
-            <span>ai-agents</span>
-            <span>e2e-testing</span>
-            <span>windsurf</span>
-            <span>playwright</span>
-            <span>github-copilot</span>
-            <span>claude-code</span>
-            <span>spec-driven-development</span>
+            <span>fewer bugs</span>
+            <span>lower costs</span>
+            <span>ship faster</span>
+            <span>quality by default</span>
+            <span>automated reviews</span>
+            <span>no context bloat</span>
+            <span>smarter agents</span>
+            <span>learn from code</span>
+            <span>secure by design</span>
+            <span>works everywhere</span>
           </UMarquee>
           <div
             class="not-prose w-full overflow-x-auto rounded-tl-xl rounded-tr-xl border border-default bg-elevated p-8 scrollbar-thin"
@@ -81,137 +71,75 @@ useSeoMeta({
     </UPageHero>
 
     <UPageSection class="dark:bg-neutral-950 py-32">
-      <template #title>
-        Why Gem Team?
-      </template>
+      <template #title> Built for Better Engineering </template>
       <template #description>
-        Gem Team wraps your AI with a disciplined engineering delivery system —
-        plan, build, review, debug, learn.
+        Four pillars that make your AI code faster, safer, and cheaper.
       </template>
       <template #features>
-        <UPageFeature icon="i-lucide-workflow">
-          <template #title>
-            Delivery Flow
-          </template>
+        <UPageFeature icon="i-lucide-shield-check">
+          <template #title> Quality by Default </template>
           <template #description>
-            Spec-driven execution, wave-based parallelism, verification gates,
-            and resumable plans. Structured processes replace ad-hoc prompting
-            for consistent results.
-          </template>
-        </UPageFeature>
-        <UPageFeature icon="i-lucide-bot">
-          <template #title>
-            16 Specialist Agents
-          </template>
-          <template #description>
-            Planner, Researcher, Implementer, Reviewer, Critic, Debugger,
-            Designer, DevOps, Tester, Documentation, Code Simplifier, and more —
-            each focused on its domain.
-          </template>
-        </UPageFeature>
-        <UPageFeature icon="i-lucide-brain">
-          <template #title>
-            Context Management
-          </template>
-          <template #description>
-            Progressive context envelope, three-tier memory, skill extraction,
-            and PRD management — context overhead minimized at every step.
+            TDD, code reviews, and security audits happen automatically: not as
+            afterthoughts.
           </template>
         </UPageFeature>
         <UPageFeature icon="i-lucide-coins">
-          <template #title>
-            Cost Control
-          </template>
+          <template #title> Smart & Efficient </template>
           <template #description>
-            Model routing, output hygiene, context pruning, and discovery depth
-            scaling — fewer tokens, same results.
+            Fewer tokens, lower costs, no context bloat. Every request is lean
+            and purposeful.
           </template>
         </UPageFeature>
-        <UPageFeature icon="i-lucide-shield-check">
-          <template #title>
-            Quality Gates
-          </template>
+        <UPageFeature icon="i-lucide-brain">
+          <template #title> Learns & Improves </template>
           <template #description>
-            TDD by default, diagnose-then-fix, integration gates, security
-            audits (OWASP), and accessibility checks (WCAG 2.1 AA).
+            Remembers what works, extracts reusable skills, and gets better with
+            every session.
           </template>
         </UPageFeature>
-        <UPageFeature icon="i-lucide-target">
-          <template #title>
-            Precise Tool Calling
-          </template>
+        <UPageFeature icon="i-lucide-plug">
+          <template #title> Works With Your Tools </template>
           <template #description>
-            Targeted context snapshots per agent, output hygiene rules, model
-            routing — precision without prompt waste.
+            Copilot, Claude, Cursor, Codex, Gemini, Windsurf: one install, all
+            targets.
           </template>
         </UPageFeature>
       </template>
     </UPageSection>
 
     <UPageSection class="py-32">
-      <template #title>
-        Works With Your Favorite Tools
-      </template>
+      <template #title> Works With Your Favorite Tools </template>
       <template #description>
-        Gem Team integrates with every major AI coding tool via APM — one
-        install command, all targets.
+        One install command. Every major AI coding tool.
       </template>
       <template #features>
         <UPageFeature icon="i-simple-icons-githubcopilot">
-          <template #title>
-            GitHub Copilot
-          </template>
-          <template #description>
-            VS Code Copilot & GitHub Copilot CLI with `.github/agents/`.
-          </template>
+          <template #title> GitHub Copilot </template>
+          <template #description> VS Code & CLI </template>
         </UPageFeature>
         <UPageFeature icon="i-simple-icons-anthropic">
-          <template #title>
-            Claude Code
-          </template>
-          <template #description>
-            Agents, rules, commands, skills, hooks, and MCP config.
-          </template>
+          <template #title> Claude Code </template>
+          <template #description> Full agent support </template>
         </UPageFeature>
         <UPageFeature icon="i-simple-icons-cursor">
-          <template #title>
-            Cursor
-          </template>
-          <template #description>
-            Agents, rules, skills, commands, hooks, and MCP config.
-          </template>
+          <template #title> Cursor </template>
+          <template #description> Agents & rules </template>
         </UPageFeature>
         <UPageFeature icon="i-simple-icons-opencode">
-          <template #title>
-            OpenCode
-          </template>
-          <template #description>
-            Agents, commands, skills, MCP, and compiled instructions.
-          </template>
+          <template #title> OpenCode </template>
+          <template #description> Commands & skills </template>
         </UPageFeature>
         <UPageFeature icon="i-simple-icons-codex">
-          <template #title>
-            Codex CLI
-          </template>
-          <template #description>
-            Agents, `AGENTS.md`, and Codex config.
-          </template>
+          <template #title> Codex CLI </template>
+          <template #description> AGENTS.md </template>
         </UPageFeature>
         <UPageFeature icon="i-simple-icons-google">
-          <template #title>
-            Gemini CLI
-          </template>
-          <template #description>
-            `GEMINI.md`, skills, instructions, and config.
-          </template>
+          <template #title> Gemini CLI </template>
+          <template #description> Skills & config </template>
         </UPageFeature>
         <UPageFeature icon="i-simple-icons-windsurf">
-          <template #title>
-            Windsurf
-          </template>
-          <template #description>
-            Rules, skills, commands, hooks, and MCP config.
-          </template>
+          <template #title> Windsurf </template>
+          <template #description> Rules & skills </template>
         </UPageFeature>
       </template>
     </UPageSection>
