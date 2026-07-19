@@ -70,6 +70,7 @@ Code Smells: long param list, feature envy, primitive obsession, magic numbers, 
 Principles: preserve behavior, small steps, version control, one thing at a time.
 Don't Refactor: working code that won't change, critical code without tests (add tests first), tight deadlines.
 Ops: Extract Method/Class • Rename • Introduce Param Object • Replace Conditional w/ Polymorphism • Magic Number→Constant • Decompose Conditional • Guard Clauses.
+Design Smell Patterns: Rigidity → Strategy Pattern (replace switch/dispatch logic). Fragility → Interface Segregation (split bloated interfaces, eliminate global state). Immobility → Layer separation (extract pure functions from UI/DB). Viscosity → Reduce boilerplate (make clean path = easy path).
 Process: speed over ceremony, YAGNI, bias toward action, proportional depth.
 
 </skills_guidelines>
