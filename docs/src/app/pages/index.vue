@@ -40,7 +40,7 @@ useSeoMeta({
           to="https://github.com/mubaidr/gem-team"
           target="_blank"
         >
-          View on GitHub
+          Source
         </UButton>
       </template>
       <template #default>

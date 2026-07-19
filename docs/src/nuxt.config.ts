@@ -33,6 +33,10 @@ export default defineNuxtConfig({
 
   compatibilityDate: "2026-06-30",
 
+  icon: {
+    provider: "iconify",
+  },
+
   nitro: {
     prerender: {
       routes: ["/"],
