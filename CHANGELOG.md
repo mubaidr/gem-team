@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.87.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.86.0...gem-team-v1.87.0) (2026-07-19)
+
+
+### 🧹 Housekeeping
+
+* **docs:** refine project overview and key features to emphasize engineering process ([2f43f9c](https://github.com/mubaidr/gem-team/commit/2f43f9c7913ea935a9ad861ad12b002ff9c9e8a7))
+
 ## [1.86.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.85.0...gem-team-v1.86.0) (2026-07-19)
 
 
