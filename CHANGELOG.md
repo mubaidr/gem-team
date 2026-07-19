@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.86.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.85.0...gem-team-v1.86.0) (2026-07-19)
+
+
+### 🧹 Housekeeping
+
+* add concise communication style rule to agent markdown files ([bc209b1](https://github.com/mubaidr/gem-team/commit/bc209b18422ae94c88d7dd90e1ee6ebc325920b5))
+
 ## [1.85.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.84.0...gem-team-v1.85.0) (2026-07-19)
 
 
