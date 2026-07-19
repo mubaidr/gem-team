@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.87.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.86.0...gem-team-v1.87.0) (2026-07-19)
+
+
+### 🧹 Housekeeping
+
+* **docs:** adjust punctuation in getting started and core concepts descriptions ([b79de06](https://github.com/mubaidr/gem-team/commit/b79de06cba4b07876fa819efa94a1efdc7c14165))
+* **docs:** refine project overview and key features to emphasize engineering process ([2f43f9c](https://github.com/mubaidr/gem-team/commit/2f43f9c7913ea935a9ad861ad12b002ff9c9e8a7))
+* **docs:** unify ASCII-only phrasing in agent configuration files ([1cc31e3](https://github.com/mubaidr/gem-team/commit/1cc31e3592e6838f6432b710faf4f4b2b2f7efce))
+* update button label and add icon provider configuration ([aa6ac2f](https://github.com/mubaidr/gem-team/commit/aa6ac2fc29743e0dd5888176779f71a5781d27c8))
+
 ## [1.86.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.85.0...gem-team-v1.86.0) (2026-07-19)
 
 
