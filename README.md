@@ -91,6 +91,7 @@ After the first install, commit the generated APM files that belong to your repo
 - **TDD by default**: Implementers follow Red-Green-Refactor with 6-category test coverage (happy path, invariants, boundaries, error paths, input variation, state transitions). Bug-fix mode requires debugger diagnosis before touching code.
 - **Diagnose-then-fix**: Debugger diagnoses → Implementer fixes → Reviewer re-verifies. Enforced at planner, orchestrator, implementer, and reviewer levels.
 - **Design smell detection**: Planner pre-checks for rigidity, fragility, immobility, and viscosity before decomposition. Critic challenges coupling, layer violations, and shortcut temptations. Simplifier applies targeted patterns (Strategy, Interface Segregation, Layer Separation) when refactoring. Orchestrator escalates complexity when design smells are detected.
+- **Answer-first communication**: All agents lead with the concrete action or command — no preamble, no tangents, no recaps. Number steps when there are multiple. End with exactly one clear next action.
 
 ### Context & Knowledge Management
 
