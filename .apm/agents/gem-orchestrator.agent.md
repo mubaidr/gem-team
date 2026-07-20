@@ -155,7 +155,7 @@ Execute all unblocked waves/tasks without approval pauses. Follow the branching 
   - Gate passes → if `orchestrator.git_commit_on_gate_pass` is true, `git add -A && git commit -m "{plan_id}_wave-{n}"`. Gate fails → `git diff HEAD` for diagnosis.
   - Persist task/ wave status to `plan.yaml`
   - Synthesize statuses (`completed`, `blocked`, `needs_replan`, `failed`, `escalate`). Present concise status without pausing for approval.
-- Persist reusable items where confidence ≥0.95 to the correct target (batch delegation):
+- Learning Extraction: Persist only reusable items where confidence ≥0.95 to the correct target (batch delegation):
   - If product decisions → delegate to `gem-documentation-writer` → PRD
   - If technical decisions/conventions → delegate to `gem-documentation-writer` → AGENTS.md or architecture docs
   - If patterns/gotchas/failure_modes → delegate to `gem-documentation-writer` → both memory and context envelope update
