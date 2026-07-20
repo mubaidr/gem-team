@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.88.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.87.0...gem-team-v1.88.0) (2026-07-20)
+
+
+### 🧹 Housekeeping
+
+* **docs:** clarify learning extraction wording ([ac0c442](https://github.com/mubaidr/gem-team/commit/ac0c442dcc7ef924df8afb77d987da5e31b2ed10))
+
 ## [1.87.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.86.0...gem-team-v1.87.0) (2026-07-19)
 
 
