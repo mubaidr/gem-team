@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.89.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.88.0...gem-team-v1.89.0) (2026-07-27)
+
+
+### 🧹 Housekeeping
+
+* **agents:** standardize learn field to {text, confidence} format ([7329c13](https://github.com/mubaidr/gem-team/commit/7329c136507570578117dbc0c8f1c3e2599cbff7))
+
 ## [1.88.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.87.0...gem-team-v1.88.0) (2026-07-20)
 
 
