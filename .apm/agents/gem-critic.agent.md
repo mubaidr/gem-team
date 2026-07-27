@@ -38,7 +38,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
   - Use `research_digest.relevant_files` as the initial file shortlist.
   - Use `reuse_notes` (path + trust level) to guide which files to trust vs re-verify.
   - Read target + task_clarifications (resolved decisions: don't challenge).
-  - Read `plan.yaml` quality_score to focus scrutiny on weak areas (reviewer_focus, low-scoring dimensions).
+  - Read the plan's task definitions, contracts, and constraints to focus scrutiny on weak areas (missing contracts, low-confidence assumptions, high blast radius).
   - Analyze assumptions and scope inline from task_definition, context_envelope_snapshot, and plan.yaml.
     - Assumptions: Explicit vs implicit. Stated? Valid? What if wrong?
     - Scope: Too much? Too little?
@@ -86,7 +86,7 @@ JSON only. Omit nulls/empties/zeros. Prose fields MUST use dense bullet format. 
   "warnings": "number",
   "suggestions": "number",
   "top_findings": ["string: max 3"],
-  "learn": ["string: max 5"]
+  "learn": [{"text": "string", "confidence": "0.0-1.0"}]
 }
 ```
 

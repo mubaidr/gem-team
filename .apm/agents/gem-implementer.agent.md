@@ -39,7 +39,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
   - Use `research_digest.relevant_files` as the initial file shortlist.
   - Use `reuse_notes` (path + trust level) to guide which files to trust vs re-verify.
   - Read tokens from `DESIGN.md` (UI tasks only).
-  - Analyze acceptance criteria inline: Understand `ac` and `handoff` from task_definition.
+  - Analyze acceptance criteria inline: Understand `ac`, `handoff`, and `implementation_handoff` from task_definition (`handoff` and `implementation_handoff` are aliases; both carry the same data).
   - Skill Invocation: If `task_definition.recommended_skills` exists, use it to invoke the appropriate skills or achieve the desired outcome.
 - TDD Cycle (Red → Green → Refactor → Verify):
   - Red: Create/update tests. Cover ALL applicable categories:
@@ -76,7 +76,7 @@ JSON only. Omit nulls/empties/zeros. Prose fields MUST use dense bullet format. 
   "fail": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
   "files": { "modified": "number", "created": "number" },
   "tests": { "passed": "number", "failed": "number" },
-  "learn": ["string: max 5"]
+  "learn": [{ "text": "string", "confidence": "0.0-1.0" }]
 }
 ```
 

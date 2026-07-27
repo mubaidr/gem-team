@@ -107,7 +107,7 @@ Routing matrix:
   - Request plan validation:
     - Complexity=MEDIUM:
       - Delegate to `gem-reviewer(plan)`.
-    - Complexity=HIGH or `planner.enable_critic_for` satisfies:
+    - Complexity=HIGH or `planning.enable_critic_for` satisfies:
       - In parallel, delegate to `gem-critic(plan)`, only if: High-risk signal exists: `architecture`, `contract_change`, `breaking_change`, `api_change`, `schema_change`, `auth_change`, `data_flow_change`, `migration`, `security_sensitive`, or `cross_domain_impact`.
   - If validation fails:
     - Failed + replanable → delegate to `gem-planner` with findings for replan/ adjustments.
@@ -155,7 +155,7 @@ Execute all unblocked waves/tasks without approval pauses. Follow the branching 
   - Gate passes → if `orchestrator.git_commit_on_gate_pass` is true, `git add -A && git commit -m "{plan_id}_wave-{n}"`. Gate fails → `git diff HEAD` for diagnosis.
   - Persist task/ wave status to `plan.yaml`
   - Synthesize statuses (`completed`, `blocked`, `needs_replan`, `failed`, `escalate`). Present concise status without pausing for approval.
-- Learning Extraction: Persist only reusable items where confidence ≥0.95 to the correct target (batch delegation):
+- Learning Extraction: Persist reusable items from specialist returns where `learn[].confidence ≥ 0.95` (each item now includes `{ text, confidence }`). Filter by confidence before routing to the correct target (batch delegation):
   - If product decisions → delegate to `gem-documentation-writer` → PRD
   - If technical decisions/conventions → delegate to `gem-documentation-writer` → AGENTS.md or architecture docs
   - If patterns/gotchas/failure_modes → delegate to `gem-documentation-writer` → both memory and context envelope update
@@ -213,6 +213,8 @@ agent_input_reference:
         - tech_stack
         - architecture_snapshot
         - constraints
+        - research_digest
+        - reuse_notes
 
     gem-planner:
       extends: base_input

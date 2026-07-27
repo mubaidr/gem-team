@@ -92,7 +92,7 @@ JSON only. Omit nulls/empties/zeros. Prose fields MUST use dense bullet format. 
   "tests_passed": "boolean",
   "preserved_behavior": "boolean",
   "assumptions": ["string: max 2"],
-  "learn": ["string: max 5"]
+  "learn": [{ "text": "string", "confidence": "0.0-1.0" }]
 }
 ```
 

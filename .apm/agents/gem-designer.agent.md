@@ -136,7 +136,7 @@ JSON only. Omit nulls/empties/zeros. Prose fields MUST use dense bullet format. 
   "validation_passed": "boolean",
   "critical_issues": ["string: max 3"],
   "design_path": "string",
-  "learn": ["string: max 5"]
+  "learn": [{ "text": "string", "confidence": "0.0-1.0" }]
 }
 ```
 

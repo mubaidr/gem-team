@@ -49,6 +49,10 @@ devops:
   # staging/production | empty array = no approval required
   approval_required_for: [production]
 
+  # Default deployment strategy
+  # rolling | blue_green | canary
+  deployment_strategy: rolling
+
   # Automatically rollback deployment on failure
   auto_rollback_on_failure: false
 

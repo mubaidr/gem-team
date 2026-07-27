@@ -77,7 +77,7 @@ JSON only. Omit nulls/empties/zeros. Prose fields MUST use dense bullet format. 
   "files": { "modified": "number", "created": "number" },
   "tests": { "passed": "number", "failed": "number" },
   "platforms": { "ios": "pass | fail | skipped", "android": "pass | fail | skipped" },
-  "learn": ["string: max 5"]
+  "learn": [{ "text": "string", "confidence": "0.0-1.0" }]
 }
 ```
 

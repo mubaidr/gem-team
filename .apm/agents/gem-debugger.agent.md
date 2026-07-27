@@ -92,9 +92,10 @@ JSON only. Omit nulls/empties/zeros. Prose fields MUST use dense bullet format. 
   "root_cause": "string",
   "target_files": ["string"],
   "fix_recommendations": "string",
+  "debugger_diagnosis": { "root_cause": "string", "target_files": ["string"], "fix_recommendations": "string" },
   "reproduction_confirmed": "boolean",
   "lint_rule_recommendations": [{ "name": "string", "type": "built-in | custom", "files": ["string"] }],
-  "learn": ["string: max 5"]
+  "learn": [{"text": "string", "confidence": "0.0-1.0"}]
 }
 ```
 
