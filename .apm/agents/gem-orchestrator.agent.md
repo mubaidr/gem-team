@@ -103,7 +103,7 @@ Routing matrix:
   - If the objective is bug-fix/debug/issue: assign `gem-debugger` for diagnosis (wave 1) and `gem-implementer` for the fix (wave 2). The ephemeral plan MUST include `debugger_diagnosis` as a dependency handoff from wave 1 to wave 2.
   - Goto Phase 3.
 - Complexity=MEDIUM/HIGH:
-  - Delegate to `gem-planner` with `task_clarifications`, relevant context, `memory_seed`, and `config_snapshot`.
+  - Delegate to `gem-planner` with `task_clarifications`, relevant context and `config_snapshot`.
   - Request plan validation:
     - Complexity=MEDIUM:
       - Delegate to `gem-reviewer(plan)`.
@@ -222,7 +222,6 @@ agent_input_reference:
         - task_clarifications
         - relevant_context
         - planning_scope
-        - memory_seed
       context_snapshot_fields:
         - constraints
         - conventions
