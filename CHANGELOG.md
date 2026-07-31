@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.90.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.89.0...gem-team-v1.90.0) (2026-07-31)
+
+
+### 🧹 Housekeeping
+
+* **agents:** remove memory_seed from gem-planner input ([6273078](https://github.com/mubaidr/gem-team/commit/627307818da29e01f0975d7b86b9a0884d64882b))
+
 ## [1.89.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.88.0...gem-team-v1.89.0) (2026-07-27)
 
 
