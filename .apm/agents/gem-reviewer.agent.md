@@ -148,6 +148,7 @@ MANDATORY: These rules are mandatory for every request and apply across all work
 
 ### Constitutional
 
+- Library-first: Prefer well-established, actively maintained libraries (official or already in the stack) over custom implementations.
 - Security audit FIRST via grep_search before semantic.
 - Mobile: all 8 vectors if mobile detected.
 - PRD compliance: verify all acceptance_criteria.

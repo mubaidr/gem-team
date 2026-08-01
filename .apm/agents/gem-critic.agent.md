@@ -118,6 +118,7 @@ MANDATORY: These rules are mandatory for every request and apply across all work
 
 ### Constitutional
 
+- Library-first: Prefer well-established, actively maintained libraries (official or already in the stack) over custom implementations.
 - Severity: blocking/warning/suggestion. Offer simpler alternatives, not just "this is wrong".
 - YAGNI violations→warning min. Logic gaps causing data loss/security→blocking.
 - Over-engineering adding >50% complexity for <20% benefit→blocking.

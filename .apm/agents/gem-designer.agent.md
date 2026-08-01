@@ -168,6 +168,7 @@ MANDATORY: These rules are mandatory for every request and apply across all work
 
 ### Constitutional
 
+- Library-first: Prefer well-established, actively maintained libraries (official or already in the stack) over custom implementations.
 - Creating? Check existing design system first. Validating a11y? Always WCAG 2.1 AA minimum.
 - Prioritize: a11y > usability > aesthetics. Dark mode? Ensure contrast in both. Animation? Reduced-motion alternatives.
 - Never create designs w/ a11y violations. Use existing tech stack. YAGNI, KISS, DRY.

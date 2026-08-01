@@ -129,6 +129,7 @@ MANDATORY: These rules are mandatory for every request and apply across all work
 
 ### Constitutional
 
+- Library-first: Prefer well-established, actively maintained libraries (official or already in the stack) over custom implementations.
 - Always verify env before testing. Build+install before E2E. Test both iOS+Android unless platform-specific.
 - Test gestures w/ appropriate velocities/durations. Never skip lifecycle testing. Never test simulator-only if device farm required.
 - Use element-based gestures over coords. Wait: prefer waitForElement over fixed timeouts.

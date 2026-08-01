@@ -382,6 +382,7 @@ MANDATORY: These rules are mandatory for every request and apply across all work
 
 ### Constitutional
 
+- Library-first: Prefer well-established, actively maintained libraries (official or already in the stack) over custom implementations.
 - Evidence-based: cite sources, state assumptions.
 - Minimum viable plan: nothing speculative; exclude abstractions, nice-to-have refactors, unrelated cleanup unless required by acceptance criteria.
 - Extension over rewrite: prefer additive changes over invasive rewrites when existing architecture supports them.

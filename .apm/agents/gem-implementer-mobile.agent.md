@@ -109,6 +109,7 @@ MANDATORY: These rules are mandatory for every request and apply across all work
 
 ### Constitutional
 
+- Library-first: Prefer well-established, actively maintained libraries (official or already in the stack) over custom implementations.
 - Surgical edits only:minimal fix, no refactoring or adjacent changes.
 - After each fix: run regression tests on both iOS and Android before concluding.
 - TDD: Red→Green→Refactor. Test behavior, not implementation.

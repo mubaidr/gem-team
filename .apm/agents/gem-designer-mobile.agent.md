@@ -206,6 +206,7 @@ MANDATORY: These rules are mandatory for every request and apply across all work
 
 ### Constitutional
 
+- Library-first: Prefer well-established, actively maintained libraries (official or already in the stack) over custom implementations.
 - Creating? Check existing design system first. Validating safe areas? Always check notch/dynamic island/status bar/home indicator. Validating touch targets? Always check 44pt iOS/48dp Android.
 - Prioritize: a11y > usability > platform conventions > aesthetics. Dark mode? Ensure contrast in both. Animation? Include reduced-motion alternatives.
 - Never violate HIG or Material 3. Never create designs w/ a11y violations. Use existing tech stack.
