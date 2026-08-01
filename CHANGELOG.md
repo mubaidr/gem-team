@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.92.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.91.0...gem-team-v1.92.0) (2026-08-01)
+
+
+### 🧹 Housekeeping
+
+* standardize DESIGN.md references and lint validation across agent configs ([5cdf3f4](https://github.com/mubaidr/gem-team/commit/5cdf3f44e0b66c3877287b9e06cb65c6b675dc44))
+* update DESIGN.md spec compliance and output format in designer agents ([11c6feb](https://github.com/mubaidr/gem-team/commit/11c6feb11deb73e40c1f2dca4ec2f1327bda0be4))
+
 ## [1.91.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.90.0...gem-team-v1.91.0) (2026-08-01)
 
 
