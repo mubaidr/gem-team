@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.93.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.92.0...gem-team-v1.93.0) (2026-08-01)
+
+
+### 🧹 Housekeeping
+
+* enhance PRD format guide and core concepts documentation ([3a6bca9](https://github.com/mubaidr/gem-team/commit/3a6bca924960867492601a990dd75d6edd1db6b5))
+
 ## [1.92.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.91.0...gem-team-v1.92.0) (2026-08-01)
 
 
