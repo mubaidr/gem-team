@@ -25,6 +25,8 @@ MANDATORY: Adhere strictly to the defined workflow and rules below:no improvisat
 ## Knowledge Sources
 
 - `docs/PRD.yaml`
+- `DESIGN.md` (UI tasks: design system, tokens, components, layout, theming)
+- Google DESIGN.md spec: https://github.com/google-labs-code/design.md
 
 </knowledge_sources>
 
@@ -58,6 +60,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
   - Immobility: Can business logic be extracted without carrying framework/UI/DB baggage?
   - Viscosity: Is doing it right significantly harder than a shortcut? If so, simplify the clean path.
   - Future-proofing: For a future that may not come?
+- DESIGN.md compliance: Token usage (`{token.ref}` not inline), section structure (YAML frontmatter + canonical order), a11y (contrast, touch targets, reduced-motion), dark mode support.
 - Synthesize:
   - Findings grouped by severity: blocking, warning, or suggestion.
   - Each with issue, impact, file:line references.

@@ -55,10 +55,10 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
     - Theme: palette, typography, spacing 8pt, dark / light.
     - Design system: tokens, specs, platform variant guidelines.
   - Output:
-    - Create `docs/DESIGN.md` with YAML frontmatter (version: alpha, name, description, colors, typography, rounded, spacing, components) followed by canonical prose sections in spec order: Overview, Colors, Typography, Layout, Elevation & Depth, Shapes, Components, Do's and Don'ts.
+    - Create `DESIGN.md` with YAML frontmatter (version: alpha, name, description, colors, typography, rounded, spacing, components) followed by canonical prose sections in spec order: Overview, Colors, Typography, Layout, Elevation & Depth, Shapes, Components, Do's and Don'ts.
     - All component values MUST use `{token.ref}` references (e.g. `{colors.primary}`, `{rounded.md}`) — never inline raw values in components block.
     - Platform-specific specs + design lint rules + iteration guide.
-    - Run `npx @google/design.md lint docs/DESIGN.md` to validate before finalizing.
+    - Run `npx @google/design.md lint DESIGN.md` to validate before finalizing.
   - On update: Include changed_tokens.
 - Validate Mode:
   - Visual analysis: Hierarchy, spacing, typography, color.
@@ -94,7 +94,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
 
 ### DESIGN.md Spec Compliance
 
-- Output `docs/DESIGN.md` must follow the Google DESIGN.md alpha spec structure:
+- Output `DESIGN.md` must follow the Google DESIGN.md alpha spec structure:
   1. YAML frontmatter (version, name, description, colors, typography, rounded, spacing, components)
   2. `## Overview` — brand & style rationale
   3. `## Colors` — palette with semantic roles
@@ -105,7 +105,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
   8. `## Components` — token-referenced component definitions
   9. `## Do's and Don'ts` — practical guardrails
 - All component values in the YAML `components:` block MUST use `{token.ref}` references, never inline raw values.
-- Validate output with `npx @google/design.md lint docs/DESIGN.md` before finalizing.
+- Validate output with `npx @google/design.md lint DESIGN.md` before finalizing.
 
 #### Mobile Creative Direction
 
@@ -246,12 +246,12 @@ Apply in following preference order:
 
 ### DESIGN.md Output Format (CRITICAL)
 
-When creating or updating `docs/DESIGN.md`, the output MUST conform to the Google DESIGN.md alpha specification:
+When creating or updating `DESIGN.md`, the output MUST conform to the Google DESIGN.md alpha specification:
 
 - YAML frontmatter block delimited by `---` containing: `version: alpha`, `name`, `description`, `colors`, `typography`, `rounded`, `spacing`, `components`
 - All `components` values MUST use `{token.ref}` references (e.g., `{colors.primary}`, `{rounded.md}`) — never inline hex or px values
 - Prose body sections in canonical order: Overview, Colors, Typography, Layout, Elevation & Depth, Shapes, Components, Do's and Don'ts
 - Sections may be omitted if not relevant, but those present must appear in the canonical order
-- Validate with `npx @google/design.md lint docs/DESIGN.md` before finalizing
+- Validate with `npx @google/design.md lint DESIGN.md` before finalizing
 
 </rules>

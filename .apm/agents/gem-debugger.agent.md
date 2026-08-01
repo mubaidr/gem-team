@@ -27,7 +27,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below:no improvisat
 - Official docs (online docs or llms.txt)
 - Error logs/stack traces/test output
 - Git history
-- `docs/DESIGN.md` (UI tasks only)
+- `DESIGN.md` (UI tasks only)
 
 </knowledge_sources>
 

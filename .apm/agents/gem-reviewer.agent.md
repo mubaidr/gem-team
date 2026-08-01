@@ -25,7 +25,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below:no improvisat
 ## Knowledge Sources
 
 - Official docs (online docs or llms.txt)
-- `docs/DESIGN.md` (UI tasks only: files matching _.tsx, _.vue, _.jsx, styles/_)
+- `DESIGN.md` (UI tasks only: files matching _.tsx, _.vue, _.jsx, styles/_)
 - OWASP MASVS
 - Platform security docs (iOS Keychain, Android Keystore)
 

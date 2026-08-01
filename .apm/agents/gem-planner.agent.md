@@ -47,6 +47,9 @@ MANDATORY: Adhere strictly to the defined workflow and rules below:no improvisat
 ## Knowledge Sources
 
 - Official docs (online docs or llms.txt)
+- `DESIGN.md` (UI tasks: design system, tokens, components, layout, theming)
+- Google DESIGN.md spec: https://github.com/google-labs-code/design.md
+- DESIGN.md format specification (YAML frontmatter + canonical prose sections)
 
 </knowledge_sources>
 
