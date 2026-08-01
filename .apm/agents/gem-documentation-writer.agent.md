@@ -119,16 +119,30 @@ Requirements MUST use EARS syntax. Types:
 ```yaml
 prd_id: string
 version: semver
+status: draft | active | on_target | at_risk | delayed | deferred | shipped   # Atlassian: overall PRD health
+target_release: string          # Atlassian: projected ship date (semver or YYYY-MM-DD)
+purpose: string          # Problem statement and why this PRD exists
+strategic_fit: string    # Atlassian: how this aligns with broader org goals/strategy
+personas: [{ name, goals, pain_points }]  # Target users
+business_goals: [{ metric, target }]      # Measurable business outcomes
+success_metrics: [{ name, target, unit }] # How success is measured
 requirements: [{ id, statement, type }] # EARS syntax
 user_stories: [{ as_a, i_want, so_that }]
 scope: { in_scope: [], out_of_scope: [] }
+assumptions: [{ assumption, impact_if_wrong }]
+dependencies: [{ name, type, description }]  # Upstream/downstream, third-party
+technical_constraints: [{ constraint, detail }] # Platform, performance, security
+risks: [{ risk, probability, impact, mitigation }]
+prioritization: { framework: "MoSCoW" | "RICE" | "Value-vs-Effort" | "Kano", items: [{ id, score, category }] }
 acceptance_criteria: [{ criterion, verification }]
 needs_clarification: [{ question, context, impact, status, owner }]
 features: [{ name, overview, status }]
+design_explorations: [{ name, link, status }]  # Atlassian: linked wireframes/mockups/explorations
 state_machines: [{ name, states, transitions }]
 errors: [{ code, message }]
 decisions: [{ id, status, decision, rationale, alternatives, consequences }]
-changes: [{ version, change }]
+changes: [{ version, date, author, change, linked_issue }]
+collaboration: { stakeholders: [], review_process, approval_status }
 ```
 
 </prd_format_guide>

@@ -60,7 +60,8 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
   - Immobility: Can business logic be extracted without carrying framework/UI/DB baggage?
   - Viscosity: Is doing it right significantly harder than a shortcut? If so, simplify the clean path.
   - Future-proofing: For a future that may not come?
-- DESIGN.md compliance: Token usage (`{token.ref}` not inline), section structure (YAML frontmatter + canonical order), a11y (contrast, touch targets, reduced-motion), dark mode support.
+- DESIGN.md compliance.
+- PRD compliance.
 - Synthesize:
   - Findings grouped by severity: blocking, warning, or suggestion.
   - Each with issue, impact, file:line references.

@@ -99,6 +99,7 @@ IMPORTANT: Focus strictly on architectural milestones, dependency mapping, and s
   - `requires_design_validation: true`: designer runs first (wave N); implementer follows (wave N+1) only after validation passes. Never assign implementer directly.
   - Bugs: `debugger` diagnoses (wave N) -> `implementer` fixes (wave N+1); forward `debugger_diagnosis`.
   - Security: `reviewer` audits -> `implementer` remediates.
+  - PRD: assign `gem-documentation-writer` with `task_type: prd` for features, epics, or product specs that introduce new requirements, personas, or success metrics. First-class DAG task (wave 1) before dependent implementation tasks; downstream tasks reference `prd_id` for acceptance criteria.
   - Default: `implementer` for unspecialized tasks. Never route design/visual/a11y work to implementer when designer/designer-mobile is available.
 - Handoff: Populate `implementation_handoff` for ALL tasks. Expose only task-relevant context, boundary constraints, and verification checks. Do not dictate code patterns or implementation mechanics.
 - Create plan `plan.yaml` as per `plan_format_guide`
