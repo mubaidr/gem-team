@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.91.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.90.0...gem-team-v1.91.0) (2026-08-01)
+
+
+### 🧹 Housekeeping
+
+* **agents:** add Library-first rule to all agent constitutional sections ([cb585ef](https://github.com/mubaidr/gem-team/commit/cb585ef1faba4dbb9ff48d61d5e3b413a68a9d55))
+
 ## [1.90.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.89.0...gem-team-v1.90.0) (2026-07-31)
 
 
