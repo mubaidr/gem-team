@@ -91,12 +91,12 @@ IMPORTANT: Focus strictly on architectural milestones, dependency mapping, and s
 - Acceptance Criteria Injection:
   - For each task, reference relevant acceptance criteria by ID when available.
   - Populate `task_definition.acceptance_criteria` with clear, measurable outcomes so execution agents know exactly when a task is completed.
-- Agent Assignment: Reason from available agents, task nature, and context:
-  - Consult `<available_agents>` list; pick the agent whose role matches the task.
-  - For UI/UX/Design/Aesthetics tasks: assign `designer` or `designer-mobile`.
-  - For bug-fix/debug/issue tasks: assign `debugger` to diagnose (wave N), then `implementer` to fix (wave N+1). Ensure `debugger_diagnosis` is forwarded.
-  - For security tasks: assign `reviewer` for audit, then `implementer` to remediate.
-  - Default to `implementer` when no specialized agent fits, trusting their capacity to resolve technicalities within the task scope.
+- Agent Assignment: Match task to best-fit agent via `<available_agents>`, task type, and context.
+  - Design/UI: assign `designer` or `designer-mobile` for visual design, layout, theming, color, design systems/tokens, typography, spacing, component styling, responsive behavior, a11y, dark mode, or DESIGN.md work.
+  - `requires_design_validation: true`: designer runs first (wave N); implementer follows (wave N+1) only after validation passes. Never assign implementer directly.
+  - Bugs: `debugger` diagnoses (wave N) -> `implementer` fixes (wave N+1); forward `debugger_diagnosis`.
+  - Security: `reviewer` audits -> `implementer` remediates.
+  - Default: `implementer` for unspecialized tasks. Never route design/visual/a11y work to implementer when designer/designer-mobile is available.
 - Handoff: Populate `implementation_handoff` for ALL tasks. Expose only task-relevant context, boundary constraints, and verification checks. Do not dictate code patterns or implementation mechanics.
 - Create plan `plan.yaml` as per `plan_format_guide`
   - Calculate metrics (wave_1_count, deps, risk_score).
@@ -210,7 +210,7 @@ tasks:
     flags:
       flaky: boolean
       retries_used: number
-      requires_design_validation: boolean # true for new UI, major redesigns, style/a11y/token work
+      requires_design_validation: boolean # true for new UI, major redesigns, style/a11y/token work — routes to designer first, then implementer
     debugger_diagnosis:
       root_cause: string
       target_files: [string]
