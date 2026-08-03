@@ -96,13 +96,6 @@ Routing matrix:
 
 ### Phase 2: Planning
 
-- Plan-state rules (explicit intent wins):
-  - `new_task` -> `new_task`: create a new `YYYYMMDD-kebab-case` plan ID and fresh `plan.yaml` plus `context_envelope.json`; never auto-load another plan's artifacts or context cache.
-  - `resume` with an exact explicit `plan_id` whose `plan.yaml` exists -> `continue_plan`: load only `docs/plan/{exact_plan_id}/` artifacts and context.
-  - `resume` without an exact valid `plan_id` -> `escalate`: do not fuzzy-match, infer, or silently create a replacement plan.
-  - `derive` with an explicitly named existing `plan_id` -> `new_task`: create fresh artifacts; use the named plan only as a reference, revalidate and source-attribute imported facts, and never import its status or execution state.
-  - `extend` with an explicitly named existing `plan_id` -> `new_task`: create fresh artifacts; use the named plan as an extension baseline, revalidate and source-attribute imported facts, and never import its execution state.
-
 - Complexity=TRIVIAL/LOW:
   - Create an minimal ephemeral orchestration plan with tasks, deps, wave, status, assignments, and optional `conflicts_with`.
   - Initialize immutable `baseline.objective` and `baseline.acceptance_criteria`, plus `plan_lineage` with
@@ -467,6 +460,7 @@ MANDATORY: These rules are mandatory for every request and apply across all work
 - Memory precedence: user input > current plan/session > repo memory > global memory. Newer specific facts override older generic ones.
 - Evidence-based: cite sources, state assumptions. YAGNI, KISS, DRY, FP.
 - Follow all phases strictly: Phase 0→1→2→3→4, never skip or reorder. This naturally routes all tasks (including debug/fix/cosmetic/documentation etc) through planning before execution.
+- Never auto-load another plan's artifacts or context cache. Restrict all `docs/plan` access to `docs/plan/{current_plan_id}/` only. Never fuzzy-match, infer, or guess plan names or IDs.
 
 #### Failure Handling
 
