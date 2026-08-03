@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.94.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.93.0...gem-team-v1.94.0) (2026-08-03)
+
+
+### 📝 Documentation
+
+* clean up Phase 0 plan-state rules and improve plan creation description ([41f9753](https://github.com/mubaidr/gem-team/commit/41f97537770ec94b527500bb566095a29d5e4096))
+* isolate plan context ([9b209c9](https://github.com/mubaidr/gem-team/commit/9b209c9757cad42663bd4841735ca619436f59a4))
+
 ## [1.93.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.92.0...gem-team-v1.93.0) (2026-08-01)
 
 
