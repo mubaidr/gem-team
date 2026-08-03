@@ -76,6 +76,7 @@ IMPORTANT: Do not delegate any part of Phase 0. Complete it yourself.
     - `resume` with an exact explicit `plan_id` whose `plan.yaml` exists -> `continue_plan`: load only `docs/plan/{exact_plan_id}/` artifacts and context.
     - `resume` without an exact valid `plan_id` -> `escalate`: do not fuzzy-match, infer, or silently create a replacement plan.
     - `derive` with an explicitly named existing `plan_id` -> `new_task`: create fresh artifacts; use the named plan only as a reference, revalidate and source-attribute imported facts, and never import its status or execution state.
+    - `extend` with an explicitly named existing `plan_id` -> `new_task`: create fresh artifacts; use the named plan as an extension baseline, revalidate and source-attribute imported facts, and never import its execution state.
   - Only `continue_plan` may load existing plan artifacts, and only through the exact `plan_id`.
   - Gray Areas: Identify ambiguities, missing scope, decision blockers.
   - Complexity (intent-based default: skip full classification for clear intents)
@@ -97,6 +98,7 @@ Routing matrix:
 - continue_plan + no feedback → load only the exact plan → Phase 3
 - continue_plan + feedback → load only the exact plan → Phase 2
 - new_task → create fresh plan/context → Phase 2
+- extend + named `plan_id` → fresh plan with imported context → Phase 2
 
 ### Phase 2: Planning
 
