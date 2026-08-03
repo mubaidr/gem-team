@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.96.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.95.0...gem-team-v1.96.0) (2026-08-03)
+
+
+### 🧹 Housekeeping
+
+* add extend support for named plan_id in orchestrator and clarify derive step in planner ([3559550](https://github.com/mubaidr/gem-team/commit/3559550be0512e542f264a1092e7def04cf4cbab))
+* clarify surgical edit rule in agent documentation ([fc24d85](https://github.com/mubaidr/gem-team/commit/fc24d85807971210fd9a7a5f41369d67ca1ad0c9))
+* remove pattern_seen_before condition for HIGH skill creation ([4231da1](https://github.com/mubaidr/gem-team/commit/4231da11e4b85549f49e9ade98f42c2c1ac74711))
+* skip gem-researcher for bug-fix/debug tasks and use gem-debugger instead ([2478694](https://github.com/mubaidr/gem-team/commit/2478694dd23ba9ff6a1b830a39f8ec1f27abfa8b))
+* update gem-orchestrator agent documentation wording and remove max_searches, max_files_to_read, max_depth fields from gem-researcher ([79ec6e0](https://github.com/mubaidr/gem-team/commit/79ec6e0281a24f2c2528807b847e65cf0b56d9fa))
+
 ## [1.95.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.94.0...gem-team-v1.95.0) (2026-08-03)
 
 
