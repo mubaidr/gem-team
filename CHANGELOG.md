@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.95.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.94.0...gem-team-v1.95.0) (2026-08-03)
+
+
+### 🧹 Housekeeping
+
+* add baseline and replan guardrails to orchestrator and planner agents and update workflow documentation ([be0499d](https://github.com/mubaidr/gem-team/commit/be0499df79abfc4c4c6eeec2b68e2c5942e564df))
+
 ## [1.94.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.93.0...gem-team-v1.94.0) (2026-08-03)
 
 
