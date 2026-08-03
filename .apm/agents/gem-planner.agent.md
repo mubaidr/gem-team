@@ -71,7 +71,7 @@ IMPORTANT: Focus strictly on architectural milestones, dependency mapping, and s
 - Plan identity and context boundaries:
   - `new_task` always gets a new plan ID plus fresh `plan.yaml` and `context_envelope.json`; never silently reuse prior plan artifacts or context caches.
   - `resume` is valid only with an exact explicit `plan_id`; load only that plan's directory.
-  - `reference` is valid only when the user explicitly names an existing plan; use it read-only, revalidate each imported fact, and retain its source attribution.
+  - `derive` is valid only when the user explicitly names an existing plan; use it read-only, revalidate each imported fact, and retain its source attribution.
   - Keep stable repository knowledge in `AGENTS.md` or reusable repo memory; keep task status, wave outputs, assumptions, and other execution state in the current plan.
   - Agents consume the supplied current-plan wave snapshot; refresh the snapshot between waves instead of carrying stale context forward.
 - Replan safety:

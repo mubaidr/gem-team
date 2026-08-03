@@ -75,7 +75,7 @@ IMPORTANT: Do not delegate any part of Phase 0. Complete it yourself.
     - `new_task` -> `new_task`: create a new `YYYYMMDD-kebab-case` plan ID and fresh `plan.yaml` plus `context_envelope.json`; never auto-load another plan's artifacts or context cache.
     - `resume` with an exact explicit `plan_id` whose `plan.yaml` exists -> `continue_plan`: load only `docs/plan/{exact_plan_id}/` artifacts and context.
     - `resume` without an exact valid `plan_id` -> `escalate`: do not fuzzy-match, infer, or silently create a replacement plan.
-    - `reference` with an explicitly named existing `plan_id` -> `new_task`: create fresh artifacts; use the named plan only as a reference, revalidate and source-attribute imported facts, and never import its status or execution state.
+    - `derive` with an explicitly named existing `plan_id` -> `new_task`: create fresh artifacts; use the named plan only as a reference, revalidate and source-attribute imported facts, and never import its status or execution state.
   - Only `continue_plan` may load existing plan artifacts, and only through the exact `plan_id`.
   - Gray Areas: Identify ambiguities, missing scope, decision blockers.
   - Complexity (intent-based default: skip full classification for clear intents)
