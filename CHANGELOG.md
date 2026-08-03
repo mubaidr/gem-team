@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.97.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.96.0...gem-team-v1.97.0) (2026-08-03)
+
+
+### 🧹 Housekeeping
+
+* move plan-state rules after Phase 2 and remove duplicate continue_plan restriction in .apm/agents/gem-orchestrator.agent.md ([5105346](https://github.com/mubaidr/gem-team/commit/51053469474ff0ba89f6938486e905fe15740b83))
+* update orchestrator agent documentation to forbid loading other plan artifacts ([c7f0ee5](https://github.com/mubaidr/gem-team/commit/c7f0ee57bc4d0d38c6dae2148d35bb5f7fad3c0a))
+
 ## [1.96.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.95.0...gem-team-v1.96.0) (2026-08-03)
 
 
