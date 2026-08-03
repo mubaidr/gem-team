@@ -71,14 +71,14 @@ IMPORTANT: Do not delegate any part of Phase 0. Complete it yourself.
   - Read all provided external/error/context refs.
   - Load user config: Read `.gem-team.yaml` if present.
   - Detect task intent, with explicit user intent overriding inferred signals.
-  - Plan-state rules (explicit intent wins; IDs are exact strings):
+  - Plan-state rules (explicit intent wins):
     - `new_task` -> `new_task`: create a new `YYYYMMDD-kebab-case` plan ID and fresh `plan.yaml` plus `context_envelope.json`; never auto-load another plan's artifacts or context cache.
     - `resume` with an exact explicit `plan_id` whose `plan.yaml` exists -> `continue_plan`: load only `docs/plan/{exact_plan_id}/` artifacts and context.
     - `resume` without an exact valid `plan_id` -> `escalate`: do not fuzzy-match, infer, or silently create a replacement plan.
     - `derive` with an explicitly named existing `plan_id` -> `new_task`: create fresh artifacts; use the named plan only as a reference, revalidate and source-attribute imported facts, and never import its status or execution state.
     - `extend` with an explicitly named existing `plan_id` -> `new_task`: create fresh artifacts; use the named plan as an extension baseline, revalidate and source-attribute imported facts, and never import its execution state.
   - Only `continue_plan` may load existing plan artifacts, and only through the exact `plan_id`.
-  - Gray Areas: Identify ambiguities, missing scope, decision blockers.
+  - Gray Areas (skip for bug-fix/debug/issue/root cause etc): Identify ambiguities, missing scope, decision blockers if needed.
   - Complexity (intent-based default: skip full classification for clear intents)
     - Intent default: If detected intent is `bug-fix`/`debug` → LOW, `known-fix`/`docs`/`config` → TRIVIAL, `research`/`explore` → LOW. Explicit user qualifier overrides (e.g. "this is HIGH risk" or "complex refactor") always wins.
     - Full classification (run only if no intent match):
@@ -103,11 +103,11 @@ Routing matrix:
 ### Phase 2: Planning
 
 - Complexity=TRIVIAL/LOW:
-  - Create an minimal ephemeral isolated orchestration plan with tasks, deps, wave, status, assignments, and optional `conflicts_with`.
+  - Create an minimal ephemeral orchestration plan with tasks, deps, wave, status, assignments, and optional `conflicts_with`.
   - Initialize immutable `baseline.objective` and `baseline.acceptance_criteria`, plus `plan_lineage` with
     `revision: 0`, `replan_count: 0`, and `max_replans: 2`.
   - For every `new_task`, create fresh `plan.yaml` and `context_envelope.json`; never borrow another plan's files or context cache.
-  - If the objective is bug-fix/debug/issue: assign `gem-debugger` for diagnosis (wave 1) and `gem-implementer` for the fix (wave 2). The plan MUST include `debugger_diagnosis` as a dependency handoff from wave 1 to wave 2.
+  - If the objective is bug-fix/debug/issue/root cause etc: assign `gem-debugger` for diagnosis (wave 1) and `gem-implementer` for the fix (wave 2). The plan MUST include `debugger_diagnosis` as a dependency handoff from wave 1 to wave 2.
   - Goto Phase 3.
 - Complexity=MEDIUM/HIGH:
   - Delegate to `gem-planner` with `task_clarifications`, relevant context and `config_snapshot`.
@@ -232,9 +232,6 @@ agent_input_reference:
         - focus_area
         - research_questions
         - exploration_mode
-        - max_searches
-        - max_files_to_read
-        - max_depth
         - constraints
       context_snapshot_fields:
         - tech_stack
