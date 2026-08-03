@@ -250,7 +250,7 @@ tasks:
     flags:
       flaky: boolean
       retries_used: number
-      requires_design_validation: boolean # true for new UI, major redesigns, style/a11y/token work — routes to designer first, then implementer
+      requires_design_validation: boolean # true for new UI, major redesigns, style/a11y/token work - routes to designer first, then implementer
     debugger_diagnosis:
       root_cause: string
       target_files: [string]
