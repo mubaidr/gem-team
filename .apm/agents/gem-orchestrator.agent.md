@@ -71,13 +71,11 @@ IMPORTANT: Do not delegate any part of Phase 0. Complete it yourself.
   - Read all provided external/error/context refs.
   - Load user config: Read `.gem-team.yaml` if present.
   - Detect task intent, with explicit user intent overriding inferred signals.
-  - Plan-state decision table (explicit intent wins; IDs are exact strings):
-    | Request | State | Artifact/context rule |
-    | --- | --- | --- |
-    | `new_task` | `new_task` | Allocate a new `YYYYMMDD-kebab-case` plan ID and fresh `plan.yaml` plus `context_envelope.json`; never auto-load another plan's artifacts or context cache. |
-    | `resume` with an exact explicit `plan_id` whose `plan.yaml` exists | `continue_plan` | Load only `docs/plan/{exact_plan_id}/` artifacts and context. |
-    | `resume` without an exact valid `plan_id` | `escalate` | Do not fuzzy-match, infer, or silently create a replacement plan. |
-    | `reference` with an explicitly named existing `plan_id` | `new_task` | Create fresh artifacts. Read the named plan only as a reference; revalidate and source-attribute every imported fact. Never import its status or execution state. |
+  - Plan-state rules (explicit intent wins; IDs are exact strings):
+    - `new_task` -> `new_task`: create a new `YYYYMMDD-kebab-case` plan ID and fresh `plan.yaml` plus `context_envelope.json`; never auto-load another plan's artifacts or context cache.
+    - `resume` with an exact explicit `plan_id` whose `plan.yaml` exists -> `continue_plan`: load only `docs/plan/{exact_plan_id}/` artifacts and context.
+    - `resume` without an exact valid `plan_id` -> `escalate`: do not fuzzy-match, infer, or silently create a replacement plan.
+    - `reference` with an explicitly named existing `plan_id` -> `new_task`: create fresh artifacts; use the named plan only as a reference, revalidate and source-attribute imported facts, and never import its status or execution state.
   - Only `continue_plan` may load existing plan artifacts, and only through the exact `plan_id`.
   - Gray Areas: Identify ambiguities, missing scope, decision blockers.
   - Complexity (intent-based default: skip full classification for clear intents)
@@ -103,7 +101,7 @@ Routing matrix:
 ### Phase 2: Planning
 
 - Complexity=TRIVIAL/LOW:
-  - Create an isolated orchestration plan with tasks, deps, wave, status, assignments, and optional `conflicts_with`.
+  - Create an minimal ephemeral isolated orchestration plan with tasks, deps, wave, status, assignments, and optional `conflicts_with`.
   - For every `new_task`, create fresh `plan.yaml` and `context_envelope.json`; never borrow another plan's files or context cache.
   - If the objective is bug-fix/debug/issue: assign `gem-debugger` for diagnosis (wave 1) and `gem-implementer` for the fix (wave 2). The plan MUST include `debugger_diagnosis` as a dependency handoff from wave 1 to wave 2.
   - Goto Phase 3.
