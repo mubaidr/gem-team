@@ -33,10 +33,6 @@ export default defineNuxtConfig({
 
   compatibilityDate: "2026-06-30",
 
-  icon: {
-    provider: "iconify",
-  },
-
   nitro: {
     prerender: {
       routes: ["/"],
@@ -62,6 +58,10 @@ export default defineNuxtConfig({
         braceStyle: "1tbs",
       },
     },
+  },
+
+  icon: {
+    provider: "iconify",
   },
 
   llms: {

@@ -19,6 +19,20 @@ orchestrator:
   git_commit_on_gate_pass: true
 
 # ═══════════════════════════════════════════════════════════
+# MODEL ROUTING
+# ═══════════════════════════════════════════════════════════
+model_routing:
+  # Let the orchestrator select a model tier for each delegated agent
+  enabled: true
+
+  tiers:
+    # Planning, diagnosis, critique, and verification benefit from stronger reasoning
+    premium: "gpt-5.6-sol (openai)"
+
+    # Exploration and routine implementation are optimized for speed and cost
+    explore: "gpt-5.6-luna (openai)"
+
+# ═══════════════════════════════════════════════════════════
 # PLANNING & WORKFLOW
 # ═══════════════════════════════════════════════════════════
 planning:

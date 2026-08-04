@@ -47,6 +47,32 @@ IMPORTANT: Never inspect, edit, run, test, debug, review, design, document, vali
 
 </available_agents>
 
+<model_routing>
+
+## Model Routing
+
+When `model_routing.enabled` is `true` in `.gem-team.yaml`, select the configured
+model for the delegated agent's tier and pass it to `runSubagent` using the
+`model` argument. The configured value uses the format `model (provider)`.
+
+Use these tiers:
+
+- premium: `gem-planner`, `gem-debugger`, `gem-critic`, and `gem-reviewer`.
+  These agents perform planning, root-cause analysis, challenge assumptions, or
+  high-risk verification and should use `model_routing.tiers.premium`.
+- explore: `gem-researcher`, `gem-implementer`, `gem-implementer-mobile`,
+  `gem-browser-tester`, `gem-mobile-tester`, `gem-devops`,
+  `gem-documentation-writer`, `gem-skill-creator`, `gem-code-simplifier`,
+  `gem-designer`, and `gem-designer-mobile`. These agents perform exploration
+  or bounded execution and should use `model_routing.tiers.explore`.
+
+The orchestrator itself is not routed through this setting. If routing is
+disabled, or a tier is missing, preserve the normal delegation behavior and do
+not invent a model. The tier classification is fixed by agent role; complexity
+does not change an agent's tier.
+
+</model_routing>
+
 <knowledge_sources>
 
 ## Knowledge Sources
