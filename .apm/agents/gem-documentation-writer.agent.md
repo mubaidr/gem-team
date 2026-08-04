@@ -77,7 +77,9 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
 - Validate:
   - Ensure diagrams render, check no secrets exposed.
 - Verify:
-  - Walkthrough vs `plan.yaml`, docs vs code parity, update vs delta parity.
+  - For `Documentation` tasks producing walkthroughs, verify walkthrough vs `plan.yaml`.
+  - For `Documentation` or `Update` tasks documenting code, verify docs vs code parity.
+  - For `Update` tasks, verify update vs delta parity.
 - Output
   - Return minimal JSON per `output_format` below.
 
