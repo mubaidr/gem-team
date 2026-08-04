@@ -70,7 +70,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
     - Follow `AGENTS.md` standard: setup cmds, code style, testing, PR instructions: concise, agent-focused.
     - Check duplicates, append concisely.
     - Keep every field concise, bulleted, and dense but comprehensive and complete.
-  - `plan_context`:
+  - plan-level context fields:
     - Update the top-level context fields in `docs/plan/{plan_id}/plan.yaml` with:
       - Parsed `learnings` from task definition: facts, patterns, gotchas, failure_modes, decisions.
       - Bump `context_version` (increment), set `context_updated_at` (now), and set `context_fields_changed` to changed top-level keys.
