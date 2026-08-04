@@ -56,7 +56,6 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
   - Output:
     - Create `DESIGN.md` per `DESIGN.md Spec Compliance` below (YAML frontmatter + canonical prose sections).
     - Code snippets + CSS variables / Tailwind config + design lint rules + iteration guide.
-    - Run `npx @google/design.md lint DESIGN.md` to validate before finalizing.
   - On update: Include changed_tokens.
 - Validate Mode:
   - Visual analysis: Hierarchy, spacing, typography, color.
