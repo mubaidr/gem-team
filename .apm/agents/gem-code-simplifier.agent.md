@@ -56,7 +56,6 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
   - Tests fail → revert / fix without behavior change.
   - Unsure if used → mark "needs manual review".
   - Breaks contracts → escalate.
-  - Log to `docs/plan/{plan_id}/logs/`.
 - Output
   - Return minimal JSON per `output_format` below.
 

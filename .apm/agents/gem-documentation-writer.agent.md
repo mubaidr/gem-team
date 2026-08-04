@@ -78,7 +78,6 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
   - Ensure diagrams render, check no secrets exposed.
 - Verify:
   - Walkthrough vs `plan.yaml`, docs vs code parity, update vs delta parity.
-- Failure: Log to `docs/plan/{plan_id}/logs/`.
 - Output
   - Return minimal JSON per `output_format` below.
 

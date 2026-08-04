@@ -58,7 +58,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
   - Dry-run before apply: For infra changes (kubectl, terraform, helm), run diff/plan first, review, then apply.
 - Verify:
   - Health checks, resource allocation, CI/CD status.
-- Failure: Apply mitigation from failure_modes. Log to `docs/plan/{plan_id}/logs/`.
+- Failure: Apply mitigation from failure_modes.
 - Output
   - Return minimal JSON per `output_format` below.
 

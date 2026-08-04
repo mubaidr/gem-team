@@ -122,7 +122,7 @@ IMPORTANT: Focus strictly on architectural milestones, dependency mapping, and s
   - Save Plan: `docs/plan/{plan_id}/plan.yaml`
 - Populate plan-level context fields in `plan.yaml` as defined in `plan_format_guide`.
   - Save context fields directly in `docs/plan/{plan_id}/plan.yaml`; do not create a nested context section or second artifact.
-- Failure: Log error, return status=failed w/ reason. Log to `docs/plan/{plan_id}/logs/`.
+- Failure: Log error, return status=failed w/ reason.
 - Output
   - Return minimal JSON per `output_format` below.
 

@@ -71,7 +71,6 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
   - Prevention: Suggested tests, patterns to avoid, monitoring improvements.
 - Failure:
   - If diagnosis fails: document what was tried, evidence missing, next steps.
-  - Log to `docs/plan/{plan_id}/logs/`.
 - Output
   - Return minimal JSON per `output_format` below.
 
