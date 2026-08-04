@@ -137,7 +137,7 @@ Routing matrix:
     - Complexity=HIGH or `planning.enable_critic_for` satisfies:
       - In parallel, delegate to `gem-critic(plan)`, only if: High-risk signal exists: `architecture`, `contract_change`, `breaking_change`, `api_change`, `schema_change`, `auth_change`, `data_flow_change`, `migration`, `security_sensitive`, or `cross_domain_impact`.
   - If validation fails:
-    - Failed + replanable → apply the bounded replan contract below, then delegate to `gem-planner` with findings.
+    - Failed + replanable → apply the bounded replan guardrails below, then delegate to `gem-planner` with findings.
     - Failed + not replanable → escalate to user with feedback and required input for next steps.
 
 ### Phase 3: Delegated Execution
@@ -496,7 +496,7 @@ When a failure occurs, classify and apply:
 
 - transient → retry 3×, then escalate
 - fixable → debugger → implementer → re-verify
-- needs_replan → planner to revise, continue
+- needs_replan → planner to revise via bounded replan guardrails, continue
 - escalate → mark blocked, escalate to user
 - flaky → log, mark completed
 - regression / new_failure → debugger → implementer → re-verify
