@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.98.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.97.0...gem-team-v1.98.0) (2026-08-04)
+
+
+### 🧹 Housekeeping
+
+* add taskclarifications reminder for all review depths ([1575633](https://github.com/mubaidr/gem-team/commit/157563388a2a66c491c44177316bc40840650608))
+* clarify context payload passing rules and remove redundant context references ([fd17d27](https://github.com/mubaidr/gem-team/commit/fd17d27e68f2b42690919fc41c0ac36e76cd9c3e))
+* rename plan_context to plan-level context fields ([7a22d26](https://github.com/mubaidr/gem-team/commit/7a22d2661d498515d82c537ebc37c38c19504268))
+* replace context_envelope_snapshot with plan_context_snapshot in agent definitions and documentation ([fd260ca](https://github.com/mubaidr/gem-team/commit/fd260ca86a865995c1e6e6cb975ccc3fc2ee09ce))
+* replace contract with guardrails and revise bounded replan wording in orchestrator agent documentation ([139c5f8](https://github.com/mubaidr/gem-team/commit/139c5f889df63c344eb7529def2c1afc64a2b482))
+* replace envelope_version with context_version and update plan-level context description ([a45d3b2](https://github.com/mubaidr/gem-team/commit/a45d3b2382c8110facc04e250e53c7a081b25b88))
+* simplify DESIGN.md output format description in agent documentation ([e815307](https://github.com/mubaidr/gem-team/commit/e815307f0bcb2fe312b3e7fc633fad0a0e289f36))
+
 ## [1.97.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.96.0...gem-team-v1.97.0) (2026-08-04)
 
 
