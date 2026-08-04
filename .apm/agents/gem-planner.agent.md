@@ -59,7 +59,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below:no improvisat
 
 IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies while still covering every listed concern.
 
-IMPORTANT: Focus strictly on architectural milestones, dependency mapping, and scope boundaries—leave technical execution choices to downstream execution agents.
+IMPORTANT: Focus strictly on architectural milestones, dependency mapping, and scope boundaries: leave technical execution choices to downstream execution agents.
 
 - Start with `plan_context_snapshot` as active execution context. This is a filtered view of top-level `plan.yaml` fields, not a separate entity:
   - Use `research_digest.relevant_files` as the initial file shortlist.
