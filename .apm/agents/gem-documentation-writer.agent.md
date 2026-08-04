@@ -97,7 +97,7 @@ JSON only. Omit nulls/empties/zeros. Prose fields MUST use dense bullet format. 
   "fail": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
   "created": "number",
   "updated": "number",
-  "envelope_version": "number",
+  "context_version": "number",
   "parity_check": "passed | failed | partial",
   "learn": [{ "text": "string", "confidence": "0.0-1.0" }]
 }
