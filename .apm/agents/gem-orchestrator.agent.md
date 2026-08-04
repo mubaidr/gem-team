@@ -176,8 +176,7 @@ Execute all unblocked waves/tasks without approval pauses. Follow the branching 
   - Delegate exclusively to the subagent specified by `task.agent`, using `agent_input_reference`. Concurrency limit = `orchestrator.max_concurrent_agents` if configured, otherwise 2. Never invoke generic, fallback or inferred subagents.
   - Skip `gem-researcher` for bug-fix/debug tasks; use `gem-debugger` instead.
   - Pass relevant settings from loaded config.
-  - Include the target agent's `plan_context_snapshot` from the current plan-level fields in `agent_input_reference`. Skip irrelevant sections.
-    The resulting `plan_context_snapshot` is the filtered view of top-level `plan.yaml` fields; do not pass a separate context object or artifact.
+  - Include the context payload per `context_passing_rule`, using only the target agent's declared `plan_context_snapshot` fields from `agent_input_reference`; skip irrelevant sections. Never pass a separate context object or artifact.
 - Integration Gate:
   - Complexity=HIGH: delegate to `gem-reviewer(wave)` for integration check after every wave.
   - Complexity=MEDIUM: delegate to `gem-reviewer(wave)` only when integration risk exists:
@@ -234,9 +233,9 @@ When delegating to subagents, always follow this format for the `prompt`. Also `
 ```yaml
 agent_input_reference:
   context_passing_rule:
-    TRIVIAL: pass only direct task instructions
+    TRIVIAL: pass only direct task instructions (no context payload)
     LOW: pass inline_context_snapshot
-    MEDIUM_HIGH: pass plan_context_snapshot filtered to agent's plan_context_snapshot only
+    MEDIUM_HIGH: pass plan_context_snapshot filtered to the target agent's declared fields below
     default: pass the smallest relevant subset required by the target agent
 
   base_input:
@@ -244,7 +243,8 @@ agent_input_reference:
     objective: string
     complexity: TRIVIAL | LOW | MEDIUM | HIGH
     task_definition: object
-    context_snapshot: object # inline_context_snapshot for LOW; plan_context_snapshot for MEDIUM/HIGH
+    inline_context_snapshot: object # LOW only: ephemeral task-scoped context, no plan.yaml fields
+    plan_context_snapshot: object # MEDIUM/HIGH only: filtered view of top-level plan fields for this agent
     config_snapshot: object # relevant settings from .gem-team.yaml
 
   agents:
