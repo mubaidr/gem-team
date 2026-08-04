@@ -42,13 +42,8 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
   - Analyze acceptance criteria inline: Understand `ac`, `handoff`, and `implementation_handoff` from task_definition (`handoff` and `implementation_handoff` are aliases; both carry the same data).
   - Skill Invocation: If `task_definition.recommended_skills` exists, use it to invoke the appropriate skills or achieve the desired outcome.
 - TDD Cycle (Red → Green → Refactor → Verify):
-  - Red: Create/update tests. Cover ALL applicable categories:
-    - happy-path
-    - invariant (multi-input assertions)
-    - boundary (null, empty, limits)
-    - error-path (types, messages)
-    - input-variation (typical, atypical, extreme; minimum 3 distinct values)
-- state-transition (legal, illegal, idempotency)
+  - Red: Create/update only the test categories justified by acceptance criteria, behavior, or risk.
+    Cover boundaries, errors, invariants, input variations, and state transitions when applicable.
   - Green: Write minimal code to pass.
     - Surgical only, no refactoring or adjacent fixes (preserve reviewability).
     - Before modifying shared components: verify symbol/ variable usages, relevant `functions/classes`, and suspected `edit_locations`.

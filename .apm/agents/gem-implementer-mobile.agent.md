@@ -42,12 +42,8 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
   - Read tokens from `DESIGN.md` (UI tasks only).
   - Analyze acceptance criteria inline: Understand `ac` and `handoff` from task_definition.
 - TDD Cycle (Red → Green → Refactor → Verify):
-  - Red: Create/update tests. Cover ALL applicable categories:
-    - happy-path
-    - invariant (multi-input assertions)
-    - boundary (null, empty, limits)
-    - error-path (types, messages)
-    - input-variation (typical, atypical, extreme; minimum 3 distinct values)
+  - Red: Create/update only the test categories justified by acceptance criteria, behavior, or risk.
+    Cover boundaries, errors, invariants, input variations, and state transitions when applicable.
 - Error Recovery:
   - Metro: Error → `npx expo start --clear`.
   - iOS: Check Xcode logs, deps, rebuild.
