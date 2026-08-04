@@ -235,8 +235,7 @@ agent_input_reference:
   context_passing_rule:
     TRIVIAL: pass only direct task instructions (no context payload)
     LOW: pass inline_context_snapshot
-    MEDIUM_HIGH: pass plan_context_snapshot filtered to the target agent's declared fields below
-    default: pass the smallest relevant subset required by the target agent
+    MEDIUM_HIGH: pass plan_context_snapshot filtered
 
   base_input:
     plan_id: string
@@ -255,12 +254,6 @@ agent_input_reference:
         - research_questions
         - exploration_mode
         - constraints
-      plan_context_snapshot:
-        - tech_stack
-        - architecture_snapshot
-        - constraints
-        - research_digest
-        - reuse_notes
 
     gem-planner:
       extends: base_input
@@ -268,12 +261,6 @@ agent_input_reference:
         - task_clarifications
         - relevant_context
         - planning_scope
-      plan_context_snapshot:
-        - constraints
-        - conventions
-        - prior_decisions
-        - architecture_snapshot
-        - research_digest
 
     gem-implementer:
       extends: base_input
@@ -282,11 +269,6 @@ agent_input_reference:
         - test_coverage
         - debugger_diagnosis
         - implementation_handoff
-      plan_context_snapshot:
-        - tech_stack
-        - constraints
-        - reuse_notes
-        - research_digest
 
     gem-implementer-mobile:
       extends: base_input
@@ -294,11 +276,6 @@ agent_input_reference:
         - platforms
         - debugger_diagnosis
         - implementation_handoff
-      plan_context_snapshot:
-        - tech_stack
-        - constraints
-        - reuse_notes
-        - research_digest
 
     gem-reviewer:
       extends: base_input
@@ -306,9 +283,6 @@ agent_input_reference:
         - review_scope
         - review_depth # lightweight for MEDIUM plans (wave correctness + acceptance criteria only); full for HIGH plans (all checks)
         - review_security_sensitive
-      plan_context_snapshot:
-        - constraints
-        - plan_summary
 
     gem-debugger:
       extends: base_input
@@ -316,19 +290,12 @@ agent_input_reference:
         - error_context
         - debugger_diagnosis
         - implementation_handoff
-      plan_context_snapshot:
-        - constraints
-        - reuse_notes
-        - research_digest
 
     gem-critic:
       extends: base_input
       task_definition_fields:
         - target
         - context
-      plan_context_snapshot:
-        - constraints
-        - plan_summary
 
     gem-code-simplifier:
       extends: base_input
@@ -337,10 +304,6 @@ agent_input_reference:
         - targets
         - focus
         - constraints
-      plan_context_snapshot:
-        - constraints
-        - tech_stack
-        - reuse_notes
 
     gem-browser-tester:
       extends: base_input
@@ -350,10 +313,6 @@ agent_input_reference:
         - fixtures
         - visual_regression
         - contracts
-      plan_context_snapshot:
-        - tech_stack
-        - constraints
-        - research_digest
 
     gem-mobile-tester:
       extends: base_input
@@ -362,10 +321,6 @@ agent_input_reference:
         - test_framework
         - test_suite
         - device_farm
-      plan_context_snapshot:
-        - tech_stack
-        - constraints
-        - research_digest
 
     gem-devops:
       extends: base_input
@@ -373,9 +328,6 @@ agent_input_reference:
         - environment
         - requires_approval
         - devops_security_sensitive
-      plan_context_snapshot:
-        - constraints
-        - tech_stack
 
     gem-documentation-writer:
       extends: base_input
@@ -386,10 +338,6 @@ agent_input_reference:
         - action
         - learnings
         - findings
-      plan_context_snapshot:
-        - constraints
-        - plan_summary
-        - conventions
 
     gem-designer:
       extends: base_input
@@ -399,10 +347,6 @@ agent_input_reference:
         - target
         - context
         - constraints
-      plan_context_snapshot:
-        - constraints
-        - architecture_snapshot
-        - tech_stack
 
     gem-designer-mobile:
       extends: base_input
@@ -412,19 +356,12 @@ agent_input_reference:
         - target
         - context
         - constraints
-      plan_context_snapshot:
-        - constraints
-        - architecture_snapshot
-        - tech_stack
 
     gem-skill-creator:
       extends: base_input
       task_definition_fields:
         - patterns
         - source_task_id
-      plan_context_snapshot:
-        - conventions
-        - reuse_notes
 ```
 
 </agent_input_reference>

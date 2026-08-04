@@ -44,7 +44,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
     - `quality.visual_diff_threshold` → set diff sensitivity
     - `quality.a11y_audit_level` → determine audit depth (none/basic/full)
     - `testing.screenshot_on_failure` → capture evidence on failures
-- Pre-flight: Navigate to target. Verify page loads, console clean, network idle. If any fails → classify as transient, do not run scenarios.
+- Pre-flight: Navigate to target. Verify page loads. Collect console and network diagnostics during finalization; require network idle before scenarios only when the flow's acceptance criteria depend on settled network state.
 - Setup: Create fixtures per task_definition.fixtures.
 - Execute: For each scenario:
   - Open: Navigate to target page.
