@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.99.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.98.0...gem-team-v1.99.0) (2026-08-04)
+
+
+### 🧹 Housekeeping
+
+* add agent workflow audit plan and remove redundant failure logging from agent definitions ([5a31cab](https://github.com/mubaidr/gem-team/commit/5a31cab26dcc6129afa9baa44656b8a6d381c76f))
+* refine verification steps to separately validate walkthrough, docs, and update parity ([1f42e31](https://github.com/mubaidr/gem-team/commit/1f42e310e3ef84fce86e3576301fa25b63a88a2a))
+* remove lint validation step from DESIGN.md creation workflow ([b32e107](https://github.com/mubaidr/gem-team/commit/b32e107861c1a2d7ef22091c290431edcf860a98))
+* streamline TDD Red step description in gem-implementer agents ([7b62a0e](https://github.com/mubaidr/gem-team/commit/7b62a0e3e86a0dc2243ce42a89bc8cf865b0ad91))
+* update gem-mobile-tester agent with applicability gate and workflow bullet, and fix planner agent workflow punctuation ([9cc0f20](https://github.com/mubaidr/gem-team/commit/9cc0f20101ef442aa32e218f0116dbaaf0469e09))
+* update pre‑flight step in gem-browser-tester agent and remove redundant plan_context_snapshot fields from orchestrator agent definitions ([db0cd6c](https://github.com/mubaidr/gem-team/commit/db0cd6cef2faf9a5deb94ba5022052777fbaf2cd))
+
 ## [1.98.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.97.0...gem-team-v1.98.0) (2026-08-04)
 
 
