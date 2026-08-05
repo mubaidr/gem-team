@@ -209,6 +209,7 @@ Execute all unblocked waves/tasks without approval pauses. Follow the branching 
   - On replan, increment `context_version`, refresh `context_updated_at`, record changed context fields,
     invalidate stale wave snapshots, and revalidate completed tasks affected by changed dependencies or criteria.
 - Loop:
+  - Project state announcements: After each wave, announce the current project state. Use the compact Plan Status format.
   - Remaining unblocked waves/tasks → next wave.
   - Blocked or not replanable → escalate.
   - Scope grows → reclassify complexity and replan if needed.
