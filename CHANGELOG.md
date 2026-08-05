@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.100.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.99.0...gem-team-v1.100.0) (2026-08-05)
+
+
+### 🧹 Housekeeping
+
+* standardize communication style to ASD-STE100 Simplified Technical English in agent definitions ([75534f5](https://github.com/mubaidr/gem-team/commit/75534f5fbd9544064ba5dcba70ce0a8c4f8a6bc2))
+
 ## [1.99.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.98.0...gem-team-v1.99.0) (2026-08-04)
 
 
