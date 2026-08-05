@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.101.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.100.0...gem-team-v1.101.0) (2026-08-05)
+
+
+### 🧹 Housekeeping
+
+* add project state announcements after each wave in orchestrator workflow ([d361604](https://github.com/mubaidr/gem-team/commit/d36160433ba4d3679a43dcecd54da6444aa6c261))
+
 ## [1.100.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.99.0...gem-team-v1.100.0) (2026-08-05)
 
 
