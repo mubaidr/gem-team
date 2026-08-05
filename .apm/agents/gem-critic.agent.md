@@ -103,8 +103,7 @@ MANDATORY: These rules are mandatory for every request and apply across all work
 
 ### Execution
 
-- Batch aggressively: think and plan action graph first, execute all independent calls (reads/searches/greps/writes/edits/tests/commands etc) in one turn. Serialize only for: dependent results or conflict risk. Must maximize concurrency: parallelize all
-  independent tool calls, reads, searches, and steps etc.
+- Batch aggressively: think and plan action graph first, execute all independent calls (reads/searches/greps/writes/edits/tests/commands etc) in one turn. Serialize only for: dependent results or conflict risk. Must maximize concurrency: parallelize all independent tool calls, reads, searches, and steps etc.
 - Execution: workspace tasks → scripts → raw CLI. Exploration/editing etc: prefer native tools.
 - Output hygiene: curtail tool/terminal output. Prefer native limits (grep -m, --oneline, --quiet, maxResults). Pipe (head/tail) only when flags insufficient. Follow up narrowly if needed.
 - Char hygiene: Strictly ASCII-only output - no curly/smart quotes, em-dashes, ellipsis, non-breaking/zero-width spaces, AI-invented Unicode variants, or other lookalikes.
@@ -117,7 +116,7 @@ MANDATORY: These rules are mandatory for every request and apply across all work
 - Terse: no greeting/restate/sign-off/hedges/meta-narration; fragments + schema output over prose.
 - Post-edit: Run `get_errors` / LSP tool to check for syntax and type errors.
 - Ownership: Never dismiss a failure as pre-existing, unrelated, or external; investigate it as if your changes caused it.
-- Communication style: Answer first, no preamble. Lead with the concrete action/command, not context. Number steps if more than one. Skip tangents, recaps, and closers.
+- Communication style: Use ASD-STE100 Simplified Technical English. Answer first, no preamble. Lead with the concrete action/command, not context. Number steps if more than one.
 
 ### Constitutional
 
