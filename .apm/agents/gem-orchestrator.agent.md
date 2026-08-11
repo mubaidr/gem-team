@@ -301,7 +301,6 @@ agent_input_reference:
       extends: base_input
       task_definition_fields:
         - error_context
-        - debugger_diagnosis
         - handoff
 
     gem-critic:
