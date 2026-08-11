@@ -16,14 +16,14 @@ orchestrator:
 
   # Git commit wave output on integration gate pass
   # Clean audit trail per wave; skip if not desired
-  git_commit_on_gate_pass: true
+  git_commit_on_gate_pass: false
 
 # ═══════════════════════════════════════════════════════════
 # MODEL ROUTING
 # ═══════════════════════════════════════════════════════════
 model_routing:
   # Let the orchestrator select a model tier for each delegated agent
-  enabled: true
+  enabled: false
 
   tiers:
     # Planning, diagnosis, critique, and verification benefit from stronger reasoning
@@ -45,7 +45,7 @@ planning:
 # ═══════════════════════════════════════════════════════════
 quality:
   # Enable visual regression testing (screenshot comparison)
-  visual_regression_enabled: true
+  visual_regression_enabled: false
 
   # Screenshot difference threshold (higher = stricter)
   # 0.99 = very strict | 0.95 = balanced | 0.90 = lenient
@@ -53,7 +53,7 @@ quality:
 
   # Accessibility audit depth (used by gem-browser-tester)
   # none | basic | full
-  a11y_audit_level: basic
+  a11y_audit_level: none
 
 # ═══════════════════════════════════════════════════════════
 # DEVOPS & DEPLOYMENT

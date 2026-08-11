@@ -123,7 +123,7 @@ Routing matrix:
 ### Phase 2: Planning
 
 - Complexity=TRIVIAL/LOW:
-  - Create an minimal ephemeral orchestration plan with tasks, deps, wave, status, assignments, and optional `conflicts_with`.
+  - Create an minimal ephemeral orchestration task list with tasks, deps, wave, status, assignments, and optional `conflicts_with`.
   - Initialize immutable `baseline.objective` and `baseline.acceptance_criteria`, plus `plan_lineage` with
     `revision: 0`, `replan_count: 0`, and `max_replans: 2`.
   - If the objective is bug-fix/debug/issue/root cause etc: assign `gem-debugger` for diagnosis (wave 1) and `gem-implementer` for the fix (wave 2). The plan MUST pair the fix task as a dependency of the debugger task; the runtime `debugger_diagnosis` is forwarded by the orchestrator at execution.
