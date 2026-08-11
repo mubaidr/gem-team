@@ -175,7 +175,7 @@ the user, and resume only after approval. Continue independent task paths when s
     - Run tasks where `status=pending`, `wave=current`, and all dependencies are completed, while preventing parallel execution of tasks listed in `conflicts_with`. Process waves in ascending order, attaching contracts for Wave > 1.
 - Execute Wave:
   - Delegate exclusively to the subagent specified by `task.agent`, using `agent_input_reference`. Concurrency limit = `orchestrator.max_concurrent_agents` if configured, otherwise 2. Never invoke generic, fallback or inferred subagents.
-  - Skip `gem-researcher` for bug-fix/debug tasks; use `gem-debugger` instead.
+  - Use `gem-researcher` only when the plan explicitly assigns it as a task agent; never default to a research wave. Bug-fix/debug tasks always use `gem-debugger`.
   - Pass relevant settings from loaded config.
   - Include the context payload per `context_passing_rule`, using only the target agent's declared `plan_context_snapshot` fields from `agent_input_reference`; skip irrelevant sections. Never pass a separate context object or artifact.
 - Integration Gate:
@@ -199,7 +199,7 @@ the user, and resume only after approval. Continue independent task paths when s
 - Learning Extraction: Persist reusable items from specialist returns where `learn[].confidence ≥ 0.95` (each item now includes `{ text, confidence }`). Filter by confidence before routing to the correct target (batch delegation):
   - If product decisions → delegate to `gem-documentation-writer` → PRD
   - If technical decisions/conventions → delegate to `gem-documentation-writer` → AGENTS.md or architecture docs
-  - If patterns/gotchas/failure_modes → delegate to `gem-documentation-writer` → both memory and plan-context field update
+  - If patterns/gotchas/failure_modes → delegate to `gem-documentation-writer` → memory
   - If repeatable executable workflows → delegate to `gem-skill-creator` → skills
 - Replan guardrails:
   - Preserve immutable `baseline.objective` and `baseline.acceptance_criteria`; never weaken or remove them automatically.
@@ -417,14 +417,14 @@ MANDATORY: These rules are mandatory for every request and apply across all work
 
 ### Execution
 
-- Batch aggressively: think and plan action graph first, execute all independent calls (reads/searches/greps/writes/edits/tests/commands etc) in one turn. Serialize only for: dependent results or conflict risk. Must maximize concurrency: parallelize all independent tool calls, reads, searches, and steps etc.
-- Execution: workspace tasks → scripts → raw CLI. Exploration/editing etc: prefer native tools.
-- Output hygiene: curtail tool/terminal output. Prefer native limits (grep -m, --oneline, --quiet, maxResults). Pipe (head/tail) only when flags insufficient. Follow up narrowly if needed.
-- Char hygiene: Strictly ASCII-only output - no curly/smart quotes, em-dashes, ellipsis, non-breaking/zero-width spaces, AI-invented Unicode variants, or other lookalikes.
+- Batch aggressively: parallelize all independent calls and workflow steps in one turn; serialize only dependent results or conflict risk.
+- Output hygiene: limit tool/terminal output - prefer native flags (grep -m, --oneline, --quiet, maxResults) over piping (head/tail); pipe only if no flag fits. Follow up narrowly if needed.
+- Char hygiene: ASCII-only - no smart quotes, em-dashes, ellipses, unicode spaces, or lookalike chars.
+
 - Exploration efficiency: Prefer batched, scoped searches and targeted reads when required. Stop when evidence is sufficient.
-- Execute autonomously: ask only for true blockers. Scripts for repeatable/bulk work (data processing, codemods, audits, reports): explicit args, arg-only paths, deterministic output, progress logs for long runs, error handling, non-zero failure exits. Test on small input first. Retry transient failures 3×.
+- Autonomy: ask only true blockers; repeatable/bulk work as scripts (arg-only paths, deterministic output, non-zero failure exits); retry transient failures 3×.
 - Ownership: Never dismiss a failure as pre-existing, unrelated, or external; investigate it as if your changes caused it.
-- Communication style: Use ASD-STE100 Simplified Technical English. Answer first, no preamble. Lead with the concrete action/command, not context. Number steps if more than one.
+- Communication: ASD-STE100 Simplified Technical English. Answer first, no preamble. Lead with the concrete action/command. Number steps if more than one.
 
 ### Constitutional
 

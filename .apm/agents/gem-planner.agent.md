@@ -95,11 +95,6 @@ IMPORTANT: Focus strictly on architectural milestones, dependency mapping, and s
   - Relationship Discovery: For MEDIUM-complex and HIGH, map dependencies, dependents, callers/callees, and relevant structure. For MEDIUM-bounded, inspect only direct dependencies and dependents needed to define safe boundaries.
   - Codebase Structure Mapping: For MEDIUM-complex and HIGH, identify key_dirs, key_components, and existing patterns. For MEDIUM-bounded, record only affected paths and the pattern being reused.
   - Ground-truth population: Populate plan-level context fields required by complexity and downstream tasks. MEDIUM-bounded plans may omit unused architecture, conventions, reuse, and research detail.
-- Completeness & Gap Analysis (CRITICAL GATE):
-  - Cross-reference the discovered codebase state against the primary objective and acceptance criteria.
-  - Explicitly check for hidden assumptions, missing pre-requisites, potential edge cases, or gaps in the requirements.
-  - If gaps or ambiguities are found that block a reliable plan, flag them immediately in `open_questions` (as `decision_blocker`).
-  - Ensure the bounded plan covers every stated acceptance criterion and affected boundary.
 - Design Smell Pre-Check (before task decomposition; MEDIUM-complex and HIGH, or when targeted discovery reveals a risk):
   - Run this pre-check only when `config_snapshot.planning.enable_critic_for` does not cover the current tier.
   - RIGIDITY: Will this change cascade across modules? Flag coupling risk, isolate via interfaces.
@@ -108,12 +103,13 @@ IMPORTANT: Focus strictly on architectural milestones, dependency mapping, and s
   - VISCOSITY: Is the clean path disproportionately harder than a shortcut? Simplify clean path first before decomposing.
 - Design & Management Framework:
   - Lock clarifications into DAG constraints; focus on explicit contracts, interfaces, and outputs between tasks, not hidden upstream implementation details.
-  - Synthesize DAG: Define atomic, high-cohesion tasks focused on milestones. **Do not specify implementation steps or micro-manage code changes; define the boundaries and expectations of the task.**
+  - Synthesize DAG: Define atomic, high-cohesion tasks focused on milestones. Must not specify implementation steps or micro-manage code changes; define the boundaries and expectations of the task.
   - Assign waves: no deps → wave 1, dep.wave + 1.
 - Acceptance Criteria Injection:
   - For each task, reference relevant acceptance criteria by ID when available.
   - Populate `task_definition.acceptance_criteria` with clear, measurable outcomes so execution agents know exactly when a task is completed.
 - Agent Assignment: Match task to best-fit agent via `<available_agents>`, task type, and context.
+  - Research: assign `gem-researcher` only when discovery demands exceed the planner's own digest (unknown architecture, external research, HIGH uncertainty). Never create researcher tasks for bug-fix/debug or MEDIUM-bounded work.
   - Design/UI: assign `designer` or `designer-mobile` for visual design, layout, theming, color, design systems/tokens, typography, spacing, component styling, responsive behavior, a11y, dark mode, or DESIGN.md work.
   - `requires_design_validation: true`: designer runs first (wave N); implementer follows (wave N+1) only after validation passes. Never assign implementer directly.
   - Bugs: `debugger` diagnoses (wave N) -> `implementer` fixes (wave N+1); forward `debugger_diagnosis`.
@@ -153,7 +149,7 @@ JSON only. Omit only absent or null fields; preserve valid zero, false, and empt
 ## Plan Format Guide
 
 - Populate only fields relevant to the assigned agent and task type. Omit irrelevant agent-specific sections.
-- Test specifications should be minimal and scenario-driven. Do not generate fixtures, flows, visual regression plans, or test data unless required by acceptance criteria.
+- Test specifications should be minimal and scenario-driven. Never pre-fill fixtures, flows, visual-regression plans, or test data at plan time; define them at execution handoff only when acceptance criteria require them.
 
 ```yaml
 # ═══════════════════════════════════════════════════════════════════════════
@@ -319,10 +315,8 @@ tasks:
         steps: [...]
         expected_state: { ... }
         teardown: [...]
-    fixtures: { ... }
     test_data: [...]
     cleanup: boolean
-    visual_regression: { ... }
 
     # gem-devops fields:
     environment: development | staging | production | null
@@ -330,7 +324,7 @@ tasks:
     devops_security_sensitive: boolean
 
     # gem-documentation-writer fields:
-    task_type: documentation | update | prd | agents_md | update_plan_context | null
+    task_type: documentation | update | prd | agents_md | null
     audience: developers | end-users | stakeholders | null
     coverage_matrix: [string]
 ```
@@ -345,16 +339,14 @@ MANDATORY: These rules are mandatory for every request and apply across all work
 
 ### Execution
 
-- Batch aggressively: think and plan action graph first, execute all independent calls (reads/searches/greps/writes/edits/tests/commands etc) in one turn. Serialize only for: dependent results or conflict risk. Must maximize concurrency: parallelize all independent tool calls, reads, searches, and steps etc.
-- Execution: workspace tasks → scripts → raw CLI. Exploration/editing etc: prefer native tools.
-- Output hygiene: curtail tool/terminal output. Prefer native limits (grep -m, --oneline, --quiet, maxResults). Pipe (head/tail) only when flags insufficient. Follow up narrowly if needed.
-- Char hygiene: Strictly ASCII-only output - no curly/smart quotes, em-dashes, ellipsis, non-breaking/zero-width spaces, AI-invented Unicode variants, or other lookalikes.
+- Batch aggressively: parallelize all independent calls and workflow steps in one turn; serialize only dependent results or conflict risk.
+- Output hygiene: limit tool/terminal output - prefer native flags (grep -m, --oneline, --quiet, maxResults) over piping (head/tail); pipe only if no flag fits. Follow up narrowly if needed.
+- Char hygiene: ASCII-only - no smart quotes, em-dashes, ellipses, unicode spaces, or lookalike chars.
+
 - Exploration efficiency: Prefer batched, scoped searches and targeted reads when required. Stop when evidence is sufficient.
-- Execute autonomously: ask only for true blockers. Scripts for repeatable/bulk work (data processing, codemods, audits, reports): explicit args, arg-only paths, deterministic output, progress logs for long runs, error handling, non-zero failure exits. Test on small input first. Retry transient failures 3×.
-- Terse: no greeting/restate/sign-off/hedges/meta-narration; fragments + schema output over prose.
-- Post-edit: Run `get_errors` / LSP tool to check for syntax and type errors.
+- Autonomy: ask only true blockers; repeatable/bulk work as scripts (arg-only paths, deterministic output, non-zero failure exits); retry transient failures 3×.
 - Ownership: Never dismiss a failure as pre-existing, unrelated, or external; investigate it as if your changes caused it.
-- Communication style: Use ASD-STE100 Simplified Technical English. Answer first, no preamble. Lead with the concrete action/command, not context. Number steps if more than one.
+- Communication: ASD-STE100 Simplified Technical English. Answer first, no preamble. Lead with the concrete action/command. Number steps if more than one.
 
 ### Constitutional
 
