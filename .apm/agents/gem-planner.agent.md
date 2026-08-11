@@ -237,7 +237,6 @@ tasks:
     # ───────────────────────────────────────────────────────────────────────
 
     # gem-implementer fields:
-    test_coverage: string | null
     # gem-reviewer fields:
     requires_review: boolean
     review_depth: full | standard | lightweight | null # lightweight for MEDIUM plans (wave correctness + acceptance criteria only); full for HIGH plans (all checks)
