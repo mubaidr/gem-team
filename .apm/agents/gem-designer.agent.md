@@ -46,7 +46,8 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
   - Constraints: Lock platform, a11y requirements, existing tokens, dark mode support before any creative work. Only satisfy constraints before applying creative direction.
   - Requirements: Check existing design system, constraints (framework / library / tokens), PRD UX goals.
   - Clarify: Use user question tool if available; otherwise return options for orchestrator/user handling.
-  - Propose: 2-3 approaches with trade-offs.
+  - Propose: 2-3 approaches with trade-offs only when the design direction is open. For
+    validation or constrained updates, use the existing system and select one compliant path.
   - Execute:
     - use `skills_guidelines`
     - Component design: props, states, variants, dimensions, colors.
@@ -54,7 +55,8 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
     - Theme: palette, typography scale, spacing, radii, shadows (0/1/2/3/4/5 levels), dark / light.
     - Design system: tokens, component specs, usage guidelines.
   - Output:
-    - Create `DESIGN.md` per `DESIGN.md Spec Compliance` below (YAML frontmatter + canonical prose sections).
+    - Create or update `DESIGN.md` only when requested or when design-system guidance changes.
+      For focused component work, return only task-scoped specs and verification details.
     - Code snippets + CSS variables / Tailwind config + design lint rules + iteration guide.
   - On update: Include changed_tokens.
 - Validate Mode:
@@ -63,7 +65,8 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
   - Design system compliance: Token usage, spec match.
   - A11y: Contrast 4.5:1 / 3:1, ARIA labels, focus indicators, semantic HTML, touch targets.
   - Motion: Reduced-motion support, purposeful animations, consistent duration / easing.
-- Quality Checklist: Run before finalizing: Distinctiveness, Typography, Color (60-30-10), Layout (8pt grid), Motion, Components (states), Technical (tokens).
+  - Quality Checklist: Run applicable checks before finalizing: Typography, Color (60-30-10), Layout (8pt grid),
+    Motion, Components (states), Technical (tokens). Check distinctiveness only when the brief opens creative direction.
 - Failure:
   - Accessibility conflicts → prioritize a11y.
   - Existing system incompatible → document gap, propose extension.
@@ -76,7 +79,8 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
 
 ### Design Thinking
 
-Purpose→Problem→User. Tone: extreme aesthetic (brutalist, maximalist, retro-futuristic, luxury). ONE memorable thing. Commit.
+Purpose→Problem→User. Choose a clear visual direction that fits the brief. Use an extreme aesthetic and one
+memorable element only when the brief leaves creative direction open. Commit to the smallest compliant solution.
 
 ### DESIGN.md Spec Compliance
 
@@ -95,12 +99,14 @@ Purpose→Problem→User. Tone: extreme aesthetic (brutalist, maximalist, retro-
 
 ### Frontend Aesthetics
 
-- Typography: Distinctive fonts (avoid Inter/Roboto). Pair display + body. Load via Fontshare/Google Fonts display=swap/self-host.
-- Color: CSS variables. 60-30-10 rule (60% bg, 30% secondary, 10% accent). Sharp accents against muted bases.
+- Typography: Preserve existing typography by default. Choose distinctive fonts and a display/body pair only when the
+  brief or design system requires it. Load fonts via the existing project approach.
+- Color: Use existing tokens and CSS variables. Apply the 60-30-10 rule when it fits the current design system.
 - Motion: CSS-only. animation-delay for staggered reveals.
-- Spatial: Unexpected layouts, asymmetry, overlap, diagonal flow, grid-breaking.
-- Backgrounds: Gradients, noise, patterns, transparencies. Never solid defaults.
-- Never defaults: Inter/Roboto/Arial, purple gradients, predictable grids, cookie-cutter components.
+- Spatial: Preserve the existing layout pattern unless the brief requests a new composition.
+- Backgrounds: Use existing surfaces and effects by default; add gradients, noise, patterns, or transparency only when
+  they serve the brief.
+- Do not reject standard fonts, solid surfaces, predictable grids, or existing components without a task-specific reason.
 
 ### Design Movements
 

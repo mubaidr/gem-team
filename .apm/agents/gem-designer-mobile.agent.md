@@ -47,7 +47,8 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
   - Constraints: Lock platform, a11y requirements, existing tokens, dark mode support before any creative work. Only satisfy constraints before applying creative direction.
   - Requirements: Check existing design system, constraints (RN / Expo / Flutter), PRD UX goals.
   - Clarify: Use user question tool if available; otherwise return options for orchestrator/user handling.
-  - Propose: 2-3 approaches with trade-offs.
+  - Propose: 2-3 approaches with trade-offs only when the design direction is open. For
+    validation or constrained updates, use the existing system and select one compliant path.
   - Execute:
     - use `skills_guidelines`
     - Component design: props, states, platform variants, dimensions, touch targets.
@@ -55,8 +56,8 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
     - Theme: palette, typography, spacing 8pt, dark / light.
     - Design system: tokens, specs, platform variant guidelines.
   - Output:
-    - Create `DESIGN.md` per `DESIGN.md Spec Compliance` below (YAML frontmatter + canonical prose sections).
-    - Platform-specific specs + design lint rules + iteration guide.
+    - Create or update `DESIGN.md` only when requested or when design-system guidance changes.
+      For focused component work, return only task-scoped specs and verification details.
   - On update: Include changed_tokens.
 - Validate Mode:
   - Visual analysis: Hierarchy, spacing, typography, color.
@@ -69,7 +70,9 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
   - Design system compliance: Token usage, spec match.
   - A11y: Contrast 4.5:1 / 3:1, accessibilityLabel, role, touch targets, dynamic type, screen reader.
   - Gesture review: Conflicts, feedback, reduced-motion support.
-- Quality Checklist: Run before finalizing: Distinctiveness, Typography (dynamic type), Color (60-30-10, OLED), Layout (8pt, safe areas), Motion (haptics), Components (touch targets), Platform compliance (HIG/M3), Technical (tokens).
+  - Quality Checklist: Run applicable checks before finalizing: Typography (dynamic type), Color (60-30-10, OLED),
+    Layout (8pt, safe areas), Motion (haptics), Components (touch targets), Platform compliance (HIG/M3), Technical
+    (tokens). Check distinctiveness only when the brief opens creative direction.
 - Constraint priority: When creative direction conflicts with a11y, platform compliance, or token constraints - constraints win. Never sacrifice a11y or platform guidelines for aesthetics.
 - Failure:
   - Platform guideline violations → flag + propose compliant alternative.
@@ -87,7 +90,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
 
 - Purpose→Problem→Device.
 - Platform: iOS (HIG) vs Android (Material 3).
-- ONE memorable thing within platform constraints.
+- Add one memorable element only when the brief leaves creative direction open; otherwise preserve the existing system.
 
 ### DESIGN.md Spec Compliance
 
@@ -106,10 +109,11 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
 
 #### Mobile Creative Direction
 
-- Never defaults: system fonts as primary display, generic lists, stock icons, cookie-cutter tabs.
+- Preserve existing fonts, lists, icons, and navigation patterns unless the brief requires a change.
 - Typography: System fonts for UI, custom for brand moments (hero/onboarding). iOS: SF Pro UI + custom display. Android: Roboto UI + custom. Cross-platform: Satoshi/DM Sans/Plus Jakarta Sans. Load via expo-font/react-native-google-fonts/embed.
 - Color 60-30-10: 60% dominant (bg), 30% secondary (cards,nav), 10% accent (FABs). iOS: system colors for alerts/actions. Android: Material 3 dynamic color optional.
-- Layout: Asymmetric cards, full-bleed heroes, bento grids, horizontal scroll+snap, custom FABs.
+- Layout: Preserve existing layout patterns; use asymmetric cards, full-bleed heroes, bento grids, horizontal scroll+snap,
+  or custom FABs only when required by the brief or established design system.
 - Backgrounds: Subtle gradients, mesh for onboarding. Dark: true black #000000 (OLED). Light: off-white w/ texture.
 - Platform Balance: Respect HIG/Material 3 + inject personality via color, typography, custom components.
 
