@@ -1,5 +1,46 @@
 # Changelog
 
+## [1.102.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.101.0...gem-team-v1.102.0) (2026-08-11)
+
+
+### 📝 Documentation
+
+* **agents:** update agent testing instructions ([bb57cc7](https://github.com/mubaidr/gem-team/commit/bb57cc7a5cf0313f894a8eb90d89a7a33e79ce48))
+
+
+### 🧹 Housekeeping
+
+* add audience parsing and audience-specific handling in documentation writer workflow ([6899335](https://github.com/mubaidr/gem-team/commit/689933521ebb758d2ad58f84f2c23ea8ef241e56))
+* add bug-fix mode description and lint_rule_recommendations field, and map critic results ([bc623fc](https://github.com/mubaidr/gem-team/commit/bc623fc9915a95d9a5ab0bc3df991899f4cfde5b))
+* add needs_replan and needs_approval status values; rename dependencies to depends_on; add execution output fields ([a124312](https://github.com/mubaidr/gem-team/commit/a1243124ea29bb23f09b3a65781f9f51ec85e473))
+* add note about including core fields only when needed in plan format guide ([65f565b](https://github.com/mubaidr/gem-team/commit/65f565b37c3c432182da205d10cd9c7332606ce8))
+* add note about using smallest analysis depth for safe plans ([9e5c3ae](https://github.com/mubaidr/gem-team/commit/9e5c3ae4b8d3881327dea9e2ed11b6499c89f807))
+* add test_bug handling to log discovered bugs as findings and route to debugger and implementer ([1104e06](https://github.com/mubaidr/gem-team/commit/1104e0621851a2928b2d2ea3399702556fa89540))
+* adjust cleanup condition to reference task_definition.cleanup and add cleanup flag to gem-mobile-tester agent ([22bcc28](https://github.com/mubaidr/gem-team/commit/22bcc28e00f45936ac86d15d3b404c8bc4e7c095))
+* adjust intent default to MEDIUM when ambiguous and blast radius is high ([a505320](https://github.com/mubaidr/gem-team/commit/a5053206b13fbbb5fa709360c1c6a4b68dc9fd79))
+* classify failures into fail enum for orchestrator routing ([3a2751d](https://github.com/mubaidr/gem-team/commit/3a2751d2ab846b07c8ccaad02e6c13152cbd8d33))
+* compute prd_score during this pass ([3ac33f2](https://github.com/mubaidr/gem-team/commit/3ac33f24efe8a5b3b860ed2c70978944323d9c40))
+* disable git commit on gate pass, disable model routing, visual regression and a11y audit in .gem-team.yaml; correct wording in orchestrator agent description ([1126b94](https://github.com/mubaidr/gem-team/commit/1126b94d600f280d6450acc08bf029b936dee816))
+* display tip only on first run when no .gem-team.yaml ([f1bbb2c](https://github.com/mubaidr/gem-team/commit/f1bbb2cd0910360298b61382a877ff8eb5633589))
+* refine approval gate to require production in devops.approval_required_for ([636b9dd](https://github.com/mubaidr/gem-team/commit/636b9ddce31801289c197f069193e9e1ff5d17c4))
+* refine planner agent workflow, improve replan safety, clarify handoff and plan saving ([cf03449](https://github.com/mubaidr/gem-team/commit/cf034499ec5785e5116b1dc3d8157b6dd5c963a7))
+* remove contract references and simplify wave gating and planning constraints ([6f29bb4](https://github.com/mubaidr/gem-team/commit/6f29bb49935746601c1f2c3f7b1cb38ca654f270))
+* remove debugger_diagnosis from gem-debugger task definition ([02d41c7](https://github.com/mubaidr/gem-team/commit/02d41c7a373d99bafb3c668b984d9cfa607beffa))
+* remove DESIGN.md workflow details and add authorship note to knowledge sources ([f902285](https://github.com/mubaidr/gem-team/commit/f90228507ab522834f54b8555a23a2719d4cd577))
+* remove HIGH/MEDIUM/LOW thresholds from gem-skill-creator workflow ([7a6b896](https://github.com/mubaidr/gem-team/commit/7a6b896aeb18a9d49a0cc9286b7b7fef7aff9c13))
+* remove pattern_seen_before reuse check ([a311c6b](https://github.com/mubaidr/gem-team/commit/a311c6b2d572e1d4b87ac0fd2b53457d904d9bde))
+* remove target argument from gem-designer-mobile and gem-orchestrator agent definitions ([709d887](https://github.com/mubaidr/gem-team/commit/709d8873fdbeff2b6d3010be06d4aa2f33fe1a3a))
+* remove test_coverage field from gem-implementer and context field from gem-critic ([9ef7597](https://github.com/mubaidr/gem-team/commit/9ef75976c9f93501dbb4bcbada9c88b4f36ed052))
+* remove testing.screenshot_on_failure entry; remove devops.deployment_strategy entry; update config_snapshot description to full .gem-team.yaml contents ([7b31810](https://github.com/mubaidr/gem-team/commit/7b31810544669a0a556cc9f29be4838e30cb0f23))
+* remove workflow_complexity_hint from output format ([d76295a](https://github.com/mubaidr/gem-team/commit/d76295ad761e9e25d930b7a366497dc106b93167))
+* set plan validation review_depth defaults to lightweight and add explicit review_depth parameter ([0a1938b](https://github.com/mubaidr/gem-team/commit/0a1938bb7e71d28ce5551b7722bd0230bd38e01f))
+* simplify task handoff definition and remove obsolete fields ([77eeb80](https://github.com/mubaidr/gem-team/commit/77eeb806e50fdc0af39ee6cd4fd68a67bd862e6d))
+* standardize agent execution context to use task_definition ([daf1dcf](https://github.com/mubaidr/gem-team/commit/daf1dcf91dd83d0c221404bdc7c2cbd6f8eea6b1))
+* update orchestrator default_complexity_threshold comment to describe minimum complexity floor ([94fa23d](https://github.com/mubaidr/gem-team/commit/94fa23d925ead06d024b4c1163aa86d7973df059))
+* update plan persistence instructions for trivial/low tasks and approval gating ([bc4f3b2](https://github.com/mubaidr/gem-team/commit/bc4f3b2ee88a2b698cd2d2e812e0d837556d048f))
+* update Planner description to lean DAG phrasing and adjust workflow MEDIUM planning details ([eaeb958](https://github.com/mubaidr/gem-team/commit/eaeb958d81c58577aced72be1455ec6f56cfceb1))
+* update planner discovery scope and research task rules ([58910f3](https://github.com/mubaidr/gem-team/commit/58910f3b9bb98e9046c773cb2f1aba6825cc390b))
+
 ## [1.101.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.100.0...gem-team-v1.101.0) (2026-08-11)
 
 
