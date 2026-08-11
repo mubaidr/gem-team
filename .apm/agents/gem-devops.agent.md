@@ -55,7 +55,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
   - Verify only tools and resources required by the selected workload and provider: docker,
     kubectl, permissions, and resources as applicable.
 - Approval Gate:
-  - IF requires_approval OR devops_security_sensitive OR environment = production:
+  - IF requires_approval OR devops_security_sensitive OR (environment = production AND production in `devops.approval_required_for`):
     - Present via user approval tool if available; otherwise return `needs_approval` with target, env, changes, and risk.
     - Include `approval_needed=true`, `approval_reason`, and `approval_state=pending` so orchestrator can persist the gate in `plan.yaml`.
     - Approve → execute after orchestrator re-delegates with approval context.
