@@ -272,14 +272,14 @@ agent_input_reference:
         - tech_stack
         - test_coverage
         - debugger_diagnosis
-        - implementation_handoff
+        - handoff
 
     gem-implementer-mobile:
       extends: base_input
       task_definition_fields:
         - platforms
         - debugger_diagnosis
-        - implementation_handoff
+        - handoff
 
     gem-reviewer:
       extends: base_input
@@ -293,7 +293,7 @@ agent_input_reference:
       task_definition_fields:
         - error_context
         - debugger_diagnosis
-        - implementation_handoff
+        - handoff
 
     gem-critic:
       extends: base_input

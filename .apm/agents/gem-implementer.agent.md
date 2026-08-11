@@ -39,7 +39,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
   - Use `research_digest.relevant_files` as the initial file shortlist.
   - Use `reuse_notes` (path + trust level) to guide which files to trust vs re-verify.
   - Read tokens from `DESIGN.md` (UI tasks only).
-  - Analyze acceptance criteria inline: Understand `ac`, `handoff`, and `implementation_handoff` from task_definition (`handoff` and `implementation_handoff` are aliases; both carry the same data).
+  - Analyze acceptance criteria inline: Understand `ac` and the canonical `handoff` from task_definition.
   - Skill Invocation: If `task_definition.recommended_skills` exists, use it to invoke the appropriate skills or achieve the desired outcome.
 - TDD Cycle (Red → Green → Refactor → Verify):
   - Red: Create/update only the test categories justified by acceptance criteria, behavior, or risk.
