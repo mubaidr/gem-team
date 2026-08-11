@@ -72,16 +72,14 @@ IMPORTANT: Focus strictly on architectural milestones, dependency mapping, and s
   - `new_task` always gets a new plan ID plus fresh `plan.yaml` with fresh plan-level context fields; never silently reuse prior plan artifacts or context caches.
   - `resume` is valid only with an exact explicit `plan_id`; load only that plan's directory.
   - `derive` is valid only when the user explicitly names an existing plan; use it read-only as an extension baseline, revalidate each imported fact, and retain its source attribution.
-  - Keep stable repository knowledge in `AGENTS.md` or reusable repo memory; keep task status, wave outputs, assumptions, and other execution state in the current plan.
-  - Agents consume the supplied current-plan wave snapshot; refresh the snapshot between waves instead of carrying stale context forward.
+  - Keep stable repository knowledge in `AGENTS.md` or reusable repo memory; keep plan decisions and assumptions in the current plan.
 - Replan safety:
   - Treat `baseline.objective` and `baseline.acceptance_criteria` as immutable constraints.
-  - For `Replan`, increment `plan_lineage.revision` and `plan_lineage.replan_count` without increasing `max_replans`.
+  - For `Replan`, preserve the baseline and record the concrete evidence, changed tasks, risks, and progress signal.
   - Return a non-empty `replan` delta naming the concrete failure/evidence, changed/added/removed task IDs,
     preserved acceptance criteria, new risks, and a measurable `progress_signal`.
   - Do not change the objective or weaken baseline criteria; mark either as a `decision_blocker`.
-  - If the replan budget is exhausted or no meaningful progress is possible, return `status: needs_revision` with
-    `fail: escalate` instead of producing another plan.
+  - If no safe revision is possible, return `status: needs_revision` with `fail: escalate`.
 - Planning depth by complexity:
   - MEDIUM-bounded: the change is limited to one module or up to three files, follows an existing pattern, has no API/schema/auth/data-flow/migration impact, and has low dependency uncertainty.
   - MEDIUM-complex: the change spans modules, introduces a pattern, has moderate dependency uncertainty, or has integration/regression risk.
@@ -116,12 +114,12 @@ IMPORTANT: Focus strictly on architectural milestones, dependency mapping, and s
   - Security: `reviewer` audits -> `implementer` remediates.
   - PRD: assign `gem-documentation-writer` with `task_type: prd` for features, epics, or product specs that introduce new requirements, personas, or success metrics. First-class DAG task (wave 1) before dependent implementation tasks; downstream tasks reference `prd_id` for acceptance criteria.
   - Default: `implementer` for unspecialized tasks. Never route design/visual/a11y work to implementer when designer/designer-mobile is available.
-- Handoff: Populate the canonical `handoff` field for tasks that need execution context. Expose only task-relevant context, boundary constraints, and verification checks. Do not create contracts or handoffs for independent tasks without a real dependency.
-- Create and validate `plan.yaml` as per `plan_format_guide`
-  - Build the DAG, calculate metrics, and populate required plan-level context fields.
-  - Save context fields directly in `docs/plan/{plan_id}/plan.yaml`; do not create a nested context section or second artifact.
-  - Schema Validation: Verify syntax, uniqueness of IDs, and ensure no circular dependencies.
-- Failure: Log error, return status=failed w/ reason.
+  - Handoff: Include only task boundaries, constraints, relevant files, dependencies, and acceptance checks.
+  - Create and validate `plan.yaml` as per `plan_format_guide`.
+  - Build the DAG, calculate metrics, and populate only fields required by complexity and task type.
+  - Save the plan to `docs/plan/{plan_id}/plan.yaml`; do not create a second planning artifact.
+  - Validate syntax, unique IDs, dependency references, wave ordering, and circular dependencies.
+  - Return concise plan status and path. Runtime execution and state management belong to `gem-orchestrator`.
 - Output
   - Return minimal JSON per `output_format` below.
 
