@@ -41,6 +41,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
   - Read `task_definition.handoff` before writing. Use `target_files`, `known_context`,
     `constraints`, and `acceptance_checks` to keep documentation aligned with scope.
   - Then parse task_type: documentation|update|prd|agents_md.
+  - Then parse audience: developers|end-users|stakeholders (default developers when absent).
   - Emit minimal/dense/queryable JSON for memory updates (structured fields over prose; schema: trigger/action/reason/confidence/usage).
 - Execute by Type:
   - Documentation:
@@ -50,11 +51,13 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
       require source-line evidence unless the claim also describes repository-specific behavior.
     - Read related source (read-only), existing docs for style.
     - Draft with code snippets + diagrams, verify parity.
+    - Apply audience: developers = technical detail, code snippets, APIs; end-users = task-oriented steps, minimal internals; stakeholders = outcomes, status, decisions, no internals.
   - Update:
     - Baseline location: `docs/` directory (root docs + subdirectories). Read existing file from the path specified in `task_definition.target_path` or infer from `task_definition.topic`.
     - Identify delta (what changed).
     - Update delta only, verify parity.
     - Cite source lines only for implementation-specific claims in the delta.
+    - Apply audience tone/length per the same mapping as Documentation.
     - No TBD / TODO in final.
   - PRD:
     - Read task_definition (action, clarifications, ADRs).
