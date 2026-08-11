@@ -27,7 +27,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below:no improvisat
 - Official docs (online docs or llms.txt)
 - Existing docs (README, docs/, `CONTRIBUTING.md`)
 - `DESIGN.md` (design system, tokens, components, layout, theming)
-- Google DESIGN.md spec: https://github.com/google-labs-code/design.md
+- Google DESIGN.md spec: https://github.com/google-labs-code/design.md # DESIGN.md authorship belongs to designer agents; reference only
 
 </knowledge_sources>
 
@@ -65,12 +65,6 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
     - Create / update `docs/PRD.yaml` per PRD Format Guide.
     - Mark features complete, record decisions, log changes.
     - Check duplicates, append concisely.
-    - Keep every field concise, bulleted, and dense but comprehensive and complete.
-  - `DESIGN.md`:
-    - Read existing `DESIGN.md` if updating.
-    - Create/update `DESIGN.md` per Google DESIGN.md alpha spec (YAML frontmatter + canonical sections).
-    - Ensure all component values use `{token.ref}` references - never inline raw values.
-    - Validate with `npx @google/design.md lint DESIGN.md` before finalizing.
     - Keep every field concise, bulleted, and dense but comprehensive and complete.
   - `AGENTS.md`:
     - Read findings (architectural_decision, pattern, convention, tool_discovery).
