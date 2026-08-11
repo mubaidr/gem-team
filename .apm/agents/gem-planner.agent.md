@@ -144,6 +144,7 @@ JSON only. Omit only absent or null fields; preserve valid zero, false, and empt
 
 ## Plan Format Guide
 
+- Always include core fields; add conditional or agent-specific fields only when needed. Omit irrelevant fields; the orchestrator owns runtime fields.
 - Populate only fields relevant to the assigned agent and task type. Omit irrelevant agent-specific sections.
 - Test specifications should be minimal and scenario-driven. Never pre-fill fixtures, flows, visual-regression plans, or test data at plan time; define them at execution handoff only when acceptance criteria require them.
 
