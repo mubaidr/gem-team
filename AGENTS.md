@@ -163,12 +163,10 @@ Example: `[gem-team] Add new debugger agent`
 
 ### Checklist
 
-1. Run `npm run lint` before committing
-2. Run `npm run typecheck` to verify types
-3. Run `npm run build` to ensure build works
-4. Add tests for new functionality
-5. Update documentation if needed
-6. Use conventional commit messages
+1. Complete the applicable checks in **Testing Instructions**
+2. Add tests for new functionality
+3. Update documentation if needed
+4. Use conventional commit messages
 
 ### Review Process
 
