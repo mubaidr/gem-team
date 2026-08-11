@@ -151,7 +151,9 @@ Routing matrix:
 
 #### Phase 3B: Wave Execution Loop
 
-Execute all unblocked waves/tasks without approval pauses. Follow the branching logic based on complexity level.
+Execute all unblocked waves/tasks without unnecessary approval pauses. When a task returns
+`needs_approval`, pause that task path, persist its approval state, present the request to
+the user, and resume only after approval. Continue independent task paths when safe.
 
 #### Complexity=TRIVIAL/LOW
 
@@ -193,6 +195,8 @@ Execute all unblocked waves/tasks without approval pauses. Follow the branching 
   - `needs_revision` from plan review -> bounded planner revision; `needs_revision` from execution -> retry only while
     `task.flags.retries_used < 3`, then escalate. Do not silently reinterpret it as scope growth.
   - `failed` -> apply the failure enum; `blocked`, `escalate`, and `needs_approval` stop the affected path.
+  - `needs_approval` -> persist `approval_state=pending`, present the approval request,
+    then re-delegate the same task with approval context after approval.
 - Learning Extraction: Persist reusable items from specialist returns where `learn[].confidence ≥ 0.95` (each item now includes `{ text, confidence }`). Filter by confidence before routing to the correct target (batch delegation):
   - If product decisions → delegate to `gem-documentation-writer` → PRD
   - If technical decisions/conventions → delegate to `gem-documentation-writer` → AGENTS.md or architecture docs

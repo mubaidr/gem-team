@@ -131,7 +131,7 @@ JSON only. Omit nulls/empties/zeros. Prose fields MUST use dense bullet format. 
 
 ```json
 {
-  "status": "completed | failed | in_progress | needs_revision",
+  "status": "completed | failed | in_progress | needs_revision | needs_approval",
   "task_id": "string",
   "fail": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
   "environment": "development | staging | production",

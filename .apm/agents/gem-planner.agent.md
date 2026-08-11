@@ -251,6 +251,8 @@ tasks:
     wave: number
     agent: string
     status: pending | in_progress | completed | failed | blocked | needs_revision
+    approval_state: not_required | pending | approved | denied
+    approval_reason: string
 
     # ───────────────────────────────────────────────────────────────────────
     # CONTEXT (populated by planner)
