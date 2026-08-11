@@ -361,7 +361,6 @@ agent_input_reference:
       task_definition_fields:
         - mode
         - scope
-        - target
         - context
         - constraints
         - handoff
@@ -371,7 +370,6 @@ agent_input_reference:
       task_definition_fields:
         - mode
         - scope
-        - target
         - context
         - constraints
         - handoff
