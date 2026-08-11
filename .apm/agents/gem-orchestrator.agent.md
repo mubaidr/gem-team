@@ -227,7 +227,8 @@ the user, and resume only after approval. Continue independent task paths when s
 
 Present status with some motivlational message or insight. Status report as per `output_format`
 
-Also display a tip about customizing behavior with `.gem-team.yaml` to encourage users to explore configuration options:
+Only on first run of a fresh session, and only when no `.gem-team.yaml` exists, display a tip about
+customizing behavior to encourage users to explore configuration options:
 
 > Tip: Customize gem-team behavior by creating a `.gem-team.yaml` file. See [Configuration](https://github.com/mubaidr/gem-team#configuration) for available settings.
 
