@@ -205,13 +205,13 @@ tasks:
     description: string
     wave: number
     agent: string
-    status: pending | in_progress | completed | failed | blocked | needs_revision # progress tracking; transitions owned by orchestrator
+    status: pending | in_progress | completed | failed | blocked | needs_revision | needs_replan | needs_approval # progress tracking; transitions owned by orchestrator
 
     # ───────────────────────────────────────────────────────────────────────
     # CONTEXT (populated by planner)
     # ───────────────────────────────────────────────────────────────────────
     covers: [string]
-    dependencies: [string]
+    depends_on: [string] # canonical dependency reference field; read by orchestrator wave evaluation
     conflicts_with: [string]
     context_files:
       - path: string
@@ -222,6 +222,8 @@ tasks:
     # ───────────────────────────────────────────────────────────────────────
     flags:
       requires_design_validation: boolean # true for new UI, major redesigns, style/a11y/token work -> designer first, then implementer
+      retries_used: number # orchestrator-set: re-delegation attempts for needs_revision tasks; max 3
+      revision_reason: string # orchestrator-set: why the task was re-delegated
 
     # ───────────────────────────────────────────────────────────────────────
     # QUALITY GATES (verification criteria)
@@ -257,6 +259,15 @@ tasks:
     coverage_matrix: [string]
     target_path: string | null # optional: docs file to create/update
     topic: string | null # optional: docs subject when target_path not yet known
+
+    # ───────────────────────────────────────────────────────────────────────
+    # EXECUTION OUTPUTS (orchestrator-persisted after task execution)
+    # ───────────────────────────────────────────────────────────────────────
+    result: # orchestrator-persisted execution outputs
+      status: completed | failed | needs_revision
+      files_changed: [string]
+      output: string # or agent-specific keys (findings, diagnosis, etc.)
+      summary: string
 ```
 
 </plan_format_guide>
