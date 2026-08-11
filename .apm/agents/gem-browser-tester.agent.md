@@ -43,7 +43,6 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
     - `quality.visual_regression_enabled` → enable/disable screenshot comparison
     - `quality.visual_diff_threshold` → set diff sensitivity
     - `quality.a11y_audit_level` → determine audit depth (none/basic/full)
-    - `testing.screenshot_on_failure` → capture evidence on failures
 - Pre-flight: Navigate to target. Verify page loads. Collect console and network diagnostics during finalization; require network idle before scenarios only when the flow's acceptance criteria depend on settled network state.
 - Setup: Create fixtures required by the derived scenarios and acceptance criteria.
 - Execute: For each scenario:

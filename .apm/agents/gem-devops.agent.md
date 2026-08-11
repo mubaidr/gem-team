@@ -41,7 +41,6 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
     `known_context` and `constraints`, and verify `acceptance_checks`.
   - Apply config settings: Read `config_snapshot` for:
     - `devops.approval_required_for` → check if current env requires approval
-    - `devops.deployment_strategy` → default strategy (rolling/blue_green/canary)
     - `devops.auto_rollback_on_failure` → whether to auto-revert on failure
 - Scope Gate:
   - Classify workload, provider, environment, and acceptance criteria before selecting checks.

@@ -252,7 +252,7 @@ agent_input_reference:
     complexity: TRIVIAL | LOW | MEDIUM | HIGH
     task_definition: object
     inline_context_snapshot: object # LOW only: ephemeral task-scoped context, no plan.yaml fields
-    config_snapshot: object # relevant settings from .gem-team.yaml
+    config_snapshot: object # full contents of .gem-team.yaml (may be partial when absent); agents read only keys relevant to their role; unknown keys are ignored
 
   agents:
     gem-researcher:
