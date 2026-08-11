@@ -52,15 +52,15 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
 - Execute Tests: Per platform:
   - Launch app via framework, run suite, capture logs / screenshots / crashes.
   - App readiness: After launch, verify app responds to input and initial screen renders. If launch crash → classify as new_failure, skip suite.
-  - Gesture testing: Tap, swipe, pinch, long-press, drag.
-  - App lifecycle: Cold start TTI, bg / fg, kill / relaunch, memory pressure, orientation.
-  - Push notifications: Grant, send, verify received / tap opens / badge, test all states.
-  - Device farm: Upload APK / IPA via API, collect videos / logs / screenshots.
-- Platform-Specific:
+  - Gesture testing, when applicable: Tap, swipe, pinch, long-press, drag.
+  - App lifecycle, when applicable: Cold start TTI, bg / fg, kill / relaunch, memory pressure, orientation.
+  - Push notifications, when applicable: Grant, send, verify received / tap opens / badge, test all states.
+  - Device farm, when required: Upload APK / IPA via API, collect videos / logs / screenshots.
+  - Platform-Specific, when applicable:
   - iOS: Safe areas, keyboard behaviors, system permissions, haptics, dark mode.
   - Android: Status / nav bar, back button, ripple effects, runtime permissions, battery optimization / doze.
-  - Cross-platform: Deep links, share extensions / intents, biometric auth, offline mode.
-- Performance:
+  - Cross-platform, when applicable: Deep links, share extensions / intents, biometric auth, offline mode.
+  - Performance, when applicable:
   - Cold start: Xcode Instruments / `adb shell am start -W`.
   - Memory: `adb shell dumpsys meminfo` / Instruments.
   - Frame rate: Core Animation FPS / `adb shell dumpsys gfxstats`.
@@ -98,6 +98,16 @@ JSON only. Omit nulls/empties/zeros. Prose fields MUST use dense bullet format. 
   "fail": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific | test_bug",
   "tests": { "ios": { "passed": "number", "failed": "number" }, "android": { "passed": "number", "failed": "number" } },
   "failures": ["string: max 3"],
+  "applicability": {
+    "gestures": "pass | fail | not_applicable",
+    "lifecycle": "pass | fail | not_applicable",
+    "push": "pass | fail | not_applicable",
+    "device_farm": "pass | fail | not_applicable",
+    "platform_specific": "pass | fail | not_applicable",
+    "cross_platform": "pass | fail | not_applicable",
+    "performance": "pass | fail | not_applicable"
+  },
+  "not_applicable_reasons": ["category: reason"],
   "crashes": "number",
   "flaky": "number",
   "evidence_path": "string",
@@ -130,7 +140,7 @@ MANDATORY: These rules are mandatory for every request and apply across all work
 
 - Library-first: Prefer well-established, actively maintained libraries (official or already in the stack) over custom implementations.
 - Always verify env before testing. Build+install before E2E. Test both iOS+Android unless platform-specific.
-- Test gestures w/ appropriate velocities/durations. Require lifecycle testing when acceptance criteria or task scope makes it applicable; otherwise mark it `not_applicable` per the gate. Never test simulator-only if device farm required.
+- Test gestures w/ appropriate velocities/durations only when applicable. Require lifecycle testing when acceptance criteria or task scope makes it applicable; otherwise mark it `not_applicable` with a reason. Never test simulator-only if device farm required.
 - Use element-based gestures over coords. Wait: prefer waitForElement over fixed timeouts.
 - Platform Isolation: run iOS/Android separately, combine results.
 - Performance: Measure→Apply→Re-measure→Compare.

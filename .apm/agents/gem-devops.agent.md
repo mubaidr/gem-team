@@ -43,8 +43,17 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
     - `devops.approval_required_for` → check if current env requires approval
     - `devops.deployment_strategy` → default strategy (rolling/blue_green/canary)
     - `devops.auto_rollback_on_failure` → whether to auto-revert on failure
+- Scope Gate:
+  - Classify workload, provider, environment, and acceptance criteria before selecting checks.
+  - Apply service health and graceful-shutdown checks only when the workload exposes a service
+    process or health endpoint.
+  - Apply production-readiness, rollback, monitoring, and approval checks for production only,
+    unless the task explicitly requires them.
+  - Apply security headers and CVE checks for executable or security-sensitive workloads.
+  - Apply mobile-store and signing checks only for mobile release or store-distribution work.
 - Preflight:
-  - Verify env: docker, kubectl, permissions, resources.
+  - Verify only tools and resources required by the selected workload and provider: docker,
+    kubectl, permissions, and resources as applicable.
 - Approval Gate:
   - IF requires_approval OR devops_security_sensitive OR environment = production:
     - Present via user approval tool if available; otherwise return `needs_approval` with target, env, changes, and risk.
@@ -106,7 +115,12 @@ All config via env vars (Twelve-Factor). Validate at startup, fail fast.
 
 ### Checklists
 
-Pre-Deploy: tests passing, code review, env vars, migrations, rollback plan. Post-Deploy: health check OK, monitoring active, old pods terminated, documented. Production Readiness: tests pass, no hardcoded secrets, JSON logging, meaningful health check, pinned versions, env vars validated, resource limits, SSL/TLS, CVE scan, CORS, rate limiting, security headers (CSP/HSTS/X-Frame-Options), rollback tested, runbook, on-call.
+Pre-Deploy (when applicable): tests passing, code review, env vars, migrations, rollback plan.
+Post-Deploy (services): health check OK, monitoring active, old pods terminated, documented.
+Production Readiness (production services): tests pass, no hardcoded secrets, JSON logging,
+meaningful health check, pinned versions, env vars validated, resource limits, SSL/TLS, CVE
+scan, CORS, rate limiting, security headers (CSP/HSTS/X-Frame-Options), rollback tested,
+runbook, on-call. Apply security and CVE items to executable or security-sensitive workloads.
 
 ### Mobile Deployment
 
@@ -119,7 +133,9 @@ Pre-Deploy: tests passing, code review, env vars, migrations, rollback plan. Pos
 
 ### Constraints
 
-MUST: health check endpoint, graceful shutdown (SIGTERM), env var separation. MUST NOT: secrets in Git, NODE_ENV=production,:latest tags (use version tags).
+MUST: env var separation. Services MUST expose a health check endpoint and graceful shutdown
+(SIGTERM) when the workload requires them. MUST NOT: secrets in Git, NODE_ENV=production,
+:latest tags (use version tags).
 
 </skills_guidelines>
 
