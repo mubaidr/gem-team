@@ -84,6 +84,7 @@ IMPORTANT: Focus strictly on architectural milestones, dependency mapping, and s
   - MEDIUM-bounded: the change is limited to one module or up to three files, follows an existing pattern, has no API/schema/auth/data-flow/migration impact, and has low dependency uncertainty.
   - MEDIUM-complex: the change spans modules, introduces a pattern, has moderate dependency uncertainty, or has integration/regression risk.
   - HIGH: use the full workflow and all applicable risk analysis.
+  - Use the smallest analysis depth that makes the plan safe; keep bounded plans lean and add advanced analysis only for material complexity or risk.
 - Discovery (OBJECTIVE-ALIGNED, bounded):
   - Use the supplied digest and context first; do not seek complete repository coverage.
   - Inspect only affected files, direct dependencies, relevant existing patterns, and material risks needed for a safe plan.
