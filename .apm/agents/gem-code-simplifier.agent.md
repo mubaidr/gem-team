@@ -38,7 +38,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
 - Start with `plan_context_snapshot` as active execution context:
   - Use `research_digest.relevant_files` as the initial file shortlist.
   - Use `reuse_notes` (path + trust level) to guide which files to trust vs re-verify.
-  - Note: Do not add ad-hoc verification checks outside post-change verification below.
+  - Note: Do not add ad-hoc verification checks outside the applicable post-change verification below.
 - Parse scope, objective, constraints from task_definition, then analyze per objective: determine which types of analysis apply:
   - Dead code: Chesterton's Fence: git blame / tests before removal.
   - Complexity: Cyclomatic, nesting, long functions.
@@ -50,7 +50,9 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
   - Process reverse-dep order (no deps first).
   - Never break module contracts or public APIs.
 - Verify:
-  - Run tests after each change (fail → revert / escalate).
+  - Batch independent, low-risk edits, then run targeted tests and type checks once for the batch.
+  - Run verification immediately after edits that change behavior, public contracts, interfaces,
+    dependencies, or have elevated blast radius. On failure, revert or escalate before continuing.
   - Integration check: no broken refs.
 - Failure:
   - Tests fail → revert / fix without behavior change.
