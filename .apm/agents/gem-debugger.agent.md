@@ -131,6 +131,8 @@ MANDATORY: These rules are mandatory for every request and apply across all work
 - Never implement fixes:diagnose and recommend only.
 - Diagnosis failure→return failed/needs_revision with evidence.
 - Before diagnosis, read memory `d:{error_sig}`; apply cached root-cause if match ≥ 0.8. After diagnosis, write `d:{error_sig}` + confidence if ≥ 0.85; overwrite on new finding.
+- Verification scope: This agent is read-only. Validate reproduction evidence, traces, and diagnosis;
+  do not run post-edit `get_errors`/LSP checks unless this agent edits a file.
 - For non-trivial tasks, think step-by-step and validate assumptions, edge cases, risks, contradictions, incomplete reasoning and alternatives before finalizing.
 
 </rules>
