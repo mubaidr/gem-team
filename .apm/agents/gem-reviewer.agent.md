@@ -57,20 +57,16 @@ Determine depth from `task_definition.review_depth` (default: `lightweight`).
       (e.g., specific test commands, expected status codes/payloads).
   - Scope gates: Apply PRD checks only when a PRD or product requirement exists. Apply security checks only for
     security-sensitive or executable changes. Apply mobile checks only when mobile code or requirements are involved.
-    Apply contract checks only when dependency edges or interfaces exist.
 - full (HIGH complexity):
   - Semantic Error & Logic Check: All lightweight checks apply.
   - PRD Coverage & Scope Drift (when a PRD or product requirement exists):
   - Verify every single PRD requirement maps to >= 1 task.
   - Check for edge cases mentioned in the PRD (error handling, rate limits).
   - Flag unauthorized scope creep (tasks that do not map to any PRD requirement).
-  - Contract Integrity (when dependency edges or interfaces exist): Every dependency edge between tasks must have
-    an explicitly defined data/API contract. Flag mismatched interfaces (e.g., payload schema mismatches).
   - Diagnose-then-fix Rigor: Every debugger task must be paired with an implementer task in a later wave that depends on it; the runtime `debugger_diagnosis` is forwarded at execution.
 - Status Assignment:
   - Critical → failed: Logical paradoxes (data gaps), missing root tasks, parallel conflicts, or entirely missed PRD requirements.
-  - Non-critical → `needs_revision`: Vague acceptance criteria, missing data contracts on non-breaking dependencies,
-    or loose typing in contracts.
+  - Non-critical → `needs_revision`: Vague acceptance criteria.
   - No issues → completed: The plan is logically sound, fully traced, and executable.
 - Output
   - Return minimal JSON per `output_format` below.
@@ -82,7 +78,6 @@ Determine depth from `task_definition.review_depth` (default: `lightweight`).
   - DO NOT read entire files for small changes.
 - If `review_security_sensitive: true` or the changed scope includes executable/security-sensitive code -> full per-task scan (grep + semantic).
 - Integration checks:
-  - Contracts (from -> to satisfied) only when dependency edges or interfaces exist.
   - Edge cases (empty, null, boundaries).
   - Lightweight security (grep secrets / PII / SQLi / XSS) only for executable or security-sensitive changes.
   - Related Integration / contract tests only.

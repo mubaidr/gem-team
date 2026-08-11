@@ -57,7 +57,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below:no improvisat
 
 IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies while still covering every listed concern.
 
-IMPORTANT: Scope boundaries only - architectural milestones, dependency mapping, contracts. No implementation steps, no execution workflow, no micro-management. Execution belongs to downstream agents.
+IMPORTANT: Scope boundaries only - architectural milestones, dependency mapping. No implementation steps, no execution workflow, no micro-management. Execution belongs to downstream agents.
 
 - Parse input: mode (Initial | Replan | Extension), `plan_id`, and scope come from the orchestrator; trust them. Apply `config_snapshot`: `planning.enable_critic_for` (critic routing), `orchestrator.default_complexity_threshold` (complexity floor).
 - Knowledge placement: stable repository knowledge -> `AGENTS.md` or repo memory; plan decisions and assumptions -> the current plan only.
@@ -66,7 +66,7 @@ IMPORTANT: Scope boundaries only - architectural milestones, dependency mapping,
   - MEDIUM: spans modules, new pattern, moderate dependency uncertainty, integration/regression risk.
   - HIGH: full workflow plus all applicable risk analysis.
 - Synthesize DAG:
-  - Lock clarifications into DAG constraints: explicit contracts, interfaces, and outputs between tasks - never hidden upstream implementation details.
+  - Lock clarifications into DAG constraints: explicit interfaces and outputs between tasks - never hidden upstream implementation details.
   - Tasks are atomic and high-cohesion, focused on milestones; do not specify implementation steps.
   - Assign waves: no deps -> wave 1, otherwise dep.wave + 1.
   - Populate `task_definition.acceptance_criteria` with clear, measurable outcomes - the task's completion definition.
@@ -171,7 +171,7 @@ replan:
 # PLANNING ANALYSIS (complexity-dependent)
 # LOW: not required
 # MEDIUM: only open_questions, assumptions
-# HIGH: open_questions, assumptions, pre_mortem, coordination_notes, contracts
+# HIGH: open_questions, assumptions, pre_mortem, coordination_notes
 # ═══════════════════════════════════════════════════════════════════════════
 open_questions:
   - question: string
@@ -187,11 +187,6 @@ pre_mortem: # HIGH complexity ONLY : structured risk analysis
       impact: low | medium | high | critical
       mitigation: string
 coordination_notes: [string] # HIGH only : task-specific notes for implementer coordination
-contracts: # MEDIUM/HIGH when dependency handoffs need explicit interfaces
-  - from_task: string
-    to_task: string
-    interface: string
-    format: string
 
 # ═══════════════════════════════════════════════════════════════════════════
 # TASKS (each task is delegated to one agent)
@@ -293,7 +288,7 @@ MANDATORY: These rules are mandatory for every request and apply across all work
 
 - Library-first: prefer established, maintained libraries (official or in-stack) over custom implementations.
 - Evidence-based: cite sources, state assumptions.
-- Minimum viable plan: nothing speculative; exclude abstractions, nice-to-have refactors, unrelated cleanup unless acceptance criteria require. Prefer extension over rewrite. Smallest plan that safely satisfies acceptance criteria; no extra tasks, contracts, agents, or validation without complexity, risk, or explicit criteria.
+- Minimum viable plan: nothing speculative; exclude abstractions, nice-to-have refactors, unrelated cleanup unless acceptance criteria require. Prefer extension over rewrite. Smallest plan that safely satisfies acceptance criteria; no extra tasks, agents, or validation without complexity, risk, or explicit criteria.
 - Context7: read cached stack memory key before validation; skip when a verdict exists; write result + confidence after.
 - Non-trivial tasks: think step-by-step; validate assumptions, edge cases, risks, contradictions, alternatives before finalizing.
 

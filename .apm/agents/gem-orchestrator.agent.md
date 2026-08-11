@@ -173,7 +173,7 @@ the user, and resume only after approval. Continue independent task paths when s
   - Wave Evaluation:
     - First Loop: Collect tasks with `wave: 1` and `status: pending`.
     - Subsequent Loops: Collect remaining tasks where `status` is not completed, plus tasks for the next wave, reading only their specific task blocks to check dependencies.
-    - Run tasks where `status=pending`, `wave=current`, and all dependencies are completed, while preventing parallel execution of tasks listed in `conflicts_with`. Process waves in ascending order, attaching contracts for Wave > 1.
+    - Run tasks where `status=pending`, `wave=current`, and all dependencies are completed, while preventing parallel execution of tasks listed in `conflicts_with`. Process waves in ascending order.
 - Execute Wave:
   - Delegate exclusively to the subagent specified by `task.agent`, using `agent_input_reference`. Concurrency limit = `orchestrator.max_concurrent_agents` if configured, otherwise 2. Never invoke generic, fallback or inferred subagents.
   - If the delegated task is a fix task paired with a completed debugger task (dependency), inject that debugger's `debugger_diagnosis` output into the payload as `task_definition.debugger_diagnosis`.
@@ -184,8 +184,7 @@ the user, and resume only after approval. Continue independent task paths when s
   - Complexity=HIGH: delegate to `gem-reviewer(wave)` for integration check after every wave.
   - Complexity=MEDIUM: delegate to `gem-reviewer(wave)` only when integration risk exists:
     - Final wave → always gate (catches all accumulated issues).
-    - Non-final wave → gate ONLY if any task in this wave has `conflicts_with` entries OR any dependency handoff
-      contract in `plan.yaml` references a task in this wave as `from_task` (i.e., downstream waves depend on its output).
+    - Non-final wave → gate ONLY if any task in this wave has `conflicts_with` entries OR any downstream task in a later wave depends on this wave's output (dependency edges in `plan.yaml`).
   - Gate passes → if `orchestrator.git_commit_on_gate_pass` is true, `git add -A && git commit -m "{plan_id}_wave-{n}"`. Gate fails → `git diff HEAD` for diagnosis.
   - Persist task/wave status to this plan's `plan.yaml`.
   - Keep task status, wave outputs, temporary assumptions, and transient findings plan-scoped. Persist only stable, revalidated repository knowledge to `AGENTS.md` or reusable repo memory, with source attribution.

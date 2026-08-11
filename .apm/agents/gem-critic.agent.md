@@ -40,7 +40,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
   - Read `task_definition.handoff` before critique. Verify that `target_files`, `known_context`,
     `constraints`, and `acceptance_checks` are coherent.
   - Read target + task_clarifications (resolved decisions: don't challenge).
-  - Read the plan's task definitions, contracts, and constraints to focus scrutiny on weak areas (missing contracts, low-confidence assumptions, high blast radius).
+  - Read the plan's task definitions and constraints to focus scrutiny on weak areas (low-confidence assumptions, high blast radius).
   - Analyze assumptions and scope inline from task_definition and plan.yaml.
     - Assumptions: Explicit vs implicit. Stated? Valid? What if wrong?
     - Scope: Too much? Too little?
