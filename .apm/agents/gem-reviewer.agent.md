@@ -41,7 +41,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
   - Read `task_definition.handoff` before review. Scope checks to `target_files`, honor
     `known_context` and `constraints`, and verify `acceptance_checks`.
   - Then parse review_scope: plan|wave.
-  - Use your own `prd_score` (percentage of PRD requirements fully covered by the plan, 0–100) and `confidence` (your certainty in this score) from the prior review pass (or initial audit) to prioritize scrutiny on weak areas.
+  - Compute `prd_score` (percentage of PRD requirements fully covered by the plan, 0–100) and `confidence` (your certainty in this score) during this pass, and use them to prioritize scrutiny on weak areas.
 
 ### Plan Review
 
