@@ -130,10 +130,16 @@ Documentation guidelines:
 
 ### Agent Testing
 
-1. Test agent responses with sample inputs
-2. Verify JSON output format compliance
-3. Check integration with orchestrator workflow
-4. Test error handling and edge cases
+> Note: No automated agent test harness exists yet
+> Agent changes are verified manually: query the agent, inspect the diff, and check that
+> referenced input fields (`task_definition_fields`, `argument-hint`) are real and consumed.
+
+1. Maintain contract consistency manually: every field in `agent_input_reference` /
+   `task_definition_fields` must be read by the target agent, and every
+   `argument-hint` value must be parsed in the workflow.
+2. Verify JSON output format compliance (fields match `output_format` schema).
+3. Check integration with orchestrator workflow (Phase routing, statuses, gates).
+4. Test error handling and edge cases.
 
 ## Security Considerations
 
