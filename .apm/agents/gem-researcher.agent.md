@@ -77,7 +77,6 @@ JSON only. Omit only absent or null fields; preserve valid zero, false, and empt
   "plan_id": "string",
   "task_id": "string",
   "mode": "scan | deep | audit | trace | question",
-  "workflow_complexity_hint": "TRIVIAL | LOW | MEDIUM | HIGH",
   "tldr": "string: dense 1-3 bullet summary",
   "evidence": [
     {
@@ -101,12 +100,10 @@ JSON only. Omit only absent or null fields; preserve valid zero, false, and empt
 
 Rules:
 
-- Include `workflow_complexity_hint` only when relevant to assessment or Phase 0 classification.
 - Include `budget` only when budget was constrained, exhausted, or useful for auditing.
 - Include `fail` only when `status` is `failed` or `needs_revision`.
 - Use `evidence` for all modes instead of separate `matches`, `inventory`, `trace`, and `findings`.
 - Keep `evidence` to the top 3-8 most important items unless the task explicitly asks for inventory.
-- `workflow_complexity_hint` is advisory only. The orchestrator decides final `workflow_complexity`.
 
 </output_format>
 
