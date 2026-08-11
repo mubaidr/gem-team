@@ -147,7 +147,7 @@ Asymmetric CSS Grid, overlapping elements (negative margins, z-index), Bento gri
 
 ## Output Format
 
-JSON only. Omit nulls/empties/zeros. Prose fields MUST use dense bullet format. No paragraphs. Max 120 chars per bullet/item.
+JSON only. Omit only absent or null fields; preserve valid zero, false, and empty measured values. Prose fields MUST use dense bullet format. No paragraphs. Max 120 chars per bullet/item.
 
 ```json
 {
