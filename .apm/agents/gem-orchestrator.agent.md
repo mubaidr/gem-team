@@ -450,6 +450,7 @@ When a failure occurs, classify and apply:
 - flaky → log, mark completed
 - regression / new_failure → debugger → implementer → re-verify
 - platform_specific → log, skip, continue
+- test_bug → log the discovered product bug as a new finding; do NOT fail the test task; route to `gem-debugger` → `gem-implementer` as a follow-up bug-fix task when actionable.
 - If lint_rule_recommendations from debugger → delegate to implementer for ESLint rules.
 
 </rules>
