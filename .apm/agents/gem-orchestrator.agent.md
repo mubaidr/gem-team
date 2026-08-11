@@ -137,6 +137,10 @@ Routing matrix:
       - Delegate to `gem-reviewer(plan)` with `review_depth: full`.
     - Complexity=HIGH or `planning.enable_critic_for` satisfies:
       - In parallel, delegate to `gem-critic(plan)`, only if: High-risk signal exists: `architecture`, `contract_change`, `breaking_change`, `api_change`, `schema_change`, `auth_change`, `data_flow_change`, `migration`, `security_sensitive`, or `cross_domain_impact`.
+  - Map critic results:
+    - `verdict: blocking` → validation failed (replanable unless findings are architecture or user-decision blockers).
+    - `verdict: warning` → require `gem-reviewer(plan)` confirmation before proceeding; proceed with findings noted if reviewer passes.
+    - `verdict: pass` → proceed.
   - If validation fails:
     - Failed + replanable → apply the bounded replan guardrails below, then delegate to `gem-planner` with findings.
     - Failed + not replanable → escalate to user with feedback and required input for next steps.
@@ -273,6 +277,7 @@ agent_input_reference:
         - acceptance_criteria
         - test_coverage
         - debugger_diagnosis # runtime: forwarded from the paired debugger task output
+        - lint_rule_recommendations # runtime: forwarded from the paired debugger task output
         - handoff
 
     gem-implementer-mobile:

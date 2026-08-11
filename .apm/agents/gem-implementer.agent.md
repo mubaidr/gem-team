@@ -47,7 +47,9 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
     - Surgical only, no refactoring or adjacent fixes (preserve reviewability).
     - Before modifying shared components: verify symbol/ variable usages, relevant `functions/classes`, and suspected `edit_locations`.
     - Run test: must pass.
-
+- Bug-Fix Mode (when `debugger_diagnosis` or `lint_rule_recommendations` present in task_definition):
+  - Validate `debugger_diagnosis` contains root cause, target files, and fix recommendations; treat it as authoritative diagnosis.
+  - Apply `lint_rule_recommendations` together with the fix when present (e.g. ESLint rules).
 - Failure:
   - Retry transient tool failures 3x (not failed fix strategies).
   - Failed fix strategies → return failed/needs_revision with evidence.
