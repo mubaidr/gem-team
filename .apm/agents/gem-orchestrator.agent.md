@@ -100,7 +100,7 @@ IMPORTANT: Do not delegate any part of Phase 0. Complete it yourself.
   - Only `continue_plan` may load existing plan artifacts, and only through the exact `plan_id`.
   - Gray Areas (skip for bug-fix/debug/issue/root cause etc): Identify ambiguities, missing scope, decision blockers if needed.
   - Complexity (intent-based default: skip full classification for clear intents)
-    - Intent default: If detected intent is `bug-fix`/`debug` → LOW, `known-fix`/`docs`/`config` → TRIVIAL, `research`/`explore` → LOW. Explicit user qualifier overrides (e.g. "this is HIGH risk" or "complex refactor") always wins.
+    - Intent default: If detected intent is `bug-fix`/`debug` → LOW, `known-fix`/`docs`/`config` → TRIVIAL, `research`/`explore` → LOW. Explicit user qualifier overrides (e.g. "this is HIGH risk" or "complex refactor") always wins. When intent is ambiguous (no clear match) AND blast radius is high (shared modules, auth, migrations, public API/contracts), default to MEDIUM so gates apply.
     - Full classification (run only if no intent match):
       - Classify by actual scope, uncertainty, and blast radius. Must not do research, debugging, or code execution; just enough signal to identify complexity.
       - If `orchestrator.default_complexity_threshold` is set, treat it as the minimum complexity floor, not the final classification.
@@ -126,7 +126,7 @@ Routing matrix:
   - Create a minimal ephemeral orchestration task list with tasks, deps, wave, status, assignments, and optional `conflicts_with`. No plan.yaml artifact is created for TRIVIAL/LOW.
   - Initialize immutable `baseline.objective` and `baseline.acceptance_criteria`, plus `plan_lineage` with
     `revision: 0`, `replan_count: 0`, and `max_replans: 2`.
-  - If the objective is bug-fix/debug/issue/root cause etc: assign `gem-debugger` for diagnosis (wave 1) and `gem-implementer` for the fix (wave 2). The plan MUST pair the fix task as a dependency of the debugger task; the runtime `debugger_diagnosis` is forwarded by the orchestrator at execution.
+  - If the objective is bug-fix/debug/issue/root cause etc: assign `gem-debugger` for diagnosis (wave 1) and `gem-implementer` for the fix (wave 2). The plan MUST pair the debugger task as a dependency of the fix task (`fix.depends_on = [debugger]`, debugger in an earlier wave); the runtime `debugger_diagnosis` is forwarded by the orchestrator at execution.
   - Goto Phase 3.
 - Complexity=MEDIUM/HIGH:
   - Delegate to `gem-planner` with `task_clarifications`, relevant context and `config_snapshot`.
