@@ -41,6 +41,8 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
   - Then detect project: RN/Expo/Flutter.
   - Read tokens from `DESIGN.md` (UI tasks only).
   - Analyze acceptance criteria inline: Understand `ac` and `handoff` from task_definition.
+  - Determine affected platforms from the task scope, changed files, platform guards, and acceptance criteria.
+    Treat both platforms as affected when shared code or cross-platform behavior is changed.
 - TDD Cycle (Red → Green → Refactor → Verify):
   - Red: Create/update only the test categories justified by acceptance criteria, behavior, or risk.
     Cover boundaries, errors, invariants, input variations, and state transitions when applicable.
@@ -49,7 +51,8 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
   - iOS: Check Xcode logs, deps, rebuild.
   - Android: `adb logcat` / Gradle, SDK mismatch, rebuild.
   - Native module: Missing → `npx expo install`.
-  - Platform failure: Isolate platform code, fix, retest both.
+  - Platform failure: Isolate platform code, fix, and retest the affected platform. Retest both only when shared
+    code or cross-platform behavior is in scope.
 - Failure:
   - Retry 3x, log "Retry N/3".
   - After max → mitigate or escalate.
@@ -101,7 +104,9 @@ MANDATORY: These rules are mandatory for every request and apply across all work
 
 - Library-first: Prefer well-established, actively maintained libraries (official or already in the stack) over custom implementations.
 - Surgical edits only: refactor only within the current task's TDD cycle (Red-Green-Refactor), never as adjacent cleanup (preserve reviewability).
-- After each fix: run regression tests on both iOS and Android before concluding.
+- After each fix: run regression tests on affected platforms before concluding. Run both iOS and Android when shared
+  code, cross-platform behavior, or acceptance criteria require it. Report an out-of-scope or unavailable platform
+  as skipped with the reason.
 - TDD: Red→Green→Refactor. Test behavior, not implementation.
 - YAGNI, KISS, DRY, FP. No TBD/TODO as final.
 - Must meet all acceptance_criteria. Use existing tech stack.
@@ -112,8 +117,9 @@ MANDATORY: These rules are mandatory for every request and apply across all work
 
 - Must: FlatList/SectionList for >50 items (never ScrollView). SafeAreaView/useSafeAreaInsets for notched devices. Platform.select for platform diffs. KeyboardAvoidingView for forms.
 - Animate only transform/opacity (GPU). Use Reanimated. Memo list items (React.memo+useCallback).
-- Test on both iOS and Android. Never inline styles (StyleSheet.create). Never hardcode dimensions (flex/Dimensions API/useWindowDimensions).
-- Never waitFor/setTimeout for animations (Reanimated timing). Don't skip platform testing. Cleanup subscriptions in useEffect.
+- Test affected platforms by default; test both iOS and Android for shared code, cross-platform behavior, or explicit
+  acceptance criteria. Never inline styles (StyleSheet.create). Never hardcode dimensions (flex/Dimensions API/useWindowDimensions).
+- Never waitFor/setTimeout for animations (Reanimated timing). Do not skip required platform testing. Cleanup subscriptions in useEffect.
 - UI: use `DESIGN.md` tokens, never hardcode colors/spacing/shadows.
 - Interface: sync/async, req-resp/event. Data: validate at boundaries, never trust input. State: match complexity. Errors: plan paths first.
 - Contract tasks: write contract tests before business logic.
@@ -121,9 +127,11 @@ MANDATORY: These rules are mandatory for every request and apply across all work
 #### Bug-Fix Mode
 
 - IF debugger_diagnosis present: validate it contains `root_cause`, `target_files`, `fix_recommendations`.
-- Update/create test that reproduces the bug (asserts correct behavior) for both iOS and Android.
+  - Update/create a test that reproduces the bug (asserts correct behavior) on affected platforms. Use both iOS and
+    Android when the bug involves shared code, cross-platform behavior, or explicit acceptance criteria.
 - Verify test fails before fix.
 - Implement minimal_change to pass the test.
-- Run regression tests on both iOS and Android:verify fix doesn't break existing functionality.
+  - Run regression tests on affected platforms to verify the fix. Include both iOS and Android when required by scope
+    or acceptance criteria.
 
 </rules>
