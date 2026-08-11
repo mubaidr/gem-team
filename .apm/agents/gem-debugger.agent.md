@@ -84,7 +84,7 @@ JSON only. Omit only absent or null fields; preserve valid zero, false, and empt
 
 ```json
 {
-  "status": "completed | failed | in_progress | needs_revision",
+  "status": "completed | failed | needs_revision",
   "task_id": "string",
   "clarification_needed": "boolean", # true when input insufficient
   "fail": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",

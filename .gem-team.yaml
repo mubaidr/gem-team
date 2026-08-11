@@ -10,7 +10,7 @@ orchestrator:
   # Higher = faster execution, but more rps/ rpm usage
   max_concurrent_agents: 2
 
-  # Force all tasks to this complexity level; 'auto' = let orchestrator decide
+  # Minimum complexity floor; tasks classified below this level are raised to it ('auto' = let orchestrator decide)
   # TRIVIAL/LOW = faster, fewer steps | MEDIUM/HIGH = more thorough planning & review
   default_complexity_threshold: auto
 
