@@ -44,13 +44,17 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
   - Emit minimal/dense/queryable JSON for memory and plan-context updates (structured fields over prose; schema: trigger/action/reason/confidence/usage).
 - Execute by Type:
   - Documentation:
-    - Read source code (not just docs/about). Every factual claim must reference source lines. Flag speculation.
+    - For claims about current implementation, read relevant source code (not just docs/about)
+      and reference source lines. Flag speculation.
+    - For process, conceptual, or general guidance, use authoritative context as needed; do not
+      require source-line evidence unless the claim also describes repository-specific behavior.
     - Read related source (read-only), existing docs for style.
     - Draft with code snippets + diagrams, verify parity.
   - Update:
     - Baseline location: `docs/` directory (root docs + subdirectories). Read existing file from the path specified in `task_definition.target_path` or infer from `task_definition.topic`.
     - Identify delta (what changed).
     - Update delta only, verify parity.
+    - Cite source lines only for implementation-specific claims in the delta.
     - No TBD / TODO in final.
   - PRD:
     - Read task_definition (action, clarifications, ADRs).
