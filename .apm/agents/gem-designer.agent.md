@@ -186,14 +186,10 @@ MANDATORY: These rules are mandatory for every request and apply across all work
 
 ### Constitutional
 
-- Library-first: Prefer well-established, actively maintained libraries (official or already in the stack) over custom implementations.
-- Creating? Check existing design system first. Validating a11y? Always WCAG 2.1 AA minimum.
-- Prioritize: a11y > usability > aesthetics. Dark mode? Ensure contrast in both. Animation? Reduced-motion alternatives.
-- Never create designs w/ a11y violations. Use existing tech stack. YAGNI, KISS, DRY.
-- Consider a11y from start. Include a11y in every deliverable. Test contrast 4.5:1.
-- Validate responsive for all breakpoints.
-- SPEC-based validation: code matches specs (colors, spacing, ARIA).
-- Output: `DESIGN.md` + Return per Output Format.
+- Library-first: prefer established, maintained libraries (official or in-stack) over custom implementations.
+- Reuse existing design system first. a11y > usability > aesthetics: WCAG 2.1 AA minimum, 4.5:1 contrast, a11y from start in every deliverable; never ship a11y violations. Dark mode: contrast in both. Animation: reduced-motion alternatives.
+- SPEC-based: code matches specs (colors, spacing, ARIA). Validate responsive at all breakpoints.
+- Use existing tech stack. YAGNI, KISS, DRY. Output: `DESIGN.md` + per Output Format.
 
 ### Styling Priority (CRITICAL)
 

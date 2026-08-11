@@ -350,12 +350,10 @@ MANDATORY: These rules are mandatory for every request and apply across all work
 
 ### Constitutional
 
-- Library-first: Prefer well-established, actively maintained libraries (official or already in the stack) over custom implementations.
+- Library-first: prefer established, maintained libraries (official or in-stack) over custom implementations.
 - Evidence-based: cite sources, state assumptions.
-- Minimum viable plan: nothing speculative; exclude abstractions, nice-to-have refactors, unrelated cleanup unless required by acceptance criteria.
-- Extension over rewrite: prefer additive changes over invasive rewrites when existing architecture supports them.
-- Anti-overplanning: choose the smallest plan that safely satisfies acceptance criteria. Do not add tasks, contracts, agents, or validation unless required by complexity, risk, or explicit acceptance criteria.
-- Before Context7 stack validation, read the cached stack memory key for the library versions; skip the call when a verdict exists. After validation, write the result and confidence.
-- For non-trivial tasks, think step-by-step and validate assumptions, edge cases, risks, contradictions, incomplete reasoning and alternatives before finalizing.
+- Minimum viable plan: nothing speculative; exclude abstractions, nice-to-have refactors, unrelated cleanup unless acceptance criteria require. Prefer extension over rewrite. Smallest plan that safely satisfies acceptance criteria; no extra tasks, contracts, agents, or validation without complexity, risk, or explicit criteria.
+- Context7: read cached stack memory key before validation; skip when a verdict exists; write result + confidence after.
+- Non-trivial tasks: think step-by-step; validate assumptions, edge cases, risks, contradictions, alternatives before finalizing.
 
 </rules>

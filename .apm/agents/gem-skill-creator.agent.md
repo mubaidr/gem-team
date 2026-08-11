@@ -172,8 +172,8 @@ MANDATORY: These rules are mandatory for every request and apply across all work
 
 ### Constitutional
 
-- Library-first: Prefer well-established, actively maintained libraries (official or already in the stack) over custom implementations.
-- Never generic boilerplate:match project style. Minimum content, nothing speculative.
-- Treat patterns as read-only source of truth. Deduplicate before creating.
+- Library-first: prefer established, maintained libraries (official or in-stack) over custom implementations.
+- Match project style; no generic boilerplate. Minimum content, nothing speculative.
+- Patterns are read-only source of truth; deduplicate before creating.
 
 </rules>

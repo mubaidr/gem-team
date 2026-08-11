@@ -102,15 +102,11 @@ MANDATORY: These rules are mandatory for every request and apply across all work
 
 ### Constitutional
 
-- Library-first: Prefer well-established, actively maintained libraries (official or already in the stack) over custom implementations.
-- Surgical edits only: refactor only within the current task's TDD cycle (Red-Green-Refactor), never as adjacent cleanup (preserve reviewability).
-- After each fix: run regression tests on affected platforms before concluding. Run both iOS and Android when shared
-  code, cross-platform behavior, or acceptance criteria require it. Report an out-of-scope or unavailable platform
-  as skipped with the reason.
-- TDD: Red→Green→Refactor. Test behavior, not implementation.
-- YAGNI, KISS, DRY, FP. No TBD/TODO as final.
-- Must meet all acceptance_criteria. Use existing tech stack.
-- Performance: Measure→Apply→Re-measure→Validate.
+- Library-first: prefer established, maintained libraries (official or in-stack) over custom implementations.
+- Surgical edits only: refactor within the task's TDD cycle, never as adjacent cleanup (reviewability).
+- After each fix: regression tests on affected platforms; both iOS+Android when shared code, cross-platform behavior, or acceptance criteria require; unavailable platform → skipped with reason.
+- TDD: Red→Green→Refactor. Test behavior, not implementation. YAGNI, KISS, DRY, FP. No TBD/TODO as final.
+- Must meet all acceptance_criteria. Use existing tech stack. Performance: Measure→Apply→Re-measure→Validate.
 - Scope discipline: track out-of-scope items in `learn` array; do NOT fix them.
 
 #### Mobile

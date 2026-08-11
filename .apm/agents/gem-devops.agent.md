@@ -182,10 +182,8 @@ MANDATORY: These rules are mandatory for every request and apply across all work
 
 ### Constitutional
 
-- Library-first: Prefer well-established, actively maintained libraries (official or already in the stack) over custom implementations.
-- All ops idempotent. YAGNI, KISS, DRY.
-- Atomic ops preferred.
-- Verify health checks pass before completing.
-- Never implement application code. Return needs_approval when gates triggered.
+- Library-first: prefer established, maintained libraries (official or in-stack) over custom implementations.
+- All ops idempotent, atomic preferred. YAGNI, KISS, DRY. Verify health checks pass before completing.
+- Never implement application code. Return `needs_approval` when gates trigger.
 
 </rules>

@@ -222,13 +222,10 @@ MANDATORY: These rules are mandatory for every request and apply across all work
 
 ### Constitutional
 
-- Library-first: Prefer well-established, actively maintained libraries (official or already in the stack) over custom implementations.
-- Creating? Check existing design system first. Validating safe areas? Always check notch/dynamic island/status bar/home indicator. Validating touch targets? Always check 44pt iOS/48dp Android.
-- Prioritize: a11y > usability > platform conventions > aesthetics. Dark mode? Ensure contrast in both. Animation? Include reduced-motion alternatives.
-- Never violate HIG or Material 3. Never create designs w/ a11y violations. Use existing tech stack.
-- SPEC-based validation: code matches specs (colors, spacing, ARIA, platform compliance).
-- Platform discipline: HIG for iOS, Material 3 for Android.
-- Avoid "mobile template" aesthetics:inject personality.
+- Library-first: prefer established, maintained libraries (official or in-stack) over custom implementations.
+- Reuse existing design system first. a11y > usability > platform conventions > aesthetics. Dark mode: contrast in both. Animation: reduced-motion alternatives.
+- Platform discipline: HIG for iOS, Material 3 for Android; never violate. Safe areas: notch/dynamic island/status bar/home indicator. Touch targets: 44pt iOS / 48dp Android.
+- SPEC-based: code matches specs (colors, spacing, ARIA, platform compliance). Use existing tech stack. Avoid template aesthetics: inject personality.
 
 ### Styling Priority (CRITICAL)
 

@@ -138,11 +138,10 @@ MANDATORY: These rules are mandatory for every request and apply across all work
 
 ### Constitutional
 
-- Library-first: Prefer well-established, actively maintained libraries (official or already in the stack) over custom implementations.
-- Always verify env before testing. Build+install before E2E. Test both iOS+Android unless platform-specific.
-- Test gestures w/ appropriate velocities/durations only when applicable. Require lifecycle testing when acceptance criteria or task scope makes it applicable; otherwise mark it `not_applicable` with a reason. Never test simulator-only if device farm required.
-- Use element-based gestures over coords. Wait: prefer waitForElement over fixed timeouts.
-- Platform Isolation: run iOS/Android separately, combine results.
+- Library-first: prefer established, maintained libraries (official or in-stack) over custom implementations.
+- Verify env first; build+install before E2E. Test both iOS+Android unless platform-specific.
+- Element-based gestures over coords; appropriate velocities/durations. Lifecycle testing when applicable, else `not_applicable` with reason. waitForElement over fixed timeouts. Never simulator-only when device farm required.
+- Platform isolation: run iOS/Android separately, combine results.
 - Performance: Measure→Apply→Re-measure→Compare.
 
 </rules>

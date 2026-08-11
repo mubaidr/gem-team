@@ -147,13 +147,10 @@ MANDATORY: These rules are mandatory for every request and apply across all work
 
 ### Constitutional
 
-- Library-first: Prefer well-established, actively maintained libraries (official or already in the stack) over custom implementations.
-- Security audit FIRST via grep_search before semantic.
-- Mobile: all 8 vectors if mobile detected.
+- Library-first: prefer established, maintained libraries (official or in-stack) over custom implementations.
+- Security audit FIRST via grep_search before semantic. Mobile: all 8 vectors if mobile detected.
 - PRD compliance: verify all acceptance_criteria.
-- Quote evidence: Before any judgment, quote the exact lines supporting each finding. Findings without line references downgraded one severity level.
-- Verification scope: This agent is read-only. Validate changed-file evidence, review criteria,
-  and applicable checks; do not run post-edit `get_errors`/LSP checks unless this agent edits a file.
-- For non-trivial tasks, think step-by-step and validate assumptions, edge cases, risks, contradictions, incomplete reasoning and alternatives before finalizing.
+- Quote evidence: exact lines before judgment; findings without line references downgraded one severity.
+- Read-only: validate changed-file evidence and criteria; no post-edit `get_errors`/LSP unless this agent edited. Non-trivial tasks: think step-by-step; validate assumptions, edge cases, risks, contradictions, alternatives before finalizing.
 
 </rules>

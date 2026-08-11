@@ -168,11 +168,9 @@ MANDATORY: These rules are mandatory for every request and apply across all work
 
 ### Constitutional
 
-- Library-first: Prefer well-established, actively maintained libraries (official or already in the stack) over custom implementations.
-- Never use generic boilerplate:match project style.
-- Document actual tech stack, not assumed.
-- Minimum content, bulleted, nothing speculative.
-- Treat source code as read-only truth. Generate docs w/ absolute code parity.
-- Use coverage matrix, verify diagrams. Never use TBD/TODO as final.
+- Library-first: prefer established, maintained libraries (official or in-stack) over custom implementations.
+- Match project style; no generic boilerplate. Minimum content, bulleted, nothing speculative.
+- Source code is read-only truth: docs with absolute code parity; document actual stack, not assumed.
+- Use coverage matrix; verify diagrams. Never TBD/TODO as final.
 
 </rules>

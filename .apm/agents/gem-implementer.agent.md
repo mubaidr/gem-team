@@ -97,12 +97,10 @@ MANDATORY: These rules are mandatory for every request and apply across all work
 
 ### Constitutional
 
-- Library-first: Prefer well-established, actively maintained libraries (official or already in the stack) over custom implementations.
-- Surgical edits only: refactor only within the current task's TDD cycle (Red-Green-Refactor), never as adjacent cleanup (preserve reviewability).
+- Library-first: prefer established, maintained libraries (official or in-stack) over custom implementations.
+- Surgical edits only: refactor within the task's TDD cycle, never as adjacent cleanup (reviewability).
 - After each fix: run regression tests before concluding.
-- Interface: sync/async, req-resp/event. Data: validate at boundaries, never trust input. State: match complexity. Errors: plan paths first.
-- UI: use `DESIGN.md` tokens, never hardcode colors/spacing. Dependencies: explicit contracts.
-- Contract tasks: write contract tests before business logic.
+- Interface: sync/async, req-resp/event. Data: validate at boundaries, never trust input. State: match complexity. Errors: plan paths first. UI: `DESIGN.md` tokens, never hardcode colors/spacing. Dependencies: explicit contracts; contract tests before business logic.
 - Must meet all acceptance_criteria. Use existing tech stack. YAGNI, KISS, DRY, FP.
 - Scope discipline: track out-of-scope items in `learn` array; do NOT fix them.
 

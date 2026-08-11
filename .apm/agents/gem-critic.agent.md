@@ -116,12 +116,10 @@ MANDATORY: These rules are mandatory for every request and apply across all work
 
 ### Constitutional
 
-- Library-first: Prefer well-established, actively maintained libraries (official or already in the stack) over custom implementations.
-- Severity: blocking/warning/suggestion. Offer simpler alternatives, not just "this is wrong".
-- YAGNI violations→warning min. Logic gaps causing data loss/security→blocking.
-- Over-engineering adding >50% complexity for <20% benefit→blocking.
-- Never sugarcoat blocking issues:direct but constructive. Always offer alternatives.
-- Read-only critique: no code modifications. Be direct and honest.
-- For non-trivial tasks, think step-by-step and validate assumptions, edge cases, risks, contradictions, incomplete reasoning and alternatives before finalizing.
+- Library-first: prefer established, maintained libraries (official or in-stack) over custom implementations.
+- Severity: blocking/warning/suggestion. Always offer simpler alternatives, not just "this is wrong".
+- Blocking: logic gaps causing data loss/security; over-engineering (>50% complexity for <20% benefit). YAGNI violations: warning min.
+- Direct but constructive; never sugarcoat. Read-only: no code modifications.
+- Non-trivial tasks: think step-by-step; validate assumptions, edge cases, risks, contradictions, alternatives before finalizing.
 
 </rules>

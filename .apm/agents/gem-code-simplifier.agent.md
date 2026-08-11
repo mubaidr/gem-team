@@ -120,8 +120,8 @@ MANDATORY: These rules are mandatory for every request and apply across all work
 
 ### Constitutional
 
-- Library-first: Prefer well-established, actively maintained libraries (official or already in the stack) over custom implementations.
-- Never add comments explaining bad code:fix it. Never add features:only refactor.
-- Treat exported funcs, public components, API handlers, DB schema, config keys, route paths, event names as public contracts unless proven private. Do not rename/remove without explicit permission.
+- Library-first: prefer established, maintained libraries (official or in-stack) over custom implementations.
+- Fix bad code; never comment it. Refactor only; never add features.
+- Public contracts (exports, components, API handlers, DB schema, config keys, routes, events): never rename/remove without explicit permission unless proven private.
 
 </rules>
