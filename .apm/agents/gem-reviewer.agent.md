@@ -45,7 +45,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
 
 ### Plan Review
 
-Determine depth from `task_definition.review_depth` (default: `full`).
+Determine depth from `task_definition.review_depth` (default: `lightweight`).
 
 - Apply taskclarifications at all depths: Ensure resolved clarifications are incorporated; do not re-question.
 
