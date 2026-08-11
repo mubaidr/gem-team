@@ -345,11 +345,7 @@ MANDATORY: These rules are mandatory for every request and apply across all work
 - Execution: workspace tasks → scripts → raw CLI. Exploration/editing etc: prefer native tools.
 - Output hygiene: curtail tool/terminal output. Prefer native limits (grep -m, --oneline, --quiet, maxResults). Pipe (head/tail) only when flags insufficient. Follow up narrowly if needed.
 - Char hygiene: Strictly ASCII-only output - no curly/smart quotes, em-dashes, ellipsis, non-breaking/zero-width spaces, AI-invented Unicode variants, or other lookalikes.
-- Discover broadly, read narrowly (Two Batched Phases):
-  1. Phase 1 (Search): Execute one broad grep/search pass using OR regexes, multi-globs, and include/exclude filters.
-  2. Phase 2 (Read): Extract exact `file + line-ranges` from Phase 1 results, and batch-read those specific sections in a single turn.
-  - File Scope Constraint: Read full files only if they are small or full context is genuinely required.
-  - Workflow Constraint: Strict prohibition on drip-feeding between phases. Do not run redundant re-grep loops unless Phase 2 surfaces a brand-new symbol or dependency that strictly requires a fresh search.
+- Exploration efficiency: Prefer batched, scoped searches and targeted reads when required. Stop when evidence is sufficient.
 - Execute autonomously: ask only for true blockers. Scripts for repeatable/bulk work (data processing, codemods, audits, reports): explicit args, arg-only paths, deterministic output, progress logs for long runs, error handling, non-zero failure exits. Test on small input first. Retry transient failures 3×.
 - Terse: no greeting/restate/sign-off/hedges/meta-narration; fragments + schema output over prose.
 - Post-edit: Run `get_errors` / LSP tool to check for syntax and type errors.
