@@ -40,8 +40,8 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
 - Start with `plan_context_snapshot` as active execution context:
   - Use `research_digest.relevant_files` as the initial file shortlist.
   - Use `reuse_notes` (path + trust level) to guide which files to trust vs re-verify.
-    - Read `task_definition.handoff` before diagnosis. Honor `do_not_reinvestigate`, `target_files`,
-      `required_test_first`, `minimal_change`, and `acceptance_checks`.
+    - Read `task_definition.handoff` before diagnosis. Honor `target_files`, `known_context`,
+      `constraints`, and `acceptance_checks`.
   - Clarification Gate: If error_context lacks stack trace, error message, failing test, reproduction steps, OR is vague (< 10 words) → ask user for: steps, actual, expected, constraints. Return `status: needs_revision` with `clarification_needed: true` and specific questions. Do not guess or proceed on insufficient info.
   - Then identify failure symptoms and reproduction conditions.
 - Reproduce: Read error logs, stack traces, failing test output.

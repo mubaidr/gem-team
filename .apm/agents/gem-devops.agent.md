@@ -40,7 +40,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
   - Use `research_digest.relevant_files` as the initial file shortlist.
   - Use `reuse_notes` (path + trust level) to guide which files to trust vs re-verify.
     - Read `task_definition.handoff` before deployment work. Limit changes to `target_files`, honor
-      `do_not_reinvestigate` and `minimal_change`, and verify `acceptance_checks`.
+      `known_context` and `constraints`, and verify `acceptance_checks`.
   - Apply config settings: Read `config_snapshot` for:
     - `devops.approval_required_for` → check if current env requires approval
     - `devops.deployment_strategy` → default strategy (rolling/blue_green/canary)

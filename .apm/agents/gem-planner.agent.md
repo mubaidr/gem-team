@@ -105,6 +105,7 @@ IMPORTANT: Focus strictly on architectural milestones, dependency mapping, and s
 - Acceptance Criteria Injection:
   - For each task, reference relevant acceptance criteria by ID when available.
   - Populate `task_definition.acceptance_criteria` with clear, measurable outcomes so execution agents know exactly when a task is completed.
+- Handoffs contain only verified context, task boundaries, constraints, and measurable checks. Do not encode execution workflow or implementation steps.
 - Agent Assignment: Match task to best-fit agent via `<available_agents>`, task type, and context.
   - Research: assign `gem-researcher` only for an explicit research deliverable or unresolved material decision blocker. Do not delegate routine planner discovery.
   - Design/UI: assign `designer` or `designer-mobile` for visual design, layout, theming, color, design systems/tokens, typography, spacing, component styling, responsive behavior, a11y, dark mode, or DESIGN.md work.
@@ -281,12 +282,11 @@ tasks:
     success_criteria: [string] # unified verification: human steps + machine-checkable predicates; every implementation task should be independently testable or explicitly state why not.
 
     # ───────────────────────────────────────────────────────────────────────
-    # TASK HANDOFF (available to every downstream agent)
+    # TASK HANDOFF
     handoff:
-      do_not_reinvestigate: [string]
-      required_test_first: string
+      known_context: [string]
       target_files: [string]
-      minimal_change: string
+      constraints: [string]
       acceptance_checks: [string]
 
     # AGENT-SPECIFIC HANDOFFS (populated based on task agent)

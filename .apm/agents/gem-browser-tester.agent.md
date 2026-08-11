@@ -38,8 +38,8 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
 - Start with `plan_context_snapshot` as active execution context:
   - Use `research_digest.relevant_files` as the initial file shortlist.
   - Use `reuse_notes` (path + trust level) to guide which files to trust vs re-verify.
-    - Read `task_definition.handoff` before testing. Use `target_files` and `acceptance_checks` to
-      select scope; honor `do_not_reinvestigate` and `minimal_change` when setting up validation.
+    - Read `task_definition.handoff` before testing. Use `target_files`, `known_context`, and
+      `constraints` to select scope; verify `acceptance_checks`.
   - Parse task_definition inline: identify validation_matrix/flows, scenarios, steps, expectations, and evidence needs.
   - Apply config settings: Read `config_snapshot` for:
     - `quality.visual_regression_enabled` → enable/disable screenshot comparison

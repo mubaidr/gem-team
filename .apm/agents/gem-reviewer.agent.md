@@ -41,7 +41,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
   - Use `research_digest.relevant_files` as the initial file shortlist.
   - Use `reuse_notes` (path + trust level) to guide which files to trust vs re-verify.
     - Read `task_definition.handoff` before review. Scope checks to `target_files`, honor
-      `do_not_reinvestigate` and `minimal_change`, and verify `acceptance_checks`.
+      `known_context` and `constraints`, and verify `acceptance_checks`.
   - Then parse review_scope: plan|wave.
   - Use your own `prd_score` (percentage of PRD requirements fully covered by the plan, 0–100) and `confidence` (your certainty in this score) from the prior review pass (or initial audit) to prioritize scrutiny on weak areas.
 

@@ -39,7 +39,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
   - Use `research_digest.relevant_files` as the initial file shortlist.
   - Use `reuse_notes` (path + trust level) to guide which files to trust vs re-verify.
     - Read `task_definition.handoff` before simplifying. Limit edits to `target_files`, honor
-      `do_not_reinvestigate` and `minimal_change`, and verify `acceptance_checks`.
+      `known_context` and `constraints`, and verify `acceptance_checks`.
   - Note: Do not add ad-hoc verification checks outside the applicable post-change verification below.
 - Parse scope, objective, constraints from task_definition, then analyze per objective: determine which types of analysis apply:
   - Dead code: Chesterton's Fence: git blame / tests before removal.
