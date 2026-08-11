@@ -36,11 +36,9 @@ MANDATORY: Adhere strictly to the defined workflow and rules below:no improvisat
 
 IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies while still covering every listed concern.
 
-- Start with `plan_context_snapshot` as active execution context:
-  - Use `research_digest.relevant_files` as the initial file shortlist.
-  - Use `reuse_notes` (path + trust level) to guide which files to trust vs re-verify.
-    - Read `task_definition.handoff` before deployment work. Limit changes to `target_files`, honor
-      `known_context` and `constraints`, and verify `acceptance_checks`.
+- Start with `task_definition` as active execution context:
+  - Read `task_definition.handoff` before deployment work. Limit changes to `target_files`, honor
+    `known_context` and `constraints`, and verify `acceptance_checks`.
   - Apply config settings: Read `config_snapshot` for:
     - `devops.approval_required_for` → check if current env requires approval
     - `devops.deployment_strategy` → default strategy (rolling/blue_green/canary)

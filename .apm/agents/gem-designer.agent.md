@@ -38,11 +38,9 @@ MANDATORY: Adhere strictly to the defined workflow and rules below:no improvisat
 
 IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies while still covering every listed concern.
 
-- Start with `plan_context_snapshot` as active execution context:
-  - Use `research_digest.relevant_files` as the initial file shortlist.
-  - Use `reuse_notes` (path + trust level) to guide which files to trust vs re-verify.
-    - Read `task_definition.handoff` before design work. Use `target_files`, `known_context`,
-      `constraints`, and `acceptance_checks` to keep the design task scoped.
+- Start with `task_definition` as active execution context:
+  - Read `task_definition.handoff` before design work. Use `target_files`, `known_context`,
+    `constraints`, and `acceptance_checks` to keep the design task scoped.
   - Then parse mode (create|validate), scope, context.
 - Create Mode:
   - Constraints: Lock platform, a11y requirements, existing tokens, dark mode support before any creative work. Only satisfy constraints before applying creative direction.

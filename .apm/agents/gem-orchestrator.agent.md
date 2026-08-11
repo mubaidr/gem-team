@@ -126,7 +126,7 @@ Routing matrix:
   - Create an minimal ephemeral orchestration plan with tasks, deps, wave, status, assignments, and optional `conflicts_with`.
   - Initialize immutable `baseline.objective` and `baseline.acceptance_criteria`, plus `plan_lineage` with
     `revision: 0`, `replan_count: 0`, and `max_replans: 2`.
-  - If the objective is bug-fix/debug/issue/root cause etc: assign `gem-debugger` for diagnosis (wave 1) and `gem-implementer` for the fix (wave 2). The plan MUST include `debugger_diagnosis` as a dependency handoff from wave 1 to wave 2.
+  - If the objective is bug-fix/debug/issue/root cause etc: assign `gem-debugger` for diagnosis (wave 1) and `gem-implementer` for the fix (wave 2). The plan MUST pair the fix task as a dependency of the debugger task; the runtime `debugger_diagnosis` is forwarded by the orchestrator at execution.
   - Goto Phase 3.
 - Complexity=MEDIUM/HIGH:
   - Delegate to `gem-planner` with `task_clarifications`, relevant context and `config_snapshot`.
@@ -143,10 +143,9 @@ Routing matrix:
 
 #### Phase 3A: Execution Context Setup
 
-- For every wave, use the supplied context snapshot for this exact `plan_id`; agents must not load another plan's artifacts or context.
-- Before each wave, read the plan-level context fields from the current `docs/plan/{plan_id}/plan.yaml` and filter them per agent.
-- During delegation, combine the filtered plan-level context with the task definition; task fields are authoritative for task-specific scope.
-- After each wave, persist refreshed plan-level context fields in `plan.yaml` before supplying context to the next wave.
+- For every wave, use the supplied task context for this exact `plan_id`; agents must not load another plan's artifacts or context.
+- During delegation, pass `task_definition` (authoritative for task scope) and `config_snapshot`.
+- After each wave, persist task status and outputs to this plan's `plan.yaml` before the next wave.
 
 #### Phase 3B: Wave Execution Loop
 
@@ -175,9 +174,10 @@ the user, and resume only after approval. Continue independent task paths when s
     - Run tasks where `status=pending`, `wave=current`, and all dependencies are completed, while preventing parallel execution of tasks listed in `conflicts_with`. Process waves in ascending order, attaching contracts for Wave > 1.
 - Execute Wave:
   - Delegate exclusively to the subagent specified by `task.agent`, using `agent_input_reference`. Concurrency limit = `orchestrator.max_concurrent_agents` if configured, otherwise 2. Never invoke generic, fallback or inferred subagents.
+  - If the delegated task is a fix task paired with a completed debugger task (dependency), inject that debugger's `debugger_diagnosis` output into the payload as `task_definition.debugger_diagnosis`.
   - Use `gem-researcher` only when the plan explicitly assigns it as a task agent; never default to a research wave. Bug-fix/debug tasks always use `gem-debugger`.
   - Pass relevant settings from loaded config.
-  - Include the context payload per `context_passing_rule`, using only the target agent's declared `plan_context_snapshot` fields from `agent_input_reference`; skip irrelevant sections. Never pass a separate context object or artifact.
+  - Include the context payload per `context_passing_rule` from `agent_input_reference`; never pass a separate context object or artifact.
 - Integration Gate:
   - Complexity=HIGH: delegate to `gem-reviewer(wave)` for integration check after every wave.
   - Complexity=MEDIUM: delegate to `gem-reviewer(wave)` only when integration risk exists:
@@ -239,7 +239,7 @@ agent_input_reference:
   context_passing_rule:
     TRIVIAL: pass only direct task instructions (no context payload)
     LOW: pass inline_context_snapshot
-    MEDIUM_HIGH: pass plan_context_snapshot filtered
+    MEDIUM_HIGH: pass task_definition (authoritative) + config_snapshot
 
   base_input:
     plan_id: string
@@ -247,7 +247,6 @@ agent_input_reference:
     complexity: TRIVIAL | LOW | MEDIUM | HIGH
     task_definition: object
     inline_context_snapshot: object # LOW only: ephemeral task-scoped context, no plan.yaml fields
-    plan_context_snapshot: object # MEDIUM/HIGH only: filtered view of top-level plan fields for this agent
     config_snapshot: object # relevant settings from .gem-team.yaml
 
   agents:
@@ -255,7 +254,6 @@ agent_input_reference:
       extends: base_input
       task_definition_fields:
         - focus_area
-        - research_questions
         - exploration_mode
         - constraints
         - handoff
@@ -265,21 +263,21 @@ agent_input_reference:
       task_definition_fields:
         - task_clarifications
         - relevant_context
-        - planning_scope
+        - reuse_notes
         - handoff
 
     gem-implementer:
       extends: base_input
       task_definition_fields:
-        - tech_stack
+        - acceptance_criteria
         - test_coverage
-        - debugger_diagnosis
+        - debugger_diagnosis # runtime: forwarded from the paired debugger task output
         - handoff
 
     gem-implementer-mobile:
       extends: base_input
       task_definition_fields:
-        - platforms
+        - acceptance_criteria
         - debugger_diagnosis
         - handoff
 
@@ -289,6 +287,8 @@ agent_input_reference:
         - review_scope
         - review_depth # lightweight for MEDIUM plans (wave correctness + acceptance criteria only); full for HIGH plans (all checks)
         - review_security_sensitive
+        - task_clarifications
+        - acceptance_criteria
         - handoff
 
     gem-debugger:
@@ -303,6 +303,8 @@ agent_input_reference:
       task_definition_fields:
         - target
         - context
+        - task_clarifications
+        - acceptance_criteria
         - handoff
 
     gem-code-simplifier:
@@ -317,20 +319,13 @@ agent_input_reference:
     gem-browser-tester:
       extends: base_input
       task_definition_fields:
-        - validation_matrix
-        - flows
-        - fixtures
-        - visual_regression
-        - contracts
+        - acceptance_criteria # scenarios derived at execution; no pre-defined matrices at plan time
         - handoff
 
     gem-mobile-tester:
       extends: base_input
       task_definition_fields:
-        - platforms
-        - test_framework
-        - test_suite
-        - device_farm
+        - acceptance_criteria
         - handoff
 
     gem-devops:
@@ -347,6 +342,8 @@ agent_input_reference:
         - task_type
         - audience
         - coverage_matrix
+        - target_path
+        - topic
         - action
         - learnings
         - findings

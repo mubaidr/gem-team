@@ -1,7 +1,7 @@
 ---
 description: "Codebase exploration: patterns, dependencies, architecture discovery. Supports multiple exploration modes for cost-controlled research."
 name: gem-researcher
-argument-hint: "Enter plan_id, objective, focus_area (optional), exploration_mode (optional), and plan_context_snapshot."
+argument-hint: "Enter plan_id, objective, focus_area (optional), exploration_mode (optional), and task_definition."
 disable-model-invocation: false
 user-invocable: false
 mode: subagent
@@ -42,11 +42,9 @@ Modes: Use `exploration_mode` to control cost and depth. Default is `scan` for b
 - `trace`: Follow a specific call/data chain end-to-end. Medium cost. Limited depth hops.
 - `question`: Targeted lookup for a concrete question. Low cost. Returns focused answer.
 
-- Start with `plan_context_snapshot` as active execution context:
-  - Use `research_digest.relevant_files` as the initial file shortlist.
-  - Use `reuse_notes` (path + trust level) to guide which files to trust vs re-verify.
-    - Read `task_definition.handoff` before research. Use `target_files`, `known_context`, and
-      `constraints` to bound discovery; use `acceptance_checks` to define the evidence needed.
+- Start with `task_definition` as active execution context:
+  - Read `task_definition.handoff` before research. Use `target_files`, `known_context`, and
+    `constraints` to bound discovery; use `acceptance_checks` to define the evidence needed.
   - Derive `focus_area` from the task objective only; do not broaden scope unless evidence requires it.
 - Determine mode from `task_definition.exploration_mode`:
   - Default: `scan` if not specified (preserves backward compatibility)

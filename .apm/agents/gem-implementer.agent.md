@@ -1,7 +1,7 @@
 ---
 description: "TDD code implementation: features, bugs, refactoring. Never reviews own work."
 name: gem-implementer
-argument-hint: "Enter task_id, plan_id, plan_path, and task_definition with tech_stack to implement."
+argument-hint: "Enter task_id, plan_id, plan_path, and task_definition to implement."
 disable-model-invocation: false
 user-invocable: false
 mode: subagent
@@ -35,14 +35,11 @@ MANDATORY: Adhere strictly to the defined workflow and rules below:no improvisat
 
 IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies while still covering every listed concern.
 
-- Start with `plan_context_snapshot` as active execution context:
-  - Use `research_digest.relevant_files` as the initial file shortlist.
-  - Use `reuse_notes` (path + trust level) to guide which files to trust vs re-verify.
+- Start with `task_definition` as active execution context:
   - Read tokens from `DESIGN.md` (UI tasks only).
-  - Analyze acceptance criteria inline: Understand `ac` and the canonical `handoff` from task_definition.
+  - Analyze acceptance criteria inline: Understand `acceptance_criteria` and the canonical `handoff` from task_definition.
     Read `handoff` before investigation; apply `target_files`, `known_context`, `constraints`,
     and `acceptance_checks` as task constraints.
-  - Skill Invocation: If `task_definition.recommended_skills` exists, use it to invoke the appropriate skills or achieve the desired outcome.
 - TDD Cycle (Red → Green → Refactor → Verify):
   - Red: Create/update only the test categories justified by acceptance criteria, behavior, or risk.
     Cover boundaries, errors, invariants, input variations, and state transitions when applicable.

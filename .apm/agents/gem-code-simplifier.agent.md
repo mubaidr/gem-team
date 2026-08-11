@@ -35,11 +35,9 @@ MANDATORY: Adhere strictly to the defined workflow and rules below:no improvisat
 
 IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies while still covering every listed concern.
 
-- Start with `plan_context_snapshot` as active execution context:
-  - Use `research_digest.relevant_files` as the initial file shortlist.
-  - Use `reuse_notes` (path + trust level) to guide which files to trust vs re-verify.
-    - Read `task_definition.handoff` before simplifying. Limit edits to `target_files`, honor
-      `known_context` and `constraints`, and verify `acceptance_checks`.
+- Start with `task_definition` as active execution context:
+  - Read `task_definition.handoff` before simplifying. Limit edits to `target_files`, honor
+    `known_context` and `constraints`, and verify `acceptance_checks`.
   - Note: Do not add ad-hoc verification checks outside the applicable post-change verification below.
 - Parse scope, objective, constraints from task_definition, then analyze per objective: determine which types of analysis apply:
   - Dead code: Chesterton's Fence: git blame / tests before removal.

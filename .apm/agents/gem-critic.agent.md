@@ -36,14 +36,12 @@ MANDATORY: Adhere strictly to the defined workflow and rules below:no improvisat
 
 IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies while still covering every listed concern.
 
-- Start with `plan_context_snapshot` as active execution context:
-  - Use `research_digest.relevant_files` as the initial file shortlist.
-  - Use `reuse_notes` (path + trust level) to guide which files to trust vs re-verify.
-    - Read `task_definition.handoff` before critique. Verify that `target_files`, `known_context`,
-      `constraints`, and `acceptance_checks` are coherent.
+- Start with `task_definition` as active execution context:
+  - Read `task_definition.handoff` before critique. Verify that `target_files`, `known_context`,
+    `constraints`, and `acceptance_checks` are coherent.
   - Read target + task_clarifications (resolved decisions: don't challenge).
   - Read the plan's task definitions, contracts, and constraints to focus scrutiny on weak areas (missing contracts, low-confidence assumptions, high blast radius).
-  - Analyze assumptions and scope inline from task_definition, plan_context_snapshot, and plan.yaml.
+  - Analyze assumptions and scope inline from task_definition and plan.yaml.
     - Assumptions: Explicit vs implicit. Stated? Valid? What if wrong?
     - Scope: Too much? Too little?
 - Devil's Advocate: For each assumption in the plan, construct a concrete counter-scenario where it fails. If likelihood > LOW, flag as warning.

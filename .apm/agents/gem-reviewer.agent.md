@@ -37,11 +37,9 @@ MANDATORY: Adhere strictly to the defined workflow and rules below:no improvisat
 
 IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies while still covering every listed concern.
 
-- Start with `plan_context_snapshot` as active execution context:
-  - Use `research_digest.relevant_files` as the initial file shortlist.
-  - Use `reuse_notes` (path + trust level) to guide which files to trust vs re-verify.
-    - Read `task_definition.handoff` before review. Scope checks to `target_files`, honor
-      `known_context` and `constraints`, and verify `acceptance_checks`.
+- Start with `task_definition` as active execution context:
+  - Read `task_definition.handoff` before review. Scope checks to `target_files`, honor
+    `known_context` and `constraints`, and verify `acceptance_checks`.
   - Then parse review_scope: plan|wave.
   - Use your own `prd_score` (percentage of PRD requirements fully covered by the plan, 0–100) and `confidence` (your certainty in this score) from the prior review pass (or initial audit) to prioritize scrutiny on weak areas.
 
@@ -55,8 +53,8 @@ Determine depth from `task_definition.review_depth` (default: `full`).
   - Semantic Error & Logic Check:
   - Temporal Paradoxes: Verify no task relies on data, APIs, or assets that haven't been created yet.
   - Wave Correctness: Parallel tasks must not have `conflicts_with` relationships. Wave 1 must contain valid root tasks.
-    - Deterministic Verification: Reject vague criteria. Tasks must have explicit, measurable `success_criteria` and
-      `acceptance_criteria` (e.g., specific test commands, expected status codes/payloads).
+    - Deterministic Verification: Reject vague criteria. Tasks must have explicit, measurable `acceptance_criteria`
+      (e.g., specific test commands, expected status codes/payloads).
   - Scope gates: Apply PRD checks only when a PRD or product requirement exists. Apply security checks only for
     security-sensitive or executable changes. Apply mobile checks only when mobile code or requirements are involved.
     Apply contract checks only when dependency edges or interfaces exist.
@@ -68,7 +66,7 @@ Determine depth from `task_definition.review_depth` (default: `full`).
   - Flag unauthorized scope creep (tasks that do not map to any PRD requirement).
   - Contract Integrity (when dependency edges or interfaces exist): Every dependency edge between tasks must have
     an explicitly defined data/API contract. Flag mismatched interfaces (e.g., payload schema mismatches).
-  - Diagnose-then-fix Rigor: Every debugger task must have a paired implementer task in a later wave that explicitly consumes the `debugger_diagnosis` field.
+  - Diagnose-then-fix Rigor: Every debugger task must be paired with an implementer task in a later wave that depends on it; the runtime `debugger_diagnosis` is forwarded at execution.
 - Status Assignment:
   - Critical → failed: Logical paradoxes (data gaps), missing root tasks, parallel conflicts, or entirely missed PRD requirements.
   - Non-critical → `needs_revision`: Vague acceptance criteria, missing data contracts on non-breaking dependencies,
@@ -82,7 +80,7 @@ Determine depth from `task_definition.review_depth` (default: `full`).
 - Changed Files Focus:
   - Review ONLY changed lines + their immediate context (function scope, callers).
   - DO NOT read entire files for small changes.
-- If `security_sensitive_tasks[]` or the changed scope includes executable/security-sensitive code -> full per-task scan (grep + semantic).
+- If `review_security_sensitive: true` or the changed scope includes executable/security-sensitive code -> full per-task scan (grep + semantic).
 - Integration checks:
   - Contracts (from -> to satisfied) only when dependency edges or interfaces exist.
   - Edge cases (empty, null, boundaries).

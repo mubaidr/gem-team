@@ -35,12 +35,10 @@ MANDATORY: Adhere strictly to the defined workflow and rules below:no improvisat
 
 IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies while still covering every listed concern.
 
-- Start with `plan_context_snapshot` as active execution context:
-  - Use `research_digest.relevant_files` as the initial file shortlist.
-  - Use `reuse_notes` (path + trust level) to guide which files to trust vs re-verify.
+- Start with `task_definition` as active execution context:
   - Then detect project: RN/Expo/Flutter.
   - Read tokens from `DESIGN.md` (UI tasks only).
-  - Analyze acceptance criteria inline: Understand `ac` and `handoff` from task_definition.
+  - Analyze acceptance criteria inline: Understand `acceptance_criteria` and `handoff` from task_definition.
     Read `handoff` before investigation; apply `target_files`, `known_context`, `constraints`,
     and `acceptance_checks` as task constraints.
   - Determine affected platforms from the task scope, changed files, platform guards, and acceptance criteria.
