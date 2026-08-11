@@ -38,11 +38,14 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
   - Use `research_digest.relevant_files` as the initial file shortlist.
   - Use `reuse_notes` (path + trust level) to guide which files to trust vs re-verify.
   - Then parse patterns[], source_task_id.
-- Evaluate & Deduplicate: Per pattern:
-  - Check `pattern_seen_before` (reuse ≥ 2×):
-    - Look for existing skills with matching pattern name/description in `docs/skills/`.
-    - Check metadata.usages in existing SKILL.md files.
-    - Query orchestrator memory for pattern frequency.
+- Evaluate & Deduplicate:
+  - For each pattern, first perform one bounded lookup for matching skill names/descriptions
+    and filesystem paths in `docs/skills/`.
+  - If no name/scope collision exists, continue with the reuse threshold and create/skip decision
+    without separate metadata, memory, or path scans.
+  - If a possible collision exists, inspect metadata.usages, query orchestrator memory, and compare
+    the full skill scope before deciding whether to merge, update, or skip.
+  - Check `pattern_seen_before` (reuse ≥ 2×) using the evidence from the applicable lookup depth.
   - HIGH (≥ 0.95) → create.
   - MEDIUM (0.6 – 0.95) → skip.
   - LOW (< 0.6) → skip.
@@ -70,7 +73,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
   - Progress logs for long runs
   - Validate with test input before finalizing
 - Validate:
-  - Deduplicate (skip if exists).
+  - Deduplicate using the applicable bounded or collision-depth lookup (skip or merge if overlap exists).
   - No secrets exposed.
   - Test scripts with dry-run or `--help`.
   - Scope check: new skill should not overlap with existing skill scope. If overlap detected → merge into existing rather than create separate.
