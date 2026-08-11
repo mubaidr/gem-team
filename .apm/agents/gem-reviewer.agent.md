@@ -57,13 +57,17 @@ Determine depth from `task_definition.review_depth` (default: `full`).
   - Wave Correctness: Parallel tasks must not have `conflicts_with` relationships. Wave 1 must contain valid root tasks.
     - Deterministic Verification: Reject vague criteria. Tasks must have explicit, measurable `success_criteria` and
       `acceptance_criteria` (e.g., specific test commands, expected status codes/payloads).
+  - Scope gates: Apply PRD checks only when a PRD or product requirement exists. Apply security checks only for
+    security-sensitive or executable changes. Apply mobile checks only when mobile code or requirements are involved.
+    Apply contract checks only when dependency edges or interfaces exist.
 - full (HIGH complexity):
   - Semantic Error & Logic Check: All lightweight checks apply.
-  - PRD Coverage & Scope Drift:
+  - PRD Coverage & Scope Drift (when a PRD or product requirement exists):
   - Verify every single PRD requirement maps to >= 1 task.
   - Check for edge cases mentioned in the PRD (error handling, rate limits).
   - Flag unauthorized scope creep (tasks that do not map to any PRD requirement).
-  - Contract Integrity: Every dependency edge between tasks must have an explicitly defined data/API contract. Flag mismatched interfaces (e.g., payload schema mismatches).
+  - Contract Integrity (when dependency edges or interfaces exist): Every dependency edge between tasks must have
+    an explicitly defined data/API contract. Flag mismatched interfaces (e.g., payload schema mismatches).
   - Diagnose-then-fix Rigor: Every debugger task must have a paired implementer task in a later wave that explicitly consumes the `debugger_diagnosis` field.
 - Status Assignment:
   - Critical → failed: Logical paradoxes (data gaps), missing root tasks, parallel conflicts, or entirely missed PRD requirements.
@@ -78,14 +82,14 @@ Determine depth from `task_definition.review_depth` (default: `full`).
 - Changed Files Focus:
   - Review ONLY changed lines + their immediate context (function scope, callers).
   - DO NOT read entire files for small changes.
-- If security_sensitive_tasks[] → full per-task scan (grep + semantic).
+- If `security_sensitive_tasks[]` or the changed scope includes executable/security-sensitive code -> full per-task scan (grep + semantic).
 - Integration checks:
-  - Contracts (from → to satisfied).
+  - Contracts (from -> to satisfied) only when dependency edges or interfaces exist.
   - Edge cases (empty, null, boundaries).
-  - Lightweight security (grep secrets / PII / SQLi / XSS).
+  - Lightweight security (grep secrets / PII / SQLi / XSS) only for executable or security-sensitive changes.
   - Related Integration / contract tests only.
   - Report all failures.
-- Mobile platform: scan 8 vectors:
+- Mobile platform: scan 8 vectors only when mobile code or mobile requirements are in scope:
   - Keychain / Keystore, cert pinning, jailbreak / root.
   - Deep links, secure storage, biometric auth.
   - Network security (NSAllowsArbitraryLoads).

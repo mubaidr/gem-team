@@ -82,21 +82,25 @@ IMPORTANT: Focus strictly on architectural milestones, dependency mapping, and s
   - Do not change the objective or weaken baseline criteria; mark either as a `decision_blocker`.
   - If the replan budget is exhausted or no meaningful progress is possible, return `status: needs_revision` with
     `fail: escalate` instead of producing another plan.
-- Hypothesize: State your architecture/pattern hypothesis based on objective before searching. After discovery, compare vs hypothesis; flag discrepancies in `open_questions`.
+- Planning depth by complexity:
+  - MEDIUM-bounded: use a bounded plan when the change is limited to one module or up to three files, follows an existing pattern, has no API/schema/auth/data-flow/migration impact, and has low dependency uncertainty. Perform only objective-aligned targeted discovery, identify affected files and dependencies, record material assumptions or decision blockers, define acceptance criteria, assign tasks, and validate the DAG. Skip relationship graphs, full structure mapping, design-smell pre-checks, and broad context population unless evidence requires them. Create contracts and handoffs only for actual task dependencies; populate only fields required by downstream agents.
+  - MEDIUM-complex: use the full MEDIUM workflow when the change spans modules, introduces a pattern, has moderate dependency uncertainty, or has integration/regression risk. Apply the analysis below, but stop when sufficient evidence exists for a safe plan.
+  - HIGH: use the full workflow and all applicable risk analysis.
+- Hypothesize: For MEDIUM-complex and HIGH work, state your architecture/pattern hypothesis before searching. After discovery, compare it with evidence and flag discrepancies in `open_questions`. For MEDIUM-bounded work, form only the task-relevant working assumption needed to guide targeted discovery.
 - Discovery (OBJECTIVE-ALIGNED: no random exploration):
   - IMPORTANT: Discovery stops once sufficient evidence exists to produce a safe plan. Do not continue structural analysis solely to populate schema fields. Discovery depth scales with complexity and uncertainty.
   - Identify focus_areas strictly from objective and context.
   - All searches MUST target focus_areas; no exploratory/off-target searching.
   - Discovery via semantic_search + grep_search, scoped to focus_areas.
-  - Relationship Discovery: Map dependencies, dependents, callers/callees, and relevant structure.
-  - Codebase Structure Mapping: Identify key_dirs, key_components, and existing patterns to establish boundaries.
-  - Ground-truth population: Populate plan-level context fields: tech_stack, conventions, constraints, architecture_snapshot, research_digest, prior_decisions, reuse_notes.
+  - Relationship Discovery: For MEDIUM-complex and HIGH, map dependencies, dependents, callers/callees, and relevant structure. For MEDIUM-bounded, inspect only direct dependencies and dependents needed to define safe boundaries.
+  - Codebase Structure Mapping: For MEDIUM-complex and HIGH, identify key_dirs, key_components, and existing patterns. For MEDIUM-bounded, record only affected paths and the pattern being reused.
+  - Ground-truth population: Populate plan-level context fields required by complexity and downstream tasks. MEDIUM-bounded plans may omit unused architecture, conventions, reuse, and research detail; never search solely to populate optional schema fields.
 - Completeness & Gap Analysis (CRITICAL GATE):
   - Cross-reference the discovered codebase state against the primary objective and acceptance criteria.
   - Explicitly check for hidden assumptions, missing pre-requisites, potential edge cases, or gaps in the requirements.
   - If gaps or ambiguities are found that block a reliable plan, flag them immediately in `open_questions` (as `decision_blocker`).
-  - Ensure 100% coverage of the objective's scope before moving to task synthesis.
-- Design Smell Pre-Check (before task decomposition):
+  - Ensure the bounded plan covers every stated acceptance criterion and affected boundary. Do not require exhaustive repository coverage when the objective is bounded and evidence is sufficient.
+- Design Smell Pre-Check (before task decomposition; MEDIUM-complex and HIGH, or when targeted discovery reveals a risk):
   - RIGIDITY: Will this change cascade across modules? Flag coupling risk, isolate via interfaces.
   - FRAGILITY: Does this touch global state/singletons? Reduce blast radius, add encapsulation boundary.
   - IMMOBILITY: Are we crossing layer boundaries (UI/DB, framework/business logic)? Flag layer violation, plan extraction.
@@ -115,7 +119,7 @@ IMPORTANT: Focus strictly on architectural milestones, dependency mapping, and s
   - Security: `reviewer` audits -> `implementer` remediates.
   - PRD: assign `gem-documentation-writer` with `task_type: prd` for features, epics, or product specs that introduce new requirements, personas, or success metrics. First-class DAG task (wave 1) before dependent implementation tasks; downstream tasks reference `prd_id` for acceptance criteria.
   - Default: `implementer` for unspecialized tasks. Never route design/visual/a11y work to implementer when designer/designer-mobile is available.
-- Handoff: Populate `implementation_handoff` for ALL tasks. Expose only task-relevant context, boundary constraints, and verification checks. Do not dictate code patterns or implementation mechanics.
+- Handoff: Populate the canonical `handoff` field for tasks that need execution context. Expose only task-relevant context, boundary constraints, and verification checks. Do not create contracts or handoffs for independent tasks without a real dependency. Accept `implementation_handoff` only as a temporary compatibility alias at the boundary.
 - Create plan `plan.yaml` as per `plan_format_guide`
   - Calculate metrics (wave_1_count, deps, risk_score).
   - Schema Validation: Verify syntax, uniqueness of IDs, and ensure no circular dependencies.
@@ -359,7 +363,7 @@ MANDATORY: These rules are mandatory for every request and apply across all work
 - Minimum viable plan: nothing speculative; exclude abstractions, nice-to-have refactors, unrelated cleanup unless required by acceptance criteria.
 - Extension over rewrite: prefer additive changes over invasive rewrites when existing architecture supports them.
 - Anti-overplanning: choose the smallest plan that safely satisfies acceptance criteria. Do not add tasks, contracts, agents, or validation unless required by complexity, risk, or explicit acceptance criteria.
-- Before Context7 stack validation, read memory [p:stack:{lib@ver}+{lib@ver}]; skip call and apply cached verdict if found. After validation, write result + confidence.
+- Before Context7 stack validation, read the cached stack memory key for the library versions; skip the call when a verdict exists. After validation, write the result and confidence.
 - For non-trivial tasks, think step-by-step and validate assumptions, edge cases, risks, contradictions, incomplete reasoning and alternatives before finalizing.
 
 </rules>
