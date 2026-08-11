@@ -1,5 +1,33 @@
 # Changelog
 
+## [1.101.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.100.0...gem-team-v1.101.0) (2026-08-11)
+
+
+### 📝 Documentation
+
+* **agents:** simplify checklist ([1c979a7](https://github.com/mubaidr/gem-team/commit/1c979a7652386768cefff8546863e1e5a12cd767))
+
+
+### 🧹 Housekeeping
+
+* add applicability qualifiers and field to gem-mobile-tester agent documentation ([4f620bd](https://github.com/mubaidr/gem-team/commit/4f620bd2b7d891d6786ac234cc0819d9a5d9750f))
+* add approval state fields to gem-devops, gem-orchestrator, and gem-planner agents ([5715313](https://github.com/mubaidr/gem-team/commit/571531388ce94eff12aa09e243b7473b3f1ed2a2))
+* add project state announcements after each wave in orchestrator workflow ([d361604](https://github.com/mubaidr/gem-team/commit/d36160433ba4d3679a43dcecd54da6444aa6c261))
+* add verification scope rules to gem-debugger and gem-orchestrator agents ([dac284a](https://github.com/mubaidr/gem-team/commit/dac284a97cc1a73c0bcce1d5ca42b3105825c12a))
+* adjust gem-designer agent workflow to propose only when design direction is open and to create or update DESIGN.md per design-system guidance ([c10c935](https://github.com/mubaidr/gem-team/commit/c10c93543553a69ee5d7ee830e3b2eb0a7123a01))
+* batch low‑risk edits and run targeted tests; add immediate verification after behavior changes ([2a6223e](https://github.com/mubaidr/gem-team/commit/2a6223ef748ddaac0d5d1ad8f3e6fdfc373c7193))
+* clarify documentation writer workflow to cite source code for implementation claims and use authoritative context for general guidance ([da3994c](https://github.com/mubaidr/gem-team/commit/da3994cf2903606332b8be1ee67fa4f1a1cee5c8))
+* clarify output format omission rules in agent definitions and add agent instruction audit README and findings ([81c9718](https://github.com/mubaidr/gem-team/commit/81c97185065bee6ad689de2e94f2be021d9cd4d0))
+* refine agent rule language, remove MANDATORY prefixes, improve clarity, and update version pinning ([c45fb80](https://github.com/mubaidr/gem-team/commit/c45fb801ef78b22a9c8aa61ae26753fc58c0b2cb))
+* remove new_task plan.yaml creation comment ([b82e7df](https://github.com/mubaidr/gem-team/commit/b82e7dfbbcb60521153bc4348f92b5a09756590f))
+* replace Two Batched Phases description with concise Exploration efficiency note ([9cf418b](https://github.com/mubaidr/gem-team/commit/9cf418b4253e94a1021284078f2d379e3307d495))
+* simplify evaluation and deduplication steps in skill creation workflow ([8e3e437](https://github.com/mubaidr/gem-team/commit/8e3e437b31a36086036afb1d5923f643cf0483ca))
+* simplify planner agent documentation and streamline planning workflow ([b89d23d](https://github.com/mubaidr/gem-team/commit/b89d23dfc57332fd3195184b5960dbc3bdf189ac))
+* standardize batch execution, output hygiene, and char hygiene across agent definitions; simplify planner task definitions and remove redundant fields ([e8a2ed0](https://github.com/mubaidr/gem-team/commit/e8a2ed05554905bea67b9975c058755a393ea5c2))
+* standardize handoff usage and constraint checks across agent definitions and documentation ([33714f0](https://github.com/mubaidr/gem-team/commit/33714f0ba01b6ca738ca268f13be9b759db078e7))
+* update gem-implementer-mobile agent documentation ([1659c3e](https://github.com/mubaidr/gem-team/commit/1659c3eba345d9adb74abc6b62b632ec65f96707))
+* update gem-planner and gem-reviewer agent docs ([5665507](https://github.com/mubaidr/gem-team/commit/56655072a4e0c959ad63c29f8fbe0eec0a971534))
+
 ## [1.100.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.99.0...gem-team-v1.100.0) (2026-08-05)
 
 
