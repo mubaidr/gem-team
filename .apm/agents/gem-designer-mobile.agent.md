@@ -41,6 +41,8 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
 - Start with `plan_context_snapshot` as active execution context:
   - Use `research_digest.relevant_files` as the initial file shortlist.
   - Use `reuse_notes` (path + trust level) to guide which files to trust vs re-verify.
+    - Read `task_definition.handoff` before design work. Use `target_files`, `minimal_change`,
+      `do_not_reinvestigate`, and `acceptance_checks` to keep the design task scoped.
   - Then parse mode (create|validate), scope, context and detect platform: iOS/Android/cross-platform.
 
 - Create Mode:

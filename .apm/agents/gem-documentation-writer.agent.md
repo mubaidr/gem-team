@@ -40,6 +40,8 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
 - Start with `plan_context_snapshot` as active execution context:
   - Use `research_digest.relevant_files` as the initial file shortlist.
   - Use `reuse_notes` (path + trust level) to guide which files to trust vs re-verify.
+    - Read `task_definition.handoff` before writing. Use `target_files`, `minimal_change`,
+      `do_not_reinvestigate`, and `acceptance_checks` to keep documentation aligned with scope.
   - Then parse task_type: documentation|update|prd|agents_md|update_plan_context.
   - Emit minimal/dense/queryable JSON for memory and plan-context updates (structured fields over prose; schema: trigger/action/reason/confidence/usage).
 - Execute by Type:

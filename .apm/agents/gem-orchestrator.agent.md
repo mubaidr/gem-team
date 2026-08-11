@@ -258,6 +258,7 @@ agent_input_reference:
         - research_questions
         - exploration_mode
         - constraints
+        - handoff
 
     gem-planner:
       extends: base_input
@@ -265,6 +266,7 @@ agent_input_reference:
         - task_clarifications
         - relevant_context
         - planning_scope
+        - handoff
 
     gem-implementer:
       extends: base_input
@@ -287,6 +289,7 @@ agent_input_reference:
         - review_scope
         - review_depth # lightweight for MEDIUM plans (wave correctness + acceptance criteria only); full for HIGH plans (all checks)
         - review_security_sensitive
+        - handoff
 
     gem-debugger:
       extends: base_input
@@ -300,6 +303,7 @@ agent_input_reference:
       task_definition_fields:
         - target
         - context
+        - handoff
 
     gem-code-simplifier:
       extends: base_input
@@ -308,6 +312,7 @@ agent_input_reference:
         - targets
         - focus
         - constraints
+        - handoff
 
     gem-browser-tester:
       extends: base_input
@@ -317,6 +322,7 @@ agent_input_reference:
         - fixtures
         - visual_regression
         - contracts
+        - handoff
 
     gem-mobile-tester:
       extends: base_input
@@ -325,6 +331,7 @@ agent_input_reference:
         - test_framework
         - test_suite
         - device_farm
+        - handoff
 
     gem-devops:
       extends: base_input
@@ -332,6 +339,7 @@ agent_input_reference:
         - environment
         - requires_approval
         - devops_security_sensitive
+        - handoff
 
     gem-documentation-writer:
       extends: base_input
@@ -342,6 +350,7 @@ agent_input_reference:
         - action
         - learnings
         - findings
+        - handoff
 
     gem-designer:
       extends: base_input
@@ -351,6 +360,7 @@ agent_input_reference:
         - target
         - context
         - constraints
+        - handoff
 
     gem-designer-mobile:
       extends: base_input
@@ -360,12 +370,14 @@ agent_input_reference:
         - target
         - context
         - constraints
+        - handoff
 
     gem-skill-creator:
       extends: base_input
       task_definition_fields:
         - patterns
         - source_task_id
+        - handoff
 ```
 
 </agent_input_reference>

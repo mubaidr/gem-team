@@ -39,6 +39,8 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
 - Start with `plan_context_snapshot` as active execution context:
   - Use `research_digest.relevant_files` as the initial file shortlist.
   - Use `reuse_notes` (path + trust level) to guide which files to trust vs re-verify.
+    - Read `task_definition.handoff` before critique. Challenge `minimal_change` and verify that
+      `target_files`, `do_not_reinvestigate`, `required_test_first`, and `acceptance_checks` are coherent.
   - Read target + task_clarifications (resolved decisions: don't challenge).
   - Read the plan's task definitions, contracts, and constraints to focus scrutiny on weak areas (missing contracts, low-confidence assumptions, high blast radius).
   - Analyze assumptions and scope inline from task_definition, plan_context_snapshot, and plan.yaml.

@@ -287,13 +287,7 @@ tasks:
     success_criteria: [string] # unified verification: human steps + machine-checkable predicates; every implementation task should be independently testable or explicitly state why not.
 
     # ───────────────────────────────────────────────────────────────────────
-    # AGENT-SPECIFIC HANDOFFS (populated based on task agent)
-    # ───────────────────────────────────────────────────────────────────────
-
-    # gem-implementer fields:
-    tech_stack: [string]
-    test_coverage: string | null
-    diag: object | null # REQUIRED when paired with debugger task; null otherwise
+    # TASK HANDOFF (available to every downstream agent)
     handoff:
       do_not_reinvestigate: [string]
       required_test_first: string
@@ -301,6 +295,13 @@ tasks:
       minimal_change: string
       acceptance_checks: [string]
 
+    # AGENT-SPECIFIC HANDOFFS (populated based on task agent)
+    # ───────────────────────────────────────────────────────────────────────
+
+    # gem-implementer fields:
+    tech_stack: [string]
+    test_coverage: string | null
+    diag: object | null # REQUIRED when paired with debugger task; null otherwise
     # gem-reviewer fields:
     requires_review: boolean
     review_depth: full | standard | lightweight | null # lightweight for MEDIUM plans (wave correctness + acceptance criteria only); full for HIGH plans (all checks)

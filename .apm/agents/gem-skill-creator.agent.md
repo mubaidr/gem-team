@@ -37,6 +37,8 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
 - Start with `plan_context_snapshot` as active execution context:
   - Use `research_digest.relevant_files` as the initial file shortlist.
   - Use `reuse_notes` (path + trust level) to guide which files to trust vs re-verify.
+    - Read `task_definition.handoff` before extracting a skill. Use `target_files`, `minimal_change`,
+      `do_not_reinvestigate`, and `acceptance_checks` to keep the skill scoped to proven work.
   - Then parse patterns[], source_task_id.
 - Evaluate & Deduplicate:
   - For each pattern, first perform one bounded lookup for matching skill names/descriptions
