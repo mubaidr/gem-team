@@ -45,7 +45,6 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
     without separate metadata, memory, or path scans.
   - If a possible collision exists, inspect metadata.usages, query orchestrator memory, and compare
     the full skill scope before deciding whether to merge, update, or skip.
-  - Check `pattern_seen_before` (reuse ≥ 2×) using the evidence from the applicable lookup depth.
   - HIGH (≥ 0.95) → create.
   - MEDIUM (0.6 – 0.95) → skip.
   - LOW (< 0.6) → skip.
