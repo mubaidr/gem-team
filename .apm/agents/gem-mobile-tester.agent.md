@@ -79,7 +79,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
   - Android → `gradlew clean`, rebuild.
   - Sim unresponsive → `xcrun simctl shutdown all && boot all` / `adb emu kill`.
 - Cleanup:
-  - Stop Metro, close sims, clear artifacts if cleanup = true.
+  - Stop Metro, close sims, clear artifacts if `task_definition.cleanup` is true (default true).
 - Output
   - Return minimal JSON per `output_format` below.
 

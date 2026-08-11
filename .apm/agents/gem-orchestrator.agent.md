@@ -332,6 +332,7 @@ agent_input_reference:
       extends: base_input
       task_definition_fields:
         - acceptance_criteria
+        - cleanup # boolean: clear artifacts/sims after run; default true
         - handoff
 
     gem-devops:
