@@ -45,9 +45,6 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
     without separate metadata, memory, or path scans.
   - If a possible collision exists, inspect metadata.usages, query orchestrator memory, and compare
     the full skill scope before deciding whether to merge, update, or skip.
-  - HIGH (≥ 0.95) → create.
-  - MEDIUM (0.6 – 0.95) → skip.
-  - LOW (< 0.6) → skip.
   - Generate kebab-case name.
   - Check if `docs/skills/{name}/SKILL.md` exists → skip if duplicate.
   - Set initial metadata.usages = 0 on new skill; increment when matching pattern is re-supplied.
