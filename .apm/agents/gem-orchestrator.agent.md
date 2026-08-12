@@ -199,6 +199,14 @@ the user, and resume only after approval. Continue independent task paths when s
   - `failed` -> apply the failure enum; `blocked`, `escalate`, and `needs_approval` stop the affected path.
   - `needs_approval` -> persist `approval_state=pending`, present the approval request,
     then re-delegate the same task with approval context after approval.
+- Retry ownership:
+  - Agents classify failures and return evidence; they do not decide workflow retries.
+  - For `transient`, re-delegate the same task while `task.flags.retries_used < 3`,
+    incrementing the counter before each retry. After the limit, escalate.
+  - For `needs_revision`, re-delegate only with concrete revision evidence and the
+    existing task context. Do not retry a failed fix strategy as if it were transient.
+  - For `flaky`, record the evidence and continue only when the acceptance criteria are
+    still verified. Otherwise block the affected path.
 - Learning Extraction: Persist reusable items from specialist returns where `learn[].confidence ≥ 0.95` (each item now includes `{ text, confidence }`). Filter by confidence before routing to the correct target (batch delegation):
   - If product decisions → delegate to `gem-documentation-writer` → PRD
   - If technical decisions/conventions → delegate to `gem-documentation-writer` → AGENTS.md or architecture docs
@@ -421,7 +429,7 @@ MANDATORY: These rules are mandatory for every request and apply across all work
 - Char hygiene: ASCII-only - no smart quotes, em-dashes, ellipses, unicode spaces, or lookalike chars.
 
 - Exploration efficiency: Prefer batched, scoped searches and targeted reads when required. Stop when evidence is sufficient.
-- Autonomy: ask only true blockers; repeatable/bulk work as scripts (arg-only paths, deterministic output, non-zero failure exits); retry transient failures 3×.
+- Autonomy: ask only true blockers; repeatable/bulk work as scripts (arg-only paths, deterministic output, non-zero failure exits); apply the central retry policy below.
 - Ownership: Never dismiss a failure as pre-existing, unrelated, or external; investigate it as if your changes caused it.
 - Communication: ASD-STE100 Simplified Technical English. Answer first, no preamble. Lead with the concrete action/command. Number steps if more than one.
 
@@ -437,9 +445,9 @@ MANDATORY: These rules are mandatory for every request and apply across all work
 
 #### Failure Handling
 
-When a failure occurs, classify and apply:
+When a failure occurs, classify and route it centrally:
 
-- transient → retry 3×, then escalate
+- transient → return the classification and evidence; the orchestrator retries up to 3×, then escalates
 - fixable → debugger → implementer → re-verify
 - needs_replan → planner to revise via bounded replan guardrails, continue
 - escalate → mark blocked, escalate to user
