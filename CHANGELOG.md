@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.103.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.102.0...gem-team-v1.103.0) (2026-08-12)
+
+
+### 🧹 Housekeeping
+
+* **agents:** add analyze/discuss/find to LOW complexity defaults ([6b67af5](https://github.com/mubaidr/gem-team/commit/6b67af55666e6355a9fd1627f587f5cedecddcb5))
+* **agents:** clarify critic/reviewer roles and critic_verdict handling ([561acf4](https://github.com/mubaidr/gem-team/commit/561acf4f86461ef5b9fd064db1ab5ad23019e707))
+* **agents:** clarify debugger implementer reproduction roles ([62b1a47](https://github.com/mubaidr/gem-team/commit/62b1a477f07491707e51f9551f3b0033d1d22222))
+* **agents:** merge Phase 3 execution context into delegated loop and simplify integration gates ([dca0c2d](https://github.com/mubaidr/gem-team/commit/dca0c2d603effd1637b7128b534cc4f05c01a29f))
+* **agents:** normalize acceptance criteria references to task_definition.acceptance_criteria ([42b5212](https://github.com/mubaidr/gem-team/commit/42b5212b1816d6dab3ee550490a8643ed0933132))
+* **agents:** refine browser pre-flight, DevOps approval flow, and mobile tester setup ([8fa7106](https://github.com/mubaidr/gem-team/commit/8fa710620602c46d63cc9cb4f7deb7a19c61b841))
+* **agents:** update autonomy rules to report transient failures with evidence ([966e7e9](https://github.com/mubaidr/gem-team/commit/966e7e974c2ac4e0a1115afddac33f4ac6bb68a7))
+
 ## [1.102.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.101.0...gem-team-v1.102.0) (2026-08-11)
 
 
