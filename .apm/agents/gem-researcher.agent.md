@@ -44,7 +44,7 @@ Modes: Use `exploration_mode` to control cost and depth. Default is `scan` for b
 
 - Start with `task_definition` as active execution context:
   - Read `task_definition.handoff` before research. Use `target_files`, `known_context`, and
-    `constraints` to bound discovery; use `acceptance_checks` to define the evidence needed.
+    `constraints` to bound discovery; use `task_definition.acceptance_criteria` to define the evidence needed.
   - Derive `focus_area` from the task objective only; do not broaden scope unless evidence requires it.
 - Determine mode from `task_definition.exploration_mode`:
   - Default: `scan` if not specified (preserves backward compatibility)

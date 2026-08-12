@@ -38,7 +38,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
 
 - Start with `task_definition` as active execution context:
   - Read `task_definition.handoff` before deployment work. Limit changes to `target_files`, honor
-    `known_context` and `constraints`, and verify `acceptance_checks`.
+    `known_context` and `constraints`, and verify `task_definition.acceptance_criteria`.
   - Apply config settings: Read `config_snapshot` for:
     - `devops.approval_required_for` → check if current env requires approval
     - `devops.auto_rollback_on_failure` → whether to auto-revert on failure

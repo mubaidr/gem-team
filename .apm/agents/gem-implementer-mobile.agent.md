@@ -38,9 +38,9 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
 - Start with `task_definition` as active execution context:
   - Then detect project: RN/Expo/Flutter.
   - Read tokens from `DESIGN.md` (UI tasks only).
-  - Analyze acceptance criteria inline: Understand `acceptance_criteria` and `handoff` from task_definition.
+  - Analyze acceptance criteria inline: Use `task_definition.acceptance_criteria` and the canonical `handoff`.
     Read `handoff` before investigation; apply `target_files`, `known_context`, `constraints`,
-    and `acceptance_checks` as task constraints.
+    and the acceptance criteria as task constraints.
   - Determine affected platforms from the task scope, changed files, platform guards, and acceptance criteria.
     Treat both platforms as affected when shared code or cross-platform behavior is changed.
 - TDD Cycle (Red → Green → Refactor → Verify):

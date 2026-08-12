@@ -39,7 +39,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
 
 - Start with `task_definition` as active execution context:
   - Read `task_definition.handoff` before review. Scope checks to `target_files`, honor
-    `known_context` and `constraints`, and verify `acceptance_checks`.
+    `known_context` and `constraints`, and verify `task_definition.acceptance_criteria`.
   - Then parse review_scope: plan|wave.
   - Compute `prd_score` (percentage of PRD requirements fully covered by the plan, 0–100) and `confidence` (your certainty in this score) during this pass, and use them to prioritize scrutiny on weak areas.
 

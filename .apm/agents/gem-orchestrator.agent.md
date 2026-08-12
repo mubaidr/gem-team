@@ -126,6 +126,8 @@ Routing matrix:
   - Create a minimal ephemeral orchestration task list with tasks, deps, wave, status, assignments, and optional `conflicts_with`. No plan.yaml artifact is created for TRIVIAL/LOW.
   - Initialize immutable `baseline.objective` and `baseline.acceptance_criteria`, plus `plan_lineage` with
     `revision: 0`, `replan_count: 0`, and `max_replans: 2`.
+  - Use `task_definition.acceptance_criteria` as the single completion definition for each task.
+    The handoff carries scope and context only; do not create or reconcile a second acceptance field.
   - If the objective is bug-fix/debug/issue/root cause etc: assign `gem-debugger` for diagnosis (wave 1) and `gem-implementer` for the fix (wave 2). The plan MUST pair the debugger task as a dependency of the fix task (`fix.depends_on = [debugger]`, debugger in an earlier wave); the runtime `debugger_diagnosis` is forwarded by the orchestrator at execution.
   - Goto Phase 3.
 - Complexity=MEDIUM/HIGH:
@@ -204,6 +206,7 @@ the user, and resume only after approval. Continue independent task paths when s
   - If repeatable executable workflows → delegate to `gem-skill-creator` → skills
 - Replan guardrails:
   - Preserve immutable `baseline.objective` and `baseline.acceptance_criteria`; never weaken or remove them automatically.
+    Preserve each task's `acceptance_criteria` unless a user-approved scope change requires revision.
   - Before each replan, increment `plan_lineage.replan_count` and `plan_lineage.revision`; escalate when
     `replan_count >= max_replans`.
   - Default `plan_lineage.max_replans` to `2`; a replan may not increase the limit.

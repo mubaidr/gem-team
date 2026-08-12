@@ -231,7 +231,6 @@ tasks:
       known_context: [string]
       target_files: [string]
       constraints: [string]
-      acceptance_checks: [string]
 
     # AGENT-SPECIFIC HANDOFFS (populated based on task agent)
     # ───────────────────────────────────────────────────────────────────────

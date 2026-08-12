@@ -38,7 +38,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
 
 - Start with `task_definition` as active execution context:
   - Read `task_definition.handoff` before testing. Use `target_files`, `known_context`, and
-    `constraints` to select scope; verify `acceptance_checks`.
+    `constraints` to select scope; verify `task_definition.acceptance_criteria`.
   - Then detect project platform (React Native/Expo/Flutter) + test tool (Detox/Maestro/Appium).
 - Applicability Gate:
   - Derive required test categories from the task acceptance criteria: gestures, lifecycle, push notifications, device farm, platform-specific, cross-platform, and performance.

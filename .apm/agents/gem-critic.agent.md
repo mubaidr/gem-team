@@ -38,7 +38,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
 
 - Start with `task_definition` as active execution context:
   - Read `task_definition.handoff` before critique. Verify that `target_files`, `known_context`,
-    `constraints`, and `acceptance_checks` are coherent.
+    `constraints`, and `task_definition.acceptance_criteria` are coherent.
   - Read target + task_clarifications (resolved decisions: don't challenge).
   - Read the plan's task definitions and constraints to focus scrutiny on weak areas (low-confidence assumptions, high blast radius).
   - Analyze assumptions and scope inline from task_definition and plan.yaml.

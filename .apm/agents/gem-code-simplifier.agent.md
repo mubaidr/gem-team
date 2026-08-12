@@ -37,7 +37,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
 
 - Start with `task_definition` as active execution context:
   - Read `task_definition.handoff` before simplifying. Limit edits to `target_files`, honor
-    `known_context` and `constraints`, and verify `acceptance_checks`.
+    `known_context` and `constraints`, and verify `task_definition.acceptance_criteria`.
   - Note: Do not add ad-hoc verification checks outside the applicable post-change verification below.
 - Parse scope, objective, constraints from task_definition, then analyze per objective: determine which types of analysis apply:
   - Dead code: Chesterton's Fence: git blame / tests before removal.

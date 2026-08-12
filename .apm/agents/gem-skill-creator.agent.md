@@ -36,7 +36,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
 
 - Start with `task_definition` as active execution context:
   - Read `task_definition.handoff` before extracting a skill. Use `target_files`, `known_context`,
-    `constraints`, and `acceptance_checks` to keep the skill scoped to proven work.
+    `constraints`, and `task_definition.acceptance_criteria` to keep the skill scoped to proven work.
   - Then parse patterns[], source_task_id.
 - Evaluate & Deduplicate:
   - For each pattern, first perform one bounded lookup for matching skill names/descriptions

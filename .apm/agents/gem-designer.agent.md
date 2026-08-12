@@ -40,7 +40,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
 
 - Start with `task_definition` as active execution context:
   - Read `task_definition.handoff` before design work. Use `target_files`, `known_context`,
-    `constraints`, and `acceptance_checks` to keep the design task scoped.
+    `constraints`, and `task_definition.acceptance_criteria` to keep the design task scoped.
   - Then parse mode (create|validate), scope, context.
 - Create Mode:
   - Constraints: Lock platform, a11y requirements, existing tokens, dark mode support before any creative work. Only satisfy constraints before applying creative direction.

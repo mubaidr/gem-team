@@ -37,8 +37,9 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
 
 - Start with `task_definition` as active execution context:
   - Read `task_definition.handoff` before testing. Use `target_files`, `known_context`, and
-    `constraints` to select scope; verify `acceptance_checks`.
-  - Derive scenarios, steps, expectations, and evidence needs from `task_definition.acceptance_criteria` and `handoff.acceptance_checks`. No pre-defined matrices at plan time.
+    `constraints` to select scope; verify `task_definition.acceptance_criteria`.
+  - Derive scenarios, steps, expectations, and evidence needs from `task_definition.acceptance_criteria`.
+    No pre-defined matrices at plan time.
   - Apply config settings: Read `config_snapshot` for:
     - `quality.visual_regression_enabled` → enable/disable screenshot comparison
     - `quality.visual_diff_threshold` → set diff sensitivity

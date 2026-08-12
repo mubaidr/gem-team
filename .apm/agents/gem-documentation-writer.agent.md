@@ -39,7 +39,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
 
 - Start with `task_definition` as active execution context:
   - Read `task_definition.handoff` before writing. Use `target_files`, `known_context`,
-    `constraints`, and `acceptance_checks` to keep documentation aligned with scope.
+    `constraints`, and `task_definition.acceptance_criteria` to keep documentation aligned with scope.
   - Then parse task_type: documentation|update|prd|agents_md.
   - Then parse audience: developers|end-users|stakeholders (default developers when absent).
   - Emit minimal/dense/queryable JSON for memory updates (structured fields over prose; schema: trigger/action/reason/confidence/usage).

@@ -39,7 +39,7 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
 
 - Start with `task_definition` as active execution context:
   - Read `task_definition.handoff` before diagnosis. Honor `target_files`, `known_context`,
-    `constraints`, and `acceptance_checks`.
+    `constraints`, and `task_definition.acceptance_criteria`.
   - Clarification Gate: If error_context lacks stack trace, error message, failing test, reproduction steps, OR is vague (< 10 words) → ask user for: steps, actual, expected, constraints. Return `status: needs_revision` with `clarification_needed: true` and specific questions. Do not guess or proceed on insufficient info.
   - Then identify failure symptoms and reproduction conditions.
 - Reproduce: Read error logs, stack traces, failing test output.
