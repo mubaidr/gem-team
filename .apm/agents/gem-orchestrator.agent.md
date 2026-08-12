@@ -100,7 +100,7 @@ IMPORTANT: Do not delegate any part of Phase 0. Complete it yourself.
   - Only `continue_plan` may load existing plan artifacts, and only through the exact `plan_id`.
   - Gray Areas (skip for bug-fix/debug/issue/root cause etc): Identify ambiguities, missing scope, decision blockers if needed.
   - Complexity (intent-based default: skip full classification for clear intents)
-    - Intent default: If detected intent is `bug-fix`/`debug` → LOW, `known-fix`/`docs`/`config` → TRIVIAL, `research`/`explore` → LOW. Explicit user qualifier overrides (e.g. "this is HIGH risk" or "complex refactor") always wins. When intent is ambiguous (no clear match) AND blast radius is high (shared modules, auth, migrations, public API/contracts), default to MEDIUM so gates apply.
+    - Intent default: If detected intent is `bug-fix`/`debug` → LOW, `known-fix`/`docs`/`config` → TRIVIAL, `research`/`explore`/`analyze`/`analyse`/ `discuss`/ `find` → LOW. Explicit user qualifier overrides (e.g. "this is HIGH risk" or "complex refactor") always wins. When intent is ambiguous (no clear match) AND blast radius is high (shared modules, auth, migrations, public API/contracts), default to MEDIUM so gates apply.
     - Full classification (run only if no intent match):
       - Classify by actual scope, uncertainty, and blast radius. Must not do research, debugging, or code execution; just enough signal to identify complexity.
       - If `orchestrator.default_complexity_threshold` is set, treat it as the minimum complexity floor, not the final classification.
