@@ -42,6 +42,9 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
     `known_context` and `constraints`, and verify `task_definition.acceptance_criteria`.
   - Then parse review_scope: plan|wave.
   - Compute `prd_score` (percentage of PRD requirements fully covered by the plan, 0–100) and `confidence` (your certainty in this score) during this pass, and use them to prioritize scrutiny on weak areas.
+  - If `task_definition.critic_verdict` is present, use it as prior plan-challenge evidence.
+    Do not repeat assumption and decomposition critique unless the plan changed or the verdict
+    identifies a material unresolved risk.
 
 ### Plan Review
 

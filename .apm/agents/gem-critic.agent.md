@@ -67,6 +67,8 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
   - Each with issue, impact, file:line references.
   - Offer alternatives, not just criticism.
   - Acknowledge what works.
+  - Focus the verdict on assumptions, scope, decomposition, coupling, and over-engineering.
+    Do not duplicate reviewer checks for acceptance coverage, security, or execution evidence.
 - Output
   - Return minimal JSON per `output_format` below.
 
