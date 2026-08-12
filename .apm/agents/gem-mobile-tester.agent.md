@@ -45,10 +45,9 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
   - Run only categories required by the acceptance criteria or explicitly requested by the task. Record every unrelated category as `not_applicable` with a brief reason.
   - Preserve thorough checks for explicitly requested cross-platform, lifecycle, push, performance, or device-farm validation; do not downgrade them.
 - Env Verification:
-  - iOS: `xcrun simctl list`.
-  - Android: `adb devices`. Start if not running.
-  - Build test app: iOS → xcodebuild, Android → gradlew assembleDebug.
-  - Install on simulator.
+  - Determine affected platforms and required test categories before platform setup.
+  - Verify and prepare only required platforms: iOS → `xcrun simctl list`; Android → `adb devices`.
+  - Build and install only required targets: iOS → xcodebuild, Android → gradlew assembleDebug.
 - Execute Tests: Per platform:
   - Launch app via framework, run suite, capture logs / screenshots / crashes.
   - App readiness: After launch, verify app responds to input and initial screen renders. If launch crash → classify as new_failure, skip suite.
@@ -77,9 +76,10 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
   - Metro → `npx react-native start --reset-cache`.
   - iOS → `xcodebuild clean`, rebuild.
   - Android → `gradlew clean`, rebuild.
-  - Sim unresponsive → `xcrun simctl shutdown all && boot all` / `adb emu kill`.
+  - Sim unresponsive → restart only the simulator/emulator owned by this task; use global reset only when explicitly required.
 - Cleanup:
-  - Stop Metro, close sims, clear artifacts if `task_definition.cleanup` is true (default true).
+  - Stop resources started by this task, close task-owned sims, and clear task artifacts when
+    `task_definition.cleanup` is true (default true). Do not reset unrelated devices.
 - Output
   - Return minimal JSON per `output_format` below.
 

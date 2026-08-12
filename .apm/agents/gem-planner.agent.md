@@ -141,7 +141,7 @@ plan_metrics:
 quality_warnings: [string]
 
 # ═══════════════════════════════════════════════════════════════════════════
-# PLAN CONTEXT (top-level fields; refreshed between waves; filtered at handoff)
+# PLAN CONTEXT (top-level fields; initialized once; changed only by explicit replan)
 # ═══════════════════════════════════════════════════════════════════════════
 context_version: number
 context_updated_at: string

@@ -93,6 +93,13 @@ IMPORTANT: On receiving user input, run Phase 0 immediately.
 
 IMPORTANT: Do not delegate any part of Phase 0. Complete it yourself.
 
+- Event scope:
+  - `new_task` → run the full assessment below.
+  - `continue_plan`, approval, retry, or feedback with an exact `plan_id` → load only that
+    plan and process the event; do not repeat intent detection, complexity classification,
+    config reads, or memory reads unless the user changes scope or configuration.
+  - Re-run the full assessment only when the objective, scope, configuration, or plan identity
+    changes, or when the existing plan is invalid.
 - Quick Assessment:
   - Read all provided external/error/context refs.
   - Load user config: Read `.gem-team.yaml` if present.
@@ -128,18 +135,32 @@ Routing matrix:
     `revision: 0`, `replan_count: 0`, and `max_replans: 2`.
   - Use `task_definition.acceptance_criteria` as the single completion definition for each task.
     The handoff carries scope and context only; do not create or reconcile a second acceptance field.
-  - If the objective is bug-fix/debug/issue/root cause etc: assign `gem-debugger` for diagnosis (wave 1) and `gem-implementer` for the fix (wave 2). The plan MUST pair the debugger task as a dependency of the fix task (`fix.depends_on = [debugger]`, debugger in an earlier wave); the runtime `debugger_diagnosis` is forwarded by the orchestrator at execution.
+  - For bug-fix/debug/issue/root-cause work, use a diagnosis sufficiency gate:
+    - Directly assign `gem-implementer` only when the input includes a deterministic reproduction,
+      actual and expected behavior, exact target files or symbols, an evidence-backed root cause,
+      and no cross-module, platform, data-flow, timing, or integration uncertainty.
+    - Otherwise assign `gem-debugger` in wave 1 and `gem-implementer` in wave 2. The fix task MUST
+      depend on the debugger task; forward the runtime `debugger_diagnosis` at execution.
   - Goto Phase 3.
 - Complexity=MEDIUM/HIGH:
   - Delegate to `gem-planner` with `task_clarifications`, relevant context and `config_snapshot`.
   - Request plan validation:
     - Complexity=MEDIUM:
-      - Delegate to `gem-reviewer(plan)` with `review_depth: lightweight`.
+      - Delegate to `gem-reviewer(plan)` with `review_depth: lightweight` only when plan risk
+        requires it: multiple tasks, dependencies, conflicts, non-low risk, quality warnings,
+        unresolved decision blockers, shared state, public contracts, security, migrations, or
+        an explicit review requirement. A single low-risk task with concrete criteria skips plan
+        review and proceeds to execution.
     - Complexity=HIGH:
       - Delegate to `gem-reviewer(plan)` with `review_depth: full`.
     - Complexity=HIGH or `planning.enable_critic_for` satisfies:
-      - In parallel, delegate to `gem-critic(plan)`, only if: High-risk signal exists: `architecture`, `contract_change`, `breaking_change`, `api_change`, `schema_change`, `auth_change`, `data_flow_change`, `migration`, `security_sensitive`, or `cross_domain_impact`.
+      - Delegate to `gem-critic(plan)` only if a high-risk signal exists: `architecture`,
+        `contract_change`, `breaking_change`, `api_change`, `schema_change`, `auth_change`,
+        `data_flow_change`, `migration`, `security_sensitive`, or `cross_domain_impact`.
         The critic checks assumptions, scope, decomposition, coupling, and over-engineering only.
+      - When the critic runs, wait for its result before delegating the plan reviewer so the
+        reviewer can consume `critic_verdict`. Run planner and reviewer in parallel only when
+        no critic result is required.
   - Map critic results:
     - `verdict: blocking` → validation failed (replanable unless findings are architecture or user-decision blockers).
     - `verdict: warning` → pass `critic_verdict` to the existing plan reviewer; do not start a second
@@ -185,10 +206,15 @@ the user, and resume only after approval. Continue independent task paths when s
   - Pass relevant settings from loaded config.
   - Include the context payload per `context_passing_rule` from `agent_input_reference`; never pass a separate context object or artifact.
 - Integration Gate:
-  - Final wave → always gate (catches all accumulated issues).
+  - Final wave → always verify the acceptance criteria, but invoke a reviewer only when the
+    final scope has public-contract, security, shared-state, migration, irreversible,
+    cross-domain, or explicit review risk. Deterministic task evidence is sufficient for a
+    low-risk final wave.
   - Non-final wave → gate ONLY when integration risk exists:
     - Complexity=MEDIUM: gate if any task in this wave has `conflicts_with` entries OR any downstream task depends on this wave's output.
-    - Complexity=HIGH: gate if this wave includes security-sensitive, contract-breaking, multi-task integration, or shared-state work; otherwise defer to the final wave.
+    - Complexity=HIGH: gate if this wave includes security-sensitive, contract-breaking,
+      migration, multi-task integration, irreversible, or shared-state work; otherwise defer
+      to the final wave.
   - Gate passes → if `orchestrator.git_commit_on_gate_pass` is true, `git add -A && git commit -m "{plan_id}_wave-{n}"`. Gate fails → `git diff HEAD` for diagnosis.
   - Persist task/wave status to this plan's `plan.yaml`.
   - Keep task status, wave outputs, temporary assumptions, and transient findings plan-scoped. Persist only stable, revalidated repository knowledge to `AGENTS.md` or reusable repo memory, with source attribution.
@@ -209,11 +235,15 @@ the user, and resume only after approval. Continue independent task paths when s
     existing task context. Do not retry a failed fix strategy as if it were transient.
   - For `flaky`, record the evidence and continue only when the acceptance criteria are
     still verified. Otherwise block the affected path.
-- Learning Extraction: Persist reusable items from specialist returns where `learn[].confidence ≥ 0.95` (each item now includes `{ text, confidence }`). Filter by confidence before routing to the correct target (batch delegation):
-  - If product decisions → delegate to `gem-documentation-writer` → PRD
-  - If technical decisions/conventions → delegate to `gem-documentation-writer` → AGENTS.md or architecture docs
-  - If patterns/gotchas/failure_modes → delegate to `gem-documentation-writer` → memory
-  - If repeatable executable workflows → delegate to `gem-skill-creator` → skills
+- Learning relay and promotion:
+  - After each wave, keep `learn[]` items plan-scoped and filter them for relevance to unblocked
+    downstream tasks. Append only relevant, compact evidence to those tasks' `handoff.known_context`.
+    This relay is orchestration state, not a durable-learning delegation.
+  - After final success, promote only stable, reusable items with `learn[].confidence ≥ 0.95`.
+    Batch the applicable promotion calls once: product decisions → PRD; technical conventions →
+    `AGENTS.md` or architecture docs; patterns/gotchas → memory; repeatable workflows → skills.
+  - Do not promote intermediate learnings after every wave unless a downstream task explicitly
+    requires durable storage before it can proceed.
 - Replan guardrails:
   - Preserve immutable `baseline.objective` and `baseline.acceptance_criteria`; never weaken or remove them automatically.
     Preserve each task's `acceptance_criteria` unless a user-approved scope change requires revision.
@@ -223,8 +253,8 @@ the user, and resume only after approval. Continue independent task paths when s
   - Require a non-empty `replan` delta with reason, changed/added/removed task IDs,
     preserved acceptance criteria, new risks, and a measurable `progress_signal`.
   - Objective or baseline acceptance-criteria changes are user decision blockers, not automatic replans.
-  - On replan, increment `context_version`, refresh `context_updated_at`, record changed context fields,
-    invalidate stale wave snapshots, and revalidate completed tasks affected by changed dependencies or criteria.
+  - On replan, invalidate stale wave snapshots and revalidate completed tasks affected by changed
+    dependencies or criteria. Do not refresh plan context between waves.
 - Loop:
   - Project state announcements: After each wave, announce the current project state. Use the compact Plan Status format.
   - Remaining unblocked waves/tasks → next wave.
@@ -300,7 +330,7 @@ agent_input_reference:
       extends: base_input
       task_definition_fields:
         - review_scope
-        - review_depth # lightweight for MEDIUM plans (wave correctness + acceptance criteria only); full for HIGH plans (all checks)
+        - review_depth # lightweight for MEDIUM plans; full for HIGH plans
         - review_security_sensitive
         - task_clarifications
         - acceptance_criteria
