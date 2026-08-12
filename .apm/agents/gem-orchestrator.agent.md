@@ -147,13 +147,9 @@ Routing matrix:
 
 ### Phase 3: Delegated Execution
 
-#### Phase 3A: Execution Context Setup
-
-- For every wave, use the supplied task context for this exact `plan_id`; agents must not load another plan's artifacts or context.
-- During delegation, pass `task_definition` (authoritative for task scope) and `config_snapshot`.
-- After each wave, persist task status and outputs to this plan's `plan.yaml` (when a plan artifact exists, e.g. MEDIUM/HIGH) before the next wave.
-
-#### Phase 3B: Wave Execution Loop
+Use the supplied task context for this exact `plan_id`; agents must not load another plan's artifacts or context.
+During delegation, pass `task_definition` (authoritative for task scope) and `config_snapshot`.
+After each wave, persist task status and outputs to this plan's `plan.yaml` (when a plan artifact exists, e.g. MEDIUM/HIGH) before the next wave.
 
 Execute all unblocked waves/tasks without unnecessary approval pauses. When a task returns
 `needs_approval`, pause that task path, persist its approval state, present the request to
@@ -185,10 +181,10 @@ the user, and resume only after approval. Continue independent task paths when s
   - Pass relevant settings from loaded config.
   - Include the context payload per `context_passing_rule` from `agent_input_reference`; never pass a separate context object or artifact.
 - Integration Gate:
-  - Complexity=HIGH: delegate to `gem-reviewer(wave)` for integration check after every wave.
-  - Complexity=MEDIUM: delegate to `gem-reviewer(wave)` only when integration risk exists:
-    - Final wave → always gate (catches all accumulated issues).
-    - Non-final wave → gate ONLY if any task in this wave has `conflicts_with` entries OR any downstream task in a later wave depends on this wave's output (dependency edges in `plan.yaml`).
+  - Final wave → always gate (catches all accumulated issues).
+  - Non-final wave → gate ONLY when integration risk exists:
+    - Complexity=MEDIUM: gate if any task in this wave has `conflicts_with` entries OR any downstream task depends on this wave's output.
+    - Complexity=HIGH: gate if this wave includes security-sensitive, contract-breaking, multi-task integration, or shared-state work; otherwise defer to the final wave.
   - Gate passes → if `orchestrator.git_commit_on_gate_pass` is true, `git add -A && git commit -m "{plan_id}_wave-{n}"`. Gate fails → `git diff HEAD` for diagnosis.
   - Persist task/wave status to this plan's `plan.yaml`.
   - Keep task status, wave outputs, temporary assumptions, and transient findings plan-scoped. Persist only stable, revalidated repository knowledge to `AGENTS.md` or reusable repo memory, with source attribution.
