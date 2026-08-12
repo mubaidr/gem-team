@@ -65,8 +65,11 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
 - Synthesize:
   - Root cause: Fundamental reason, not symptoms.
   - Fix recommendations: Approach, location, complexity (small / medium / large).
-  - Prove-It Pattern: Reproduction test FIRST, confirm fails, THEN fix.
-  - Minimal reproduction: Strip unrelated setup from repro. If repro > 30 lines of setup, flag diagnosis complexity as HIGH.
+  - Prove-It Pattern: Prove the failure with an existing test or a minimal reproduction
+    specification before recommending a fix. Do not create or modify repository tests.
+  - Minimal reproduction: Strip unrelated setup from the reproduction evidence. If the
+    required setup exceeds 30 lines, flag diagnosis complexity as HIGH and provide the
+    exact reproduction steps for the implementer.
   - ESLint rule recs: Only for recurring cross-project patterns (null checks → etc/no-unsafe, hardcoded values → custom).
   - Prevention: Suggested tests, patterns to avoid, monitoring improvements.
 - Failure:

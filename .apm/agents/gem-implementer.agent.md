@@ -49,6 +49,8 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
     - Run test: must pass.
 - Bug-Fix Mode (when `debugger_diagnosis` or `lint_rule_recommendations` present in task_definition):
   - Validate `debugger_diagnosis` contains root cause, target files, and fix recommendations; treat it as authoritative diagnosis.
+  - Own the regression test: create or update the minimal reproduction test before applying the fix.
+    If the debugger supplied only a reproduction specification, convert it into the test during Red.
   - Apply `lint_rule_recommendations` together with the fix when present (e.g. ESLint rules).
 - Failure: Classify per enum and return evidence.
 - Output

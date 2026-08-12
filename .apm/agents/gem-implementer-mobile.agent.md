@@ -53,6 +53,9 @@ IMPORTANT: Batch/join dependency-free steps; serialize only true dependencies wh
   - Native module: Missing → `npx expo install`.
   - Platform failure: Isolate platform code, fix, and retest the affected platform. Retest both only when shared
     code or cross-platform behavior is in scope.
+- Bug-Fix Mode (when `debugger_diagnosis` is present in task_definition):
+  - Validate the diagnosis, then own the regression test and minimal reproduction on the affected platform(s).
+    The debugger provides evidence or a reproduction specification; it does not modify tests.
 - Failure: Classify per enum and return evidence.
 - Output
   - Return minimal JSON per `output_format` below.
