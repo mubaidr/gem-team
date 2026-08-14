@@ -31,12 +31,20 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
     - Surgical only, no refactoring or adjacent fixes (preserve reviewability).
     - Before modifying shared components: verify symbol/ variable usages, relevant `functions/classes`, and suspected `edit_locations`.
     - Run test: must pass.
+  - Output: return minimal JSON per `output_format`.
+
 - Bug-Fix Mode (when `debugger_diagnosis` or `lint_rule_recommendations` present in task_definition):
   - Validate `debugger_diagnosis` contains `root_cause`, non-empty `target_files`, a complete `reproduction` object with `steps`, `expected`, and `actual`, and non-empty `fix_recommendations`; treat it as authoritative diagnosis.
   - Own the regression test: create or update the minimal reproduction test before applying the fix.
     If the debugger supplied only a reproduction specification, convert it into the test during Red.
   - Apply `lint_rule_recommendations` together with the fix when present (e.g. ESLint rules).
-- Output: return minimal JSON per `output_format`.
+  - Output: return minimal JSON per `output_format`.
+
+- Design Handoff Mode (when `requires_design_validation: true`):
+  - Require `design_handoff` with a non-empty `design_path`, `changed_tokens`, and `design_constraints`.
+  - Require `validation_passed: true` and `a11y_pass: true` before implementation. If either is false or missing, return `blocked` or `needs_revision` with evidence; do not implement against an unvalidated design.
+  - Treat the design artifact, changed tokens, and design constraints as implementation inputs. Preserve them unless the task explicitly approves a design revision.
+  - Output: return minimal JSON per `output_format`.
 
 </workflow>
 

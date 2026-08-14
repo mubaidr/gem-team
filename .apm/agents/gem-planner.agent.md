@@ -62,7 +62,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
   - PRD: `documentation-writer` with `task_type: prd`, first-class wave 1 task; downstream tasks reference `prd_id`.
   - Default: `implementer`. Never route design/visual/a11y work to implementer when `gem-designer` is available.
 - Emit: build the DAG, calculate metrics, populate only fields required by complexity and task type. Create and validate `plan.yaml` per `plan_format_guide`: syntax, unique IDs, dependency references, wave ordering, circular dependencies. Save to `docs/plan/{plan_id}/plan.yaml`; no second planning artifact.
-- Output: return minimal JSON per `output_format` below. Runtime execution and state management belong to `gem-orchestrator`.
+- Output: return minimal JSON per `output_format`. Runtime execution and state management belong to `gem-orchestrator`.
 
 </workflow>
 
@@ -207,6 +207,8 @@ tasks:
     # ───────────────────────────────────────────────────────────────────────
 
     # gem-implementer fields:
+    # requires_design_validation: boolean
+    # design_handoff: {design_path: string, changed_tokens: string[], design_constraints: string[], validation_passed: boolean, a11y_pass: boolean}
     # gem-reviewer fields:
     # review_mode: plan | wave | critic
     # critic_subject and critic_context are required only when review_mode is critic:

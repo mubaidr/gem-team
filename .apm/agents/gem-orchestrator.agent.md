@@ -107,6 +107,7 @@ Execute all unblocked waves/tasks without unnecessary approval pauses.
 - Execute Wave:
   - Delegate exclusively to the subagent specified by `task.agent`, using `agent_input_reference`. Concurrency limit = `orchestrator.max_concurrent_agents` if configured, otherwise 2. Never invoke generic, fallback or inferred subagents.
   - If the delegated task is a fix task paired with a completed debugger task (dependency), inject that debugger's `debugger_diagnosis` output into the payload as `task_definition.debugger_diagnosis`.
+  - If the delegated task is an implementer task paired with a completed designer task (dependency), inject the designer's `handoff` output into the payload as `task_definition.design_handoff`. When `requires_design_validation: true`, reject the handoff if `design_path`, `changed_tokens`, `design_constraints`, `validation_passed`, or `a11y_pass` is missing, or if either validation flag is false.
   - Use `gem-researcher` only when the plan explicitly assigns it as a task agent; never default to a research wave. Bug-fix/debug tasks always use `gem-debugger`.
   - Pass relevant settings from loaded config.
   - Include task context only through `task_definition`, with handoff details under `task_definition.handoff`; never pass a separate context object or artifact.
@@ -240,6 +241,8 @@ agent_input_reference:
       extends: base_input
       task_definition_fields:
         - acceptance_criteria
+        - requires_design_validation
+        - design_handoff # runtime: structured output forwarded from the paired designer task
         - debugger_diagnosis # runtime: structured output forwarded from the paired debugger task
         - lint_rule_recommendations # runtime: forwarded from the paired debugger task output
         - handoff
