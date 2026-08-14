@@ -186,7 +186,7 @@ tasks:
     agent: string
     depends_on: [string] # canonical task IDs that must complete before this task
     conflicts_with: [string] # optional task IDs that must not run in parallel
-    status: pending | in_progress | completed | failed | blocked | needs_revision | needs_replan | needs_approval # progress tracking; transitions owned by orchestrator
+    status: pending | in_progress | completed | failed | blocked | needs_revision | needs_replan # progress tracking; transitions owned by orchestrator
 
     # ───────────────────────────────────────────────────────────────────────
     # ROUTING (planner-set)
