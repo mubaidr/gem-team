@@ -64,7 +64,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
   "console_errors": "number",
   "network_failures": "number",
   "a11y_issues": "number",
-  "learn": [{ "text": "string", "confidence": "0.0-1.0" }]
+  "evidence_path": "string"
 }
 ```
 

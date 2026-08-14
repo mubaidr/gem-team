@@ -47,6 +47,8 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
   - Fix recommendations.
   - Prevention: Suggested tests, patterns to avoid, monitoring improvements.
 - Output: return minimal JSON per `output_format`.
+  Return the diagnosis only when it is required by the downstream fix task. Do not include a separate
+  learning or narrative field.
 
 </workflow>
 
@@ -60,22 +62,23 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
   "task_id": "string",
   "clarification_needed": "boolean", # true when input insufficient
   "fail": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
-  "debugger_diagnosis": {
-    "root_cause": "string",
-    "target_files": ["string"],
-    "reproduction": {
-      "steps": ["string"],
-      "expected": "string",
-      "actual": "string"
+  "handoff": {
+    "debugger_diagnosis": {
+      "root_cause": "string",
+      "target_files": ["string"],
+      "reproduction": {
+        "steps": ["string"],
+        "expected": "string",
+        "actual": "string"
+      },
+      "fix_recommendations": ["string"]
     },
-    "fix_recommendations": ["string"],
-    "prevention": ["string"]
+    "lint_rule_recommendations": [{
+      "name": "string",
+      "type": "built-in | custom",
+      "files": ["string"]
+    }]
   },
-  "lint_rule_recommendations": [{
-    "name": "string",
-    "type": "built-in | custom",
-    "files": ["string"]
-  }],
   "learn": [{"text": "string", "confidence": "0.0-1.0"}]
 }
 ```

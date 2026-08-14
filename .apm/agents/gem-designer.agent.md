@@ -49,8 +49,11 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
   "a11y_pass": "boolean",
   "validation_passed": "boolean",
   "critical_issues": ["string: max 3"],
-  "design_path": "string",
-  "learn": [{ "text": "string", "confidence": "0.0-1.0" }]
+  "handoff": {
+    "design_path": "string",
+    "changed_tokens": ["string"],
+    "design_constraints": ["string"]
+  }
 }
 ```
 

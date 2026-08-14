@@ -71,8 +71,7 @@ Modes: Use `exploration_mode` to control cost and depth.
     }
   ],
   "blockers": ["string: max 3"],
-  "next_questions": ["string: max 3"],
-  "fail": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific"
+  "next_questions": ["string: max 3"]
 }
 ```
 

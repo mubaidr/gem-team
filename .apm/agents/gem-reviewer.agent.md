@@ -94,8 +94,7 @@ Determine depth from `task_definition.review_depth` (default: `lightweight`). Ap
     "tradeoff": "string",
     "recommendation": "string"
   }],
-  "decision_blockers": ["string"],
-  "learn": [{"text": "string", "confidence": "0.0-1.0"}]
+  "decision_blockers": ["string"]
 }
 ```
 

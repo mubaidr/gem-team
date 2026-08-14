@@ -66,8 +66,7 @@ MANDATORY: Follow the workflow and rules below. Do not improvise.
   "status": "completed | failed | needs_revision",
   "task_id": "string",
   "fail": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
-  "paths": ["string"],
-  "learn": [{ "text": "string", "confidence": "0.0-1.0" }]
+  "paths": ["string"]
 }
 ```
 

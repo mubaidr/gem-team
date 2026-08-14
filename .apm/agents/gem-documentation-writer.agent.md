@@ -33,8 +33,7 @@ Write docs, READMEs, API docs, diagrams. Maintain `AGENTS.md`. Never implement c
   "fail": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
   "created": 0,
   "updated": 0,
-  "parity_check": "passed | failed | partial",
-  "learn": [{ "text": "...", "confidence": 0.9 }]
+  "parity_check": "passed | failed | partial"
 }
 ```
 

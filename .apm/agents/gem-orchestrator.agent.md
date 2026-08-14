@@ -233,7 +233,7 @@ agent_input_reference:
         - target_path
         - topic
         - action
-        - learnings
+        - learnings # optional documentation inputs; not a universal agent-result field
         - findings
         - handoff
 
