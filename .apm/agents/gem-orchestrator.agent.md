@@ -49,13 +49,16 @@ Routing matrix:
 
 ### Phase 2: Planning
 
-Deterministic risk-to-review mapping. Define `high_risk_signals` once as: `architecture`, `contract_change`, `breaking_change`, `api_change`, `schema_change`, `auth_change`, `data flow_change`, `migration`, `security_sensitive`, `cross_domain_impact`.
+Deterministic three-level reviewer routing. Define these signal sets once:
 
-| Plan signal                                                                                | Reviewer dispatch                             |
-| ------------------------------------------------------------------------------------------ | --------------------------------------------- |
-| No risk and (single task or TRIVIAL/LOW complexity)                                        | Skip plan review                              |
-| Complexity=MEDIUM or multi-task/low-risk                                                   | `review_mode: plan`, `review_depth: standard` |
-| Complexity=HIGH OR any `high_risk_signals` present OR `planning.enable_critic_for` matches | `review_mode: plan`, `review_depth: full`     |
+- `high_risk_signals`: `architecture`, `contract_change`, `breaking_change`, `api_change`, `schema_change`, `auth_change`, `data_flow_change`, `migration`, `security_sensitive`, `cross_domain_impact`.
+- `critic_signals`: `architecture`, `breaking_change`, `cross_domain_impact`.
+
+Select exactly one reviewer level in priority order:
+
+1. standard: MEDIUM complexity or a multi-task LOW plan without a `critic_signals` match. Dispatch one `gem-reviewer` plan review with `review_depth: standard`.
+2. high: HIGH complexity or any `high_risk_signals` match that is not a `critic_signals` match. Dispatch one `gem-reviewer` plan review with `review_depth: high`.
+3. critic: Any `critic_signals` match. Add exactly one wave-1 `gem-reviewer` task with `review_mode: critic`; it replaces the orchestrator-side high review. All implementation tasks depending on the challenged plan must depend on the critic task or a later task that consumes its approved findings.
 
 - Complexity=TRIVIAL/LOW:
   - Create a minimal ephemeral orchestration task list with tasks, `depends_on`, wave, status, assignments, and optional `conflicts_with`. No plan.yaml artifact is created for TRIVIAL/LOW.
@@ -65,9 +68,7 @@ Deterministic risk-to-review mapping. Define `high_risk_signals` once as: `archi
   - Goto Phase 3.
 - Complexity=MEDIUM/HIGH:
   - Delegate to `gem-planner` with `task_clarifications`, relevant context and `config_snapshot`.
-  - Request plan validation:
-    - Follow the deterministic risk-to-review mapping exactly once.
-    - Merge the plan-challenge and security/compliance findings into one full review when that row applies.
+  - Request the single reviewer level selected by the deterministic three-level routing rules.
   - Map reviewer results:
     - `verdict: blocking` -> validation failed (replanable unless findings are architecture or user-decision blockers).
     - `verdict: warning` -> bounded revision if material; otherwise proceed.

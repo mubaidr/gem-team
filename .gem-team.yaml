@@ -36,8 +36,8 @@ model_routing:
 # PLANNING & WORKFLOW
 # ═══════════════════════════════════════════════════════════
 planning:
-  # Require gem-reviewer plan validation with maximum review depth for these complexities
-  # TRIVIAL/LOW/MEDIUM/HIGH
+  # Upgrade reviewer routing for these complexities: standard -> high -> critic.
+  # Critic is reserved for architecture, breaking, and cross-domain risk signals.
   enable_critic_for: [HIGH]
 
 # ═══════════════════════════════════════════════════════════

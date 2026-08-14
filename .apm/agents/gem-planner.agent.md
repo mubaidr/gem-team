@@ -54,10 +54,6 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
   - Assign waves: `depends_on: []` -> wave 1; otherwise wave = max(dependency wave) + 1.
   - Populate `task_definition.acceptance_criteria` with clear, measurable outcomes - the task's completion definition.
 - Handoffs: verified context, task boundaries, constraints, and measurable checks only. No execution workflow or implementation steps.
-- Reviewer task contracts: `review_mode` accepts `plan`, `wave`, `full`, or `critic`. For `critic` only, require both exact objects below; do not use aliases or require these fields for the other modes:
-  - `critic_subject`: `{objective: string, proposal: string, constraints: string[], alternatives: string[], evidence: string[], decision_needed: string}`
-  - `critic_context`: `{audience: string, time_horizon: string, success_criteria: string[], known_unknowns: string[]}`
-    Critic tasks use `gem-reviewer` as the reviewer and are read-only. They must not introduce a standalone `gem-critic` agent or route. Every reviewer task still has explicit ownership, dependencies, wave placement, acceptance criteria, and a handoff with known context and constraints.
 - Agent assignment: match task to best-fit agent via `<available_agents>`:
   - Research: `gem-researcher` only for an explicit research deliverable or unresolved material blocker. Do not delegate routine planner discovery.
   - Design/UI (visual, layout, theming, tokens, typography, spacing, responsive, a11y, dark mode, DESIGN.md): `designer`. `flags.requires_design_validation: true` -> designer wave N, implementer wave N+1.
@@ -218,7 +214,7 @@ tasks:
     # critic_context: {audience: string, time_horizon: string, success_criteria: string[], known_unknowns: string[]}
     # Critic mode is read-only and must not mutate files or claim completion.
     requires_review: boolean
-    review_depth: standard | full | null # standard for MEDIUM plans (wave correctness + acceptance criteria only); full for HIGH-risk plans (all checks)
+    review_depth: standard | high | null # standard for MEDIUM plans (wave correctness + acceptance criteria only); high for HIGH-risk plans (all checks)
     review_security_sensitive: boolean
 
     # gem-devops fields:

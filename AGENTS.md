@@ -65,20 +65,7 @@ npm run format
 .apm/skills/<skill-name>/SKILL.md
 ```
 
-The standalone `gem-critic` agent has been removed. Plan challenge behavior is
-handled by `gem-reviewer` through `review_mode: plan|wave`. The reviewer
-also supports additive `review_mode: critic` for `discuss`, `proposal`,
-`feature_idea`, and `challenge` intents. Critic mode is read-only and returns
-structured challenges, alternatives, and decision blockers. Every reported
-record includes evidence, impact, and action; it does not mutate files or
-claim completion of proposed work.
-
-Current packaged skills:
-
-- `gem-design-md-guidelines`: UI/UX, accessibility, platform conventions, motion, and `DESIGN.md` compliance.
-- `gem-devops-guidelines`: Deployment, CI/CD, containers, health checks, rollback, and production readiness.
-
-Agent file structure:
+### Agent file structure
 
 ```text
 ---                    # Frontmatter: name, description, args
@@ -98,7 +85,7 @@ Agent documentation lives in `docs/src/content/3.agents/`:
 docs/src/content/3.agents/1.index.md    # Main agent catalog
 ```
 
-Documentation guidelines:
+#### Documentation guidelines
 
 - Update `1.index.md` when adding/modifying agents
 - Include agent name, role, and key capabilities
@@ -158,27 +145,6 @@ Keep each skill focused and progressively disclosed:
 3. Run `npm run build` to ensure production build works
 4. Test responsive design on different screen sizes
 5. Verify accessibility with screen readers
-
-### Agent Testing
-
-> Note: No automated agent test harness exists yet
-> Agent changes are verified manually: query the agent, inspect the diff, and check that
-> referenced input fields (`task_definition_fields`, `argument-hint`) are real and consumed.
-
-1. Maintain contract consistency manually: every field in `agent_input_reference` /
-   `task_definition_fields` must be read by the target agent, and every
-   `argument-hint` value must be parsed in the workflow.
-2. Verify JSON output format compliance (fields match `output_format` schema).
-3. Check integration with orchestrator workflow (Phase routing, statuses, gates).
-4. Test error handling and edge cases.
-
-### Skill Testing
-
-1. Verify frontmatter parses and `name` matches the skill directory.
-2. Verify the description is specific enough for task matching.
-3. Check links and referenced files under the skill directory.
-4. Confirm guidance is reusable, scoped, and free of secrets or product-specific data.
-5. Run `apm compile --target copilot,claude,cursor --validate` after skill changes.
 
 ## Security Considerations
 

@@ -24,7 +24,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 
 ## Workflow
 
-- Parse `review_mode`: `plan`, `wave`, or `critic`.
+- Parse `review_mode`: `plan`, `wave`, or `critic`. Plan review uses `review_depth: standard` or `high`; critic is a separate review path and does not use `review_depth`.
 
 ### Plan review
 
@@ -38,7 +38,7 @@ Determine depth from `task_definition.review_depth` (default: `standard`). Apply
       (e.g., specific test commands, expected status codes/payloads).
   - Scope gates: Apply PRD checks only when a PRD or product requirement exists. Apply security checks only for
     security-sensitive or executable changes. Apply mobile checks only when mobile code or requirements are involved.
-- full (HIGH complexity):
+- high (HIGH complexity or high-risk signal):
   - Semantic Error & Logic Check: All standard checks apply.
   - Check for edge cases mentioned in the PRD (error handling, rate limits).
   - Flag unauthorized scope creep.
@@ -74,7 +74,7 @@ Determine depth from `task_definition.review_depth` (default: `standard`). Apply
   "task_id": "string",
   "fail": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
   "confidence": 0.0-1.0,
-  "scope": "plan | wave | full",
+  "scope": "plan | wave | critic",
   "verdict": "pass | warning | blocking",
   "warnings": "number",
   "critical_findings": ["SEVERITY file:line: issue"],
