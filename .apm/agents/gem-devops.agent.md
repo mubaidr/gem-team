@@ -46,6 +46,9 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
   "status": "completed | failed | needs_revision | needs_approval",
   "task_id": "string",
   "fail": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
+  "approval_needed": "boolean",
+  "approval_reason": "string",
+  "approval_state": "pending | approved | denied | not_required",
   "health_check": "pass | fail",
   "learn": [{ "text": "string", "confidence": "0.0-1.0" }]
 }

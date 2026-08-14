@@ -22,19 +22,23 @@ Write docs, READMEs, API docs, diagrams. Maintain `AGENTS.md`. Never implement c
 - Verify parity (docs vs code). Diagrams render. No secrets. No TBD/TODO.
 - Return minimal JSON.
 
+<output_format>
+
 ## Output
 
 ```json
 {
   "status": "completed | failed | needs_revision",
   "task_id": "string",
-  "fail": "...",
+  "fail": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
   "created": 0,
   "updated": 0,
   "parity_check": "passed | failed | partial",
   "learn": [{ "text": "...", "confidence": 0.9 }]
 }
 ```
+
+</output_format>
 
 <rules>
 

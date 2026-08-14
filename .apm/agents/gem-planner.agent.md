@@ -59,7 +59,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
   - Bugs: `debugger` (wave N) -> `implementer` (wave N+1); forward `debugger_diagnosis`.
   - Security: `reviewer` audits -> `implementer` remediates.
   - PRD: `documentation-writer` with `task_type: prd`, first-class wave 1 task; downstream tasks reference `prd_id`.
-  - Default: `implementer`. Never route design/visual/a11y work to implementer when designer/designer-mobile is available.
+  - Default: `implementer`. Never route design/visual/a11y work to implementer when `gem-designer` is available.
 - Emit: build the DAG, calculate metrics, populate only fields required by complexity and task type. Create and validate `plan.yaml` per `plan_format_guide`: syntax, unique IDs, dependency references, wave ordering, circular dependencies. Save to `docs/plan/{plan_id}/plan.yaml`; no second planning artifact.
 - Output: return minimal JSON per `output_format` below. Runtime execution and state management belong to `gem-orchestrator`.
 

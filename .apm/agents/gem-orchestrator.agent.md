@@ -212,15 +212,6 @@ agent_input_reference:
         - error_context
         - handoff
 
-    gem-designer-mobile:
-      extends: base_input
-      task_definition_fields:
-        - mode
-        - scope
-        - context
-        - constraints
-        - handoff
-
     gem-designer:
       extends: base_input
       task_definition_fields:
@@ -249,13 +240,6 @@ agent_input_reference:
         - action
         - learnings
         - findings
-        - handoff
-
-    gem-implementer-mobile:
-      extends: base_input
-      task_definition_fields:
-        - acceptance_criteria
-        - debugger_diagnosis
         - handoff
 
     gem-implementer:
@@ -320,10 +304,9 @@ model for the delegated agent's tier and pass/ assign to it when delegating task
 - premium: `gem-planner`, `gem-debugger`, and `gem-reviewer`.
   These agents perform planning, root-cause analysis, challenge assumptions, or
   high-risk verification and should use `model_routing.tiers.premium`.
-- explore: `gem-researcher`, `gem-implementer`, `gem-implementer-mobile`,
-  `gem-browser-tester`, `gem-mobile-tester`, `gem-devops`,
-  `gem-documentation-writer`, `gem-skill-creator`, `gem-code-simplifier`,
-  `gem-designer`, and `gem-designer-mobile`. These agents perform exploration
+- explore: `gem-researcher`, `gem-implementer`, `gem-browser-tester`,
+  `gem-mobile-tester`, `gem-devops`, `gem-documentation-writer`,
+  `gem-skill-creator`, `gem-code-simplifier`, and `gem-designer`. These agents perform exploration
   or bounded execution and should use `model_routing.tiers.explore`.
 
 The tier classification is fixed by agent role; complexity
