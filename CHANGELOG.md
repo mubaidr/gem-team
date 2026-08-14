@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.104.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.103.0...gem-team-v1.104.0) (2026-08-14)
+
+
+### 🧹 Housekeeping
+
+* **agents:** refactor definitions, merge critic into reviewer, and standardize workflows ([6c80f53](https://github.com/mubaidr/gem-team/commit/6c80f53e9d087364ab5a0955a99ce23ffcacc56a))
+* **agents:** remove mobile-specific agent definitions and standardize workflows ([6cf0115](https://github.com/mubaidr/gem-team/commit/6cf01157417915efb7164e6b909e52dc0555899c))
+
 ## [1.103.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.102.0...gem-team-v1.103.0) (2026-08-12)
 
 
