@@ -28,9 +28,9 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 
 ### Plan review
 
-Determine depth from `task_definition.review_depth` (default: `lightweight`). Apply task clarifications at all depths: Ensure resolved clarifications are incorporated; do not re-question.
+Determine depth from `task_definition.review_depth` (default: `standard`). Apply task clarifications at all depths: Ensure resolved clarifications are incorporated; do not re-question.
 
-- lightweight (MEDIUM complexity):
+- standard (MEDIUM complexity):
   - Semantic Error & Logic Check:
   - Temporal Paradoxes: Verify no task relies on data, APIs, or assets that haven't been created yet.
   - Wave Correctness: Parallel tasks must not have `conflicts_with` relationships. Wave 1 must contain valid root tasks.
@@ -39,7 +39,7 @@ Determine depth from `task_definition.review_depth` (default: `lightweight`). Ap
   - Scope gates: Apply PRD checks only when a PRD or product requirement exists. Apply security checks only for
     security-sensitive or executable changes. Apply mobile checks only when mobile code or requirements are involved.
 - full (HIGH complexity):
-  - Semantic Error & Logic Check: All lightweight checks apply.
+  - Semantic Error & Logic Check: All standard checks apply.
   - Check for edge cases mentioned in the PRD (error handling, rate limits).
   - Flag unauthorized scope creep.
   - Diagnose-then-fix Rigor: Every debugger task must be paired with an implementer task in a later wave that depends on it; the runtime `debugger_diagnosis` is forwarded at execution.

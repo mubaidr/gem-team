@@ -49,6 +49,14 @@ Routing matrix:
 
 ### Phase 2: Planning
 
+Deterministic risk-to-review mapping. Define `high_risk_signals` once as: `architecture`, `contract_change`, `breaking_change`, `api_change`, `schema_change`, `auth_change`, `data flow_change`, `migration`, `security_sensitive`, `cross_domain_impact`.
+
+| Plan signal                                                                                | Reviewer dispatch                             |
+| ------------------------------------------------------------------------------------------ | --------------------------------------------- |
+| No risk and (single task or TRIVIAL/LOW complexity)                                        | Skip plan review                              |
+| Complexity=MEDIUM or multi-task/low-risk                                                   | `review_mode: plan`, `review_depth: standard` |
+| Complexity=HIGH OR any `high_risk_signals` present OR `planning.enable_critic_for` matches | `review_mode: plan`, `review_depth: full`     |
+
 - Complexity=TRIVIAL/LOW:
   - Create a minimal ephemeral orchestration task list with tasks, `depends_on`, wave, status, assignments, and optional `conflicts_with`. No plan.yaml artifact is created for TRIVIAL/LOW.
   - For bug-fix/debug/issue/root-cause work, use a diagnosis sufficiency gate:
@@ -58,18 +66,8 @@ Routing matrix:
 - Complexity=MEDIUM/HIGH:
   - Delegate to `gem-planner` with `task_clarifications`, relevant context and `config_snapshot`.
   - Request plan validation:
-    - Complexity=MEDIUM:
-      - Delegate to `gem-reviewer(plan)` with `review_depth: lightweight` only when plan risk
-        requires it: multiple tasks, dependencies, conflicts, non-low risk, quality warnings,
-        unresolved decision blockers, shared state, public contracts, security, migrations, or
-        an explicit review requirement. A single low-risk task with concrete criteria skips plan
-        review and proceeds to execution.
-    - Complexity=HIGH or `planning.enable_critic_for` satisfies:
-      - Run `gem-reviewer(plan)` with `review_mode: plan` and `review_depth: full` when a high-risk signal exists:
-        `architecture`, `contract_change`, `breaking_change`, `api_change`, `schema_change`,
-        `auth_change`, `data_flow_change`, `migration`, `security_sensitive`, or
-        `cross_domain_impact`.
-      - Maximum-depth plan review combines plan challenge with security and compliance review.
+    - Follow the deterministic risk-to-review mapping exactly once.
+    - Merge the plan-challenge and security/compliance findings into one full review when that row applies.
   - Map reviewer results:
     - `verdict: blocking` -> validation failed (replanable unless findings are architecture or user-decision blockers).
     - `verdict: warning` -> bounded revision if material; otherwise proceed.
@@ -275,7 +273,7 @@ agent_input_reference:
         - critic_subject # critic mode only: {objective: string, proposal: string, constraints: string[], alternatives: string[], evidence: string[], decision_needed: string}
         - critic_context # critic mode only: {audience: string, time_horizon: string, success_criteria: string[], known_unknowns: string[]}
         - review_scope
-        - review_depth # lightweight for MEDIUM plans; full for HIGH-risk plan reviews
+        - review_depth # standard for MEDIUM plans; full for HIGH-risk plan reviews
         - review_security_sensitive
         - task_clarifications
         - acceptance_criteria

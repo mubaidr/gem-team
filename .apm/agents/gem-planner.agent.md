@@ -212,13 +212,13 @@ tasks:
 
     # gem-implementer fields:
     # gem-reviewer fields:
-    # review_mode: plan | wave | full | critic
+    # review_mode: plan | wave | critic
     # critic_subject and critic_context are required only when review_mode is critic:
     # critic_subject: {objective: string, proposal: string, constraints: string[], alternatives: string[], evidence: string[], decision_needed: string}
     # critic_context: {audience: string, time_horizon: string, success_criteria: string[], known_unknowns: string[]}
     # Critic mode is read-only and must not mutate files or claim completion.
     requires_review: boolean
-    review_depth: full | standard | lightweight | null # lightweight for MEDIUM plans (wave correctness + acceptance criteria only); full for HIGH plans (all checks)
+    review_depth: standard | full | null # standard for MEDIUM plans (wave correctness + acceptance criteria only); full for HIGH-risk plans (all checks)
     review_security_sensitive: boolean
 
     # gem-devops fields:
