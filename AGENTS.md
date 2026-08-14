@@ -2,14 +2,14 @@
 
 ## Project Overview
 
-Gem Team turns AI coding into an engineering process. It provides agent definitions that enforce good software engineering: optimizing cost, time, and quality.
+Gem Team turns AI coding into an engineering process. It provides focused agent definitions and reusable skills that enforce good software engineering: optimizing cost, time, and quality.
 
 ### Key Features
 
 - **Quality by Default**: TDD, code reviews, and security audits happen automatically
 - **Smart & Efficient**: Fewer tokens, lower costs, no context bloat
 - **Works With Your Tools**: Copilot, Claude, Cursor, Codex, Gemini, Windsurf
-- **Learns & Improves**: Remembers what works, extracts reusable skills
+- **Learns & Improves**: Remembers what works and packages reusable skills
 
 ## Setup Commands
 
@@ -60,7 +60,18 @@ npm run format
 ```bash
 # Edit agent definitions in
 .apm/agents/<agent-name>.agent.md
+
+# Edit packaged skills in
+.apm/skills/<skill-name>/SKILL.md
 ```
+
+The standalone `gem-critic` agent has been removed. Plan challenge behavior is
+handled by `gem-reviewer` through `review_mode: plan|wave|full`.
+
+Current packaged skills:
+
+- `gem-design-md-guidelines`: UI/UX, accessibility, platform conventions, motion, and `DESIGN.md` compliance.
+- `gem-devops-guidelines`: Deployment, CI/CD, containers, health checks, rollback, and production readiness.
 
 Agent file structure:
 
@@ -88,6 +99,21 @@ Documentation guidelines:
 - Include agent name, role, and key capabilities
 - Add model routing recommendations
 - Reference workflow phases and integration points
+- Document removed agents and merged responsibilities when agent boundaries change
+- Document every packaged skill, its activation scope, and its source path under `.apm/skills/`
+
+### Skill Documentation
+
+Skills are standard `SKILL.md` playbooks stored under `.apm/skills/<skill-name>/`.
+Keep each skill focused and progressively disclosed:
+
+- Frontmatter `name` must match the directory name
+- `description` must state the capability and activation context
+- Include workflow, validation checks, and relevant edge cases
+- Keep reusable guidance in the skill; keep task execution in agents
+- Use `references/`, `scripts/`, or `assets/` only when needed
+- Do not include secrets, private task data, or one-off workarounds
+- Rebuild or repack with APM after source changes to validate generated targets
 
 ## Code Style Guidelines
 
@@ -140,6 +166,14 @@ Documentation guidelines:
 2. Verify JSON output format compliance (fields match `output_format` schema).
 3. Check integration with orchestrator workflow (Phase routing, statuses, gates).
 4. Test error handling and edge cases.
+
+### Skill Testing
+
+1. Verify frontmatter parses and `name` matches the skill directory.
+2. Verify the description is specific enough for task matching.
+3. Check links and referenced files under the skill directory.
+4. Confirm guidance is reusable, scoped, and free of secrets or product-specific data.
+5. Run `apm compile --target copilot,claude,cursor --validate` after skill changes.
 
 ## Security Considerations
 

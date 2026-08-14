@@ -6,7 +6,9 @@ description: >-
 author: mubaidr
 license: Apache-2.0
 target: all
-includes: auto
+includes:
+  - .apm/agents/**
+  - .apm/skills/**
 dependencies:
   apm: []
   mcp: []

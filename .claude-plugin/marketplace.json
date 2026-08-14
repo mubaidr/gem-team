@@ -13,6 +13,7 @@
       "description": "Self-Learning Multi-agent orchestration framework for spec-driven development and automated verification",
       "name": "gem-team",
       "source": {
+        "ref": "gem-team-v1.103.0",
         "repo": "mubaidr/gem-team",
         "source": "github"
       },
@@ -28,7 +29,7 @@
         "prd",
         "mobile"
       ],
-      "version": "1.32.0"
+      "version": "1.103.0"
     }
   ]
 }

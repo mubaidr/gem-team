@@ -30,7 +30,6 @@
       ],
       "extra-files": [
         ".claude-plugin/marketplace.json",
-        ".github/plugins/gem-team/plugin.json",
         "apm.yml",
         "plugin.json",
         "README.md",
