@@ -36,7 +36,7 @@ model_routing:
 # PLANNING & WORKFLOW
 # ═══════════════════════════════════════════════════════════
 planning:
-  # Run gem-critic (challenge assumptions, find edge cases) for these complexities
+  # Require gem-reviewer validation with full-mode critic behavior for these complexities
   # TRIVIAL/LOW/MEDIUM/HIGH
   enable_critic_for: [HIGH]
 

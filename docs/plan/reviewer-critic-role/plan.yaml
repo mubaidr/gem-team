@@ -1,0 +1,367 @@
+plan_id: reviewer-critic-role
+objective: >-
+  Expand gem-reviewer into a general critic role for discussions, proposals,
+  feature ideas, and critical challenge while preserving plan, wave, and full
+  review behavior and compatibility.
+created_at: "2026-08-14"
+created_by: gem-planner
+status: pending
+tldr: >-
+  Add an additive critic contract, route the four critic intents through the
+  existing reviewer, preserve enable_critic_for as reviewer validation, and
+  align planner, configuration, and documentation references.
+
+baseline:
+  objective: >-
+    Expand gem-reviewer into a general critic role while preserving
+    plan/wave/full behavior.
+  acceptance_criteria:
+    - Existing plan|wave|full contracts remain valid.
+    - Critic mode has explicit input and measurable output.
+    - Routing and agent input references can invoke critic mode.
+    - Docs/config accurately describe behavior.
+    - Validation commands are explicit.
+  captured_at: "2026-08-14"
+
+plan_lineage:
+  root_plan_id: reviewer-critic-role
+  revision: 1
+  replan_count: 1
+  max_replans: 2
+  parent_revision: 0
+  reason: validation_failure
+
+plan_metrics:
+  wave_1_task_count: 1
+  total_dependencies: 10
+  risk_score: medium
+
+quality_warnings:
+  - Generated package files under build/ are versioned snapshots; compile validation must confirm whether they require refresh after source changes.
+  - Historical CHANGELOG.md references to gem-critic must remain historical and must not be presented as the current routing contract.
+
+context_version: 2
+context_updated_at: "2026-08-14"
+context_fields_changed:
+  - replan
+  - tasks.reviewer-contract
+  - tasks.orchestrator-routing
+  - tasks.planner-contract
+  - tasks.package-and-doc-validation
+tech_stack:
+  - name: Markdown agent contracts
+    role: Agent definitions and orchestration input/output contracts
+  - name: YAML
+    role: Gem Team configuration and plan artifact format
+  - name: Nuxt 4 documentation site
+    role: User-facing agent and configuration documentation
+  - name: APM
+    role: Package compilation and validation
+conventions:
+  - Use ASCII-only text.
+  - Preserve existing agent names and existing review mode names.
+  - Use canonical task_definition and handoff fields for delegated input.
+  - Use conventional documentation structure and existing validation commands.
+constraints:
+  hard:
+    - Do not rename or remove plan, wave, or full review modes.
+    - Do not add a standalone gem-critic agent.
+    - Preserve planning.enable_critic_for and its [HIGH] default for compatibility.
+    - Critic mode is read-only and must challenge ideas, assumptions, alternatives, and decision blockers.
+    - Do not implement source changes as part of this planning task.
+  soft:
+    - Prefer additive fields and branch-specific validation over broad contract rewrites.
+    - Keep documentation changes limited to current behavior and compatibility notes.
+  compatibility:
+    - Existing reviewer callers using plan, wave, or full must remain valid without critic-only fields.
+    - Existing configuration with planning.enable_critic_for must parse and continue to trigger reviewer validation.
+    - Existing generic reviewer output fields must remain available to existing consumers.
+  security_requirements:
+    - Critic mode must not mutate repository files or claim implementation completion.
+    - Do not introduce secrets or executable external integrations.
+architecture_snapshot:
+  agent_contract: >-
+    gem-reviewer is the single review and challenge agent. It currently parses
+    plan, wave, and full modes and returns a common JSON review result.
+  orchestration: >-
+    gem-orchestrator detects intent, routes reviewer tasks, and declares the
+    gem-reviewer task_definition fields in agent_input_reference.
+  planning: >-
+    gem-planner defines the durable DAG plan format and reviewer task handoff
+    fields; it must recognize any additive critic mode contract.
+  configuration: >-
+    .gem-team.yaml retains planning.enable_critic_for: [HIGH], currently
+    described as running the removed gem-critic behavior.
+  documentation: >-
+    README.md, AGENTS.md, workflow, agent, configuration, and local-development
+    docs describe reviewer responsibilities and the removed standalone agent.
+prior_decisions:
+  - decision: Standalone gem-critic was removed.
+    source: AGENTS.md and docs/src/content/5.resources/4.local-development.md
+  - decision: Existing reviewer modes are plan, wave, and full.
+    source: .apm/agents/gem-reviewer.agent.md
+  - decision: planning.enable_critic_for remains enabled for HIGH complexity.
+    source: .gem-team.yaml and task_definition.task_clarifications
+reuse_notes:
+  - path: /projects/gem-team/.apm/agents/gem-reviewer.agent.md
+    trust_level: verified
+  - path: /projects/gem-team/.apm/agents/gem-orchestrator.agent.md
+    trust_level: verified
+  - path: /projects/gem-team/.apm/agents/gem-planner.agent.md
+    trust_level: verified
+  - path: /projects/gem-team/.gem-team.yaml
+    trust_level: verified
+  - path: /projects/gem-team/docs/src/content/3.agents/1.index.md
+    trust_level: verified
+  - path: /projects/gem-team/docs/src/content/4.configuration/1.index.md
+    trust_level: verified
+  - path: /projects/gem-team/docs/src/content/5.resources/4.local-development.md
+    trust_level: verified
+
+replan:
+  reason: Reviewer found that downstream tasks lacked a deterministic shared critic input schema and final checks were vague.
+  changed_tasks:
+    - reviewer-contract
+    - orchestrator-routing
+    - planner-contract
+    - package-and-doc-validation
+  added_tasks: []
+  removed_tasks: []
+  preserved_acceptance_criteria:
+    - Existing plan/wave/full remain valid
+    - Critic mode has explicit input/output
+    - Routing and docs are covered
+  new_risks:
+    - Schema drift between reviewer, orchestrator, and planner
+    - Validation may pass without checking all required contract references
+  progress_signal: Critic fields are named identically in all three contracts and validation lists exact grep/build commands with expected zero-failure outcomes.
+
+open_questions: []
+assumptions:
+  - The four critic intents are discuss, proposal, feature_idea, and challenge.
+  - The existing plan, wave, and full common output fields are consumed by callers and must remain stable.
+  - A critic result can use the existing pass, warning, or blocking verdict and add critic-specific structured fields.
+  - APM compile is the authoritative check for packaged agent definitions and generated targets.
+
+tasks:
+  - id: reviewer-contract
+    title: Define additive reviewer critic contract
+    description: >-
+      Extend the gem-reviewer agent definition with an additive critic branch
+      for discussion, proposal, feature idea, and critical challenge requests.
+      Define the exact required critic_subject and critic_context input schema,
+      read-only boundaries, structured challenge categories, decision-blocker
+      handling, and measurable output while
+      retaining the existing plan, wave, and full workflow and output contract.
+    wave: 1
+    agent: gem-implementer
+    status: pending
+    flags:
+      requires_design_validation: false
+      retries_used: 0
+      revision_reason: ""
+    acceptance_criteria:
+      - ".apm/agents/gem-reviewer.agent.md accepts review_mode: critic in addition to plan, wave, and full."
+      - "Critic input uses exactly critic_subject {objective: string, proposal: string, constraints: string[], alternatives: string[], evidence: string[], decision_needed: string} and critic_context {audience: string, time_horizon: string, success_criteria: string[], known_unknowns: string[]}; all fields are required for critic mode."
+      - "Critic output preserves common reviewer fields and defines critic_verdict plus structured challenges, alternatives, and decision_blockers with evidence, impact, and action for each reported challenge."
+      - "The critic branch states that it is read-only and does not implement, mutate files, or claim completion of proposed work."
+      - "The plan, wave, and full parsing and output requirements remain present and do not require critic-only fields."
+    handoff:
+      known_context:
+        - "Current reviewer parses only plan, wave, and full at .apm/agents/gem-reviewer.agent.md:27."
+        - "The requested critic mode is additive and must cover discussions, proposals, feature ideas, and critical challenge."
+        - "The authoritative critic input schema is critic_subject {objective, proposal, constraints, alternatives, evidence, decision_needed} and critic_context {audience, time_horizon, success_criteria, known_unknowns}."
+        - "Critic output must make challenges and decision blockers measurable, not only provide free-form prose."
+      constraints:
+        - "Preserve existing mode names and common JSON output fields."
+        - "Use ASCII-only text and no source implementation outside the agent contract."
+    requires_review: true
+    review_depth: lightweight
+    review_security_sensitive: false
+
+  - id: orchestrator-routing
+    title: Route critic intents and expose reviewer inputs
+    description: >-
+      Update gem-orchestrator intent routing and agent_input_reference so the
+      four critic intents can invoke gem-reviewer with review_mode critic and
+      exactly critic_subject {objective, proposal, constraints, alternatives,
+      evidence, decision_needed} plus critic_context {audience, time_horizon,
+      success_criteria, known_unknowns}. Preserve existing plan, wave, and full
+      routing, config snapshot forwarding, and HIGH reviewer validation behavior.
+    wave: 2
+    agent: gem-implementer
+    depends_on:
+      - reviewer-contract
+    status: pending
+    flags:
+      requires_design_validation: false
+      retries_used: 0
+      revision_reason: ""
+    acceptance_criteria:
+      - "gem-orchestrator routes discuss, proposal, feature_idea, and challenge intent to gem-reviewer with review_mode: critic."
+      - "gem-orchestrator agent_input_reference lists the exact required objects critic_subject {objective: string, proposal: string, constraints: string[], alternatives: string[], evidence: string[], decision_needed: string} and critic_context {audience: string, time_horizon: string, success_criteria: string[], known_unknowns: string[]}; these names match reviewer-contract with no aliases."
+      - "Existing plan, wave, and full route conditions remain valid and are not renamed, removed, or made dependent on critic-only fields."
+      - "planning.enable_critic_for remains part of the routing decision as reviewer validation, with HIGH behavior preserved."
+      - "The handoff states that critic mode is read-only and that the reviewer receives the full config_snapshot."
+    handoff:
+      known_context:
+        - "Current intent inference mentions discuss but does not expose proposal, feature_idea, or challenge reviewer routing."
+        - "Current gem-reviewer input reference allows review_mode only as plan, wave, or full."
+        - "Reviewer contract task defines the authoritative critic field names and output shape: critic_subject {objective, proposal, constraints, alternatives, evidence, decision_needed} and critic_context {audience, time_horizon, success_criteria, known_unknowns}."
+      constraints:
+        - "Depend on reviewer-contract output; do not invent a second critic schema."
+        - "Preserve the compatibility meaning of planning.enable_critic_for."
+    requires_review: true
+    review_depth: lightweight
+    review_security_sensitive: false
+
+  - id: planner-contract
+    title: Align planner reviewer task schema
+    description: >-
+      Update the gem-planner definition or its reviewer task schema where
+      needed so plans can express a critic reviewer task with exactly
+      critic_subject {objective, proposal, constraints, alternatives, evidence,
+      decision_needed} and critic_context {audience, time_horizon,
+      success_criteria, known_unknowns}, without weakening the existing plan,
+      wave, and full reviewer task contracts. Keep critic fields branch-specific
+      and preserve measurable acceptance criteria and handoff boundaries.
+    wave: 2
+    agent: gem-implementer
+    depends_on:
+      - reviewer-contract
+    status: pending
+    flags:
+      requires_design_validation: false
+      retries_used: 0
+      revision_reason: ""
+    acceptance_criteria:
+      - "gem-planner recognizes review_mode: critic as an allowed reviewer task mode while retaining plan, wave, and full."
+      - "Planner guidance identifies exactly critic_subject {objective: string, proposal: string, constraints: string[], alternatives: string[], evidence: string[], decision_needed: string} and critic_context {audience: string, time_horizon: string, success_criteria: string[], known_unknowns: string[]} and requires them only for critic mode, with no aliases."
+      - "The planner schema continues to require explicit task ownership, dependencies, waves, and handoff constraints for reviewer tasks."
+      - "No standalone gem-critic agent or planner route is introduced."
+    handoff:
+      known_context:
+        - "Current planner format includes gem-reviewer fields but lists only plan, wave, or full in the reviewer handoff comment."
+        - "The reviewer-contract task is the source of truth for critic inputs and output fields: critic_subject {objective, proposal, constraints, alternatives, evidence, decision_needed} and critic_context {audience, time_horizon, success_criteria, known_unknowns}."
+      constraints:
+        - "Make the smallest schema/guidance change that supports critic tasks."
+        - "Do not alter the immutable plan acceptance criteria or remove existing mode compatibility."
+    requires_review: true
+    review_depth: lightweight
+    review_security_sensitive: false
+
+  - id: config-compatibility
+    title: Preserve and redefine critic configuration compatibility
+    description: >-
+      Update .gem-team.yaml and any directly coupled configuration contract
+      comments so planning.enable_critic_for remains parseable and keeps its
+      [HIGH] default, but clearly means reviewer validation rather than a
+      standalone gem-critic invocation.
+    wave: 3
+    agent: gem-implementer
+    depends_on:
+      - orchestrator-routing
+      - planner-contract
+    status: pending
+    flags:
+      requires_design_validation: false
+      retries_used: 0
+      revision_reason: ""
+    acceptance_criteria:
+      - ".gem-team.yaml retains planning.enable_critic_for: [HIGH] with the same key and value shape."
+      - "Configuration comments describe the setting as complexity levels requiring gem-reviewer validation and do not claim a gem-critic agent is run."
+      - "Existing unrelated orchestrator, model_routing, quality, devops, and testing settings are unchanged."
+      - "The config contract remains compatible with existing users and the orchestrator routing semantics documented by orchestrator-routing."
+    handoff:
+      known_context:
+        - "The current config comment says Run gem-critic and conflicts with the removed-agent compatibility requirement."
+        - "The user explicitly requires preserving planning.enable_critic_for and redefining its meaning."
+      constraints:
+        - "Do not rename the key or add a replacement key."
+        - "Keep edits limited to compatibility wording and any required contract annotation."
+    requires_review: true
+    review_depth: lightweight
+    review_security_sensitive: false
+
+  - id: documentation-references
+    title: Align agent and configuration documentation
+    description: >-
+      Update current README, AGENTS.md, workflow, agent catalog, configuration,
+      and local-development documentation to describe gem-reviewer critic mode,
+      its four supported intent classes, the preserved plan/wave/full modes,
+      and the compatibility meaning of planning.enable_critic_for. Keep
+      historical removal notes accurate without advertising a standalone agent.
+    wave: 4
+    agent: gem-documentation-writer
+    depends_on:
+      - config-compatibility
+    status: pending
+    flags:
+      requires_design_validation: false
+      retries_used: 0
+      revision_reason: ""
+    acceptance_criteria:
+      - "README.md and docs/src/content/3.agents/1.index.md describe Reviewer as supporting plan, wave, full, and additive critic behavior."
+      - "docs/src/content/2.guide/3.workflow.md describes routing for discuss, proposal, feature_idea, and challenge and preserves existing review behavior."
+      - "docs/src/content/4.configuration/1.index.md documents planning.enable_critic_for as reviewer validation with its compatible default."
+      - "AGENTS.md and docs/src/content/5.resources/4.local-development.md state that standalone gem-critic is removed while gem-reviewer provides the behavior."
+      - "No current configuration or documentation instructs users to invoke a standalone gem-critic; historical CHANGELOG.md entries remain unchanged as history."
+    handoff:
+      known_context:
+        - "Relevant current references are in README.md, AGENTS.md, docs/src/content/2.guide/3.workflow.md, docs/src/content/3.agents/1.index.md, docs/src/content/4.configuration/1.index.md, and docs/src/content/5.resources/4.local-development.md."
+        - "The source contracts and compatibility wording are completed by upstream tasks."
+      constraints:
+        - "Use existing documentation tone and Markdown structure."
+        - "Use ASCII-only text and do not rewrite historical changelog entries."
+    task_type: update
+    audience: developers
+    coverage_matrix:
+      - "Reviewer mode compatibility: plan, wave, full, and additive critic"
+      - "Critic intent routing: discuss, proposal, feature_idea, challenge"
+      - "Critic read-only behavior and measurable challenge output"
+      - "planning.enable_critic_for compatibility and reviewer validation meaning"
+      - "Removed standalone gem-critic compatibility note"
+    topic: gem-reviewer critic role and compatibility
+
+  - id: package-and-doc-validation
+    title: Validate contracts, package output, and documentation
+    description: >-
+      Perform final read-only validation of the completed contract, routing,
+      configuration, and documentation changes. Confirm source and packaged
+      agent definitions agree, existing review modes remain valid, critic
+      inputs and outputs are traceable, and the documentation site builds.
+    wave: 5
+    agent: gem-reviewer
+    depends_on:
+      - reviewer-contract
+      - orchestrator-routing
+      - planner-contract
+      - config-compatibility
+      - documentation-references
+    status: pending
+    flags:
+      requires_design_validation: false
+      retries_used: 0
+      revision_reason: ""
+    acceptance_criteria:
+      - "apm audit completes successfully from /projects/gem-team."
+      - "apm compile --target copilot,claude,cursor --validate completes successfully and reports no invalid agent contract or stale generated reviewer contract."
+      - "cd docs/src && npm run lint completes successfully."
+      - "cd docs/src && npm run typecheck completes successfully."
+      - "cd docs/src && npm run build completes successfully."
+      - 'From /projects/gem-team, the scoped search `for file in .apm/agents/gem-reviewer.agent.md .apm/agents/gem-orchestrator.agent.md .apm/agents/gem-planner.agent.md; do for token in critic_subject objective proposal constraints alternatives evidence decision_needed critic_context audience time_horizon success_criteria known_unknowns; do grep -qF "$token" "$file" || exit 1; done; done` exits 0, proving every exact critic field name is present in reviewer, orchestrator, and planner contracts.'
+      - 'From /projects/gem-team, `for mode in plan wave full critic; do grep -qF "$mode" .apm/agents/gem-reviewer.agent.md || exit 1; done` exits 0, and `grep -qF ''planning.enable_critic_for'' .gem-team.yaml && grep -qF ''HIGH'' .gem-team.yaml` exits 0.'
+      - 'From /projects/gem-team, `test -z "$(grep -RIn --exclude=CHANGELOG.md --exclude-dir=build -E ''(^|[^[:alnum:]_-])(invoke|run|route)[^[:alnum:]_-].*gem-critic|gem-critic.*(invoke|run|route)'' README.md AGENTS.md .apm docs/src | grep -vE ''removed|historical|compatibility'')"` exits 0, proving no current standalone gem-critic invocation exists outside explicit removal, historical, or compatibility text.'
+      - "From /projects/gem-team, `grep -qF 'read-only' .apm/agents/gem-reviewer.agent.md && grep -qF 'critic_verdict' .apm/agents/gem-reviewer.agent.md && grep -qF 'decision_blockers' .apm/agents/gem-reviewer.agent.md` exits 0, proving critic boundaries and measurable output are declared."
+      - "The contract review records exact file and line evidence that plan, wave, and full remain accepted without critic_subject or critic_context, while critic requires both objects and all ten nested fields."
+    handoff:
+      known_context:
+        - "This is a read-only final review after all upstream tasks complete."
+        - "The repository requires APM validation and docs lint, typecheck, and build checks for agent and documentation changes."
+        - "Generated build output must be checked by the APM compile validation rather than assumed current."
+      constraints:
+        - "Do not modify files during validation; report exact file and line evidence for any failure."
+        - "Treat stale generated output as a release-blocking integration finding, not as an optional warning."
+    requires_review: false
+    review_depth: lightweight
+    review_security_sensitive: false

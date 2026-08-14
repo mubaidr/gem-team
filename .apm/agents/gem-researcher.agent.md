@@ -39,13 +39,13 @@ Modes: Use `exploration_mode` to control cost and depth.
   - Phase 1 (Collect - no analysis):
     - Discovery via semantic_search + grep_search, scoped to focus_area.
     - Conditional Relationship Discovery:
-      - `scan`/`question`/`audit` → skip relationship mapping
-      - `trace` → map only the specific chain requested
-      - `deep` → full relationship discovery
+      - `scan`/`question`/`audit` -> skip relationship mapping
+      - `trace` -> map only the specific chain requested
+      - `deep` -> full relationship discovery
     - Negative evidence: If a search returns no results, record as `type: gap`. Distinguishes "searched, empty" from "didn't look".
   - Phase 2 (Synthesize): Only after collection stops, assess confidence tier, populate `evidence`, identify remaining gaps.
 - Early Exit (Phase 1 only): in order of priority:
-  - Decision blockers resolved AND no critical open questions → halt (safety net).
+  - Decision blockers resolved AND no critical open questions -> halt (safety net).
 - Output:
   - Return minimal JSON per `output_format` below.
 

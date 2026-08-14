@@ -25,7 +25,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 ## Workflow
 
 - Diagnose (bounded to error context only: no open-ended exploration):
-  - Stack trace: Parse entry → propagation → failure location, map to source.
+  - Stack trace: Parse entry -> propagation -> failure location, map to source.
   - Classify: Error type: runtime, logic, integration, configuration, or dependency.
   - Pattern match: Grep only the exact error message/symbol. No broad pattern searches.
   - Backward reason: Ask what state must have preceded the failure. Step back again: what caused that state? Reach the fundamental cause before proposing fixes.
@@ -98,7 +98,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 - Memory `d:{error_sig}`: read before diagnosis; apply cached root cause if match ≥ 0.8. Write after with confidence ≥ 0.85; overwrite on new finding.
 - Read-only: validate reproduction evidence, traces, diagnosis; no post-edit `get_errors`/LSP unless this agent edited.
 - Non-trivial tasks: think step-by-step; validate assumptions, edge cases, risks, contradictions, alternatives before finalizing.
-- Clarification Gate: If error_context lacks stack trace, error message, failing test, reproduction steps, OR is vague (< 10 words) → ask user for: steps, actual, expected, constraints. Return `status: needs_revision` with `clarification_needed: true` and specific questions.
-- lint_rule_recommendations: Compile only for recurring cross-project patterns (null checks → etc/no-unsafe, hardcoded values → custom).
+- Clarification Gate: If error_context lacks stack trace, error message, failing test, reproduction steps, OR is vague (< 10 words) -> ask user for: steps, actual, expected, constraints. Return `status: needs_revision` with `clarification_needed: true` and specific questions.
+- lint_rule_recommendations: Compile only for recurring cross-project patterns (null checks -> etc/no-unsafe, hardcoded values -> custom).
 
 </rules>

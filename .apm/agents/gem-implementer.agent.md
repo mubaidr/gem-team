@@ -24,7 +24,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 
 ## Workflow
 
-- TDD Cycle (Red → Green → Refactor → Verify):
+- TDD Cycle (Red -> Green -> Refactor -> Verify):
   - Red: Create/update only the test categories justified by acceptance criteria, behavior, or risk.
     Cover boundaries, errors, invariants, input variations, and state transitions when applicable.
   - Green: Write minimal code to pass.

@@ -31,11 +31,11 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
   - Preserve thorough checks for explicitly requested cross-platform, lifecycle, push, performance, or device-farm validation; do not downgrade them.
 - Env Verification:
   - Determine affected platforms and required test categories before platform setup.
-  - Verify and prepare only required platforms: iOS → `xcrun simctl list`; Android → `adb devices`.
-  - Build and install only required targets: iOS → xcodebuild, Android → gradlew assembleDebug.
+  - Verify and prepare only required platforms: iOS -> `xcrun simctl list`; Android -> `adb devices`.
+  - Build and install only required targets: iOS -> xcodebuild, Android -> gradlew assembleDebug.
 - Execute Tests: Per platform:
   - Launch app via framework, run suite, capture logs / screenshots / crashes.
-  - App readiness: After launch, verify app responds to input and initial screen renders. If launch crash → classify as new_failure, skip suite.
+  - App readiness: After launch, verify app responds to input and initial screen renders. If launch crash -> classify as new_failure, skip suite.
   - Gesture testing, when applicable: Tap, swipe, pinch, long-press, drag.
   - App lifecycle, when applicable: Cold start TTI, bg / fg, kill / relaunch, memory pressure, orientation.
   - Push notifications, when applicable: Grant, send, verify received / tap opens / badge, test all states.
@@ -50,10 +50,10 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
   - Frame rate: Core Animation FPS / `adb shell dumpsys gfxstats`.
   - Bundle size.
 - Error Recovery:
-  - Metro → `npx react-native start --reset-cache`.
-  - iOS → `xcodebuild clean`, rebuild.
-  - Android → `gradlew clean`, rebuild.
-  - Sim unresponsive → restart only the simulator/emulator owned by this task; use global reset only when explicitly required.
+  - Metro -> `npx react-native start --reset-cache`.
+  - iOS -> `xcodebuild clean`, rebuild.
+  - Android -> `gradlew clean`, rebuild.
+  - Sim unresponsive -> restart only the simulator/emulator owned by this task; use global reset only when explicitly required.
 - Cleanup:
   - Stop resources started by this task, close task-owned sims, and clear task artifacts when
     `task_definition.cleanup` is true (default true). Do not reset unrelated devices.
@@ -99,6 +99,6 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 - Verify env first; build+install before E2E. Test both iOS+Android unless platform-specific.
 - Element-based gestures over coords; appropriate velocities/durations. Lifecycle testing when applicable, else `not_applicable` with reason. waitForElement over fixed timeouts. Never simulator-only when device farm required.
 - Platform isolation: run iOS/Android separately, combine results.
-- Performance: Measure→Apply→Re-measure→Compare.
+- Performance: Measure->Apply->Re-measure->Compare.
 
 </rules>

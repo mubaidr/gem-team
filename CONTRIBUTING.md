@@ -29,7 +29,7 @@
   ---                    # Frontmatter: name, description, args
   # Role / # Expertise   # Identity & core competencies
   # Knowledge Sources    # Prioritized references
-  # Workflow             # Init → Analyze → Self-Critique → Handle Failure → Output
+  # Workflow             # Init -> Analyze -> Self-Critique -> Handle Failure -> Output
   # Output Format        # Return JSON schema
   # Rules                # Execution, Constitutional, Anti-Patterns, Directives
   ```
@@ -39,7 +39,7 @@
 1. Conventional commit message
 2. Push to branch
 3. PR with conventional title
-4. Merge → Release Please auto-releases
+4. Merge -> Release Please auto-releases
 
 ---
 

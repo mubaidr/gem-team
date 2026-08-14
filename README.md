@@ -115,7 +115,7 @@ Gem Team installs a set of specialized agents that work together under the guida
 | **Orchestrator**    | Coordinates the workflow and ensures all tasks are completed correctly.                             |
 | **Planner**         | Creates lean DAG plans with bounded discovery, dependencies, waves, risks, and acceptance criteria. |
 | **Implementer**     | Writes the code using TDD and best practices.                                                       |
-| **Reviewer**        | Challenges plans and verifies code quality, security, and compliance with requirements.             |
+| **Reviewer**        | Reviews plans; provides read-only critique for ideas and challenges.                                |
 | **Debugger**        | Diagnoses bugs with root-cause analysis (never implements fixes).                                   |
 | **Researcher**      | Explores the codebase and finds the best patterns to use.                                           |
 | **Designer**        | Creates UI/UX designs, layouts, and design systems.                                                 |
@@ -145,6 +145,37 @@ Gem Team works with your favorite AI coding tools:
 ## Configuration
 
 Gem Team is designed to work out of the box with smart defaults. You can customize behavior by editing the `AGENTS.md` file or specific agent definitions in the `.apm/agents/` directory.
+
+### Reviewer and critic modes
+
+`gem-reviewer` supports the existing `plan`, `wave`, and `full` review modes.
+It also supports additive `critic` mode for four intents: `discuss`,
+`proposal`, `feature_idea`, and `challenge`. Critic mode is read-only: it
+does not implement proposals, mutate files, or claim completion.
+
+Critic results use a structured verdict and measurable records for challenges,
+alternatives, and decision blockers. Each reported record includes evidence,
+impact, and a concrete action. Existing callers using `plan`, `wave`, or
+`full` do not need critic-only fields. The standalone `gem-critic` agent was
+removed; `gem-reviewer` provides this behavior.
+
+Critic requests must provide both `critic_subject` and `critic_context`:
+
+```yaml
+review_mode: critic
+critic_subject:
+  objective: string
+  proposal: string
+  constraints: string[]
+  alternatives: string[]
+  evidence: string[]
+  decision_needed: string
+critic_context:
+  audience: string
+  time_horizon: string
+  success_criteria: string[]
+  known_unknowns: string[]
+```
 
 ## Learn More
 
