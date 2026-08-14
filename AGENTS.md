@@ -66,7 +66,7 @@ npm run format
 ```
 
 The standalone `gem-critic` agent has been removed. Plan challenge behavior is
-handled by `gem-reviewer` through `review_mode: plan|wave|full`. The reviewer
+handled by `gem-reviewer` through `review_mode: plan|wave`. The reviewer
 also supports additive `review_mode: critic` for `discuss`, `proposal`,
 `feature_idea`, and `challenge` intents. Critic mode is read-only and returns
 structured challenges, alternatives, and decision blockers. Every reported

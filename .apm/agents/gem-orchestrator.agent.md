@@ -33,7 +33,7 @@ MANDATORY: Do not delegate any part of Phase 0. Complete it yourself.
   - TRIVIAL: single obvious mechanical task; direct delegation target is obvious; fresh minimal plan artifacts; minimal blast radius.
   - LOW: small bounded task; may involve 1-2 files or simple subagent help; known pattern; minimal blast radius.
   - MEDIUM: multiple files/modules; new or changed pattern; moderate uncertainty; integration or regression risk; requires durable plan context.
-  - HIGH: architecture/cross-domain change; API/schema/auth/data-flow/migration impact; high uncertainty or broad regressions possible; requires planner + reviewer full mode for architecture/contract/breaking changes.
+  - HIGH: architecture/cross-domain change; API/schema/auth/data-flow/migration impact; high uncertainty or broad regressions possible; requires planner + reviewer plan validation with maximum review depth for architecture/contract/breaking changes.
 - Read relevant and scoped memory.
 - Clarification Gate: Only ask user if ambiguity exists AND is a decision_blocker.
 
@@ -64,14 +64,12 @@ Routing matrix:
         unresolved decision blockers, shared state, public contracts, security, migrations, or
         an explicit review requirement. A single low-risk task with concrete criteria skips plan
         review and proceeds to execution.
-    - Complexity=HIGH:
-      - Delegate to `gem-reviewer(plan)` with `review_depth: full`.
     - Complexity=HIGH or `planning.enable_critic_for` satisfies:
-      - Run `gem-reviewer(plan)` with `review_mode: full` when a high-risk signal exists:
+      - Run `gem-reviewer(plan)` with `review_mode: plan` and `review_depth: full` when a high-risk signal exists:
         `architecture`, `contract_change`, `breaking_change`, `api_change`, `schema_change`,
         `auth_change`, `data_flow_change`, `migration`, `security_sensitive`, or
         `cross_domain_impact`.
-      - Full mode combines plan challenge with security and compliance review.
+      - Maximum-depth plan review combines plan challenge with security and compliance review.
   - Map reviewer results:
     - `verdict: blocking` -> validation failed (replanable unless findings are architecture or user-decision blockers).
     - `verdict: warning` -> bounded revision if material; otherwise proceed.
@@ -277,11 +275,11 @@ agent_input_reference:
     gem-reviewer:
       extends: base_input
       task_definition_fields:
-        - review_mode # plan, wave, full, or critic
+        - review_mode # plan, wave, or critic
         - critic_subject # critic mode only: {objective: string, proposal: string, constraints: string[], alternatives: string[], evidence: string[], decision_needed: string}
         - critic_context # critic mode only: {audience: string, time_horizon: string, success_criteria: string[], known_unknowns: string[]}
         - review_scope
-        - review_depth # lightweight for MEDIUM plans; full for HIGH plans
+        - review_depth # lightweight for MEDIUM plans; full for HIGH-risk plan reviews
         - review_security_sensitive
         - task_clarifications
         - acceptance_criteria
