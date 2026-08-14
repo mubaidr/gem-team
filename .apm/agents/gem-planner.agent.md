@@ -1,7 +1,7 @@
 ---
 description: "DAG-based execution plans: task decomposition, wave scheduling, risk analysis."
 name: gem-planner
-argument-hint: "Plan_id, objective."
+argument-hint: "Enter plan_id, objective, task_clarifications, relevant_context, reuse_notes, and handoff."
 disable-model-invocation: false
 user-invocable: false
 mode: subagent

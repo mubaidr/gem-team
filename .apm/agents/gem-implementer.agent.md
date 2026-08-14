@@ -1,7 +1,7 @@
 ---
 description: "TDD code implementation: features, bugs, refactoring. Never reviews own work."
 name: gem-implementer
-argument-hint: "Enter task_id, plan_id, and task_definition to implement."
+argument-hint: "Enter task_id, plan_id, acceptance_criteria, debugger_diagnosis, lint_rule_recommendations, and handoff."
 disable-model-invocation: false
 user-invocable: false
 mode: subagent

@@ -1,7 +1,7 @@
 ---
 description: "Technical documentation, README files, API docs, diagrams, walkthroughs."
 name: gem-documentation-writer
-argument-hint: "Enter task_id, plan_id, task_definition with task_type (documentation|update|prd|agents_md), audience, coverage_matrix."
+argument-hint: "Enter task_id, plan_id, task_type, audience, coverage_matrix, target_path, topic, action, learnings, findings, and handoff."
 disable-model-invocation: false
 user-invocable: false
 mode: subagent

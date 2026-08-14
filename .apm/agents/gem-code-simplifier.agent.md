@@ -1,6 +1,7 @@
 ---
 description: "Refactoring specialist: removes dead code, reduces complexity, consolidates duplicates."
 name: gem-code-simplifier
+argument-hint: "Enter task_id, plan_id, scope, targets, focus, constraints, and handoff."
 disable-model-invocation: false
 user-invocable: false
 mode: subagent

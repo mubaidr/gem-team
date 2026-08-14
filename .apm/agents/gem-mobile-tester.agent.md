@@ -1,7 +1,7 @@
 ---
 description: "Mobile E2E testing: Detox, Maestro, iOS/Android simulators."
 name: gem-mobile-tester
-argument-hint: "Enter task_id, plan_id, and mobile test definition to run E2E tests on iOS/Android."
+argument-hint: "Enter task_id, plan_id, acceptance_criteria, cleanup, and handoff."
 disable-model-invocation: false
 user-invocable: false
 mode: subagent

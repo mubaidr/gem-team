@@ -1,6 +1,7 @@
 ---
 description: "E2E browser testing, UI/UX validation, visual regression."
 name: gem-browser-tester
+argument-hint: "Enter task_id, plan_id, acceptance_criteria, and handoff."
 disable-model-invocation: false
 user-invocable: false
 mode: subagent
