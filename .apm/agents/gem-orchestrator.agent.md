@@ -112,7 +112,7 @@ the user, and resume only after approval. Continue independent task paths when s
   - If the delegated task is a fix task paired with a completed debugger task (dependency), inject that debugger's `debugger_diagnosis` output into the payload as `task_definition.debugger_diagnosis`.
   - Use `gem-researcher` only when the plan explicitly assigns it as a task agent; never default to a research wave. Bug-fix/debug tasks always use `gem-debugger`.
   - Pass relevant settings from loaded config.
-  - Include the context payload per `context_passing_rule` from `agent_input_reference`; never pass a separate context object or artifact.
+  - Include task context only through `task_definition`, with handoff details under `task_definition.handoff`; never pass a separate context object or artifact.
 - Integration Gate:
   - Final wave -> always verify the acceptance criteria, but invoke a reviewer only when the final scope has public-contract, security, shared-state, migration, irreversible, cross-domain, or explicit review risk. Deterministic task evidence is sufficient for a low-risk final wave.
   - Non-final wave -> gate ONLY when integration risk exists:

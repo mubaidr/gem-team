@@ -1,7 +1,7 @@
 ---
 description: "Creates portable Agent Skills from verified reusable patterns. Use when packaging a successful workflow as a skills.sh-compatible SKILL.md."
 name: gem-skill-creator
-argument-hint: "Enter task_id, plan_id, plan_path, patterns, source_task_id."
+argument-hint: "Enter task_id, plan_id, patterns, source_task_id."
 disable-model-invocation: false
 user-invocable: false
 mode: subagent

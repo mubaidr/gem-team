@@ -1,7 +1,7 @@
 ---
 description: "Plan and implementation review: assumptions, quality, security, and compliance."
 name: gem-reviewer
-argument-hint: "Enter task_id, plan_id, plan_path, review_mode (plan|wave|full|critic), and review criteria."
+argument-hint: "Enter task_id, plan_id, review_mode (plan|wave|full|critic), and review criteria."
 disable-model-invocation: false
 user-invocable: false
 mode: subagent
