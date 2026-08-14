@@ -32,7 +32,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
     - Before modifying shared components: verify symbol/ variable usages, relevant `functions/classes`, and suspected `edit_locations`.
     - Run test: must pass.
 - Bug-Fix Mode (when `debugger_diagnosis` or `lint_rule_recommendations` present in task_definition):
-  - Validate `debugger_diagnosis` contains root cause, target files, and fix recommendations; treat it as authoritative diagnosis.
+  - Validate `debugger_diagnosis` contains `root_cause`, non-empty `target_files`, a complete `reproduction` object with `steps`, `expected`, and `actual`, and non-empty `fix_recommendations`; treat it as authoritative diagnosis.
   - Own the regression test: create or update the minimal reproduction test before applying the fix.
     If the debugger supplied only a reproduction specification, convert it into the test during Red.
   - Apply `lint_rule_recommendations` together with the fix when present (e.g. ESLint rules).

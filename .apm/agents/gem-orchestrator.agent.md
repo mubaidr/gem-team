@@ -245,7 +245,7 @@ agent_input_reference:
       extends: base_input
       task_definition_fields:
         - acceptance_criteria
-        - debugger_diagnosis # runtime: forwarded from the paired debugger task output
+        - debugger_diagnosis # runtime: structured output forwarded from the paired debugger task
         - lint_rule_recommendations # runtime: forwarded from the paired debugger task output
         - handoff
 

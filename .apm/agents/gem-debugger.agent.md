@@ -62,7 +62,14 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
   "fail": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
   "debugger_diagnosis": {
     "root_cause": "string",
-    "fix_recommendations": "string"
+    "target_files": ["string"],
+    "reproduction": {
+      "steps": ["string"],
+      "expected": "string",
+      "actual": "string"
+    },
+    "fix_recommendations": ["string"],
+    "prevention": ["string"]
   },
   "lint_rule_recommendations": [{
     "name": "string",
