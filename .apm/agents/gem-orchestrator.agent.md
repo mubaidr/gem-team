@@ -50,7 +50,7 @@ Routing matrix:
 ### Phase 2: Planning
 
 - Complexity=TRIVIAL/LOW:
-  - Create a minimal ephemeral orchestration task list with tasks, deps, wave, status, assignments, and optional `conflicts_with`. No plan.yaml artifact is created for TRIVIAL/LOW.
+  - Create a minimal ephemeral orchestration task list with tasks, `depends_on`, wave, status, assignments, and optional `conflicts_with`. No plan.yaml artifact is created for TRIVIAL/LOW.
   - For bug-fix/debug/issue/root-cause work, use a diagnosis sufficiency gate:
     - Assign `gem-debugger` in wave 1 and `gem-implementer` in wave 2. The fix task MUST
       depend on the debugger task; forward the runtime `debugger_diagnosis` at execution.

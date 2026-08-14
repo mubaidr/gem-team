@@ -50,7 +50,8 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 - Synthesize DAG:
   - Lock clarifications into DAG constraints: explicit interfaces and outputs between tasks - never hidden upstream implementation details.
   - Tasks are atomic and high-cohesion, focused on milestones; do not specify implementation steps.
-  - Assign waves: no deps -> wave 1, otherwise dep.wave + 1.
+  - Use `depends_on` as the canonical task dependency field. Use an empty list for root tasks.
+  - Assign waves: `depends_on: []` -> wave 1; otherwise wave = max(dependency wave) + 1.
   - Populate `task_definition.acceptance_criteria` with clear, measurable outcomes - the task's completion definition.
 - Handoffs: verified context, task boundaries, constraints, and measurable checks only. No execution workflow or implementation steps.
 - Reviewer task contracts: `review_mode` accepts `plan`, `wave`, `full`, or `critic`. For `critic` only, require both exact objects below; do not use aliases or require these fields for the other modes:
@@ -183,6 +184,8 @@ tasks:
     description: string
     wave: number
     agent: string
+    depends_on: [string] # canonical task IDs that must complete before this task
+    conflicts_with: [string] # optional task IDs that must not run in parallel
     status: pending | in_progress | completed | failed | blocked | needs_revision | needs_replan | needs_approval # progress tracking; transitions owned by orchestrator
 
     # ───────────────────────────────────────────────────────────────────────
