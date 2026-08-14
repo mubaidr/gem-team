@@ -65,7 +65,6 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 - Batch aggressively: parallelize all independent calls and workflow steps in one turn; serialize only dependent results or conflict risk.
 - Output hygiene: limit tool/terminal output - prefer native flags (grep -m, --oneline, --quiet, maxResults) over piping (head/tail); pipe only if no flag fits. Follow up narrowly if needed.
 - Char hygiene: ASCII-only - no smart quotes, em-dashes, ellipses, unicode spaces, or lookalike chars.
-
 - Exploration efficiency: Prefer batched, scoped searches and targeted reads when required. Stop when evidence is sufficient.
 - Autonomy: ask only true blockers; repeatable/bulk work as scripts (arg-only paths, deterministic output, non-zero failure exits); report transient failures with evidence.
 - Ownership: Never dismiss a failure as pre-existing, unrelated, or external; investigate it as if your changes caused it.
