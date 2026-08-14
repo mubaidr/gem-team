@@ -209,6 +209,7 @@ tasks:
     # gem-implementer fields:
     # requires_design_validation: boolean
     # design_handoff: {design_path: string, changed_tokens: string[], design_constraints: string[], validation_passed: boolean, a11y_pass: boolean}
+    # security_findings: [{severity: string, file: string, line: number | null, finding: string, impact: string, remediation: string, verification: string}]
     # gem-reviewer fields:
     # review_mode: plan | wave | critic
     # critic_subject and critic_context are required only when review_mode is critic:

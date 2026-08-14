@@ -46,6 +46,11 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
   - Treat the design artifact, changed tokens, and design constraints as implementation inputs. Preserve them unless the task explicitly approves a design revision.
   - Output: return minimal JSON per `output_format`.
 
+- Security Remediation Mode (when `security_findings` is present):
+  - Address every blocking or high-severity finding and verify each listed remediation before completion.
+  - Do not suppress, downgrade, or omit findings. Return `needs_revision` or `failed` with evidence when a finding cannot be remediated safely.
+  - Output: return minimal JSON per `output_format`.
+
 </workflow>
 
 <output_format>

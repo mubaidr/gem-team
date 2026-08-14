@@ -78,6 +78,7 @@ Determine depth from `task_definition.review_depth` (default: `standard`). Apply
   "verdict": "pass | warning | blocking",
   "warnings": "number",
   "critical_findings": ["SEVERITY file:line: issue"],
+  "security_findings": [{"severity": "string", "file": "string", "line": "number | null", "finding": "string", "impact": "string", "remediation": "string", "verification": "string"}],
   "files_reviewed": "number",
   "acceptance_criteria_met": "number",
   "acceptance_criteria_missing": "number",
