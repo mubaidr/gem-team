@@ -368,7 +368,7 @@ When a failure occurs, classify and route it centrally:
 - fixable -> debugger -> implementer -> re-verify
 - needs_replan -> planner to revise via bounded replan guardrails, continue
 - escalate -> mark blocked, escalate to user
-- flaky -> log, mark completed
+- Flaky: Record evidence, then verify every acceptance criterion. Continue only if all remain verified; otherwise mark blocked and stop the affected dependency path. Never treat flaky results as transient failures or weaken criteria.
 - regression / new_failure -> debugger -> implementer -> re-verify
 - platform_specific -> log, skip, continue
 - test_bug -> log the discovered product bug as a new finding; do NOT fail the test task; route to `gem-debugger` -> `gem-implementer` as a follow-up bug-fix task when actionable.
