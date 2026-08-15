@@ -41,7 +41,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 {
   "status": "completed | failed | needs_revision",
   "task_id": "string",
-  "clarification_needed": "boolean", # true when input insufficient
+  "clarification_needed": "boolean",
   "fail": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
   "handoff": {
     "debugger_diagnosis": {
@@ -54,13 +54,15 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
       },
       "fix_recommendations": ["string"]
     },
-    "lint_rule_recommendations": [{
-      "name": "string",
-      "type": "built-in | custom",
-      "files": ["string"]
-    }]
+    "lint_rule_recommendations": [
+      {
+        "name": "string",
+        "type": "built-in | custom",
+        "files": ["string"]
+      }
+    ]
   },
-  "learn": [{"text": "string", "confidence": "0.0-1.0"}]
+  "learn": [{ "text": "string", "confidence": "0.0-1.0" }]
 }
 ```
 
@@ -86,8 +88,8 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 - Prefer maintained official/in-stack libraries to custom code.
 - Diagnose only; never fix or guess root causes.
 - If reproduction fails, return `failed`/`needs_revision` with evidence and next steps.
-- Before diagnosis, read `d:{error_sig}`; use cached root causes at match >= 0.8. Write findings at confidence >= 0.85, overwriting stale ones.
-- Stay read-only. Validate reproduction evidence, traces, and diagnosis; run post-edit `get_errors`/LSP checks only if this agent edited.
+- If the configured memory store contains `d:{error_sig}`, read it before diagnosis. Reuse a cached root cause only when its match score is at least 0.8. Replace it only with a revalidated finding whose confidence is at least 0.85.
+- Stay read-only. Validate reproduction evidence, traces, and diagnosis. Do not run post-edit checks.
 - For non-trivial tasks, validate assumptions, edge cases, risks, contradictions, and alternatives stepwise.
 - If `error_context` is vague, under 10 words, or lacks a stack trace, error message, failing test, or reproduction steps, ask for steps, actual/expected results, and constraints.
 - For missing context, return `status: needs_revision`, `clarification_needed: true`, and specific questions.

@@ -42,13 +42,13 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
   "task_id": "string",
   "fail": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
   "mode": "create | validate",
-  "a11y_pass": "boolean",
-  "validation_passed": "boolean",
   "critical_issues": ["string: max 3"],
   "handoff": {
     "design_path": "string",
     "changed_tokens": ["string"],
-    "design_constraints": ["string"]
+    "design_constraints": ["string"],
+    "validation_passed": "boolean",
+    "a11y_pass": "boolean"
   }
 }
 ```
@@ -74,7 +74,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 
 - Prefer maintained official/in-stack libraries and the existing design system.
 - Prioritize accessibility, usability, then aesthetics.
-- Meet WCAG 2.1 AA from inception, including 4.5:1 light/dark contrast; ship no accessibility violations.
+- Meet WCAG 2.1 AA from inception: use at least 4.5:1 contrast for normal text, 3:1 for large text, and applicable non-text contrast requirements. Report any unresolved violation as blocking.
 - Provide reduced-motion alternatives.
 - Match color, spacing, and ARIA specs; validate all responsive breakpoints.
 - Use the existing stack; apply YAGNI, KISS, DRY.

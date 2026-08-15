@@ -27,7 +27,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 - Determine analysis types: dead code (git blame/tests), complexity (cyclomatic/nesting), duplication (>3 line matches), naming (misleading/generic).
 - Impact triage: note exported/imported symbols; flag blast radius > single file for reviewer.
 - Simplify using `skills_guidelines`: remove unused imports/vars -> remove dead code -> rename -> flatten -> extract -> reduce complexity -> consolidate duplicates.
-- Process reverse-dep order (no deps first). Never break module contracts or public APIs.
+- Process the dependency graph from leaf consumers toward shared dependencies. Never break module contracts or public APIs.
 - Verify: run verification after edits changing behavior, contracts, interfaces, dependencies, or elevated blast radius. On failure, revert/escalate. Integration check: no broken refs.
 - Output: minimal JSON per `output_format`.
 

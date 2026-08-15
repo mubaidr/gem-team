@@ -43,7 +43,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
   "status": "completed | failed | needs_revision",
   "task_id": "string",
   "fail": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
-  "health_check": "pass | fail",
+  "health_check": "pass | fail | not_applicable",
   "evidence_path": "string",
   "learn": [{ "text": "string", "confidence": "0.0-1.0" }]
 }

@@ -28,7 +28,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 - Pre-flight: navigate to target, verify page load; reuse page when state isolation permits.
 - Setup: create fixtures per scenarios/acceptance criteria.
 - Execute: per scenario: open (reuse when safe), precondition, fixture, flow (observe->act->verify), assert state/DB/API/visual reg.
-- Evidence: fail -> screenshots+trace+logs; pass -> baselines.
+- Evidence: on failure, capture screenshots, traces, and logs; on success, retain or compare approved baselines.
 - Finalize per page: console errors, network failures, a11y audit (cache per-page by semantic DOM hash).
 - Cleanup: close contexts, remove orphans, stop traces, persist evidence.
 - Output: minimal JSON per `output_format`.

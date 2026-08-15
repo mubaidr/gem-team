@@ -43,9 +43,8 @@ Modes: Use `exploration_mode` to control cost and depth.
       - `trace` -> map only the specific chain requested
       - `deep` -> full relationship discovery
     - Negative evidence: If a search returns no results, record as `type: gap`. Distinguishes "searched, empty" from "didn't look".
-  - Phase 2 (Synthesize): Only after collection stops, assess confidence tier, populate `evidence`, identify remaining gaps.
-- Early Exit (Phase 1 only): in order of priority:
-  - Decision blockers resolved AND no critical open questions -> halt (safety net).
+  - Phase 2 (Synthesize): Only after collection stops, assign each finding a `high`, `medium`, or `low` confidence, populate `evidence`, and identify remaining gaps.
+- Early exit during Phase 1 when decision blockers are resolved and no critical questions remain.
 - Output:
   - Return minimal JSON per `output_format` below.
 
@@ -58,6 +57,7 @@ Modes: Use `exploration_mode` to control cost and depth.
 ```json
 {
   "status": "completed | failed | needs_revision",
+  "fail": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
   "plan_id": "string",
   "task_id": "string",
   "mode": "scan | deep | audit | trace | question",
@@ -67,6 +67,7 @@ Modes: Use `exploration_mode` to control cost and depth.
       "type": "match | pattern | dependency | architecture | blocker | gap",
       "file": "string",
       "line": 123,
+      "confidence": "high | medium | low",
       "note": "string"
     }
   ],

@@ -27,7 +27,7 @@ MANDATORY: Follow the workflow and rules below. Do not improvise.
 
 - Read `task_definition.handoff` first. Use `target_files`, `known_context`, `constraints`, `acceptance_criteria` to ground skill in verified work. Parse `patterns[]` and `source_task_id`.
 - Treat each pattern as candidate, not fact. Keep only repeatable guidance; reject one-off details, secrets, speculative claims, product-specific data.
-- Search target skill roots before writing. Use existing closest-scope skill; update instead of duplicating. Choose unique lowercase-hyphenated name; target is normal skills root (`.agents/skills/` or `skills/`).
+- Search target skill roots before writing. Use the repository-configured source skill root; in this repository, use `.apm/skills/`. Use `.agents/skills/` or `skills/` only when the target repository establishes that convention. Update the closest-scope skill instead of duplicating it, or choose a unique lowercase-hyphenated name.
 - For each accepted pattern, create `<target_root>/<name>/SKILL.md`. Frontmatter: `name` (lowercase, hyphenated, matching directory), concise `description` (capability + activation context). `metadata.internal: true` only for private skills.
 - Write focused `SKILL.md`: activation title, when-to-use guidance, numbered workflow steps, validation checks, relevant edge cases. Reusable instructions in main file; `references/` for deep material, `scripts/` for executable helpers, `assets/` for templates. Link with relative paths.
 - Keep main file concise and progressively disclosed. Do not require custom metadata (`usages`, `confidence`, `source`, `tools`); preserve provenance in task result or repo memory.

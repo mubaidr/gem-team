@@ -44,6 +44,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
   "task_id": "string",
   "fail": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific | test_bug",
   "failures": ["string: max 3"],
+  "not_applicable": ["string: category and reason"],
   "evidence_path": "string"
 }
 ```
@@ -74,6 +75,6 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 - Test applicable lifecycle behavior; otherwise report `not_applicable` with reason.
 - Wait for elements; avoid fixed timeouts.
 - Use required device farms; never substitute simulator-only testing.
-- Measure performance, change, remeasure, compare.
+- Measure performance before and after the implementation under test, then compare the results.
 
 </rules>

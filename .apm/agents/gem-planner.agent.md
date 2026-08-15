@@ -43,16 +43,16 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 
 ## Workflow
 
-- Replan safety: `baseline.objective` and `baseline.acceptance_criteria` are immutable. Non-empty `replan` delta required: failure/evidence, changed/removed task IDs, preserved acceptance criteria, new risks, `progress_signal`. Baseline changes are `decision_blocker`.
+- Replan safety: `baseline.objective` and `baseline.acceptance_criteria` are immutable. A non-empty `replan` delta must include the reason, changed/added/removed task IDs, preserved acceptance criteria, new risks, and `progress_signal`. Baseline changes are `decision_blocker`.
 - Planning depth by complexity: smallest safe depth. MEDIUM spans modules with moderate risk; HIGH adds full risk analysis.
 - Synthesize DAG: lock clarifications into constraints (explicit interfaces, never hidden implementation). Tasks are atomic, high-cohesion, milestone-focused. `depends_on` = canonical dependency; empty list = root task. Waves: `depends_on: []` -> wave 1; otherwise max(dependency wave) + 1. Populate `acceptance_criteria` with measurable outcomes.
 - Agent assignment: match via `<available_agents>`:
   - Research: `gem-researcher` only for explicit deliverable or material blocker.
-  - Design/UI: `designer` (with `requires_design_validation: true` -> designer wave N, implementer N+1).
-  - Bugs: `debugger` (wave N) -> `implementer` (N+1); forward `debugger_diagnosis`.
-  - Security: `reviewer` audits -> `implementer` remediates.
-  - PRD: `documentation-writer` with `task_type: prd`, first-class wave 1; downstream reference `prd_id`.
-  - Default: `implementer`. Never route design/visual/a11y to implementer when `gem-designer` available.
+  - Design/UI: `gem-designer` (with `requires_design_validation: true` -> designer wave N, implementer N+1).
+  - Bugs: `gem-debugger` (wave N) -> `gem-implementer` (N+1); forward `debugger_diagnosis`.
+  - Security: `gem-reviewer` audits -> `gem-implementer` remediates.
+  - PRD: `gem-documentation-writer` with `task_type: prd`, first-class wave 1. Downstream tasks depend on the PRD task ID and receive its `target_path` in `handoff.known_context`.
+  - Default: `gem-implementer`. Never route design, visual, or accessibility work to `gem-implementer` when `gem-designer` is available.
 - Output: minimal JSON per `output_format`. Runtime execution belongs to `gem-orchestrator`.
 
 </workflow>
@@ -80,9 +80,9 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 - Test specifications are minimal and scenario-driven. Never pre-fill fixtures, flows, visual-regression plans, or test data at plan time; define them at execution handoff only when acceptance criteria require them.
 
 ```yaml
-# ═══════════════════════════════════════════════════════════════════════════
+# ---------------------------------------------------------------------------
 # PLAN METADATA (always present)
-# ═══════════════════════════════════════════════════════════════════════════
+# ---------------------------------------------------------------------------
 plan_id: string
 objective: string
 created_at: string
@@ -103,22 +103,22 @@ plan_lineage:
   parent_revision: number
   reason: initial | validation_failure | execution_failure | scope_change
 
-# ═══════════════════════════════════════════════════════════════════════════
+# ---------------------------------------------------------------------------
 # PLAN-LEVEL METRICS (populated by planner)
-# ═══════════════════════════════════════════════════════════════════════════
+# ---------------------------------------------------------------------------
 plan_metrics:
   wave_1_task_count: number
   total_dependencies: number
   risk_score: low | medium | high
 quality_warnings: [string]
 
-# ═══════════════════════════════════════════════════════════════════════════
+# ---------------------------------------------------------------------------
 # PLAN CONTEXT (top-level fields; initialized once; changed only by explicit replan)
-# ═══════════════════════════════════════════════════════════════════════════
+# ---------------------------------------------------------------------------
 context_version: number
 context_updated_at: string
 context_fields_changed: [string]
-tech_stack: [object] # plan-level only; task-level tech_stack stays an execution handoff
+tech_stack: [object] # plan-level only; pass task-relevant stack details through handoff.known_context
 conventions: [string]
 constraints:
   hard: [string]
@@ -138,12 +138,12 @@ replan:
   new_risks: [string]
   progress_signal: string
 
-# ═══════════════════════════════════════════════════════════════════════════
+# ---------------------------------------------------------------------------
 # PLANNING ANALYSIS (complexity-dependent)
 # LOW: not required
 # MEDIUM: only open_questions, assumptions
 # HIGH: open_questions, assumptions, pre_mortem, coordination_notes
-# ═══════════════════════════════════════════════════════════════════════════
+# ---------------------------------------------------------------------------
 open_questions:
   - question: string
     context: string
@@ -159,13 +159,13 @@ pre_mortem: # HIGH complexity ONLY : structured risk analysis
       mitigation: string
 coordination_notes: [string] # HIGH only : task-specific notes for implementer coordination
 
-# ═══════════════════════════════════════════════════════════════════════════
+# ---------------------------------------------------------------------------
 # TASKS (each task is delegated to one agent)
-# ═══════════════════════════════════════════════════════════════════════════
+# ---------------------------------------------------------------------------
 tasks:
-  - # ───────────────────────────────────────────────────────────────────────
+  - # -----------------------------------------------------------------------
     # IDENTITY (always present)
-    # ───────────────────────────────────────────────────────────────────────
+    # -----------------------------------------------------------------------
     id: string
     title: string
     description: string
@@ -175,27 +175,27 @@ tasks:
     conflicts_with: [string] # optional task IDs that must not run in parallel
     status: pending | in_progress | completed | failed | blocked | needs_revision | needs_replan # progress tracking; transitions owned by orchestrator
 
-    # ───────────────────────────────────────────────────────────────────────
+    # -----------------------------------------------------------------------
     # ROUTING (planner-set)
-    # ───────────────────────────────────────────────────────────────────────
+    # -----------------------------------------------------------------------
     flags:
       requires_design_validation: boolean # true for new UI, major redesigns, style/a11y/token work -> designer first, then implementer
       retries_used: number # orchestrator-set: re-delegation attempts for needs_revision tasks; max 3
       revision_reason: string # orchestrator-set: why the task was re-delegated
 
-    # ───────────────────────────────────────────────────────────────────────
+    # -----------------------------------------------------------------------
     # QUALITY GATES (verification criteria)
-    # ───────────────────────────────────────────────────────────────────────
+    # -----------------------------------------------------------------------
     acceptance_criteria: [string] # clear, measurable outcomes; the single completion definition per task (no separate success_criteria)
 
-    # ───────────────────────────────────────────────────────────────────────
+    # -----------------------------------------------------------------------
     # TASK HANDOFF
     handoff:
       known_context: [string]
       constraints: [string]
 
     # AGENT-SPECIFIC HANDOFFS (populated based on task agent)
-    # ───────────────────────────────────────────────────────────────────────
+    # -----------------------------------------------------------------------
 
     # gem-implementer fields:
     # requires_design_validation: boolean
@@ -246,9 +246,9 @@ tasks:
 - Cite evidence; state assumptions.
 - Produce the smallest safe plan meeting criteria; omit speculation, needless abstractions, optional refactors, unrelated cleanup, and unjustified tasks, agents, or validation.
 - Extend rather than rewrite.
-- Before validation, read the cached Context7 stack memory key. If a verdict exists, skip validation; otherwise write result/confidence.
+- If `config_snapshot` defines a Context7 validation cache key for the detected stack and version, read it before validation. Reuse only a matching, unexpired verdict; otherwise validate and store the result with confidence.
 - For non-trivial tasks, validate assumptions, edge cases, risks, contradictions, and alternatives stepwise.
-- Ask the user to clarify every ambiguity.
+- Ask the user only about ambiguities that block a decision. Record safe, explicit assumptions for the rest.
 - Include only architectural milestones/dependency mapping; exclude implementation steps, execution workflows, and micromanagement.
 
 </rules>

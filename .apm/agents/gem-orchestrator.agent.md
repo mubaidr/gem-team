@@ -46,11 +46,11 @@ Deterministic three-level reviewer routing. Define these signal sets once:
 - `high_risk_signals`: `architecture`, `contract_change`, `breaking_change`, `api_change`, `schema_change`, `auth_change`, `data_flow_change`, `migration`, `security_sensitive`, `cross_domain_impact`.
 - `critic_signals`: `architecture`, `breaking_change`, `cross_domain_impact`.
 
-Select exactly one reviewer level in priority order:
+Select exactly one reviewer level in this priority order:
 
-1. standard: MEDIUM complexity or a multi-task LOW plan without a `critic_signals` match. Dispatch one `gem-reviewer` plan review with `review_depth: standard`.
-2. high: HIGH complexity or any `high_risk_signals` match that is not a `critic_signals` match. Dispatch one `gem-reviewer` plan review with `review_depth: high`.
-3. critic: Any `critic_signals` match. Add exactly one wave-1 `gem-reviewer` task with `review_mode: critic`; it replaces the orchestrator-side high review. All implementation tasks depending on the challenged plan must depend on the critic task or a later task that consumes its approved findings.
+1. critic: Any `critic_signals` match. Add exactly one wave-1 `gem-reviewer` task with `review_mode: critic`; it replaces the orchestrator-side high review. All implementation tasks depending on the challenged plan must depend on the critic task or a later task that consumes its approved findings.
+2. high: Otherwise, HIGH complexity or any `high_risk_signals` match. Dispatch one `gem-reviewer` plan review with `review_depth: high`.
+3. standard: Otherwise, MEDIUM complexity or a multi-task LOW plan. Dispatch one `gem-reviewer` plan review with `review_depth: standard`.
 
 - Complexity=TRIVIAL/LOW:
   - Create a minimal ephemeral orchestration task list with tasks, `depends_on`, wave, status, assignments, and optional `conflicts_with`. No plan.yaml artifact is created for TRIVIAL/LOW.
@@ -62,9 +62,8 @@ Select exactly one reviewer level in priority order:
   - Delegate to `gem-planner` with `task_clarifications`, relevant context and `config_snapshot`.
   - Request the single reviewer level selected by the deterministic three-level routing rules.
   - Map reviewer results:
-    - `verdict: blocking` -> validation failed (replanable unless findings are architecture or user-decision blockers).
-    - `verdict: warning` -> bounded revision if material; otherwise proceed.
-    - `verdict: pass` -> proceed.
+    - Plan review: `verdict: blocking` -> validation failed (replanable unless findings are architecture or user-decision blockers); `warning` -> bounded revision if material, otherwise proceed; `pass` -> proceed.
+    - Critic review: `critic_verdict: proceed` -> continue; `revise` -> bounded revision; `defer`, `reject`, or `needs_input` -> block or request the required decision.
   - If validation fails:
     - Failed + replanable -> apply the bounded replan guardrails below, then delegate to `gem-planner` with findings.
     - Failed + not replanable -> escalate to user with feedback and required input for next steps.
@@ -90,7 +89,7 @@ Execute all unblocked waves/tasks without unnecessary approval pauses.
 
 - Select Work:
   - Do NOT read complete `plan.yaml` file. Collect tasks via targeted search and filtering:
-    - Search/Grep: Collect tasks from `plan.yaml` using qauery/ search to locate matching the target wave (e.g., `wave: 1`) or matching non-completed statuses.
+    - Search/Grep: Collect tasks from `plan.yaml` using query/search to locate tasks matching the target wave (e.g., `wave: 1`) or non-completed statuses.
     - Partial Read: Based on the search/grep results, read only the specific line ranges containing the matched task blocks.
   - Wave Evaluation:
     - First Loop: Collect tasks with `wave: 1` and `status: pending`.
@@ -156,7 +155,7 @@ Execute all unblocked waves/tasks without unnecessary approval pauses.
 
 ### Phase 4: Output
 
-Present status with some motivlational message or insight. Status report as per `output_format`
+Present the status per `output_format` with one concise motivational message or insight.
 
 Only on first run of a fresh session, and only when no `.gem-team.yaml` exists, display a tip about
 customizing behavior to encourage users to explore configuration options:
@@ -271,7 +270,7 @@ agent_input_reference:
         - critic_subject # critic mode only: {objective: string, proposal: string, constraints: string[], alternatives: string[], evidence: string[], decision_needed: string}
         - critic_context # critic mode only: {audience: string, time_horizon: string, success_criteria: string[], known_unknowns: string[]}
         - review_scope
-        - review_depth # standard for MEDIUM plans; full for HIGH-risk plan reviews
+        - review_depth # standard for MEDIUM plans; high for HIGH-risk plan reviews
         - review_security_sensitive
         - task_clarifications
         - acceptance_criteria
@@ -371,8 +370,8 @@ Classify/route failures centrally:
 - `escalate`: mark blocked and escalate to the user.
 - `flaky`: record evidence; verify every criterion. Continue only if all pass; otherwise block the affected dependency path. Never classify as transient or weaken criteria.
 - `regression` or `new_failure`: route debugger -> implementer -> verification.
-- `platform_specific`: log, skip, and continue.
-- `test_bug`: log the product bug as a new finding without failing the test task; if actionable, route follow-up to `gem-debugger` -> `gem-implementer`.
+- `platform_specific`: record the affected platform and evidence. Continue only if all acceptance criteria for required platforms remain verified; otherwise block the affected path.
+- `test_bug`: record the test defect without classifying the product as failed. If actionable, route the test fix through `gem-debugger` -> `gem-implementer` -> verification.
 - Delegate debugger `lint_rule_recommendations` to implementer for ESLint rules.
 
 </rules>

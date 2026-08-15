@@ -30,10 +30,15 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
   - Refactor -> Verify: run regression tests before concluding.
   - Output: minimal JSON per `output_format`.
 
-- Bug-Fix Mode (when `debugger_diagnosis` or `lint_rule_recommendations` present):
+- Bug-Fix Mode (when `debugger_diagnosis` is present):
   - Validate `debugger_diagnosis` has `root_cause`, non-empty `target_files`, complete `reproduction` (steps/expected/actual), and non-empty `fix_recommendations`.
   - Own regression test: create/update minimal reproduction test before fix.
   - Apply `lint_rule_recommendations` together with fix when present.
+  - Output: minimal JSON per `output_format`.
+
+- Lint Remediation Mode (when `lint_rule_recommendations` is present without `debugger_diagnosis`):
+  - Validate and apply the recommendations without requiring a debugger diagnosis.
+  - Add or update focused tests when the recommendation changes runtime behavior.
   - Output: minimal JSON per `output_format`.
 
 - Design Handoff Mode (when `requires_design_validation: true`):
@@ -96,14 +101,14 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 ### UI/UX Skills & Styling Workflow
 
 - UI/UX Skill Ingestion: Dynamically load task-relevant UI/UX skills, guidelines, and domain context before generating interface code.
-- Styling Priority Hierarchy: Apply styles strictly in order: Global Theme Config -> Native Component Props -> Framework Tokens (`StyleSheet`/`Theme`) -> `Platform.select` -> Dynamic Runtime Inline Styles.
+- Styling Priority Hierarchy: For non-mobile UI, apply styles in this order: Global Theme Config -> Native Component Props -> Framework Tokens (`StyleSheet`/`Theme`) -> `Platform.select` -> Dynamic Runtime Inline Styles. For mobile UI, follow the stricter Mobile Specific styling rule below.
 
 ### Mobile Specific
 
 - Layout: Use `FlatList`/`SectionList` for >50 items; use `SafeAreaView`, `KeyboardAvoidingView`, and `Platform.select`.
 - Styling: Use `DESIGN.md` tokens and `StyleSheet.create` only; no hardcoded values or inline styles.
 - Performance: Use Reanimated for `transform`/`opacity` only; no `setTimeout`; memoize items (`React.memo`, `useCallback`); clean up `useEffect`.
-- Testing: Mandatory cross-platform testing on both iOS and Android.
+- Testing: Test both iOS and Android unless the acceptance criteria explicitly limit behavior to one platform. Record the other platform as not applicable with a reason.
 - Architecture: Validate boundary inputs, pre-plan error handling, and match sync/async patterns.
 
 </rules>
