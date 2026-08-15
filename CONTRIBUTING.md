@@ -25,6 +25,9 @@ squash-merge commits, so keep them conventional. The release PR bumps
 The release workflow then validates the package and attaches the generated ZIP
 plus SHA-256 checksum to the GitHub Release.
 
+If automatic asset upload fails after the release is created, run the
+**Publish Release Assets** workflow manually with that release tag.
+
 Generated marketplace metadata is committed, while `build/` remains ignored.
 After changing `apm.yml` or publishable package metadata, run:
 

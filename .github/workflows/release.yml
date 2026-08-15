@@ -14,7 +14,7 @@ jobs:
   release-please:
     runs-on: ubuntu-latest
     steps:
-      - uses: googleapis/release-please-action@v4
+      - uses: googleapis/release-please-action@8b8fd2cc23b2e18957157a9d923d75aa0c6f6ad5 # v4
         id: release
         with:
           # Uses the manifest file to determine versions
@@ -23,13 +23,13 @@ jobs:
 
       - name: Checkout release tag
         if: ${{ steps.release.outputs.releases_created == 'true' }}
-        uses: actions/checkout@v5
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
           ref: ${{ steps.release.outputs.tag_name }}
 
       - name: Set up APM
         if: ${{ steps.release.outputs.releases_created == 'true' }}
-        uses: microsoft/apm-action@v1
+        uses: microsoft/apm-action@d723bb64ed70c135bbaf87d126b721dd2dae0439 # v1.10.0
         with:
           setup-only: "true"
           apm-version: "0.28.0"
@@ -40,7 +40,8 @@ jobs:
           apm run check
           apm run pack
           for archive in build/*.zip; do
-            sha256sum "$archive" > "$archive.sha256"
+            archive_name="$(basename "$archive")"
+            (cd build && sha256sum "$archive_name" > "$archive_name.sha256")
           done
 
       - name: Attach APM artifacts to release

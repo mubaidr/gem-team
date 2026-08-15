@@ -203,6 +203,7 @@ Example: `[gem-team] Add new debugger agent`
 - Version auto-bumps in `apm.yml` and `version.txt`
 - Conventional commits trigger automated releases
 - `microsoft/apm-action` validates tags and attaches ZIP/checksum assets
+- `Publish Release Assets` can retry packaging and upload for an existing tag
 - `.claude-plugin/marketplace.json` is committed; `build/` is generated
 
 ## Troubleshooting

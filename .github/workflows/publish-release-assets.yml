@@ -1,0 +1,51 @@
+name: Publish Release Assets
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing gem-team-v<version> release tag
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate tag format
+        env:
+          RELEASE_TAG: ${{ inputs.tag }}
+        run: |
+          if [[ ! "$RELEASE_TAG" =~ ^gem-team-v[0-9]+\.[0-9]+\.[0-9]+([.-][0-9A-Za-z.-]+)?$ ]]; then
+            echo "Invalid release tag: $RELEASE_TAG" >&2
+            exit 1
+          fi
+
+      - name: Checkout release tag
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          ref: ${{ inputs.tag }}
+
+      - name: Set up APM
+        uses: microsoft/apm-action@d723bb64ed70c135bbaf87d126b721dd2dae0439 # v1.10.0
+        with:
+          setup-only: "true"
+          apm-version: "0.28.0"
+
+      - name: Validate and package release
+        run: |
+          apm run check
+          apm run pack
+          for archive in build/*.zip; do
+            archive_name="$(basename "$archive")"
+            (cd build && sha256sum "$archive_name" > "$archive_name.sha256")
+          done
+
+      - name: Attach APM artifacts to release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ inputs.tag }}
+        run: gh release upload "$RELEASE_TAG" build/*.zip build/*.zip.sha256 --clobber

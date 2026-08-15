@@ -97,6 +97,8 @@ apm update mubaidr/gem-team --yes
 apm update -g mubaidr/gem-team --yes
 ```
 
+To check for an update to the APM CLI itself, use `apm self-update --check`.
+
 For reproducible environments, pin a release tag:
 
 ```bash
