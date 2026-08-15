@@ -65,7 +65,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 ```json
 {
   "status": "completed | failed | needs_revision",
-  "fail": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
+  "fail": "transient | fixable | needs_replan | escalate",
   "plan_id": "string",
   "plan_path": "string",
   "complexity": "MEDIUM | HIGH",
