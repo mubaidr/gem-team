@@ -1,7 +1,7 @@
 ---
 description: "DAG-based execution plans: task decomposition, wave scheduling, risk analysis."
 name: gem-planner
-argument-hint: "Enter plan_id, objective, task_clarifications, relevant_context, reuse_notes, and handoff."
+argument-hint: "Enter plan_id, provisional_complexity, risk_signals, objective, task_clarifications, relevant_context, reuse_notes, and handoff."
 disable-model-invocation: false
 user-invocable: false
 mode: subagent
@@ -44,7 +44,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 ## Workflow
 
 - Replan safety: `baseline.objective` and `baseline.acceptance_criteria` are immutable. A non-empty `replan` delta must include the reason, changed/added/removed task IDs, preserved acceptance criteria, new risks, and `progress_signal`. Baseline changes are `decision_blocker`.
-- Planning depth by complexity: smallest safe depth. MEDIUM spans modules with moderate risk; HIGH adds full risk analysis.
+- Confirm complexity from planning evidence and return `MEDIUM` or `HIGH` with matched `risk_signals` and a concise reason. May promote the provisional complexity once; never downgrade it. MEDIUM spans modules with moderate risk; HIGH adds full risk analysis.
 - Synthesize DAG: lock clarifications into constraints (explicit interfaces, never hidden implementation). Tasks are atomic, high-cohesion, milestone-focused. `depends_on` = canonical dependency; empty list = root task. Waves: `depends_on: []` -> wave 1; otherwise max(dependency wave) + 1. Populate `acceptance_criteria` with measurable outcomes.
 - Agent assignment: match via `<available_agents>`:
   - Research: `gem-researcher` only for explicit deliverable or material blocker.
@@ -66,7 +66,10 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
   "status": "completed | failed | needs_revision",
   "fail": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
   "plan_id": "string",
-  "plan_path": "string"
+  "plan_path": "string",
+  "complexity": "MEDIUM | HIGH",
+  "risk_signals": ["string"],
+  "complexity_reason": "string"
 }
 ```
 
@@ -85,6 +88,8 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 # ---------------------------------------------------------------------------
 plan_id: string
 objective: string
+complexity: MEDIUM | HIGH
+risk_signals: [string]
 created_at: string
 created_by: string
 status: pending | approved | in_progress | completed | failed
@@ -202,13 +207,17 @@ tasks:
     # design_handoff: {design_path: string, changed_tokens: string[], design_constraints: string[], validation_passed: boolean, a11y_pass: boolean}
     # security_findings: [{severity: string, file: string, line: number | null, finding: string, impact: string, remediation: string, verification: string}]
     # gem-reviewer fields:
-    # review_mode: plan | wave | critic
+    # review_mode: standard | high | critic
+    # review_target: plan | task | code | decision | docs | config | integration
+    # review_scope: changed | affected | full
     # critic_subject and critic_context are required only when review_mode is critic:
     # critic_subject: {objective: string, proposal: string, constraints: string[], alternatives: string[], evidence: string[], decision_needed: string}
     # critic_context: {audience: string, time_horizon: string, success_criteria: string[], known_unknowns: string[]}
     # Critic mode is read-only and must not mutate files or claim completion.
     requires_review: boolean
-    review_depth: standard | high | null # standard for MEDIUM plans (wave correctness + acceptance criteria only); high for HIGH-risk plans (all checks)
+    review_mode: standard | high | critic | null
+    review_target: plan | task | code | decision | docs | config | integration | null
+    review_scope: changed | affected | full | null
     review_security_sensitive: boolean
 
     # gem-devops fields:
