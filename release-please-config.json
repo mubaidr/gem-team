@@ -28,10 +28,7 @@
           "type": "chore"
         }
       ],
-      "extra-files": [
-        "apm.yml",
-        "version.txt"
-      ],
+      "extra-files": ["apm.yml", "version.txt"],
       "package-name": "gem-team",
       "release-type": "simple",
       "versioning": "always-bump-minor"
