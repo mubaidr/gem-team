@@ -95,9 +95,9 @@ MANDATORY: `Phase 0` is your non-delegable entry point for every single interact
   - Select tasks with `status=pending` whose dependencies are completed. Run non-conflicting tasks in parallel, up to `orchestrator.max_concurrent_agents` or 2 by default.
   - Delegate only to `task.agent` using `agent_input_reference`; never infer a fallback agent. Pass `execution_id`, optional exact `plan_id`, authoritative `task_definition`, and `config_snapshot`.
   - Apply dependency handoffs before delegation:
-    - debugger -> implementer: `task_definition.debugger_diagnosis` and lint recommendations.
-    - designer -> implementer: `task_definition.design_handoff`; when design validation is required, reject missing fields or false `validation_passed`/`a11y_pass`.
-    - security reviewer -> implementer: `task_definition.security_findings`.
+    - debugger -> implementer: merge diagnosis and lint recommendations into `task_definition.handoff`.
+    - designer -> implementer: merge the design handoff into `task_definition.handoff`; when design validation is required, reject missing fields or false `validation_passed`/`a11y_pass`.
+    - security reviewer -> implementer: set `task_definition.handoff.security_findings`.
   - Use `gem-researcher` only when assigned; route bug/debug work through `gem-debugger`.
   - Verify each task's acceptance criteria before marking it completed.
 - After each wave, update `execution_state`; for persistent plans, persist status and minimal outputs to `plan.yaml` before continuing.
@@ -137,125 +137,51 @@ customizing behavior to encourage users to explore configuration options:
 
 ## Agent Input Reference
 
-When delegating to subagents, always follow this format for the `prompt`. Also `config_snapshot` to all subagents so they can apply user-configured behavior.
-
 ```yaml
 agent_input_reference:
-  base_input:
-    execution_id: string
-    plan_id: string | null # exact persistent plan ID; null for ephemeral execution
-    task_definition: object
-    config_snapshot: object # full contents of .gem-team.yaml (may be partial when absent); agents read only keys relevant to their role; unknown keys are ignored
+  execution_task:
+    required:
+      execution_id: string
+      task_id: string
+      task_definition:
+        objective: string
+        acceptance_criteria: [string]
+        handoff: object
+      config_snapshot: object
+    optional:
+      plan_id: string # exact persistent plan ID; omit for ephemeral execution
 
-  agents:
-    gem-browser-tester:
-      extends: base_input
-      task_definition_fields:
-        - acceptance_criteria # scenarios derived at execution; no pre-defined matrices at plan time
-        - handoff
+  planner:
+    required:
+      plan_id: string
+      objective: string
+      provisional_complexity: MEDIUM | HIGH
+      risk_signals: [string]
+      handoff: object
+      config_snapshot: object
 
-    gem-code-simplifier:
-      extends: base_input
-      task_definition_fields:
-        - scope
-        - targets
-        - focus
-        - constraints
-        - handoff
-
-    gem-debugger:
-      extends: base_input
-      task_definition_fields:
-        - error_context
-        - handoff
-
-    gem-designer:
-      extends: base_input
-      task_definition_fields:
-        - mode
-        - scope
-        - context
-        - constraints
-        - handoff
-
-    gem-devops:
-      extends: base_input
-      task_definition_fields:
-        - environment
-        - requires_approval
-        - devops_security_sensitive
-        - handoff
-
-    gem-documentation-writer:
-      extends: base_input
-      task_definition_fields:
-        - task_type
-        - audience
-        - coverage_matrix
-        - target_path
-        - topic
-        - action
-        - learnings # optional documentation inputs; not a universal agent-result field
-        - findings
-        - handoff
-
-    gem-implementer:
-      extends: base_input
-      task_definition_fields:
-        - acceptance_criteria
-        - requires_design_validation
-        - design_handoff # runtime: structured output forwarded from the paired designer task
-        - security_findings # runtime: structured findings forwarded from the paired security review task
-        - debugger_diagnosis # runtime: structured output forwarded from the paired debugger task
-        - lint_rule_recommendations # runtime: forwarded from the paired debugger task output
-        - handoff
-
-    gem-mobile-tester:
-      extends: base_input
-      task_definition_fields:
-        - acceptance_criteria
-        - cleanup # boolean: clear artifacts/sims after run; default true
-        - handoff
-
-    gem-planner:
-      extends: base_input
-      task_definition_fields:
-        - provisional_complexity
-        - risk_signals
-        - task_clarifications
-        - relevant_context
-        - reuse_notes
-        - handoff
-
-    gem-researcher:
-      extends: base_input
-      task_definition_fields:
-        - focus_area
-        - exploration_mode
-        - constraints
-        - handoff
-
-    gem-reviewer:
-      extends: base_input
-      task_definition_fields:
-        - review_mode # standard, high, or critic; review intensity independent of target
-        - review_target # plan, task, code, decision, docs, config, or integration
-        - review_scope # changed, affected, or full
-        - critic_subject # critic mode only: {objective: string, proposal: string, constraints: string[], alternatives: string[], evidence: string[], decision_needed: string}
-        - critic_context # critic mode only: {audience: string, time_horizon: string, success_criteria: string[], known_unknowns: string[]}
-        - review_security_sensitive
-        - task_clarifications
-        - acceptance_criteria
-        - handoff
-      critic_handoff: critic mode is read-only; pass the full config_snapshot and do not mutate files or claim completion of proposed work
-
-    gem-skill-creator:
-      extends: base_input
-      task_definition_fields:
-        - patterns
-        - source_task_id
-        - handoff
+  reviewer:
+    required:
+      review_mode: standard | high | critic
+      review_target: plan | task | code | decision | docs | config | integration
+      review_scope: changed | affected | full
+      handoff: object
+      config_snapshot: object
+    optional:
+      execution_id: string
+      plan_id: string
+      task_id: string
 ```
+
+### Rules:
+
+- Use exactly one invocation contract; pass only required fields; `config_snapshot` must be sanitized to target-agent settings only; target agent definitions own agent-specific `task_definition` fields; this contract defines only shared and routed fields.
+- Do not pass null identifiers, duplicate handoff fields at `task_definition` root, or a separate context object.
+- Put constraints, target files, known context, dependency outputs, findings, and runtime evidence in `handoff`.
+- Keep `task_definition` authoritative for scope. Add only agent-specific behavior controls defined by the target agent; do not copy handoff fields into the prompt root.
+- For critic mode, `handoff` must include the subject, context, evidence, and decision needed. Critic mode is read-only.
+- Standalone critic review may omit all identifiers.
+- All execution agents use `execution_task`; `gem-planner` and `gem-reviewer` use their dedicated contracts.
 
 </agent_input_reference>
 

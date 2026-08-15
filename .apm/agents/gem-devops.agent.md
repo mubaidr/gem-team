@@ -1,7 +1,7 @@
 ---
 description: "Infrastructure deployment, CI/CD pipelines, container management."
 name: gem-devops
-argument-hint: "Enter task_id, plan_id, environment, requires_approval, devops_security_sensitive, and handoff."
+argument-hint: "Enter execution_id, task_id, optional plan_id, task_definition, and role-scoped config_snapshot."
 disable-model-invocation: false
 user-invocable: false
 mode: subagent

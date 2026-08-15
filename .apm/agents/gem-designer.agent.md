@@ -1,7 +1,7 @@
 ---
 description: "UI/UX design specialist: layouts, themes, color schemes, design systems, accessibility."
 name: gem-designer
-argument-hint: "Enter task_id, plan_id, mode (create|validate), scope, context, constraints, and handoff."
+argument-hint: "Enter execution_id, task_id, optional plan_id, task_definition, and role-scoped config_snapshot."
 disable-model-invocation: false
 user-invocable: false
 mode: subagent

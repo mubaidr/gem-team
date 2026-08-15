@@ -1,7 +1,7 @@
 ---
 description: "DAG-based execution plans: task decomposition, wave scheduling, risk analysis."
 name: gem-planner
-argument-hint: "Enter plan_id, provisional_complexity, risk_signals, objective, task_clarifications, relevant_context, reuse_notes, and handoff."
+argument-hint: "Enter plan_id, objective, provisional_complexity, risk_signals, handoff, and role-scoped config_snapshot."
 disable-model-invocation: false
 user-invocable: false
 mode: subagent
@@ -49,7 +49,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 - Agent assignment: match via `<available_agents>`:
   - Research: `gem-researcher` only for explicit deliverable or material blocker.
   - Design/UI: `gem-designer` (with `requires_design_validation: true` -> designer wave N, implementer N+1).
-  - Bugs: `gem-debugger` (wave N) -> `gem-implementer` (N+1); forward `debugger_diagnosis`.
+  - Bugs: `gem-debugger` (wave N) -> `gem-implementer` (N+1); forward diagnosis through `handoff.debugger_diagnosis`.
   - Security: `gem-reviewer` audits -> `gem-implementer` remediates.
   - PRD: `gem-documentation-writer` with `task_type: prd`, first-class wave 1. Downstream tasks depend on the PRD task ID and receive its `target_path` in `handoff.known_context`.
   - Default: `gem-implementer`. Never route design, visual, or accessibility work to `gem-implementer` when `gem-designer` is available.
@@ -204,21 +204,22 @@ tasks:
 
     # gem-implementer fields:
     # requires_design_validation: boolean
-    # design_handoff: {design_path: string, changed_tokens: string[], design_constraints: string[], validation_passed: boolean, a11y_pass: boolean}
-    # security_findings: [{severity: string, file: string, line: number | null, finding: string, impact: string, remediation: string, verification: string}]
+    # handoff.design_path: string
+    # handoff.changed_tokens: [string]
+    # handoff.design_constraints: [string]
+    # handoff.validation_passed: boolean
+    # handoff.a11y_pass: boolean
+    # handoff.security_findings: [{severity: string, file: string, line: number | null, finding: string, impact: string, remediation: string, verification: string}]
     # gem-reviewer fields:
     # review_mode: standard | high | critic
     # review_target: plan | task | code | decision | docs | config | integration
     # review_scope: changed | affected | full
-    # critic_subject and critic_context are required only when review_mode is critic:
-    # critic_subject: {objective: string, proposal: string, constraints: string[], alternatives: string[], evidence: string[], decision_needed: string}
-    # critic_context: {audience: string, time_horizon: string, success_criteria: string[], known_unknowns: string[]}
+    # handoff.critic_subject and handoff.critic_context are required only when review_mode is critic.
     # Critic mode is read-only and must not mutate files or claim completion.
     requires_review: boolean
     review_mode: standard | high | critic | null
     review_target: plan | task | code | decision | docs | config | integration | null
     review_scope: changed | affected | full | null
-    review_security_sensitive: boolean
 
     # gem-devops fields:
     environment: development | staging | production | null

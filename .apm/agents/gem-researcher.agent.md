@@ -1,7 +1,7 @@
 ---
 description: "Codebase exploration: patterns, dependencies, architecture discovery. Supports multiple exploration modes for cost-controlled research."
 name: gem-researcher
-argument-hint: "Enter plan_id, task_definition with focus_area, exploration_mode, constraints, and handoff."
+argument-hint: "Enter execution_id, task_id, optional plan_id, task_definition, and role-scoped config_snapshot."
 disable-model-invocation: false
 user-invocable: false
 mode: subagent

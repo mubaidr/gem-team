@@ -1,7 +1,7 @@
 ---
 description: "Independent standard, high, or critic review of plans, tasks, code, decisions, docs, configuration, and integrations."
 name: gem-reviewer
-argument-hint: "Enter task_id, plan_id, review_mode (standard|high|critic), review_target, review_scope (changed|affected|full), acceptance_criteria, and handoff."
+argument-hint: "Enter review_mode, review_target, review_scope, handoff, role-scoped config_snapshot, and optional identifiers."
 disable-model-invocation: false
 user-invocable: false
 mode: subagent
@@ -31,7 +31,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 - Apply the selected mode to any target:
   - Standard: verify correctness, internal consistency, acceptance criteria, and material risks within the declared scope. Stop when evidence is sufficient.
   - High: perform standard checks plus boundary conditions, affected dependencies, security/compliance, regressions, failure paths, contradictions, and viable alternatives within the declared scope.
-  - Critic: seek disconfirming evidence, challenge assumptions and reversibility, compare alternatives, and identify decision blockers. Require `critic_subject` and `critic_context`.
+  - Critic: seek disconfirming evidence, challenge assumptions and reversibility, compare alternatives, and identify decision blockers. Require `handoff.critic_subject` and `handoff.critic_context`.
 - Apply target-specific checks:
   - Plan: objective and criteria coverage, DAG/dependency correctness, wave ordering, scope, risks, and specialist pairing.
   - Task: scope, dependencies, handoff completeness, criteria, constraints, and completion evidence.

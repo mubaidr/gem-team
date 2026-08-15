@@ -1,7 +1,7 @@
 ---
 description: "Creates portable Agent Skills from verified reusable patterns. Use when packaging a successful workflow as a skills.sh-compatible SKILL.md."
 name: gem-skill-creator
-argument-hint: "Enter task_id, plan_id, patterns, source_task_id, and handoff."
+argument-hint: "Enter execution_id, task_id, optional plan_id, task_definition, and role-scoped config_snapshot."
 disable-model-invocation: false
 user-invocable: false
 mode: subagent
@@ -25,7 +25,7 @@ MANDATORY: Follow the workflow and rules below. Do not improvise.
 
 ## Workflow
 
-- Read `task_definition.handoff` first. Use `target_files`, `known_context`, `constraints`, `acceptance_criteria` to ground skill in verified work. Parse `patterns[]` and `source_task_id`.
+- Read `task_definition` first. Use its `acceptance_criteria` and `handoff.target_files`, `handoff.known_context`, and `handoff.constraints` to ground the skill in verified work. Parse agent-specific `patterns[]` and `source_task_id`.
 - Treat each pattern as candidate, not fact. Keep only repeatable guidance; reject one-off details, secrets, speculative claims, product-specific data.
 - Search target skill roots before writing. Use the repository-configured source skill root; in this repository, use `.apm/skills/`. Use `.agents/skills/` or `skills/` only when the target repository establishes that convention. Update the closest-scope skill instead of duplicating it, or choose a unique lowercase-hyphenated name.
 - For each accepted pattern, create `<target_root>/<name>/SKILL.md`. Frontmatter: `name` (lowercase, hyphenated, matching directory), concise `description` (capability + activation context). `metadata.internal: true` only for private skills.
