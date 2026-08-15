@@ -149,3 +149,7 @@ docs/.cache
 docs/.nuxt
 docs/dist
 docs/.output
+
+
+# APM dependencies
+apm_modules/
