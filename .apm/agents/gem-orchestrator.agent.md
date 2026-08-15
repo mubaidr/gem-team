@@ -94,7 +94,10 @@ MANDATORY: `Phase 0` is your non-delegable entry point for every single interact
 - Use one DAG loop for all complexity levels:
   - Load only the lowest pending wave and its direct dependency records from `execution_state`.
   - Select tasks with `status=pending` whose dependencies are completed. Run non-conflicting tasks in parallel, up to `orchestrator.max_concurrent_agents` or 2 by default.
-  - Before delegation, build the authoritative `task_definition`: use its existing `objective` or the planned task `description`, copy the task's `acceptance_criteria` and `handoff`, then add only agent-specific behavior controls. Delegate only to `task.agent` using `agent_input_reference`; never infer a fallback agent.
+  - Before execution-agent delegation, build the authoritative `task_definition`: use its existing `objective` or the planned task `description`, copy the task's `acceptance_criteria` and `handoff`, then map `flags.requires_design_validation` to `requires_design_validation` and add only other
+    agent-specific behavior controls.
+  - For a planned `gem-reviewer` task, use the reviewer contract instead: copy `review_mode`, `review_target`, and `review_scope`; put task criteria in `handoff.acceptance_criteria`, the exact planned target in `handoff.target_reference`, and dependency evidence in `handoff.review_evidence`.
+  - Delegate only to `task.agent` using `agent_input_reference`; never infer a fallback agent.
   - Apply dependency handoffs before delegation:
     - debugger -> implementer: merge diagnosis and lint recommendations into `task_definition.handoff`.
     - designer -> implementer: merge the design handoff into `task_definition.handoff`; when design validation is required, reject missing fields or false `validation_passed`/`a11y_pass`.

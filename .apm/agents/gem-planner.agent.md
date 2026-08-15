@@ -43,7 +43,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 
 ## Workflow
 
-- Read inputs only from `handoff.task_clarifications`, `handoff.relevant_context`, optional `handoff.reuse_notes`, and replan-only `handoff.review_findings`.
+- Read handoff-carried inputs only from `handoff.task_clarifications`, `handoff.relevant_context`, optional `handoff.reuse_notes`, and replan-only `handoff.review_findings`.
 - Replan safety: `baseline.objective` and `baseline.acceptance_criteria` are immutable. A non-empty `replan` delta must include the reason, changed/added/removed task IDs, preserved acceptance criteria, new risks, and `progress_signal`. Baseline changes are `decision_blocker`.
 - Confirm complexity from planning evidence and return `MEDIUM` or `HIGH` with matched `risk_signals` and a concise reason. May promote the provisional complexity once; never downgrade it. MEDIUM spans modules with moderate risk; HIGH adds full risk analysis.
 - Synthesize DAG: lock clarifications into constraints (explicit interfaces, never hidden implementation). Tasks are atomic, high-cohesion, milestone-focused. `depends_on` = canonical dependency; empty list = root task. Waves: `depends_on: []` -> wave 1; otherwise max(dependency wave) + 1. Populate `acceptance_criteria` with measurable outcomes.

@@ -30,24 +30,24 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
   - Refactor -> Verify: run regression tests before concluding.
   - Output: minimal JSON per `output_format`.
 
-- Bug-Fix Mode (when `handoff.debugger_diagnosis` is present):
-  - Validate `handoff.debugger_diagnosis` has `root_cause`, non-empty `target_files`, complete `reproduction` (steps/expected/actual), and non-empty `fix_recommendations`.
+- Bug-Fix Mode (when `task_definition.handoff.debugger_diagnosis` is present):
+  - Validate `task_definition.handoff.debugger_diagnosis` has `root_cause`, non-empty `target_files`, complete `reproduction` (steps/expected/actual), and non-empty `fix_recommendations`.
   - Own regression test: create/update minimal reproduction test before fix.
-  - Apply `handoff.lint_rule_recommendations` together with fix when present.
+  - Apply `task_definition.handoff.lint_rule_recommendations` together with fix when present.
   - Output: minimal JSON per `output_format`.
 
-- Lint Remediation Mode (when `handoff.lint_rule_recommendations` is present without `handoff.debugger_diagnosis`):
+- Lint Remediation Mode (when `task_definition.handoff.lint_rule_recommendations` is present without `task_definition.handoff.debugger_diagnosis`):
   - Validate and apply the recommendations without requiring a debugger diagnosis.
   - Add or update focused tests when the recommendation changes runtime behavior.
   - Output: minimal JSON per `output_format`.
 
-- Design Handoff Mode (when `requires_design_validation: true`):
-  - Require `handoff` with non-empty `design_path`, `changed_tokens`, `design_constraints`.
-  - Require `handoff.validation_passed: true` and `handoff.a11y_pass: true` before implementation.
+- Design Handoff Mode (when `task_definition.requires_design_validation: true`):
+  - Require `task_definition.handoff` with non-empty `design_path`, `changed_tokens`, `design_constraints`.
+  - Require `task_definition.handoff.validation_passed: true` and `task_definition.handoff.a11y_pass: true` before implementation.
   - Preserve design artifact, tokens, and constraints unless task approves revision.
   - Output: minimal JSON per `output_format`.
 
-- Security Remediation Mode (when `handoff.security_findings` is present):
+- Security Remediation Mode (when `task_definition.handoff.security_findings` is present):
   - Address every blocking/high-severity finding; verify each remediation before completion.
   - Return `needs_revision` or `failed` with evidence when finding cannot be remediated safely.
   - Output: minimal JSON per `output_format`.
