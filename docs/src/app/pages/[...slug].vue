@@ -64,6 +64,11 @@ const links = computed(() => {
       :title="page.title"
       :description="page.description"
       :headline="headline"
+      :ui="{
+        root: 'border-b border-default/70 pb-8',
+        title: 'tracking-tight',
+        description: 'max-w-3xl leading-7'
+      }"
     >
       <template #links>
         <UButton
@@ -76,7 +81,7 @@ const links = computed(() => {
       </template>
     </UPageHeader>
 
-    <UPageBody>
+    <UPageBody class="docs-prose">
       <ContentRenderer v-if="page" :value="page" />
 
       <USeparator v-if="surround?.length" />

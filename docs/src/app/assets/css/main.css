@@ -10,3 +10,42 @@
 :root {
   --ui-radius: 0.75rem;
 }
+
+@layer base {
+  body {
+    @apply bg-default text-default antialiased;
+  }
+
+  ::selection {
+    @apply bg-primary/20 text-highlighted;
+  }
+}
+
+@layer components {
+  .docs-prose {
+    @apply max-w-none;
+  }
+
+  .docs-prose :is(h2, h3) {
+    @apply scroll-mt-24;
+  }
+
+  .docs-prose :is(p, li) {
+    @apply leading-7;
+  }
+
+  .docs-prose :is(pre, table, blockquote) {
+    @apply shadow-sm;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

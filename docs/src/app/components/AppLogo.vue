@@ -1,3 +1,3 @@
 <template>
-  <img src="/logo.svg" alt="logo" />
+  <img src="/logo.svg" alt="Gem Team" class="size-contain" />
 </template>

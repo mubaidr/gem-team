@@ -7,7 +7,13 @@ const { header } = useAppConfig()
 </script>
 
 <template>
-  <UHeader :ui="{ center: 'flex-1' }" :to="header?.to || '/'">
+  <UHeader
+    :ui="{
+      root: 'border-b border-default/70 bg-default/80 backdrop-blur',
+      center: 'flex-1'
+    }"
+    :to="header?.to || '/'"
+  >
     <UContentSearchButton
       v-if="header?.search"
       :collapsed="false"
@@ -15,11 +21,18 @@ const { header } = useAppConfig()
     />
 
     <template #left>
-      <NuxtLink :to="header?.to || '/'">
-        <div class="flex gap-2">
-          <span v-if="header?.title" class="font-semibold text-lg">
+      <NuxtLink
+        :to="header?.to || '/'"
+        class="flex min-h-11 items-center gap-3"
+      >
+        <AppLogo class="size-7" />
+        <div class="hidden sm:block">
+          <span v-if="header?.title" class="font-semibold tracking-tight">
             {{ header.title }}
           </span>
+          <span class="block text-xs text-muted"
+          >Engineering for AI coding</span
+          >
         </div>
       </NuxtLink>
     </template>

@@ -1,12 +1,32 @@
 export default defineAppConfig({
   ui: {
     colors: {
-      primary: 'green',
-      neutral: 'stone'
+      primary: 'emerald',
+      secondary: 'cyan',
+      neutral: 'slate'
+    },
+    page: {
+      slots: {
+        root: 'relative',
+        container: 'max-w-7xl'
+      }
+    },
+    pageHero: {
+      slots: {
+        root: 'relative overflow-hidden border-b border-default/70',
+        container: 'py-20 sm:py-28',
+        title: 'text-4xl sm:text-6xl lg:text-7xl tracking-tight',
+        description: 'max-w-2xl text-lg sm:text-xl leading-8'
+      }
+    },
+    pageSection: {
+      slots: {
+        container: 'py-20 sm:py-28'
+      }
     },
     footer: {
       slots: {
-        root: 'border-t border-default',
+        root: 'border-t border-default/70 bg-muted/30',
         left: 'text-sm text-muted'
       }
     }
