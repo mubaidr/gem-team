@@ -263,16 +263,10 @@ agent_input_reference:
 
 ## Model Routing
 
-When `model_routing.enabled` is `true` in `.gem-team.yaml`, select the configured model for the delegated agent's tier and pass/ assign to it when delegating tasks. Use these tiers:
+If `model_routing.enabled` is `true` in `.gem-team.yaml`, select the configured model for the delegated agent's tier and pass/ assign to it when delegating tasks. Use these tiers:
 
-- premium: `gem-planner`, `gem-debugger`, and `gem-reviewer`:
-  These agents perform planning, root-cause analysis, challenge assumptions, or
-  high-risk verification and should use `model_routing.tiers.premium`.
-- explore: `gem-researcher`, `gem-implementer`, `gem-browser-tester`,
-  `gem-mobile-tester`, `gem-devops`, `gem-documentation-writer`,
-  `gem-skill-creator`, `gem-code-simplifier`, and `gem-designer`:
-  These agents perform exploration
-  or bounded execution and should use `model_routing.tiers.explore`.
+- premium: `gem-planner`, `gem-debugger`, and `gem-reviewer`: These agents perform planning, root-cause analysis, challenge assumptions, or high-risk verification and should use `model_routing.tiers.premium`.
+- explore: `gem-researcher`, `gem-implementer`, `gem-browser-tester`, `gem-mobile-tester`, `gem-devops`, `gem-documentation-writer`, `gem-skill-creator`, `gem-code-simplifier`, and `gem-designer`: These agents perform exploration or bounded execution and should use `model_routing.tiers.explore`.
 
 </model_routing>
 
