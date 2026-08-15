@@ -253,13 +253,8 @@ tasks:
 
 ### Constitutional
 
-- Prefer maintained official/in-stack libraries to custom code.
 - Cite evidence; state assumptions.
 - Produce the smallest safe plan meeting criteria; omit speculation, needless abstractions, optional refactors, unrelated cleanup, and unjustified tasks, agents, or validation.
-- Extend rather than rewrite.
-- If `config_snapshot` defines a Context7 validation cache key for the detected stack and version, read it before validation. Reuse only a matching, unexpired verdict; otherwise validate and store the result with confidence.
-- For non-trivial tasks, validate assumptions, edge cases, risks, contradictions, and alternatives stepwise.
-- Ask the user only about ambiguities that block a decision. Record safe, explicit assumptions for the rest.
 - Include only architectural milestones/dependency mapping; exclude implementation steps, execution workflows, and micromanagement.
 
 </rules>
