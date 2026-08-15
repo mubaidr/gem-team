@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.108.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.107.0...gem-team-v1.108.0) (2026-08-15)
+
+
+### 🧹 Housekeeping
+
+* clarify and update gem-planner agent assignment rules ([9d6fe7e](https://github.com/mubaidr/gem-team/commit/9d6fe7e1b5771de474b1e2595d393ddf91c83f1d))
+* remove obsolete fail status values from gem-planner agent ([99e74d6](https://github.com/mubaidr/gem-team/commit/99e74d6d12177bc591e2a90efce8cf6c6f1f51b3))
+* remove obsolete handoff fields and clarify critic mode rules ([9b5dd1b](https://github.com/mubaidr/gem-team/commit/9b5dd1b8f66e88f5e75159a096761a1068cfb37f))
+* remove obsolete plan context and clarify handoff structure ([dade7cd](https://github.com/mubaidr/gem-team/commit/dade7cd2b93b934279174a827832292837c8f308))
+* update documentation and UI ([0e42f8d](https://github.com/mubaidr/gem-team/commit/0e42f8dfaf893baa776580cd39554becd329df89))
+* update gem-planner agent rules ([a434cad](https://github.com/mubaidr/gem-team/commit/a434cad051e0d9664214df759729798816f9d471))
+
 ## [1.107.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.106.0...gem-team-v1.107.0) (2026-08-15)
 
 
