@@ -49,10 +49,10 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 - Synthesize DAG: lock clarifications into constraints (explicit interfaces, never hidden implementation). Tasks are atomic, high-cohesion, milestone-focused. `depends_on` = canonical dependency; empty list = root task. Waves: `depends_on: []` -> wave 1; otherwise max(dependency wave) + 1. Populate `acceptance_criteria` with measurable outcomes.
 - Agent assignment: match via `<available_agents>`:
   - Research: `gem-researcher` only for explicit deliverable or material blocker.
-  - Design/UI: For greenfield UI, new screens, or material layout/style/UX changes, default to `gem-designer` unless the user explicitly opts out; set `requires_design_validation: true` -> designer wave N, implementer N+1, then `gem-browser-tester` or `gem-mobile-tester` when the UI is runnable. Keep small fixes that preserve an approved design on the normal implementation path.
-  - Bugs: `gem-debugger` (wave N) -> `gem-implementer` (N+1); forward diagnosis through `handoff.debugger_diagnosis`.
-  - Security: `gem-reviewer` audits -> `gem-implementer` remediates.
-  - PRD: `gem-documentation-writer` with `task_type: prd`, first-class wave 1. Downstream tasks depend on the PRD task ID and receive its `target_path` in `handoff.known_context`.
+  - Design/UI: For greenfield UI, new screens, or material layout/style/UX changes, route `gem-designer` -> `gem-implementer` -> runnable-UI `gem-browser-tester` or `gem-mobile-tester`; encode each transition with `depends_on` and set `requires_design_validation: true`. Keep small fixes that preserve an approved design on the default path unless the user opts out.
+  - Bugs: Route `gem-debugger` -> `gem-implementer`; encode the dependency and route `handoff.debugger_diagnosis`.
+  - Security: Route `gem-reviewer` -> `gem-implementer`; encode the dependency and route `handoff.security_findings`.
+  - PRD: Route a wave-1 `gem-documentation-writer` task with `task_type: prd` -> downstream tasks; depend on its task ID and route its `target_path` through `handoff.known_context`.
   - Default: `gem-implementer`. Never route design, visual, or accessibility work to `gem-implementer` when `gem-designer` is available.
 - Output: minimal JSON per `output_format`. Runtime execution belongs to `gem-orchestrator`.
 
