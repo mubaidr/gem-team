@@ -1,5 +1,38 @@
 # Changelog
 
+## [1.105.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.104.0...gem-team-v1.105.0) (2026-08-15)
+
+
+### 🚀 New Agents & Features
+
+* **gem-reviewer:** add general critic mode ([f612442](https://github.com/mubaidr/gem-team/commit/f612442cd7959c676ccca07850a57e2a12bcf606))
+
+
+### 🧹 Housekeeping
+
+* **agents:** refactor definitions and standardize workflows ([bc22dd5](https://github.com/mubaidr/gem-team/commit/bc22dd589df66c3ab618f881667864d14068be3e))
+* **agents:** remove handoff field documentation ([f3e96f1](https://github.com/mubaidr/gem-team/commit/f3e96f1943c2cd9642de92eea94dfe68bd34112e))
+* **agents:** remove logo asset ([e8c904e](https://github.com/mubaidr/gem-team/commit/e8c904e433a073b4c6bf99696e4e07362bbb0c2b))
+* **agents:** remove needs_approval from task status and workflow ([fd0556a](https://github.com/mubaidr/gem-team/commit/fd0556a13e33ae85a04a2e6910cd343fd42e057c))
+* **agents:** remove plan_path from argument hints ([8758b5e](https://github.com/mubaidr/gem-team/commit/8758b5e6a52b13c022cfefa7800ec5cb67cefde8))
+* **agents:** resolve flaky-failure contradiction ([fde5219](https://github.com/mubaidr/gem-team/commit/fde52193f794036fccb14cd6d8fe7f33bc581d0a))
+* **agents:** standardize agent output formats and handoff structures ([659d940](https://github.com/mubaidr/gem-team/commit/659d94083fab31a10c38c11d20f11203cd48dbb7))
+* **agents:** standardize agent workflow and rules formatting ([a145461](https://github.com/mubaidr/gem-team/commit/a145461ed48667758eadbbbb79afd520c0edf263))
+* **agents:** standardize agent workflow and rules formatting ([8c01690](https://github.com/mubaidr/gem-team/commit/8c01690a415526e6d2c1b0bff934b9a3524bac31))
+* **agents:** standardize agent workflow and rules formatting ([2caba3a](https://github.com/mubaidr/gem-team/commit/2caba3a53a61c738ba025de978bbfa591cd5408e))
+* **agents:** standardize agent workflow and rules formatting ([f27a413](https://github.com/mubaidr/gem-team/commit/f27a413d62efc5f4b492070b352536c0c4f26a6e))
+* **agents:** standardize argument hints ([3645573](https://github.com/mubaidr/gem-team/commit/3645573da8774f559ae7236b87b7a7f1d437b3a3))
+* **agents:** standardize argument hints formatting ([3ff38c5](https://github.com/mubaidr/gem-team/commit/3ff38c59ec28826a15b33fffa34a2a97180fea4a))
+* **agents:** standardize debugger diagnosis and implementer validation ([c5c1350](https://github.com/mubaidr/gem-team/commit/c5c135034cab27b79591fb1e7e25d1f170e1ff9a))
+* **agents:** standardize design handoff and validation ([44211b9](https://github.com/mubaidr/gem-team/commit/44211b9bf3d3e6c42553608c5a57370cec9e551b))
+* **agents:** standardize model routing formatting ([7c9a795](https://github.com/mubaidr/gem-team/commit/7c9a795cf325da01823537545f33d0a1047601c3))
+* **agents:** standardize review depth and risk-to-review mapping ([2b51fda](https://github.com/mubaidr/gem-team/commit/2b51fda8df9b32cdd4e26c778698cd515d4f0894))
+* **agents:** standardize reviewer routing and critic mode ([4faa593](https://github.com/mubaidr/gem-team/commit/4faa593ac769469ed2a04616ff60ba125ed7ae4e))
+* **agents:** standardize reviewer-critic role plan structure ([b566e12](https://github.com/mubaidr/gem-team/commit/b566e1223c905f317289bdb57a79b0cdf16f0c83))
+* **agents:** standardize security findings flow across agents ([3825b6e](https://github.com/mubaidr/gem-team/commit/3825b6e8560f0e5256d7911e1224224b043f8dbe))
+* **agents:** standardize task definition and reviewer output formatting ([c9bb24d](https://github.com/mubaidr/gem-team/commit/c9bb24d9200df90fdac923a241aa1e07eca3360b))
+* **agents:** standardize task dependency and conflict fields ([6379fb1](https://github.com/mubaidr/gem-team/commit/6379fb1dc180cb7fbea3dafdc8b3fd050de51b44))
+
 ## [1.104.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.103.0...gem-team-v1.104.0) (2026-08-14)
 
 
