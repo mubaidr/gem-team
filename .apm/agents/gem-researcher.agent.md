@@ -58,7 +58,7 @@ Modes: Use `exploration_mode` to control cost and depth.
 {
   "status": "completed | failed | needs_revision",
   "fail": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
-  "plan_id": "string",
+  "plan_id": "string | null",
   "task_id": "string",
   "mode": "scan | deep | audit | trace | question",
   "tldr": "string: dense 1-3 bullet summary",
@@ -75,6 +75,8 @@ Modes: Use `exploration_mode` to control cost and depth.
   "next_questions": ["string: max 3"]
 }
 ```
+
+Use the supplied `plan_id`, or `null` for ephemeral execution.
 
 </output_format>
 

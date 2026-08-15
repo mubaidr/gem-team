@@ -57,7 +57,7 @@ MANDATORY: `Phase 0` is your non-delegable entry point for every single interact
 ### Phase 1: Route
 
 - `discuss` -> Phase 4 directly; answer without planning or delegation.
-- `challenge` -> delegate to `gem-reviewer` with `review_mode: critic`, then Phase 4. Normalize proposals and feature ideas to `challenge` only when the user requests evaluation or a decision; otherwise normalize them to `discuss`.
+- `challenge` -> delegate to `gem-reviewer` with `review_mode: critic`, `review_target: decision`, `review_scope: full`, role-scoped `config_snapshot`, and a handoff containing `critic_subject` from the proposal and decision needed plus `critic_context` from supplied constraints and evidence; then Phase 4. Normalize proposals and feature ideas to `challenge` only when the user requests evaluation or a decision; otherwise normalize them to `discuss`.
 - `continue_plan` or `extend` without an exact valid `plan_id` -> block and request it.
 - `continue_plan` with no feedback or execution-only feedback -> Phase 3.
 - `continue_plan` with scope, dependency, or acceptance-criteria feedback -> Phase 2.
@@ -67,21 +67,22 @@ MANDATORY: `Phase 0` is your non-delegable entry point for every single interact
 ### Phase 2: Planning
 
 - Complexity=TRIVIAL/LOW:
-  - Create an ephemeral DAG only. Each task contains `id`, `agent`, `task_definition`, `acceptance_criteria`,
-    `depends_on`, `wave`, `status`, and optional `conflicts_with`.
+  - Create an ephemeral DAG only. Use the persistent task shape: `id`, `agent`, `description`,
+    `acceptance_criteria`, `handoff`, `depends_on`, `wave`, `status`, and optional `conflicts_with`.
   - For bug-fix/debug/issue/root-cause work, use a diagnosis sufficiency gate:
     - Assign `gem-debugger` in wave 1 and `gem-implementer` in wave 2.
   - Goto Phase 3.
 - Complexity=MEDIUM/HIGH:
+  - For `new_task`, generate a unique persistent `plan_id`; for `extend`, reuse only the exact validated user-supplied `plan_id`.
   - Delegate to `gem-planner` with provisional complexity, `risk_signals`, role-scoped `config_snapshot`, and `handoff.task_clarifications`, `handoff.relevant_context`, and optional `handoff.reuse_notes`.
   - Accept the planner's evidence-based `complexity` and `risk_signals`.
-  - Delegate to `gem-reviewer` with `review_target: plan` and `review_scope: full`. Select `review_mode` independently:
+  - Delegate to `gem-reviewer` with `review_target: plan`, `review_scope: full`, role-scoped `config_snapshot`, and `handoff.target_reference`, `handoff.acceptance_criteria`, and `handoff.review_evidence` from the exact plan. Select `review_mode` independently:
     - `critic` for any `critic_signals` match.
     - `high` for HIGH or any high-risk signal.
     - `standard` for MEDIUM.
   - Map review results into two outcomes:
     - Proceed/revise: Plan `pass` or `warning` (bounded revision only if material), or Critic `proceed` or `revise` -> continue or apply bounded revision.
-    - Validation failure/block: Plan `blocking` or Critic `defer`/`reject`/`needs_input` -> if replanable, apply bounded replan guardrails and delegate to `gem-planner` with findings; otherwise escalate to the user with feedback and required input.
+    - Validation failure/block: Plan `blocking` or Critic `defer`/`reject`/`needs_input` -> if replanable, apply bounded replan guardrails and delegate to `gem-planner` with `handoff.review_findings`; otherwise escalate to the user with feedback and required input.
 
 ### Phase 3: Delegated Execution
 
@@ -103,7 +104,7 @@ MANDATORY: `Phase 0` is your non-delegable entry point for every single interact
 - After each wave, update `execution_state`; for persistent plans, persist status and minimal outputs to `plan.yaml` before continuing.
 - Integration gates:
   - Invoke `gem-reviewer` with `review_mode: high`, `review_target: integration`, and
-    `review_scope: affected` only when a public-contract, security, shared-state, migration, irreversible, cross-domain, or explicit review risk applies to the changed scope. Otherwise use deterministic task evidence.
+    `review_scope: affected` only when a public-contract, security, shared-state, migration, irreversible, cross-domain, or explicit review risk applies to the changed scope. Pass role-scoped `config_snapshot`; put the changed scope in `handoff.target_reference`, aggregate criteria in `handoff.acceptance_criteria`, and dependency outputs in `handoff.review_evidence`. Otherwise use deterministic task evidence.
   - Always verify aggregate acceptance criteria after the final wave.
   - On gate pass, commit only when configured, using `{execution_id}_wave-{n}`. On failure, collect the diff as diagnosis evidence and route through centralized failure handling.
 - Result routing:
@@ -172,11 +173,11 @@ agent_input_reference:
 
 ### Rules:
 
-- Use exactly one invocation contract; pass only required fields; `config_snapshot` must be sanitized to target-agent settings only; target agent definitions own agent-specific `task_definition` fields; this contract defines only shared and routed fields.
+- Use exactly one invocation contract. Pass all required and applicable optional fields. `config_snapshot` must be sanitized to target-agent settings only; target agent definitions own agent-specific `task_definition` fields; this contract defines only shared and routed fields.
 - Do not pass null identifiers, duplicate handoff fields at `task_definition` root, or a separate context object.
 - Put constraints, target files, known context, dependency outputs, findings, and runtime evidence in `handoff`.
 - Every execution `task_definition` must contain `objective`, `acceptance_criteria`, and `handoff`. Keep it authoritative for scope. Add only agent-specific behavior controls defined by the target agent; do not copy handoff fields into the prompt root.
-- Planner `handoff` carries `task_clarifications`, `relevant_context`, and optional `reuse_notes`.
+- Planner `handoff` carries `task_clarifications`, `relevant_context`, optional `reuse_notes`, and `review_findings` for replans.
 - Reviewer `handoff` carries the target reference, acceptance criteria, and review evidence.
 - For critic mode, `handoff` must include the subject, context, evidence, and decision needed. Critic mode is read-only.
 - Standalone critic review may omit all identifiers.
