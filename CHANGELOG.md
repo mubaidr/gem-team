@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.106.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.105.0...gem-team-v1.106.0) (2026-08-15)
+
+
+### 📝 Documentation
+
+* **orchestrator:** align workflow documentation ([9ea0c5c](https://github.com/mubaidr/gem-team/commit/9ea0c5cc401d0db29d0f102eb627cd65d14275a8))
+
+
+### 🧹 Housekeeping
+
+* **agents:** standardize task definition and handoff references ([68ac410](https://github.com/mubaidr/gem-team/commit/68ac4109971379e5154d90dd69873b1f05a1c172))
+* **agents:** standardize task definitions and reviewer handoffs ([ae7e9aa](https://github.com/mubaidr/gem-team/commit/ae7e9aa8b03f9713008e8ccf25a68b0889a7cb39))
+* **agents:** standardize visual QA and design guidelines ([a95bbe7](https://github.com/mubaidr/gem-team/commit/a95bbe761ebffa7d2b930f0a9bbc39da132542eb))
+* **gitignore:** add apm_modules to gitignore ([a4ed0eb](https://github.com/mubaidr/gem-team/commit/a4ed0eb7ef9422fc030292aad3c177f1dc872b53))
+
 ## [1.105.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.104.0...gem-team-v1.105.0) (2026-08-15)
 
 
