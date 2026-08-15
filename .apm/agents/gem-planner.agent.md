@@ -49,7 +49,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 - Synthesize DAG: lock clarifications into constraints (explicit interfaces, never hidden implementation). Tasks are atomic, high-cohesion, milestone-focused. `depends_on` = canonical dependency; empty list = root task. Waves: `depends_on: []` -> wave 1; otherwise max(dependency wave) + 1. Populate `acceptance_criteria` with measurable outcomes.
 - Agent assignment: match via `<available_agents>`:
   - Research: `gem-researcher` only for explicit deliverable or material blocker.
-  - Design/UI: `gem-designer` (with `requires_design_validation: true` -> designer wave N, implementer N+1).
+  - Design/UI: For greenfield UI, new screens, or material layout/style/UX changes, default to `gem-designer` unless the user explicitly opts out; set `requires_design_validation: true` -> designer wave N, implementer N+1, then `gem-browser-tester` or `gem-mobile-tester` when the UI is runnable. Keep small fixes that preserve an approved design on the normal implementation path.
   - Bugs: `gem-debugger` (wave N) -> `gem-implementer` (N+1); forward diagnosis through `handoff.debugger_diagnosis`.
   - Security: `gem-reviewer` audits -> `gem-implementer` remediates.
   - PRD: `gem-documentation-writer` with `task_type: prd`, first-class wave 1. Downstream tasks depend on the PRD task ID and receive its `target_path` in `handoff.known_context`.
@@ -185,7 +185,7 @@ tasks:
     # ROUTING (planner-set)
     # -----------------------------------------------------------------------
     flags:
-      requires_design_validation: boolean # true for new UI, major redesigns, style/a11y/token work -> designer first, then implementer
+      requires_design_validation: boolean # true by default for greenfield UI, new screens, material redesigns, style/a11y/token work unless user opts out -> designer first, then implementer
       retries_used: number # orchestrator-set: re-delegation attempts for needs_revision tasks; max 3
       revision_reason: string # orchestrator-set: why the task was re-delegated
 

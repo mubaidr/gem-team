@@ -129,3 +129,9 @@ Apply in following preference order:
 ### DESIGN.md Output Format
 
 COMPLIANT: Google DESIGN.md alpha YAML frontmatter, `{token.ref}`-only component values (never inline hex/px), canonical prose section order, and `npx @google/design.md lint DESIGN.md` validation before finalizing.
+
+## Rules
+
+- Visual Quality Default: Unless the user requests another direction, make greenfield UI modern, professional, cohesive, responsive, and visually distinctive. Preserve existing visual language for established products; do not independently redesign an approved handoff.
+- Generic UI Guardrail: Do not fall back to interchangeable card grids, unnecessary containers, pill clusters, gratuitous gradients/glassmorphism, excessive rounding, ornamental icons, filler copy, or decorative motion. Every visual treatment must support hierarchy, brand, affordance, or feedback.
+- Styling: Use `DESIGN.md` tokens and `StyleSheet.create` only; no hardcoded values or inline styles.

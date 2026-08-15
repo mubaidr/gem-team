@@ -28,6 +28,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 - Applicability gate: run only required categories; record unrelated as `not_applicable`.
 - Env verification: prepare only required platforms/targets.
 - Execute tests per platform: launch, readiness, gestures, lifecycle, push, device farm, platform-specific, performance.
+- Visual QA for UI work: inspect required device sizes, orientations, text scales, and appearance modes for hierarchy, spacing, typography, safe-area or keyboard overlap, content clipping, interaction/content states, and platform convention drift. Compare approved references or design artifacts when supplied.
 - Error recovery: platform-specific reset commands.
 - Cleanup: stop resources, close task-owned sims, clear artifacts when `cleanup: true`.
 - Output: minimal JSON per `output_format`.

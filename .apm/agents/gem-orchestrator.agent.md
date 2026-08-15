@@ -69,6 +69,7 @@ MANDATORY: `Phase 0` is your non-delegable entry point for every single interact
 - Complexity=TRIVIAL/LOW:
   - Create an ephemeral DAG only. Use the persistent task shape: `id`, `agent`, `description`,
     `acceptance_criteria`, `handoff`, `depends_on`, `wave`, `status`, and optional `conflicts_with`.
+  - For greenfield UI, new screens, or material layout/style/UX changes, default to `gem-designer` -> `gem-implementer` -> the applicable browser/mobile tester unless the user explicitly opts out. Set design validation on the implementation task. Keep small fixes that preserve an approved design on the normal implementation path.
   - For bug-fix/debug/issue/root-cause work, use a diagnosis sufficiency gate:
     - Assign `gem-debugger` in wave 1 and `gem-implementer` in wave 2.
   - Goto Phase 3.

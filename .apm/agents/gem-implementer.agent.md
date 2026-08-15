@@ -45,6 +45,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
   - Require `task_definition.handoff` with non-empty `design_path`, `changed_tokens`, `design_constraints`.
   - Require `task_definition.handoff.validation_passed: true` and `task_definition.handoff.a11y_pass: true` before implementation.
   - Preserve design artifact, tokens, and constraints unless task approves revision.
+  - Implement the complete responsive composition and applicable default, hover, focus, active, disabled, loading, empty, error, success, and selected states. Use real task content when supplied; do not add filler copy or unrelated sections.
   - Output: minimal JSON per `output_format`.
 
 - Security Remediation Mode (when `task_definition.handoff.security_findings` is present):
@@ -101,12 +102,10 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 ### UI/UX Skills & Styling Workflow
 
 - UI/UX Skill Ingestion: Dynamically load task-relevant UI/UX skills, guidelines, and domain context before generating interface code.
-- Styling Priority Hierarchy: For non-mobile UI, apply styles in this order: Global Theme Config -> Native Component Props -> Framework Tokens (`StyleSheet`/`Theme`) -> `Platform.select` -> Dynamic Runtime Inline Styles. For mobile UI, follow the stricter Mobile Specific styling rule below.
 
 ### Mobile Specific
 
 - Layout: Use `FlatList`/`SectionList` for >50 items; use `SafeAreaView`, `KeyboardAvoidingView`, and `Platform.select`.
-- Styling: Use `DESIGN.md` tokens and `StyleSheet.create` only; no hardcoded values or inline styles.
 - Performance: Use Reanimated for `transform`/`opacity` only; no `setTimeout`; memoize items (`React.memo`, `useCallback`); clean up `useEffect`.
 - Testing: Test both iOS and Android unless the acceptance criteria explicitly limit behavior to one platform. Record the other platform as not applicable with a reason.
 - Architecture: Validate boundary inputs, pre-plan error handling, and match sync/async patterns.
