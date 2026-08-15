@@ -1,5 +1,5 @@
 name: gem-team
-version: 1.106.0
+version: 1.107.0
 description: >-
   Self-Learning Multi-agent orchestration harness for spec-driven development
   and automated verification.
@@ -12,7 +12,9 @@ dependencies:
   apm: []
   mcp: []
 scripts:
-  check: apm marketplace check && apm pack --check-versions --check-clean --dry-run && apm audit --ci --no-policy
+  check: >-
+    apm marketplace check && apm pack --check-versions --check-clean --dry-run
+    && apm audit --ci --no-policy
   pack: apm pack --check-versions --archive
 marketplace:
   owner:

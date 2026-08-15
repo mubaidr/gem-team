@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.107.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.106.0...gem-team-v1.107.0) (2026-08-15)
+
+
+### 🧹 Housekeeping
+
+* **config:** restructure project configuration and release process ([ce7e2ce](https://github.com/mubaidr/gem-team/commit/ce7e2ce0d24339fa5061fbe891e543f2d541f19d))
+* fix trailing newline and reformat extra-files array ([a572351](https://github.com/mubaidr/gem-team/commit/a572351c853c084148c4b4d75a0371b09d76350e))
+* pin dependencies and update documentation ([a3209f4](https://github.com/mubaidr/gem-team/commit/a3209f4ea9a6172bac75e4e515e47c39d8d91850))
+
 ## [1.106.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.105.0...gem-team-v1.106.0) (2026-08-15)
 
 
