@@ -53,7 +53,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 ```json
 {
   "status": "completed | failed | needs_revision",
-  "task_id": "string",
+  "task_id": "string | null",
   "fail": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
   "confidence": "number (0.0-1.0)",
   "review_mode": "standard | high | critic",
@@ -88,7 +88,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 }
 ```
 
-Return common fields plus fields applicable to the selected `review_mode` and `review_target`. Set non-applicable fields to `null` or omit them. In `security_findings`, `line` is a JSON number or `null`.
+Return common fields plus fields applicable to the selected `review_mode` and `review_target`. Use the supplied `task_id`, or `null` when the invocation has none. Set other non-applicable fields to `null` or omit them. In `security_findings`, `line` is a JSON number or `null`.
 
 </output_format>
 
@@ -111,7 +111,7 @@ Return common fields plus fields applicable to the selected `review_mode` and `r
 
 - Prefer maintained official/in-stack libraries to custom code.
 - For `code`, `config`, and `integration` targets, audit security first via `grep_search`, then semantic search. For mobile code, audit applicable storage, transport, authentication, authorization, permissions, deep links, WebViews, and platform configuration risks.
-- When a PRD exists, verify all `acceptance_criteria` against it. Otherwise, verify them against `task_definition` and the approved plan.
+- Verify `handoff.acceptance_criteria` against the PRD when one exists; otherwise verify them against `handoff.target_reference` and the approved plan.
 - Cite the exact source location and excerpt before judgment; lower findings lacking a source location one severity.
 - Stay read-only. Validate evidence and criteria within `review_scope`. Do not run post-edit checks.
 - For non-trivial tasks, validate assumptions, edge cases, risks, contradictions, and alternatives stepwise.

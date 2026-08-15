@@ -73,7 +73,7 @@ MANDATORY: `Phase 0` is your non-delegable entry point for every single interact
     - Assign `gem-debugger` in wave 1 and `gem-implementer` in wave 2.
   - Goto Phase 3.
 - Complexity=MEDIUM/HIGH:
-  - Delegate to `gem-planner` with provisional complexity, `risk_signals`, `task_clarifications`, relevant context, and `config_snapshot`.
+  - Delegate to `gem-planner` with provisional complexity, `risk_signals`, role-scoped `config_snapshot`, and `handoff.task_clarifications`, `handoff.relevant_context`, and optional `handoff.reuse_notes`.
   - Accept the planner's evidence-based `complexity` and `risk_signals`.
   - Delegate to `gem-reviewer` with `review_target: plan` and `review_scope: full`. Select `review_mode` independently:
     - `critic` for any `critic_signals` match.
@@ -93,7 +93,7 @@ MANDATORY: `Phase 0` is your non-delegable entry point for every single interact
 - Use one DAG loop for all complexity levels:
   - Load only the lowest pending wave and its direct dependency records from `execution_state`.
   - Select tasks with `status=pending` whose dependencies are completed. Run non-conflicting tasks in parallel, up to `orchestrator.max_concurrent_agents` or 2 by default.
-  - Delegate only to `task.agent` using `agent_input_reference`; never infer a fallback agent. Pass `execution_id`, optional exact `plan_id`, authoritative `task_definition`, and `config_snapshot`.
+  - Before delegation, build the authoritative `task_definition`: use its existing `objective` or the planned task `description`, copy the task's `acceptance_criteria` and `handoff`, then add only agent-specific behavior controls. Delegate only to `task.agent` using `agent_input_reference`; never infer a fallback agent.
   - Apply dependency handoffs before delegation:
     - debugger -> implementer: merge diagnosis and lint recommendations into `task_definition.handoff`.
     - designer -> implementer: merge the design handoff into `task_definition.handoff`; when design validation is required, reject missing fields or false `validation_passed`/`a11y_pass`.
@@ -143,10 +143,7 @@ agent_input_reference:
     required:
       execution_id: string
       task_id: string
-      task_definition:
-        objective: string
-        acceptance_criteria: [string]
-        handoff: object
+      task_definition: object
       config_snapshot: object
     optional:
       plan_id: string # exact persistent plan ID; omit for ephemeral execution
@@ -178,7 +175,9 @@ agent_input_reference:
 - Use exactly one invocation contract; pass only required fields; `config_snapshot` must be sanitized to target-agent settings only; target agent definitions own agent-specific `task_definition` fields; this contract defines only shared and routed fields.
 - Do not pass null identifiers, duplicate handoff fields at `task_definition` root, or a separate context object.
 - Put constraints, target files, known context, dependency outputs, findings, and runtime evidence in `handoff`.
-- Keep `task_definition` authoritative for scope. Add only agent-specific behavior controls defined by the target agent; do not copy handoff fields into the prompt root.
+- Every execution `task_definition` must contain `objective`, `acceptance_criteria`, and `handoff`. Keep it authoritative for scope. Add only agent-specific behavior controls defined by the target agent; do not copy handoff fields into the prompt root.
+- Planner `handoff` carries `task_clarifications`, `relevant_context`, and optional `reuse_notes`.
+- Reviewer `handoff` carries the target reference, acceptance criteria, and review evidence.
 - For critic mode, `handoff` must include the subject, context, evidence, and decision needed. Critic mode is read-only.
 - Standalone critic review may omit all identifiers.
 - All execution agents use `execution_task`; `gem-planner` and `gem-reviewer` use their dedicated contracts.
