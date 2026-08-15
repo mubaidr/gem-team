@@ -5,20 +5,22 @@ description: >-
   and automated verification.
 author: mubaidr
 license: Apache-2.0
-target: all
 includes:
-  - .apm/agents/**
-  - .apm/skills/**
+  - .apm/agents
+  - .apm/skills
 dependencies:
   apm: []
   mcp: []
+scripts:
+  check: apm marketplace check && apm pack --check-versions --check-clean --dry-run && apm audit --ci --no-policy
+  pack: apm pack --check-versions --archive
 marketplace:
   owner:
     name: mubaidr
     url: https://github.com/mubaidr
     email: mubaidr@gmail.com
-  build:
-    tagPattern: gem-team-v{version}
+  versioning:
+    strategy: lockstep
   metadata:
     homepage: https://github.com/mubaidr/gem-team
   packages:
@@ -26,8 +28,7 @@ marketplace:
       description: >-
         Self-Learning Multi-agent orchestration harness for spec-driven
         development and automated verification
-      source: mubaidr/gem-team
-      version: ^1.19.0
+      source: ./
       tags:
         - multi-agent
         - orchestration

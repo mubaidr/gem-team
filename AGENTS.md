@@ -65,6 +65,16 @@ npm run format
 .apm/skills/<skill-name>/SKILL.md
 ```
 
+### APM Package
+
+```bash
+# Validate marketplace resolution, generated metadata, versions, and audit
+apm run check
+
+# Build a release ZIP under build/
+apm run pack
+```
+
 ### Agent file structure
 
 ```text
@@ -190,8 +200,10 @@ Example: `[gem-team] Add new debugger agent`
 
 - **Release Please** on `main` branch
 - PR titles become squash-merge commits
-- Version auto-bumps in `version.txt` + git tags
+- Version auto-bumps in `apm.yml` and `version.txt`
 - Conventional commits trigger automated releases
+- `microsoft/apm-action` validates tags and attaches ZIP/checksum assets
+- `.claude-plugin/marketplace.json` is committed; `build/` is generated
 
 ## Troubleshooting
 

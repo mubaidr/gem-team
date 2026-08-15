@@ -21,18 +21,30 @@ jobs:
           manifest-file: .release-please-manifest.json
           config-file: release-please-config.json
 
-      # Generate a workflow summary showing what was released
-      - name: Generate Release Summary
-        if: ${{ steps.release.outputs.releases_created }}
+      - name: Checkout release tag
+        if: ${{ steps.release.outputs.releases_created == 'true' }}
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ steps.release.outputs.tag_name }}
+
+      - name: Set up APM
+        if: ${{ steps.release.outputs.releases_created == 'true' }}
+        uses: microsoft/apm-action@v1
+        with:
+          setup-only: "true"
+          apm-version: "0.28.0"
+
+      - name: Validate and package release
+        if: ${{ steps.release.outputs.releases_created == 'true' }}
         run: |
-          echo "## 🤖 gem-team Release" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Version:** ${{ steps.release.outputs.tag_name }}" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### Release Type" >> $GITHUB_STEP_SUMMARY
-          echo "- ${{ steps.release.outputs.release_type }}" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### Changed Components" >> $GITHUB_STEP_SUMMARY
-          ls -1 .apm/agents/*.agent.md 2>/dev/null | while read file; do
-            echo "- $file" >> $GITHUB_STEP_SUMMARY
+          apm run check
+          apm run pack
+          for archive in build/*.zip; do
+            sha256sum "$archive" > "$archive.sha256"
           done
+
+      - name: Attach APM artifacts to release
+        if: ${{ steps.release.outputs.releases_created == 'true' }}
+        run: gh release upload "${{ steps.release.outputs.tag_name }}" build/*.zip build/*.zip.sha256 --clobber
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

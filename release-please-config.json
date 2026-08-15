@@ -29,10 +29,7 @@
         }
       ],
       "extra-files": [
-        ".claude-plugin/marketplace.json",
         "apm.yml",
-        "plugin.json",
-        "README.md",
         "version.txt"
       ],
       "package-name": "gem-team",
