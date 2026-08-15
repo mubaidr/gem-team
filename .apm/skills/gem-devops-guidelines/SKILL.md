@@ -19,7 +19,7 @@ livenessProbe, readinessProbe, startupProbe w/ proper initialDelay and threshold
 
 ## CI/CD
 
-PR: lint->typecheck->unit->integration->preview. Main: ...->build->staging->smoke->production.
+PR: lint->typecheck->unit->integration->preview. Main: build->staging->smoke->production.
 
 ## Health Checks
 

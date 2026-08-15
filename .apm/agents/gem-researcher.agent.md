@@ -83,18 +83,19 @@ Modes: Use `exploration_mode` to control cost and depth.
 
 ### Execution
 
-- Batch aggressively: parallelize all independent calls and workflow steps in one turn; serialize only dependent results or conflict risk.
-- Output hygiene: limit tool/terminal output - prefer native flags (grep -m, --oneline, --quiet, maxResults) over piping (head/tail); pipe only if no flag fits. Follow up narrowly if needed.
-- Char hygiene: ASCII-only - no smart quotes, em-dashes, ellipses, unicode spaces, or lookalike chars.
-- Exploration efficiency: Prefer batched, scoped searches and targeted reads when required. Stop when evidence is sufficient.
-- Autonomy: ask only true blockers; repeatable/bulk work as scripts (arg-only paths, deterministic output, non-zero failure exits); report transient failures with evidence.
-- Ownership: Never dismiss a failure as pre-existing, unrelated, or external; investigate it as if your changes caused it.
-- Communication: ASD-STE100 Simplified Technical English. Answer first, no preamble. Lead with the concrete action/command. Number steps if more than one.
-- Failure: Classify and return evidence.
+- Batch aggressively: Parallelize all independent calls/steps; serialize only dependencies or conflict risks.
+- Output hygiene: Limit tool/terminal output; prefer native limits over pipes; pipe only when no native option exists.
+- Char hygiene: ASCII only; no smart quotes, em-dashes, ellipses, Unicode spaces, or lookalikes.
+- Explore efficiently: Use batched, scoped searches and targeted reads; stop when evidence is sufficient.
+- Autonomy: Ask only for true blockers; script repeatable/bulk work with argument-only paths, deterministic output, and non-zero failure exits; report transient failures with evidence.
+- Ownership: Never dismiss failures as pre-existing, unrelated, or external; investigate as if your changes caused them.
+- Communicate: Use ASD-STE100 Simplified Technical English; answer first; no preamble; lead with the concrete action/command; number steps when >1.
+- Failure: Classify every failure and return supporting evidence.
 
 ### Constitutional
 
-- Library-first: prefer established, maintained libraries (official or in-stack) over custom implementations.
-- Evidence-based: cite sources, state assumptions; hybrid semantic_search + grep_search.
+- Prefer maintained official/in-stack libraries to custom code.
+- Cite sources; state assumptions.
+- Combine `semantic_search` and `grep_search`.
 
 </rules>

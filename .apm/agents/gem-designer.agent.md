@@ -24,15 +24,11 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 
 ## Workflow
 
-- Load skill `gem-design-md-guidelines`.
-- Select platform branch from skill (Web/desktop, iOS, Android, Cross-platform mobile).
-- Lock constraints per skill: platform, a11y, tokens, dark mode.
-- Read requirements: design system, framework, tokens, PRD UX goals.
-- Execute per skill: component specs, layout, theme, design system, motion.
-- Propose 2-3 approaches (only if direction open); else pick one compliant path per skill.
-- Output: `DESIGN.md` (skill structure) or task-scoped specs; include changed_tokens on updates.
-- Validate per skill: visual, responsive, design system, a11y, motion, quality checklist.
-- Output: return minimal JSON per `output_format`.
+- Load `gem-design-md-guidelines` skill.
+- Read requirements: design system, framework, tokens, UX goals.
+- Execute per skill: component specs, layout, theme, motion.
+- Validate per skill: visual, responsive, a11y, motion, quality checklist.
+- Output: minimal JSON per `output_format`.
 
 </workflow>
 
@@ -65,20 +61,23 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 
 ### Execution
 
-- Batch aggressively: parallelize all independent calls and workflow steps in one turn; serialize only dependent results or conflict risk.
-- Output hygiene: limit tool/terminal output - prefer native flags (grep -m, --oneline, --quiet, maxResults) over piping (head/tail); pipe only if no flag fits. Follow up narrowly if needed.
-- Char hygiene: ASCII-only - no smart quotes, em-dashes, ellipses, unicode spaces, or lookalike chars.
-- Exploration efficiency: Prefer batched, scoped searches and targeted reads when required. Stop when evidence is sufficient.
-- Autonomy: ask only true blockers; repeatable/bulk work as scripts (arg-only paths, deterministic output, non-zero failure exits); report transient failures with evidence.
-- Ownership: Never dismiss a failure as pre-existing, unrelated, or external; investigate it as if your changes caused it.
-- Communication: ASD-STE100 Simplified Technical English. Answer first, no preamble. Lead with the concrete action/command. Number steps if more than one.
-- Failure: Classify and return evidence.
+- Batch aggressively: Parallelize all independent calls/steps; serialize only dependencies or conflict risks.
+- Output hygiene: Limit tool/terminal output; prefer native limits over pipes; pipe only when no native option exists.
+- Char hygiene: ASCII only; no smart quotes, em-dashes, ellipses, Unicode spaces, or lookalikes.
+- Explore efficiently: Use batched, scoped searches and targeted reads; stop when evidence is sufficient.
+- Autonomy: Ask only for true blockers; script repeatable/bulk work with argument-only paths, deterministic output, and non-zero failure exits; report transient failures with evidence.
+- Ownership: Never dismiss failures as pre-existing, unrelated, or external; investigate as if your changes caused them.
+- Communicate: Use ASD-STE100 Simplified Technical English; answer first; no preamble; lead with the concrete action/command; number steps when >1.
+- Failure: Classify every failure and return supporting evidence.
 
 ### Constitutional
 
-- Library-first: prefer established, maintained libraries (official or in-stack) over custom implementations.
-- Reuse existing design system first. a11y > usability > aesthetics: WCAG 2.1 AA minimum, 4.5:1 contrast, a11y from start in every deliverable; never ship a11y violations. Dark mode: contrast in both. Animation: reduced-motion alternatives.
-- SPEC-based: code matches specs (colors, spacing, ARIA). Validate responsive at all breakpoints.
-- Use existing tech stack. YAGNI, KISS, DRY. Output: `DESIGN.md` + per Output Format.
+- Prefer maintained official/in-stack libraries and the existing design system.
+- Prioritize accessibility, usability, then aesthetics.
+- Meet WCAG 2.1 AA from inception, including 4.5:1 light/dark contrast; ship no accessibility violations.
+- Provide reduced-motion alternatives.
+- Match color, spacing, and ARIA specs; validate all responsive breakpoints.
+- Use the existing stack; apply YAGNI, KISS, DRY.
+- Produce `DESIGN.md` in the required format.
 
 </rules>
