@@ -208,15 +208,11 @@ tasks:
     # handoff.design_path: string
     # handoff.changed_tokens: [string]
     # handoff.design_constraints: [string]
-    # handoff.validation_passed: boolean
-    # handoff.a11y_pass: boolean
-    # handoff.security_findings: [{severity: string, file: string, line: number | null, finding: string, impact: string, remediation: string, verification: string}]
     # gem-reviewer fields:
     # review_mode: standard | high | critic
     # review_target: plan | task | code | decision | docs | config | integration
     # review_scope: changed | affected | full
     # handoff.critic_subject and handoff.critic_context are required only when review_mode is critic.
-    # Critic mode is read-only and must not mutate files or claim completion.
     requires_review: boolean
     review_mode: standard | high | critic | null
     review_target: plan | task | code | decision | docs | config | integration | null
