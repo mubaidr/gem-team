@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.109.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.108.0...gem-team-v1.109.0) (2026-08-16)
+
+
+### 🧹 Housekeeping
+
+* clarify agent handoff structures and review mode routing ([9b1597e](https://github.com/mubaidr/gem-team/commit/9b1597e3af05e9efbdf6707a4815bbaa00a3175a))
+
 ## [1.108.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.107.0...gem-team-v1.108.0) (2026-08-15)
 
 
