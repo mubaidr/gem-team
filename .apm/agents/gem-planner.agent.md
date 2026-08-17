@@ -78,7 +78,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 - Replan Rules:
   - Freeze immutable baseline: Preserve `baseline.objective` and `baseline.acceptance_criteria`.
   - Preserve valid completed work unless new evidence invalidates its outputs.
-  - Record delta state: Track `completed_task_ids`, `delta_reason`, `new_risks`, `revised_tasks`, `invalidated_tasks`, and `invalidated_assumptions`.
+  - Record delta state: Track `delta_reason`, `new_risks`, `revised_tasks`, `invalidated_tasks`, and `invalidated_assumptions`.
   - Replan only the affected dependency path where possible; do not regenerate unaffected work.
   - Never weaken or remove acceptance criteria merely to make the plan pass.
 
@@ -166,7 +166,6 @@ replan: # required only when replanning
   preserved_acceptance_criteria: [string]
   new_risks: [string]
   progress_signal: string
-  completed_task_ids: [string]
   revised_tasks: [string]
   invalidated_tasks: [string]
   invalidated_assumptions: [string]
@@ -191,7 +190,6 @@ tasks:
   - id: string
     title: string
     description: string
-    task_type: research | decision | design | implementation | migration | test | validation | review | documentation
     wave: number
     agent: string
 
@@ -216,8 +214,6 @@ tasks:
 
     flags:
       requires_design_validation: boolean
-      retries_used: number # orchestrator-owned retry state; max 3; omit on initial creation
-      revision_reason: string # orchestrator-owned retry context; omit until retry
 
     covers: [string] # global acceptance criterion IDs
 
@@ -238,7 +234,6 @@ tasks:
     requires_approval: boolean
     devops_security_sensitive: boolean
 
-    task_type: documentation | update | prd | agents_md | null # documentation-task metadata only
     audience: developers | end-users | stakeholders | null
     coverage_matrix: [string]
     topic: string | null
