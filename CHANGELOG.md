@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.110.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.109.0...gem-team-v1.110.0) (2026-08-17)
+
+
+### 🧹 Housekeeping
+
+* remove obsolete fields from gem-planner agent configuration ([d157b57](https://github.com/mubaidr/gem-team/commit/d157b5736e3a71493d49257bc9c83c303779c0b3))
+* remove obsolete fields from gem-planner agent configuration ([4504452](https://github.com/mubaidr/gem-team/commit/4504452280fbdee9bcb12b4d5e7d5f8735d08712))
+* update agent communication guidelines ([a195ae9](https://github.com/mubaidr/gem-team/commit/a195ae9e75f55d789bba51af6ad6366e2e63da92))
+
 ## [1.109.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.108.0...gem-team-v1.109.0) (2026-08-16)
 
 
