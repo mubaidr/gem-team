@@ -47,8 +47,8 @@ Modes: Use `exploration_mode` to control cost and depth.
       - `scan`/`question`/`audit` -> skip relationship mapping
       - `trace` -> map only the specific chain requested
       - `deep` -> full relationship discovery
-    - Negative evidence: If a search returns no results, record as `type: gap`. Distinguishes "searched, empty" from "didn't look".
-  - Phase 2 (Synthesize): Only after collection stops, assign each finding a `high`, `medium`, or `low` confidence, populate `evidence`, and identify remaining gaps.
+    - Negative evidence: If a search returns no results, record a compact `gap` entry in `relevant_context`. Distinguish "searched, empty" from "didn't look".
+  - Phase 2 (Synthesize): Only after collection stops, assign each finding a `high`, `medium`, or `low` confidence, populate `relevant_context`, and identify remaining gaps.
 - Early exit during Phase 1 when decision blockers are resolved and no critical
   questions remain. Return a `gap` instead of expanding scope to resolve an
   unrelated unknown.
@@ -69,15 +69,7 @@ Modes: Use `exploration_mode` to control cost and depth.
   "task_id": "string",
   "mode": "scan | deep | audit | trace | question",
   "tldr": "string: dense 1-3 bullet summary",
-  "evidence": [
-    {
-      "type": "match | pattern | dependency | architecture | blocker | gap",
-      "file": "string",
-      "line": 123,
-      "confidence": "high | medium | low",
-      "note": "string"
-    }
-  ],
+  "relevant_context": ["string: compact source-backed context preserving type, file, line, confidence, and note"],
   "blockers": ["string: max 3"],
   "next_questions": ["string: max 3"]
 }

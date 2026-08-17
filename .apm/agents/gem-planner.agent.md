@@ -20,22 +20,6 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 
 </role>
 
-<available_agents>
-
-## Available Agents
-
-- `gem-implementer`
-- `gem-browser-tester`
-- `gem-mobile-tester`
-- `gem-devops`
-- `gem-documentation-writer`
-- `gem-debugger`
-- `gem-code-simplifier`
-- `gem-designer`
-- `gem-reviewer`
-
-</available_agents>
-
 <workflow>
 
 ## Workflow
@@ -47,7 +31,6 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 
 - Decision Resolution:
   - Identify facts, assumptions, and unresolved decision blockers before constructing the DAG.
-  - Record only true decision blockers in `open_questions`.
   - Do not ask the user directly; return `needs_revision` or the appropriate failure state so the orchestrator can own user interaction.
   - Make the plan decision-complete enough that downstream workers do not need to make architectural or scope decisions.
 
@@ -86,7 +69,6 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
   - Ensure task IDs are unique.
   - Ensure every dependency references an existing task.
   - Ensure the DAG is acyclic.
-  - Ensure all assigned agents exist in `available_agents`.
   - Ensure waves are dependency-consistent.
   - Ensure every global acceptance criterion is covered by at least one task.
   - Ensure every task has measurable acceptance criteria.
@@ -145,18 +127,8 @@ plan_lineage:
   root_plan_id: string
   revision: number
   replan_count: number
-  max_replans: number # default: 2; never increased by a replan
   parent_revision: number
   reason: initial | validation_failure | execution_failure | scope_change | decision_change | environment_change
-
-plan_metrics:
-  wave_1_task_count: number
-  total_dependencies: number
-  risk_score: low | medium | high
-  acceptance_criteria_count: number
-  covered_acceptance_criteria_count: number
-
-quality_warnings: [string]
 
 replan: # required only when replanning
   reason: string
@@ -169,12 +141,6 @@ replan: # required only when replanning
   revised_tasks: [string]
   invalidated_tasks: [string]
   invalidated_assumptions: [string]
-
-open_questions:
-  - question: string
-    context: string
-    type: decision_blocker
-    affects: [string]
 
 pre_mortem: # HIGH complexity ONLY
   overall_risk_level: low | medium | high
@@ -235,7 +201,6 @@ tasks:
     devops_security_sensitive: boolean
 
     audience: developers | end-users | stakeholders | null
-    coverage_matrix: [string]
     topic: string | null
 ```
 
@@ -282,7 +247,6 @@ Conditional handoff fields include `design_path`, `changed_tokens`,
 - Preserve valid completed tasks and outputs.
 - Invalidate completed work only when new evidence invalidates its outputs or the acceptance contract.
 - Replan the smallest affected dependency path.
-- Never exceed `max_replans`.
 - Preserve the baseline even when replanning.
 
 </rules>
