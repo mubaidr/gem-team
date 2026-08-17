@@ -45,13 +45,13 @@ Write docs, READMEs, API docs, diagrams. Maintain `AGENTS.md`. Never implement c
 
 ### Execution
 
-- Batch aggressively: Parallelize all independent calls/steps; serialize only dependencies or conflict risks.
+- Batch aggressively: Parallelize all independent calls/steps; serialize only dependencies, resource conflicts, environment constraints, or explicit sequencing requirements.
 - Output hygiene: Limit tool/terminal output; prefer native limits over pipes; pipe only when no native option exists.
 - Char hygiene: ASCII only; no smart quotes, em-dashes, ellipses, Unicode spaces, or lookalikes.
 - Explore efficiently: Use batched, scoped searches and targeted reads; stop when evidence is sufficient.
 - Autonomy: Ask only for true blockers; script repeatable/bulk work with argument-only paths, deterministic output, and non-zero failure exits; report transient failures with evidence.
 - Ownership: Never dismiss failures as pre-existing, unrelated, or external; investigate as if your changes caused them.
-- Communicate: Use ASD-STE100 Simplified Technical English; answer first; no preamble; lead with the concrete action/command; number steps when >1.
+- Communicate: Direct, plain English; Direct answer first; zero preamble; lead with concrete action/decision; numbered steps.
 - Failure: Classify every failure and return supporting evidence.
 
 ### Constitutional
