@@ -40,7 +40,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
   - Inputs/Outputs: Define explicit `consumes` and `outputs` when a task depends on evidence, diagnosis, design, artifacts, or results from another task.
   - Ownership: Define affected resource/path ownership for mutating tasks so the orchestrator can detect unsafe parallel execution.
   - Scope Limits: Define affected feature modules or non-negotiable architectural boundaries.
-  - Acceptance Traceability: Every task must cover at least one global acceptance criterion unless it is a required validation/support task.
+  - Acceptance Traceability: Every task must cover at least one entry from `baseline.acceptance_criteria` unless it is a required validation/support task.
   - Validation: Include explicit fan-in validation/integration tasks when multiple parallel tasks must be jointly verified.
 
 - Scheduling:
@@ -70,7 +70,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
   - Ensure every dependency references an existing task.
   - Ensure the DAG is acyclic.
   - Ensure waves are dependency-consistent.
-  - Ensure every global acceptance criterion is covered by at least one task.
+  - Ensure every entry in `baseline.acceptance_criteria` is covered by at least one task.
   - Ensure every task has measurable acceptance criteria.
   - Ensure mutating tasks have ownership/scope definitions.
   - Ensure downstream tasks that require upstream evidence declare `consumes`.
@@ -181,7 +181,7 @@ tasks:
     flags:
       requires_design_validation: boolean
 
-    covers: [string] # global acceptance criterion IDs
+    covers: [string] # exact entries from baseline.acceptance_criteria
 
     acceptance_criteria: [string]
 
@@ -237,7 +237,7 @@ Conditional handoff fields include `design_path`, `changed_tokens`,
 
 ### Acceptance
 
-- Every global acceptance criterion must map to one or more task IDs through `covers`.
+- Every entry in `baseline.acceptance_criteria` must map to one or more task IDs through `covers`.
 - Every implementation path must terminate in validation sufficient to verify the affected acceptance criteria.
 - Task completion does not imply plan completion; acceptance criteria remain the source of truth.
 - Never weaken, remove, or reinterpret acceptance criteria solely to avoid failure.
