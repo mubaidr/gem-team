@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.111.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.110.0...gem-team-v1.111.0) (2026-08-19)
+
+
+### 🧹 Housekeeping
+
+* cleanup ([9880130](https://github.com/mubaidr/gem-team/commit/98801302c994588a01c656e5204b222227fe75d4))
+* **main:** release gem-team 1.110.0 ([68fbe6a](https://github.com/mubaidr/gem-team/commit/68fbe6ae4aa7fe4dbd5cf0b44156b5ca6c2045f2))
+* **main:** release gem-team 1.110.0 ([ce00167](https://github.com/mubaidr/gem-team/commit/ce00167c0c6084cb1e7fcff822c84b51d7c8c4a0))
+* update agent guidelines and YAGNI/KISS principles ([4a47b45](https://github.com/mubaidr/gem-team/commit/4a47b4552fe661e865999fffea22857cf6eb847d))
+
 ## [1.110.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.109.0...gem-team-v1.110.0) (2026-08-17)
 
 
