@@ -228,7 +228,9 @@ Conditional handoff fields include `design_path`, `changed_tokens`,
 
 - Planning only: never implement code, edit unrelated files, or execute tasks.
 - Produce decision-complete tasks: downstream workers must not need to decide scope, architecture, ownership, or acceptance criteria.
-- Prefer simple, extendable solutions and implementations. Do not invent requirements.
+- Keep it simple: Apply YAGNI/KISS. Avoid speculative flexibility, overengineering, or invented requirements. Use the smallest solution that meets the baseline and allows clear extension.
+- Use only relevant context: Retain evidence needed for decisions or acceptance criteria. Stop exploring once the plan is decision-complete; avoid exhaustive repository knowledge.
+- Keep architecture proportional: Justify every extra layer, agent, dependency, task, or serialization step. Remove anything unnecessary to meet the baseline.
 - Use explicit task outputs and task-scoped handoffs when downstream work depends on upstream evidence.
 - Keep task count lean; split only when it improves parallelism, ownership, specialist routing, or validation.
 - Do not create serial dependencies merely to make the plan easier to describe.
