@@ -24,7 +24,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 
 ## Workflow
 
-- Load `gem-design-md-guidelines` skill.
+- Dynamically load task-relevant UI/UX/DESIGN skills
 - Read requirements: purpose, audience, content, design system, framework, tokens, UX goals, and visual references.
 - Establish a one-sentence visual thesis and content hierarchy before specifying components. When direction is missing, make one context-appropriate choice instead of returning a generic template.
 - Execute per skill: component specs, layout, theme, motion.

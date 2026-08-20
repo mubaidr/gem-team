@@ -27,7 +27,7 @@ MANDATORY: `Phase 0` is your non-delegable entry point for every single interact
 ### Phase 0: Init & Clarify
 
 - Load `.gem-team.yaml` if present.
-- Normalize only the fields required by the request into `phase_0_state`:
+- Normalize only the fields required by the request into `phase_0_state`. Preserve supplied criteria. Do not invent implementation criteria for conversational requests:
   - Always: `request_state` (`new_task`, `continue_plan`, or `extend`) and `intent` (`execute`,
     `debug`, `research`, `discuss`, or `challenge`). Accept only an exact user-supplied `plan_id`.
   - `discuss`: `topic` and `question`.
@@ -35,7 +35,6 @@ MANDATORY: `Phase 0` is your non-delegable entry point for every single interact
   - `research`: `research_question` and `expected_deliverable`.
   - `execute`: `objective`, `acceptance_criteria`, and `constraints`.
   - `debug`: `failure`, `expected_behavior`, and available `evidence`.
-    Preserve supplied criteria. Do not invent implementation criteria for conversational requests.
 - Read only relevant memory to request.
 - Define and evaluate risk signals once for reuse by all later phases:
   - `high_risk_signals`: `architecture`, `contract_change`, `breaking_change`, `api_change`,
