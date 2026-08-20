@@ -148,17 +148,14 @@ agent_input_reference:
       task_id: string
 ```
 
-### Rules:
+### Rules
 
-- Use exactly one invocation contract. Pass all required and applicable optional fields. `config_snapshot` must be sanitized to target-agent settings only; target agent definitions own agent-specific `task_definition` fields; this contract defines only shared and routed fields.
-- Do not pass null identifiers, duplicate handoff fields at `task_definition` root, or a separate context object.
-- Put constraints, target files, known context, prior-wave outputs, findings, and runtime evidence in `handoff`.
-- Every execution `task_definition` must contain `objective`, `acceptance_criteria`, and `handoff`. Keep it authoritative for scope. Add only agent-specific behavior controls defined by the target agent; do not copy handoff fields into the prompt root.
-- Planner `handoff` carries `task_clarifications` and `relevant_context` for initial plans. Replans also carry the immutable `baseline`, the exact `current_plan`, and `review_findings`. The orchestrator owns the replan budget and validates the planner's returned structure and task delta.
-- Reviewer `handoff` carries the target reference, acceptance criteria, and review evidence.
-- For critic mode, `handoff` must include the subject, context, evidence, and decision needed. Critic mode is read-only.
-- Standalone critic review may omit all identifiers.
-- All execution agents use `execution_task`; `gem-planner` and `gem-reviewer` use their dedicated contracts.
+- Use one invocation contract; pass only required/applicable fields. Sanitize `config_snapshot` to target-agent settings.
+- Keep scope authoritative in `task_definition`; put constraints, targets, context, prior outputs, findings, and runtime evidence in `handoff`.
+- Never duplicate identifiers/context between root and `handoff`.
+- Planner replans require immutable `baseline`, exact `current_plan`, and `review_findings`; orchestrator owns replan limits and validates the returned delta.
+- Reviewer `handoff` carries target, criteria, and evidence; `critic` additionally requires subject, context, evidence, and decision and is read-only.
+- Execution agents use `execution_task`; `gem-planner` and `gem-reviewer` use dedicated contracts.
 
 </agent_input_reference>
 
