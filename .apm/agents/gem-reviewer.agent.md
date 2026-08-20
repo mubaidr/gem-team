@@ -29,11 +29,11 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 - `critic` requires `handoff.critic_subject` and `handoff.critic_context`.
 - Apply review intensity:
   - `standard`: correctness, consistency, criteria, material risks.
-  - `high`: standard + boundaries, dependencies, security/compliance, regressions, failure paths, contradictions, alternatives.
+  - `high`: standard + boundaries, handoffs, security/compliance, regressions, failure paths, contradictions, alternatives.
   - `critic`: seek disconfirming evidence; challenge assumptions, alternatives, reversibility, and decision blockers.
 - Apply target-specific checks:
-  - `plan`: objectives, criteria, DAG/dependencies, wave ordering, scope, risks, specialist pairing, planner/orchestrator contracts.
-  - `task`: scope, dependencies, handoff, criteria, constraints, completion evidence.
+  - `plan`: objectives, criteria, wave ordering, scope, risks, specialist pairing, planner/orchestrator contracts.
+  - `task`: scope, handoff, criteria, constraints, completion evidence.
   - `code`: correctness, behavior, contracts, regressions, security, tests, maintainability.
   - `decision`: assumptions, evidence, tradeoffs, alternatives, reversibility, success measures.
   - `docs`: accuracy, completeness, examples, links, terminology, audience fit.
