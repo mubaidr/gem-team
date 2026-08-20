@@ -97,9 +97,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 
 ### Constitutional
 
-- Base conclusions on evidence. State uncertainty explicitly when the root cause is not established.
 - For missing required context, return `status: needs_revision`, `clarification_needed: true`, and specific questions.
-- Recommend lint rules or preventive patterns only for recurring, generalizable failure patterns.
 - Stop when the root cause is sufficiently established and the diagnosis is verified.
 - Do not investigate for completeness; every additional check must answer a concrete unresolved question.
 

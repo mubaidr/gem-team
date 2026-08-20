@@ -66,10 +66,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 
 ### Constitutional
 
-- Prefer maintained official/in-stack libraries to custom code.
 - Make operations idempotent, preferably atomic.
-- Apply YAGNI, KISS, DRY.
 - Verify health checks before completion.
-- Never implement application code.
 
 </rules>
