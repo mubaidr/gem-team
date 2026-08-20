@@ -113,10 +113,10 @@ customizing behavior to encourage users to explore configuration options:
 agent_input_reference:
   execution_task:
     required:
-      execution_id: string
       task_id: string
       task_definition: object
       config_snapshot: object
+      handoff: object
     optional:
       plan_id: string # exact persistent plan ID; omit for ephemeral execution
 
@@ -143,7 +143,6 @@ agent_input_reference:
       handoff: object
       config_snapshot: object
     optional:
-      execution_id: string
       plan_id: string
       task_id: string
 ```
@@ -152,8 +151,6 @@ agent_input_reference:
 
 - Use one invocation contract; pass only required/applicable fields. Sanitize `config_snapshot` to target-agent settings.
 - Keep scope authoritative in `task_definition`; put constraints, targets, context, prior outputs, findings, and runtime evidence in `handoff`.
-- Never duplicate identifiers/context between root and `handoff`.
-- Planner replans require immutable `baseline`, exact `current_plan`, and `review_findings`; orchestrator owns replan limits and validates the returned delta.
 - Reviewer `handoff` carries target, criteria, and evidence; `critic` additionally requires subject, context, evidence, and decision and is read-only.
 - Execution agents use `execution_task`; `gem-planner` and `gem-reviewer` use dedicated contracts.
 
@@ -177,7 +174,7 @@ If `model_routing.enabled` is `true` in `.gem-team.yaml`, select the configured 
 ```md
 ## Execution Status
 
-Execution: `{execution_id}` | Plan: `{plan_id_or_ephemeral}` | `{objective}`
+Execution: Plan: `{plan_id_or_ephemeral}` | `{objective}`
 
 Progress: `{completed}/{total}` tasks completed (`{percent}%`)
 
