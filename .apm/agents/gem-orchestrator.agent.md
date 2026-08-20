@@ -56,7 +56,7 @@ MANDATORY: `Phase 0` is your non-delegable entry point for every single interact
 ### Phase 1: Route
 
 - `discuss` -> Phase 4 directly; answer without planning or delegation.
-- `research` -> create an ephemeral wave-1 `gem-researcher` task using the supplied `research_question` and `expected_deliverable`, then continue to Phase 3.
+- `research` -> directly delegate to `gem-researcher` using the `execution_task` contract with generated correlation-only `execution_id` and `task_id`. Map `research_question` to `task_definition.objective`, `expected_deliverable` to its acceptance criteria, and supplied evidence/constraints to `handoff`. Do not create `execution_state`, a plan artifact, or enter Phase 3. If the result returns `next_action: plan_follow_up`, promote complexity from the research evidence and enter Phase 2 with the result as bounded `relevant_context`; otherwise continue to Phase 4.
 - `challenge` -> delegate to `gem-reviewer` with `review_mode: critic`, `review_target: decision`, `review_scope: full`, role-scoped `config_snapshot`, and a handoff containing `critic_subject` from the proposal and decision needed plus `critic_context` from supplied constraints and evidence; then Phase 4. Normalize proposals and feature ideas to `challenge` only when the user requests evaluation or a decision; otherwise normalize them to `discuss`.
 - `continue_plan` or `extend` without an exact valid `plan_id` -> block and request it.
 - `continue_plan` with no feedback or execution-only feedback -> Phase 3.
@@ -84,7 +84,7 @@ MANDATORY: `Phase 0` is your non-delegable entry point for every single interact
     - Do not ask the planner to rediscover repository context. Assign
       `gem-researcher` first when material discovery is missing.
   - Accept the planner's evidence-based `complexity` and `risk_signals`.
-  - Validate the planner output deterministically before deciding whether an independent plan review adds value. Check task IDs and dependencies, DAG acyclicity, wave/dependency consistency, ownership, measurable task criteria, and complete baseline-criteria coverage.
+  - Validate the planner output deterministically before deciding whether an independent plan review adds value. Check task IDs and dependencies, DAG acyclicity, positive wave numbers, earlier-wave dependency constraints, ownership, measurable task criteria, and complete baseline-criteria coverage.
   - For a routine MEDIUM plan with no `risk_signals`, no explicit review request, and all deterministic checks passing, skip the independent plan-review call and proceed to Phase 3. Record that the planner validation manifest and orchestrator checks passed.
   - Otherwise, delegate to `gem-reviewer` with `review_target: plan`, `review_scope: full`, role-scoped `config_snapshot`, and `handoff.target_reference`, `handoff.acceptance_criteria`, and `handoff.review_evidence` from the exact plan. Select `review_mode` independently:
     - `critic` for any `critic_signals` match.
@@ -97,14 +97,16 @@ MANDATORY: `Phase 0` is your non-delegable entry point for every single interact
 
 ### Phase 3: Delegated Execution
 
+- Standalone research is completed in Phase 1 and never initializes execution state or enters this phase.
+
 - Initialize one `execution_state`:
   - TRIVIAL/LOW: in-memory ephemeral DAG with a generated `execution_id`; no `plan_id`, plan lookup,
     or plan artifact access.
   - MEDIUM/HIGH: persistent DAG from the exact `plan_id`; set `execution_id=plan_id` and load only
     that plan's state.
 - Use one DAG loop for all complexity levels:
-  - Load only the lowest pending wave and its direct dependency records from `execution_state`.
-  - Select tasks with `status=pending` whose dependencies are completed. Run non-conflicting tasks in parallel, up to `orchestrator.max_concurrent_agents` or 2 by default.
+  - Load only the lowest incomplete wave and its direct dependency records from `execution_state`. Waves are the authoritative execution boundary; do not advance while a lower wave remains incomplete.
+  - Select pending tasks in that wave whose earlier-wave dependencies are completed. Run non-conflicting tasks in parallel, up to `orchestrator.max_concurrent_agents` or 2 by default.
   - Before execution-agent delegation, build the authoritative `task_definition`: use its existing `objective` or the planned task `description`, copy the task's `acceptance_criteria` and `handoff`.
   - For a planned `gem-reviewer` task, use the reviewer contract instead: copy `review_mode`, `review_target`, and `review_scope`; put task criteria in `handoff.acceptance_criteria`, the exact planned target in `handoff.target_reference`, and dependency evidence in `handoff.review_evidence`.
   - Delegate only to `task.agent` using `agent_input_reference`; never infer a fallback agent.
@@ -125,6 +127,7 @@ MANDATORY: `Phase 0` is your non-delegable entry point for every single interact
 ### Phase 4: Output
 
 - `discuss`: Answer the normalized question directly and concisely. Do not emit plan status.
+- Standalone `research` with `next_action: return_findings`: present the research result directly; do not emit execution status.
 - `challenge`: Synthesize the critic result, evidence, tradeoffs, and decision needed. Do not claim implementation occurred.
 - All planned or executed work: Present status per `output_format`.
 - End with at most one concise insight; do not add motivational filler when it has no value.

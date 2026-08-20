@@ -30,21 +30,6 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
   - Refactor -> Verify: run regression tests before concluding.
   - Output: minimal JSON per `output_format`.
 
-- Bug-Fix Mode (when `task_definition.handoff.debugger_diagnosis` is present):
-  - Own regression test: create/update minimal reproduction test before fix.
-  - Apply `task_definition.handoff.lint_rule_recommendations` together with fix when present.
-  - Output: minimal JSON per `output_format`.
-
-- Lint Remediation Mode (when `task_definition.handoff.lint_rule_recommendations` is present without `task_definition.handoff.debugger_diagnosis`):
-  - Validate and apply the recommendations without requiring a debugger diagnosis.
-  - Add or update focused tests when the recommendation changes runtime behavior.
-  - Output: minimal JSON per `output_format`.
-
-- Security Remediation Mode (when `task_definition.handoff.security_findings` is present):
-  - Address every blocking/high-severity finding; verify each remediation before completion.
-  - Return `needs_revision` or `failed` with evidence when finding cannot be remediated safely.
-  - Output: minimal JSON per `output_format`.
-
 </workflow>
 
 <output_format>
@@ -81,11 +66,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 
 - Prefer maintained official/in-stack libraries to custom code.
 - Edit surgically; refactor only within TDD, never adjacent cleanup.
-- Run regression tests after each fix.
-- Preserve interface patterns: sync/async, request-response/event-driven.
 - Validate boundaries; trust no input. Match state management to complexity; plan errors first.
-- Use `DESIGN.md` tokens; never hardcode UI colors/spacing.
-- Define dependency contracts; test them before business logic.
 - Meet all `acceptance_criteria`; use the existing stack, YAGNI, KISS, DRY, FP.
 
 ### UI/UX Skills & Styling Workflow

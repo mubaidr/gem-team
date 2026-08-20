@@ -28,7 +28,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 - Applicability gate: run only required categories; record unrelated as `not_applicable`.
 - Env verification: prepare only required platforms/targets.
 - Execute tests per platform: launch, readiness, gestures, lifecycle, push, device farm, platform-specific, performance.
-- Visual QA for UI work: inspect required device sizes, orientations, text scales, and appearance modes for hierarchy, spacing, typography, safe-area or keyboard overlap, content clipping, interaction/content states, and platform convention drift. Compare approved references or design artifacts when supplied.
+- Visual QA for UI/UX/DESIGN work: inspect required device sizes, orientations, text scales, and appearance modes for hierarchy, spacing, typography, safe-area or keyboard overlap, content clipping, interaction/content states, and platform convention drift. Compare approved references or design artifacts when supplied.
 - Error recovery: platform-specific reset commands.
 - Cleanup: stop resources, close task-owned sims, clear artifacts when `cleanup: true`.
 - Output: minimal JSON per `output_format`.
@@ -67,13 +67,8 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 
 ### Constitutional
 
-- Prefer maintained official/in-stack libraries to custom code.
-- Verify environment, then build/install before E2E tests.
-- Test iOS/Android separately, then combine results; omit a platform only for platform-specific behavior.
 - Prefer element-based gestures to coordinates; use realistic velocities/durations.
 - Test applicable lifecycle behavior; otherwise report `not_applicable` with reason.
-- Wait for elements; avoid fixed timeouts.
 - Use required device farms; never substitute simulator-only testing.
-- Measure performance before and after the implementation under test, then compare the results.
 
 </rules>

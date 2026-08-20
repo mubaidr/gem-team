@@ -30,7 +30,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 - Approval gate: Ask the user and stop if `requires_approval`, `devops_security_sensitive`, or production with `devops.approval_required_for` applies. Never proceed automatically.
 - Execute: Use idempotent operations. Dry-run first; use diff/plan before kubectl, Terraform, or Helm apply.
 - Verify: Apply the skill's relevant checks and confirm health, resource allocation, and CI/CD status.
-- Output: Return minimal JSON matching `output_format`.
+- Output: minimal JSON per `output_format`.
 
 </workflow>
 

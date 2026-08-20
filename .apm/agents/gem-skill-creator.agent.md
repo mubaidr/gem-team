@@ -33,7 +33,7 @@ MANDATORY: Follow the workflow and rules below. Do not improvise.
 - Keep main file concise and progressively disclosed. Do not require custom metadata (`usages`, `confidence`, `source`, `tools`); preserve provenance in task result or repo memory.
 - Scripts: optional. Add shebang, `--help`, argument validation, non-zero failures, safe untrusted input handling. Test with `--help` or dry run. Never chmod/run unless environment permits.
 - Validate result: frontmatter parses; `name` matches directory; `description` useful; links resolve; no secrets; coherent scope; no duplicate skill. Use `npx skills init <name>` as template reference when useful.
-- Classify failures per enum; return minimal JSON per `output_format`.
+- Output: minimal JSON per `output_format`.
 
 </workflow>
 
@@ -64,12 +64,5 @@ MANDATORY: Follow the workflow and rules below. Do not improvise.
 - Autonomy: Ask only for true blockers; script repeatable/bulk work with argument-only paths, deterministic output, and non-zero failure exits; report transient failures with evidence.
 - Communicate: Direct, plain & simple English; zero preamble; lead with concrete action/decision; numbered steps.
 - Failure: Classify every failure and return supporting evidence.
-
-### Constitutional
-
-- Prefer established tools/repository conventions to custom code.
-- Treat patterns as read-only; deduplicate before creation.
-- Never publish secrets/private task data.
-- Never create skills for one-off workarounds.
 
 </rules>

@@ -44,9 +44,9 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
   - Validation: Include explicit fan-in validation/integration tasks when multiple parallel tasks must be jointly verified.
 
 - Scheduling:
-  - `depends_on` is the source of truth for execution ordering.
-  - `wave` is a derived scheduling hint and must be consistent with dependencies.
-  - Parallelize all independent tasks; serialize only dependency, resource, environment, or conflict constraints.
+  - `wave` is the authoritative execution boundary. The Orchestrator completes the lowest incomplete wave before advancing.
+  - Use `depends_on` to declare evidence and handoff prerequisites, not as a competing scheduler. Every dependency must reference a task in an earlier wave; same-wave and later-wave dependencies are invalid.
+  - Parallelize independent tasks within the same wave; serialize only resource, environment, or conflict constraints.
 
 - Specialist Routing Matrix:
   - UI (New/Modified): `gem-designer` -> `gem-implementer` -> (`gem-browser-tester` | `gem-mobile-tester`).
@@ -69,7 +69,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
   - Ensure task IDs are unique.
   - Ensure every dependency references an existing task.
   - Ensure the DAG is acyclic.
-  - Ensure waves are dependency-consistent.
+  - Ensure waves are positive integers and dependency-consistent: every `depends_on` target exists and is in an earlier wave.
   - Ensure every entry in `baseline.acceptance_criteria` is covered by at least one task.
   - Ensure every task has measurable acceptance criteria.
   - Ensure mutating tasks have ownership/scope definitions.
@@ -79,7 +79,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 
 - Output & Storage Contract:
   - Write complete plan to `docs/plan/{plan_id}/plan.yaml`.
-  - Output: minimal JSON per `output_format`.
+  - Return minimal JSON matching `output_format`.
 
 </workflow>
 
@@ -229,7 +229,7 @@ Conditional handoff fields include `design_path`, `changed_tokens`,
 - Use explicit task outputs and task-scoped handoffs when downstream work depends on upstream evidence.
 - Keep task count lean; split only when it improves parallelism, ownership, specialist routing, or validation.
 - Do not create serial dependencies merely to make the plan easier to describe.
-- Do not make `wave` authoritative; dependencies determine execution order.
+- Make `wave` the authoritative execution boundary. Use `depends_on` for prerequisite, evidence, and handoff validation; reject same-wave and later-wave dependencies.
 - Do not use `conflicts_with` as a substitute for ownership. Declare resource ownership for affected paths and let the orchestrator derive conflicts where possible.
 
 ### Acceptance
