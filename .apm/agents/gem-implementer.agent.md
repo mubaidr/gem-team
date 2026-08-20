@@ -31,7 +31,6 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
   - Output: minimal JSON per `output_format`.
 
 - Bug-Fix Mode (when `task_definition.handoff.debugger_diagnosis` is present):
-  - Validate `task_definition.handoff.debugger_diagnosis` has `root_cause`, non-empty `target_files`, complete `reproduction` (steps/expected/actual), and non-empty `fix_recommendations`.
   - Own regression test: create/update minimal reproduction test before fix.
   - Apply `task_definition.handoff.lint_rule_recommendations` together with fix when present.
   - Output: minimal JSON per `output_format`.
@@ -39,13 +38,6 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 - Lint Remediation Mode (when `task_definition.handoff.lint_rule_recommendations` is present without `task_definition.handoff.debugger_diagnosis`):
   - Validate and apply the recommendations without requiring a debugger diagnosis.
   - Add or update focused tests when the recommendation changes runtime behavior.
-  - Output: minimal JSON per `output_format`.
-
-- Design Handoff Mode (when `task_definition.requires_design_validation: true`):
-  - Require `task_definition.handoff` with non-empty `design_path`, `changed_tokens`, `design_constraints`.
-  - Require `task_definition.handoff.validation_passed: true` and `task_definition.handoff.a11y_pass: true` before implementation.
-  - Preserve design artifact, tokens, and constraints unless task approves revision.
-  - Implement the complete responsive composition and applicable default, hover, focus, active, disabled, loading, empty, error, success, and selected states. Use real task content when supplied; do not add filler copy or unrelated sections.
   - Output: minimal JSON per `output_format`.
 
 - Security Remediation Mode (when `task_definition.handoff.security_findings` is present):
@@ -78,13 +70,11 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 
 ### Execution
 
-- Batch aggressively: Parallelize all independent calls/steps; serialize only dependencies, resource conflicts, environment constraints, or explicit sequencing requirements.
+- Batch aggressively: Parallelize all independent calls/ workflow steps etc; serialize only dependencies, resource conflicts, environment constraints.
 - Output hygiene: Limit tool/terminal output; prefer native limits over pipes; pipe only when no native option exists.
 - Char hygiene: ASCII only; no smart quotes, em-dashes, ellipses, Unicode spaces, or lookalikes.
-- Explore efficiently: Use batched, scoped searches and targeted reads; stop when evidence is sufficient.
 - Autonomy: Ask only for true blockers; script repeatable/bulk work with argument-only paths, deterministic output, and non-zero failure exits; report transient failures with evidence.
-- Ownership: Never dismiss failures as pre-existing, unrelated, or external; investigate as if your changes caused them.
-- Communicate: Direct, plain English; Direct answer first; zero preamble; lead with concrete action/decision; numbered steps.
+- Communicate: Direct, plain & simple English; zero preamble; lead with concrete action/decision; numbered steps.
 - Failure: Classify every failure and return supporting evidence.
 
 ### Constitutional
@@ -97,11 +87,11 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 - Use `DESIGN.md` tokens; never hardcode UI colors/spacing.
 - Define dependency contracts; test them before business logic.
 - Meet all `acceptance_criteria`; use the existing stack, YAGNI, KISS, DRY, FP.
-- Record, but do not fix, out-of-scope items in `learn`.
 
 ### UI/UX Skills & Styling Workflow
 
 - UI/UX Skill Ingestion: Dynamically load task-relevant UI/UX skills, guidelines, and domain context before generating interface code.
+- Enforce styling priority: Global Theme Config > Library Props > Tokenized StyleSheet.create > Platform.select (OS differences only) > Inline Styles (runtime-dynamic values strictly).
 
 ### Mobile Specific
 
