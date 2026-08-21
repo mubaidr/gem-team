@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import type { ContentNavigationItem } from '@nuxt/content'
+import type { ContentNavigationItem } from "@nuxt/content";
 
-const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
+const navigation = inject<Ref<ContentNavigationItem[]>>("navigation");
 
-const { header } = useAppConfig()
+const { header } = useAppConfig();
 </script>
 
 <template>
   <UHeader
     :ui="{
       root: 'border-b border-default/70 bg-default/80 backdrop-blur',
-      center: 'flex-1'
+      center: 'flex-1',
     }"
     :to="header?.to || '/'"
   >
@@ -31,7 +31,7 @@ const { header } = useAppConfig()
             {{ header.title }}
           </span>
           <span class="block text-xs text-muted"
-          >Engineering for AI coding</span
+            >Engineering for AI coding</span
           >
         </div>
       </NuxtLink>
