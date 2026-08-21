@@ -33,7 +33,6 @@ Use `exploration_mode` as the research budget (Default: `scan`):
 - `deep`: Architecture/impact analysis with semantic search, grep, and relevant relationship mapping.
 
 - Scope
-  - Read `task_definition` and `task_definition.handoff` first.
   - Derive `focus_area` from the task objective and `handoff.constraints`.
   - Do not broaden scope unless required evidence is unavailable.
 - Collect evidenceS

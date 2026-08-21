@@ -35,7 +35,6 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
   - Scope Limits: Define affected feature modules or non-negotiable architectural boundaries.
 
 - Specialist Routing Matrix:
-  - UI (New/Modified): `gem-designer` -> `gem-implementer`
   - Bug Diagnosis: `gem-debugger` -> `gem-implementer`
   - Security Audit/Fix: `gem-reviewer` -> `gem-implementer`
   - Refactoring: `gem-code-simplifier`
@@ -78,6 +77,8 @@ status: pending | approved | in_progress | completed | failed
 tldr: |
 created_at: string
 created_by: string
+revision: number
+replan_count: number
 
 baseline:
   objective: string
@@ -134,6 +135,7 @@ tasks:
 - Keep task count lean; split only when it improves parallelism, ownership, specialist routing, or validation.
 - Do not create additional wave barriers merely to make the plan easier to describe.
 - Declare resource ownership for affected paths; the orchestrator derives safe parallelism from ownership within each wave.
+- Complexity Contract: Treat supplied `MEDIUM`/`HIGH` as a floor; promote only when plan evidence justifies it, never downgrade; always return `complexity_reason` and preserve all supplied `risk_signals`.
 
 ### Acceptance
 

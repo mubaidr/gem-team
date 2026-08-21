@@ -157,7 +157,6 @@
 - add approval state fields to gem-devops, gem-orchestrator, and gem-planner agents ([5715313](https://github.com/mubaidr/gem-team/commit/571531388ce94eff12aa09e243b7473b3f1ed2a2))
 - add project state announcements after each wave in orchestrator workflow ([d361604](https://github.com/mubaidr/gem-team/commit/d36160433ba4d3679a43dcecd54da6444aa6c261))
 - add verification scope rules to gem-debugger and gem-orchestrator agents ([dac284a](https://github.com/mubaidr/gem-team/commit/dac284a97cc1a73c0bcce1d5ca42b3105825c12a))
-- adjust gem-designer agent workflow to propose only when design direction is open and to create or update DESIGN.md per design-system guidance ([c10c935](https://github.com/mubaidr/gem-team/commit/c10c93543553a69ee5d7ee830e3b2eb0a7123a01))
 - batch low‑risk edits and run targeted tests; add immediate verification after behavior changes ([2a6223e](https://github.com/mubaidr/gem-team/commit/2a6223ef748ddaac0d5d1ad8f3e6fdfc373c7193))
 - clarify documentation writer workflow to cite source code for implementation claims and use authoritative context for general guidance ([da3994c](https://github.com/mubaidr/gem-team/commit/da3994cf2903606332b8be1ee67fa4f1a1cee5c8))
 - clarify output format omission rules in agent definitions and add agent instruction audit README and findings ([81c9718](https://github.com/mubaidr/gem-team/commit/81c97185065bee6ad689de2e94f2be021d9cd4d0))
@@ -246,7 +245,6 @@
 ### 🧹 Housekeeping
 
 - standardize DESIGN.md references and lint validation across agent configs ([5cdf3f4](https://github.com/mubaidr/gem-team/commit/5cdf3f44e0b66c3877287b9e06cb65c6b675dc44))
-- update DESIGN.md spec compliance and output format in designer agents ([11c6feb](https://github.com/mubaidr/gem-team/commit/11c6feb11deb73e40c1f2dca4ec2f1327bda0be4))
 
 ## [1.91.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.90.0...gem-team-v1.91.0) (2026-08-01)
 

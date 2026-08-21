@@ -152,7 +152,6 @@ Gem Team installs a set of specialized agents that work together under the guida
 | **Reviewer**        | Reviews plans; provides read-only critique for ideas and challenges.                   |
 | **Debugger**        | Diagnoses bugs with root-cause analysis (never implements fixes).                      |
 | **Researcher**      | Explores the codebase and finds the best patterns to use.                              |
-| **Designer**        | Creates UI/UX designs, layouts, and design systems.                                    |
 | **Tester**          | Runs E2E browser tests and visual regression.                                          |
 | **Tester Mobile**   | Runs mobile E2E tests on iOS/Android simulators.                                       |
 | **DevOps**          | Manages deployments, CI/CD, and infrastructure with approval gates.                    |

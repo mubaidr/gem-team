@@ -140,7 +140,10 @@ agent_input_reference:
       review_mode: standard | high | critic
       review_target: plan | task | code | decision | docs | config | integration
       review_scope: changed | affected | full
-      handoff: object
+      handoff:
+        target_reference: string
+        criteria: [string]
+        evidence: [string]
       config_snapshot: object
     optional:
       plan_id: string
@@ -151,7 +154,7 @@ agent_input_reference:
 
 - Use one invocation contract; pass only required/applicable fields. Sanitize `config_snapshot` to target-agent settings.
 - Keep scope authoritative in `task_definition`; put constraints, targets, context, prior outputs, findings, and runtime evidence in `handoff`.
-- Reviewer `handoff` carries target, criteria, and evidence; `critic` additionally requires subject, context, evidence, and decision and is read-only.
+- Reviewer `handoff` carries `target_reference`, criteria, and evidence; plan reviews reference the planner's `plan_path`. `critic` additionally requires subject, context, evidence, and decision and is read-only.
 - Execution agents use `execution_task`; `gem-planner` and `gem-reviewer` use dedicated contracts.
 
 </agent_input_reference>
@@ -163,7 +166,7 @@ agent_input_reference:
 If `model_routing.enabled` is `true` in `.gem-team.yaml`, select the configured model for the delegated agent's tier and pass/ assign to it when delegating tasks. Use these tiers:
 
 - premium: `gem-planner`, `gem-debugger`, and `gem-reviewer`: These agents perform planning, root-cause analysis, challenge assumptions, or high-risk verification and should use `model_routing.tiers.premium`.
-- explore: `gem-researcher`, `gem-implementer`, `gem-browser-tester`, `gem-mobile-tester`, `gem-devops`, `gem-documentation-writer`, `gem-skill-creator`, `gem-code-simplifier`, and `gem-designer`: These agents perform exploration or bounded execution and should use `model_routing.tiers.explore`.
+- explore: `gem-researcher`, `gem-implementer`, `gem-browser-tester`, `gem-mobile-tester`, `gem-devops`, `gem-documentation-writer`, `gem-skill-creator`, and `gem-code-simplifier`: These agents perform exploration or bounded execution and should use `model_routing.tiers.explore`.
 
 </model_routing>
 
