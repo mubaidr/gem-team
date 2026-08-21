@@ -140,14 +140,14 @@ Gem Team installs a set of specialized agents that work together under the guida
 
 - **Specialist Agents**: Dedicated agents for planning, research, implementation, review, and more.
 - **Orchestration**: One wave loop coordinates ordered work, parallel tasks, bounded retries, and final acceptance checks at every complexity level.
-- **Context Management**: Execution agents receive an authoritative `task_definition`; constraints, evidence, and prior-wave outputs travel through its canonical `handoff`. Planner and reviewer use dedicated handoff contracts, and every delegate receives only a role-scoped configuration snapshot.
+- **Context Management**: Execution agents receive an authoritative `task_definition` with a nested `handoff`; constraints, evidence, and prior-wave outputs travel through it. Planner receives a bounded `planning_context`; reviewer uses a dedicated review `handoff`; every delegate receives only a role-scoped configuration snapshot.
 
 ### Agent Roles
 
 | Role                | Description                                                                            |
 | :------------------ | :------------------------------------------------------------------------------------- |
 | **Orchestrator**    | Coordinates the workflow and ensures all tasks are completed correctly.                |
-| **Planner**         | Creates bounded wave plans: milestones, routing, handoffs, waves, risks, and criteria. |
+| **Planner**         | Creates bounded wave plans: milestones, routing, per-task handoffs, waves, risks, and criteria. |
 | **Implementer**     | Writes the code using TDD and best practices.                                          |
 | **Reviewer**        | Reviews plans; provides read-only critique for ideas and challenges.                   |
 | **Debugger**        | Diagnoses bugs with root-cause analysis (never implements fixes).                      |

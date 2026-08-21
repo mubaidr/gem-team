@@ -67,13 +67,12 @@ MANDATORY: `Phase 0` is your non-delegable entry point for every single interact
   - Goto Phase 3.
 - Complexity=MEDIUM/HIGH:
   - For `new_task`, generate a unique persistent `plan_id`; for `extend`, reuse only the exact validated user-supplied `plan_id`.
-  - Delegate to `gem-planner` with `plan_id`, `objective`, `acceptance_criteria`, `provisional_complexity`, `risk_signals`, the bounded planner `handoff`, and `config_snapshot`.
+  - Delegate to `gem-planner`.
   - Accept the planner's evidence-based `complexity` and `risk_signals`.
-  - Validate the returned plan before review: task IDs are unique, waves are positive and contiguous from 1, ownership is declared for mutating tasks, every task has measurable criteria, and all baseline criteria are covered.
 
 - Pre-execution review when required:
   - Invoke `gem-reviewer` with `review_target: plan` for only: HIGH complexity plans, high-risk or critic signals or explicit review requests only.
-  - Select `review_mode` independently: `critic` for any `critic_signals` match, `high` for HIGH or any high-risk signal, otherwise `standard`.
+    - Select `review_mode` independently: `critic` for any `critic_signals` match, `high` for HIGH or any high-risk signal, otherwise `standard`.
   - `needs_revision` -> one bounded planner revision using its blocker/evidence; never retry execution.
   - Review `pass`/`warning` or Critic `proceed`/`revise` -> continue; apply bounded material revisions.
   - Review `blocking` or Critic `defer`/`reject`/`needs_input` -> replan with `baseline`, `current_plan`, and `review_findings`, or escalate to the user.
@@ -114,9 +113,13 @@ agent_input_reference:
   execution_task:
     required:
       task_id: string
-      task_definition: object
+      task_definition:
+        objective: string
+        acceptance_criteria: [string]
+        handoff:
+          constraints: [string]
+          relevant_context: [string]
       config_snapshot: object
-      handoff: object
     optional:
       plan_id: string # exact persistent plan ID; omit for ephemeral execution
 
@@ -127,7 +130,7 @@ agent_input_reference:
       acceptance_criteria: [string]
       provisional_complexity: MEDIUM | HIGH
       risk_signals: [string]
-      handoff:
+      planning_context:
         task_clarifications: [string]
         relevant_context: [string]
         baseline: object # required for replans
@@ -153,9 +156,9 @@ agent_input_reference:
 ### Rules
 
 - Use one invocation contract; pass only required/applicable fields. Sanitize `config_snapshot` to target-agent settings.
-- Keep scope authoritative in `task_definition`; put constraints, targets, context, prior outputs, findings, and runtime evidence in `handoff`.
+- Keep scope authoritative in `task_definition`; put constraints, targets, context, prior outputs, findings, and runtime evidence in `task_definition.handoff`.
 - Reviewer `handoff` carries `target_reference`, criteria, and evidence; plan reviews reference the planner's `plan_path`. `critic` additionally requires subject, context, evidence, and decision and is read-only.
-- Execution agents use `execution_task`; `gem-planner` and `gem-reviewer` use dedicated contracts.
+- Execution agents receive `task_definition` (with nested `handoff`); `gem-planner` receives `planning_context`; `gem-reviewer` receives a dedicated review `handoff`.
 
 </agent_input_reference>
 

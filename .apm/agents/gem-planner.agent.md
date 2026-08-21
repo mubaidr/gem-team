@@ -108,6 +108,9 @@ tasks:
     agent: string
     status: pending | in_progress | completed | failed | blocked | needs_revision | needs_replan
     acceptance_criteria: [string]
+    handoff:
+      constraints: [string]
+      relevant_context: [string]
 ```
 
 </plan_format_guide>

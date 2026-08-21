@@ -33,7 +33,7 @@ Use `exploration_mode` as the research budget (Default: `scan`):
 - `deep`: Architecture/impact analysis with semantic search, grep, and relevant relationship mapping.
 
 - Scope
-  - Derive `focus_area` from the task objective and `handoff.constraints`.
+  - Derive `focus_area` from the task objective and `task_definition.handoff.constraints`.
   - Do not broaden scope unless required evidence is unavailable.
 - Collect evidenceS
   - Use `semantic_search` and `grep_search` within `focus_area`.
