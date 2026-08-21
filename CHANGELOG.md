@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.112.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.111.0...gem-team-v1.112.0) (2026-08-21)
+
+
+### 🧹 Housekeeping
+
+* clarify wave execution model and simplify agent guidelines ([5b0f6e8](https://github.com/mubaidr/gem-team/commit/5b0f6e8d7b647d0c3c82b489ad8606bd97a25c83))
+* clean up agent documentation formatting ([bbf35b6](https://github.com/mubaidr/gem-team/commit/bbf35b6633e2f75d2b1739a6585809fe47d85257))
+* simplify agent guidelines and remove redundant guidance ([80534e9](https://github.com/mubaidr/gem-team/commit/80534e9293575c6beb1b3222e0208214372aaa53))
+* simplify agent guidelines and remove redundant guidance ([5e55a2a](https://github.com/mubaidr/gem-team/commit/5e55a2a4b535b0b489a479bf517287f944cf57ed))
+* simplify agent guidelines and remove redundant guidance ([c47f2b7](https://github.com/mubaidr/gem-team/commit/c47f2b78222cc84fc10006d1998316a4f650a4fd))
+* simplify agent guidelines and remove redundant guidance ([e67ab60](https://github.com/mubaidr/gem-team/commit/e67ab6021067d76e61ed1239d77e8be21494139f))
+* simplify agent guidelines and remove redundant guidance ([18a2cec](https://github.com/mubaidr/gem-team/commit/18a2cecb4ee96cbfa3bd8b00e2c5b89172c80649))
+* simplify agent guidelines and remove redundant guidance ([de19aa8](https://github.com/mubaidr/gem-team/commit/de19aa8d28c0ea48393b979a1a35928dccd81d57))
+* simplify agent guidelines and remove redundant guidance ([5fae8d5](https://github.com/mubaidr/gem-team/commit/5fae8d5e2777c38fb98086a65e1da03737342da5))
+* simplify agent guidelines and remove redundant guidance ([41600ba](https://github.com/mubaidr/gem-team/commit/41600ba1b477f80db3a546b92cec9eedffa64589))
+
 ## [1.111.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.110.0...gem-team-v1.111.0) (2026-08-19)
 
 ### 🧹 Housekeeping
