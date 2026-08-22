@@ -58,7 +58,7 @@ Return only fields required for this task. Conditional fields are required only 
 ```json
 {
   "status": "completed | failed | needs_revision",
-  "fail": "fixable | needs_replan | escalate", // required when status is failed
+  "fail": "fixable | needs_replan | escalate",
   "plan_id": "string",
   "plan_path": "string",
   "complexity": "MEDIUM | HIGH",
@@ -66,6 +66,8 @@ Return only fields required for this task. Conditional fields are required only 
   "complexity_reason": "string"
 }
 ```
+
+`fail` is required only when `status` is `failed`.
 
 </output_format>
 

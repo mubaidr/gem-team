@@ -49,8 +49,8 @@ Return only fields required for this task. Conditional fields are required only 
 ```json
 {
   "status": "completed | failed | needs_retry | blocked",
-  "blocked_reason": "string", // required only when status is blocked
-  "retry_reason": "string", // required only when status is needs_retry
+  "blocked_reason": "string",
+  "retry_reason": "string",
   "fail": "fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific | test_bug",
   "console_errors": "number",
   "network_failures": "number",
@@ -58,6 +58,8 @@ Return only fields required for this task. Conditional fields are required only 
   "evidence_path": "string"
 }
 ```
+
+`blocked_reason` is required only when `status` is `blocked`; `retry_reason` is required only when `status` is `needs_retry`.
 
 </output_format>
 

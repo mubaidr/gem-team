@@ -56,11 +56,11 @@ Return only fields required for this task. Conditional fields are required only 
 ```json
 {
   "status": "completed | failed | needs_revision",
-  "revision_findings": ["string"], // required only when status is needs_revision
+  "revision_findings": ["string"],
   "fail": "fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
   "confidence": "number (0.0-1.0)",
   "verdict": "pass | warning | blocking",
-  "blocking_reason": "string", // required when verdict is blocking or critic_verdict is defer, reject, or needs_input
+  "blocking_reason": "string",
   "regression_risk": "LOW | MEDIUM | HIGH | CRITICAL",
   "warnings": "number",
   "critical_findings": ["SEVERITY file:line: issue"],
@@ -88,6 +88,8 @@ Return only fields required for this task. Conditional fields are required only 
   "decision_blockers": ["string"]
 }
 ```
+
+`revision_findings` is required only when `status` is `needs_revision`. `blocking_reason` is required when `verdict` is `blocking` or `critic_verdict` is `defer`, `reject`, or `needs_input`.
 
 </output_format>
 

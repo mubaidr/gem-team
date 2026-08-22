@@ -57,7 +57,7 @@ Return only fields required for this task. Conditional fields are required only 
 {
   "status": "completed | failed | needs_revision",
   "clarification_needed": "boolean",
-  "questions": ["string"] // required only when clarification_needed is true
+  "questions": ["string"],
   "fail": "fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
   "handoff": {
     "debugger_diagnosis": {
@@ -81,6 +81,8 @@ Return only fields required for this task. Conditional fields are required only 
   "learn": [{ "text": "string", "confidence": "0.0-1.0" }]
 }
 ```
+
+`questions` is required only when `clarification_needed` is `true`.
 
 </output_format>
 
