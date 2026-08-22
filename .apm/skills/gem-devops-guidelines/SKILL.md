@@ -5,6 +5,8 @@ description: Design or review infrastructure, deployment, CI/CD, Docker, Kuberne
 
 # DevOps Guidelines
 
+Apply only the sections relevant to the workload, provider, environment, and acceptance criteria. Skip Docker, Kubernetes, mobile, production, rollback, health, feature-flag, and security checks when they do not apply.
+
 ## Deployment strategy
 
 - Rolling (default): gradual, zero-downtime replacement.

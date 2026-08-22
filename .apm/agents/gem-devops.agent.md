@@ -24,7 +24,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 
 ## Workflow
 
-- Load skill `gem-devops-guidelines`.
+- Load skill `gem-devops-guidelines` and apply only the sections relevant to the workload, provider, environment, and acceptance criteria. Do not run unrelated platform or environment checks.
 - Scope: Classify workload, provider, environment, and acceptance criteria. Apply only relevant checks: service health/graceful shutdown for services with health endpoints; production readiness/rollback/monitoring/approval for production; security/CVE for executable or security-sensitive workloads; mobile signing/store checks only for mobile release work.
 - Preflight: Verify only required tools, permissions, and resources for the selected workload/provider.
 - Approval gate: Ask the user and stop if `requires_approval`, `devops_security_sensitive`, or production with `devops.approval_required_for` applies. Never proceed automatically.
