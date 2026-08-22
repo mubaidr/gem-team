@@ -1,16 +1,16 @@
 <script setup lang="ts">
 useHead({
-  titleTemplate: "%s",
-});
+  titleTemplate: '%s'
+})
 
 useSeoMeta({
-  title: "Gem Team",
-  ogTitle: "Gem Team",
+  title: 'Gem Team',
+  ogTitle: 'Gem Team',
   description:
-    "Turn AI coding into an engineering process: agent definitions that enforce good software engineering.",
+    'Turn AI coding into an engineering process: agent definitions that enforce good software engineering.',
   ogDescription:
-    "Turn AI coding into an engineering process: agent definitions that enforce good software engineering.",
-});
+    'Turn AI coding into an engineering process: agent definitions that enforce good software engineering.'
+})
 </script>
 
 <template>
@@ -22,7 +22,7 @@ useSeoMeta({
         container: 'relative z-10 items-center',
         title: 'max-w-4xl text-balance tracking-tighter',
         description: 'max-w-xl leading-8 text-pretty',
-        links: 'flex-wrap gap-3',
+        links: 'flex-wrap gap-3'
       }"
     >
       <template #headline>
@@ -79,7 +79,7 @@ useSeoMeta({
                 </div>
                 <span
                   class="font-mono text-[0.62rem] uppercase tracking-[0.16em] text-dimmed"
-                  >gem-team / ready</span
+                >gem-team / ready</span
                 >
               </div>
               <div class="space-y-5 p-5 text-left sm:p-7">
@@ -90,7 +90,9 @@ useSeoMeta({
                     <UIcon name="i-lucide-route" class="size-4" />
                   </span>
                   <div>
-                    <p class="font-semibold text-highlighted">Route the work</p>
+                    <p class="font-semibold text-highlighted">
+                      Route the work
+                    </p>
                     <p class="mt-1 text-sm leading-6 text-muted">
                       Classify intent. Pick only the workflow depth it needs.
                     </p>
@@ -103,7 +105,9 @@ useSeoMeta({
                     <UIcon name="i-lucide-workflow" class="size-4" />
                   </span>
                   <div>
-                    <p class="font-semibold text-highlighted">Build in waves</p>
+                    <p class="font-semibold text-highlighted">
+                      Build in waves
+                    </p>
                     <p class="mt-1 text-sm leading-6 text-muted">
                       Specialist agents collaborate with bounded context and
                       clear handoffs.
@@ -140,35 +144,45 @@ useSeoMeta({
     </UPageHero>
 
     <UPageSection id="why" class="border-y border-default/70 bg-muted/25">
-      <template #title> The anti-chaos layer for AI coding. </template>
+      <template #title>
+        The anti-chaos layer for AI coding.
+      </template>
       <template #description>
         Keep the speed of AI without giving up the discipline of a great
         engineering team.
       </template>
       <template #features>
         <UPageFeature icon="i-lucide-shield-check">
-          <template #title> Quality by default </template>
+          <template #title>
+            Quality by default
+          </template>
           <template #description>
             TDD, reviews, security, and acceptance checks happen when they
             matter — not after the damage is done.
           </template>
         </UPageFeature>
         <UPageFeature icon="i-lucide-coins">
-          <template #title> Less context. More signal. </template>
+          <template #title>
+            Less context. More signal.
+          </template>
           <template #description>
             Progressive context and model routing keep every request lean,
             focused, and cost-aware.
           </template>
         </UPageFeature>
         <UPageFeature icon="i-lucide-brain">
-          <template #title> Learning is a feature </template>
+          <template #title>
+            Learning is a feature
+          </template>
           <template #description>
             Capture the patterns that work and turn them into reusable skills
             for the next session.
           </template>
         </UPageFeature>
         <UPageFeature icon="i-lucide-plug">
-          <template #title> Bring your own tools </template>
+          <template #title>
+            Bring your own tools
+          </template>
           <template #description>
             One package for Copilot, Claude, Cursor, Codex, Gemini, Windsurf,
             and more.
@@ -178,7 +192,9 @@ useSeoMeta({
     </UPageSection>
 
     <UPageSection id="tools" class="border-t border-default/70 bg-muted/25">
-      <template #title> One install. Your favorite tools. </template>
+      <template #title>
+        One install. Your favorite tools.
+      </template>
       <template #description>
         Keep your editor. Upgrade the process around it.
       </template>
@@ -188,33 +204,33 @@ useSeoMeta({
             {
               icon: 'i-simple-icons-githubcopilot',
               title: 'GitHub Copilot',
-              text: 'VS Code & CLI',
+              text: 'VS Code & CLI'
             },
             {
               icon: 'i-simple-icons-anthropic',
               title: 'Claude Code',
-              text: 'Full agent support',
+              text: 'Full agent support'
             },
             {
               icon: 'i-simple-icons-cursor',
               title: 'Cursor',
-              text: 'Agents & rules',
+              text: 'Agents & rules'
             },
             {
               icon: 'i-simple-icons-opencode',
               title: 'OpenCode',
-              text: 'Commands & skills',
+              text: 'Commands & skills'
             },
             {
               icon: 'i-simple-icons-codex',
               title: 'Codex CLI',
-              text: 'AGENTS.md',
+              text: 'AGENTS.md'
             },
             {
               icon: 'i-simple-icons-google',
               title: 'Gemini CLI',
-              text: 'Skills & config',
-            },
+              text: 'Skills & config'
+            }
           ]"
           :key="tool.title"
           :icon="tool.icon"
@@ -237,7 +253,7 @@ useSeoMeta({
         {
           label: 'Start building',
           to: '/getting-started',
-          trailingIcon: 'i-lucide-arrow-right',
+          trailingIcon: 'i-lucide-arrow-right'
         },
         {
           label: 'View on GitHub',
@@ -245,8 +261,8 @@ useSeoMeta({
           target: '_blank',
           color: 'neutral',
           variant: 'subtle',
-          trailingIcon: 'i-simple-icons-github',
-        },
+          trailingIcon: 'i-simple-icons-github'
+        }
       ]"
     />
   </UPage>
