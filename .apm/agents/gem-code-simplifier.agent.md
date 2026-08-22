@@ -48,6 +48,8 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 
 <output_format>
 
+Return only fields required for this task. Omit empty or non-applicable fields.
+
 ## Output Format
 
 ```json

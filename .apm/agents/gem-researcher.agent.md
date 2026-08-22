@@ -51,6 +51,8 @@ Use `exploration_mode` as the research budget (Default: `scan`):
 
 <output_format>
 
+Return only fields required for this task. Omit empty or non-applicable fields.
+
 ## Output Format
 
 ```json

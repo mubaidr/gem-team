@@ -24,6 +24,8 @@ Write docs, READMEs, API docs, diagrams. Maintain `AGENTS.md`. Never implement c
 
 <output_format>
 
+Return only fields required for this task. Omit empty or non-applicable fields.
+
 ## Output
 
 ```json

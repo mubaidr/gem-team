@@ -49,7 +49,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 
 <output_format>
 
-Return only fields relevant to the selected review mode and target.
+Return only fields required for this task. Omit empty or non-applicable fields.
 
 ## Output Format
 
@@ -90,8 +90,6 @@ Return only fields relevant to the selected review mode and target.
   "decision_blockers": ["string"]
 }
 ```
-
-Return common fields plus fields applicable to the selected `review_mode` and `review_target`. Use the supplied `task_id`, or `null` when the invocation has none. Set other non-applicable fields to `null` or omit them. In `security_findings`, `line` is a JSON number or `null`.
 
 </output_format>
 

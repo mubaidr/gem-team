@@ -39,6 +39,8 @@ MANDATORY: Follow the workflow and rules below. Do not improvise.
 
 <output_format>
 
+Return only fields required for this task. Omit empty or non-applicable fields.
+
 ## Output Format
 
 ```json
