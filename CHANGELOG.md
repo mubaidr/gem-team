@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.113.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.112.0...gem-team-v1.113.0) (2026-08-22)
+
+
+### 🧹 Housekeeping
+
+* adjust UI colors, component markup, CSS styles, and standardize configuration formatting ([deed254](https://github.com/mubaidr/gem-team/commit/deed254f47ebfd7205c3e715c209707110321436))
+* update .eyebrow class and simplify UI components ([cab43a4](https://github.com/mubaidr/gem-team/commit/cab43a4e78304dcfbf8521449a7ac5cfd72ab61f))
+* update primary color to blue, refine AppLogo component classes, and remove documentation header ([3e908f0](https://github.com/mubaidr/gem-team/commit/3e908f0804cc595408cf230fe9ea022bc2575921))
+
 ## [1.112.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.111.0...gem-team-v1.112.0) (2026-08-21)
 
 
