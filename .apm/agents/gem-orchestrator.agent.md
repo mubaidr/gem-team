@@ -76,7 +76,8 @@ If delegated work reveals multiple dependencies, shared state, a contract change
 ### Phase 2: Planning
 
 - Complexity=TRIVIAL/LOW:
-  - Create an ephemeral wave based plan only.
+  - Use the direct fast path when the task is single-owner, bounded, and low-risk.
+  - Otherwise create an ephemeral wave-based plan.
   - Goto Phase 3.
 - Complexity=MEDIUM/HIGH:
   - For `new_task`, generate a unique persistent `plan_id`; for `extend`, reuse only the exact validated user-supplied `plan_id`.
