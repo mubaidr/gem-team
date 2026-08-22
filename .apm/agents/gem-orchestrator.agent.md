@@ -82,7 +82,8 @@ If delegated work reveals multiple dependencies, shared state, a contract change
   - Accept the planner's evidence-based `complexity` and `risk_signals`.
 
 - Pre-execution review when required:
-  - Invoke `gem-reviewer` with `review_target: plan` for only: HIGH complexity plans, high-risk or critic signals or explicit review requests only.
+  - Invoke `gem-reviewer` only when at least one applies: HIGH complexity, a high-risk or critic signal, an explicit review request, or insufficient or contradictory verification evidence.
+  - For a required plan review, use `review_target: plan`.
     - Select `review_mode` independently: `critic` for any `critic_signals` match, `high` for HIGH or any high-risk signal, otherwise `standard`.
   - `needs_revision` -> one bounded planner revision using its blocker/evidence; never retry execution.
   - Review `pass`/`warning` or Critic `proceed`/`revise` -> continue; apply bounded material revisions.
