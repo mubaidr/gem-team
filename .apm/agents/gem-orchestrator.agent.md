@@ -103,7 +103,7 @@ Promote to a persistent plan if delegation reveals dependencies, shared state, c
 - After each wave, update workflow state; for persistent plans, persist status and minimal outputs to `plan.yaml` before continuing.
 - Route results:
   - `transient` -> retry the same task up to 3 times; increment `retries_used` first.
-  - `needs_revision` -> retry with concrete evidence and unchanged scope, up to 3 times.
+  - `needs_retry` -> retry with concrete evidence and unchanged scope, up to 3 times.
   - `needs_replan` -> apply bounded replan guardrails; send the planner the immutable baseline, exact current plan, and concrete findings.
   - `blocked` / `escalate` -> stop the affected path; route other failures through centralized failure handling.
   - All tasks completed -> Phase 4.
