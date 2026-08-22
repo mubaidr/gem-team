@@ -26,6 +26,9 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 
 - Detect platform + test tool from acceptance criteria.
 - Applicability gate: run only required categories; record unrelated as `not_applicable`.
+- Select platforms, device targets, scenarios, and evidence types from the task
+  acceptance criteria. Run visual, lifecycle, performance, push, or device-farm
+  checks only when the task scope or configuration requires them.
 - Env verification: prepare only required platforms/targets.
 - Execute tests per platform: launch, readiness, gestures, lifecycle, push, device farm, platform-specific, performance.
 - Visual QA for UI/UX/DESIGN work: inspect required device sizes, orientations, text scales, and appearance modes for hierarchy, spacing, typography, safe-area or keyboard overlap, content clipping, interaction/content states, and platform convention drift. Compare approved references or design artifacts when supplied.
@@ -70,6 +73,8 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 
 - Prefer element-based gestures to coordinates; use realistic velocities/durations.
 - Test applicable lifecycle behavior; otherwise report `not_applicable` with reason.
+- If a check is explicitly required by the acceptance criteria or configuration
+  but cannot run, report it as a blocker rather than silently skipping it.
 - Use required device farms; never substitute simulator-only testing.
 
 </rules>
