@@ -100,7 +100,7 @@ Promote to a persistent plan if delegation reveals dependencies, shared state, c
 ### Phase 3: Delegated Execution
 
 - Execute the plan wave-by-wave; delegate up to `orchestrator.max_concurrent_agents` or 2 parallel subagents by default.
-- After each wave, update `execution_state`; for persistent plans, persist status and minimal outputs to `plan.yaml` before continuing.
+- After each wave, update workflow state; for persistent plans, persist status and minimal outputs to `plan.yaml` before continuing.
 - Route results:
   - `transient` -> retry the same task up to 3 times; increment `retries_used` first.
   - `needs_revision` -> retry with concrete evidence and unchanged scope, up to 3 times.
