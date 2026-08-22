@@ -56,12 +56,8 @@ Return only fields required for this task. Conditional fields are required only 
 ```json
 {
   "status": "completed | failed | needs_revision",
-  "task_id": "string | null",
   "fail": "fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
   "confidence": "number (0.0-1.0)",
-  "review_mode": "standard | high | critic",
-  "review_target": "plan | task | code | decision | docs | config | integration",
-  "review_scope": "changed | affected | full",
   "verdict": "pass | warning | blocking",
   "blocking_reason": "string", // required when verdict is blocking or critic_verdict is defer, reject, or needs_input
   "regression_risk": "LOW | MEDIUM | HIGH | CRITICAL",
