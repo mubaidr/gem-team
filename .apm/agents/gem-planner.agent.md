@@ -109,6 +109,7 @@ tasks:
     wave: number
     agent: string
     status: pending | in_progress | completed | failed | blocked | needs_revision | needs_replan
+    retries_used: number
     acceptance_criteria: [string]
     handoff:
       constraints: [string]

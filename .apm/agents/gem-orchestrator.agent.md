@@ -139,6 +139,7 @@ agent_input_reference:
       task_definition:
         objective: string
         acceptance_criteria: [string]
+        retries_used: number
         handoff:
           constraints: [string]
           relevant_context: [string]
