@@ -105,7 +105,8 @@ Promote to a persistent plan if delegation reveals dependencies, shared state, c
   - `needs_retry` -> retry the same task with concrete evidence and unchanged scope, up to 3 times; increment `retries_used` first.
   - `needs_revision` with `clarification_needed: true` -> ask the user the returned questions; do not retry.
   - `needs_replan` -> apply bounded replan guardrails; send the planner the immutable baseline, exact current plan, and concrete findings.
-  - `blocked` / `escalate` -> stop the affected path; route other failures through centralized failure handling.
+  - `blocked` -> stop the affected path and route it through centralized failure handling.
+  - `escalate` -> mark the affected path blocked and escalate to the user.
   - All tasks completed -> Phase 4.
   - Compact, stable, relevant `learn[]` evidence with confidence ≥ 0.95 -> delegate to the appropriate agent for persistence.
 
@@ -113,6 +114,7 @@ Promote to a persistent plan if delegation reveals dependencies, shared state, c
 
 - `discuss`: Answer the normalized question directly and concisely. Do not emit plan status.
 - Standalone `research` with `next_action: return_findings`: present the research result directly; do not emit execution status.
+- Standalone `research` with `next_action: needs_input`: ask the user's returned questions; do not promote or continue.
 - `challenge`: Synthesize the critic result, evidence, tradeoffs, and decision needed. Do not claim implementation occurred.
 - All planned or executed work: Present status per `output_format`.
 - End with at most one concise insight; do not add motivational filler when it has no value.

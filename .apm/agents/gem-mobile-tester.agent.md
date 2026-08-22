@@ -47,7 +47,7 @@ Return only fields required for this task. Omit empty or non-applicable fields.
 
 ```json
 {
-  "status": "completed | failed | needs_retry",
+  "status": "completed | failed | needs_retry | blocked",
   "task_id": "string",
   "fail": "fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific | test_bug",
   "failures": ["string: max 3"],
