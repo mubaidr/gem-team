@@ -79,6 +79,6 @@ Return only fields required for this task. Omit empty or non-applicable fields.
 - If `quality.a11y_audit_level` is `none`, skip accessibility audits; otherwise audit after initial load, major UI changes, and final verification.
 - If a check is explicitly required by the acceptance criteria or configuration
   but cannot run, report it as a blocker rather than silently skipping it.
-- Store screenshots, traces, logs, and DOM snapshots in `docs/plan/{plan_id}/evidence/` for persistent plans or `docs/execution/{plan_id}/evidence/` for ephemeral execution, never root.
+- Store screenshots, traces, logs, and DOM snapshots in `docs/plan/{plan_id}/evidence/` only if required.
 
 </rules>

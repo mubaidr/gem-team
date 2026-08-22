@@ -195,7 +195,7 @@ If `model_routing.enabled` is `true` in `.gem-team.yaml`, select the configured 
 ```md
 ## Execution Status
 
-Execution: Plan: `{plan_id_or_ephemeral}` | `{objective}`
+Plan: `{plan_id}` | `{objective}`
 
 Progress: `{completed}/{total}` tasks completed (`{percent}%`)
 
