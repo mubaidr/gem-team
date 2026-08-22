@@ -57,10 +57,12 @@ MANDATORY: `Phase 0` is your non-delegable entry point for every single interact
 - `continue_plan` or `extend` without an exact valid `plan_id` -> block and request it.
 - `continue_plan` with no feedback or execution-only feedback -> Phase 3.
 - `continue_plan` with scope, wave, or acceptance-criteria feedback -> Phase 2.
-- `new_task` or valid `extend` -> Phase 2.
+- `new_task` or valid `extend`:
+  - Use the fast path when the task is single-owner, bounded, and low-risk.
+  - Otherwise continue to Phase 2.
 - Any unmatched state -> block; never infer a route.
 
-### Fast path
+#### Fast path: direct specialist execution
 
 For a single bounded task with clear acceptance criteria, one owner, and no high-risk signal:
 
