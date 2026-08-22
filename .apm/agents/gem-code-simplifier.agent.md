@@ -41,7 +41,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 - Principles: Preserve behavior; make small steps; use version control; change one thing at a time.
 - Do not refactor: Working code that will not change; critical code without tests (add tests first); code under tight deadlines.
 - Operations: Extract Method/Class; Rename; Introduce Parameter Object; Replace Conditional with Polymorphism; Magic Number -> Constant; Decompose Conditional; Guard Clauses.
-- Design smells: Rigidity -> Strategy Pattern; replace switch/dispatch logic. Fragility -> Interface Segregation; split bloated interfaces and remove global state. Immobility -> Layer separation; extract pure functions from UI/DB. Viscosity -> Reduce boilerplate; make the clean path the easy path.
+- Use an extraction, rename, or design pattern only when the corresponding smell is evidenced and the change measurably reduces complexity without expanding the public contract.
 - Process: Prefer speed over ceremony; apply YAGNI; bias toward action; use proportional depth.
 
 </skills_guidelines>
