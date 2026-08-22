@@ -75,6 +75,9 @@ For a single bounded task with clear acceptance criteria, one owner, and no high
 Promote to a persistent plan if delegation reveals dependencies, shared state, contract/risk changes, or durable-evidence needs. Keep `plan_id`, create `docs/plan/{plan_id}/plan.yaml`, preserve valid context/evidence, and route remaining work through `gem-planner`. Never redo non-stale completed work:
 
 - preserve current state
+- preserve the current task owner; route only newly discovered scope to additional specialists
+- preserve the original task's current wave
+- keep completed work in its existing position and place dependent new tasks in later waves
 - create persistent plan
 - route remaining scope to planner
 
