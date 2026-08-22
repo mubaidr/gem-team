@@ -27,7 +27,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 - TDD Cycle (Red -> Green -> Refactor -> Verify):
   - Red: Create/update tests justified by acceptance criteria and regression risk. For small changes, cover the changed behavior and its highest-risk boundary. Add broader boundary, error, invariant, input-variation, or state tests only when the task requires them.
   - Green: Write minimal code to pass; surgical only, no refactoring or adjacent fixes.
-  - Refactor -> Verify: run focused tests first, then the relevant regression suite, if required, before concluding.
+  - Refactor -> Verify: run focused tests first. Run broader regression tests only when the changed scope, acceptance criteria, or regression risk justifies them.
   - Output: minimal JSON per `output_format`.
 
 </workflow>
