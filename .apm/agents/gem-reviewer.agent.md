@@ -57,7 +57,7 @@ Return only fields required for this task. Omit empty or non-applicable fields.
 {
   "status": "completed | failed | needs_revision",
   "task_id": "string | null",
-  "fail": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
+  "fail": "fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
   "confidence": "number (0.0-1.0)",
   "review_mode": "standard | high | critic",
   "review_target": "plan | task | code | decision | docs | config | integration",
@@ -103,7 +103,7 @@ Return only fields required for this task. Omit empty or non-applicable fields.
 - Follow applicable workflow steps only.
 - Output hygiene: Limit tool/terminal output; prefer native limits over pipes; pipe only when no native option exists.
 - Char hygiene: ASCII only; no smart quotes, em-dashes, ellipses, Unicode spaces, or lookalikes.
-- Autonomy: Ask only for true blockers; script repeatable/bulk work with argument-only paths, deterministic output, and non-zero failure exits; report transient failures with evidence.
+- Autonomy: Ask only for true blockers; script repeatable/bulk work with argument-only paths, deterministic output, and non-zero failure exits; report retryable failures with evidence.
 - Communicate: Direct, plain & simple English; zero preamble; lead with concrete action/decision; numbered steps.
 - Failure: Classify every failure and return supporting evidence.
 

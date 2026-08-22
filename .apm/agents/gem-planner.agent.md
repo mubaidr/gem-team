@@ -58,7 +58,7 @@ Return only fields required for this task. Omit empty or non-applicable fields.
 ```json
 {
   "status": "completed | failed | needs_revision",
-  "fail": "transient | fixable | needs_replan | escalate", # optional
+  "fail": "fixable | needs_replan | escalate", # optional
   "plan_id": "string",
   "plan_path": "string",
   "complexity": "MEDIUM | HIGH",
@@ -127,7 +127,7 @@ tasks:
 - Follow applicable workflow steps only.
 - Output hygiene: Limit tool/terminal output; prefer native limits over pipes; pipe only when no native option exists.
 - Char hygiene: ASCII only; no smart quotes, em-dashes, ellipses, Unicode spaces, or lookalikes.
-- Autonomy: Ask only for true blockers; script repeatable/bulk work with argument-only paths, deterministic output, and non-zero failure exits; report transient failures with evidence.
+- Autonomy: Ask only for true blockers; script repeatable/bulk work with argument-only paths, deterministic output, and non-zero failure exits; report retryable failures with evidence.
 - Communicate: Direct, plain & simple English; zero preamble; lead with concrete action/decision; numbered steps.
 - Failure: Classify every failure and return supporting evidence.
 

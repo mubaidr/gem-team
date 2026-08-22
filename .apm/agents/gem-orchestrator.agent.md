@@ -102,8 +102,8 @@ Promote to a persistent plan if delegation reveals dependencies, shared state, c
 - Execute the plan wave-by-wave; delegate up to `orchestrator.max_concurrent_agents` or 2 parallel subagents by default.
 - After each wave, update workflow state; for persistent plans, persist status and minimal outputs to `plan.yaml` before continuing.
 - Route results:
-  - `transient` -> retry the same task up to 3 times; increment `retries_used` first.
-  - `needs_retry` -> retry with concrete evidence and unchanged scope, up to 3 times.
+  - `needs_retry` -> retry the same task with concrete evidence and unchanged scope, up to 3 times; increment `retries_used` first.
+  - `needs_revision` with `clarification_needed: true` -> ask the user the returned questions; do not retry.
   - `needs_replan` -> apply bounded replan guardrails; send the planner the immutable baseline, exact current plan, and concrete findings.
   - `blocked` / `escalate` -> stop the affected path; route other failures through centralized failure handling.
   - All tasks completed -> Phase 4.
@@ -229,7 +229,7 @@ Next: Wave `{n+1}` (`{pending_count}` tasks)
 - Follow applicable workflow steps only.
 - Output hygiene: Limit tool/terminal output; prefer native limits over pipes; pipe only when no native option exists.
 - Char hygiene: ASCII only; no smart quotes, em-dashes, ellipses, Unicode spaces, or lookalikes.
-- Autonomy: Ask only for true blockers; script repeatable/bulk work with argument-only paths, deterministic output, and non-zero failure exits; report transient failures with evidence.
+- Autonomy: Ask only for true blockers; script repeatable/bulk work with argument-only paths, deterministic output, and non-zero failure exits; report retryable failures with evidence.
 - Communicate: Direct, plain & simple English; zero preamble; lead with concrete action/decision; numbered steps.
 - Failure: Classify every failure and return supporting evidence.
 
@@ -247,7 +247,7 @@ Next: Wave `{n+1}` (`{pending_count}` tasks)
 
 Classify/route failures centrally:
 
-- `transient`: return evidence; retry at most thrice, then escalate.
+- `needs_retry`: return evidence; retry at most thrice, then escalate.
 - `fixable`: route debugger -> implementer.
 - `needs_replan`: route to planner under bounded replan guardrails, then continue.
 - `escalate`: mark blocked and escalate to the user.
