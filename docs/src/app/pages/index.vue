@@ -46,7 +46,6 @@ useSeoMeta({
           to="/getting-started"
           size="xl"
           trailing-icon="i-lucide-arrow-right"
-          class="shadow-xl shadow-primary/20"
         >
           Start building
         </UButton>
@@ -65,7 +64,7 @@ useSeoMeta({
         <div class="relative mx-auto w-full max-w-xl">
           <div class="absolute -inset-6 rounded-4xl bg-primary/10 blur-3xl" />
           <div
-            class="surface-grid relative overflow-hidden rounded-[1.5rem] border border-default/80 bg-elevated/90 p-3 shadow-2xl shadow-primary/10 backdrop-blur sm:p-4"
+            class="surface-grid relative overflow-hidden rounded-[1.5rem] border border-default/80 bg-elevated/90 p-3 backdrop-blur sm:p-4"
           >
             <div
               class="overflow-hidden rounded-[1rem] border border-default/70 bg-default/90"

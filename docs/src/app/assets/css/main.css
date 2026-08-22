@@ -118,7 +118,7 @@
   }
 
   .docs-prose :is(pre, table, blockquote) {
-    @apply shadow-lg shadow-primary/5;
+    /* @apply shadow-lg shadow-primary/5; */
   }
 
   .docs-prose :is(code):not(pre code) {
