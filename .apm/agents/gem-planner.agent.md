@@ -32,6 +32,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 - Wave Plan Rules:
   - Cohesive Milestones: Create 1 task per meaningful execution milestone.
   - Task Order: Assign every task to one positive execution wave. All tasks in a wave become eligible after the preceding wave completes.
+  - Explicit Dependencies: Add `depends_on: [task_id]` when a task directly depends on another task.
   - Scope Limits: Define affected feature modules or non-negotiable architectural boundaries.
 
 - Specialist Routing Matrix:
@@ -115,6 +116,7 @@ tasks:
     title: string
     description: string
     wave: number
+    depends_on: [task_id] # conditional: omit when the task has no direct dependency
     agent: string
     status: pending | in_progress | completed | failed | blocked | needs_revision | needs_replan
     retries_used: 0
