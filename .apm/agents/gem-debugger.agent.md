@@ -56,7 +56,6 @@ Return only fields required for this task. Conditional fields are required only 
 ```json
 {
   "status": "completed | failed | needs_revision",
-  "task_id": "string",
   "clarification_needed": "boolean",
   "questions": ["string"] // required only when clarification_needed is true
   "fail": "fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",

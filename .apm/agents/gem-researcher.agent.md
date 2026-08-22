@@ -59,8 +59,6 @@ Return only fields required for this task. Conditional fields are required only 
 {
   "status": "completed | failed | needs_revision",
   "fail": "fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
-  "plan_id": "string",
-  "task_id": "string",
   "mode": "scan | deep | audit | trace | question",
   "next_action": "return_findings | plan_follow_up | needs_input",
   "tldr": "string: dense 1-3 bullet summary",
