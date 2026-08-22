@@ -49,13 +49,14 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 
 <output_format>
 
-Return only fields required for this task. Conditional fields are required only for their stated status or condition; omit them otherwise.
+Return only fields required for this task. Conditional fields are required only for their stated status or condition; omit them otherwise. When status is failed, fail is required.
 
 ## Output Format
 
 ```json
 {
   "status": "completed | failed | needs_revision",
+  "revision_findings": ["string"], // required only when status is needs_revision
   "fail": "fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
   "confidence": "number (0.0-1.0)",
   "verdict": "pass | warning | blocking",

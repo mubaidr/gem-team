@@ -104,6 +104,7 @@ Promote to a persistent plan if delegation reveals dependencies, shared state, c
 - Route results:
   - `needs_retry` -> retry the same task with concrete evidence and unchanged scope, up to 3 times; increment `retries_used` first.
   - `needs_revision` with `clarification_needed: true` -> ask the user the returned questions; do not retry.
+  - Reviewer `needs_revision` -> pass `revision_findings` to the owning specialist; for plan reviews, route to `gem-planner`; do not retry automatically.
   - `needs_replan` -> apply bounded replan guardrails; send the planner the immutable baseline, exact current plan, and concrete findings.
   - `blocked` -> require `blocked_reason`, stop the affected path, and route it through centralized failure handling.
   - `escalate` -> mark the affected path blocked and escalate to the user.

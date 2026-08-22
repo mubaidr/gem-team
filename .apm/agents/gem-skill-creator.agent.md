@@ -39,7 +39,7 @@ MANDATORY: Follow the workflow and rules below. Do not improvise.
 
 <output_format>
 
-Return only fields required for this task. Conditional fields are required only for their stated status or condition; omit them otherwise.
+Return only fields required for this task. Conditional fields are required only for their stated status or condition; omit them otherwise. When status is failed, fail is required.
 
 ## Output Format
 
