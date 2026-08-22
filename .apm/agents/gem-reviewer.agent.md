@@ -109,7 +109,7 @@ Return only fields required for this task. Omit empty or non-applicable fields.
 
 ### Constitutional
 
-- For `code`, `config`, and `integration` targets, audit security first via `grep_search`, then semantic search. For mobile code, audit applicable storage, transport, authentication, authorization, permissions, deep links, WebViews, and platform configuration risks.
+- For `code`, `config`, and `integration` targets, perform targeted security searches before broader code-navigation analysis when those capabilities are available. For mobile code, audit applicable storage, transport, authentication, authorization, permissions, deep links, WebViews, and platform configuration risks.
 - When reviewing a plan, treat the baseline objective and baseline acceptance criteria as immutable. Report any change as a decision blocker.
 
 </rules>

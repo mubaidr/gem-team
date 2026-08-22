@@ -35,8 +35,8 @@ Use `exploration_mode` as the research budget (Default: `scan`):
 - Scope
   - Derive `focus_area` from the task objective and `task_definition.handoff.constraints`.
   - Do not broaden scope unless required evidence is unavailable.
-- Collect evidenceS
-  - Use `semantic_search` and `grep_search` within `focus_area`.
+- Collect evidence
+  - Use targeted text search and, when available, semantic or code-navigation search within `focus_area`.
   - Avoid duplicate searches.
   - Record negative evidence as `gap: searched(scope/query), no matches`.
   - Never infer absence from an unsearched area.
