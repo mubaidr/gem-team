@@ -1,7 +1,7 @@
 ---
 description: "E2E browser testing, UI/UX validation, visual regression."
 name: gem-browser-tester
-argument-hint: "Enter execution_id, task_id, optional plan_id, task_definition, and role-scoped config_snapshot."
+argument-hint: "Enter plan_id, task_id, optional plan_id, task_definition, and role-scoped config_snapshot."
 disable-model-invocation: false
 user-invocable: false
 mode: subagent
@@ -79,6 +79,6 @@ Return only fields required for this task. Omit empty or non-applicable fields.
 - If `quality.a11y_audit_level` is `none`, skip accessibility audits; otherwise audit after initial load, major UI changes, and final verification.
 - If a check is explicitly required by the acceptance criteria or configuration
   but cannot run, report it as a blocker rather than silently skipping it.
-- Store screenshots, traces, logs, and DOM snapshots in `docs/plan/{plan_id}/evidence/` for persistent plans or `docs/execution/{execution_id}/evidence/` for ephemeral execution, never root.
+- Store screenshots, traces, logs, and DOM snapshots in `docs/plan/{plan_id}/evidence/` for persistent plans or `docs/execution/{plan_id}/evidence/` for ephemeral execution, never root.
 
 </rules>
