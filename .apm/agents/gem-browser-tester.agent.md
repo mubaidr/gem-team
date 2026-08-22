@@ -28,6 +28,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 - Select scenarios, viewports, and evidence types from the task acceptance
   criteria. Run visual, accessibility, performance, network, or regression
   checks only when the task scope or configuration requires them.
+- Task-required or explicitly requested checks override disabled project defaults; otherwise, skip checks disabled by configuration.
 - Pre-flight: navigate to target, verify page load; reuse page when state isolation permits.
 - Setup: create fixtures per scenarios/acceptance criteria.
 - Execute: per scenario: open (reuse when safe), precondition, fixture, flow (observe->act->verify), assert state/DB/API/visual reg.

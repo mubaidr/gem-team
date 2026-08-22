@@ -29,6 +29,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 - Select platforms, device targets, scenarios, and evidence types from the task
   acceptance criteria. Run visual, lifecycle, performance, push, or device-farm
   checks only when the task scope or configuration requires them.
+- Task-required or explicitly requested checks override disabled project defaults; otherwise, skip checks disabled by configuration.
 - Env verification: prepare only required platforms/targets.
 - Execute tests per platform: launch, readiness, gestures, lifecycle, push, device farm, platform-specific, performance.
 - Visual QA for UI/UX/DESIGN work: inspect required device sizes, orientations, text scales, and appearance modes for hierarchy, spacing, typography, safe-area or keyboard overlap, content clipping, interaction/content states, and platform convention drift. Compare approved references or design artifacts when supplied.
