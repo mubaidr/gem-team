@@ -85,11 +85,14 @@ Return only fields required for this task. Conditional fields are required only 
       "recommendation": "string"
     }
   ],
-  "decision_blockers": ["string"]
+  "decision_blockers": ["string"],
+  "learn": [{ "text": "string", "confidence": 0.95 }]
 }
 ```
 
 `revision_findings` is required only when `status` is `needs_revision`. `blocking_reason` is required when `verdict` is `blocking` or `critic_verdict` is `defer`, `reject`, or `needs_input`.
+
+Return `learn` only for stable, reusable, repeated, or persistent findings; omit it for review-local observations. `confidence` must be a number from `0.0` to `1.0`.
 
 </output_format>
 

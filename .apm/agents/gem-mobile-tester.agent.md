@@ -53,11 +53,14 @@ Return only fields required for this task. Conditional fields are required only 
   "fail": "fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific | test_bug",
   "failures": ["string: max 3"],
   "not_applicable": ["string: category and reason"],
-  "evidence_path": "string"
+  "evidence_path": "string",
+  "learn": [{ "text": "string", "confidence": 0.95 }]
 }
 ```
 
 `blocked_reason` is required only when `status` is `blocked`; `retry_reason` is required only when `status` is `needs_retry`.
+
+Return `learn` only for stable, reusable, repeated, or persistent findings; omit it for task-local observations. `confidence` must be a number from `0.0` to `1.0`.
 
 </output_format>
 

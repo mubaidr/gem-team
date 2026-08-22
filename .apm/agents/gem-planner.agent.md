@@ -63,11 +63,14 @@ Return only fields required for this task. Conditional fields are required only 
   "plan_path": "string",
   "complexity": "MEDIUM | HIGH",
   "risk_signals": ["string"],
-  "complexity_reason": "string"
+  "complexity_reason": "string",
+  "learn": [{ "text": "string", "confidence": 0.95 }]
 }
 ```
 
 `fail` is required only when `status` is `failed`.
+
+Return `learn` only for stable, reusable, repeated, or persistent findings; omit it for task-local observations. `confidence` must be a number from `0.0` to `1.0`.
 
 </output_format>
 

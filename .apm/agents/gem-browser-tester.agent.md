@@ -55,11 +55,14 @@ Return only fields required for this task. Conditional fields are required only 
   "console_errors": 0,
   "network_failures": 0,
   "a11y_issues": 0,
-  "evidence_path": "string"
+  "evidence_path": "string",
+  "learn": [{ "text": "string", "confidence": 0.95 }]
 }
 ```
 
 `blocked_reason` is required only when `status` is `blocked`; `retry_reason` is required only when `status` is `needs_retry`.
+
+Return `learn` only for stable, reusable, repeated, or persistent findings; omit it for task-local observations. `confidence` must be a number from `0.0` to `1.0`.
 
 </output_format>
 
