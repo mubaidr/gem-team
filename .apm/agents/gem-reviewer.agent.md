@@ -49,6 +49,8 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 
 <output_format>
 
+Return only fields relevant to the selected review mode and target.
+
 ## Output Format
 
 ```json
