@@ -58,9 +58,13 @@ Return only fields required for this task. Conditional fields are required only 
   "blocked_reason": "string",
   "retry_reason": "string",
   "fail": "fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
-  "learn": [{ "text": "string", "confidence": "0.0-1.0" }]
+  "learn": [{ "text": "string", "confidence": 0.95 }]
 }
 ```
+
+`confidence` must be a number from `0.0` to `1.0`.
+
+Return `learn` only for stable, reusable, repeated, or persistent findings; omit it for task-local observations.
 
 `blocked_reason` is required only when `status` is `blocked`; `retry_reason` is required only when `status` is `needs_retry`.
 

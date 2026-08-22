@@ -78,9 +78,13 @@ Return only fields required for this task. Conditional fields are required only 
       }
     ]
   },
-  "learn": [{ "text": "string", "confidence": "0.0-1.0" }]
+  "learn": [{ "text": "string", "confidence": 0.95 }]
 }
 ```
+
+`confidence` must be a number from `0.0` to `1.0`.
+
+Return `learn` only for stable, reusable, repeated, or persistent findings; omit it for task-local observations.
 
 `questions` is required only when `clarification_needed` is `true`.
 
