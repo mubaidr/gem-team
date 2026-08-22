@@ -102,7 +102,7 @@ Promote to a persistent plan if delegation reveals dependencies, shared state, c
 - Execute the plan wave-by-wave; delegate up to `orchestrator.max_concurrent_agents` or 2 parallel subagents by default.
 - After each wave, update workflow state; for persistent plans, persist status and minimal outputs to `plan.yaml` before continuing.
 - Route results:
-  - `needs_retry` -> retry the same task with concrete evidence and unchanged scope, up to 3 times; increment `retries_used` first.
+  - `needs_retry` -> require `retry_reason`, then retry the same task with concrete evidence and unchanged scope, up to 3 times; increment `retries_used` first.
   - `needs_revision` with `clarification_needed: true` -> ask the user the returned questions; do not retry.
   - Reviewer `needs_revision` -> pass `revision_findings` to the owning specialist; for plan reviews, route to `gem-planner`; do not retry automatically.
   - `needs_replan` -> apply bounded replan guardrails; send the planner the immutable baseline, exact current plan, and concrete findings.

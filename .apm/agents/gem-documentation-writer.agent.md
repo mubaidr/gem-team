@@ -32,7 +32,8 @@ Return only fields required for this task. Conditional fields are required only 
 {
   "status": "completed | failed | needs_retry | blocked",
   "task_id": "string",
-  "blocked_reason": "string" // required only when status is blocked
+  "blocked_reason": "string", // required only when status is blocked
+  "retry_reason": "string", // required only when status is needs_retry
   "fail": "fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
   "created": 0,
   "updated": 0,
