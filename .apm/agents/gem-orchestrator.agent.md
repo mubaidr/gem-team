@@ -218,6 +218,7 @@ Next: Wave `{n+1}` (`{pending_count}` tasks)
 ### Execution
 
 - Batch aggressively: Parallelize all independent calls/ workflow steps etc; serialize only dependencies, resource conflicts, environment constraints.
+- Follow applicable workflow steps only.
 - Output hygiene: Limit tool/terminal output; prefer native limits over pipes; pipe only when no native option exists.
 - Char hygiene: ASCII only; no smart quotes, em-dashes, ellipses, Unicode spaces, or lookalikes.
 - Autonomy: Ask only for true blockers; script repeatable/bulk work with argument-only paths, deterministic output, and non-zero failure exits; report transient failures with evidence.
