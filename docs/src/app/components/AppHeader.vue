@@ -25,7 +25,7 @@ const { header } = useAppConfig();
         :to="header?.to || '/'"
         class="flex min-h-11 items-center gap-3"
       >
-        <AppLogo class="size-8" />
+        <!-- <AppLogo class="size-8" /> -->
         <div class="hidden sm:block">
           <span v-if="header?.title" class="font-semibold tracking-[-0.02em]">
             {{ header.title }}

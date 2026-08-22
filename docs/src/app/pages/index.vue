@@ -62,8 +62,6 @@ useSeoMeta({
         </UButton>
       </template>
       <template #default>
-        <StarsBg />
-
         <div class="relative mx-auto w-full max-w-xl">
           <div class="absolute -inset-6 rounded-4xl bg-primary/10 blur-3xl" />
           <div
@@ -143,9 +141,6 @@ useSeoMeta({
     </UPageHero>
 
     <UPageSection id="why" class="border-y border-default/70 bg-muted/25">
-      <template #headline>
-        <span class="eyebrow">Why Gem Team</span>
-      </template>
       <template #title> The anti-chaos layer for AI coding. </template>
       <template #description>
         Keep the speed of AI without giving up the discipline of a great
@@ -183,75 +178,7 @@ useSeoMeta({
       </template>
     </UPageSection>
 
-    <UPageSection
-      id="workflow"
-      orientation="horizontal"
-      class="relative overflow-hidden"
-    >
-      <template #headline>
-        <span class="eyebrow">The workflow</span>
-      </template>
-      <template #title> One team. Every stage of delivery. </template>
-      <template #description>
-        Gem Team gives each kind of work a focused specialist, then coordinates
-        the handoffs so quality never gets lost between prompts.
-      </template>
-      <template #default>
-        <div
-          class="surface-grid w-full rounded-[1.5rem] border border-default/80 bg-elevated p-4 shadow-xl shadow-primary/5 sm:p-6"
-        >
-          <div class="grid gap-3 sm:grid-cols-2">
-            <div
-              v-for="(step, index) in [
-                {
-                  icon: 'i-lucide-compass',
-                  label: 'Route',
-                  text: 'Understand the request',
-                },
-                {
-                  icon: 'i-lucide-map',
-                  label: 'Plan',
-                  text: 'Shape the smallest safe path',
-                },
-                {
-                  icon: 'i-lucide-hammer',
-                  label: 'Build',
-                  text: 'Delegate with clean handoffs',
-                },
-                {
-                  icon: 'i-lucide-check-check',
-                  label: 'Verify',
-                  text: 'Prove the result before done',
-                },
-              ]"
-              :key="step.label"
-              class="group rounded-xl border border-default/70 bg-default/70 p-4 transition-colors hover:border-primary/50 hover:bg-primary/5"
-            >
-              <div class="flex items-center justify-between">
-                <span
-                  class="grid size-9 place-items-center rounded-lg bg-primary/10 text-primary"
-                  ><UIcon :name="step.icon" class="size-4"
-                /></span>
-                <span class="font-mono text-xs text-dimmed"
-                  >0{{ index + 1 }}</span
-                >
-              </div>
-              <p class="mt-5 font-semibold text-highlighted">
-                {{ step.label }}
-              </p>
-              <p class="mt-1 text-sm text-muted">
-                {{ step.text }}
-              </p>
-            </div>
-          </div>
-        </div>
-      </template>
-    </UPageSection>
-
     <UPageSection id="tools" class="border-t border-default/70 bg-muted/25">
-      <template #headline>
-        <span class="eyebrow">Works where you work</span>
-      </template>
       <template #title> One install. Your favorite tools. </template>
       <template #description>
         Keep your editor. Upgrade the process around it.
