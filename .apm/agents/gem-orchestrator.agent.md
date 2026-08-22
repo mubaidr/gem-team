@@ -136,10 +136,10 @@ agent_input_reference:
     required:
       plan_id: string # workflow ID; persistent plans use it for docs/plan/{plan_id}/
       task_id: string
+      retries_used: number
       task_definition:
         objective: string
         acceptance_criteria: [string]
-        retries_used: number
         handoff:
           constraints: [string]
           relevant_context: [string]

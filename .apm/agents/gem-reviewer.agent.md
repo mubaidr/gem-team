@@ -63,6 +63,7 @@ Return only fields required for this task. Conditional fields are required only 
   "review_target": "plan | task | code | decision | docs | config | integration",
   "review_scope": "changed | affected | full",
   "verdict": "pass | warning | blocking",
+  "blocking_reason": "string", // required when verdict is blocking or critic_verdict is defer, reject, or needs_input
   "regression_risk": "LOW | MEDIUM | HIGH | CRITICAL",
   "warnings": "number",
   "critical_findings": ["SEVERITY file:line: issue"],
