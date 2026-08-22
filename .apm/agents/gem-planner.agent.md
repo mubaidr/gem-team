@@ -58,6 +58,7 @@ Return only fields required for this task. Conditional fields are required only 
 ```json
 {
   "status": "completed | failed | needs_revision",
+  "revision_findings": ["string"],
   "fail": "fixable | needs_replan | escalate",
   "plan_id": "string",
   "plan_path": "string",
@@ -69,6 +70,7 @@ Return only fields required for this task. Conditional fields are required only 
 ```
 
 `fail` is required only when `status` is `failed`.
+`revision_findings` is required only when `status` is `needs_revision`.
 
 Return `learn` only for stable, reusable, repeated, or persistent findings; omit it for task-local observations. `confidence` must be a number from `0.0` to `1.0`.
 
@@ -86,6 +88,7 @@ created_at: string
 created_by: string
 revision: number
 replan_count: number
+planner_revision_used: false
 
 baseline:
   objective: string
@@ -114,7 +117,7 @@ tasks:
     wave: number
     agent: string
     status: pending | in_progress | completed | failed | blocked | needs_revision | needs_replan
-    retries_used: number
+    retries_used: 0
     acceptance_criteria: [string]
     handoff:
       constraints: [string]

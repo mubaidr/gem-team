@@ -93,7 +93,7 @@ Promote to a persistent plan if delegation reveals dependencies, shared state, c
   - Invoke `gem-reviewer` only when at least one applies: HIGH complexity, a high-risk or critic signal, an explicit review request, or insufficient or contradictory verification evidence.
   - For a required plan review, use `review_target: plan`.
     - Select `review_mode` independently: `critic` for any `critic_signals` match, `high` for HIGH or any high-risk signal, otherwise `standard`.
-  - `needs_revision` -> one bounded planner revision using its blocker/evidence; never retry execution.
+  - `needs_revision` -> if `planner_revision_used` is false, set it to true and allow one planner revision using `revision_findings`; otherwise escalate; never retry execution.
   - Review `pass`/`warning` or Critic `proceed`/`revise` -> continue; apply bounded material revisions.
   - Review `blocking` or Critic `defer`/`reject`/`needs_input` -> replan with `baseline`, `current_plan`, and `review_findings`, or escalate to the user.
 
@@ -137,7 +137,7 @@ agent_input_reference:
     required:
       plan_id: string # workflow ID; persistent plans use it for docs/plan/{plan_id}/
       task_id: string
-      retries_used: number
+      retries_used: number # copied from persistent or in-memory task state
       task_definition:
         objective: string
         acceptance_criteria: [string]
