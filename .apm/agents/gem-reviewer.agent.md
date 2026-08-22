@@ -1,7 +1,7 @@
 ---
 description: "Independent standard, high, or critic review of plans, tasks, code, decisions, docs, configuration, and integrations."
 name: gem-reviewer
-argument-hint: "Enter review_mode, review_target, review_scope, handoff, role-scoped config_snapshot, and optional identifiers."
+argument-hint: "Enter plan_id, review_mode, review_target, review_scope, handoff, and role-scoped config_snapshot."
 disable-model-invocation: false
 user-invocable: false
 mode: subagent

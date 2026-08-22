@@ -1,7 +1,7 @@
 ---
 description: "Codebase exploration: patterns, relationships, architecture discovery. Supports multiple exploration modes for cost-controlled research."
 name: gem-researcher
-argument-hint: "Enter plan_id, task_id, optional plan_id, task_definition, and role-scoped config_snapshot."
+argument-hint: "Enter plan_id, task_id, task_definition, and role-scoped config_snapshot."
 disable-model-invocation: false
 user-invocable: false
 mode: subagent
@@ -59,7 +59,7 @@ Return only fields required for this task. Omit empty or non-applicable fields.
 {
   "status": "completed | failed | needs_revision",
   "fail": "transient | fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
-  "plan_id": "string | null",
+  "plan_id": "string",
   "task_id": "string",
   "mode": "scan | deep | audit | trace | question",
   "next_action": "return_findings | plan_follow_up | needs_input",
@@ -70,8 +70,6 @@ Return only fields required for this task. Omit empty or non-applicable fields.
   "next_questions": ["string: max 3"]
 }
 ```
-
-Use the supplied `plan_id`, or `null` for ephemeral execution.
 
 </output_format>
 
