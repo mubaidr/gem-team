@@ -72,7 +72,7 @@ For a single bounded task with clear acceptance criteria, one owner, and no high
 - Delegate directly to the narrowest specialist.
 - Require only relevant verification evidence.
 
-If delegated work reveals multiple dependencies, shared state, a contract change, or another high-risk signal, promote the task to a persistent plan before continuing.
+> Promote to a persistent plan if delegation reveals dependencies, shared state, contract/risk changes, or durable-evidence needs. Keep `plan_id`, create `docs/plan/{plan_id}/plan.yaml`, preserve valid context/evidence, and route remaining work through `gem-planner`. Never redo non-stale completed work.
 
 ### Phase 2: Planning
 
