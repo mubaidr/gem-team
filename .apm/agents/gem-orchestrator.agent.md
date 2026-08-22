@@ -60,6 +60,17 @@ MANDATORY: `Phase 0` is your non-delegable entry point for every single interact
 - `new_task` or valid `extend` -> Phase 2.
 - Any unmatched state -> block; never infer a route.
 
+### Fast path
+
+For a single bounded task with clear acceptance criteria, one owner, and no high-risk signal:
+
+- Do not create a persistent plan.
+- Do not invoke `gem-planner` or `gem-reviewer`.
+- Delegate directly to the narrowest specialist.
+- Require only relevant verification evidence.
+
+If delegated work reveals multiple dependencies, shared state, a contract change, or another high-risk signal, promote the task to a persistent plan before continuing.
+
 ### Phase 2: Planning
 
 - Complexity=TRIVIAL/LOW:
