@@ -17,138 +17,299 @@ useSeoMeta({
   <UPage class="relative">
     <UPageHero
       orientation="horizontal"
-      class="py-20 sm:py-28"
+      class="min-h-[calc(100svh-4.5rem)] border-b-0 py-20 sm:py-28"
       :ui="{
-        title: 'max-w-4xl text-balance',
-        description: 'max-w-xl leading-8',
-        links: 'flex-wrap',
+        container: 'relative z-10 items-center',
+        title: 'max-w-4xl text-balance tracking-tighter',
+        description: 'max-w-xl leading-8 text-pretty',
+        links: 'flex-wrap gap-3',
       }"
     >
+      <template #headline>
+        <span class="eyebrow">The open engineering system for AI</span>
+      </template>
       <template #title>
-        Turn AI Coding Into an
-        <span class="text-primary">Engineering Process</span>
+        Turn AI coding into a
+        <span class="relative whitespace-nowrap text-primary">
+          <span
+            class="absolute -inset-x-3 bottom-1 -z-10 h-3 rounded-full bg-primary/15 blur-lg"
+          />
+          better process.
+        </span>
       </template>
       <template #description>
-        Agent definitions that enforce good software engineering: optimizing
-        cost, time, and quality.
+        A coordinated team of agents that plans, builds, reviews, and learns —
+        so every coding session ships with more signal and less chaos.
       </template>
       <template #links>
         <UButton
           to="/getting-started"
           size="xl"
           trailing-icon="i-lucide-arrow-right"
+          class="shadow-xl shadow-primary/20"
         >
-          Get Started
+          Start building
+        </UButton>
+        <UButton
+          to="https://github.com/mubaidr/gem-team"
+          target="_blank"
+          size="xl"
+          color="neutral"
+          variant="outline"
+          leading-icon="i-simple-icons-github"
+        >
+          View on GitHub
         </UButton>
       </template>
       <template #default>
         <StarsBg />
 
-        <div class="space-y-12">
-          <UMarquee :repeat="2">
-            <span>fewer bugs</span>
-            <span>lower costs</span>
-            <span>ship faster</span>
-            <span>quality by default</span>
-            <span>automated reviews</span>
-            <span>no context bloat</span>
-            <span>smarter agents</span>
-            <span>learn from code</span>
-            <span>secure by design</span>
-            <span>works everywhere</span>
-          </UMarquee>
+        <div class="relative mx-auto w-full max-w-xl">
+          <div class="absolute -inset-6 rounded-4xl bg-primary/10 blur-3xl" />
           <div
-            class="not-prose w-full overflow-x-auto rounded-2xl border border-default bg-elevated p-6 shadow-xl shadow-primary/5 scrollbar-thin sm:p-8"
+            class="surface-grid relative overflow-hidden rounded-[1.5rem] border border-default/80 bg-elevated/90 p-3 shadow-2xl shadow-primary/10 backdrop-blur sm:p-4"
           >
-            <pre
-              class="text-sm leading-relaxed"
-            ><code class="text-default">apm install mubaidr/gem-team --target copilot,claude,cursor,opencode,codex,gemini,windsurf</code></pre>
+            <div
+              class="overflow-hidden rounded-[1rem] border border-default/70 bg-default/90"
+            >
+              <div
+                class="flex items-center justify-between border-b border-default/70 px-4 py-3"
+              >
+                <div class="flex items-center gap-2">
+                  <span class="size-2 rounded-full bg-error/70" />
+                  <span class="size-2 rounded-full bg-warning/70" />
+                  <span class="size-2 rounded-full bg-success/70" />
+                </div>
+                <span
+                  class="font-mono text-[0.62rem] uppercase tracking-[0.16em] text-dimmed"
+                  >gem-team / ready</span
+                >
+              </div>
+              <div class="space-y-5 p-5 text-left sm:p-7">
+                <div class="flex items-start gap-3">
+                  <span
+                    class="mt-1 grid size-7 shrink-0 place-items-center rounded-lg bg-primary/15 text-primary"
+                  >
+                    <UIcon name="i-lucide-route" class="size-4" />
+                  </span>
+                  <div>
+                    <p class="font-semibold text-highlighted">Route the work</p>
+                    <p class="mt-1 text-sm leading-6 text-muted">
+                      Classify intent. Pick only the workflow depth it needs.
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-3">
+                  <span
+                    class="mt-1 grid size-7 shrink-0 place-items-center rounded-lg bg-secondary/15 text-secondary"
+                  >
+                    <UIcon name="i-lucide-workflow" class="size-4" />
+                  </span>
+                  <div>
+                    <p class="font-semibold text-highlighted">Build in waves</p>
+                    <p class="mt-1 text-sm leading-6 text-muted">
+                      Specialist agents collaborate with bounded context and
+                      clear handoffs.
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-3">
+                  <span
+                    class="mt-1 grid size-7 shrink-0 place-items-center rounded-lg bg-success/15 text-success"
+                  >
+                    <UIcon name="i-lucide-badge-check" class="size-4" />
+                  </span>
+                  <div>
+                    <p class="font-semibold text-highlighted">
+                      Verify, then learn
+                    </p>
+                    <p class="mt-1 text-sm leading-6 text-muted">
+                      Quality gates catch regressions. Stable patterns become
+                      reusable skills.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="border-t border-default/70 bg-muted/40 px-5 py-4 font-mono text-xs text-muted sm:px-7"
+              >
+                <span class="mr-2 text-primary">$</span> apm install
+                mubaidr/gem-team
+              </div>
+            </div>
           </div>
         </div>
       </template>
     </UPageHero>
 
-    <UPageSection class="bg-muted/30">
-      <template #title> Built for Better Engineering </template>
+    <UPageSection id="why" class="border-y border-default/70 bg-muted/25">
+      <template #headline>
+        <span class="eyebrow">Why Gem Team</span>
+      </template>
+      <template #title> The anti-chaos layer for AI coding. </template>
       <template #description>
-        Four pillars that make your AI code faster, safer, and cheaper.
+        Keep the speed of AI without giving up the discipline of a great
+        engineering team.
       </template>
       <template #features>
         <UPageFeature icon="i-lucide-shield-check">
-          <template #title> Quality by Default </template>
+          <template #title> Quality by default </template>
           <template #description>
-            TDD, code reviews, and security audits happen automatically: not as
-            afterthoughts.
+            TDD, reviews, security, and acceptance checks happen when they
+            matter — not after the damage is done.
           </template>
         </UPageFeature>
         <UPageFeature icon="i-lucide-coins">
-          <template #title> Smart & Efficient </template>
+          <template #title> Less context. More signal. </template>
           <template #description>
-            Fewer tokens, lower costs, no context bloat. Every request is lean
-            and purposeful.
+            Progressive context and model routing keep every request lean,
+            focused, and cost-aware.
           </template>
         </UPageFeature>
         <UPageFeature icon="i-lucide-brain">
-          <template #title> Learns & Improves </template>
+          <template #title> Learning is a feature </template>
           <template #description>
-            Remembers what works, extracts reusable skills, and gets better with
-            every session.
+            Capture the patterns that work and turn them into reusable skills
+            for the next session.
           </template>
         </UPageFeature>
         <UPageFeature icon="i-lucide-plug">
-          <template #title> Works With Your Tools </template>
+          <template #title> Bring your own tools </template>
           <template #description>
-            Copilot, Claude, Cursor, Codex, Gemini, Windsurf: one install, all
-            targets.
+            One package for Copilot, Claude, Cursor, Codex, Gemini, Windsurf,
+            and more.
           </template>
         </UPageFeature>
       </template>
     </UPageSection>
 
-    <UPageSection>
-      <template #title> Works With Your Favorite Tools </template>
+    <UPageSection
+      id="workflow"
+      orientation="horizontal"
+      class="relative overflow-hidden"
+    >
+      <template #headline>
+        <span class="eyebrow">The workflow</span>
+      </template>
+      <template #title> One team. Every stage of delivery. </template>
       <template #description>
-        One install command. Every major AI coding tool.
+        Gem Team gives each kind of work a focused specialist, then coordinates
+        the handoffs so quality never gets lost between prompts.
+      </template>
+      <template #default>
+        <div
+          class="surface-grid w-full rounded-[1.5rem] border border-default/80 bg-elevated p-4 shadow-xl shadow-primary/5 sm:p-6"
+        >
+          <div class="grid gap-3 sm:grid-cols-2">
+            <div
+              v-for="(step, index) in [
+                {
+                  icon: 'i-lucide-compass',
+                  label: 'Route',
+                  text: 'Understand the request',
+                },
+                {
+                  icon: 'i-lucide-map',
+                  label: 'Plan',
+                  text: 'Shape the smallest safe path',
+                },
+                {
+                  icon: 'i-lucide-hammer',
+                  label: 'Build',
+                  text: 'Delegate with clean handoffs',
+                },
+                {
+                  icon: 'i-lucide-check-check',
+                  label: 'Verify',
+                  text: 'Prove the result before done',
+                },
+              ]"
+              :key="step.label"
+              class="group rounded-xl border border-default/70 bg-default/70 p-4 transition-colors hover:border-primary/50 hover:bg-primary/5"
+            >
+              <div class="flex items-center justify-between">
+                <span
+                  class="grid size-9 place-items-center rounded-lg bg-primary/10 text-primary"
+                  ><UIcon :name="step.icon" class="size-4"
+                /></span>
+                <span class="font-mono text-xs text-dimmed"
+                  >0{{ index + 1 }}</span
+                >
+              </div>
+              <p class="mt-5 font-semibold text-highlighted">
+                {{ step.label }}
+              </p>
+              <p class="mt-1 text-sm text-muted">
+                {{ step.text }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </template>
+    </UPageSection>
+
+    <UPageSection id="tools" class="border-t border-default/70 bg-muted/25">
+      <template #headline>
+        <span class="eyebrow">Works where you work</span>
+      </template>
+      <template #title> One install. Your favorite tools. </template>
+      <template #description>
+        Keep your editor. Upgrade the process around it.
       </template>
       <template #features>
-        <UPageFeature icon="i-simple-icons-githubcopilot">
-          <template #title> GitHub Copilot </template>
-          <template #description> VS Code & CLI </template>
-        </UPageFeature>
-        <UPageFeature icon="i-simple-icons-anthropic">
-          <template #title> Claude Code </template>
-          <template #description> Full agent support </template>
-        </UPageFeature>
-        <UPageFeature icon="i-simple-icons-cursor">
-          <template #title> Cursor </template>
-          <template #description> Agents & rules </template>
-        </UPageFeature>
-        <UPageFeature icon="i-simple-icons-opencode">
-          <template #title> OpenCode </template>
-          <template #description> Commands & skills </template>
-        </UPageFeature>
-        <UPageFeature icon="i-simple-icons-codex">
-          <template #title> Codex CLI </template>
-          <template #description> AGENTS.md </template>
-        </UPageFeature>
-        <UPageFeature icon="i-simple-icons-google">
-          <template #title> Gemini CLI </template>
-          <template #description> Skills & config </template>
-        </UPageFeature>
-        <UPageFeature icon="i-simple-icons-windsurf">
-          <template #title> Windsurf </template>
-          <template #description> Rules & skills </template>
+        <UPageFeature
+          v-for="tool in [
+            {
+              icon: 'i-simple-icons-githubcopilot',
+              title: 'GitHub Copilot',
+              text: 'VS Code & CLI',
+            },
+            {
+              icon: 'i-simple-icons-anthropic',
+              title: 'Claude Code',
+              text: 'Full agent support',
+            },
+            {
+              icon: 'i-simple-icons-cursor',
+              title: 'Cursor',
+              text: 'Agents & rules',
+            },
+            {
+              icon: 'i-simple-icons-opencode',
+              title: 'OpenCode',
+              text: 'Commands & skills',
+            },
+            {
+              icon: 'i-simple-icons-codex',
+              title: 'Codex CLI',
+              text: 'AGENTS.md',
+            },
+            {
+              icon: 'i-simple-icons-google',
+              title: 'Gemini CLI',
+              text: 'Skills & config',
+            },
+          ]"
+          :key="tool.title"
+          :icon="tool.icon"
+        >
+          <template #title>
+            {{ tool.title }}
+          </template>
+          <template #description>
+            {{ tool.text }}
+          </template>
         </UPageFeature>
       </template>
     </UPageSection>
 
     <UPageCTA
       class="border-t border-default/70"
-      title="Ready to engineer better with AI?"
+      title="Make your next session count."
       description="Install Gem Team and give every coding session a smarter, more reliable workflow."
       :links="[
         {
-          label: 'Get Started',
+          label: 'Start building',
           to: '/getting-started',
           trailingIcon: 'i-lucide-arrow-right',
         },

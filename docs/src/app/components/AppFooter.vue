@@ -1,17 +1,30 @@
-<script setup lang="ts">
-const { footer } = useAppConfig();
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <UFooter>
+  <UFooter
+    class="relative overflow-hidden border-t border-default/70 bg-default/70"
+  >
     <template #left>
-      <NuxtLink to="https://mubaidr.js.org">mubaidr.js.org</NuxtLink>
+      <div class="flex items-center gap-3 text-sm text-muted">
+        <AppLogo class="size-6" />
+        <span
+          >Gem Team <span class="text-dimmed">/</span> Engineering for AI</span
+        >
+      </div>
     </template>
 
     <template #right>
-      <!-- {{ footer.credits }} -->
-
-      <UColorModeButton v-if="footer?.colorMode" />
+      <div class="flex items-center gap-1">
+        <UButton
+          to="https://github.com/mubaidr/gem-team"
+          target="_blank"
+          icon="i-simple-icons-github"
+          aria-label="Open Gem Team on GitHub"
+          color="neutral"
+          variant="ghost"
+        />
+        <UColorModeButton />
+      </div>
 
       <!-- <template v-if="footer?.links">
         <UButton

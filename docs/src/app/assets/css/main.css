@@ -5,37 +5,124 @@
 
 @theme {
   --font-sans: "Outfit", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
 }
 
 :root {
-  --ui-radius: 0.75rem;
+  --ui-radius: 0.9rem;
 }
 
 @layer base {
+  html {
+    color-scheme: light;
+    scroll-behavior: smooth;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
   body {
-    @apply bg-default text-default antialiased;
+    @apply overflow-x-hidden bg-default text-default antialiased;
+    background-image:
+      linear-gradient(
+        to right,
+        color-mix(in srgb, var(--ui-border) 22%, transparent) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to bottom,
+        color-mix(in srgb, var(--ui-border) 16%, transparent) 1px,
+        transparent 1px
+      );
+    background-size: 4rem 4rem;
+    background-position: center top;
   }
 
   ::selection {
-    @apply bg-primary/20 text-highlighted;
+    @apply bg-primary/25 text-highlighted;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-default;
   }
 }
 
 @layer components {
+  .site-shell {
+    @apply relative isolate;
+  }
+
+  .site-shell::before {
+    content: "";
+    @apply pointer-events-none fixed inset-0 -z-10;
+    background:
+      radial-gradient(
+        circle at 50% -10%,
+        color-mix(in srgb, var(--ui-primary) 13%, transparent),
+        transparent 32rem
+      ),
+      radial-gradient(
+        circle at 100% 45%,
+        color-mix(in srgb, var(--ui-secondary) 8%, transparent),
+        transparent 28rem
+      );
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 font-mono text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-primary;
+  }
+
+  .eyebrow::before {
+    content: "";
+    @apply h-px w-6 bg-primary;
+  }
+
+  .surface-grid {
+    background-image:
+      linear-gradient(
+        to right,
+        color-mix(in srgb, var(--ui-border) 30%, transparent) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to bottom,
+        color-mix(in srgb, var(--ui-border) 24%, transparent) 1px,
+        transparent 1px
+      );
+    background-size: 2rem 2rem;
+  }
+
   .docs-prose {
     @apply max-w-none;
   }
 
   .docs-prose :is(h2, h3) {
-    @apply scroll-mt-24;
+    @apply scroll-mt-28 text-balance;
+  }
+
+  .docs-prose :is(h2) {
+    @apply mt-14 border-t border-default/70 pt-8;
+  }
+
+  .docs-prose :is(h3) {
+    @apply mt-10;
   }
 
   .docs-prose :is(p, li) {
-    @apply leading-7;
+    @apply leading-8;
+  }
+
+  .docs-prose :is(a) {
+    @apply font-medium underline decoration-primary/40 underline-offset-4 transition-colors hover:text-primary hover:decoration-primary;
   }
 
   .docs-prose :is(pre, table, blockquote) {
-    @apply shadow-sm;
+    @apply shadow-lg shadow-primary/5;
+  }
+
+  .docs-prose :is(code):not(pre code) {
+    @apply rounded-md border border-default/70 bg-muted px-1.5 py-0.5 font-mono text-[0.86em] text-highlighted;
   }
 }
 

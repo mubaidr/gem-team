@@ -9,7 +9,7 @@ const { header } = useAppConfig();
 <template>
   <UHeader
     :ui="{
-      root: 'border-b border-default/70 bg-default/80 backdrop-blur',
+      root: 'border-b border-default/70 bg-default/75 backdrop-blur-xl',
       center: 'flex-1',
     }"
     :to="header?.to || '/'"
@@ -25,13 +25,14 @@ const { header } = useAppConfig();
         :to="header?.to || '/'"
         class="flex min-h-11 items-center gap-3"
       >
-        <AppLogo class="size-7" />
+        <AppLogo class="size-8" />
         <div class="hidden sm:block">
-          <span v-if="header?.title" class="font-semibold tracking-tight">
+          <span v-if="header?.title" class="font-semibold tracking-[-0.02em]">
             {{ header.title }}
           </span>
-          <span class="block text-xs text-muted"
-            >Engineering for AI coding</span
+          <span
+            class="mt-0.5 block font-mono text-[0.62rem] uppercase tracking-[0.14em] text-muted"
+            >Engineering system for AI</span
           >
         </div>
       </NuxtLink>

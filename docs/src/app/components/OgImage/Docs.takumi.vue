@@ -1,13 +1,13 @@
 <script setup lang="ts">
 defineOptions({
-  inheritAttrs: false,
-});
+  inheritAttrs: false
+})
 
 defineProps<{
-  headline?: string;
-  title?: string;
-  description?: string;
-}>();
+  headline?: string
+  title?: string
+  description?: string
+}>()
 </script>
 
 <template>

@@ -38,7 +38,7 @@ provide("navigation", navigation);
 </script>
 
 <template>
-  <UApp>
+  <UApp class="site-shell">
     <NuxtLoadingIndicator />
 
     <AppHeader />

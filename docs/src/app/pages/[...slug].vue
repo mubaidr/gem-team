@@ -65,9 +65,9 @@ const links = computed(() => {
       :description="page.description"
       :headline="headline"
       :ui="{
-        root: 'border-b border-default/70 pb-8',
-        title: 'tracking-tight',
-        description: 'max-w-3xl leading-7',
+        root: 'border-b border-default/70 pb-10',
+        title: 'tracking-tighter text-balance',
+        description: 'max-w-3xl leading-7 text-pretty',
       }"
     >
       <template #links>

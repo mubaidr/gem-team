@@ -1,9 +1,9 @@
 export default defineAppConfig({
   ui: {
     colors: {
-      primary: "emerald",
+      primary: "amber",
       secondary: "cyan",
-      neutral: "slate",
+      neutral: "zinc",
     },
     page: {
       slots: {
@@ -14,9 +14,10 @@ export default defineAppConfig({
     pageHero: {
       slots: {
         root: "relative overflow-hidden border-b border-default/70",
-        container: "py-20 sm:py-28",
-        title: "text-4xl sm:text-6xl lg:text-7xl tracking-tight",
-        description: "max-w-2xl text-lg sm:text-xl leading-8",
+        container: "py-24 sm:py-32",
+        title:
+          "text-4xl sm:text-6xl lg:text-7xl tracking-[-0.045em] text-balance",
+        description: "max-w-2xl text-lg sm:text-xl leading-8 text-pretty",
       },
     },
     pageSection: {
