@@ -42,7 +42,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 
 <output_format>
 
-Return only fields required for this task. Omit empty or non-applicable fields.
+Return only fields required for this task. Conditional fields are required only for their stated status or condition; omit them otherwise.
 
 ## Output Format
 
@@ -50,6 +50,7 @@ Return only fields required for this task. Omit empty or non-applicable fields.
 {
   "status": "completed | failed | needs_retry | blocked",
   "task_id": "string",
+  "blocked_reason": "string" // required only when status is blocked
   "fail": "fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific | test_bug",
   "console_errors": "number",
   "network_failures": "number",

@@ -105,7 +105,7 @@ Promote to a persistent plan if delegation reveals dependencies, shared state, c
   - `needs_retry` -> retry the same task with concrete evidence and unchanged scope, up to 3 times; increment `retries_used` first.
   - `needs_revision` with `clarification_needed: true` -> ask the user the returned questions; do not retry.
   - `needs_replan` -> apply bounded replan guardrails; send the planner the immutable baseline, exact current plan, and concrete findings.
-  - `blocked` -> stop the affected path and route it through centralized failure handling.
+  - `blocked` -> require `blocked_reason`, stop the affected path, and route it through centralized failure handling.
   - `escalate` -> mark the affected path blocked and escalate to the user.
   - All tasks completed -> Phase 4.
   - Compact, stable, relevant `learn[]` evidence with confidence ≥ 0.95 -> delegate to the appropriate agent for persistence.

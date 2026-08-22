@@ -49,7 +49,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 
 <output_format>
 
-Return only fields required for this task. Omit empty or non-applicable fields.
+Return only fields required for this task. Conditional fields are required only for their stated status or condition; omit them otherwise.
 
 ## Output Format
 
@@ -58,6 +58,7 @@ Return only fields required for this task. Omit empty or non-applicable fields.
   "status": "completed | failed | needs_revision",
   "task_id": "string",
   "clarification_needed": "boolean",
+  "questions": ["string"] // required only when clarification_needed is true
   "fail": "fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
   "handoff": {
     "debugger_diagnosis": {
