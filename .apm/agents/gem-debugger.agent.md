@@ -56,7 +56,7 @@ Return only fields required for this task. Conditional fields are required only 
 ```json
 {
   "status": "completed | failed | needs_revision",
-  "clarification_needed": "boolean",
+  "clarification_needed": false,
   "questions": ["string"],
   "fail": "fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
   "handoff": {

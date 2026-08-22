@@ -44,8 +44,8 @@ Return only fields required for this task. Conditional fields are required only 
   "blocked_reason": "string",
   "retry_reason": "string",
   "fail": "fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
-  "files": { "modified": "number", "created": "number" },
-  "tests": { "passed": "number", "failed": "number" },
+  "files": { "modified": 0, "created": 0 },
+  "tests": { "passed": 0, "failed": 0 },
   "learn": [{ "text": "string", "confidence": "0.0-1.0" }]
 }
 ```

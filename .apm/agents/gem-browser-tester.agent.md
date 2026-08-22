@@ -52,9 +52,9 @@ Return only fields required for this task. Conditional fields are required only 
   "blocked_reason": "string",
   "retry_reason": "string",
   "fail": "fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific | test_bug",
-  "console_errors": "number",
-  "network_failures": "number",
-  "a11y_issues": "number",
+  "console_errors": 0,
+  "network_failures": 0,
+  "a11y_issues": 0,
   "evidence_path": "string"
 }
 ```
