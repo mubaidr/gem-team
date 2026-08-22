@@ -72,8 +72,8 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 
 ### UI/UX Skills & Styling Workflow
 
-- UI/UX Skill Ingestion: Dynamically load task-relevant UI/UX skills, guidelines, and domain context before generating interface code.
-- Enforce styling priority: Global Theme Config > Library Props > Tokenized StyleSheet.create > Platform.select (OS differences only) > Inline Styles (runtime-dynamic values strictly).
+- Load UI/UX guidance only when the task changes user-facing UI, layout, interaction, accessibility, or visual behavior.
+- For UI changes, use this styling priority: Global Theme Config > Library Props > Tokenized styles > Platform-specific styles > Inline runtime styles.
 
 ### Mobile Specific
 
