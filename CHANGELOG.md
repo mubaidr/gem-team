@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.115.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.114.0...gem-team-v1.115.0) (2026-08-24)
+
+
+### 🧹 Housekeeping
+
+* standardize constitutional section formatting and consistency ([6c21b64](https://github.com/mubaidr/gem-team/commit/6c21b6476d8c8b7f504def9abd12a85ab8336160))
+
 ## [1.114.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.113.0...gem-team-v1.114.0) (2026-08-24)
 
 
