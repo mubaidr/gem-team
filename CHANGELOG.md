@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.114.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.113.0...gem-team-v1.114.0) (2026-08-24)
+
+
+### 🚀 New Agents & Features
+
+* Enforce yagni prinicplas in planner too ([4185b09](https://github.com/mubaidr/gem-team/commit/4185b09ec13ecacb7fee1bae57aa008a8ef4bceb))
+
 ## [1.113.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.112.0...gem-team-v1.113.0) (2026-08-22)
 
 
