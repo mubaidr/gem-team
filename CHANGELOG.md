@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.116.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.115.0...gem-team-v1.116.0) (2026-08-26)
+
+
+### 🧹 Housekeeping
+
+* remove "never delegation" from orchestrator fast path rules ([9297588](https://github.com/mubaidr/gem-team/commit/929758868a9b7d8924544e051b9e8a690c7909a5))
+
 ## [1.115.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.114.0...gem-team-v1.115.0) (2026-08-24)
 
 
