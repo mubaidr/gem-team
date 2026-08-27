@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.117.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.116.0...gem-team-v1.117.0) (2026-08-26)
+
+
+### 🧹 Housekeeping
+
+* add verification boundary rules to orchestrator ([189d1a4](https://github.com/mubaidr/gem-team/commit/189d1a4852a4b66dbe5a474e0d4b89ec91fb5b77))
+
 ## [1.116.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.115.0...gem-team-v1.116.0) (2026-08-26)
 
 
