@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.118.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.117.0...gem-team-v1.118.0) (2026-08-28)
+
+
+### 🧹 Housekeeping
+
+* add rule to avoid tautological tests to gem-implementer ([11e057d](https://github.com/mubaidr/gem-team/commit/11e057d090b359e2c99923925826f10b5b076bac))
+
 ## [1.117.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.116.0...gem-team-v1.117.0) (2026-08-26)
 
 
