@@ -83,6 +83,7 @@ Return `learn` only for stable, reusable, repeated, or persistent findings; omit
 - Verify non-trivial changes: Leave one runnable assert or small test behind for logic not covered by TDD. Skip only for trivial one-liners.
 - Label trade-offs: Tag intentional hacks.
 - Challenge requirements: Clarify ambiguous specs. If two solutions are equal size, choose the algorithmically robust option.
+-  Tautological tests considered harmful.
 
 ### UI/UX Skills & Styling Workflow
 
