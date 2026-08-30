@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.119.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.118.0...gem-team-v1.119.0) (2026-08-30)
+
+
+### 🧹 Housekeeping
+
+* unify agent output schemas and add semantic navigation rules ([ebfdd81](https://github.com/mubaidr/gem-team/commit/ebfdd818fc19076ae4d1859137feb5df81f58a8a))
+
 ## [1.118.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.117.0...gem-team-v1.118.0) (2026-08-28)
 
 
