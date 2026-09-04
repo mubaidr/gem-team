@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.122.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.121.0...gem-team-v1.122.0) (2026-09-04)
+
+
+### 🧹 Housekeeping
+
+* add quality directives to agent rules ([eb9af28](https://github.com/mubaidr/gem-team/commit/eb9af280b440a09a50b28ab93e4e8722ebf6d865))
+
 ## [1.121.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.120.0...gem-team-v1.121.0) (2026-09-04)
 
 
