@@ -153,6 +153,13 @@ useSeoMeta({
             matter — not after the damage is done.
           </template>
         </UPageFeature>
+        <UPageFeature icon="i-lucide-ban">
+          <template #title> Anti-slop built in </template>
+          <template #description>
+            Quality Directives kill dead buttons, buzzwords, template filler,
+            and AI-generated noise before it ships.
+          </template>
+        </UPageFeature>
         <UPageFeature icon="i-lucide-coins">
           <template #title> Less context. More signal. </template>
           <template #description>
