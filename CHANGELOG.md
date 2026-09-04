@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.121.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.120.0...gem-team-v1.121.0) (2026-09-04)
+
+
+### 🧹 Housekeeping
+
+* add anti-slop built in feature to documentation ([df77c24](https://github.com/mubaidr/gem-team/commit/df77c2424da7c7effe48f0048924aef371932fe3))
+* **main:** add quality directives to agent rules ([3a3e17d](https://github.com/mubaidr/gem-team/commit/3a3e17d42990e257d3fe18bd752a5ea966230f7b))
+* update agent descriptions and add quality directives ([dc6c1d1](https://github.com/mubaidr/gem-team/commit/dc6c1d1ef894f7a104a729e74396fd07cbe18f79))
+
 ## [1.120.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.119.0...gem-team-v1.120.0) (2026-09-03)
 
 
