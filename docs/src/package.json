@@ -1,10 +1,10 @@
 {
   "allowScripts": {
-    "@parcel/watcher@2.5.6": true,
-    "sharp@0.34.5": true,
+    "@parcel/watcher": true,
+    "sharp": true,
     "unrs-resolver@1.12.2": true,
     "vue-demi@0.14.10": true,
-    "esbuild@0.28.2": true
+    "esbuild": true
   },
   "dependencies": {
     "@iconify-json/lucide": "^1.2.131",
