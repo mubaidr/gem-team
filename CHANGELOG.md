@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.123.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.122.0...gem-team-v1.123.0) (2026-09-10)
+
+
+### 🧹 Housekeeping
+
+* bump docs dependencies and update package-lock ([03b019b](https://github.com/mubaidr/gem-team/commit/03b019b9eba73c8a2eb9eae2082b606d3f55dc03))
+* update docs homepage, add performance stats, and bump dependencies ([c1ad026](https://github.com/mubaidr/gem-team/commit/c1ad026573361e0e6567636407b94d66e8e1850a))
+* update docs homepage, add performance stats, and bump dependencies ([f1d9c9e](https://github.com/mubaidr/gem-team/commit/f1d9c9e51c006af1fc665a440d1cbef20b07c38a))
+
 ## [1.122.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.121.0...gem-team-v1.122.0) (2026-09-10)
 
 
