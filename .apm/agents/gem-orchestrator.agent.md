@@ -177,6 +177,11 @@ agent_input_reference:
       provisional_complexity: "MEDIUM | HIGH"
       risk_signals:
         - str
+      handoff:
+        high_risk_signals:
+          - str
+        critic_signals:
+          - str
       planning_context:
         task_clarifications:
           - str
@@ -197,6 +202,10 @@ agent_input_reference:
       handoff:
         target_reference: str
         criteria:
+          - str
+        high_risk_signals:
+          - str
+        critic_signals:
           - str
         evidence:
           - str
