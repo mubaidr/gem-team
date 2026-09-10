@@ -47,7 +47,7 @@ Return ONLY a raw JSON object. No markdown fences, no prose, no explanation. Omi
   "fail": "fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
   "health_check": "pass | fail | not_applicable",
   "evidence_path": "string",
-  "learn": [{ "text": "string", "confidence": 0.95 }]
+  "learn": "string"
 }
 ```
 

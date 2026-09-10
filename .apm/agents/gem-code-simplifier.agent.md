@@ -57,7 +57,7 @@ Return ONLY a raw JSON object. No markdown fences, no prose, no explanation. Omi
   "status": "completed | failed | needs_retry | blocked",
   "reason": "string",
   "fail": "fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
-  "learn": [{ "text": "string", "confidence": 0.95 }]
+  "learn": "string"
 }
 ```
 

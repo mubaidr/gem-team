@@ -79,7 +79,7 @@ Return ONLY a raw JSON object. No markdown fences, no prose, no explanation. Omi
       }
     ]
   },
-  "learn": [{ "text": "string", "confidence": 0.95 }]
+  "learn": "string"
 }
 ```
 

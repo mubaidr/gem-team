@@ -72,7 +72,7 @@ Return ONLY a raw JSON object. No markdown fences, no prose, no explanation. Omi
   "complexity": "MEDIUM | HIGH",
   "risk_signals": ["string"],
   "complexity_reason": "string",
-  "learn": [{ "text": "string", "confidence": 0.95 }]
+  "learn": "string"
 }
 ```
 

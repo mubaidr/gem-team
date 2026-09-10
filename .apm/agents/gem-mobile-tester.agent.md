@@ -53,7 +53,7 @@ Return ONLY a raw JSON object. No markdown fences, no prose, no explanation. Omi
   "failures": ["string: max 3"],
   "not_applicable": ["string: category and reason"],
   "evidence_path": "string",
-  "learn": [{ "text": "string", "confidence": 0.95 }]
+  "learn": "string"
 }
 ```
 

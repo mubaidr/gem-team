@@ -61,33 +61,22 @@ Return ONLY a raw JSON object. No markdown fences, no prose, no explanation. Omi
   "confidence": 0.95,
   "verdict": "pass | warning | blocking",
   "blocking_reason": "string",
-  "regression_risk": "LOW | MEDIUM | HIGH | CRITICAL",
   "warnings": 0,
   "critical_findings": ["SEVERITY file:line: issue"],
-  "security_findings": [{ "severity": "string", "file": "string", "line": 123, "finding": "string", "impact": "string", "remediation": "string", "verification": "string" }],
   "files_reviewed": 0,
   "acceptance_criteria_met": 0,
   "acceptance_criteria_missing": 0,
-  "prd_score": 0,
-  "critic_verdict": "proceed | revise | defer | reject | needs_input",
-  "challenges": [
-    {
-      "finding": "string",
-      "evidence": "string",
-      "impact": "string",
-      "action": "string"
-    }
-  ],
-  "alternatives": [
-    {
-      "option": "string",
-      "tradeoff": "string",
-      "recommendation": "string"
-    }
-  ],
-  "decision_blockers": ["string"],
   "revision_findings": ["string"],
-  "learn": [{ "text": "string", "confidence": 0.95 }]
+  "learn": "string",
+  "_critic_mode": {
+    "critic_verdict": "proceed | revise | defer | reject | needs_input",
+    "challenges": [{ "finding": "string", "evidence": "string", "impact": "string", "action": "string" }],
+    "alternatives": [{ "option": "string", "tradeoff": "string", "recommendation": "string" }],
+    "decision_blockers": ["string"]
+  },
+  "_security_mode": {
+    "security_findings": [{ "severity": "string", "file": "string", "line": 123, "finding": "string", "impact": "string", "remediation": "string" }]
+  }
 }
 ```
 

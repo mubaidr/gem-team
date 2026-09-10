@@ -55,7 +55,7 @@ Return ONLY a raw JSON object. No markdown fences, no prose, no explanation. Omi
   "network_failures": 0,
   "a11y_issues": 0,
   "evidence_path": "string",
-  "learn": [{ "text": "string", "confidence": 0.95 }]
+  "learn": "string"
 }
 ```
 
