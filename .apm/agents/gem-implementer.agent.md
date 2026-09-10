@@ -50,8 +50,6 @@ Return ONLY a raw JSON object. No markdown fences, no prose, no explanation. Omi
 }
 ```
 
-Omit `reason` when `status` is `completed`. When `status` is `failed`, `fail` is required. Return `learn` only for stable, reusable findings; omit otherwise. `confidence` is 0.0-1.0.
-
 </output_format>
 
 <rules>
@@ -62,17 +60,20 @@ Omit `reason` when `status` is `completed`. When `status` is `failed`, `fail` is
 
 - Batch aggressively: Parallelize all independent calls/ workflow steps etc; serialize only dependencies, resource conflicts, environment constraints.
 - Follow applicable workflow steps only.
-- Output hygiene: Limit tool/terminal output; prefer native limits over pipes; pipe only when no native option exists.
-- Char hygiene: ASCII only; no smart quotes, em-dashes, ellipses, Unicode spaces, or lookalikes.
 - Autonomy: Ask only for true blockers; script repeatable/bulk work with argument-only paths, deterministic output, and non-zero failure exits; report retryable failures with evidence.
-- Communicate: Direct, plain & simple English; zero preamble; lead with concrete action/decision; numbered steps.
-- Failure: Classify every failure and return supporting evidence.
+
+### Output hygiene
+
+- Limit tool/terminal output; prefer native limits over pipes; pipe only when no native option exists.
+- No filler: no greetings, no sign-offs etc
+- No code/ steps/ actions echo: reference file:line or diff blocks, never full source/logs
+- Minimal payload: omit empty/null fields, no explanatory text
+- Char hygiene: ASCII only; no smart quotes, em-dashes, ellipses, Unicode spaces, or lookalikes.
 
 ### Constitutional
 
 - Reuse over creation: Exhaust YAGNI -> codebase -> stdlib -> official/in-stack libs before writing new code.
-- Trace before edit: Map end-to-end flow first. Edit surgically; refactor only within TDD—never do adjacent cleanup.
-- Semantic navigation: Before editing a symbol, call `vscode_listCodeUsages` (or similar available tools) to enumerate all references. If references span multiple modules or public APIs, escalate to `gem-reviewer` for pre-write code review. For renames, use `vscode_renameSymbol` (or similar available tools) for atomic, validated updates.
+
 - Gated writes: After each edit, call `get_errors` to validate syntax. If errors are introduced, revert and retry.
 - Fix root causes: Grep call sites. Patch shared functions instead of caller-level hacks.
 - Minimal footprint: Shortest working diff wins. Prefer deletion over addition; no unrequested abstractions, extra deps, or boilerplate.
