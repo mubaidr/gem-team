@@ -12,36 +12,6 @@ useSeoMeta({
     "Turn AI coding into an engineering process: agent definitions that enforce good software engineering.",
 });
 
-const stages = [
-  {
-    name: "Classify",
-    agent: "gem-orchestrator",
-    output:
-      "Routes the task to the right specialist with a lean context budget.",
-  },
-  {
-    name: "Plan",
-    agent: "gem-planner",
-    output:
-      "Wave plan with milestones, handoffs, risks, and acceptance criteria.",
-  },
-  {
-    name: "Implement",
-    agent: "gem-implementer",
-    output: "TDD cycles. Tests green before anything merges.",
-  },
-  {
-    name: "Review",
-    agent: "gem-reviewer",
-    output: "Independent quality, security, and contract checks.",
-  },
-  {
-    name: "Learn",
-    agent: "gem-skill-creator",
-    output: "Packages what worked into reusable skills.",
-  },
-];
-
 const phases = [
   {
     name: "Classify",
@@ -85,91 +55,129 @@ const capabilities = [
     title: "TDD by default",
     description:
       "Tests are written before code. Red, green, refactor, every cycle.",
+    icon: "i-lucide-flask-conical",
   },
   {
     title: "Code review on every change",
     description:
       "An independent reviewer checks quality, security, and contracts before anything merges.",
+    icon: "i-lucide-scan-eye",
   },
   {
     title: "Security audits",
     description:
       "Targeted searches for vulnerabilities in code, configuration, and integrations.",
+    icon: "i-lucide-shield-check",
   },
   {
     title: "Cost-aware routing",
     description:
       "Model tiers and progressive context keep token spend down without losing signal.",
+    icon: "i-lucide-coins",
   },
   {
     title: "Resumable plans",
     description:
       "Persistent plan IDs let you pause and resume a session without losing context.",
+    icon: "i-lucide-play",
   },
   {
     title: "Model-agnostic",
     description:
       "Hardened output contracts work across Copilot, Claude, Cursor, Codex, Gemini, and Windsurf.",
+    icon: "i-lucide-cpu",
   },
   {
     title: "Anti-slop directives",
     description: "Agents refuse dead buttons, buzzwords, and template filler.",
+    icon: "i-lucide-badge-check",
+  },
+];
+
+const stats = [
+  {
+    value: "Sub-$0.001",
+    label: "typical API call",
+    highlight: true,
+  },
+  {
+    value: "10x",
+    label: "cost reduction with caching",
+    highlight: true,
+  },
+  {
+    value: "82.8M+",
+    label: "tokens processed",
+  },
+  {
+    value: "666",
+    label: "agent runs",
+  },
+  {
+    value: "~124K",
+    label: "avg. context/run",
+  },
+  {
+    value: "2-5s",
+    label: "typical response latency",
   },
 ];
 
 const tools = [
-  "GitHub Copilot",
-  "Claude Code",
-  "Cursor",
-  "OpenCode",
-  "Codex CLI",
-  "Gemini CLI",
-  "Windsurf",
+  {
+    name: "GitHub Copilot",
+    icon: "i-simple-icons-github",
+  },
+  {
+    name: "Claude Code",
+    icon: "i-simple-icons-anthropic",
+  },
+  {
+    name: "Cursor",
+    icon: "i-simple-icons-cursor",
+  },
+  {
+    name: "OpenCode",
+    icon: "i-lucide-code",
+  },
+  {
+    name: "Codex CLI",
+    icon: "i-simple-icons-openai",
+  },
+  {
+    name: "Gemini CLI",
+    icon: "i-simple-icons-googlegemini",
+  },
+  {
+    name: "Windsurf",
+    icon: "i-lucide-wind",
+  },
 ];
 </script>
 
 <template>
   <div>
-    <section class="border-b border-default/70">
-      <div
-        class="mx-auto grid max-w-7xl gap-16 px-4 py-20 sm:px-6 sm:py-28 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-12 lg:px-8"
-      >
-        <div>
-          <p class="eyebrow">Open-source agent team</p>
-          <h1
-            class="mt-6 text-4xl font-semibold tracking-[-0.02em] text-balance sm:text-5xl lg:text-6xl"
-          >
-            Turn AI coding into an engineering process.
-          </h1>
-          <p class="mt-6 max-w-2xl text-lg leading-8 text-pretty text-muted">
-            Gem Team installs a team of specialist agents that plan, build,
-            review, and learn. TDD, code reviews, and security checks run
-            automatically. Every session gets a plan, tests, a review, and a
-            record of what worked.
-          </p>
-          <div class="mt-8 flex flex-wrap items-center gap-3">
-            <UButton
-              to="/getting-started/installation"
-              size="lg"
-              color="primary"
-              trailing-icon="i-lucide-arrow-right"
-            >
-              Install Gem Team
-            </UButton>
-            <UButton
-              to="/getting-started"
-              size="lg"
-              color="neutral"
-              variant="outline"
-            >
-              Read the docs
-            </UButton>
-          </div>
-          <p class="mt-6 font-mono text-xs text-muted">
-            Apache 2.0 · Open source · Works with any model
-          </p>
-        </div>
-
+    <UPageHero
+      title="Turn AI coding into an engineering process."
+      description="Gem Team installs a team of specialist agents that plan, build, review, and learn. TDD, code reviews, and security checks run automatically. Every session gets a plan, tests, a review, and a record of what worked."
+      :links="[
+        {
+          label: 'Install Gem Team',
+          to: '/getting-started/installation',
+          color: 'primary',
+          trailingIcon: 'i-lucide-arrow-right',
+          size: 'lg',
+        },
+        {
+          label: 'Read the docs',
+          to: '/getting-started',
+          color: 'neutral',
+          variant: 'outline',
+          size: 'lg',
+        },
+      ]"
+    >
+      <template #default>
         <div
           class="rounded-xl border border-default/70 bg-default/60 p-6 sm:p-7"
         >
@@ -181,8 +189,8 @@ const tools = [
           </div>
           <ol>
             <li
-              v-for="(stage, i) in stages"
-              :key="stage.agent"
+              v-for="(phase, i) in phases"
+              :key="phase.agent"
               class="flex gap-4"
             >
               <div class="flex flex-col items-center">
@@ -192,180 +200,190 @@ const tools = [
                   {{ i + 1 }}
                 </span>
                 <span
-                  v-if="i < stages.length - 1"
+                  v-if="i < phases.length - 1"
                   class="my-1 w-px flex-1 bg-default/70"
                   aria-hidden="true"
                 />
               </div>
               <div class="min-w-0 pb-5">
                 <div class="flex flex-wrap items-baseline gap-x-2">
-                  <span class="text-sm font-semibold">{{ stage.name }}</span>
+                  <span class="text-sm font-semibold">{{ phase.name }}</span>
                   <code class="font-mono text-xs text-primary">{{
-                    stage.agent
+                    phase.agent
                   }}</code>
                 </div>
                 <p class="mt-1 text-sm leading-6 text-muted">
-                  {{ stage.output }}
+                  {{ phase.output }}
                 </p>
               </div>
             </li>
           </ol>
         </div>
-      </div>
-    </section>
+      </template>
 
-    <section id="workflow" class="border-b border-default/70">
-      <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
-        <div class="max-w-2xl">
-          <p class="eyebrow">How it works</p>
-          <h2
-            class="mt-4 text-3xl font-semibold tracking-[-0.02em] text-balance sm:text-4xl"
-          >
-            One pipeline, five stages.
-          </h2>
-          <p class="mt-4 text-lg leading-8 text-muted">
-            Every task flows through the same pipeline. Each stage has one job,
-            a defined output, and a handoff to the next.
-          </p>
-        </div>
-        <div class="mt-14">
-          <div
-            v-for="(phase, i) in phases"
-            :key="phase.agent"
-            class="grid gap-4 border-t border-default/70 py-8 sm:grid-cols-[240px_1fr] sm:gap-10"
-          >
-            <div>
-              <div class="flex items-baseline gap-3">
-                <span class="font-mono text-xs text-muted">{{
-                  String(i + 1).padStart(2, "0")
-                }}</span>
-                <h3 class="text-lg font-semibold">
-                  {{ phase.name }}
-                </h3>
-              </div>
-              <code
-                class="mt-2 inline-block rounded-md border border-default/70 bg-muted/40 px-2 py-0.5 font-mono text-xs text-primary"
-              >
-                {{ phase.agent }}
-              </code>
-            </div>
-            <div>
-              <p class="leading-8 text-muted">
-                {{ phase.description }}
-              </p>
-              <p class="mt-3 font-mono text-xs text-muted">
-                Output: {{ phase.output }}
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+      <template #top>
+        <UBadge color="success" variant="subtle" size="sm" class="mb-4">
+          Apache 2.0 · Open source · Works with any model
+        </UBadge>
+      </template>
+    </UPageHero>
 
-    <section id="why" class="border-b border-default/70 bg-muted/25">
-      <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
-        <div class="max-w-2xl">
-          <p class="eyebrow">What you get</p>
-          <h2
-            class="mt-4 text-3xl font-semibold tracking-[-0.02em] text-balance sm:text-4xl"
-          >
-            Engineering discipline, enforced.
-          </h2>
-          <p class="mt-4 text-lg leading-8 text-muted">
-            The agents don't suggest good practice — they run it. These are the
-            gates every session passes through.
-          </p>
-        </div>
-        <ul class="mt-14 grid gap-x-12 gap-y-8 sm:grid-cols-2">
-          <li v-for="item in capabilities" :key="item.title" class="flex gap-4">
-            <span
-              class="mt-2 size-1.5 shrink-0 rounded-sm bg-primary"
-              aria-hidden="true"
-            />
-            <div>
-              <h3 class="font-semibold">
-                {{ item.title }}
-              </h3>
-              <p class="mt-1 leading-7 text-muted">
-                {{ item.description }}
-              </p>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <section id="tools" class="border-b border-default/70">
-      <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
-        <div class="max-w-2xl">
-          <p class="eyebrow">Bring your own tools</p>
-          <h2
-            class="mt-4 text-3xl font-semibold tracking-[-0.02em] text-balance sm:text-4xl"
-          >
-            Works with the tools you already use.
-          </h2>
-          <p class="mt-4 text-lg leading-8 text-muted">
-            Install once, use from any of these.
-          </p>
-        </div>
-        <ul class="mt-14 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-          <li
-            v-for="tool in tools"
-            :key="tool"
-            class="rounded-lg border border-default/70 px-4 py-3 text-sm font-medium"
-          >
-            {{ tool }}
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <section id="install" class="border-b border-default/70">
-      <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
-        <div
-          class="rounded-xl border border-default/70 bg-default/60 p-8 sm:p-12"
+    <UPageSection
+      id="stats"
+      align="center"
+      :ui="{ container: 'py-16 sm:py-20' }"
+    >
+      <UPageGrid
+        :ui="{
+          wrapper: 'grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6',
+        }"
+      >
+        <UPageCard
+          v-for="stat in stats"
+          :key="stat.label"
+          :ui="{
+            root: stat.highlight
+              ? 'border-primary/50 bg-primary/5'
+              : 'border-default/70 bg-default/60',
+            body: 'p-5 text-center',
+          }"
         >
-          <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
-            <div>
-              <h2
-                class="text-3xl font-semibold tracking-[-0.02em] text-balance sm:text-4xl"
-              >
-                Install the team in one command.
-              </h2>
-              <p class="mt-4 text-lg leading-8 text-muted">
-                APM installs the agents and skills into your project. Open
-                source, Apache 2.0, works with any model.
-              </p>
-              <div class="mt-8 flex flex-wrap gap-3">
-                <UButton
-                  to="/getting-started/installation"
-                  size="lg"
-                  color="primary"
-                  trailing-icon="i-lucide-arrow-right"
-                >
-                  Installation guide
-                </UButton>
-                <UButton
-                  to="https://github.com/mubaidr/gem-team"
-                  target="_blank"
-                  size="lg"
-                  color="neutral"
-                  variant="outline"
-                  leading-icon="i-simple-icons-github"
-                >
-                  View on GitHub
-                </UButton>
-              </div>
+          <span
+            :class="[
+              'text-2xl font-semibold sm:text-3xl',
+              stat.highlight ? 'text-primary' : 'text-default',
+            ]"
+            >{{ stat.value }}</span
+          >
+          <p class="mt-2 text-xs text-muted sm:text-sm">{{ stat.label }}</p>
+        </UPageCard>
+      </UPageGrid>
+
+      <UAlert
+        color="info"
+        variant="soft"
+        icon="i-lucide-badge-info"
+        title="How the cost stays low"
+        description="DeepSeek V4.1 Flash charges $0.15/M uncached input and $0.003/M cached input. Gem-Team's scoped handoffs and persistent context mean most of each 100K+ token call hits cache — turning what looks like an expensive context into a sub-penny operation."
+        class="mt-8 max-w-3xl mx-auto"
+      />
+
+      <p class="mt-6 max-w-2xl text-center text-sm text-muted">
+        Observed during Gem-Team development using DeepSeek V4.1 Flash via
+        CommandCode.
+      </p>
+    </UPageSection>
+
+    <UPageSection
+      id="workflow"
+      headline="How it works"
+      title="One pipeline, five stages."
+      description="Every task flows through the same pipeline. Each stage has one job, a defined output, and a handoff to the next."
+      :ui="{ container: 'border-t border-default/70' }"
+    >
+      <div class="mt-14">
+        <div
+          v-for="(phase, i) in phases"
+          :key="phase.agent"
+          class="grid gap-4 border-t border-default/70 py-8 sm:grid-cols-[240px_1fr] sm:gap-10"
+        >
+          <div>
+            <div class="flex items-baseline gap-3">
+              <span class="font-mono text-xs text-muted">{{
+                String(i + 1).padStart(2, "0")
+              }}</span>
+              <h3 class="text-lg font-semibold">
+                {{ phase.name }}
+              </h3>
             </div>
-            <div>
-              <pre
-                class="overflow-x-auto rounded-lg border border-default/70 bg-muted/40 p-5 font-mono text-sm leading-7"
-              ><code>curl -sSL https://aka.ms/apm-unix | sh
-apm install mubaidr/gem-team</code></pre>
-            </div>
+            <code
+              class="mt-2 inline-block rounded-md border border-default/70 bg-muted/40 px-2 py-0.5 font-mono text-xs text-primary"
+            >
+              {{ phase.agent }}
+            </code>
+          </div>
+          <div>
+            <p class="leading-8 text-muted">
+              {{ phase.description }}
+            </p>
+            <p class="mt-3 font-mono text-xs text-muted">
+              Output: {{ phase.output }}
+            </p>
           </div>
         </div>
       </div>
-    </section>
+    </UPageSection>
+
+    <UPageSection
+      id="why"
+      headline="What you get"
+      title="Engineering discipline, enforced."
+      description="The agents don't suggest good practice — they run it. These are the gates every session passes through."
+      :ui="{ root: 'bg-muted/25 border-y border-default/70' }"
+    >
+      <UPageGrid class="mt-14">
+        <UPageFeature
+          v-for="item in capabilities"
+          :key="item.title"
+          :title="item.title"
+          :description="item.description"
+          :icon="item.icon"
+        />
+      </UPageGrid>
+    </UPageSection>
+
+    <UPageSection
+      id="tools"
+      headline="Bring your own tools"
+      title="Works with the tools you already use."
+      description="Install once, use from any of these."
+    >
+      <UPageGrid
+        :ui="{
+          wrapper: 'grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4',
+        }"
+      >
+        <UPageCard
+          v-for="tool in tools"
+          :key="tool.name"
+          :ui="{
+            root: 'border-default/70',
+            body: 'px-4 py-3 flex items-center gap-3',
+          }"
+        >
+          <UIcon :name="tool.icon" class="size-5 shrink-0 text-muted" />
+          <span class="text-sm font-medium">{{ tool.name }}</span>
+        </UPageCard>
+      </UPageGrid>
+    </UPageSection>
+
+    <UPageCTA
+      title="Install the team in one command."
+      description="APM installs the agents and skills into your project. Open source, Apache 2.0, works with any model."
+      :links="[
+        {
+          label: 'Installation guide',
+          to: '/getting-started/installation',
+          color: 'primary',
+          trailingIcon: 'i-lucide-arrow-right',
+        },
+        {
+          label: 'View on GitHub',
+          to: 'https://github.com/mubaidr/gem-team',
+          target: '_blank',
+          color: 'neutral',
+          variant: 'outline',
+          leadingIcon: 'i-simple-icons-github',
+        },
+      ]"
+      :ui="{ root: 'border-t border-default/70' }"
+    >
+      <template #default>
+        <pre
+          class="overflow-x-auto rounded-lg border border-default/70 bg-muted/40 p-5 font-mono text-sm leading-7"
+        ><code>curl -sSL https://aka.ms/apm-unix | sh
+apm install mubaidr/gem-team</code></pre>
+      </template>
+    </UPageCTA>
   </div>
 </template>
