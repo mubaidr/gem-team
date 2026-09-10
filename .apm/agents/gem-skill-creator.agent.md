@@ -61,9 +61,7 @@ Return ONLY a raw JSON object. No markdown fences, no prose, no explanation. Omi
 ### Execution
 
 - Batch aggressively: Parallelize all independent calls/ workflow steps etc; serialize only dependencies, resource conflicts, environment constraints.
-- Follow applicable workflow steps only.
 - Autonomy: Ask only for true blockers; script repeatable/bulk work with argument-only paths, deterministic output, and non-zero failure exits; report retryable failures with evidence.
-- Semantic navigation: Prefer `vscode_listCodeUsages` and `vscode_renameSymbol` (or similar available tools) over grep for symbol resolution and call-site enumeration.
 
 ### Output hygiene
 

@@ -60,7 +60,6 @@ Return ONLY a raw JSON object. No markdown fences, no prose, no explanation. Omi
 ### Execution
 
 - Batch aggressively: Parallelize all independent calls/ workflow steps etc; serialize only dependencies, resource conflicts, environment constraints.
-- Follow applicable workflow steps only.
 - Autonomy: Ask only for true blockers; script repeatable/bulk work with argument-only paths, deterministic output, and non-zero failure exits; report retryable failures with evidence.
 
 ### Output hygiene
@@ -69,12 +68,10 @@ Return ONLY a raw JSON object. No markdown fences, no prose, no explanation. Omi
 - No filler: no greetings, no sign-offs etc
 - No code/ steps/ actions echo: reference file:line or diff blocks, never full source/logs
 - Minimal payload: omit empty/null fields, no explanatory text
-- Char hygiene: ASCII only; no smart quotes, em-dashes, ellipses, Unicode spaces, or lookalikes.
 
 ### Constitutional
 
 - Make operations idempotent, preferably atomic.
 - Verify health checks before completion.
-- Semantic navigation: Prefer `vscode_listCodeUsages` and `vscode_renameSymbol` (or similar available tools) over grep for symbol resolution and call-site enumeration.
 
 </rules>

@@ -68,7 +68,6 @@ Return ONLY a raw JSON object. No markdown fences, no prose, no explanation. Omi
 ### Execution
 
 - Batch aggressively: Parallelize all independent calls/ workflow steps etc; serialize only dependencies, resource conflicts, environment constraints.
-- Follow applicable workflow steps only.
 - Autonomy: Ask only for true blockers; script repeatable/bulk work with argument-only paths, deterministic output, and non-zero failure exits; report retryable failures with evidence.
 
 ### Output hygiene
@@ -83,7 +82,6 @@ Return ONLY a raw JSON object. No markdown fences, no prose, no explanation. Omi
 - If `quality.a11y_audit_level` is `none`, skip accessibility audits; otherwise audit after initial load, major UI changes, and final verification.
 - If a check is explicitly required by the acceptance criteria or configuration but cannot run, report it as a blocker rather than silently skipping it.
 - Store screenshots, traces, logs, and DOM snapshots in `docs/plan/{plan_id}/evidence/` only if required.
-- Semantic navigation: Prefer `vscode_listCodeUsages` and `vscode_renameSymbol` (or similar available tools) over grep for symbol resolution and call-site enumeration.
 
 ## UI Checks
 

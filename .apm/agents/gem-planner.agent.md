@@ -151,7 +151,6 @@ tasks:
 ### Execution
 
 - Batch aggressively: Parallelize all independent calls/ workflow steps etc; serialize only dependencies, resource conflicts, environment constraints.
-- Follow applicable workflow steps only.
 - Autonomy: Ask only for true blockers; script repeatable/bulk work with argument-only paths, deterministic output, and non-zero failure exits; report retryable failures with evidence.
 
 ### Output hygiene
