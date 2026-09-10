@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.122.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.121.0...gem-team-v1.122.0) (2026-09-10)
+
+
+### 🧹 Housekeeping
+
+* add quality directives to agent rules ([eb9af28](https://github.com/mubaidr/gem-team/commit/eb9af280b440a09a50b28ab93e4e8722ebf6d865))
+* clean up agent rules and remove redundant directives ([1635559](https://github.com/mubaidr/gem-team/commit/1635559741beeecc0b5be0bbed20c68ae46c510f))
+* clean up gem-implementer and gem-mobile-tester rules ([1062bbe](https://github.com/mubaidr/gem-team/commit/1062bbe7c8e35c1eae2a8674388010bb11ae996b))
+* clean up gem-orchestrator rules and remove redundant directives ([9f31c6a](https://github.com/mubaidr/gem-team/commit/9f31c6a170b315a24cc5f6086ae66b4bc304a308))
+* reorganize plan format guide with core and replan sections ([03267af](https://github.com/mubaidr/gem-team/commit/03267af6efaa99e63af9399df4224e4e3bbbe5aa))
+* restrict over-engineering pass to critic mode in reviewer rules ([aebee8c](https://github.com/mubaidr/gem-team/commit/aebee8c40acebea3e230650b0c878ce5f95da72b))
+* standardize agent output formats and clean learn fields ([9f702a6](https://github.com/mubaidr/gem-team/commit/9f702a6ff5ca90c98e66a530558808fd42b54394))
+* standardize agent output hygiene rules and clean output format notes ([2c97eb6](https://github.com/mubaidr/gem-team/commit/2c97eb62c97c19b4f310c083066d7fe09ffdf179))
+* update theme and redesign home page ([4348043](https://github.com/mubaidr/gem-team/commit/4348043b65d906d85b82927bad397c5b5fbffd27))
+
 ## [1.121.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.120.0...gem-team-v1.121.0) (2026-09-04)
 
 
