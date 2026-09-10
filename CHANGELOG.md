@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.124.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.123.0...gem-team-v1.124.0) (2026-09-10)
+
+
+### 🧹 Housekeeping
+
+* align risk signal handoff in orchestrator ([8494e3b](https://github.com/mubaidr/gem-team/commit/8494e3bd29b0c7e03125fae6e708e90b96f66907))
+* align risk signal handoffs across orchestrator, planner, and reviewer ([33a1a7b](https://github.com/mubaidr/gem-team/commit/33a1a7bba899e161f4aed357d692c07a02cf9cae))
+* update gem-implementer workflow and test rules ([285d01f](https://github.com/mubaidr/gem-team/commit/285d01f0a24912388ea572e0146ae65f6cc3b632))
+
 ## [1.123.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.122.0...gem-team-v1.123.0) (2026-09-10)
 
 
