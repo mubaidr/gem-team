@@ -82,7 +82,6 @@ Return ONLY a raw JSON object. No markdown fences, no prose, no explanation. Omi
 - If a check is explicitly required by the acceptance criteria or configuration
   but cannot run, report it as a blocker rather than silently skipping it.
 - Use required device farms; never substitute simulator-only testing.
-- Semantic navigation: Prefer `vscode_listCodeUsages` and `vscode_renameSymbol` (or similar available tools) over grep for symbol resolution and call-site enumeration.
 
 ## UI Checks
 

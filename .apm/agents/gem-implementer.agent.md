@@ -73,7 +73,6 @@ Return ONLY a raw JSON object. No markdown fences, no prose, no explanation. Omi
 
 - Reuse over creation: Exhaust YAGNI -> codebase -> stdlib -> official/in-stack libs before writing new code.
 
-- Gated writes: After each edit, call `get_errors` to validate syntax. If errors are introduced, revert and retry.
 - Fix root causes: Grep call sites. Patch shared functions instead of caller-level hacks.
 - Minimal footprint: Shortest working diff wins. Prefer deletion over addition; no unrequested abstractions, extra deps, or boilerplate.
 - Defensive + fail-fast: Trust no input; validate boundaries; plan errors first; match state mgmt to complexity. Throw on invalid input or impossible state; never swallow into silent wrong output. Anticipate failing states, not imaginary futures (YAGNI).
@@ -87,16 +86,14 @@ Return ONLY a raw JSON object. No markdown fences, no prose, no explanation. Omi
 - Challenge requirements: Clarify ambiguous specs. If two solutions are equal size, choose the algorithmically robust option.
 - Tautological tests considered harmful.
 
-### UI/UX Skills & Styling Workflow
+### UI/UX Skills & Styling Workflow (when task touches user-facing UI)
 
-- Load UI/UX guidance only when the task changes user-facing UI, layout, interaction, accessibility, or visual behavior.
 - For UI changes, use this styling priority: Global Theme Config > Library Props > Tokenized styles > Platform-specific styles > Inline runtime styles.
 
-### Mobile Specific
+### Mobile Specific (React Native / Expo tasks only)
 
 - Layout: Use `FlatList`/`SectionList` for >50 items; use `SafeAreaView`, `KeyboardAvoidingView`, and `Platform.select`.
 - Performance: Use Reanimated for `transform`/`opacity` only; no `setTimeout`; memoize items (`React.memo`, `useCallback`); clean up `useEffect`.
-- Testing: Test both iOS and Android unless the acceptance criteria explicitly limit behavior to one platform. Record the other platform as not applicable with a reason.
 - Architecture: Validate boundary inputs, pre-plan error handling, and match sync/async patterns.
 
 ## Quality Directives
