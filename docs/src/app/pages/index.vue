@@ -94,34 +94,24 @@ const capabilities = [
   },
 ];
 
-const stats = [
-  {
-    value: "Sub-$0.001",
-    label: "typical API call",
-    highlight: true,
-  },
-  {
-    value: "10x",
-    label: "cost reduction with caching",
-    highlight: true,
-  },
-  {
-    value: "82.8M+",
-    label: "tokens processed",
-  },
-  {
-    value: "666",
-    label: "agent runs",
-  },
-  {
-    value: "~124K",
-    label: "avg. context/run",
-  },
-  {
-    value: "2-5s",
-    label: "typical response latency",
-  },
-];
+const stats = {
+  headline: [
+    {
+      value: "Sub-$0.001",
+      label: "typical API call on 100K+ token contexts",
+    },
+    {
+      value: "30x",
+      label: "cheaper than uncached input",
+    },
+  ],
+  supporting: [
+    { value: "82.8M+", label: "tokens" },
+    { value: "666", label: "agent runs" },
+    { value: "~124K", label: "avg. context/run" },
+    { value: "2-5s", label: "typical latency" },
+  ],
+};
 
 const tools = [
   {
@@ -176,6 +166,7 @@ const tools = [
           size: 'lg',
         },
       ]"
+      orientation="horizontal"
     >
       <template #default>
         <div
@@ -221,7 +212,7 @@ const tools = [
         </div>
       </template>
 
-      <template #top>
+      <template #headline>
         <UBadge color="success" variant="subtle" size="sm" class="mb-4">
           Apache 2.0 · Open source · Works with any model
         </UBadge>
@@ -230,47 +221,56 @@ const tools = [
 
     <UPageSection
       id="stats"
+      headline="Stable plans. Warmer cache. Lower cost."
       align="center"
       :ui="{ container: 'py-16 sm:py-20' }"
     >
-      <UPageGrid
-        :ui="{
-          wrapper: 'grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6',
-        }"
+      <div
+        class="mx-auto grid max-w-4xl grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-12"
       >
-        <UPageCard
-          v-for="stat in stats"
+        <div
+          v-for="stat in stats.headline"
           :key="stat.label"
-          :ui="{
-            root: stat.highlight
-              ? 'border-primary/50 bg-primary/5'
-              : 'border-default/70 bg-default/60',
-            body: 'p-5 text-center',
-          }"
+          class="text-center"
         >
           <span
-            :class="[
-              'text-2xl font-semibold sm:text-3xl',
-              stat.highlight ? 'text-primary' : 'text-default',
-            ]"
+            class="text-4xl font-semibold tracking-tight text-primary sm:text-5xl"
             >{{ stat.value }}</span
           >
-          <p class="mt-2 text-xs text-muted sm:text-sm">{{ stat.label }}</p>
-        </UPageCard>
-      </UPageGrid>
+          <p class="mt-3 text-sm leading-6 text-muted">{{ stat.label }}</p>
+        </div>
+      </div>
 
-      <UAlert
-        color="info"
-        variant="soft"
-        icon="i-lucide-badge-info"
-        title="How the cost stays low"
-        description="DeepSeek V4.1 Flash charges $0.15/M uncached input and $0.003/M cached input. Gem-Team's scoped handoffs and persistent context mean most of each 100K+ token call hits cache — turning what looks like an expensive context into a sub-penny operation."
-        class="mt-8 max-w-3xl mx-auto"
-      />
+      <div
+        class="mx-auto mt-12 flex max-w-3xl flex-wrap items-center justify-center gap-x-8 gap-y-4 border-t border-default/70 pt-8"
+      >
+        <div
+          v-for="stat in stats.supporting"
+          :key="stat.label"
+          class="text-center"
+        >
+          <span class="text-lg font-semibold text-default">{{
+            stat.value
+          }}</span>
+          <span class="ml-1.5 text-sm text-muted">{{ stat.label }}</span>
+        </div>
+      </div>
 
-      <p class="mt-6 max-w-2xl text-center text-sm text-muted">
-        Observed during Gem-Team development using DeepSeek V4.1 Flash via
-        CommandCode.
+      <p
+        class="mt-8 max-w-2xl text-center text-sm text-muted justify-center mx-auto"
+      >
+        DeepSeek V4.1 Flash charges $0.15/M uncached input and $0.003/M cached
+        input. Gem-Team's scoped handoffs keep most calls hitting cache —
+        turning large contexts into sub-penny operations.
+        <UButton
+          to="/guide/optimizations#cost-in-practice"
+          color="primary"
+          variant="link"
+          label="See the full breakdown"
+          trailing-icon="i-lucide-arrow-right"
+          :ui="{ base: 'px-0' }"
+          class="-ml-1"
+        />
       </p>
     </UPageSection>
 
@@ -340,7 +340,7 @@ const tools = [
     >
       <UPageGrid
         :ui="{
-          wrapper: 'grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4',
+          base: 'grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4',
         }"
       >
         <UPageCard
