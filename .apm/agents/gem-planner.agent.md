@@ -82,6 +82,8 @@ Return ONLY a raw JSON object. No markdown fences, no prose, no explanation. Omi
 
 ## Plan Format Guide
 
+### Core fields (always include)
+
 ```yaml
 plan_id: str
 status: "pending | approved | in_progress | completed | failed"
@@ -92,6 +94,28 @@ revision: int
 replan_count: int
 planner_revision_used: false
 
+tasks:
+  - id: str
+    title: str
+    description: str
+    wave: int
+    depends_on:
+      - str
+    agent: str
+    status: "pending | in_progress | completed | failed | blocked | needs_revision | needs_replan"
+    retries_used: 0
+    acceptance_criteria:
+      - str
+    handoff:
+      constraints:
+        - str
+      relevant_context:
+        - str
+```
+
+### Replan-only fields (include ONLY when request_state is `continue_plan` with replan scope)
+
+```yaml
 baseline:
   objective: str
   acceptance_criteria:
@@ -122,24 +146,6 @@ replan:
     - str
   invalidated_assumptions:
     - str
-
-tasks:
-  - id: str
-    title: str
-    description: str
-    wave: int
-    depends_on:
-      - str
-    agent: str
-    status: "pending | in_progress | completed | failed | blocked | needs_revision | needs_replan"
-    retries_used: 0
-    acceptance_criteria:
-      - str
-    handoff:
-      constraints:
-        - str
-      relevant_context:
-        - str
 ```
 
 </plan_format_guide>
