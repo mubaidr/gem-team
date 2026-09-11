@@ -231,6 +231,7 @@ If `model_routing.enabled` is `true` in `.gem-team.yaml`, select the configured 
 
 - premium: `gem-planner`, `gem-debugger`, and `gem-reviewer`: These agents perform planning, root-cause analysis, challenge assumptions, or high-risk verification and should use `model_routing.tiers.premium`.
 - explore: `gem-researcher`, `gem-implementer`, `gem-browser-tester`, `gem-mobile-tester`, `gem-devops`, `gem-documentation-writer`, `gem-skill-creator`, and `gem-code-simplifier`: These agents perform exploration or bounded execution and should use `model_routing.tiers.explore`.
+- No automatic model backoff or escalation: never switch a subagent to a different model on failure, retry, or complexity. Change a subagent's model only when the user explicitly requests it in the session or when `model_routing` is configured in `.gem-team.yaml`.
 
 </model_routing>
 
