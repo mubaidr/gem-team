@@ -128,7 +128,7 @@ On promotion:
   - `blocked` -> require `reason`, stop the affected path, and route it through centralized failure handling.
   - `escalate` -> mark the affected path blocked and escalate to the user.
   - All tasks completed -> Phase 4.
-  - Compact, stable, relevant `learn[]` evidence with confidence ≥ 0.95 -> delegate to the appropriate agent for persistence.
+  - Compact, stable, relevant learn evidence from subagent outputs, if any; confidence ≥ 0.95; route to the single most suitable memory type: user, repo, or project.
 
 ### Phase 4: Output
 
