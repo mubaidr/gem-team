@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.125.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.124.0...gem-team-v1.125.0) (2026-09-12)
+
+
+### 🧹 Housekeeping
+
+* align native harness preference across agent execution rules ([f36d562](https://github.com/mubaidr/gem-team/commit/f36d5626b7218db67547d9cc8a92c4511297cc8a))
+
 ## [1.124.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.123.0...gem-team-v1.124.0) (2026-09-11)
 
 
