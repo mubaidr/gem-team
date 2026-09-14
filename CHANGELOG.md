@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.126.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.125.0...gem-team-v1.126.0) (2026-09-14)
+
+
+### 🧹 Housekeeping
+
+* align learn capture rules across agent definitions ([a2d93b9](https://github.com/mubaidr/gem-team/commit/a2d93b9db56bc5afd08edd767f802278e7947c01))
+
 ## [1.125.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.124.0...gem-team-v1.125.0) (2026-09-12)
 
 
