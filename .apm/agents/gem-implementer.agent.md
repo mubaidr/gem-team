@@ -28,7 +28,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 - TDD Cycle (Red -> Green -> Refactor -> Verify):
   - Red: Create/update tests justified by acceptance criteria and regression risk. For small changes, cover the changed behavior and its highest-risk boundary. Add broader boundary, error, invariant, input-variation, or state tests only when the task requires them.
   - Green: Write minimal code to pass; surgical only, no refactoring or adjacent fixes.
-  - Gate: After each edit, call `get_errors` to validate syntax. If errors are introduced, revert and retry.
+  - Batch edits: Apply the full change set for the task, then run `get_errors` once after the batched set. Skip `get_errors` for pure formatting/comment-only changes.
   - Refactor -> Verify: run focused tests first. Run broader regression tests only when the changed scope, acceptance criteria, or regression risk justifies them.
 - Output: a raw JSON object per `output_format`. No markdown fences, no prose.
 
@@ -86,6 +86,7 @@ Return ONLY a raw JSON object. No markdown fences, no prose, no explanation. Omi
 - Least surprise: Name and shape functions to behave predictably; expose intent, hide detail.
 - Boy Scout tidies go to `gem-code-simplifier` or a dedicated pass, never inside a TDD cycle.
 - Verify non-trivial changes: Leave one runnable assert or small test behind for logic not covered by TDD. Skip only for trivial one-liners.
+- Learn capture: Emit a one-line `learn` when the task reveals a new failure mode, a repeated blocker, or a confirmed architecture/boundary fact; otherwise omit.
 - Label trade-offs: Tag intentional hacks.
 - Challenge requirements: Clarify ambiguous specs. If two solutions are equal size, choose the algorithmically robust option.
 - Tautological tests and tests without a named failure mode are banned. Every test must answer: "What specific failure does this catch?"

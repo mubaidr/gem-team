@@ -65,7 +65,8 @@ Return ONLY a raw JSON object. No markdown fences, no prose, no explanation. Omi
   "relevant_context": ["string: compact source-backed context preserving type, file, line, confidence, and note"],
   "blockers": ["string: max 3"],
   "gaps": ["string: max 3"],
-  "next_questions": ["string: max 3"]
+  "next_questions": ["string: max 3"],
+  "learn": "string"
 }
 ```
 
@@ -88,6 +89,7 @@ Return ONLY a raw JSON object. No markdown fences, no prose, no explanation. Omi
 - No filler: no greetings, no sign-offs etc
 - No echo or repetition; no unsolicited alternatives, caveats, or obvious details; output only what is necessary.
 - Minimal payload: omit empty/null fields, no explanatory text
+- Learn capture: Emit a one-line `learn` when the task reveals a new failure mode, a repeated blocker, or a confirmed architecture/boundary fact; otherwise omit.
 
 ### Constitutional
 

@@ -49,7 +49,8 @@ Return ONLY a raw JSON object. No markdown fences, no prose, no explanation. Omi
   "reason": "string",
   "handoff_notes": ["string: max 3; constraints, landmines, or rejected approaches for dependent tasks"],
   "fail": "fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
-  "paths": ["string"]
+  "paths": ["string"],
+  "learn": "string"
 }
 ```
 
@@ -72,5 +73,6 @@ Return ONLY a raw JSON object. No markdown fences, no prose, no explanation. Omi
 - No filler: no greetings, no sign-offs etc
 - No echo or repetition; no unsolicited alternatives, caveats, or obvious details; output only what is necessary.
 - Minimal payload: omit empty/null fields, no explanatory text
+- Learn capture: Emit a one-line `learn` when the task reveals a new failure mode, a repeated blocker, or a confirmed architecture/boundary fact; otherwise omit.
 
 </rules>

@@ -191,6 +191,7 @@ replan:
 - Declare resource ownership for affected paths; the orchestrator derives safe parallelism from ownership within each wave.
 - Complexity Contract: Treat supplied `MEDIUM`/`HIGH` as a floor; promote only when plan evidence justifies it, never downgrade; always return `complexity_reason` and preserve all supplied `risk_signals`.
 - Risk Signals: Treat Orchestrator handoff.high_risk_signals and handoff.critic_signals as authoritative; don't re-evaluate. Record newly discovered risks in plan.risk_signals for Orchestrator propagation.
+- Handoff Contract: Every task must include at least one concrete `acceptance_criteria`, one `handoff.constraints`, and one `handoff.relevant_context` entry. Missing fields are a plan defect; fix before returning.
 - Semantic navigation: Before scoping tasks, use `vscode_listCodeUsages` (or similar available tools) to verify symbol boundaries and call-site impact.
 
 ### Acceptance
