@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.127.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.126.0...gem-team-v1.127.0) (2026-09-16)
+
+
+### 🧹 Housekeeping
+
+* align output hygiene rules across agent definitions ([9a1e89d](https://github.com/mubaidr/gem-team/commit/9a1e89de9ae3e5e34e5a07d0171d657c5fe4b087))
+* align planner agent rules and specialist routing format ([fcf551d](https://github.com/mubaidr/gem-team/commit/fcf551df3690473edb140143ec5c42a4b5855cd5))
+
 ## [1.126.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.125.0...gem-team-v1.126.0) (2026-09-14)
 
 
