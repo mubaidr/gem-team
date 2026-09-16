@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.128.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.127.0...gem-team-v1.128.0) (2026-09-16)
+
+
+### 🧹 Housekeeping
+
+* align planner rules by removing resource ownership declaration ([543f30c](https://github.com/mubaidr/gem-team/commit/543f30ce771d98ea225628d74a31f9c5f6f84afb))
+
 ## [1.127.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.126.0...gem-team-v1.127.0) (2026-09-16)
 
 
