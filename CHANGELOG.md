@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.129.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.128.0...gem-team-v1.129.0) (2026-09-16)
+
+
+### 🧹 Housekeeping
+
+* align agent rules and remove redundant directives ([06b2151](https://github.com/mubaidr/gem-team/commit/06b2151a6ca05ac9b0044ca608842d593e1acfb6))
+
 ## [1.128.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.127.0...gem-team-v1.128.0) (2026-09-16)
 
 
