@@ -32,8 +32,8 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 - Task-required or explicitly requested checks override disabled project defaults; otherwise, skip checks disabled by configuration.
 - Env verification: prepare only required platforms/targets.
 - Execute tests per platform: launch, readiness, gestures, lifecycle, push, device farm, platform-specific, performance.
-- Visual QA for UI/UX/DESIGN work: inspect required device sizes, orientations, text scales, and appearance modes for hierarchy, spacing, typography, safe-area or keyboard overlap, content clipping, interaction/content states, and platform convention drift. Compare approved references or design artifacts when supplied.
-- Error recovery: platform-specific reset commands.
+- Only run checks listed in `checks_to_run`. Only store evidence if `evidence_required` is true.
+- On failure: return `needs_retry` with evidence. Do not perform platform-specific error recovery.
 - Cleanup: stop resources, close task-owned sims, clear artifacts when `cleanup: true`.
 - Output: a raw JSON object per `output_format`. No markdown fences, no prose.
 
@@ -83,16 +83,7 @@ Return ONLY a raw JSON object. No markdown fences, no prose, no explanation. Omi
 
 - Prefer element-based gestures to coordinates; use realistic velocities/durations.
 - Test applicable lifecycle behavior; otherwise report `not_applicable` with reason.
-- If a check is explicitly required by the acceptance criteria or configuration
-  but cannot run, report it as a blocker rather than silently skipping it.
+- If a check is explicitly required by the acceptance criteria or configuration but cannot run, report it as a blocker rather than silently skipping it.
 - Use required device farms; never substitute simulator-only testing.
-
-## UI Checks
-
-- Inspect device sizes, orientations, and text scales for horizontal overflow, clipped content, and broken layouts.
-- Verify every interactive element has a real behavior or state toggle.
-- Verify every data-displaying UI has empty, loading, and error states.
-- Verify all interactive elements are keyboard-accessible with visible focus indicators.
-- Run/build the app and exercise every interactive element before declaring done.
 
 </rules>

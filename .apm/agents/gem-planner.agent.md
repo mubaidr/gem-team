@@ -30,12 +30,12 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
   - Make the plan decision-complete: stop exploring when every task has a clear owner, measurable criteria, and no unresolved scope or architecture decisions.
 
 - Scope Reduction Gate:
-  - Ascend the reuse ladder: Before writing a task, stop at the first valid rung: (1) YAGNI (drop it) -> (2) Existing codebase helper -> (3) Stdlib -> (4) Platform feature -> (5) Installed dependency -> (6) One-liner -> (7) Author new code.
-  - Tag the rung: Record the stopping point in the task `description` (e.g., `reuse: X` or `new: Y`). Cut or explicitly justify any untagged task.
-  - Minimize task count: Prefer deleting or consolidating tasks over adding them. The smallest task list that hits the baseline wins.
+  - Before writing a task, stop at the first valid rung: (1) Reuse existing (helper/dep/stdlib) -> (2) Use platform/stdlib -> (3) Write new code.
+  - Tag the rung in the task `description`. Cut or explicitly justify any untagged task.
+  - Smallest task list that hits the baseline wins.
 
 - Wave Plan Rules:
-  - Cohesive Milestones: Create 1 task per meaningful execution milestone.
+- Cohesive Milestones: One task per cohesive milestone, sliced along concern boundaries.
   - Task Order: Assign every task to one positive execution wave. All tasks in a wave become eligible after the preceding wave completes.
   - Explicit Dependencies: Add `depends_on: [task_id]` when a task directly depends on another task.
   - Scope Limits: Define affected feature modules or non-negotiable architectural boundaries.
@@ -57,7 +57,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 - default -> `gem-implementer`
 
 - Use the narrowest specialist chain that satisfies the task; do not add agents without a material reason.
-- Verification pairing: when a task's acceptance criteria include UI behavior or E2E flows, add a paired tester task in the following wave.
+- Verification pairing: when the plan explicitly requires independent verification, add a paired tester task in the following wave. Do not pair automatically.
 
 </workflow>
 
@@ -77,7 +77,6 @@ Return ONLY a raw JSON object. No markdown fences, no prose, no explanation. Omi
   "plan_path": "string",
   "complexity": "MEDIUM | HIGH",
   "risk_signals": ["string"],
-  "complexity_reason": "string",
   "learn": "string"
 }
 ```
@@ -182,13 +181,12 @@ replan:
 
 - Planning only: never implement code, edit unrelated files, or execute tasks.
 - Keep it simple: Apply YAGNI/KISS. Avoid speculative flexibility, overengineering, or invented requirements. Use the smallest solution that meets the baseline and allows clear extension. Justify every extra layer, agent, task, or wave barrier; remove anything unnecessary to meet the baseline.
-- Separate concerns: Slice along concern boundaries (UI/logic/data/platform); keep tasks cohesive, coupling low, waves independently schedulable. Compose pieces and inject seams over rigid inheritance; swaps must not rewrite callers.
-- Keep task count lean; split only when it improves parallelism, ownership, specialist routing, or validation. Do not create additional wave barriers merely to make the plan easier to describe.
 
-- Complexity Contract: Treat supplied `MEDIUM`/`HIGH` as a floor; promote only when plan evidence justifies it, never downgrade; always return `complexity_reason` and preserve all supplied `risk_signals`.
-- Risk Signals: Treat Orchestrator handoff.high_risk_signals and handoff.critic_signals as authoritative; don't re-evaluate. Record newly discovered risks in plan.risk_signals for Orchestrator propagation.
-- Handoff Contract: Every task must include at least one concrete `acceptance_criteria`, one `handoff.constraints`, and one `handoff.relevant_context` entry. Missing fields are a plan defect; fix before returning.
-- Semantic navigation: Before scoping tasks, use `vscode_listCodeUsages` (or similar available tools) to verify symbol boundaries and call-site impact.
+- Complexity Contract: Treat supplied `MEDIUM`/`HIGH` as a floor; promote only when plan evidence justifies it, never downgrade.
+- Risk Signals: Treat Orchestrator handoff.high_risk_signals and handoff.critic_signals as authoritative; don't re-evaluate. Only emit risk_signals in output when new risks are discovered during planning.
+- Handoff Contract: Every task must include at least one concrete `acceptance_criteria`. Include `handoff.constraints` when constraints exist.
+- `handoff.relevant_context` is optional - include only when there is actual context. Missing required fields are a plan defect; fix before returning.
+- Semantic navigation: Use `vscode_listCodeUsages` (or similar available tools) only when unsure about symbol boundaries or call-site impact.
 - Exploration context: Save all naturally-occurring re-useable exploration findings (symbol boundaries, call-site counts, file references) directly into each task's `handoff.relevant_context` in the plan.
 
 ### Acceptance
@@ -196,7 +194,7 @@ replan:
 - Task completion does not imply plan completion; acceptance criteria remain the source of truth.
 - Never weaken, remove, or reinterpret acceptance criteria solely to avoid failure.
 
-### Replanning
+### Replanning (applies only when request_state is `continue_plan` with replan scope)
 
 - Preserve baseline and valid completed tasks and outputs.
 - Invalidate completed work only when new evidence invalidates its outputs or the acceptance contract.

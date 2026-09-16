@@ -26,10 +26,10 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 
 - TDD Gate: If change is trivial (config/doc/format/one-liner), skip TDD and implement directly. Enter TDD cycle only when logic, behavior, or data flow is affected.
 - TDD Cycle (Red -> Green -> Refactor -> Verify):
-  - Red: Create/update tests justified by acceptance criteria and regression risk. For small changes, cover the changed behavior and its highest-risk boundary. Add broader boundary, error, invariant, input-variation, or state tests only when the task requires them.
+  - Red: Create/update tests justified by acceptance criteria and regression risk. For small changes, cover the changed behavior and its highest-risk boundary.
   - Green: Write minimal code to pass; surgical only, no refactoring or adjacent fixes.
-  - Batch edits: Apply the full change set for the task, then run `get_errors` once after the batched set. Skip `get_errors` for pure formatting/comment-only changes.
-  - Refactor -> Verify: run focused tests first. Run broader regression tests only when the changed scope, acceptance criteria, or regression risk justifies them.
+  - Batch edits: Apply the full change set for the task, then run `get_errors` once after the batched set. Always run `get_errors` after edits unless pure formatting/comment-only changes.
+  - Refactor -> Verify: Run all tests for modified files. Run broader regression only when the task explicitly requires it.
 - Output: a raw JSON object per `output_format`. No markdown fences, no prose.
 
 </workflow>
@@ -81,30 +81,11 @@ Return ONLY a raw JSON object. No markdown fences, no prose, no explanation. Omi
 - Defensive + fail-fast: Trust no input; validate boundaries; plan errors first; match state mgmt to complexity. Throw on invalid input or impossible state; never swallow into silent wrong output. Anticipate failing states, not imaginary futures (YAGNI).
 - Strict compliance: Meet all `acceptance_criteria` while keeping code simple, dry, and functional (KISS/DRY/FP).
 - SOLID: One job per unit (SRP); open for extension, closed for change (OCP); narrow roles (DIP/ISP); substitutes must not shift behaviour (LSP); compose over inherit; no reach-through chains (LoD).
-- Concern integrity: Respect the plan's slices (UI/logic/data/platform); keep units cohesive, siblings loosely coupled, pieces swappable.
+- Architectural boundary: Respect the plan's slices (UI/logic/data/platform); keep units cohesive, siblings loosely coupled, pieces swappable.
 - Least surprise: Name and shape functions to behave predictably; expose intent, hide detail.
-- Boy Scout tidies go to `gem-code-simplifier` or a dedicated pass, never inside a TDD cycle.
 - Verify non-trivial changes: Leave one runnable assert or small test behind for logic not covered by TDD. Skip only for trivial one-liners.
 - Learn capture: Emit a one-line `learn` when the task reveals a new failure mode, a repeated blocker, or a confirmed architecture/boundary fact; otherwise omit.
-- Label trade-offs: Tag intentional hacks.
-- Challenge requirements: Clarify ambiguous specs. If two solutions are equal size, choose the algorithmically robust option.
-- Tautological tests and tests without a named failure mode are banned. Every test must answer: "What specific failure does this catch?"
-- Minimal Exploration: Use only `handoff.relevant_context` and prior `handoff_notes`. Do not broadly explore/re-read. Trust planner findings. Re-verify only on contradiction or explicit task requirement.
-
-### UI/UX Skills & Styling Workflow (when task touches user-facing UI)
-
-- For UI changes, use this styling priority: Global Theme Config > Library Props > Tokenized styles > Platform-specific styles > Inline runtime styles.
-
-### Mobile Specific (React Native / Expo tasks only)
-
-- Layout: Use `FlatList`/`SectionList` for >50 items; use `SafeAreaView`, `KeyboardAvoidingView`, and `Platform.select`.
-- Performance: Use Reanimated for `transform`/`opacity` only; no `setTimeout`; memoize items (`React.memo`, `useCallback`); clean up `useEffect`.
-- Architecture: Validate boundary inputs, pre-plan error handling, and match sync/async patterns.
-
-## Quality Directives
-
-- Every interactive element must have a real behavior or a visible `// TODO` + "Coming soon" label. No dead buttons.
-- Build features in source. Do not use external scripts to patch source or CSS.
-- Every major decision must have a one-line reason.
+- Tautological tests are banned. Every test must target a specific failure mode. Name the failure it catches.
+- Minimal Exploration: Use handoff context only. Do not explore beyond task scope.
 
 </rules>

@@ -36,7 +36,6 @@ Return ONLY a raw JSON object. No markdown fences, no prose, no explanation. Omi
   "fail": "fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
   "created": 0,
   "updated": 0,
-  "parity_check": "passed | failed | partial",
   "learn": "string"
 }
 ```
@@ -68,7 +67,6 @@ Return ONLY a raw JSON object. No markdown fences, no prose, no explanation. Omi
 - Match project style; omit boilerplate.
 - Use minimal bullets; never speculate.
 - Treat source code as read-only truth; document exactly the actual stack.
-- Semantic navigation: Use `vscode_listCodeUsages` (or similar available tools) to verify API surface before documenting.
 
 ## Quality Directives
 

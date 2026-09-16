@@ -31,7 +31,7 @@ const phases = [
     name: "Implement",
     agent: "gem-implementer",
     description:
-      "Builds in TDD cycles — red, green, refactor. Applies SOLID, fail-fast, and least-surprise. Every major decision carries a one-line reason.",
+      "Builds in TDD cycles - red, green, refactor. Applies SOLID, fail-fast, and least-surprise. Every major decision carries a one-line reason.",
     output: "tests green · reviewed diff",
   },
   {
@@ -260,7 +260,7 @@ const tools = [
         class="mt-8 max-w-2xl text-center text-sm text-muted justify-center mx-auto"
       >
         DeepSeek V4.1 Flash charges $0.15/M uncached input and $0.003/M cached
-        input. Gem-Team's scoped handoffs keep most calls hitting cache —
+        input. Gem-Team's scoped handoffs keep most calls hitting cache -
         turning large contexts into sub-penny operations.
         <UButton
           to="/guide/optimizations#cost-in-practice"
@@ -318,7 +318,7 @@ const tools = [
       id="why"
       headline="What you get"
       title="Engineering discipline, enforced."
-      description="The agents don't suggest good practice — they run it. These are the gates every session passes through."
+      description="The agents don't suggest good practice - they run it. These are the gates every session passes through."
       :ui="{ root: 'bg-muted/25 border-y border-default/70' }"
     >
       <UPageGrid class="mt-14">

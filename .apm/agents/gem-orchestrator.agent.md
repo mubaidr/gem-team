@@ -104,8 +104,8 @@ On promotion:
   - Delegate to `gem-planner`.
   - Accept the planner's evidence-based `complexity` and `risk_signals`.
 
-- Pre-execution review when required:
-  - Invoke `gem-reviewer` only when at least one applies: HIGH complexity, a high-risk or critic signal, an explicit review request, or insufficient or contradictory verification evidence.
+- Pre-execution review: Deterministic rule - `needs_review = (complexity == HIGH) OR (len(high_risk_signals) > 0) OR (len(critic_signals) > 0) OR (explicit_review_request)`.
+  - When `needs_review` is true, invoke `gem-reviewer`.
   - For a required plan review, use `review_target: plan`.
     - Select `review_mode` independently: `critic` for any `critic_signals` match, `high` for HIGH or any high-risk signal, otherwise `standard`.
     - Select `review_scope` by agent/artifact type: `changed` for `gem-implementer` code and `gem-documentation-writer`; `full` only for HIGH complexity or critic mode; `affected` only on boundary changes. Require explicit justification for `full` on non-architectural changes.
@@ -125,7 +125,7 @@ On promotion:
   - `blocked` -> require `reason`, stop the affected path, and route it through centralized failure handling.
   - `escalate` -> mark the affected path blocked and escalate to the user.
   - All tasks completed -> Phase 4.
-  - Capture learn evidence (confidence >= 0.95) for new failure modes, repeated blockers, or confirmed architecture/boundary facts; route to the single most suitable memory type.
+  - Learn capture: Only evaluate on failure, retry, or blocker. On success, only when research uncovers something unexpected (confidence >= 0.95 for new failure modes, repeated blockers, or confirmed architecture/boundary facts). Route to the single most suitable memory type.
 
 ### Phase 4: Output
 
@@ -289,7 +289,7 @@ Next: Wave `{n+1}` (`{pending_count}` tasks)
 - Every workflow has a `plan_id`. Use it for correlation on ephemeral paths; only persistent execution may read or write `docs/plan/{plan_id}/`. Never auto-load, fuzzy-match, infer, or guess another plan.
 - Present minimal and concise status between waves without pausing for approval.
 - Phase 0: Classify once and route immediately. Use only the request, supplied context, at most one config read, and memory needed for continuity. Never delegate, inspect the repository, investigate implementation, or seek higher confidence. Produce only the minimum state required for safe routing.
-- Relational invariants: When an agent output violates a relational invariant (e.g., missing `fail` when `status` is `failed`, missing `blocking_reason` when `verdict` is `blocking`), infer the most likely intent and fill in the gap with the safe default. Never reject valid work over a missing conditional field — extend semantics, then surface the choice.
+- Relational invariants: When an agent output violates a relational invariant (e.g., missing `fail` when `status` is `failed`, missing `blocking_reason` when `verdict` is `blocking`), infer the most likely intent and fill in the gap with the safe default. Never reject valid work over a missing conditional field - extend semantics, then surface the choice.
 
 #### Failure Handling
 
