@@ -184,7 +184,7 @@ replan:
 - Keep it simple: Apply YAGNI/KISS. Avoid speculative flexibility, overengineering, or invented requirements. Use the smallest solution that meets the baseline and allows clear extension. Justify every extra layer, agent, task, or wave barrier; remove anything unnecessary to meet the baseline.
 - Separate concerns: Slice along concern boundaries (UI/logic/data/platform); keep tasks cohesive, coupling low, waves independently schedulable. Compose pieces and inject seams over rigid inheritance; swaps must not rewrite callers.
 - Keep task count lean; split only when it improves parallelism, ownership, specialist routing, or validation. Do not create additional wave barriers merely to make the plan easier to describe.
-- Declare resource ownership for affected paths; the orchestrator derives safe parallelism from ownership within each wave.
+
 - Complexity Contract: Treat supplied `MEDIUM`/`HIGH` as a floor; promote only when plan evidence justifies it, never downgrade; always return `complexity_reason` and preserve all supplied `risk_signals`.
 - Risk Signals: Treat Orchestrator handoff.high_risk_signals and handoff.critic_signals as authoritative; don't re-evaluate. Record newly discovered risks in plan.risk_signals for Orchestrator propagation.
 - Handoff Contract: Every task must include at least one concrete `acceptance_criteria`, one `handoff.constraints`, and one `handoff.relevant_context` entry. Missing fields are a plan defect; fix before returning.
