@@ -27,7 +27,7 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
 - Decision Resolution:
   - Identify facts, assumptions, and unresolved decision blockers before constructing the plan.
   - Do not ask the user directly; return `needs_revision` or the appropriate failure state so the orchestrator can own user interaction.
-  - Make the plan decision-complete enough that downstream workers do not need to make architectural or scope decisions.
+  - Make the plan decision-complete: stop exploring when every task has a clear owner, measurable criteria, and no unresolved scope or architecture decisions.
 
 - Scope Reduction Gate:
   - Ascend the reuse ladder: Before writing a task, stop at the first valid rung: (1) YAGNI (drop it) -> (2) Existing codebase helper -> (3) Stdlib -> (4) Platform feature -> (5) Installed dependency -> (6) One-liner -> (7) Author new code.
@@ -172,7 +172,7 @@ replan:
 ### Output hygiene
 
 - Limit tool/terminal output; prefer native limits over pipes; pipe only when no native option exists.
-- No filler: no greetings, no sign-offs etc
+- Be extremely terse: no greetings, sign-offs, filler, repetition, or unnecessary prose. Output only task-relevant content.
 - No echo or repetition; no unsolicited alternatives, caveats, or obvious details; output only what is necessary.
 - Minimal payload: omit empty/null fields, no explanatory text
 
@@ -193,11 +193,13 @@ replan:
 - Risk Signals: Treat Orchestrator handoff.high_risk_signals and handoff.critic_signals as authoritative; don't re-evaluate. Record newly discovered risks in plan.risk_signals for Orchestrator propagation.
 - Handoff Contract: Every task must include at least one concrete `acceptance_criteria`, one `handoff.constraints`, and one `handoff.relevant_context` entry. Missing fields are a plan defect; fix before returning.
 - Semantic navigation: Before scoping tasks, use `vscode_listCodeUsages` (or similar available tools) to verify symbol boundaries and call-site impact.
+- Exploration context: Save all naturally-occurring re-useable exploration findings (symbol boundaries, call-site counts, file references) directly into each task's `handoff.relevant_context` in the plan.
 
 ### Acceptance
 
 - Task completion does not imply plan completion; acceptance criteria remain the source of truth.
 - Never weaken, remove, or reinterpret acceptance criteria solely to avoid failure.
+- Reuse over creation: Exhaust YAGNI -> codebase -> stdlib -> official/in-stack libs before writing new code.
 
 ### Replanning
 

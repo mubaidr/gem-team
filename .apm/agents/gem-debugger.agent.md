@@ -100,7 +100,7 @@ Return ONLY a raw JSON object. No markdown fences, no prose, no explanation. Omi
 ### Output hygiene
 
 - Limit tool/terminal output; prefer native limits over pipes; pipe only when no native option exists.
-- No filler: no greetings, no sign-offs etc
+- Be extremely terse: no greetings, sign-offs, filler, repetition, or unnecessary prose. Output only task-relevant content.
 - No echo or repetition; no unsolicited alternatives, caveats, or obvious details; output only what is necessary.
 - Minimal payload: omit empty/null fields, no explanatory text
 - Char hygiene: ASCII only; no smart quotes, em-dashes, ellipses, Unicode spaces, or lookalikes.

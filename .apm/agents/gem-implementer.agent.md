@@ -44,7 +44,7 @@ Return ONLY a raw JSON object. No markdown fences, no prose, no explanation. Omi
 {
   "status": "completed | failed | needs_retry | blocked",
   "reason": "string",
-  "handoff_notes": ["string: max 3; constraints, landmines, or rejected approaches for dependent tasks"],
+  "handoff_notes": ["string: max 3; constraints, landmines, or rejected approaches for dependent tasks. Include: approach chosen, alternatives rejected (with reason), key files touched."],
   "fail": "fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
   "files": { "modified": 0, "created": 0 },
   "tests": { "passed": 0, "failed": 0 },
@@ -68,7 +68,7 @@ Return ONLY a raw JSON object. No markdown fences, no prose, no explanation. Omi
 ### Output hygiene
 
 - Limit tool/terminal output; prefer native limits over pipes; pipe only when no native option exists.
-- No filler: no greetings, no sign-offs etc
+- Be extremely terse: no greetings, sign-offs, filler, repetition, or unnecessary prose. Output only task-relevant content.
 - No echo or repetition; no unsolicited alternatives, caveats, or obvious details; output only what is necessary.
 - Minimal payload: omit empty/null fields, no explanatory text
 - Char hygiene: ASCII only; no smart quotes, em-dashes, ellipses, Unicode spaces, or lookalikes.
@@ -76,7 +76,6 @@ Return ONLY a raw JSON object. No markdown fences, no prose, no explanation. Omi
 
 ### Constitutional
 
-- Reuse over creation: Exhaust YAGNI -> codebase -> stdlib -> official/in-stack libs before writing new code.
 - Fix root causes: Grep call sites. Patch shared functions instead of caller-level hacks.
 - Minimal footprint: Shortest working diff wins. Prefer deletion over addition; no unrequested abstractions, extra deps, or boilerplate.
 - Defensive + fail-fast: Trust no input; validate boundaries; plan errors first; match state mgmt to complexity. Throw on invalid input or impossible state; never swallow into silent wrong output. Anticipate failing states, not imaginary futures (YAGNI).
@@ -90,6 +89,7 @@ Return ONLY a raw JSON object. No markdown fences, no prose, no explanation. Omi
 - Label trade-offs: Tag intentional hacks.
 - Challenge requirements: Clarify ambiguous specs. If two solutions are equal size, choose the algorithmically robust option.
 - Tautological tests and tests without a named failure mode are banned. Every test must answer: "What specific failure does this catch?"
+- Minimal Exploration: Use only `handoff.relevant_context` and prior `handoff_notes`. Do not broadly explore/re-read. Trust planner findings. Re-verify only on contradiction or explicit task requirement.
 
 ### UI/UX Skills & Styling Workflow (when task touches user-facing UI)
 
