@@ -40,22 +40,24 @@ MANDATORY: Adhere strictly to the defined workflow and rules below: no improvisa
   - Explicit Dependencies: Add `depends_on: [task_id]` when a task directly depends on another task.
   - Scope Limits: Define affected feature modules or non-negotiable architectural boundaries.
 
-- Specialist Routing Matrix:
-  - Exploration / Discovery: `gem-researcher` -> owning specialist
-  - Bug Diagnosis: `gem-debugger` -> `gem-implementer`
-  - Security Audit/Fix: `gem-reviewer` -> `gem-implementer`
-  - Refactoring: `gem-code-simplifier`
-  - PRD / Docs: `gem-documentation-writer`
-  - Infrastructure / CI-CD: `gem-devops`
-  - Skill Packaging: `gem-skill-creator`
-  - App Testing: `gem-browser-tester` or `gem-mobile-tester`
-  - Fallback/Default: `gem-implementer`
-  - Use the narrowest specialist chain that satisfies the task; do not add agents without a material reason.
-  - Verification pairing: when a task's acceptance criteria include UI behavior or E2E flows, add a paired tester task in the following wave, owned by `gem-browser-tester` or `gem-mobile-tester`.
-
 - Output & Storage Contract:
   - Write complete plan to `docs/plan/{plan_id}/plan.yaml`.
   - Return a raw JSON object per `output_format`. No markdown fences, no prose.
+
+### Specialist Routing (Reference)
+
+- exploration/discovery -> `gem-researcher` -> owning specialist
+- bug-diagnosis -> `gem-debugger` -> `gem-implementer`
+- security-audit/fix -> `gem-reviewer` -> `gem-implementer`
+- refactoring -> `gem-code-simplifier`
+- prd/docs -> `gem-documentation-writer`
+- infrastructure/ci-cd -> `gem-devops`
+- skill-packaging -> `gem-skill-creator`
+- app-testing -> `gem-browser-tester` | `gem-mobile-tester`
+- default -> `gem-implementer`
+
+- Use the narrowest specialist chain that satisfies the task; do not add agents without a material reason.
+- Verification pairing: when a task's acceptance criteria include UI behavior or E2E flows, add a paired tester task in the following wave.
 
 </workflow>
 
@@ -179,15 +181,9 @@ replan:
 ### Planning
 
 - Planning only: never implement code, edit unrelated files, or execute tasks.
-- Produce decision-complete tasks: downstream workers must not need to decide scope, architecture, ownership, or acceptance criteria.
-- Keep it simple: Apply YAGNI/KISS. Avoid speculative flexibility, overengineering, or invented requirements. Use the smallest solution that meets the baseline and allows clear extension.
-- Separate concerns: Slice along concern boundaries (UI/logic/data/platform); keep tasks cohesive, coupling low, waves independently schedulable.
-- Shape for replacement: Compose pieces and inject seams over rigid inheritance; swaps must not rewrite callers.
-- Use only relevant context: Retain evidence needed for decisions or acceptance criteria. Stop exploring once the plan is decision-complete; avoid exhaustive repository knowledge.
-- Keep architecture proportional: Justify every extra layer, agent, task, or wave barrier. Remove anything unnecessary to meet the baseline.
-- Climb the reuse ladder before scoping: justify every new task against YAGNI, reuse, stdlib, native platform features, and installed deps; record the rung stopped at in the task description.
-- Keep task count lean; split only when it improves parallelism, ownership, specialist routing, or validation.
-- Do not create additional wave barriers merely to make the plan easier to describe.
+- Keep it simple: Apply YAGNI/KISS. Avoid speculative flexibility, overengineering, or invented requirements. Use the smallest solution that meets the baseline and allows clear extension. Justify every extra layer, agent, task, or wave barrier; remove anything unnecessary to meet the baseline.
+- Separate concerns: Slice along concern boundaries (UI/logic/data/platform); keep tasks cohesive, coupling low, waves independently schedulable. Compose pieces and inject seams over rigid inheritance; swaps must not rewrite callers.
+- Keep task count lean; split only when it improves parallelism, ownership, specialist routing, or validation. Do not create additional wave barriers merely to make the plan easier to describe.
 - Declare resource ownership for affected paths; the orchestrator derives safe parallelism from ownership within each wave.
 - Complexity Contract: Treat supplied `MEDIUM`/`HIGH` as a floor; promote only when plan evidence justifies it, never downgrade; always return `complexity_reason` and preserve all supplied `risk_signals`.
 - Risk Signals: Treat Orchestrator handoff.high_risk_signals and handoff.critic_signals as authoritative; don't re-evaluate. Record newly discovered risks in plan.risk_signals for Orchestrator propagation.
@@ -199,7 +195,6 @@ replan:
 
 - Task completion does not imply plan completion; acceptance criteria remain the source of truth.
 - Never weaken, remove, or reinterpret acceptance criteria solely to avoid failure.
-- Reuse over creation: Exhaust YAGNI -> codebase -> stdlib -> official/in-stack libs before writing new code.
 
 ### Replanning
 
