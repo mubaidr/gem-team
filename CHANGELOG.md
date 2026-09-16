@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.130.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.129.0...gem-team-v1.130.0) (2026-09-16)
+
+
+### 🧹 Housekeeping
+
+* fix typo in gem-planner agent rules ([354617b](https://github.com/mubaidr/gem-team/commit/354617b5246bdd21d3fb3595f5b969ec6f94e511))
+
 ## [1.129.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.128.0...gem-team-v1.129.0) (2026-09-16)
 
 
