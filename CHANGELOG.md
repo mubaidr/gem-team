@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.131.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.130.0...gem-team-v1.131.0) (2026-09-17)
+
+
+### 🧹 Housekeeping
+
+* align agent rules and prefer deterministic automation ([d62657f](https://github.com/mubaidr/gem-team/commit/d62657f939fabcb9e4a1cd285d78a6e3e1670985))
+
 ## [1.130.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.129.0...gem-team-v1.130.0) (2026-09-17)
 
 
