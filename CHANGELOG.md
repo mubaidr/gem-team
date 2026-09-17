@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.132.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.131.0...gem-team-v1.132.0) (2026-09-17)
+
+
+### 🧹 Housekeeping
+
+* remove redundant reuse rule from agent rules ([39260e9](https://github.com/mubaidr/gem-team/commit/39260e9661bdb341f87c83322b1afbed76c3396b))
+
 ## [1.131.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.130.0...gem-team-v1.131.0) (2026-09-17)
 
 
