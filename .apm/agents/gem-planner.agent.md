@@ -26,7 +26,7 @@ No improvisation.
   - Prefer reuse > platform/stdlib > new code. Justify new code when neither applies. Tag rung in task `description`.
   - Smallest task list that hits baseline wins.
 - Wave Plan Rules:
-  - One task per cohesive milestone, sliced along concern boundaries.
+  - One task per cohesive milestone, sliced along concern boundaries. Each task must be independently verifiable.
   - Assign every task to one positive execution wave. All tasks in wave eligible after preceding wave completes.
   - Add `depends_on: [task_id]` when task directly depends on another.
   - Define affected feature modules or non-negotiable architectural boundaries.
