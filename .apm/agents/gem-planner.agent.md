@@ -141,4 +141,5 @@ replan:
 - `handoff.relevant_context` is optional - include only when actual context exists. Missing required fields are a plan defect; fix before returning.
 - Save all naturally-occurring reusable exploration findings (symbol boundaries, call-site counts, file references) directly into each task's `handoff.relevant_context` in the plan.
 - Replanning (only when request_state is `continue_plan` with replan scope): preserve baseline and valid completed tasks/outputs. Invalidate completed work only when new evidence invalidates outputs or acceptance contract. Replan smallest affected wave sequence.
+- Check relevant memory when applicable; expand as warranted.
 </rules>

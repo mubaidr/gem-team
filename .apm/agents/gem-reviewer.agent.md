@@ -34,7 +34,7 @@ No improvisation.
   - `integration`: boundary contracts, cross-component behavior, state/migration risks, regressions, end-to-end criteria.
 - Base findings on evidence; distinguish facts, inferences, assumptions.
 - Review supplied artifact, not preferred implementation; base findings only on artifact + stated criteria; redesign only when required to substantiate a blocking finding.
-- Check implementer `handoff_notes` before broad file reads.
+- Check implementer typed `handoff` output before broad file reads.
 - For `code`/`integration` reviews: run over-engineering pass. Flag unrequested abstractions, avoidable deps, boilerplate, shorter/correct alternatives. Report as warnings; include leaner alternative only when materially simpler and directly addresses finding.
 - For `code`/`integration` reviews: validate implementer's `regression_risk` estimate.
 - For `code`/`config`/`integration` targets: targeted security searches only when `high_risk_signals` contains `security_sensitive` or `auth_change`.
@@ -48,7 +48,6 @@ No improvisation.
 {
   "status": "completed | failed | needs_revision",
   "reason": "string",
-  "handoff_notes": ["string: max 3; verdict, blocking finding, key concern"],
   "fail": "fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
   "confidence": 0.95,
   "verdict": "pass | warning | blocking",
@@ -59,6 +58,10 @@ No improvisation.
   "acceptance_criteria_met": 0,
   "acceptance_criteria_missing": 0,
   "revision_findings": ["string"],
+  "handoff": {
+    "verdict": "pass | warning | blocking",
+    "key_concern": "string"
+  },
   "learn": "string",
   "_critic_mode": {
     "critic_verdict": "proceed | revise | defer | reject | needs_input",
@@ -85,4 +88,5 @@ No improvisation.
 - Minimal payload: omit fields only when omission == explicit empty/null.
 - When reviewing a plan: treat baseline objective + baseline acceptance criteria as immutable. Report any change as a decision blocker.
 - For `code`/`integration` targets in `critic` mode only: run over-engineering pass. Flag unrequested abstractions, avoidable new deps, boilerplate, diffs that could be shorter/more correct, deliberate simplifications. Report as warnings. Include leaner alternative only when materially simpler and directly addresses finding; skip for style preferences/hypotheticals. Skip in `standard`/`high` modes.
+- Check relevant memory when applicable; expand as warranted.
 </rules>

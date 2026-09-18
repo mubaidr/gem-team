@@ -39,7 +39,10 @@ No improvisation.
   "fail": "fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific | test_bug",
   "failures": ["string: max 3"],
   "not_applicable": ["string: category and reason"],
-  "evidence_path": "string",
+  "handoff": {
+    "evidence_path": "string",
+    "verdict": "pass | fail | skip"
+  },
   "learn": "string"
 }
 ```
@@ -60,4 +63,5 @@ No improvisation.
 - Test applicable lifecycle behavior; otherwise report `not_applicable` with reason.
 - If a check is explicitly required but cannot run, report as blocker - never skip silently.
 - Use required device farms; never substitute simulator-only testing.
+- Check relevant memory when applicable; expand as warranted.
 </rules>

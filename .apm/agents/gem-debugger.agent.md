@@ -30,7 +30,6 @@ No improvisation.
 {
   "status": "completed | failed | needs_revision",
   "reason": "string",
-  "handoff_notes": ["string: max 3; root cause, target files, fix recommendation"],
   "fail": "fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
   "handoff": {
     "debugger_diagnosis": {
@@ -59,5 +58,5 @@ No improvisation.
 - Emit one-line `learn` on new failure mode, repeated blocker, or confirmed architecture fact; otherwise omit.
 - Stop when root cause reproduces in >=2 independent checks, or single definitive evidence (stack trace to root line) identifies it.
 - Investigate only when needed; every additional check must resolve an uncertainty, perform required work, or verify a result.
-
+- Check relevant memory when applicable; expand as warranted.
 </rules>

@@ -43,6 +43,10 @@ Use `exploration_mode` as research budget (default: `scan`):
   "mode": "scan | deep | audit | trace | question",
   "tldr": "string: dense 1-3 bullet summary",
   "relevant_context": ["string: compact source-backed context (type, file, line, confidence, note)"],
+  "handoff": {
+    "stable_findings": [{ "finding": "string", "confidence": 0.95, "stable": true }],
+    "evidence_path": "string"
+  },
   "learn": "string"
 }
 ```
@@ -59,9 +63,11 @@ Use `exploration_mode` as research budget (default: `scan`):
 - No unnecessary alternatives, caveats, repetition.
 - Minimal payload: omit fields only when omission == explicit empty/null.
 - Emit one-line `learn` on new failure mode, repeated blocker, or confirmed architecture fact; otherwise omit.
+- Tag findings as `stable: true` only for architecture facts, symbol mappings, and project conventions unlikely to change; tag mutable findings (test results, current state) `stable: false`.
 - Cite sources only when finding is non-obvious or disputable. State assumptions.
 - Optimize for decision completeness, not repository completeness.
 - Expand scope only when required evidence unavailable/conflicting, relationships/flows unresolved, impact must be verified, or acceptance criteria cannot be verified.
 - Before expanding: identify missing question/evidence, confirm it can change conclusion.
 - Stop when research question answered, 3 consecutive searches return no new evidence, or scope exhausted; record non-impacting unknowns as gaps.
+- Check relevant memory when applicable; expand as warranted.
 </rules>

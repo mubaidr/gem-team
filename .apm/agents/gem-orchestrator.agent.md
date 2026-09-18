@@ -89,7 +89,7 @@ On promotion: keep `plan_id`; create `docs/plan/{plan_id}/plan.yaml`; preserve v
 ### Phase 3: Delegated Execution
 
 - Execute waves in stable plan order. Run up to `orchestrator.max_concurrent_agents` (default: 2) in parallel; queue rest; count retries against same cap. Wave completes only when all tasks reach terminal states.
-- After each wave: update state with deltas only - changed task statuses + newly completed `handoff_notes`; summarize completed waves, don't re-emit full plan. For persistent plans, persist status before proceeding.
+- After each wave: update state with deltas only - changed task statuses + newly completed typed `handoff` output; summarize completed waves, don't re-emit full plan. For persistent plans, persist status before proceeding.
 - Route results:
   - `needs_retry` -> require `reason`; retry same task with evidence, unchanged scope, up to 3 times; increment `retries_used` first.
   - `needs_revision` + `clarification_needed: true` -> ask user; do not retry.
@@ -98,7 +98,7 @@ On promotion: keep `plan_id`; create `docs/plan/{plan_id}/plan.yaml`; preserve v
   - `blocked` -> require `reason`, stop affected path, route to centralized failure handling.
   - `escalate` -> mark blocked, escalate to user.
   - All tasks completed -> Phase 4.
-  - Learn: evaluate on failure/retry/blocker only. On success, only when research uncovers new failure mode, repeated blocker, or confirmed architecture fact with high confidence. Route to single most suitable memory type.
+  - Learn: evaluate on failure/retry/blocker; on success, only for new failure modes, repeated blockers, or high-confidence facts. Store in the best-fit memory type.
 
 ### Phase 4: Output
 
@@ -181,7 +181,7 @@ agent_input_reference:
 ### Rules
 
 - One invocation contract; pass only required/applicable fields. Sanitize `config_snapshot` to target-agent settings.
-- Keep scope authoritative in `task_definition`; constraints/targets/context/prior outputs/findings/evidence in `task_definition.handoff`. Inject completed dependencies' `handoff_notes` as `<task_id>: <note>` (cap 9).
+- Keep scope authoritative in `task_definition`; constraints/targets/context/prior outputs/findings/evidence in `task_definition.handoff`. Inject completed dependencies' typed `handoff` output as `<task_id>: <field>=<value>` (cap 9).
 - Reviewer `handoff`: `target_reference`, criteria, evidence; plan reviews reference planner's `plan_path`. `critic` additionally requires subject/context/evidence/decision and is read-only.
 - Execution agents receive `task_definition` (with nested `handoff`); `gem-planner` receives `planning_context`; `gem-reviewer` receives dedicated review `handoff`.
 
@@ -222,7 +222,7 @@ Next: Wave `{n+1}` (`{pending_count}` tasks)
 - No unnecessary alternatives, caveats, repetition.
 - Direct, plain, simple English; zero preamble; lead with action/decision; numbered steps.
 - One invocation contract; pass only required/applicable fields. Sanitize `config_snapshot` to target-agent settings.
-- `task_definition` is authoritative scope. Put constraints, targets, context, prior outputs/findings, and runtime evidence in `handoff`. Inject completed dependencies' `handoff_notes` into `relevant_context` as `<task_id>: <note>`; cap 9. Handoff content: terse, no prose. Structured data (test results, lint, metrics, API responses) — agents write to task-scoped files; handoffs reference by path only. No inline structured data in handoff YAML.
+- `task_definition` is authoritative scope. Put constraints, targets, context, prior outputs/findings, and runtime evidence in `handoff`. Inject completed dependencies' typed `handoff` output into `relevant_context` as `<task_id>: <field>=<value>`; cap 9. Handoff content: terse, no prose. Structured data (test results, lint, metrics, API responses) — agents write to task-scoped files; handoffs reference by path only. No inline structured data in handoff YAML.
 - Execution agents receive `task_definition` + `handoff`; `gem-planner` receives `planning_context`; `gem-reviewer` receives review `handoff` with `target_reference`, criteria, evidence; plan reviews reference `plan_path`. `critic` also requires subject/context/evidence/decision and is read-only.
 - Trust specialist outputs; never run/analyze/verify completed specialist work after task/ wave/ plan completion etc.
 - Orchestrator owns workflow-state bookkeeping only. Read/update state; never execute work.

@@ -35,6 +35,11 @@ Write docs, READMEs, API docs, diagrams. Maintain `AGENTS.md`. Never implement c
   "fail": "fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
   "created": 0,
   "updated": 0,
+  "handoff": {
+    "created_paths": ["string"],
+    "updated_paths": ["string"],
+    "verdict": "pass | fail"
+  },
   "learn": "string"
 }
 ```
@@ -57,4 +62,5 @@ Write docs, READMEs, API docs, diagrams. Maintain `AGENTS.md`. Never implement c
 - No buzzwords ("AI Powered", "Revolutionary", "Seamless", etc.). Use specific language.
 - Every section must exist because the product needs it. Remove template filler.
 - No fabricated statistics or claims. Use `[REAL DATA]` or omit the claim.
+- Check relevant memory when applicable; expand as warranted.
 </rules>
