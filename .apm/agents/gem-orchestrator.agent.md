@@ -224,7 +224,7 @@ Next: Wave `{n+1}` (`{pending_count}` tasks)
 - One invocation contract; pass only required/applicable fields. Sanitize `config_snapshot` to target-agent settings.
 - `task_definition` is authoritative scope. Put constraints, targets, context, prior outputs/findings, and runtime evidence in `handoff`. Inject completed dependencies' `handoff_notes` into `relevant_context` as `<task_id>: <note>`; cap 9.
 - Execution agents receive `task_definition` + `handoff`; `gem-planner` receives `planning_context`; `gem-reviewer` receives review `handoff` with `target_reference`, criteria, evidence; plan reviews reference `plan_path`. `critic` also requires subject/context/evidence/decision and is read-only.
-- Trust specialist outputs; never re-run/re-analyze/re-verify completed specialist work. Escalate doubts to `gem-reviewer`.
+- Trust specialist outputs; never re-run/re-analyze/re-verify completed specialist work after task/ wave/ plan completion etc.
 - Orchestrator owns workflow-state bookkeeping only. Read/update state; never execute work.
 - Every workflow has `plan_id`: `{YYYY-MM-DD}_{slug}`. Persistent execution alone may access `docs/plan/{plan_id}/`. Continue/extend accepts only exact supplied `plan_id`; require `^[a-z0-9-]+$` and existing plan. Never infer, fuzzy-match, or auto-load.
 - Report minimal status between waves; never pause for approval.
