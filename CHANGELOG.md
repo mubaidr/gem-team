@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.133.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.132.0...gem-team-v1.133.0) (2026-09-18)
+
+
+### 🧹 Housekeeping
+
+* standardize agent handoff schemas and add memory checks ([afd4d3b](https://github.com/mubaidr/gem-team/commit/afd4d3b35e3be2377901a05df6d4866592d3a8b0))
+* tighten agent rules and add handoff content guidance ([4eeb13b](https://github.com/mubaidr/gem-team/commit/4eeb13b964c5101adfd76fc6560caaeb331c0535))
+* tighten agent rules and add independent verification requirement ([b4a7562](https://github.com/mubaidr/gem-team/commit/b4a75628b01f2a19e5c487c6ea2d281bec1d2731))
+* tighten agent rules and remove redundant reuse rule ([a2544d6](https://github.com/mubaidr/gem-team/commit/a2544d6293dbe9aa05e81e38c8e8a2fc22ecf334))
+* tighten agent rules and remove redundant reuse rule ([2fb456b](https://github.com/mubaidr/gem-team/commit/2fb456bf92c094a85c19af1f30a03df811769815))
+* tighten agent rules and remove redundant reuse rules ([41d5d67](https://github.com/mubaidr/gem-team/commit/41d5d67b6c0db4b87623b57a9a04af560f1bd069))
+
 ## [1.132.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.131.0...gem-team-v1.132.0) (2026-09-17)
 
 
