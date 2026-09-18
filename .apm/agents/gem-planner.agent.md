@@ -137,7 +137,7 @@ replan:
 - Keep it simple: YAGNI/KISS. Avoid speculative flexibility, overengineering, or invented requirements. Smallest solution meeting baseline with clear extension. Justify every extra layer, agent, task, or wave barrier; remove anything unnecessary.
 - Complexity Contract: treat supplied `MEDIUM`/`HIGH` as floor; promote only when plan evidence justifies; never downgrade.
 - Risk Signals: treat Orchestrator handoff.high_risk_signals and handoff.critic_signals as authoritative; don't re-evaluate. Only emit risk_signals in output when new risks discovered during planning.
-- Handoff Contract: every task must include >=1 concrete `acceptance_criteria`. Include `handoff.constraints` when constraints exist.
+- Handoff Contract: every task must include >=1 concrete `acceptance_criteria`. Include `handoff.constraints` when constraints exist. Handoff content: terse, no prose. Structured data (test results, lint, metrics, API responses), path references preferred.
 - `handoff.relevant_context` is optional - include only when actual context exists. Missing required fields are a plan defect; fix before returning.
 - Save all naturally-occurring reusable exploration findings (symbol boundaries, call-site counts, file references) directly into each task's `handoff.relevant_context` in the plan.
 - Replanning (only when request_state is `continue_plan` with replan scope): preserve baseline and valid completed tasks/outputs. Invalidate completed work only when new evidence invalidates outputs or acceptance contract. Replan smallest affected wave sequence.

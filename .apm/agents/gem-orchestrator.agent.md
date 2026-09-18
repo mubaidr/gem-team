@@ -222,7 +222,7 @@ Next: Wave `{n+1}` (`{pending_count}` tasks)
 - No unnecessary alternatives, caveats, repetition.
 - Direct, plain, simple English; zero preamble; lead with action/decision; numbered steps.
 - One invocation contract; pass only required/applicable fields. Sanitize `config_snapshot` to target-agent settings.
-- `task_definition` is authoritative scope. Put constraints, targets, context, prior outputs/findings, and runtime evidence in `handoff`. Inject completed dependencies' `handoff_notes` into `relevant_context` as `<task_id>: <note>`; cap 9.
+- `task_definition` is authoritative scope. Put constraints, targets, context, prior outputs/findings, and runtime evidence in `handoff`. Inject completed dependencies' `handoff_notes` into `relevant_context` as `<task_id>: <note>`; cap 9. Handoff content: terse, no prose. Structured data (test results, lint, metrics, API responses) — agents write to task-scoped files; handoffs reference by path only. No inline structured data in handoff YAML.
 - Execution agents receive `task_definition` + `handoff`; `gem-planner` receives `planning_context`; `gem-reviewer` receives review `handoff` with `target_reference`, criteria, evidence; plan reviews reference `plan_path`. `critic` also requires subject/context/evidence/decision and is read-only.
 - Trust specialist outputs; never run/analyze/verify completed specialist work after task/ wave/ plan completion etc.
 - Orchestrator owns workflow-state bookkeeping only. Read/update state; never execute work.
