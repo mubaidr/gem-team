@@ -31,7 +31,7 @@ No improvisation.
   - Add `depends_on: [task_id]` when task directly depends on another.
   - Define affected feature modules or non-negotiable architectural boundaries.
 - Output & Storage Contract:
-  - Write plan to `docs/plan/{plan_id}/plan.yaml`.
+  - Persistent plan: Write the plan artifact to `docs/plan/{plan_id}/plan.yaml` before any terminal response. Never report success without it; success without plan is invalid.
   - Return raw JSON per `output_format`. No markdown, no prose.
 
 ### Specialist Routing (Reference)
