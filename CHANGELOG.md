@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.134.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.133.0...gem-team-v1.134.0) (2026-09-22)
+
+
+### 🧹 Housekeeping
+
+* tighten gem-planner storage contract and enforce persistent plan ([2f6275d](https://github.com/mubaidr/gem-team/commit/2f6275d5245fb1a8ea983aa2e2acf7f61dd10ad5))
+
 ## [1.133.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.132.0...gem-team-v1.133.0) (2026-09-18)
 
 
