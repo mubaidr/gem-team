@@ -36,6 +36,13 @@ No improvisation.
   - Assign every task to one positive execution wave. All tasks in wave eligible after preceding wave completes.
   - Add `depends_on: [task_id]` when task directly depends on another.
   - Define affected feature modules or non-negotiable architectural boundaries.
+- Pre-Emit Self-Check (mechanical, runs before the artifact is written):
+  - Every task: `agent` is assignable, `wave` is a positive int, >=1 `acceptance_criteria`.
+  - Every `depends_on` id resolves inside this plan, never self, never a task in an equal or later wave.
+  - Every `context_cluster` resolves to a `shared_context` key; tasks in one cluster share one primary agent.
+  - Replan scope only: `baseline.objective` and `baseline.acceptance_criteria` present and unchanged.
+  - On failure, fix and re-run. Never emit a plan that fails its own check; if unfixable, return `needs_revision` with `revision_findings`.
+  - This list is exhaustive. Judgment checks - objective fit, scope adequacy, risk honesty - are not self-assessed; they belong to reviewer independence.
 - Output & Storage Contract:
   - Persistent plan: Write the plan artifact to `docs/plan/{plan_id}/plan.yaml` before any terminal response. Never report success without it; success without plan is invalid.
   - Return raw JSON per `output_format`. No markdown, no prose.
@@ -87,6 +94,9 @@ revision: int
 replan_count: int
 planner_revision_used: false
 
+decisions: [str]
+assumptions: [str]
+
 shared_context:
   { cluster_id }: [str]
 
@@ -115,9 +125,6 @@ baseline:
   objective: str
   acceptance_criteria: [str]
   captured_at: str
-
-decisions: [str]
-assumptions: [str]
 
 replan:
   reason: str
@@ -149,6 +156,7 @@ replan:
 - Risk Signals: treat Orchestrator handoff.high_risk_signals and handoff.critic_signals as authoritative; don't re-evaluate. Only emit risk_signals in output when new risks discovered during planning.
 - Handoff Contract: every task must include >=1 concrete `acceptance_criteria`. Include `handoff.constraints` when constraints exist. Handoff content: terse, no prose. Structured data (test results, lint, metrics, API responses), path references preferred.
 - `handoff.relevant_context`: optional, task-local reusable findings (symbol boundaries, call-site counts, file references). Omit when empty. Findings shared by 2+ tasks go in top-level `shared_context` keyed by `cluster_id` instead, named in each consumer's `context_cluster`; omit both for standalone tasks.
+- `decisions`: non-obvious structural choices with a one-line reason (wave barrier, specialist, scope cut). `assumptions`: stated assumptions the plan depends on. Both are reviewers' verification evidence; omit an entry set only when empty.
 - Missing required fields are a plan defect; fix before returning.
 - Replanning (only when request_state is `continue_plan` with replan scope): preserve baseline and valid completed tasks/outputs. Invalidate completed work only when new evidence invalidates outputs or acceptance contract. Replan smallest affected wave sequence.
 - Check relevant memory when applicable; expand as warranted.

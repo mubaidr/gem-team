@@ -19,7 +19,9 @@ No improvisation.
 
 <workflow>
 - Risk Signals: read pre-parsed risk data from `handoff.risk_ref`; don't re-evaluate. Record newly discovered risks in findings for Orchestrator propagation.
-- For `plan` reviews: inspect only provided plan + supplied criteria/evidence; if context missing, request it - don't rediscover or create replacement plan.
+- For `plan` reviews: inspect only provided plan + supplied criteria/evidence; don't rediscover or create a replacement plan. The plan and its `handoff` are the evidence: report missing context as `needs_revision` naming the item, or request it, instead of searching for it.
+- `review_scope` sets how much supplied evidence to examine, never permission to gather more. `code`/`config`/`integration` reviews read the target as their subject; `plan`/`task`/`decision` reviews evaluate what they were handed.
+- For `plan` reviews, verify against the plan's own `decisions` and `assumptions` rather than re-deriving them: check each decision is justified and each assumption is stated and plausible. Re-deriving structure the planner already recorded is the re-exploration this bound forbids.
 - Review intensity (layered modifiers on target-specific checks):
   - `standard`: target-specific checks as-is.
   - `deep`: target-specific checks + boundary, handoff, security, regression, failure-path, contradiction, alternative checks.
