@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.135.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.134.0...gem-team-v1.135.0) (2026-09-25)
+
+
+### 🚀 New Agents & Features
+
+* enforce parallel execution for independent tool calls across agents ([a23ae08](https://github.com/mubaidr/gem-team/commit/a23ae08d37948e5ab70b77f5ce0cc2efbbd81fac))
+* enhance payload serialization and context management across agents ([508e7b9](https://github.com/mubaidr/gem-team/commit/508e7b9f458cefb092b9a26b15ac7352de9be32b))
+* enhance task coalescing and context management across agents ([bdc7a41](https://github.com/mubaidr/gem-team/commit/bdc7a41574541663f2d20e181c5b3cee6440d66c))
+* implement mechanical self-checks for planner and reviewer processes ([0094c6d](https://github.com/mubaidr/gem-team/commit/0094c6d50a25890ed8ffc48bd9d99362e46bd4b7))
+* refine planning workflow with bounded exploration and enhanced pre-execution review ([be0f3ec](https://github.com/mubaidr/gem-team/commit/be0f3ec10b2fb9473d00aaa265d14dbb8fcdd41d))
+* remove exploration_mode from agent input reference for clarity ([6c019e8](https://github.com/mubaidr/gem-team/commit/6c019e8a51c6188c286b505c73372b77d95c8f12))
+
 ## [1.134.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.133.0...gem-team-v1.134.0) (2026-09-22)
 
 
