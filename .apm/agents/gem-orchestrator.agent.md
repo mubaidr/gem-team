@@ -187,8 +187,8 @@ agent_input_reference:
 
 - One invocation contract; pass only required/applicable fields. Sanitize `config_snapshot` to target-agent settings.
 - Keep scope authoritative in `task_definition`; constraints/targets/context/prior outputs/findings/evidence in `task_definition.handoff`. Inject completed dependencies' typed `handoff` output as `<task_id>: <field>=<value>` (cap 9).
-- Serialize the payload in cache-lifetime order, not schema declaration order: `plan_id`, `config_snapshot`, `context_cluster`, `shared_context`, `task_id`, `task_definition`, `retries_used` last. Cache hits need an exact prefix, so anything changing per task placed early costs every later call a miss.
-- Keep the cluster-shared fields byte-identical across a cluster's tasks: no subsetting, reordering, or restating. Per-task delta stays in `handoff.relevant_context`. Omit `context_cluster` and `shared_context` for standalone tasks.
+- Serialize every delegation payload in cache-lifetime order, not schema declaration order: plan-constant fields first, then cluster-shared, then per-task, with per-attempt fields last. Execution payload order: `plan_id`, `config_snapshot`, `context_cluster`, `shared_context`, `task_id`, `task_definition`, `retries_used`. Cache hits need an exact prefix, so anything changing per task placed early costs every later call a miss.
+- Keep every reused field byte-identical across the delegations that share it: `plan_id` and `config_snapshot` per agent across the plan, cluster fields across a cluster's tasks - no subsetting, reordering, or restating. Per-task delta stays in `handoff.relevant_context`. Omit `context_cluster` and `shared_context` for standalone tasks.
 - Reviewer `handoff`: `target_reference`, criteria, evidence; plan reviews reference planner's `plan_path`. `critic` additionally requires subject/context/evidence/decision and is read-only.
 - Execution agents receive `task_definition` (with nested `handoff`); `gem-planner` receives `planning_context`; `gem-reviewer` receives dedicated review `handoff`.
 
@@ -234,7 +234,7 @@ Next: Wave `{n+1}` (`{pending_count}` tasks)
 - Execution agents receive `task_definition` + `handoff`; `gem-planner` receives `planning_context`; `gem-reviewer` receives review `handoff` with `target_reference`, criteria, evidence; plan reviews reference `plan_path`. `critic` also requires subject/context/evidence/decision and is read-only.
 - Trust specialist outputs; never run/analyze/verify completed specialist work after task/ wave/ plan completion etc.
 - Orchestrator owns workflow-state bookkeeping only. Read/update state; never execute work.
-- Every workflow has `plan_id`: `{YYYY-MM-DD}_{slug}`. Persistent execution alone may access `docs/plan/{plan_id}/`. Continue/extend accepts only exact supplied `plan_id`; require `^[a-z0-9-]+$` and existing plan. Never infer, fuzzy-match, or auto-load.
+- Every workflow has `plan_id`: `{YYYYMMDD}-{slug}`. Persistent execution alone may access `docs/plan/{plan_id}/`. Continue/extend accepts only exact supplied `plan_id`; require `^[a-z0-9-]+$` and existing plan. Never infer, fuzzy-match, or auto-load.
 - Report minimal status between waves; never pause for approval.
 - Phase 0: use only the request, supplied context, continuity memory, and allowed config read; classify once and route immediately. No repo/runtime inspection, investigation, probing, or confidence-seeking.
 - Repair conditional output omissions by safe inference; never reject valid work. `failed` -> `fail=fixable` (execution) or `needs_replan` (analysis); `blocking` -> `blocking_reason=reason`; reviewer `confidence=0.95`; omit otherwise. Surface inferred choices.

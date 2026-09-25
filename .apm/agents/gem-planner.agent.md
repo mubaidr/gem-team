@@ -30,7 +30,7 @@ No improvisation.
   - Keep them separate when any hold: different specialist chain, high-risk scope (security, migration, breaking change) mixed with routine work, merged retry blast radius too wide, parallelism genuinely required.
   - Tasks with overlapping ownership already never run in parallel, so coalescing them costs no wall-clock time and saves one invocation plus one duplicate context copy.
   - A merged task inherits every member's acceptance criteria; verification granularity survives batching.
-  - When 2+ tasks need the same exploration or findings, plan one `gem-researcher` task sized for the union of consumers and place its output in cluster `shared_context`. Single-consumer evidence stays a path reference.
+  - When 2+ tasks need the same exploration or findings, plan one `gem-researcher` task sized for the union of consumers and declare the cluster's `shared_context` key. Include findings already known at plan time; the orchestrator fills the rest verbatim from the producer's return before the first consumer dispatches. Single-consumer evidence stays a path reference.
 - Wave Plan Rules:
   - One task per cohesive milestone, sliced along concern boundaries, then coalesced per Context Coalescing Gate. Each task must be independently verifiable.
   - Assign every task to one positive execution wave. All tasks in wave eligible after preceding wave completes.
