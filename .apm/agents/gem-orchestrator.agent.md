@@ -129,7 +129,6 @@ agent_input_reference:
         objective: str
         acceptance_criteria:
           - str
-        exploration_mode: "scan | question | audit | trace | deep"
         handoff:
           constraints:
             - str
