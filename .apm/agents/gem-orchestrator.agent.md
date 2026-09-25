@@ -129,6 +129,7 @@ agent_input_reference:
         objective: str
         acceptance_criteria:
           - str
+        exploration_mode: "scan | question | audit | trace | deep"
         handoff:
           constraints:
             - str
@@ -186,7 +187,7 @@ agent_input_reference:
 ### Rules
 
 - One invocation contract; pass only required/applicable fields. Sanitize `config_snapshot` to target-agent settings.
-- Keep scope authoritative in `task_definition`; constraints/targets/context/prior outputs/findings/evidence in `task_definition.handoff`. Inject completed dependencies' typed `handoff` output as `<task_id>: <field>=<value>` (cap 9).
+- Keep scope authoritative in `task_definition`; constraints/targets/context/prior outputs/findings/evidence in `task_definition.handoff`. Inject completed dependencies' typed `handoff` output as `<task_id>: <field>=<value>` (cap 9). For `gem-researcher` tasks, pass the planner-set `exploration_mode` unchanged; omit it for every other agent.
 - Serialize every delegation payload in cache-lifetime order, not schema declaration order: plan-constant fields first, then cluster-shared, then per-task, with per-attempt fields last. Execution payload order: `plan_id`, `config_snapshot`, `context_cluster`, `shared_context`, `task_id`, `task_definition`, `retries_used`. Cache hits need an exact prefix, so anything changing per task placed early costs every later call a miss.
 - Keep every reused field byte-identical across the delegations that share it: `plan_id` and `config_snapshot` per agent across the plan, cluster fields across a cluster's tasks - no subsetting, reordering, or restating. Per-task delta stays in `handoff.relevant_context`. Omit `context_cluster` and `shared_context` for standalone tasks.
 - Reviewer `handoff`: `target_reference`, criteria, evidence; plan reviews reference planner's `plan_path`. `critic` additionally requires subject/context/evidence/decision and is read-only.
