@@ -25,8 +25,14 @@ No improvisation.
 - Scope Reduction Gate:
   - Prefer reuse > platform/stdlib > new code. Justify new code when neither applies. Tag rung in task `description`.
   - Smallest task list that hits baseline wins.
+- Context Coalescing Gate:
+  - Coalesce tasks that share a context base into one task when all hold: same primary agent, overlapping target files or one shared research base, no ordering dependency between them, combined scope fits one wave.
+  - Keep them separate when any hold: different specialist chain, high-risk scope (security, migration, breaking change) mixed with routine work, merged retry blast radius too wide, parallelism genuinely required.
+  - Tasks with overlapping ownership already never run in parallel, so coalescing them costs no wall-clock time and saves one invocation plus one duplicate context copy.
+  - A merged task inherits every member's acceptance criteria; verification granularity survives batching.
+  - When 2+ tasks need the same exploration or findings, plan one `gem-researcher` task sized for the union of consumers and place its output in cluster `shared_context`. Single-consumer evidence stays a path reference.
 - Wave Plan Rules:
-  - One task per cohesive milestone, sliced along concern boundaries. Each task must be independently verifiable.
+  - One task per cohesive milestone, sliced along concern boundaries, then coalesced per Context Coalescing Gate. Each task must be independently verifiable.
   - Assign every task to one positive execution wave. All tasks in wave eligible after preceding wave completes.
   - Add `depends_on: [task_id]` when task directly depends on another.
   - Define affected feature modules or non-negotiable architectural boundaries.
@@ -81,6 +87,9 @@ revision: int
 replan_count: int
 planner_revision_used: false
 
+shared_context:
+  { cluster_id }: [str]
+
 tasks:
   - id: str
     title: str
@@ -91,6 +100,7 @@ tasks:
     status: "pending | in_progress | completed | failed | blocked | needs_revision | needs_replan"
     retries_used: 0
     acceptance_criteria: [str]
+    context_cluster: str
     handoff:
       constraints: [str]
       relevant_context: [str]
@@ -138,8 +148,8 @@ replan:
 - Complexity Contract: treat supplied `MEDIUM`/`HIGH` as floor; promote only when plan evidence justifies; never downgrade.
 - Risk Signals: treat Orchestrator handoff.high_risk_signals and handoff.critic_signals as authoritative; don't re-evaluate. Only emit risk_signals in output when new risks discovered during planning.
 - Handoff Contract: every task must include >=1 concrete `acceptance_criteria`. Include `handoff.constraints` when constraints exist. Handoff content: terse, no prose. Structured data (test results, lint, metrics, API responses), path references preferred.
-- `handoff.relevant_context` is optional - include only when actual context exists. Missing required fields are a plan defect; fix before returning.
-- Save all naturally-occurring reusable exploration findings (symbol boundaries, call-site counts, file references) directly into each task's `handoff.relevant_context` in the plan.
+- `handoff.relevant_context`: optional, task-local reusable findings (symbol boundaries, call-site counts, file references). Omit when empty. Findings shared by 2+ tasks go in top-level `shared_context` keyed by `cluster_id` instead, named in each consumer's `context_cluster`; omit both for standalone tasks.
+- Missing required fields are a plan defect; fix before returning.
 - Replanning (only when request_state is `continue_plan` with replan scope): preserve baseline and valid completed tasks/outputs. Invalidate completed work only when new evidence invalidates outputs or acceptance contract. Replan smallest affected wave sequence.
 - Check relevant memory when applicable; expand as warranted.
 </rules>

@@ -89,6 +89,7 @@ On promotion: keep `plan_id`; create `docs/plan/{plan_id}/plan.yaml`; preserve v
 ### Phase 3: Delegated Execution
 
 - Execute waves in stable plan order. Run up to `orchestrator.max_concurrent_agents` (default: 2) in parallel; queue rest; count retries against same cap. Wave completes only when all tasks reach terminal states.
+- Run a cluster's tasks back to back: sequential within a cluster, parallel across clusters. Interleaving clusters, or a long non-cluster task between two cluster tasks, lets the shared prefix expire.
 - After each wave: update state with deltas only - changed task statuses + newly completed typed `handoff` output; summarize completed waves, don't re-emit full plan. For persistent plans, persist status before proceeding.
 - Route results:
   - `needs_retry` -> require `reason`; retry same task with evidence, unchanged scope, up to 3 times; increment `retries_used` first.
@@ -122,8 +123,8 @@ agent_input_reference:
   execution_task:
     required:
       plan_id: str
+      config_snapshot: {}
       task_id: str
-      retries_used: int
       task_definition:
         objective: str
         acceptance_criteria:
@@ -133,7 +134,11 @@ agent_input_reference:
             - str
           relevant_context:
             - str
-      config_snapshot: {}
+      retries_used: int
+    optional:
+      context_cluster: str
+      shared_context:
+        - str
 
   planner:
     required:
@@ -182,6 +187,8 @@ agent_input_reference:
 
 - One invocation contract; pass only required/applicable fields. Sanitize `config_snapshot` to target-agent settings.
 - Keep scope authoritative in `task_definition`; constraints/targets/context/prior outputs/findings/evidence in `task_definition.handoff`. Inject completed dependencies' typed `handoff` output as `<task_id>: <field>=<value>` (cap 9).
+- Serialize the payload in cache-lifetime order, not schema declaration order: `plan_id`, `config_snapshot`, `context_cluster`, `shared_context`, `task_id`, `task_definition`, `retries_used` last. Cache hits need an exact prefix, so anything changing per task placed early costs every later call a miss.
+- Keep the cluster-shared fields byte-identical across a cluster's tasks: no subsetting, reordering, or restating. Per-task delta stays in `handoff.relevant_context`. Omit `context_cluster` and `shared_context` for standalone tasks.
 - Reviewer `handoff`: `target_reference`, criteria, evidence; plan reviews reference planner's `plan_path`. `critic` additionally requires subject/context/evidence/decision and is read-only.
 - Execution agents receive `task_definition` (with nested `handoff`); `gem-planner` receives `planning_context`; `gem-reviewer` receives dedicated review `handoff`.
 
@@ -222,7 +229,7 @@ Next: Wave `{n+1}` (`{pending_count}` tasks)
 - No unnecessary alternatives, caveats, repetition.
 - Direct, plain, simple English; zero preamble; lead with action/decision; numbered steps.
 - One invocation contract; pass only required/applicable fields. Sanitize `config_snapshot` to target-agent settings.
-- `task_definition` is authoritative scope. Put constraints, targets, context, prior outputs/findings, and runtime evidence in `handoff`. Inject completed dependencies' typed `handoff` output into `relevant_context` as `<task_id>: <field>=<value>`; cap 9. Handoff content: terse, no prose. Structured data (test results, lint, metrics, API responses) — agents write to task-scoped files; handoffs reference by path only. No inline structured data in handoff YAML.
+- `task_definition` is authoritative scope. Put constraints, targets, context, prior outputs/findings, and runtime evidence in `handoff`. Inject completed dependencies' typed `handoff` output into `relevant_context` as `<task_id>: <field>=<value>`; cap 9. Handoff content: terse, no prose. Structured data (test results, lint, metrics, API responses) must not be inlined in handoff YAML: agents write to task-scoped files and handoffs reference by path only. Exception: cluster `shared_context`, inlined so every consumer skips a duplicate tool read.
 - Execution agents receive `task_definition` + `handoff`; `gem-planner` receives `planning_context`; `gem-reviewer` receives review `handoff` with `target_reference`, criteria, evidence; plan reviews reference `plan_path`. `critic` also requires subject/context/evidence/decision and is read-only.
 - Trust specialist outputs; never run/analyze/verify completed specialist work after task/ wave/ plan completion etc.
 - Orchestrator owns workflow-state bookkeeping only. Read/update state; never execute work.

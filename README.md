@@ -137,7 +137,7 @@ Gem Team uses a structured workflow to turn AI coding into a reliable engineerin
 ## Features
 
 - **Risk-Based Quality Gates**: TDD and deterministic verification always apply; specialist reviews and audits run when the plan or changed scope requires them.
-- **Effortless Context**: Progressive context management prevents bloat. Scoped handoffs, bounded `planning_context`, and evidence-by-reference keep each agent's token footprint minimal while maximizing cached token reuse across waves.
+- **Effortless Context**: Progressive context management prevents bloat. Scoped handoffs, context-coalesced tasks, verbatim cluster `shared_context`, a cache-lifetime payload order, and evidence-by-reference keep each agent's token footprint minimal while maximizing cached token reuse across waves.
 - **Smart Routing**: Tasks are automatically routed to the right agents based on complexity.
 - **Parallel Execution**: Independent tasks run in parallel within waves; overlapping ownership is serialized to prevent conflicts.
 - **Resumable Plans**: Every MEDIUM/HIGH task gets a persistent plan ID and `plan.yaml`. Pause, resume, or extend work without losing context.
