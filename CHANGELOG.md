@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.136.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.135.0...gem-team-v1.136.0) (2026-09-28)
+
+
+### 🚀 New Agents & Features
+
+* enhance clarity in planning and implementation guidelines with YAGNI/KISS principles ([1cb192f](https://github.com/mubaidr/gem-team/commit/1cb192feab4b5f92d8d05483ed50016f7465d895))
+* make evidence_path optional in handoff for agents ([b5dcbfe](https://github.com/mubaidr/gem-team/commit/b5dcbfee80694365b729a7ad803301bdc39c12c0))
+
 ## [1.135.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.134.0...gem-team-v1.135.0) (2026-09-25)
 
 
