@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.137.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.136.0...gem-team-v1.137.0) (2026-10-02)
+
+
+### 🚀 New Agents & Features
+
+* delegate every task to a named specialist subagent for improved clarity ([72a4d13](https://github.com/mubaidr/gem-team/commit/72a4d1345b453c244e9eb76310f27c30e736e0fa))
+
 ## [1.136.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.135.0...gem-team-v1.136.0) (2026-09-28)
 
 
