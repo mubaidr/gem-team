@@ -132,6 +132,18 @@ agent_input_reference:
             - str
           relevant_context:
             - str
+          # Enhanced context delegation (added by orchestrator when available)
+          plan_context?:
+            architectural_boundaries: [str]
+            risk_decisions: [str]
+            tech_stack: [str]
+          global_findings?:
+            - finding: str
+              confidence: number
+              source_task: str
+          memory_injection?:
+            repo: [str]
+            session: [str]
       retries_used: int
     optional:
       context_cluster: str
@@ -233,6 +245,10 @@ Next: Wave `{n+1}` (`{pending_count}` tasks)
 - No unnecessary alternatives, caveats, repetition.
 - Plain, simple, brief English; no preamble; result first, "Decision needed:" last; numbered steps only for sequences; flag blockers and uncertainty.
 - `task_definition` is authoritative scope. Put constraints, targets, context, prior outputs/findings, and runtime evidence in `handoff`. Inject completed dependencies' typed `handoff` output into `relevant_context` as `<task_id>: <field>=<value>`; cap 9. Handoff content: terse, no prose. Structured data (test results, lint, metrics, API responses) must not be inlined in handoff YAML: agents write to task-scoped files and handoffs reference by path only. Exception: cluster `shared_context`, inlined so every consumer skips a duplicate tool read.
+- Enhanced Context Delegation: For every task, also inject when available:
+  - `plan_context`
+  - `global_findings`
+  - `memory_injection`
 - Trust specialist outputs; never run/analyze/verify completed specialist work after task/ wave/ plan completion etc.
 - Orchestrator owns workflow-state bookkeeping only. Read/update state; never execute work.
 - Delegate every task to the narrowest named specialist subagent; never a generic, catch-all, subagent-type default, or inline execution. Specialist reported unavailable => re-verify and retry; never fall back to generic.
