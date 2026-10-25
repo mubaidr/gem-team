@@ -40,11 +40,10 @@ No improvisation.
   - Every task: `agent` is assignable, `wave` is a positive int, >=1 `acceptance_criteria`.
   - Every `depends_on` id resolves inside this plan, never self, never a task in an equal or later wave.
   - Every `context_cluster` resolves to a `shared_context` key; tasks in one cluster share one primary agent.
-- Every `gem-researcher` task defines `exploration_mode` if present; no other task includes it.
-- `context_cluster` and `shared_context` are only present when a cluster exists; omit both for standalone tasks.
-  - Replan scope only: `baseline.objective` and `baseline.acceptance_criteria` present and unchanged.
+  - Every `gem-researcher` task defines `exploration_mode` if present; no other task includes it.
+  - `context_cluster` and `shared_context` are only present when a cluster exists; omit both for standalone tasks.
   - On failure, fix the item and re-run once. Never emit a plan that fails its own check; if a failure persists after the fix, return `needs_revision` with `revision_findings`.
-  - This list is exhaustive. Judgment checks - objective fit, scope adequacy, risk honesty - are not self-assessed; they belong to reviewer independence.
+  - This list is exhaustive. Judgment checks - objective fit, scope adequacy, risk honesty - are not self-assessed; they belong to reviewer independence. Replan baseline validation is orchestrator-owned; do not re-check.
 - Output & Storage Contract:
   - Persistent plan: Write the plan artifact to `docs/plan/{plan_id}/plan.yaml` before any terminal response. Never report success without it; success without plan is invalid.
   - Return raw JSON per `output_format`. No markdown, no prose.
