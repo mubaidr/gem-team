@@ -157,9 +157,10 @@ agent_input_reference:
           - str
         relevant_context:
           - str
-        baseline: {}
-        current_plan: {}
-        review_findings:
+        # replan-only fields (optional for initial plans)
+        baseline?: {}
+        current_plan?: {}
+        review_findings?:
           - {}
       config_snapshot: {}
 
