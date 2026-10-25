@@ -64,6 +64,5 @@ No improvisation.
 - Every test must target a specific failure mode. Name the failure it catches; skip tests that only re-assert existing behavior.
 - Start with handoff context as primary source. Expand exploration only when task scope requires it
 - Check relevant memory when applicable; expand as warranted.
-</rules>
 
 </rules>
