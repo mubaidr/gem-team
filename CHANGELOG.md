@@ -1,5 +1,30 @@
 # Changelog
 
+## [1.139.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.138.0...gem-team-v1.139.0) (2026-10-25)
+
+
+### 🧹 Housekeeping
+
+* **main:** add critic-only fields to gem-orchestrator agent specification ([a2dc452](https://github.com/mubaidr/gem-team/commit/a2dc452f31abe51e6d6b926aa6b8a63e2ed0d4d3))
+* **main:** add enhanced context delegation fields to gem-orchestrator agent input reference ([fe36ed3](https://github.com/mubaidr/gem-team/commit/fe36ed3098009c2f7a4ad8f99dbfd44bc4e63ee7))
+* **main:** add failure handling rules to gem-orchestrator agent specification ([61f1165](https://github.com/mubaidr/gem-team/commit/61f11651a4507b9cfcc8ea60b87ee3e1b04b6d1f))
+* **main:** add handoff exploration gap guideline to agent rules ([8a98507](https://github.com/mubaidr/gem-team/commit/8a98507250fae9f26778e993764e60d21c51492d))
+* **main:** add needs_retry status to gem-planner agent specification ([c90b3c2](https://github.com/mubaidr/gem-team/commit/c90b3c2cd2f2332be840e91c9d4e6f23d3a1e3f6))
+* **main:** add relevant_context and stable_findings to handoff output format ([9ed7cfc](https://github.com/mubaidr/gem-team/commit/9ed7cfc4ad2675a6b13f531721c32daa721bbab9))
+* **main:** add test_bug and blocked to gem-code-simplifier output format ([f6c608c](https://github.com/mubaidr/gem-team/commit/f6c608c173c3ff96606c233a5397702565e5f4db))
+* **main:** clarify intent priority in gem-orchestrator agent specification ([820bde1](https://github.com/mubaidr/gem-team/commit/820bde18dda8fba5ee87e4f4b50f4f0dc64f7459))
+* **main:** delete plan.yaml dry-run audit plan ([55a62b5](https://github.com/mubaidr/gem-team/commit/55a62b5edebc19708e6f7384e18b8b2f8e5ce3c1))
+* **main:** finalize traces and persist evidence including failure traces in gem-browser-tester agent cleanup ([b4e2b47](https://github.com/mubaidr/gem-team/commit/b4e2b47cb89ecee1df1990727883d376f1bdc99e))
+* **main:** make baseline, current_plan, and review_findings optional in gem-orchestrator input reference ([1548037](https://github.com/mubaidr/gem-team/commit/1548037eae249f0e49a271ad699661d57a4ca130))
+* **main:** make lint_rule_recommendations optional in gem-debugger agent input reference ([fb235da](https://github.com/mubaidr/gem-team/commit/fb235da0d913c97e46a978d4fdfba954c01234c1))
+* **main:** make reproduction field optional in gem-debugger output format ([2d79d3e](https://github.com/mubaidr/gem-team/commit/2d79d3e488d82a621610971b162c2c0a7380f7c7))
+* **main:** remove last rule from gem-implementer.agent.md ([57787c9](https://github.com/mubaidr/gem-team/commit/57787c95cde51c73358dbfa2cdfe496ef3429590))
+* **main:** reorganize gem-devops-guidelines SKILL.md structure and update skills index table ([a3545e7](https://github.com/mubaidr/gem-team/commit/a3545e72a632fd07681172ce076f3e20f7d9dd48))
+* **main:** reorganize planner self-check and add debugger diagnosis rule to reviewer ([8388876](https://github.com/mubaidr/gem-team/commit/8388876a6cbf53b9e81e792b39540f6801b983da))
+* **main:** update gem-implementer agent rules and documentation ([aa2f066](https://github.com/mubaidr/gem-team/commit/aa2f0660671399f1c9d5633295873a80c66bc992))
+* **main:** update gem-orchestrator agent rules and documentation ([5f2bfb9](https://github.com/mubaidr/gem-team/commit/5f2bfb9759ebe35b13f8e41adaad37431df3c884))
+* **main:** update gem-planner agent specification ([3eca32d](https://github.com/mubaidr/gem-team/commit/3eca32d739cdc6fda69dd74bc662cb61a62fa237))
+
 ## [1.138.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.137.0...gem-team-v1.138.0) (2026-10-13)
 
 
