@@ -177,6 +177,10 @@ agent_input_reference:
         risk_ref: str
         evidence:
           - str
+        # critic-only (required when review_mode == critic)
+        subject?: str
+        context?: str
+        decision_needed?: str
       config_snapshot: {}
     optional:
       task_id: str

@@ -1,0 +1,144 @@
+plan_id: 20261025-agent-workflow-dry-run
+status: pending
+tldr: |
+  Read-only, two-wave audit of the actual orchestrator workflow and every packaged agent definition. A deep researcher builds the evidence-backed candidate list; an independent reviewer validates and finalizes it. No fixes are implemented, and the orchestrator initially surfaces only the single highest-priority validated finding.
+objective: |
+  Dry-run audit of the gem-team agent definitions and the orchestrator workflow to find token/prompt-cost waste, contract or routing bugs, and workflow-step friction. Deliver a prioritized, actionable fix list that the orchestrator will surface to the user one item at a time.
+acceptance_criteria:
+  - "Every finding cites a concrete file path plus line number or named section in the current repo; no speculation and no memory-only claims."
+  - "Every finding is classified as token/prompt-cost waste, contract/routing/execution bugs, or workflow-step friction or ambiguity."
+  - "Every proposed fix states the exact edit, affected files, expected benefit, regression risk, and a concrete validation check."
+  - "Findings are ordered by severity and impact as P0, P1, or P2."
+  - "The audit is analysis-only: no agent definition, packaged skill, docs page, or config file is modified."
+  - "The final fix list identifies exactly one highest-priority finding to present first, after which the orchestrator can surface one item at a time."
+complexity: MEDIUM
+risk_signals: []
+critic_signals: []
+config_snapshot:
+  orchestrator:
+    max_concurrent_agents: 2
+  model_routing:
+    enabled: false
+created_at: "2026-10-25T08:37:33Z"
+created_by: gem-planner
+revision: 1
+replan_count: 0
+planner_revision_used: false
+
+decisions:
+  - "Use two waves and two tasks: one deep research pass followed by one independent review; splitting exploration from validation keeps the review independent without adding implementation tasks."
+  - "Keep the audit read-only; write only task-scoped analysis artifacts under docs/plan/20261025-agent-workflow-dry-run/audit/."
+  - "Coalesce orchestrator tracing and all agent-definition inspection into one researcher task because both require the same files and contract map; separate tasks would duplicate reads."
+  - "Use the reviewer only to validate the consolidated candidate list, not to perform a second broad exploration."
+  - "Store the complete ordered list but expose only one validated finding in the initial user-facing response."
+
+assumptions:
+  - "The current checkout contains readable .apm agent definitions, .apm packaged skills, .gem-team.yaml, and the docs agent catalog; the audit verifies this rather than relying on prior notes."
+  - "The request is a new, analysis-only dry run; proposed edits are recommendations, not authorized changes."
+  - "Task-scoped YAML reports under this plan directory are audit outputs and do not alter the protected agent, skill, docs-page, or config files."
+
+shared_context:
+  audit_research:
+    - ".apm/agents/gem-orchestrator.agent.md is the workflow contract to trace first, from Phase 0 through Phase 4."
+    - ".gem-team.yaml currently sets orchestrator.max_concurrent_agents=2 and model_routing.enabled=false."
+    - "The current checkout inventory contains 12 files matching .apm/agents/*.agent.md and one file matching .apm/skills/*/SKILL.md; reverify paths and line numbers before citing them."
+    - "Repository memory is discovery input only and cannot support a finding unless independently reverified in the current checkout."
+  audit_validation:
+    - "The reviewer validates the candidate findings artifact against its cited current-checkout evidence; it does not replace the research pass with a new broad audit."
+    - "A rejected or materially incomplete candidate must be excluded from the final list or returned with an exact revision request; criteria are never silently relaxed."
+
+artifacts:
+  candidate_findings: "docs/plan/20261025-agent-workflow-dry-run/audit/candidate-findings.yaml"
+  review_findings: "docs/plan/20261025-agent-workflow-dry-run/audit/review-findings.yaml"
+  final_findings: "docs/plan/20261025-agent-workflow-dry-run/audit/final-findings.yaml"
+
+tasks:
+  - id: audit_workflow_and_definitions
+    title: Trace the live workflow and audit all agent contracts
+    description: |
+      Scope-reduction rung: reuse existing definitions and current-checkout evidence; create no implementation code and change no audited source.
+      Starting from .apm/agents/gem-orchestrator.agent.md, dry-run the workflow as it applies to this request. Map Phase 0 through Phase 4, including the actual route through planning, research, review, wave execution, handoffs, retries, and output. Then inspect every .apm/agents/*.agent.md and .apm/skills/*/SKILL.md, with docs/src/content/3.agents/1.index.md used only to corroborate contract claims. Identify token/prompt-cost waste, contract/routing/execution defects, and workflow friction. Produce the consolidated candidate list and nominate one first finding.
+    objective: Produce a complete, current-checkout-backed candidate audit and prioritized fix list without modifying audited sources.
+    wave: 1
+    depends_on: []
+    agent: gem-researcher
+    status: pending
+    retries_used: 0
+    acceptance_criteria:
+      - "docs/plan/20261025-agent-workflow-dry-run/audit/candidate-findings.yaml exists and includes a coverage matrix naming every current .apm/agents/*.agent.md and .apm/skills/*/SKILL.md file, plus .gem-team.yaml and docs/src/content/3.agents/1.index.md, with its inspection status and citations."
+      - "The artifact contains a dry-run trace of this request through orchestrator Phases 0-4 with a path-and-line or path-and-section citation for every asserted workflow behavior and the practical effect of max_concurrent_agents=2 and model_routing.enabled=false."
+      - "Every candidate finding has finding_id, priority, category, evidence, problem, exact_fix, affected_files, expected_benefit, regression_risk, and validation_check fields; every evidence item resolves to an existing current-checkout path and a 1-based line number or named section."
+      - "Every finding has exactly one primary category: token_prompt_cost, contract_routing_execution, or workflow_friction; category is not inferred from wording alone."
+      - "Each exact_fix is a specific edit, each validation_check names a concrete command, assertion, or observable pass condition rather than 'test it,' and each regression_risk identifies the behavior that could break."
+      - "Findings are ordered P0, then P1, then P2, with documented severity and impact rationale; P0 means workflow-breaking or contract-breaking behavior, P1 means material recurring cost or friction, and P2 means bounded local clarity or maintainability impact."
+      - "Exactly one candidate is marked proposed_first and is selected using the first_finding_selection rule in this plan; no ties are left implicit."
+      - "Before-and-after status or hashes show that .apm/agents/**, .apm/skills/**, docs/src/**, and .gem-team.yaml were not modified; only the permitted audit artifact was added."
+      - "No candidate relies only on repository memory, a stale line number, or an unsupported inference; negative checks record the searched scope and no-match result when that absence supports the conclusion."
+    context_cluster: audit_research
+    exploration_mode: deep
+    handoff:
+      constraints:
+        - "Read .apm/agents/gem-orchestrator.agent.md before other agent definitions and trace its actual Phase 0-4 path for this request."
+        - "Do not edit .apm/agents/**, .apm/skills/**, docs/src/**, or .gem-team.yaml; the only allowed write is docs/plan/20261025-agent-workflow-dry-run/audit/candidate-findings.yaml."
+        - "Audit every current agent definition and packaged skill; do not stop after the previously suspected weak spots."
+        - "Use repository memory only as a search lead and reverify every reportable claim in the current checkout."
+        - "Treat token-waste evidence as repeated or oversized prompt content, redundant context, payload/schema bloat, redundant handoffs, unnecessary delegation, or duplicated reads; support the mechanism with a source citation."
+        - "Write structured findings to the artifact and return its path as evidence_path; keep the agent return JSON compact."
+      relevant_context:
+        - ".gem-team.yaml: orchestrator.max_concurrent_agents=2; model_routing.enabled=false."
+        - "docs/src/content/3.agents/1.index.md is a comparison surface, not authority over the .apm definitions."
+      high_risk_signals: []
+      critic_signals: []
+
+  - id: validate_and_finalize_findings
+    title: Independently validate and finalize the prioritized fix list
+    description: |
+      Scope-reduction rung: reuse the consolidated candidate artifact and re-open only its cited evidence; do not implement fixes or conduct a separate broad audit.
+      Validate every candidate independently against the current checkout. Record accept, revise, or reject decisions, remove unsupported candidates, preserve the required fix fields, restore P0/P1/P2 ordering, and select exactly one first finding from the surviving findings.
+    objective: Produce the reviewed final audit list and one deterministic first item for one-at-a-time delivery.
+    wave: 2
+    depends_on:
+      - audit_workflow_and_definitions
+    agent: gem-reviewer
+    status: pending
+    retries_used: 0
+    acceptance_criteria:
+      - "docs/plan/20261025-agent-workflow-dry-run/audit/review-findings.yaml records a verdict for every candidate finding and the evidence checked; no candidate is omitted from review."
+      - "Each accepted candidate's cited path, line number or named section, and quoted or paraphrased claim are independently reopened and confirmed in the current checkout; unsupported candidates are rejected with a reason."
+      - "The final artifact contains only accepted, complete findings and preserves finding_id, priority, category, evidence, exact_fix, affected_files, expected_benefit, regression_risk, and validation_check for each one."
+      - "Every accepted category is one of token_prompt_cost, contract_routing_execution, or workflow_friction, and every accepted finding has a concrete validation check and an explicit regression risk."
+      - "Accepted findings are ordered P0, P1, P2 with impact-based ties resolved deterministically, and final-findings.yaml marks exactly one first_finding according to first_finding_selection."
+      - "The review identifies any coverage or workflow-trace gap in candidate-findings.yaml; a material gap produces needs_revision with an exact correction request rather than a silently weakened verdict."
+      - "Before-and-after status or hashes show that .apm/agents/**, .apm/skills/**, docs/src/**, and .gem-team.yaml were not modified; only the two permitted audit artifacts were added or changed."
+      - "The reviewer reports an overall pass, warning, or blocking verdict and exact revision_findings for any candidate that cannot pass unchanged."
+    context_cluster: audit_validation
+    handoff:
+      constraints:
+        - "Review the consolidated candidate list at docs/plan/20261025-agent-workflow-dry-run/audit/candidate-findings.yaml against the plan acceptance criteria."
+        - "Use review_mode=standard, review_target=decision, review_scope=full for the supplied candidate set; independently re-open cited evidence but do not perform an unbounded second search."
+        - "Do not implement fixes and do not modify .apm/agents/**, .apm/skills/**, docs/src/**, or .gem-team.yaml."
+        - "Write the per-candidate review to docs/plan/20261025-agent-workflow-dry-run/audit/review-findings.yaml and the accepted ordered list to docs/plan/20261025-agent-workflow-dry-run/audit/final-findings.yaml."
+        - "If a candidate needs a material correction, return needs_revision with the exact field, evidence, or ordering change required."
+        - "Do not infer acceptance from plausibility; a missing current-checkout citation is a revision or rejection."
+      relevant_context:
+        - "audit_workflow_and_definitions: evidence_path=docs/plan/20261025-agent-workflow-dry-run/audit/candidate-findings.yaml"
+        - "Authoritative acceptance criteria are in this plan's objective and acceptance_criteria."
+      high_risk_signals: []
+      critic_signals: []
+
+first_finding_selection:
+  source_artifact: "docs/plan/20261025-agent-workflow-dry-run/audit/final-findings.yaml"
+  rule: "Select exactly one accepted finding by priority first, then demonstrated impact, then breadth, then expected benefit, then evidence confidence; use finding_id ascending only as the final deterministic tie-break."
+  priority_order:
+    - P0
+    - P1
+    - P2
+  impact_order:
+    - "Contract or execution correctness, including dropped context or wrong routing"
+    - "Material recurring prompt/token overhead"
+    - "Recurring workflow friction or ambiguity"
+  breadth_order: "Descending number of affected workflow steps, agent contracts, or delegation calls"
+  benefit_order: "Descending expected benefit supported by the evidence"
+  confidence_order: "Descending reviewer confidence"
+  initial_delivery: "Present the selected first_finding only; keep the rest of final-findings.yaml available for subsequent one-at-a-time requests."
+  no_valid_findings: "If no finding passes independent validation, report no validated finding rather than inventing or promoting an unsupported item."
