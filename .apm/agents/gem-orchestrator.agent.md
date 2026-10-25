@@ -187,12 +187,11 @@ agent_input_reference:
 
 ### Rules
 
-- One invocation contract; pass only required/applicable fields. Sanitize `config_snapshot` to target-agent settings.
+- Delegation payload rules: see <rules> below.
 - Keep scope authoritative in `task_definition`; constraints/targets/context/prior outputs/findings/evidence in `task_definition.handoff`. Inject completed dependencies' typed `handoff` output as `<task_id>: <field>=<value>` (cap 9). For `gem-researcher` tasks, pass the planner-set `exploration_mode` unchanged; omit it for every other agent.
 - Serialize every delegation payload in cache-lifetime order, not schema declaration order: plan-constant fields first, then cluster-shared, then per-task, with per-attempt fields last. Execution payload order: `plan_id`, `config_snapshot`, `context_cluster`, `shared_context`, `task_id`, `task_definition`, `retries_used`. Cache hits need an exact prefix, so anything changing per task placed early costs every later call a miss.
 - Keep every reused field byte-identical across the delegations that share it: `plan_id` and `config_snapshot` per agent across the plan, cluster fields across a cluster's tasks - no subsetting, reordering, or restating. Per-task delta stays in `handoff.relevant_context`. Omit `context_cluster` and `shared_context` for standalone tasks.
 - Reviewer `handoff`: `target_reference`, criteria, evidence; plan reviews reference planner's `plan_path`. `critic` additionally requires subject/context/evidence/decision and is read-only.
-- Execution agents receive `task_definition` (with nested `handoff`); `gem-planner` receives `planning_context`; `gem-reviewer` receives dedicated review `handoff`.
 
 </agent_input_reference>
 
@@ -202,7 +201,8 @@ If `model_routing.enabled` is true in `.gem-team.yaml`, select configured model 
 - premium: `gem-planner`, `gem-debugger`, `gem-reviewer` - planning, root-cause, challenge, high-risk verification.
 - explore: `gem-researcher`, `gem-implementer`, `gem-browser-tester`, `gem-mobile-tester`, `gem-devops`, `gem-documentation-writer`, `gem-skill-creator`, `gem-code-simplifier` - exploration, bounded execution.
   When `false` (default), agents use session default; no tier-based selection. No automatic model backoff on failure/retry/complexity. Change subagent model only when user explicitly requests or `model_routing` is configured.
-  </model_routing>
+
+</model_routing>
 
 <output_format>
 
@@ -231,9 +231,7 @@ Next: Wave `{n+1}` (`{pending_count}` tasks)
 - No greetings, sign-offs, filler, or unnecessary prose.
 - No unnecessary alternatives, caveats, repetition.
 - Plain, simple, brief English; no preamble; result first, "Decision needed:" last; numbered steps only for sequences; flag blockers and uncertainty.
-- One invocation contract; pass only required/applicable fields. Sanitize `config_snapshot` to target-agent settings.
 - `task_definition` is authoritative scope. Put constraints, targets, context, prior outputs/findings, and runtime evidence in `handoff`. Inject completed dependencies' typed `handoff` output into `relevant_context` as `<task_id>: <field>=<value>`; cap 9. Handoff content: terse, no prose. Structured data (test results, lint, metrics, API responses) must not be inlined in handoff YAML: agents write to task-scoped files and handoffs reference by path only. Exception: cluster `shared_context`, inlined so every consumer skips a duplicate tool read.
-- Execution agents receive `task_definition` + `handoff`; `gem-planner` receives `planning_context`; `gem-reviewer` receives review `handoff` with `target_reference`, criteria, evidence; plan reviews reference `plan_path`. `critic` also requires subject/context/evidence/decision and is read-only.
 - Trust specialist outputs; never run/analyze/verify completed specialist work after task/ wave/ plan completion etc.
 - Orchestrator owns workflow-state bookkeeping only. Read/update state; never execute work.
 - Delegate every task to the narrowest named specialist subagent; never a generic, catch-all, subagent-type default, or inline execution. Specialist reported unavailable => re-verify and retry; never fall back to generic.
