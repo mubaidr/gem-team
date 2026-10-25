@@ -110,7 +110,7 @@ tasks:
     wave: int
     depends_on: [str]
     agent: str
-    status: "pending | in_progress | completed | failed | blocked | needs_revision | needs_replan"
+    status: "pending | in_progress | completed | failed | blocked | needs_revision | needs_replan | needs_retry"
     retries_used: 0
     acceptance_criteria: [str]
     # context_cluster: optional; omit for standalone tasks; required when shared_context is used
