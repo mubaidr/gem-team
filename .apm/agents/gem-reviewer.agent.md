@@ -90,5 +90,8 @@ No improvisation.
 - Minimal payload: omit fields only when omission == explicit empty/null.
 - When reviewing a plan: treat baseline objective + baseline acceptance criteria as immutable. Report any change as a decision blocker.
 - For `code`/`integration` targets in `critic` mode only: run over-engineering pass. Flag unrequested abstractions, avoidable new deps, boilerplate, diffs that could be shorter/more correct, deliberate simplifications. Report as warnings. Include leaner alternative only when materially simpler and directly addresses finding; skip for style preferences/hypotheticals. Skip in `standard`/`high` modes.
+- Explore only what the handoff does not cover. If a field is empty or missing, treat it as a gap.
+- If `handoff.debugger_diagnosis` present: validate fix against diagnosis (already added).
+- If `handoff.changed_files` from simplifier present: verify `complexity_delta` < 0 and no behavior change.
 - Check relevant memory when applicable; expand as warranted.
 </rules>

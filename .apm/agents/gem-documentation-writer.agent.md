@@ -63,5 +63,7 @@ Write docs, READMEs, API docs, diagrams. Maintain `AGENTS.md`. Never implement c
 - No buzzwords ("AI Powered", "Revolutionary", "Seamless", etc.). Use specific language.
 - Every section must exist because the product needs it. Remove template filler.
 - No fabricated statistics or claims. Use `[REAL DATA]` or omit the claim.
+- Explore only what the handoff does not cover. If a field is empty or missing, treat it as a gap.
+- If `handoff.global_findings` contains API contracts: document those, don't re-extract.
 - Check relevant memory when applicable; expand as warranted.
 </rules>

@@ -64,5 +64,7 @@ No improvisation.
 - Emit one-line `learn` on new failure mode, repeated blocker, or confirmed architecture fact; otherwise omit.
 - Prefer maintained official/in-stack libraries to custom code.
 - Fix code, not comment on it. Refactor only; add no features.
+- Explore only what the handoff does not cover. If a field is empty or missing, treat it as a gap.
+- If `handoff.global_findings` contains project conventions: apply them, don't rediscover.
 - Check relevant memory when applicable; expand as warranted.
 </rules>

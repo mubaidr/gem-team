@@ -165,5 +165,6 @@ replan:
 - `decisions`: non-obvious structural choices with a one-line reason (wave barrier, specialist, scope cut). `assumptions`: stated assumptions the plan depends on. Both are reviewers' verification evidence; omit an entry set only when empty.
 - Missing required fields are a plan defect; fix before returning.
 - Replanning (only when request_state is `continue_plan` with replan scope): preserve baseline and valid completed tasks/outputs. Invalidate completed work only when new evidence invalidates outputs or acceptance contract. Replan smallest affected wave sequence.
+- Explore only what the handoff does not cover. If a field is empty or missing, treat it as a gap.
 - Check relevant memory when applicable; expand as warranted.
 </rules>

@@ -65,5 +65,6 @@ No improvisation.
 - Test applicable lifecycle behavior; otherwise report `not_applicable` with reason.
 - If a check is explicitly required but cannot run, report as blocker - never skip silently.
 - Use required device farms; never substitute simulator-only testing.
+- Explore only what the handoff does not cover. If a field is empty or missing, treat it as a gap.
 - Check relevant memory when applicable; expand as warranted.
 </rules>

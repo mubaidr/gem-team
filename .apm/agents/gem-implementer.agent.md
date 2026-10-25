@@ -63,6 +63,9 @@ No improvisation.
 - Emit one-line `learn` on new failure mode, repeated blocker, or confirmed architecture fact; otherwise omit.
 - Every test must target a specific failure mode. Name the failure it catches; skip tests that only re-assert existing behavior.
 - Start with handoff context as primary source. Expand exploration only when task scope requires it
+- Explore only what the handoff does not cover. If a field is empty or missing, treat it as a gap.
+- If `handoff.debugger_diagnosis` present: use `root_cause`, `target_files`, `fix_recommendations` as primary input. Skip re-diagnosis.
+- If `handoff.stable_findings` from tester present: treat as regression test targets.
 - Check relevant memory when applicable; expand as warranted.
 
 </rules>

@@ -56,5 +56,7 @@ No improvisation.
 - `evidence_path?` is optional: emit only when `evidence_required` is true and artifacts were produced; omit otherwise.
 - Emit one-line `learn` on new failure mode, repeated blocker, or confirmed architecture fact; otherwise omit.
 - Make operations idempotent, preferably atomic.
+- Explore only what the handoff does not cover. If a field is empty or missing, treat it as a gap.
+- If `handoff.plan_context.tech_stack` present: use for provider/workload classification.
 - Check relevant memory when applicable; expand as warranted.
 </rules>

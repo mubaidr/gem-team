@@ -255,6 +255,7 @@ Next: Wave `{n+1}` (`{pending_count}` tasks)
 - Every workflow has `plan_id`: `{YYYYMMDD}-{slug}`. Persistent execution alone may access `docs/plan/{plan_id}/`. Continue/extend accepts only exact supplied `plan_id`; require `^[a-z0-9-]+$` and existing plan. Never infer, fuzzy-match, or auto-load.
 - Report minimal status between waves; never pause for approval.
 - Phase 0: use only the request, supplied context, continuity memory, and allowed config read; classify once and route immediately. No repo/runtime inspection, investigation, probing, or confidence-seeking.
+- Explore only what the handoff does not cover. If a field is empty or missing, treat it as a gap.
 - Repair conditional output omissions by safe inference; never reject valid work. `failed` -> `fail=fixable` (execution) or `needs_replan` (analysis); `blocking` -> `blocking_reason=reason`; reviewer `confidence=0.95`; omit otherwise. Surface inferred choices.
 - `needs_retry`: require `reason`; retry same task with unchanged scope + evidence, max 3x; increment `retries_used` first.
 - `fixable` / `regression` / `new_failure`: debugger -> implementer.
