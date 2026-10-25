@@ -37,7 +37,7 @@ No improvisation.
       "reproduction?": { "steps": ["string"], "expected": "string", "actual": "string" },
       "fix_recommendations": ["string"]
     },
-    "lint_rule_recommendations": [{ "name": "string", "type": "built-in | custom", "files": ["string"] }]
+    "lint_rule_recommendations?": [{ "name": "string", "type": "built-in | custom", "files": ["string"] }]
   },
   "learn": "string"
 }
