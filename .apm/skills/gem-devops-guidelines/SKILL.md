@@ -7,16 +7,16 @@ description: Design or review infrastructure, deployment, CI/CD, Docker, Kuberne
 
 ## When to Use
 
-Use for DevOps, platform, container, pipeline, or release tasks — any work that touches infrastructure, deployment, CI/CD, Docker, Kubernetes, health checks, rollback, feature flags, production readiness, or mobile release workflows.
+Use for DevOps, platform, container, pipeline, or release tasks - any work that touches infrastructure, deployment, CI/CD, Docker, Kubernetes, health checks, rollback, feature flags, production readiness, or mobile release workflows.
 
 ## Numbered Workflow
 
-1. **Assess** — identify workload type, target provider/environment, acceptance criteria, and risk level.
-2. **Classify** — select applicable sections (deployment strategy, Docker, K8s, CI/CD, health, config, rollback, feature flags, mobile) based on workload/provider/environment.
-3. **Plan** — for each selected section, define concrete steps, validation checks, and rollback triggers.
-4. **Apply** — execute the plan, running validation at each gate (lint → typecheck → unit → integration → preview → smoke).
-5. **Verify** — confirm health endpoints, monitoring, rollback capability, and documented outcome.
-6. **Rollback-ready** — ensure a tested rollback path exists before declaring success.
+1. **Assess** - identify workload type, target provider/environment, acceptance criteria, and risk level.
+2. **Classify** - select applicable sections (deployment strategy, Docker, K8s, CI/CD, health, config, rollback, feature flags, mobile) based on workload/provider/environment.
+3. **Plan** - for each selected section, define concrete steps, validation checks, and rollback triggers.
+4. **Apply** - execute the plan, running validation at each gate (lint -> typecheck -> unit -> integration -> preview -> smoke).
+5. **Verify** - confirm health endpoints, monitoring, rollback capability, and documented outcome.
+6. **Rollback-ready** - ensure a tested rollback path exists before declaring success.
 
 ## Edge Cases
 
@@ -33,7 +33,7 @@ Apply only sections relevant to workload/provider/environment/acceptance criteri
 ## Deployment strategy
 
 - Rolling (default): gradual, zero-downtime replacement.
-- Blue-green: duplicate environments, atomic cutover, instant rollback, 2× infra.
+- Blue-green: duplicate environments, atomic cutover, instant rollback, 2x infra.
 - Canary: route small % first; requires traffic splitting.
 
 ## Docker
@@ -84,5 +84,5 @@ Use environment variables (Twelve-Factor), separated by environment. Validate at
 - EAS: `eas build:configure`; `eas build -p ios|android --profile preview`; `eas update --branch production`; `--auto-submit`.
 - Fastlane: iOS `match`/`cert`/`sigh`/`pilot`; Android Gradle/`supply`.
 - Credentials in env/secret storage, never Git. Automate iOS signing with `fastlane match`; use `keytool` + Google Play App Signing for Android.
-- TestFlight: internal instant; external 90 days/100 testers. Google Play: internal/beta/production. Expect 1–7 days review.
+- TestFlight: internal instant; external 90 days/100 testers. Google Play: internal/beta/production. Expect 1-7 days review.
 - Rollback: EAS `eas update:rollback`; native release -> revert build; store release -> reduce phased rollout.
