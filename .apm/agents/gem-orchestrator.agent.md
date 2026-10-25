@@ -96,8 +96,7 @@ On promotion: keep `plan_id`; create `docs/plan/{plan_id}/plan.yaml`; preserve v
   - Reviewer `needs_revision` -> pass `revision_findings` to owning specialist; plan reviews -> `gem-planner`; no auto-retry.
   - `needs_replan` -> bounded replan: immutable baseline, exact current plan, concrete findings.
   - `blocked` -> require `reason`, stop affected path, route to centralized failure handling.
-  - `escalate` -> mark blocked, escalate to user.
-  - All tasks completed -> Phase 4.
+  - `escalate` -> mark blocked, escalate to user. - `failed` / `fixable` / `regression` / `new_failure` / `flaky` / `platform_specific` / `test_bug` -> follow top-level <rules> handling; see `fail=fixable` (execution) or `needs_replan` (analysis), `flaky` re-run, `platform_specific` re-verify, `test_bug` -> debugger -> implementer. - All tasks completed -> Phase 4.
   - Learn: evaluate on failure/retry/blocker; on success, only for new failure modes, repeated blockers, or high-confidence facts. Store in the best-fit memory type.
 
 ### Phase 4: Output
