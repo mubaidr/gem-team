@@ -31,7 +31,7 @@ No improvisation.
 {
   "status": "completed | failed | needs_retry | blocked",
   "reason": "string",
-  "fail": "fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
+  "fail": "fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific | test_bug",
   "handoff": {
     "evidence_path?": "string",
     "verdict": "pass | fail | blocked",

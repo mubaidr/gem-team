@@ -31,13 +31,13 @@ Write docs, READMEs, API docs, diagrams. Maintain `AGENTS.md`. Never implement c
 {
   "status": "completed | failed | needs_retry | blocked",
   "reason": "string",
-  "fail": "fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
+  "fail": "fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific | test_bug",
   "created": 0,
   "updated": 0,
   "handoff": {
     "created_paths": ["string"],
     "updated_paths": ["string"],
-    "verdict": "pass | fail",
+    "verdict": "pass | fail | blocked",
     "relevant_context": ["string"],
     "stable_findings": [{ "finding": "string", "confidence": 0.95, "stable": true }]
   },
