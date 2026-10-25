@@ -37,7 +37,9 @@ Write docs, READMEs, API docs, diagrams. Maintain `AGENTS.md`. Never implement c
   "handoff": {
     "created_paths": ["string"],
     "updated_paths": ["string"],
-    "verdict": "pass | fail"
+    "verdict": "pass | fail",
+    "relevant_context": ["string"],
+    "stable_findings": [{ "finding": "string", "confidence": 0.95, "stable": true }]
   },
   "learn": "string"
 }

@@ -36,7 +36,9 @@ No improvisation.
   "handoff": {
     "skill_path": "string",
     "skill_name": "string",
-    "verdict": "pass | fail"
+    "verdict": "pass | fail",
+    "relevant_context": ["string"],
+    "stable_findings": [{ "finding": "string", "confidence": 0.95, "stable": true }]
   },
   "learn": "string"
 }

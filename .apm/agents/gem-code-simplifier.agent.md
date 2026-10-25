@@ -42,7 +42,9 @@ No improvisation.
   "handoff": {
     "changed_files": ["string"],
     "complexity_delta": 0,
-    "verdict": "pass | fail"
+    "verdict": "pass | fail",
+    "relevant_context": ["string"],
+    "stable_findings": [{ "finding": "string", "confidence": 0.95, "stable": true }]
   },
   "learn": "string"
 }

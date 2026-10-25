@@ -34,7 +34,9 @@ No improvisation.
   "fail": "fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
   "handoff": {
     "evidence_path?": "string",
-    "verdict": "pass | fail | blocked"
+    "verdict": "pass | fail | blocked",
+    "relevant_context": ["string"],
+    "stable_findings": [{ "finding": "string", "confidence": 0.95, "stable": true }]
   },
   "learn": "string"
 }

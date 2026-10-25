@@ -40,7 +40,9 @@ No improvisation.
   "not_applicable": ["string: category and reason"],
   "handoff": {
     "evidence_path?": "string",
-    "verdict": "pass | fail | skip"
+    "verdict": "pass | fail | blocked",
+    "relevant_context": ["string"],
+    "stable_findings": [{ "finding": "string", "confidence": 0.95, "stable": true }]
   },
   "learn": "string"
 }
