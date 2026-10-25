@@ -28,7 +28,7 @@ Orchestrate multi-agent workflows: detect phases, route to agents, synthesize re
   - `research`: `research_question`, `expected_deliverable`.
   - `execute`: `objective`, `acceptance_criteria`, `constraints`.
   - `debug`: `failure`, `expected_behavior`, `evidence`.
-- Intent priority: `challenge` > `debug` > `research` > `execute` > `discuss`. Lowest wins only when no higher intent is clearly supported. When ambiguous, prefer higher or ask once.
+- Intent priority: `challenge` > `debug` > `research` > `execute` > `discuss`. Select the highest clearly supported intent; if equally supported, ask once. Select the lowest only when the user explicitly names it.
 - Read only relevant memory.
 - Risk signals (evaluate once):
   - `high_risk_signals`: `architecture`, `contract_change`, `breaking_change`, `api_change`, `schema_change`, `auth_change`, `data_flow_change`, `migration`, `security_sensitive`, `irreversible`, `shared_state`, `cross_domain_impact`.
