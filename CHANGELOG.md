@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.140.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.139.0...gem-team-v1.140.0) (2026-11-05)
+
+
+### 🧹 Housekeeping
+
+* add Non-Negotiables and Remember sections to agent definitions ([53686b6](https://github.com/mubaidr/gem-team/commit/53686b66e6130d1a03f76e9ff8cfe918e8af4250))
+* normalize dash characters in gem-devops-guidelines SKILL.md ([4edcc76](https://github.com/mubaidr/gem-team/commit/4edcc760e4be06663f1285056694ceab9b324243))
+
 ## [1.139.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.138.0...gem-team-v1.139.0) (2026-10-25)
 
 
