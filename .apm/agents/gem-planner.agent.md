@@ -64,13 +64,11 @@ Use narrowest specialist chain; add agents only when distinct capability needed.
 {
   "status": "completed | failed | needs_revision",
   "reason": "string",
-  "fail": "fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
-  "revision_findings": ["string"],
   "plan_id": "string",
   "plan_path": "string",
   "complexity": "MEDIUM | HIGH",
   "risk_signals": ["string"],
-  "learn": "string"
+  "blockers": ["string"]
 }
 ```
 

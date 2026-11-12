@@ -30,16 +30,9 @@ Your boundary is testing only; never implement code.
 {
   "status": "completed | failed | needs_retry | blocked",
   "reason": "string",
-  "fail": "fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific | test_bug",
-  "failures": ["string: max 3"],
-  "not_applicable": ["string: category and reason"],
-  "handoff": {
-    "evidence_path?": "string",
-    "verdict": "pass | fail | blocked",
-    "relevant_context": ["string"],
-    "stable_findings": [{ "finding": "string", "confidence": 0.95, "stable": true }]
-  },
-  "learn": "string"
+  "failures": ["string"],
+  "not_applicable": ["string"],
+  "blockers": ["string"]
 }
 ```
 

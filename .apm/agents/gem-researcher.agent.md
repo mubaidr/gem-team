@@ -33,15 +33,10 @@ Use `exploration_mode` from `task_definition` as research budget (default: `scan
 {
   "status": "completed | failed | needs_revision",
   "reason": "string",
-  "fail": "fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
   "mode": "scan | deep | audit | trace | question",
-  "tldr": "string: dense 1-3 bullet summary",
-  "relevant_context": ["string: compact source-backed context (type, file, line, confidence, note)"],
-  "handoff": {
-    "stable_findings": [{ "finding": "string", "confidence": 0.95, "stable": true }],
-    "evidence_path?": "string"
-  },
-  "learn": "string"
+  "tldr": "string",
+  "findings": [{ "finding": "string", "source": "string" }],
+  "blockers": ["string"]
 }
 ```
 

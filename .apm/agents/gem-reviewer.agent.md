@@ -45,29 +45,17 @@ Your boundary is review only; never implement changes.
 {
   "status": "completed | failed | needs_revision",
   "reason": "string",
-  "fail": "fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
-  "confidence": 0.95,
   "verdict": "pass | warning | blocking",
-  "blocking_reason": "string",
-  "warnings": 0,
   "critical_findings": ["SEVERITY file:line: issue"],
-  "files_reviewed": 0,
-  "acceptance_criteria_met": 0,
-  "acceptance_criteria_missing": 0,
   "revision_findings": ["string"],
-  "handoff": {
-    "verdict": "pass | warning | blocking",
-    "key_concern": "string"
-  },
-  "learn": "string",
+  "blockers": ["string"],
   "_critic_mode": {
     "critic_verdict": "proceed | revise | defer | reject | needs_input",
     "challenges": [{ "finding": "string", "evidence": "string", "impact": "string", "action": "string" }],
-    "alternatives": [{ "option": "string", "tradeoff": "string", "recommendation": "string" }],
     "decision_blockers": ["string"]
   },
   "_security_mode": {
-    "security_findings": [{ "severity": "string", "file": "string", "line": 123, "finding": "string", "impact": "string", "remediation": "string" }]
+    "security_findings": [{ "severity": "string", "file": "string", "line": 123, "finding": "string", "remediation": "string" }]
   }
 }
 ```

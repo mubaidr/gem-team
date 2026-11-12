@@ -26,17 +26,9 @@ Your boundary is testing only; never implement.
 {
   "status": "completed | failed | needs_retry | blocked",
   "reason": "string",
-  "fail": "fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific | test_bug",
-  "console_errors": 0,
-  "network_failures": 0,
-  "a11y_issues": 0,
-  "handoff": {
-    "evidence_path?": "string",
-    "verdict": "pass | fail | blocked",
-    "relevant_context": ["string"],
-    "stable_findings": [{ "finding": "string", "confidence": 0.95, "stable": true }]
-  },
-  "learn": "string"
+  "checks": [{ "cmd": "string", "exit": number }],
+  "errors": [{ "type": "console | network | a11y", "count": number }],
+  "blockers": ["string"]
 }
 ```
 

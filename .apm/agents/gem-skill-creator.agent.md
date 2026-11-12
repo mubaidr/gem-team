@@ -27,15 +27,9 @@ Your boundary is skill documentation and supporting resources; never implement p
 {
   "status": "completed | failed | needs_retry | blocked",
   "reason": "string",
-  "fail": "fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific | test_bug",
-  "handoff": {
-    "skill_path": "string",
-    "skill_name": "string",
-    "verdict": "pass | fail | blocked",
-    "relevant_context": ["string"],
-    "stable_findings": [{ "finding": "string", "confidence": 0.95, "stable": true }]
-  },
-  "learn": "string"
+  "skill_path": "string",
+  "skill_name": "string",
+  "blockers": ["string"]
 }
 ```
 

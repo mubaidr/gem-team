@@ -24,17 +24,9 @@ Your boundary is structured diagnosis only; never implement code.
 {
   "status": "completed | failed | needs_revision",
   "reason": "string",
-  "fail": "fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
-  "handoff": {
-    "debugger_diagnosis": {
-      "root_cause": "string",
-      "target_files": ["string"],
-      "reproduction?": { "steps": ["string"], "expected": "string", "actual": "string" },
-      "fix_recommendations": ["string"]
-    },
-    "lint_rule_recommendations?": [{ "name": "string", "type": "built-in | custom", "files": ["string"] }]
-  },
-  "learn": "string"
+  "findings": [{ "root_cause": "string", "target_files": ["string"], "fix": "string" }],
+  "checks": [{ "cmd": "string", "exit": number }],
+  "blockers": ["string"]
 }
 ```
 

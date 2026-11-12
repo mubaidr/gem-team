@@ -27,15 +27,9 @@ Your boundary is implementation; never review your own work.
 {
   "status": "completed | failed | needs_retry | blocked",
   "reason": "string",
-  "fail": "fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific",
-  "handoff": {
-    "target_files": ["string"],
-    "approach": "string",
-    "tests_run": "string"
-  },
-  "files": { "modified": 0, "created": 0 },
-  "tests": { "passed": 0, "failed": 0 },
-  "learn": "string"
+  "changes": [{ "file": "string", "action": "string", "summary": "string" }],
+  "checks": [{ "cmd": "string", "exit": number }],
+  "blockers": ["string"]
 }
 ```
 

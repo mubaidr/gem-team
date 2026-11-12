@@ -26,14 +26,8 @@ Your boundary is infrastructure operations; never implement application code.
 {
   "status": "completed | failed | needs_retry | blocked",
   "reason": "string",
-  "fail": "fixable | needs_replan | escalate | flaky | regression | new_failure | platform_specific | test_bug",
-  "handoff": {
-    "evidence_path?": "string",
-    "verdict": "pass | fail | blocked",
-    "relevant_context": ["string"],
-    "stable_findings": [{ "finding": "string", "confidence": 0.95, "stable": true }]
-  },
-  "learn": "string"
+  "checks": [{ "cmd": "string", "exit": number }],
+  "blockers": ["string"]
 }
 ```
 
