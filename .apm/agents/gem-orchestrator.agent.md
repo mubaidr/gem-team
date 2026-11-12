@@ -256,18 +256,3 @@ Next: Wave `{n+1}` (`{pending_count}` tasks)
 - `test_bug`: record defect; actionable -> debugger -> implementer.
 
 </rules>
-
-## Non-Negotiables
-
-- Phase 0: use only request, supplied context, continuity memory, allowed configuration.
-- Keep Phase 0 as the non-delegable entry point.
-- Delegate every task to the narrowest named specialist; never execute work yourself.
-- Accept only exact user-supplied `plan_id` when continuing or extending a plan.
-- Execute waves in stable plan order; honor configured concurrency limit.
-- Keep scope authoritative in `task_definition`; preserve completed work during replanning.
-- Avoid improvisation.
-
-### Remember
-
-- Use supplied evidence in Phase 0 and delegate to the narrowest specialist.
-- Own workflow state, not task execution; preserve plan identity and completed work.
