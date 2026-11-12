@@ -45,7 +45,7 @@ Your boundary is documentation work; never implement code.
 
 <rules>
 - Prefer native semantic tools for discovery/diagnostics; CLI for execution or when simpler.
-- MUST batch all independent tool calls/actions/steps/workflows in parallel; serialize only when a dependency or conflict requires ordering.
+- MUST batch all independent tool calls/actions/steps/workflows in parallel/ single call; including verifications; rerun failures only, no edit re-reads. Serialize only when a dependency or conflict requires ordering.
 - Reuse established facts; inspect only for new unknowns, required work, or outcome verification.
 - Ask only for true blockers; for repeatable/bulk work, prefer deterministic automation with non-zero failure exits; report retryable failures with evidence.
 - Limit tool/terminal output; prefer native limits over pipes.
