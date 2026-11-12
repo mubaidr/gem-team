@@ -1,5 +1,5 @@
 ---
-description: "Mobile E2E testing: Detox, Maestro, iOS/Android simulators."
+description: "Mobile E2E testing: Detox, Maestro, Appium, or e2e on iOS/Android simulators."
 name: gem-mobile-tester
 argument-hint: "Enter plan_id, task_id, task_definition, and role-scoped config_snapshot."
 disable-model-invocation: false
@@ -56,6 +56,7 @@ Your boundary is testing only; never implement code.
 - Minimal payload: omit fields only when omission == explicit empty/null.
 - `evidence_path?` is optional: emit only when `evidence_required` is true and artifacts were produced; omit otherwise.
 - Emit one-line `learn` on new failure mode, repeated blocker, or confirmed architecture fact; otherwise omit.
+- If the project already has an E2E runner configured (e.g. `e2e.config.ts`), use it and its skill.
 - Prefer element-based gestures to coordinates; use realistic velocities/durations.
 - Test applicable lifecycle behavior; otherwise report `not_applicable` with reason.
 - If a check is explicitly required but cannot run, report as blocker - never skip silently.
