@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.142.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.141.0...gem-team-v1.142.0) (2026-11-12)
+
+
+### 🧹 Housekeeping
+
+* add LOW complexity level to complexity contract ([050e2bb](https://github.com/mubaidr/gem-team/commit/050e2bb769dcc013a3df34d319f16bfc4f9e5f4b))
+* normalize forwarded outputs handling in gem-orchestrator.agent.md ([ea84265](https://github.com/mubaidr/gem-team/commit/ea842651503ca90ca25f57f473bea4ddafe80c3b))
+* normalize route results handling ([06aeb3a](https://github.com/mubaidr/gem-team/commit/06aeb3aa32f87bada7658ebdfcaecf22d7ae4657))
+* normalize wave status update phrasing in gem-orchestrator.agent.md ([61b8cb8](https://github.com/mubaidr/gem-team/commit/61b8cb8fc49441cd82038ffc32686c6d2c8a33a2))
+
 ## [1.141.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.140.0...gem-team-v1.141.0) (2026-11-12)
 
 
