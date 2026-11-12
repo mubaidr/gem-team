@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.141.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.140.0...gem-team-v1.141.0) (2026-11-12)
+
+
+### 🚀 New Agents & Features
+
+* **gem-mobile-tester:** support projects with a configured e2e runner ([ac8307e](https://github.com/mubaidr/gem-team/commit/ac8307e2d7c1cd7b2bdfa45a15babaf8bad918e6))
+* **gem-mobile-tester:** support projects with a configured e2e runner ([8058670](https://github.com/mubaidr/gem-team/commit/80586709e694ca65271df0ddd88f19e8c3e597b8))
+
+
+### 🧹 Housekeeping
+
+* enhance tool call rule ([f04ea76](https://github.com/mubaidr/gem-team/commit/f04ea76f51500dadd883aec5ef67d1f8aefa95eb))
+* normalize agent descriptions ([750ea7b](https://github.com/mubaidr/gem-team/commit/750ea7bb4f92f99a2ee98a5fe9d79584144774e2))
+* normalize agent output format ([fa4ee17](https://github.com/mubaidr/gem-team/commit/fa4ee17b41f4cdf1209cb849ac8fdc65545c7d25))
+* normalize phase 3 execution flow ([15c79d2](https://github.com/mubaidr/gem-team/commit/15c79d29e05fdaa4271f3f5e18a5b94cadaf8dc7))
+
 ## [1.140.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.139.0...gem-team-v1.140.0) (2026-11-05)
 
 
