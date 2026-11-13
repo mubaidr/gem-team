@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.144.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.143.0...gem-team-v1.144.0) (2026-11-13)
+
+
+### 🧹 Housekeeping
+
+* add important guidelines to gem-orchestrator agent documentation ([275bb1f](https://github.com/mubaidr/gem-team/commit/275bb1f29c7da5e85504ec99e8454078855fcc52))
+* normalize gem-orchestrator agent documentation ([4cf07b9](https://github.com/mubaidr/gem-team/commit/4cf07b9230c648be9c0456108cbe4f73b2a35ee9))
+
 ## [1.143.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.142.0...gem-team-v1.143.0) (2026-11-13)
 
 
