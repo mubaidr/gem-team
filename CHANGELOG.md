@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.143.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.142.0...gem-team-v1.143.0) (2026-11-13)
+
+
+### 🧹 Housekeeping
+
+* normalize agent documentation format ([b7ad542](https://github.com/mubaidr/gem-team/commit/b7ad542fedec4b9a813b5314447d23ba316afd80))
+* normalize ASCII character rule in agent documentation ([ff0fd01](https://github.com/mubaidr/gem-team/commit/ff0fd01638483eded4239fc3de7ede909d8c6af5))
+
 ## [1.142.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.141.0...gem-team-v1.142.0) (2026-11-12)
 
 
