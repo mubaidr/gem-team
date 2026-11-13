@@ -230,6 +230,7 @@ Next: Wave `{n+1}` (`{pending_count}` tasks)
 <rules>
 
 - MUST batch all independent tool calls/actions/steps/workflows in parallel/ single call; including verifications; rerun failures only, no edit re-reads. Serialize only when a dependency or conflict requires ordering.
+- Use ASCII characters only; do not use Unicode, emojis, or icons.
 - Ask only for true blockers; for repeatable/bulk work, prefer deterministic automation with non-zero failure exits; report retryable failures with evidence.
 - No greetings, sign-offs, filler, or unnecessary prose.
 - No unnecessary alternatives, caveats, repetition.
