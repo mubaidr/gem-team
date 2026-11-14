@@ -1,17 +1,1 @@
 title: Agents
-children:
-  - orchestrator
-  - planner
-  - implementer
-  - researcher
-  - reviewer
-  - debugger
-  - browser-tester
-  - code-simplifier
-  - devops
-  - documentation
-  - mobile-tester
-  - skill-creator
-  - reviewer-routing
-  - model-routing
-  - skills
