@@ -1,148 +1,148 @@
 <script setup lang="ts">
 useHead({
-  titleTemplate: "%s",
-});
+  titleTemplate: '%s'
+})
 
 useSeoMeta({
-  title: "Gem Team",
-  ogTitle: "Gem Team",
+  title: 'Gem Team',
+  ogTitle: 'Gem Team',
   description:
-    "Turn AI coding into an engineering process: agent definitions that enforce good software engineering.",
+    'Turn AI coding into an engineering process: agent definitions that enforce good software engineering.',
   ogDescription:
-    "Turn AI coding into an engineering process: agent definitions that enforce good software engineering.",
-});
+    'Turn AI coding into an engineering process: agent definitions that enforce good software engineering.'
+})
 
 const phases = [
   {
-    name: "Classify",
-    agent: "gem-orchestrator",
+    name: 'Classify',
+    agent: 'gem-orchestrator',
     description:
-      "Reads the task and routes it to the right specialist. Loads only the context the task needs, so sessions stay lean and cheap.",
-    output: "task routing · context budget",
+      'Reads the task and routes it to the right specialist. Loads only the context the task needs, so sessions stay lean and cheap.',
+    output: 'task routing · context budget'
   },
   {
-    name: "Plan",
-    agent: "gem-planner",
+    name: 'Plan',
+    agent: 'gem-planner',
     description:
-      "Turns the task into a bounded wave plan: milestones, routing, handoffs, risks, and acceptance criteria. Cuts scope with YAGNI and KISS before any code is written.",
-    output: "plan.yaml · acceptance criteria",
+      'Turns the task into a bounded wave plan: milestones, routing, handoffs, risks, and acceptance criteria. Cuts scope with YAGNI and KISS before any code is written.',
+    output: 'plan.yaml · acceptance criteria'
   },
   {
-    name: "Implement",
-    agent: "gem-implementer",
+    name: 'Implement',
+    agent: 'gem-implementer',
     description:
-      "Builds in TDD cycles - red, green, refactor. Applies SOLID, fail-fast, and least-surprise. Every major decision carries a one-line reason.",
-    output: "tests green · reviewed diff",
+      'Builds in TDD cycles - red, green, refactor. Applies SOLID, fail-fast, and least-surprise. Every major decision carries a one-line reason.',
+    output: 'tests green · reviewed diff'
   },
   {
-    name: "Review",
-    agent: "gem-reviewer",
+    name: 'Review',
+    agent: 'gem-reviewer',
     description:
-      "Independent review of plans, code, and decisions. Checks quality, security, and contracts before anything merges.",
-    output: "review verdict · security audit",
+      'Independent review of plans, code, and decisions. Checks quality, security, and contracts before anything merges.',
+    output: 'review verdict · security audit'
   },
   {
-    name: "Learn",
-    agent: "gem-skill-creator",
+    name: 'Learn',
+    agent: 'gem-skill-creator',
     description:
-      "Packages what worked into reusable skills, so the team gets better with every session.",
-    output: "reusable SKILL.md",
-  },
-];
+      'Packages what worked into reusable skills, so the team gets better with every session.',
+    output: 'reusable SKILL.md'
+  }
+]
 
 const capabilities = [
   {
-    title: "TDD by default",
+    title: 'TDD by default',
     description:
-      "Tests are written before code. Red, green, refactor, every cycle.",
-    icon: "i-lucide-flask-conical",
+      'Tests are written before code. Red, green, refactor, every cycle.',
+    icon: 'i-lucide-flask-conical'
   },
   {
-    title: "Code review on every change",
+    title: 'Code review on every change',
     description:
-      "An independent reviewer checks quality, security, and contracts before anything merges.",
-    icon: "i-lucide-scan-eye",
+      'An independent reviewer checks quality, security, and contracts before anything merges.',
+    icon: 'i-lucide-scan-eye'
   },
   {
-    title: "Security audits",
+    title: 'Security audits',
     description:
-      "Targeted searches for vulnerabilities in code, configuration, and integrations.",
-    icon: "i-lucide-shield-check",
+      'Targeted searches for vulnerabilities in code, configuration, and integrations.',
+    icon: 'i-lucide-shield-check'
   },
   {
-    title: "Cost-aware routing",
+    title: 'Cost-aware routing',
     description:
-      "Model tiers and progressive context keep token spend down without losing signal.",
-    icon: "i-lucide-coins",
+      'Model tiers and progressive context keep token spend down without losing signal.',
+    icon: 'i-lucide-coins'
   },
   {
-    title: "Resumable plans",
+    title: 'Resumable plans',
     description:
-      "Persistent plan IDs let you pause and resume a session without losing context.",
-    icon: "i-lucide-play",
+      'Persistent plan IDs let you pause and resume a session without losing context.',
+    icon: 'i-lucide-play'
   },
   {
-    title: "Model-agnostic",
+    title: 'Model-agnostic',
     description:
-      "Hardened output contracts work across Copilot, Claude, Cursor, Codex, Gemini, and Windsurf.",
-    icon: "i-lucide-cpu",
+      'Hardened output contracts work across Copilot, Claude, Cursor, Codex, Gemini, and Windsurf.',
+    icon: 'i-lucide-cpu'
   },
   {
-    title: "Anti-slop directives",
-    description: "Agents refuse dead buttons, buzzwords, and template filler.",
-    icon: "i-lucide-badge-check",
-  },
-];
+    title: 'Anti-slop directives',
+    description: 'Agents refuse dead buttons, buzzwords, and template filler.',
+    icon: 'i-lucide-badge-check'
+  }
+]
 
 const stats = {
   headline: [
     {
-      value: "Sub-$0.001",
-      label: "typical API call on 100K+ token contexts",
+      value: 'Sub-$0.001',
+      label: 'typical API call on 100K+ token contexts'
     },
     {
-      value: "30x",
-      label: "cheaper than uncached input",
-    },
+      value: '30x',
+      label: 'cheaper than uncached input'
+    }
   ],
   supporting: [
-    { value: "82.8M+", label: "tokens" },
-    { value: "666", label: "agent runs" },
-    { value: "~124K", label: "avg. context/run" },
-    { value: "2-5s", label: "typical latency" },
-  ],
-};
+    { value: '82.8M+', label: 'tokens' },
+    { value: '666', label: 'agent runs' },
+    { value: '~124K', label: 'avg. context/run' },
+    { value: '2-5s', label: 'typical latency' }
+  ]
+}
 
 const tools = [
   {
-    name: "GitHub Copilot",
-    icon: "i-simple-icons-github",
+    name: 'GitHub Copilot',
+    icon: 'i-simple-icons-github'
   },
   {
-    name: "Claude Code",
-    icon: "i-simple-icons-anthropic",
+    name: 'Claude Code',
+    icon: 'i-simple-icons-anthropic'
   },
   {
-    name: "Cursor",
-    icon: "i-simple-icons-cursor",
+    name: 'Cursor',
+    icon: 'i-simple-icons-cursor'
   },
   {
-    name: "OpenCode",
-    icon: "i-lucide-code",
+    name: 'OpenCode',
+    icon: 'i-lucide-code'
   },
   {
-    name: "Codex CLI",
-    icon: "i-simple-icons-openai",
+    name: 'Codex CLI',
+    icon: 'i-simple-icons-openai'
   },
   {
-    name: "Gemini CLI",
-    icon: "i-simple-icons-googlegemini",
+    name: 'Gemini CLI',
+    icon: 'i-simple-icons-googlegemini'
   },
   {
-    name: "Windsurf",
-    icon: "i-lucide-wind",
-  },
-];
+    name: 'Windsurf',
+    icon: 'i-lucide-wind'
+  }
+]
 </script>
 
 <template>
@@ -156,15 +156,15 @@ const tools = [
           to: '/getting-started/installation',
           color: 'primary',
           trailingIcon: 'i-lucide-arrow-right',
-          size: 'lg',
+          size: 'lg'
         },
         {
           label: 'Read the docs',
           to: '/getting-started',
           color: 'neutral',
           variant: 'outline',
-          size: 'lg',
-        },
+          size: 'lg'
+        }
       ]"
       orientation="horizontal"
     >
@@ -221,7 +221,8 @@ const tools = [
 
     <UPageSection
       id="stats"
-      headline="Stable plans. Warmer cache. Lower cost."
+      headline="Case Study"
+      title="Stable plans. Warmer cache. Lower cost."
       align="center"
       :ui="{ container: 'py-16 sm:py-20' }"
     >
@@ -235,9 +236,11 @@ const tools = [
         >
           <span
             class="text-4xl font-semibold tracking-tight text-primary sm:text-5xl"
-            >{{ stat.value }}</span
+          >{{ stat.value }}</span
           >
-          <p class="mt-3 text-sm leading-6 text-muted">{{ stat.label }}</p>
+          <p class="mt-3 text-sm leading-6 text-muted">
+            {{ stat.label }}
+          </p>
         </div>
       </div>
 
@@ -340,7 +343,7 @@ const tools = [
     >
       <UPageGrid
         :ui="{
-          base: 'grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4',
+          base: 'grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4'
         }"
       >
         <UPageCard
@@ -348,7 +351,7 @@ const tools = [
           :key="tool.name"
           :ui="{
             root: 'border-default/70',
-            body: 'px-4 py-3 flex items-center gap-3',
+            body: 'px-4 py-3 flex items-center gap-3'
           }"
         >
           <UIcon :name="tool.icon" class="size-5 shrink-0 text-muted" />
@@ -365,7 +368,7 @@ const tools = [
           label: 'Installation guide',
           to: '/getting-started/installation',
           color: 'primary',
-          trailingIcon: 'i-lucide-arrow-right',
+          trailingIcon: 'i-lucide-arrow-right'
         },
         {
           label: 'View on GitHub',
@@ -373,8 +376,8 @@ const tools = [
           target: '_blank',
           color: 'neutral',
           variant: 'outline',
-          leadingIcon: 'i-simple-icons-github',
-        },
+          leadingIcon: 'i-simple-icons-github'
+        }
       ]"
       :ui="{ root: 'border-t border-default/70' }"
     >

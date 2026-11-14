@@ -1,1 +1,8 @@
 title: Configuration
+children:
+  - model-routing
+  - orchestrator
+  - quality
+  - devops
+  - testing
+  - examples

@@ -1,1 +1,17 @@
 title: Guide
+children:
+  - features
+  - core-concepts
+  - workflow
+  - quality
+  - efficiency
+  - compatibility
+  - learning
+  - init-clarify
+  - route
+  - plan
+  - workflow-execute
+  - workflow-output
+  - failure-handling
+  - comparison
+  - optimizations
