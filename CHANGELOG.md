@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.145.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.144.0...gem-team-v1.145.0) (2026-11-14)
+
+
+### 🧹 Housekeeping
+
+* update dependencies ([4f7271f](https://github.com/mubaidr/gem-team/commit/4f7271f2cd333e8d3acc479919b6de9c88695363))
+
 ## [1.144.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.143.0...gem-team-v1.144.0) (2026-11-13)
 
 
