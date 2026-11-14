@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.145.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.144.0...gem-team-v1.145.0) (2026-11-14)
+
+
+### 🧹 Housekeeping
+
+* normalize and restructure documentation ([c34bbc1](https://github.com/mubaidr/gem-team/commit/c34bbc15c46535c0b2a30640fb12202432f22b4b))
+* normalize and restructure documentation ([b3bdc1c](https://github.com/mubaidr/gem-team/commit/b3bdc1ce73557d095befdd9e2ca221542a6463a0))
+* update dependencies ([4f7271f](https://github.com/mubaidr/gem-team/commit/4f7271f2cd333e8d3acc479919b6de9c88695363))
+
 ## [1.144.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.143.0...gem-team-v1.144.0) (2026-11-13)
 
 
