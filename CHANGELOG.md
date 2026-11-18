@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.145.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.144.0...gem-team-v1.145.0) (2026-11-18)
+
+
+### 🧹 Housekeeping
+
+* normalize and restructure agent documentation ([a63f778](https://github.com/mubaidr/gem-team/commit/a63f77876aed4505a2fd69661a44678a0f84f85f))
+* normalize and restructure documentation ([c34bbc1](https://github.com/mubaidr/gem-team/commit/c34bbc15c46535c0b2a30640fb12202432f22b4b))
+* normalize and restructure documentation ([b3bdc1c](https://github.com/mubaidr/gem-team/commit/b3bdc1ce73557d095befdd9e2ca221542a6463a0))
+* normalize and restructure gem-planner agent documentation ([cb6aea1](https://github.com/mubaidr/gem-team/commit/cb6aea1e1d1e06f46cb557594ddd5c31460c2fcd))
+* normalize and restructure gem-planner agent documentation ([29b6954](https://github.com/mubaidr/gem-team/commit/29b695473c864f4c80cb263d60f611f3990573b8))
+* normalize and restructure gem-planner agent documentation ([7743676](https://github.com/mubaidr/gem-team/commit/77436760d1c86d66801b05920fbcc7e4ba762ba4))
+* update dependencies ([4f7271f](https://github.com/mubaidr/gem-team/commit/4f7271f2cd333e8d3acc479919b6de9c88695363))
+
 ## [1.144.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.143.0...gem-team-v1.144.0) (2026-11-13)
 
 
