@@ -85,7 +85,7 @@ assumptions: [str]
 
 # shared_context: optional; only include when at least one context_cluster is used
 shared_context:
-  { cluster_id }: [str]
+  { cluster_id }: [str] # Max 5 file:line or symbol refs per cluster. No findings.
 
 tasks:
   - id: str
@@ -103,7 +103,7 @@ tasks:
     exploration_mode?: "scan | question | audit | trace | deep"
     handoff:
       constraints: [str]
-      relevant_context: [str]
+      relevant_context: [str] # Max 3 file:line or symbol refs only. No findings.
       high_risk_signals: [str]
       critic_signals: [str]
 ```
@@ -144,9 +144,10 @@ replan:
 - YAGNI/KISS: minimum that meets the task; reuse before building; justify every extra layer/agent/task/wave barrier; never cut validation, error handling, security, or accessibility.
 - Complexity Contract: treat supplied `LOW`/`MEDIUM`/`HIGH` as floor; promote only when plan evidence justifies; never downgrade.
 - Risk Signals: treat Orchestrator handoff.high_risk_signals and handoff.critic_signals as authoritative; don't re-evaluate. Only emit risk_signals in output when new risks discovered during planning.
-- Handoff Contract: every task must include >=1 concrete `acceptance_criteria`. Include `handoff.constraints` when constraints exist. Handoff content: terse, no prose. Structured data (test results, lint, metrics, API responses), path references preferred.
+- Handoff Contract: require `acceptance_criteria` (>=1); include `handoff.constraints` if applicable; restrict `handoff.relevant_context` (max 3) and `shared_context` (max 5/cluster) to `file:line` or symbol references only (no prose, summaries, or data).
 - Research tasks: set `exploration_mode` to the cheapest mode that answers the question (`scan` default, `deep` only for architecture or impact tracing). A question answerable by search gets `scan` or `question`, never `deep`.
-- `handoff.relevant_context`: optional, task-local reusable findings (symbol boundaries, call-site counts, file references). Omit when empty. Findings shared by 2+ tasks go in top-level `shared_context` (optional) keyed by `cluster_id`, named in each consumer's `context_cluster` (optional); omit all three for standalone tasks.
+- `handoff.relevant_context`: optional, max 3 file:line or symbol refs only. No findings, no prose. Omit when empty.
+- `shared_context`: optional, max 5 file:line or symbol refs per cluster. No findings. Omit when empty.
 - `decisions`: non-obvious structural choices with a one-line reason (wave barrier, specialist, scope cut). `assumptions`: stated assumptions the plan depends on. Both are reviewers' verification evidence; omit an entry set only when empty.
 - Missing required fields are a plan defect; fix before returning.
 - Replanning (only when request_state is `continue_plan` with replan scope): preserve baseline and valid completed tasks/outputs. Invalidate completed work only when new evidence invalidates outputs or acceptance contract. Replan smallest affected wave sequence.
