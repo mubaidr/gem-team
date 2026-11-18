@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.146.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.145.0...gem-team-v1.146.0) (2026-11-18)
+
+
+### 🧹 Housekeeping
+
+* normalize and restructure gem-browser-tester and gem-implementer agent documentation ([c790529](https://github.com/mubaidr/gem-team/commit/c7905299d7c9e63dc8beb8224e7ec7c1bf3fd67e))
+
 ## [1.145.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.144.0...gem-team-v1.145.0) (2026-11-18)
 
 
