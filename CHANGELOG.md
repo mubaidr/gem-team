@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.147.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.146.0...gem-team-v1.147.0) (2026-11-18)
+
+
+### 🧹 Housekeeping
+
+* update gem-orchestrator agent status reporting ([8e11868](https://github.com/mubaidr/gem-team/commit/8e118688fad21d0f626f9e9e84c3bfacbd9beb73))
+
 ## [1.146.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.145.0...gem-team-v1.146.0) (2026-11-18)
 
 
