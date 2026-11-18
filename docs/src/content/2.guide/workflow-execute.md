@@ -91,28 +91,28 @@ retries_used: 1
 
 ## Scheduling Rules
 
-| Rule | Description |
-|------|-------------|
-| **Plan order** | Waves execute sequentially (1 → 2 → 3) |
+| Rule                     | Description                                             |
+| ------------------------ | ------------------------------------------------------- |
+| **Plan order**           | Waves execute sequentially (1 → 2 → 3)                  |
 | **Parallel within wave** | Up to `orchestrator.max_concurrent_agents` (default: 2) |
-| **Cluster contiguity** | Tasks sharing `context_cluster` run back-to-back |
-| **Ownership protection** | Overlapping ownership → never parallel (serialized) |
-| **Retries count** | Each retry consumes a concurrency slot |
+| **Cluster contiguity**   | Tasks sharing `context_cluster` run back-to-back        |
+| **Ownership protection** | Overlapping ownership → never parallel (serialized)     |
+| **Retries count**        | Each retry consumes a concurrency slot                  |
 
 ---
 
 ## Specialist Delegation
 
-| Agent | When Delegated | Key Handoff Fields |
-|-------|----------------|-------------------|
-| `gem-implementer` | Features, fixes, refactors (TDD) | `constraints`, `relevant_context`, `plan_context` |
-| `gem-debugger` | Bug fixes (after diagnosis) | `failure`, `expected_behavior`, `evidence` |
-| `gem-researcher` | Exploration tasks | `exploration_mode`, `handoff` |
-| `gem-reviewer` | Review gates | `review_mode`, `review_target`, `review_scope`, `evidence` |
-| `gem-browser-tester` | UI/E2E testing | Test scope, visual regression config |
-| `gem-devops` | Infrastructure, CI/CD | Deployment target, approval gates |
-| `gem-documentation-writer` | Docs, API docs, diagrams | Target audience, format, scope |
-| `gem-code-simplifier` | Refactoring, dead code removal | Target files, preservation rules |
+| Agent                      | When Delegated                   | Key Handoff Fields                                         |
+| -------------------------- | -------------------------------- | ---------------------------------------------------------- |
+| `gem-implementer`          | Features, fixes, refactors (TDD) | `constraints`, `relevant_context`, `plan_context`          |
+| `gem-debugger`             | Bug fixes (after diagnosis)      | `failure`, `expected_behavior`, `evidence`                 |
+| `gem-researcher`           | Exploration tasks                | `exploration_mode`, `handoff`                              |
+| `gem-reviewer`             | Review gates                     | `review_mode`, `review_target`, `review_scope`, `evidence` |
+| `gem-browser-tester`       | UI/E2E testing                   | Test scope, visual regression config                       |
+| `gem-devops`               | Infrastructure, CI/CD            | Deployment target, approval gates                          |
+| `gem-documentation-writer` | Docs, API docs, diagrams         | Target audience, format, scope                             |
+| `gem-code-simplifier`      | Refactoring, dead code removal   | Target files, preservation rules                           |
 
 **All delegation via Orchestrator** — never direct agent-to-agent.
 
@@ -123,6 +123,7 @@ retries_used: 1
 ### Automatic Review Trigger
 
 Reviewer invoked when **any** condition met:
+
 - HIGH complexity
 - High-risk signals (`architecture`, `breaking_change`, `cross_domain_impact`)
 - Critic signals from Phase 0
@@ -132,9 +133,9 @@ Reviewer invoked when **any** condition met:
 ### Review Handoff
 
 ```yaml
-review_mode: "standard"  # standard | high | critic
-review_target: "integration"  # plan | task | code | decision | docs | config | integration
-review_scope: "changed"  # changed | affected | full
+review_mode: "standard" # standard | high | critic
+review_target: "integration" # plan | task | code | decision | docs | config | integration
+review_scope: "changed" # changed | affected | full
 handoff:
   target_reference: "src/api/users/search.ts"
   criteria:
@@ -199,20 +200,20 @@ blocked_tasks: []
 
 After each task, Orchestrator classifies result:
 
-| Classification | Meaning | Handler |
-|----------------|---------|---------|
-| `completed` | Success, criteria met | Continue to next task |
-| `needs_retry` | Transient failure | Retry same task (max 3x, increment `retries_used`) |
-| `needs_revision` + `clarification_needed` | Scope ambiguous | Ask user, no retry |
-| `needs_revision` (plan) | Plan issue | Planner with `revision_findings` |
-| `needs_revision` (code) | Code issue | Owning specialist with `revision_findings` |
-| `failed` | Execution failure | Infer: `fixable` (code) or `needs_replan` (analysis) |
-| `fixable` / `regression` / `new_failure` | Code bug | Debugger → Implementer |
-| `needs_replan` | Scope/dependencies wrong | Planner (bounded replan) |
-| `flaky` | Intermittent | Specialist re-runs once |
-| `platform_specific` | Platform issue | Specialist verifies criteria |
-| `test_bug` | Test defect | Debugger → Implementer |
-| `blocked` / `escalate` | External dependency | Stop path, escalate to user |
+| Classification                            | Meaning                  | Handler                                              |
+| ----------------------------------------- | ------------------------ | ---------------------------------------------------- |
+| `completed`                               | Success, criteria met    | Continue to next task                                |
+| `needs_retry`                             | Transient failure        | Retry same task (max 3x, increment `retries_used`)   |
+| `needs_revision` + `clarification_needed` | Scope ambiguous          | Ask user, no retry                                   |
+| `needs_revision` (plan)                   | Plan issue               | Planner with `revision_findings`                     |
+| `needs_revision` (code)                   | Code issue               | Owning specialist with `revision_findings`           |
+| `failed`                                  | Execution failure        | Infer: `fixable` (code) or `needs_replan` (analysis) |
+| `fixable` / `regression` / `new_failure`  | Code bug                 | Debugger → Implementer                               |
+| `needs_replan`                            | Scope/dependencies wrong | Planner (bounded replan)                             |
+| `flaky`                                   | Intermittent             | Specialist re-runs once                              |
+| `platform_specific`                       | Platform issue           | Specialist verifies criteria                         |
+| `test_bug`                                | Test defect              | Debugger → Implementer                               |
+| `blocked` / `escalate`                    | External dependency      | Stop path, escalate to user                          |
 
 ---
 
