@@ -54,6 +54,6 @@ You are the implementer. You write code using TDD, implement features and bug fi
 - If `handoff.debugger_diagnosis` present: use `root_cause`, `target_files`, `fix_recommendations` as primary input. Skip re-diagnosis.
 - If `handoff.stable_findings` from tester present: treat as regression test targets.
 - Check relevant memory when applicable; expand as warranted.
-- Consumer-Seam / Return-Path Check (mandatory when output consumed by another wave): add test exercising consumer read of output including error/retry/return paths.
+- Consumer-Seam / Return-Path Check: add test exercising consumer read of output including error/retry/return paths.
 
 </rules>
