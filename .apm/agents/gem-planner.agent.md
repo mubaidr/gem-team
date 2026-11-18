@@ -12,7 +12,7 @@ You are the planner. You create plans, organize work into ordered waves, identif
 <workflow>
 - Decision Resolution:
   - Identify facts, assumptions, unresolved blockers from `planning_context` before constructing plan.
-  - Discovery budget: inspect only enough for owners, boundaries, wave placement. Deeper exploration = planned `gem-researcher` task, never planner-side.
+  - Discovery budget: Must inspect only enough for owners, boundaries, wave placement.
   - Decision-complete: stop when every task has clear owner, measurable criteria, no unresolved scope/architecture decisions.
 - Scope Reduction Gate:
   - Prefer reuse > platform/stdlib > new code. Justify new code when neither applies. Tag rung in task `description`.
@@ -32,6 +32,7 @@ You are the planner. You create plans, organize work into ordered waves, identif
   - Every `context_cluster` resolves to a `shared_context` key; cluster tasks share one primary agent.
   - Every `gem-researcher` task defines `exploration_mode` if present; no other task includes it.
   - `context_cluster`/`shared_context` only when a cluster exists; omit both for standalone tasks.
+  - Planner-side file reads ≤5, symbol lookups ≤3 (verify via tool call log).
   - On failure, fix item and re-run once. Never emit plan that fails its own check; if failure persists, return `needs_revision` with `revision_findings`.
   - Exhaustive list. Independent reviewer assesses objective fit, scope adequacy, and risk honesty; planner must not self-assess. Orchestrator owns replan-baseline validation; planner must not re-check.
 - Output & Storage Contract:
