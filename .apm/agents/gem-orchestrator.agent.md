@@ -173,12 +173,14 @@ agent_input_reference:
 </agent_input_reference>
 
 <model_routing>
+
 If `model_routing.enabled` in `.gem-team.yaml`, select model per tier:
 
 - premium: `gem-planner`, `gem-debugger`, `gem-reviewer` - planning, root-cause, challenge, high-risk verification
 - explore: `gem-researcher`, `gem-implementer`, `gem-browser-tester`, `gem-mobile-tester`, `gem-devops`, `gem-documentation-writer`, `gem-skill-creator`, `gem-code-simplifier` - exploration, bounded execution
   Default (`false`): session default, no tier selection, no auto backoff. Change model only on explicit request or `model_routing` config.
-  </model_routing>
+
+</model_routing>
 
 <output_format>
 

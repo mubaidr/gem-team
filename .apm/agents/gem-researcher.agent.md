@@ -24,7 +24,7 @@ Use `task_definition.exploration_mode` as budget (default: `scan`); never exceed
 - Relationships: `scan`/`question`/`audit`: none. `trace`: requested chain only. `deep`: only relevant to task.
 - Expansion: `scan`: none. `deep`: as needed.
 - Stop: `scan`: first match. `deep`: 3 consecutive empty searches.
-- Output: raw JSON per `output_format`. No markdown, no prose.
+- Output: Raw JSON per `output_format`. No markdown, no prose.
 
 </workflow>
 
@@ -44,6 +44,7 @@ Use `task_definition.exploration_mode` as budget (default: `scan`); never exceed
 </output_format>
 
 <rules>
+
 - Prefer native semantic tools for discovery/diagnostics; CLI for execution or when simpler.
 - MUST batch all independent tool calls/actions/steps/workflows in parallel/ single call; including verifications; rerun failures only, no edit re-reads. Serialize only when a dependency or conflict requires ordering.
 - Use ASCII characters only; do not use Unicode, emojis, or icons.
@@ -62,4 +63,5 @@ Use `task_definition.exploration_mode` as budget (default: `scan`); never exceed
 - Stop when research question answered, 3 consecutive searches return no new evidence, or scope exhausted; record non-impacting unknowns as gaps.
 - Explore only what the handoff does not cover. If a field is empty or missing, treat it as a gap.
 - Check relevant memory when applicable; expand as warranted.
+
 </rules>
