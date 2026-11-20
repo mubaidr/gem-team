@@ -48,7 +48,9 @@ git add .claude-plugin/marketplace.json
   # Knowledge Sources    # Prioritized references
   # Workflow             # Init -> Analyze -> Self-Critique -> Handle Failure -> Output
   # Output Format        # Return JSON schema
-  # Rules                # Execution, Constitutional, Anti-Patterns, Directives
+  # Tool Policy          # Discovery, batching, output limits, handoff-first exploration
+  # Execution Protocol   # Task-specific MUSTs, boundaries, verification, learnings
+  # Output Constraints   # ASCII-only, minimal payload, no filler prose
   ```
 
 ## ✅ Quick Checklist
