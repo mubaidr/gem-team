@@ -23,6 +23,7 @@ const { header } = useAppConfig()
     <template #left>
       <NuxtLink
         :to="header?.to || '/'"
+        aria-label="Gem Team home"
         class="flex min-h-11 items-center gap-3"
       >
         <!-- <AppLogo class="size-8" /> -->

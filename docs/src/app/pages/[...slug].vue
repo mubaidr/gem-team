@@ -31,13 +31,14 @@ const title = page.value.seo?.title || page.value.title
 const description = page.value.seo?.description || page.value.description
 
 const site = useSiteConfig()
+const siteUrl = composeSiteUrl(site.url, useRuntimeConfig().app.baseURL as string)
 useSchemaOrg(
   computed(() =>
     buildDocsSchemaGraph({
       page: page.value,
       navigation: navigation?.value as DocsNavItem[] | undefined,
       path: route.path,
-      siteUrl: site.url,
+      siteUrl,
       description
     })
   )
@@ -103,7 +104,11 @@ const links = computed(() => {
     </UPageBody>
 
     <template v-if="page?.body?.toc?.links?.length" #right>
-      <UContentToc :title="toc?.title" :links="page.body?.toc?.links">
+      <UContentToc
+        aria-label="On this page"
+        :title="toc?.title"
+        :links="page.body?.toc?.links"
+      >
         <template v-if="toc?.bottom" #bottom>
           <div
             class="hidden lg:block space-y-6"
@@ -111,7 +116,11 @@ const links = computed(() => {
           >
             <USeparator v-if="page.body?.toc?.links?.length" type="dashed" />
 
-            <UPageLinks :title="toc.bottom.title" :links="links" />
+            <UPageLinks
+              aria-label="Community links"
+              :title="toc.bottom.title"
+              :links="links"
+            />
           </div>
         </template>
       </UContentToc>

@@ -13,9 +13,9 @@ useSeoMeta({
 })
 
 const site = useSiteConfig()
+const origin = siteBaseUrl(composeSiteUrl(site.url, useRuntimeConfig().app.baseURL as string))
 useSchemaOrg(
   computed(() => {
-    const origin = `${site.url.replace(/\/$/, '')}/`
     return [
       {
         '@type': 'Organization',

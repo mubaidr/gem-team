@@ -1,3 +1,5 @@
+import { joinURL } from 'ufo'
+
 export type SchemaNode = Record<string, unknown> & { '@type': string }
 
 export interface DocsNavItem {
@@ -10,7 +12,21 @@ export interface DocsPageData {
   title?: string
   description?: string
   path?: string
-  body?: { children?: unknown[] }
+  body?: unknown
+}
+
+function bodyChildren(body: unknown): unknown[] {
+  if (body && typeof body === 'object') {
+    const source = body as { children?: unknown[], value?: unknown }
+    for (const candidate of [source.value, source.children]) {
+      if (Array.isArray(candidate)) return candidate
+      if (candidate && typeof candidate === 'object') {
+        const nested = (candidate as { children?: unknown[] }).children
+        if (Array.isArray(nested)) return nested
+      }
+    }
+  }
+  return []
 }
 
 export interface DocsSchemaInput {
@@ -48,9 +64,7 @@ function elementTag(node: unknown): string {
 }
 
 function elementChildren(node: unknown): unknown[] {
-  if (!isElement(node)) return []
-  const children = node[2]
-  return Array.isArray(children) ? children : children == null ? [] : [children]
+  return isElement(node) ? node.slice(2) : []
 }
 
 function normalizePath(path: string): string {
@@ -61,6 +75,15 @@ function normalizePath(path: string): string {
 export function absoluteUrl(siteUrl: string, path: string): string {
   const base = siteUrl.replace(/\/+$/, '')
   return normalizePath(path) === '/' ? `${base}/` : `${base}${normalizePath(path)}`
+}
+
+// site.url is the origin; schema-org appends app.baseURL (e.g. /gem-team/) to it.
+export function composeSiteUrl(siteUrl: string, baseURL: string): string {
+  return joinURL(siteUrl, baseURL)
+}
+
+export function siteBaseUrl(siteUrl: string): string {
+  return absoluteUrl(siteUrl, '/')
 }
 
 export function findNavigationTrail(
@@ -106,7 +129,7 @@ export function extractFaqNodes(
   body: DocsPageData['body'],
   pageUrl: string
 ): SchemaNode[] {
-  const children = Array.isArray(body?.children) ? body.children : []
+  const children = bodyChildren(body)
   const questions: Array<{ name: string, text: string }> = []
   let current: { name: string, parts: string[] } | null = null
 
@@ -147,7 +170,7 @@ export function extractHowToNodes(
   page: DocsPageData,
   pageUrl: string
 ): SchemaNode[] {
-  const children = Array.isArray(body?.children) ? body.children : []
+  const children = bodyChildren(body)
   const headings = children
     .filter(node => /^h[1-6]$/.test(elementTag(node)))
     .map(nodeText)
@@ -198,9 +221,9 @@ export function buildArticleNode(
     'url': pageUrl,
     'inLanguage': 'en',
     'mainEntityOfPage': { '@id': `${pageUrl}#webpage` },
-    'isPartOf': { '@id': `${siteUrl}/#website` },
-    'author': { '@id': `${siteUrl}/#organization` },
-    'publisher': { '@id': `${siteUrl}/#organization` }
+    'isPartOf': { '@id': `${siteBaseUrl(siteUrl)}#website` },
+    'author': { '@id': `${siteBaseUrl(siteUrl)}#organization` },
+    'publisher': { '@id': `${siteBaseUrl(siteUrl)}#organization` }
   }
 }
 
@@ -211,9 +234,9 @@ export function buildDocsSchemaGraph(input: DocsSchemaInput): SchemaNode[] {
   const description = input.description ?? page.description ?? ''
   const organization: SchemaNode = {
     '@type': 'Organization',
-    '@id': `${siteUrl}/#organization`,
+    '@id': `${siteBaseUrl(siteUrl)}#organization`,
     'name': 'Gem Team',
-    'url': `${siteUrl}/`
+    'url': siteBaseUrl(siteUrl)
   }
 
   return [

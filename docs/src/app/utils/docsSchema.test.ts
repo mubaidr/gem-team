@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck -- Node's built-in test runner types are not installed in this Nuxt project.
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import {
@@ -8,6 +10,8 @@ import {
   extractHowToNodes,
   buildArticleNode,
   buildDocsSchemaGraph,
+  composeSiteUrl,
+  siteBaseUrl,
   type DocsNavItem
 } from './docsSchema.ts'
 
@@ -89,6 +93,24 @@ test('extractFaqNodes turns question headings into FAQPage questions with answer
   assert.equal(main[1].name, 'Why Two Tiers?')
 })
 
+test('schema parsing reads the minimark body.value wrapper used by Nuxt Content', () => {
+  const body = {
+    type: 'minimark',
+    value: [
+      ['h2', { id: 'what' }, ['What Just Happened?']],
+      ['p', {}, ['The plan ran.']]
+    ]
+  }
+  assert.equal(extractFaqNodes(body, PAGE_URL).length, 1)
+  const graph = buildDocsSchemaGraph({
+    page: { title: 'Quick Start', path: '/getting-started/quick-start', body },
+    navigation: nav,
+    path: '/getting-started/quick-start',
+    siteUrl: SITE
+  })
+  assert.ok(graph.some(node => node['@type'] === 'FAQPage'))
+})
+
 test('extractFaqNodes ignores prose headings that are not questions', () => {
   const body = { children: [['h2', {}, ['Purpose']], ['p', {}, ['Text.']]] } as unknown as {
     children?: unknown[]
@@ -100,7 +122,7 @@ test('extractHowToNodes builds HowTo steps from an ordered list on an instructio
   const body = {
     children: [
       ['h2', { id: 'steps' }, ['Step 1: Install Gem Team']],
-      ['ol', {}, [['li', {}, ['Install APM.']], ['li', {}, ['Run apm install.']], ['li', {}, ['Verify.']]]]
+      ['ol', {}, ['li', {}, ['Install APM.']], ['li', {}, ['Run apm install.']], ['li', {}, ['Verify.']]]
     ]
   } as unknown as { children?: unknown[] }
   const nodes = extractHowToNodes(body, { title: 'Installation', path: PATH }, PAGE_URL)
@@ -113,7 +135,7 @@ test('extractHowToNodes builds HowTo steps from an ordered list on an instructio
 })
 
 test('extractHowToNodes skips non-instruction pages and too-short lists', () => {
-  const body = { children: [['ol', {}, [['li', {}, ['One.']]]]] } as unknown as { children?: unknown[] }
+  const body = { children: [['ol', {}, ['li', {}, ['One.']]]] } as unknown as { children?: unknown[] }
   assert.deepEqual(extractHowToNodes(body, { title: 'Overview', path: '/guide/features' }, PAGE_URL), [])
   assert.deepEqual(extractHowToNodes(undefined, { title: 'Installation' }, PAGE_URL), [])
 })
@@ -161,4 +183,69 @@ test('buildDocsSchemaGraph combines all node types and survives missing page/nav
   })
   assert.ok(degraded.length >= 2)
   assert.ok(degraded.every(node => typeof node['@type'] === 'string'))
+})
+
+const PUBLIC_BASE = 'https://mubaidr.github.io/gem-team/'
+
+function collectIds(value: unknown, defs: Set<string>, refs: string[]): void {
+  if (Array.isArray(value)) {
+    value.forEach(item => collectIds(item, defs, refs))
+    return
+  }
+  if (value && typeof value === 'object') {
+    const obj = value as Record<string, unknown>
+    if (typeof obj['@type'] === 'string' && typeof obj['@id'] === 'string') {
+      defs.add(obj['@id'])
+    }
+    for (const [key, item] of Object.entries(obj)) {
+      if (key === '@id' && typeof item === 'string') refs.push(item)
+      else collectIds(item, defs, refs)
+    }
+  }
+}
+
+test('composeSiteUrl and siteBaseUrl carry /gem-team into every URL and @id', () => {
+  const siteUrl = composeSiteUrl('https://mubaidr.github.io', '/gem-team/')
+  assert.equal(siteUrl, PUBLIC_BASE)
+  assert.equal(siteBaseUrl(siteUrl), PUBLIC_BASE)
+
+  const graph = buildDocsSchemaGraph({
+    page: { title: 'Installation', description: 'Install Gem Team.', path: PATH },
+    navigation: nav,
+    path: PATH,
+    siteUrl
+  })
+  const article = graph.find(node => node['@type'] === 'Article')
+  const org = graph.find(node => node['@type'] === 'Organization')
+  const crumbs = graph.find(node => node['@type'] === 'BreadcrumbList')
+  assert.equal(article?.url, 'https://mubaidr.github.io/gem-team/getting-started/installation')
+  assert.equal(article?.['@id'], 'https://mubaidr.github.io/gem-team/getting-started/installation#article')
+  assert.equal(org?.['@id'], 'https://mubaidr.github.io/gem-team/#organization')
+  assert.equal(org?.url, PUBLIC_BASE)
+  for (const item of crumbs?.itemListElement as Array<Record<string, unknown>>) {
+    assert.ok(String(item.item).startsWith(PUBLIC_BASE))
+  }
+  for (const node of graph) {
+    assert.ok(String(node['@id']).includes('/gem-team'))
+    if (node.url) assert.ok(String(node.url).startsWith(PUBLIC_BASE))
+  }
+})
+
+test('all @id references resolve to nodes emitted in the same @graph', () => {
+  const siteUrl = composeSiteUrl('https://mubaidr.github.io', '/gem-team/')
+  const graph = buildDocsSchemaGraph({
+    page: { title: 'Installation', description: 'Install Gem Team.', path: PATH },
+    navigation: nav,
+    path: PATH,
+    siteUrl
+  })
+  // nuxt-schema-org emits these defaults into the same @graph on every built page.
+  const defs = new Set<string>([
+    `${siteUrl}#website`,
+    `${siteUrl.replace(/\/$/, '')}${PATH}#webpage`
+  ])
+  const refs: string[] = []
+  collectIds(graph, defs, refs)
+  assert.ok(refs.length > 0)
+  assert.deepEqual(refs.filter(id => !defs.has(id)), [])
 })

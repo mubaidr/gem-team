@@ -26,6 +26,22 @@
 
 :root {
   --ui-radius: 0.25rem;
+  /* WCAG AA: default orange/green 500-600 fail 4.5:1 on light surfaces. */
+  --ui-color-primary-500: #c2410c !important;
+  --ui-color-primary-600: #9a3412 !important;
+  --ui-color-success-500: #166534 !important;
+  --ui-color-success-600: #166534 !important;
+}
+
+.dark {
+  --ui-color-primary-400: #fdba74 !important;
+  --ui-color-success-400: #86efac !important;
+}
+
+/* Shiki's light tokens fall below AA; darken while preserving token hues. */
+html:not(.dark) pre.shiki code span[class],
+html:not(.dark) code.shiki span[class] {
+  color: color-mix(in srgb, var(--shiki-light) 55%, #000) !important;
 }
 
 @layer base {
