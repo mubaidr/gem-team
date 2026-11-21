@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.148.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.147.0...gem-team-v1.148.0) (2026-11-21)
+
+
+### 🧹 Housekeeping
+
+* **agents:** refine code simplifier agent refactoring guideline ([73e55b3](https://github.com/mubaidr/gem-team/commit/73e55b349d4e78e58a96337406092f4cb8250a52))
+* **agents:** standardize agent output format rules structure ([a3ac938](https://github.com/mubaidr/gem-team/commit/a3ac938b8e6168650b9093ffeaf611c8bb3225ed))
+* **agents:** standardize agent output format rules structure ([052c9b8](https://github.com/mubaidr/gem-team/commit/052c9b87933683af8afed66756b202d1bbe4d49d))
+* standardize Raw JSON capitalization in agent output format comments ([e669bbe](https://github.com/mubaidr/gem-team/commit/e669bbe68d9dc76a6d13578dd7bbed9682fa2707))
+* update plan IDs and references from 2025 to 2026 ([6fea4a8](https://github.com/mubaidr/gem-team/commit/6fea4a8232dddd1594c296ecedfdc6cf3fb2bd99))
+
 ## [1.147.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.146.0...gem-team-v1.147.0) (2026-11-18)
 
 
