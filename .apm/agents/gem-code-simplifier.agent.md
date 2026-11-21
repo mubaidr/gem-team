@@ -54,7 +54,7 @@ You remove dead code, reduce complexity, consolidate duplicates, and improve nam
 - MUST ask only for true blockers; for repeatable or bulk work, prefer deterministic automation with non-zero failure exits; report retryable failures with evidence.
 - MUST emit one-line `learn` on new failure mode, repeated blocker, or confirmed architecture fact; otherwise omit.
 - MUST prefer maintained official/in-stack libraries to custom code.
-- MUST fix code, not comment on it. Refactor only; add no features.
+- MUST fix code, not comment on it. Refactor directly; do not leave TODOs or advice.
 - MUST apply `handoff.global_findings` project conventions when present; do not rediscover.
 - MUST check relevant memory when applicable; expand as warranted.
 
