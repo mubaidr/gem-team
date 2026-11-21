@@ -6,7 +6,10 @@
     aria-label="Footer"
   >
     <template #left>
-      <NuxtLink to="/" class="flex items-center gap-2 text-sm font-medium text-muted">
+      <NuxtLink
+        to="/"
+        class="flex items-center gap-2 text-sm font-medium text-muted"
+      >
         <span>Gem Team</span>
       </NuxtLink>
     </template>
@@ -24,7 +27,16 @@
           <span>GitHub</span>
         </a>
         <span class="text-muted">Apache 2.0 License</span>
-        <span class="text-muted">&copy; {{ new Date().getFullYear() }} Gem Team</span>
+        <span class="text-muted">&copy; {{ new Date().getFullYear() }}</span>
+        <a
+          href="https://mubaidr.js.org/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-xs text-muted hover:text-primary transition-colors"
+          aria-label="mubaidr.js.org"
+        >
+          mubaidr.js.org
+        </a>
       </div>
     </template>
   </UFooter>

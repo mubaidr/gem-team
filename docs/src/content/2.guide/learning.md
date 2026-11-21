@@ -202,7 +202,3 @@ promoted_findings:
 | Low confidence (< 0.95) | Not reliable |
 | Speculative patterns | Not validated |
 | Duplicate findings | Already in memory |
-
----
-
-## TTL & Cleanup

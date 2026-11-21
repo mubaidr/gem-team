@@ -63,7 +63,7 @@ Every task receives fields in **cache-lifetime order** for maximum prefix reuse:
 
 ```yaml
 # Plan-constant (same for all tasks in plan)
-plan_id: "20250115-user-search-api"
+plan_id: "20261121-user-search-api"
 config_snapshot: { ... }
 
 # Cluster-shared (same for tasks in cluster)
@@ -214,7 +214,7 @@ docs/plan/{plan_id}/
 ### Status.yaml (Updated Each Wave)
 
 ```yaml
-plan_id: "20250115-user-search-api"
+plan_id: "20261121-user-search-api"
 current_wave: 2
 completed_waves: [1]
 completed_tasks:
@@ -398,7 +398,7 @@ relevant_context:
 
 ## Learning & Memory Promotion Example
 
-After final success for plan `20250115-user-search-api`:
+After final success for plan `20261121-user-search-api`:
 
 | Finding | Confidence | Source Task | Memory Tier |
 |---------|------------|-------------|-------------|

@@ -67,7 +67,7 @@ flowchart LR
 
 ```yaml
 # Plan-constant (same for ALL tasks in plan)
-plan_id: "20250115-user-search-api"
+plan_id: "20261121-user-search-api"
 config_snapshot: { ... }
 
 # Cluster-shared (same for tasks in same context_cluster)

@@ -121,7 +121,7 @@ question: "Should we use different models for planning vs implementation?"
 
 ```yaml
 phase_0_state:
-  plan_id: "20250115-user-search-api"
+  plan_id: "20261121-user-search-api"
   request_state: "new_task"
   intent: "execute"
   objective: "Add user search endpoint..."
@@ -146,7 +146,7 @@ phase_0_state:
 | "Migrate auth to OAuth2" | execute | HIGH | auth_change, breaking_change | Full plan + critic review |
 | "How does caching work?" | research | LOW | none | Researcher → Phase 4 |
 | "Should we use Redis or DB?" | challenge | MEDIUM | architecture | Reviewer critic → Phase 4 |
-| "Continue plan 20250115-user-search" | continue_plan | MEDIUM | existing plan | Phase 3 resume |
+| "Continue plan 20261121-user-search" | continue_plan | MEDIUM | existing plan | Phase 3 resume |
 
 ---
 

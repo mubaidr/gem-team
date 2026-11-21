@@ -7,9 +7,9 @@ useSeoMeta({
   title: 'Gem Team',
   ogTitle: 'Gem Team',
   description:
-    'Turn AI coding into an engineering process: agent definitions that enforce good software engineering.',
+    'Turn AI coding into an engineering process: classified, planned, implemented, reviewed, and learned — with TDD, code review, and scoped handoffs.',
   ogDescription:
-    'Turn AI coding into an engineering process: agent definitions that enforce good software engineering.'
+    'Turn AI coding into an engineering process: classified, planned, implemented, reviewed, and learned — with TDD, code review, and scoped handoffs.'
 })
 
 const phases = [
@@ -17,35 +17,35 @@ const phases = [
     name: 'Classify',
     agent: 'gem-orchestrator',
     description:
-      'Reads the task, picks the right specialist agent, and loads only the files the task needs. Keeps each session lean and cheap by ignoring unrelated code.',
+      'Reads the task, assigns complexity and risk, then routes to the right specialist. No repo inspection — uses only the request and supplied evidence.',
     output: 'task route · context file list'
   },
   {
     name: 'Plan',
     agent: 'gem-planner',
     description:
-      'Breaks the task into a bounded wave plan: milestones, routing, handoffs, risks, and acceptance criteria. Cuts scope with YAGNI and KISS before any code is written.',
+      'Builds an ordered wave plan with scoped handoffs and acceptance criteria. MEDIUM/HIGH only — TRIVIAL/LOW goes straight to execution.',
     output: 'plan.yaml · acceptance criteria'
   },
   {
     name: 'Implement',
     agent: 'gem-implementer',
     description:
-      'Builds in TDD cycles - write a failing test, make it pass, refactor. Applies fail-fast and least-surprise. Every major decision carries a one-line reason in the diff.',
+      'TDD: write a failing test first, then minimal code, then refactor. One-line reason per decision. Bug fixes route through Debugger first.',
     output: 'green tests · reviewed diff'
   },
   {
     name: 'Review',
     agent: 'gem-reviewer',
     description:
-      'An independent reviewer checks quality, security, and contracts before anything merges. Blocks on broken tests or unverified claims.',
+      'Independent quality, security, and contract review. Three axes — mode, target, scope — matched to risk. Blocks on broken tests or unverified claims.',
     output: 'review verdict · security audit'
   },
   {
     name: 'Learn',
     agent: 'gem-skill-creator',
     description:
-      'Packages what worked into a reusable skill (SKILL.md) so the next session starts from proven patterns instead of blank files.',
+      'Promotes findings with confidence ≥ 0.95 into repo memory. Reusable patterns become SKILL.md playbooks for the next session.',
     output: 'SKILL.md skill file'
   }
 ]
@@ -54,7 +54,7 @@ const capabilities = [
   {
     title: 'TDD by default',
     description:
-      'Every change starts with a failing test. Code is written only to make that test pass, then refactored. No test, no code.',
+      'Every implementation starts with a failing test. Code is written only to make that test pass, then refactored. No test, no code.',
     icon: 'i-lucide-flask-conical'
   },
   {
@@ -66,74 +66,55 @@ const capabilities = [
   {
     title: 'Security audits',
     description:
-      'Targeted checks for vulnerabilities in code, configuration, and integrations - hardcoded secrets, unsafe deserialization, and missing input validation.',
+      'Targeted checks for hardcoded secrets, unsafe deserialization, missing input validation, and data-flow issues. Security findings block until resolved.',
     icon: 'i-lucide-shield-check'
   },
   {
-    title: 'Cost-aware routing',
+    title: 'Cost-aware model routing',
     description:
-      'Simple tasks use small models; complex ones escalate. Context is loaded in slices so you never pay for files the task does not touch.',
+      'Planner, Debugger, and Reviewer use premium models; Implementer, Researcher, and testers use explore models. Scoped handoffs cut tokens by ~80%.',
     icon: 'i-lucide-coins'
   },
   {
     title: 'Resumable plans',
     description:
-      'Each plan gets a persistent ID. Close the session and come back later - the agent resumes from the last milestone without rebuilding context.',
+      'Every MEDIUM/HIGH task gets a persistent plan_id. Close the session and resume from the last milestone — no context rebuild.',
     icon: 'i-lucide-play'
   },
   {
-    title: 'Model-agnostic',
+    title: 'Works with your tools',
     description:
-      'Output contracts are hardened so the same plan works across Copilot, Claude, Cursor, Codex, Gemini, and Windsurf. Switch models without rewriting prompts.',
+      'One workflow across Copilot, Claude Code, Cursor, Codex, Gemini, Windsurf, and OpenCode. Same plan.yaml, same agent behavior everywhere.',
     icon: 'i-lucide-cpu'
   },
   {
     title: 'Anti-slop directives',
     description:
-      'Agents refuse dead buttons, buzzwords, and template filler. Every line of code must do something concrete.',
+      'Agents refuse dead buttons, buzzwords, and template filler. Every line of code must do something concrete — verified by review.',
     icon: 'i-lucide-badge-check'
   }
 ]
-
-const stats = {
-  headline: [
-    {
-      value: 'Sub-$0.001',
-      label: 'typical API call on a 100K+ token context'
-    },
-    {
-      value: '30x',
-      label: 'cheaper than uncached input'
-    }
-  ],
-  supporting: [
-    { value: '82.8M+', label: 'tokens processed' },
-    { value: '666', label: 'agent runs completed' },
-    { value: '~124K', label: 'average context per run' },
-    { value: '2-5s', label: 'typical response latency' }
-  ]
-}
 
 const firstTasks = [
   {
     title: 'Write a plan for your task',
     description: 'Describe what you want to build and get a plan.yaml with milestones, acceptance criteria, and a scope cut before any code is written.',
-    to: '/getting-started/installation'
+    to: '/getting-started/quick-start'
   },
   {
     title: 'Run TDD on a feature',
     description: 'Start with a failing test, write code to make it pass, then refactor. No test, no code.',
-    to: '/getting-started/installation'
+    to: '/getting-started/first-steps'
   },
   {
     title: 'Review a change before it merges',
     description: 'Submit a diff for an independent quality, security, and contract check. Broken tests block the change.',
-    to: '/getting-started/installation'
+    to: '/agents/reviewer'
   },
   {
     title: 'Save a reusable skill',
     description: 'Turn a successful session into a SKILL.md so the next session starts from proven patterns instead of blank files.',
-    to: '/getting-started/installation'
+    to: '/agents/skill-creator'
   }
 ]
 
@@ -178,7 +159,7 @@ const tools = [
 
     <UPageHero
       title="Turn AI coding into an engineering process."
-      description="Install a team of specialist agents that classify, plan, implement, review, and learn from every task. Tests are written before code, a separate reviewer checks every change, and each session ends with a reusable skill. One command installs it into any project."
+      description="A coordinated team of specialist agents that classify, plan, implement, review, and learn from every task. TDD by default, independent code review on every change, scoped handoffs that cut token cost, and resumable plans you can come back to. One command installs it into any project."
       :links="[
         {
           label: 'Install Gem Team',
@@ -242,79 +223,32 @@ const tools = [
       </template>
 
       <template #headline>
-        <UBadge
-          color="success"
-          variant="subtle"
-          size="sm"
-          class="mb-4"
-        >
-          Apache 2.0 · Open source · Works with any model
-        </UBadge>
+        <div class="flex items-center gap-2">
+          <UBadge
+            color="success"
+            variant="subtle"
+            size="sm"
+            class="mb-4"
+          >
+            Apache 2.0 · Open source · Works with any model
+          </UBadge>
+          <a
+            href="https://mubaidr.js.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-xs text-muted hover:text-primary transition-colors"
+          >
+            by mubaidr.js.org
+          </a>
+        </div>
       </template>
     </UPageHero>
 
     <UPageSection
-      id="main-content"
-      headline="Case Study"
-      title="Stable plans. Warmer cache. Lower cost."
-      align="center"
-      :ui="{ container: 'py-16 sm:py-20' }"
-    >
-      <div
-        class="mx-auto grid max-w-4xl grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-12"
-      >
-        <div
-          v-for="stat in stats.headline"
-          :key="stat.label"
-          class="text-center"
-        >
-          <span
-            class="text-4xl font-semibold tracking-tight text-primary sm:text-5xl"
-          >{{ stat.value }}</span>
-          <p class="mt-3 text-sm leading-6 text-muted">
-            {{ stat.label }}
-          </p>
-        </div>
-      </div>
-
-      <div
-        class="mx-auto mt-12 flex max-w-3xl flex-wrap items-center justify-center gap-x-8 gap-y-4 border-t border-default/70 pt-8"
-      >
-        <div
-          v-for="stat in stats.supporting"
-          :key="stat.label"
-          class="text-center"
-        >
-          <span class="text-lg font-semibold text-default">{{
-            stat.value
-          }}</span>
-          <span class="ml-1.5 text-sm text-muted">{{ stat.label }}</span>
-        </div>
-      </div>
-
-      <p
-        class="mt-8 max-w-2xl text-center text-sm text-muted justify-center mx-auto"
-      >
-        DeepSeek V4.1 Flash charges $0.15/M uncached input and $0.003/M cached
-        input. Gem-Team's scoped handoffs keep most calls hitting cache -
-        turning large contexts into sub-penny operations.
-        <UButton
-          to="/guide/optimizations#cost-in-practice"
-          color="primary"
-          variant="link"
-          label="See the full breakdown"
-          trailing-icon="i-lucide-arrow-right"
-          :ui="{ base: 'px-0' }"
-          class="-ml-1"
-        />
-      </p>
-    </UPageSection>
-
-    <UPageSection
-      id="workflow"
+      id="how-it-works"
       headline="How it works"
       title="One pipeline, five stages."
-      description="Every task flows through the same pipeline. Each stage has one job, a defined output, and a handoff to the next."
+      description="Every task flows through the same pipeline. Each stage has one job, a defined output, and a scoped handoff to the next — no full-context dumps."
       :ui="{ container: 'border-t border-default/70' }"
     >
       <div class="mt-14">
@@ -354,7 +288,7 @@ const tools = [
       id="why"
       headline="What you get"
       title="Engineering discipline, enforced."
-      description="The agents don't suggest good practice - they run it. These are the gates every session passes through."
+      description="The agents don't suggest good practice — they run it. These are the gates every session passes through."
       :ui="{ root: 'bg-muted/25 border-y border-default/70' }"
     >
       <UPageGrid class="mt-14">
@@ -372,7 +306,7 @@ const tools = [
       id="first-tasks"
       headline="Common first tasks"
       title="What to try in your first session."
-      description="Pick one of these and run it through the pipeline."
+      description="Pick one and run it through the pipeline."
       :ui="{ container: 'border-t border-default/70' }"
     >
       <UPageGrid class="mt-14">

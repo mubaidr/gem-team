@@ -40,7 +40,7 @@ planning_context:
 ## Output: Wave Plan
 
 ```yaml
-plan_id: "20250115-user-search-api"
+plan_id: "20261121-user-search-api"
 objective: "..."
 acceptance_criteria: [...]
 complexity: "MEDIUM"

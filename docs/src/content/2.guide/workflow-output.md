@@ -79,7 +79,7 @@ Even for fast path (TRIVIAL/LOW), the Orchestrator produces a structured status 
 ```markdown
 ## Execution Status
 
-Plan: `20250115-user-search-api` | Add user search endpoint with filtering and pagination
+Plan: `20261121-user-search-api` | Add user search endpoint with filtering and pagination
 Progress: `5/5` tasks (100%)
 Waves: Wave 3 (2/2)
 Blocked: 0
@@ -113,7 +113,7 @@ Next: Complete
 |------|---------|
 | `src/api/users/search.ts` | Search endpoint implementation |
 | `tests/api/users/search.test.ts` | Comprehensive test suite |
-| `docs/plan/20250115-user-search-api/plan.yaml` | Persistent plan artifact |
+| `docs/plan/20261121-user-search-api/plan.yaml` | Persistent plan artifact |
 
 ## Next Actions
 
@@ -130,7 +130,7 @@ Next: Complete
 ```markdown
 ## Execution Status
 
-Plan: `20250115-typo-fix` | Fix typo in README
+Plan: `20261121-typo-fix` | Fix typo in README
 Progress: `1/1` tasks (100%)
 Waves: Wave 1 (1/1)
 Blocked: 0
@@ -160,7 +160,7 @@ Next: Complete
 ```markdown
 ## Execution Status
 
-Plan: `20250115-user-search-api` | Add user search endpoint with filtering and pagination
+Plan: `20261121-user-search-api` | Add user search endpoint with filtering and pagination
 Progress: `5/5` tasks (100%)
 Waves: Wave 3 (2/2)
 Blocked: 0
@@ -194,7 +194,7 @@ Next: Complete
 |------|---------|
 | `src/api/users/search.ts` | Search endpoint implementation |
 | `tests/api/users/search.test.ts` | Comprehensive test suite |
-| `docs/plan/20250115-user-search-api/plan.yaml` | Persistent plan artifact |
+| `docs/plan/20261121-user-search-api/plan.yaml` | Persistent plan artifact |
 
 ## Next Actions
 
@@ -207,7 +207,7 @@ Next: Complete
 ```markdown
 ## Execution Status
 
-Plan: `20250115-deploy-staging` | Deploy to staging
+Plan: `20261121-deploy-staging` | Deploy to staging
 Progress: `3/5` tasks (60%)
 Waves: Wave 2 (2/3)
 Blocked: 1 | deploy-to-staging
@@ -234,7 +234,7 @@ Next: Wave 3 (blocked)
 ## Next Actions
 
 - [ ] Unblock staging cluster
-- [ ] Resume plan `20250115-deploy-staging`
+- [ ] Resume plan `20261121-deploy-staging`
 ```
 
 ---
@@ -335,7 +335,7 @@ Successful Pattern (multiple tasks, high confidence)
 On completion, `docs/plan/{plan_id}/` contains:
 
 ```
-docs/plan/20250115-user-search-api/
+docs/plan/20261121-user-search-api/
 ├── plan.yaml              # Immutable baseline
 ├── status.yaml            # Final state: all completed
 ├── wave-1/

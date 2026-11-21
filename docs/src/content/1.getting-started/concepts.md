@@ -222,7 +222,7 @@ Skills keep agent definitions focused while providing task-specific guidance.
 | Architecture change, breaking change | Full plan (HIGH) | "Migrate auth to OAuth2" |
 | Research question, no code | Research path | "How does caching work?" |
 | Decision review, tradeoffs | Challenge path | "Should we use Redis or DB?" |
-| Continue existing work | Continue plan (exact `plan_id`) | "Resume plan 20250115-user-search" |
+| Continue existing work | Continue plan (exact `plan_id`) | "Resume plan 20261121-user-search" |
 
 ---
 

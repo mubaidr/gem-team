@@ -117,8 +117,8 @@ Phase 4: Synthesize critic result + evidence + tradeoffs + decision needed
 
 | Feedback Type | Route | Example |
 |---------------|-------|---------|
-| "Continue" / "Resume" | Phase 3 | "Continue plan 20250115-xyz" |
-| "Add new task" | Phase 2 (`extend`) | "Extend plan 20250115-xyz with new feature" |
+| "Continue" / "Resume" | Phase 3 | "Continue plan 20261121-xyz" |
+| "Add new task" | Phase 2 (`extend`) | "Extend plan 20261121-xyz with new feature" |
 | "Change wave order" | Phase 2 (`revise_waves`) | "Move review before implementation" |
 | "Update criteria" | Phase 2 (`revise_criteria`) | "Add performance benchmark requirement" |
 | "Change scope" | Phase 2 (`revise_scope`) | "Also update the mobile API" |
@@ -195,14 +195,14 @@ flowchart TD
 | Migrate auth to OAuth2 | execute | HIGH | Phase 2 Planner + Reviewer | High-risk, breaking change |
 | "How does caching work?" | research | LOW | gem-researcher → Phase 4 | Standalone research |
 | "Should we use Redis or DB?" | challenge | MEDIUM | gem-reviewer critic → Phase 4 | Decision review |
-| "Continue plan 20250115-xyz" | continue_plan | MEDIUM | Phase 3 | Resume existing plan |
+| "Continue plan 20261121-xyz" | continue_plan | MEDIUM | Phase 3 | Resume existing plan |
 
 ## Continue Plan: Decision Table
 
 | Feedback Type | Route | Example |
 |---------------|-------|---------|
-| "Continue" / "Resume" | Phase 3 | "Continue plan 20250115-xyz" |
-| "Add new task" | Phase 2 (`extend`) | "Extend plan 20250115-xyz with new feature" |
+| "Continue" / "Resume" | Phase 3 | "Continue plan 20261121-xyz" |
+| "Add new task" | Phase 2 (`extend`) | "Extend plan 20261121-xyz with new feature" |
 | "Change wave order" | Phase 2 (`revise_waves`) | "Move review before implementation" |
 | "Update criteria" | Phase 2 (`revise_criteria`) | "Add performance benchmark requirement" |
 | "Change scope" | Phase 2 (`revise_scope`) | "Also update the mobile API" |

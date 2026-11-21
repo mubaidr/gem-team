@@ -119,9 +119,9 @@ copilot chat --agent gem-orchestrator "Plan the user search feature"
 
 # Review with Claude Code (strong analysis)
 claude
-> /gem-reviewer Review plan 20250115-user-search-api
+> /gem-reviewer Review plan 20261121-user-search-api
 
-# All tools share: docs/plan/20250115-user-search-api/
+# All tools share: docs/plan/20261121-user-search-api/
 ```
 
 ---

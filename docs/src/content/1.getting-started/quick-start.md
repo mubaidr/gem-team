@@ -1,173 +1,149 @@
 ---
-
 title: Quick Start
 description: Run your first Gem Team task in 5 minutes.
 navigation:
   icon: i-lucide-rocket
 seo:
   title: Quick Start — Gem Team
-  description: Run your first Gem Team task in 5 minutes. Install, create a test task, and verify results.
+  description: Install Gem Team, run your first task, and verify results in 5 minutes.
   ogTitle: Quick Start — Gem Team
-  ogDescription: Run your first Gem Team task in 5 minutes.
+  ogDescription: Install Gem Team and run your first task.
 ---
 
 
 ## 5-Minute Quick Start
 
-This guide gets you from zero to your first completed task.
+Go from zero to your first completed task with Gem Team.
 
 ### Prerequisites
 
-- Node.js 26+ (for docs site development)
-- One of: VS Code Copilot, Claude Code, Cursor, Codex, Gemini, or Windsurf
-- A Git repository to work in
+- A Git repository (any project)
+- One of: VS Code Copilot, Claude Code, Cursor, Codex, Gemini, Windsurf, or OpenCode
 
 ---
 
-## Step 1: Install Gem Team (30 seconds)
+## Step 1: Install Gem Team
+
+In your project root:
 
 ```bash
-# In your project root
 curl -sSL https://aka.ms/apm-unix | sh
 apm install mubaidr/gem-team --target copilot,claude,cursor
 ```
 
-> **Using a different tool?** See [full installation guide](/getting-started/installation).
+> Using a different tool? See [full installation guide](/getting-started/installation).
+
+Verify:
+
+```bash
+apm list | grep gem-team
+```
+
+You should see `gem-team` listed with a version.
 
 ---
 
-## Step 2: Create a Test Task (1 minute)
+## Step 2: Create Your First Task
 
-Create a simple task file to verify everything works:
+Create a task file describing what you want:
 
 ```bash
-# Create a test request
-cat > test-task.md << 'EOF'
-## Task: Create a hello world function
+cat > my-task.md << 'EOF'
+## Task: Add a greeting helper
 
-Create a TypeScript function `greet(name: string): string` that returns "Hello, {name}!".
-Write a test first (TDD), then implement.
+Create a TypeScript function `greet(name: string): string` in `src/utils/greet.ts`
+that returns `Hello, {name}!`. Write a failing test first (TDD), then implement,
+then verify the test passes.
 EOF
 ```
 
 ---
 
-## Step 3: Run Your First Task (2 minutes)
+## Step 3: Run It
 
-### In VS Code Copilot / GitHub Copilot CLI
+### VS Code Copilot / Copilot CLI
 
 ```bash
-# Using Copilot CLI
-copilot chat --agent gem-orchestrator "Read test-task.md and execute the task"
+copilot chat --agent gem-orchestrator "Read my-task.md and execute the task"
 ```
 
-### In Claude Code
+### Claude Code
 
 ```bash
-# In your project directory
 claude
-> /gem-orchestrator Read test-task.md and execute the task
+> /gem-orchestrator Read my-task.md and execute the task
 ```
 
-### In Cursor
+### Cursor
 
 1. Open Command Palette (`Cmd+Shift+P` / `Ctrl+Shift+P`)
-2. Type "Gem Team: Orchestrator"
-3. Paste the task: "Read test-task.md and execute the task"
+2. Select "Gem Team: Orchestrator"
+3. Paste: `Read my-task.md and execute the task`
 
 ---
 
-## Step 4: Verify Results (1 minute)
+## Step 4: Verify the Result
 
-You should see:
-
-1. **Test created first** (Red phase)
-2. **Implementation added** (Green phase)  
-3. **Test passing** (Verify)
-4. **Status report** showing what was done
+You should see a structured status report:
 
 ```text
 ## Execution Status
 
-Plan: `20250115-hello-world` | Create a hello world function
-Progress: `2/2` tasks (100%)
-Waves: Wave 1 (2/2)
+Plan: `20261121-greeting-helper` | Add a greeting helper
+Progress: `1/1` tasks (100%)
+Waves: Wave 1 (1/1)
 Blocked: 0
 Next: Complete
 ```
 
----
+And new files in your project:
 
-## Step 5: Clean Up (30 seconds)
-
-```bash
-rm test-task.md
-# Check what was created
-ls -la src/  # or your project structure
+```
+src/utils/greet.ts          # implementation
+src/utils/greet.test.ts     # TDD test (written first)
 ```
 
-## Verification Checklist
+---
 
-| Check | Pass/Fail |
-|-------|-----------|
-| Gem Team installed via APM | ☐ |
-| Test task created | ☐ |
-| Orchestrator accepted the task | ☐ |
-| Test written first (Red phase) | ☐ |
-| Implementation added (Green phase) | ☐ |
-| Test passes | ☐ |
-| Structured status report shown | ☐ |
+## Step 5: Clean Up
+
+```bash
+rm my-task.md
+```
 
 ---
 
 ## What Just Happened?
 
-| Phase | Agent | Action |
-|-------|-------|--------|
-| **Plan** | Orchestrator | Classified as TRIVIAL, routed directly |
-| **Execute** | Implementer | Wrote test → implemented function → verified |
-| **Output** | Orchestrator | Reported status and results |
+1. **Phase 0** — Orchestrator classified the task (TRIVIAL, fast path).
+2. **Phase 1** — Routed directly to the Implementer agent (no planner needed).
+3. **Phase 3** — Implementer wrote a failing test (Red), then minimal code to pass (Green), then verified (Refactor).
+4. **Phase 4** — Structured status report; findings promoted to session memory.
 
-The Orchestrator automatically:
-- Classified your request (TRIVIAL complexity)
-- Routed to the Implementer (fast path)
-- Applied TDD (test first, then implementation)
-- Verified the test passes
-- Reported structured status
+No persistent `plan.yaml` was created — TRIVIAL tasks use the fast path without plan artifacts.
 
 ---
 
-## Common First Tasks to Try
+## Common First Tasks
 
-| Task Type | Example Prompt |
-|-----------|----------------|
-| **New feature** | "Add a user authentication module with login/register" |
-| **Bug fix** | "Fix the off-by-one error in `utils/date.ts:42`" |
-| **Refactor** | "Extract the validation logic from `api/users.ts` into a reusable module" |
-| **Research** | "Find all usages of the deprecated `legacyApi` and suggest replacements" |
-| **Documentation** | "Create API documentation for the `/users` endpoints" |
+| Type | Example |
+|------|---------|
+| New feature | "Add a `/api/users/search` endpoint with filtering and pagination" |
+| Bug fix | "Fix the off-by-one error in `src/utils/date.ts:42`" |
+| Refactor | "Extract validation logic from `api/users.ts` into a reusable module" |
+| Research | "Find all usages of the deprecated `legacyApi` and suggest replacements" |
+| Documentation | "Write API docs for the `/users` endpoints" |
 
 ---
 
 ## Next Steps
 
-<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-  <div class="p-4 border rounded-lg">
-    <h3>🎯 First Steps Walkthrough</h3>
-    <p>Detailed guided example with a real feature</p>
-    <a href="/getting-started/first-steps" class="text-primary">Continue →</a>
-  </div>
-  <div class="p-4 border rounded-lg">
-    <h3>🧠 Core Concepts</h3>
-    <p>Understand the mental model behind Gem Team</p>
-    <a href="/getting-started/concepts" class="text-primary">Learn More →</a>
-  </div>
-  <div class="p-4 border rounded-lg">
-    <h3>⚙️ Configuration</h3>
-    <p>Customize behavior with .gem-team.yaml</p>
-    <a href="/configuration" class="text-primary">Configure →</a>
-  </div>
-</div>
+| Want to... | Go to |
+|------------|-------|
+| Build a real feature end-to-end | [First Steps Walkthrough](/getting-started/first-steps) |
+| Understand the mental model | [Core Concepts](/getting-started/concepts) |
+| Customize behavior | [Configuration](/configuration) |
+| Install for another tool | [Compatible Tools](/resources/compatible-tools) |
 
 ---
 
@@ -175,9 +151,9 @@ The Orchestrator automatically:
 
 | Problem | Cause | Fix |
 |---------|-------|-----|
-| "gem-orchestrator not found" | Gem Team not installed for this tool | Run `apm install mubaidr/gem-team --target <tool>` |
-| "plan_id not found" | Exact `plan_id` required; no fuzzy matching | Use the exact ID from original execution |
-| "No tests found" | TDD not triggered | Check acceptance criteria are testable |
-| "Review gate keeps failing" | Acceptance criteria don't match implementation | Align criteria before re-running |
+| `gem-orchestrator not found` | Gem Team not installed for this tool | `apm install mubaidr/gem-team --target <tool>` |
+| `plan_id not found` | Exact `plan_id` required; no fuzzy matching | Use the exact ID from the original run |
+| No tests written | TDD not triggered | Check acceptance criteria are testable |
+| Review gate keeps failing | Criteria don't match implementation | Align criteria, then re-run |
 
-> **Tip**: The quick start uses the **fast path** (TRIVIAL/LOW complexity). For real features, you'll see the full workflow with planning, multiple agents, and quality gates. Continue to [First Steps](/getting-started/first-steps) for a complete example.
+> Tip: TRIVIAL tasks use the fast path (no planner, no persistent plan). Real features with multiple files or risk signals trigger the full MEDIUM/HIGH workflow. Continue to [First Steps](/getting-started/first-steps) for a complete example.

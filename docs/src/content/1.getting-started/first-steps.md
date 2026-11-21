@@ -68,7 +68,7 @@ claude
    Intent: execute
    Complexity: MEDIUM (multiple files, API conventions, tests)
    Risk signals: api_change, contract_change
-   Plan ID: 20250115-user-search-api
+   Plan ID: 20261121-user-search-api
 ```
 
 ### Phase 1: Route
@@ -87,7 +87,7 @@ Wave 4: [Reviewer] Integration review (api_change triggered)
 Wave 5: [Browser Tester] API contract test (optional)
 ```
 
-**Plan saved to** `docs/plan/20250115-user-search-api/plan.yaml`
+**Plan saved to** `docs/plan/20261121-user-search-api/plan.yaml`
 
 ---
 
@@ -162,7 +162,7 @@ Task 3: Verify (Refactor)
 ```
 ## Execution Status
 
-Plan: `20250115-user-search-api` | User Search API Endpoint
+Plan: `20261121-user-search-api` | User Search API Endpoint
 Progress: `5/5` tasks (100%)
 Waves: Wave 1 (1/1) → Wave 2 (1/1) → Wave 3 (2/2) → Wave 4 (1/1)
 Blocked: 0
@@ -174,7 +174,7 @@ Next: Complete
 |------|---------|
 | `src/api/users/search.ts` | Search endpoint implementation |
 | `tests/api/users/search.test.ts` | Comprehensive test suite |
-| `docs/plan/20250115-user-search-api/plan.yaml` | Persistent plan artifact |
+| `docs/plan/20261121-user-search-api/plan.yaml` | Persistent plan artifact |
 
 ## Promoted Learnings (confidence ≥ 0.95)
 
@@ -232,7 +232,7 @@ Reuse the search logic, add CSV serializer.
 EOF
 
 # Continue the same plan
-copilot chat --agent gem-orchestrator "Continue plan 20250115-user-search-api with extend-task.md"
+copilot chat --agent gem-orchestrator "Continue plan 20261121-user-search-api with extend-task.md"
 ```
 
 This demonstrates **resumable plans** — same `plan_id`, new wave added, previous work preserved.
@@ -259,7 +259,7 @@ Task: implement search endpoint
 ```
 **After** (Gem Team scoped handoff):
 ```yaml
-plan_id: "20250115-user-search-api"
+plan_id: "20261121-user-search-api"
 task_id: "implement-search"
 handoff:
   constraints: ["Follow API conventions", "Use Prisma"]
@@ -281,7 +281,7 @@ Add `?format=csv` to the search endpoint that streams CSV download.
 Reuse the search logic, add CSV serializer.
 EOF
 
-copilot chat --agent gem-orchestrator "Extend plan 20250115-user-search-api with extend-task.md"
+copilot chat --agent gem-orchestrator "Extend plan 20261121-user-search-api with extend-task.md"
 
 # Variation 2: Add a new test dimension
 cat > new-test.md << 'EOF'
@@ -291,7 +291,7 @@ Add a performance test asserting results return within 200ms.
 Use the existing test file as base.
 EOF
 
-copilot chat --agent gem-orchestrator "Continue plan 20250115-user-search-api with new-test.md"
+copilot chat --agent gem-orchestrator "Continue plan 20261121-user-search-api with new-test.md"
 ```
 
 ---

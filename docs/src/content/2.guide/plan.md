@@ -195,7 +195,7 @@ docs/plan/{plan_id}/
 ## Concrete Planning Example: User Search API (MEDIUM)
 
 ```yaml
-plan_id: "20250115-user-search-api"
+plan_id: "20261121-user-search-api"
 objective: "Add user search endpoint with filtering and pagination"
 acceptance_criteria:
   - "GET /api/users/search?q=... returns filtered results"
@@ -252,7 +252,7 @@ review_scope: "changed"
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| `plan_id` | string | Yes | Format: `YYYYMMDD-slug`, e.g. `20250115-user-search-api` |
+| `plan_id` | string | Yes | Format: `YYYYMMDD-slug`, e.g. `20261121-user-search-api` |
 | `objective` | string | Yes | What the plan achieves |
 | `acceptance_criteria` | string[] | Yes | Testable criteria for completion |
 | `complexity` | enum | Yes | `TRIVIAL`\|`LOW`\|`MEDIUM`\|`HIGH` |
