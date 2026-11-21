@@ -6,7 +6,7 @@ navigation:
   icon: i-lucide-cpu
 seo:
   title: Model Routing — Gem Team
-  description: Tier-based model selection: premium for planning/review, explore for implementation and testing.
+  description: "Tier-based model selection: premium for planning/review, explore for implementation and testing."
   ogTitle: Model Routing — Gem Team
   ogDescription: Tier-based model selection for delegated agents.
 ---

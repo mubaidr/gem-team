@@ -52,7 +52,11 @@ const { header } = useAppConfig()
     </template>
 
     <template #body>
-      <UContentNavigation highlight :navigation="navigation" />
+      <UContentNavigation
+        highlight
+        :navigation="navigation"
+        aria-label="Site navigation"
+      />
     </template>
   </UHeader>
 </template>

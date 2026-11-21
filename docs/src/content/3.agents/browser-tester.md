@@ -6,7 +6,7 @@ navigation:
   icon: i-lucide-monitor
 seo:
   title: Browser Tester Agent — Gem Team
-  description: The gem-browser-tester performs UI/E2E testing: visual regression, accessibility, performance, and contract tests.
+  description: "The gem-browser-tester performs UI/E2E testing: visual regression, accessibility, performance, and contract tests."
   ogTitle: Browser Tester Agent — Gem Team
   ogDescription: The gem-browser-tester performs UI/E2E testing.
 ---

@@ -6,7 +6,7 @@ navigation:
   icon: i-lucide-git-branch
 seo:
   title: Route — Gem Team
-  description: Phase 1: fast path vs full plan routing based on complexity and risk signals.
+  description: "Phase 1: fast path vs full plan routing based on complexity and risk signals."
   ogTitle: Route — Gem Team
   ogDescription: Phase 1: route requests to fast path or full plan.
 ---

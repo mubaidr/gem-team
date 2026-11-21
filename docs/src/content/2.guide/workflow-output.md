@@ -6,7 +6,7 @@ navigation:
   icon: i-lucide-check-circle
 seo:
   title: Output — Gem Team
-  description: Phase 4: structured status reports, progress tracking, and learnings capture.
+  description: "Phase 4: structured status reports, progress tracking, and learnings capture."
   ogTitle: Output — Gem Team
   ogDescription: Phase 4: structured status reports and learnings.
 ---

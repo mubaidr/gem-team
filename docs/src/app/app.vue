@@ -43,13 +43,13 @@ provide('navigation', navigation)
 
     <a
       href="#main-content"
-      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-white focus:rounded focus:outline-none"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded focus:bg-default focus:px-4 focus:py-2 focus:text-highlighted focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-default"
     >Skip to main content</a
     >
 
     <AppHeader aria-label="Main navigation" />
 
-    <UMain id="main-content">
+    <UMain id="main-content" tabindex="-1">
       <NuxtLayout>
         <NuxtPage />
       </NuxtLayout>

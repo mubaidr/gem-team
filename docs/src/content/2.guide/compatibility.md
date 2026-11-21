@@ -6,7 +6,7 @@ navigation:
   icon: i-lucide-blocks
 seo:
   title: Compatibility — Gem Team
-  description: Model and tool compatibility: Copilot, Claude Code, Cursor, Codex, Gemini, Windsurf, OpenCode.
+  description: "Model and tool compatibility: Copilot, Claude Code, Cursor, Codex, Gemini, Windsurf, OpenCode."
   ogTitle: Compatibility — Gem Team
   ogDescription: Model and tool compatibility for Gem Team.
 ---

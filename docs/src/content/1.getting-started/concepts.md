@@ -6,7 +6,7 @@ navigation:
   icon: i-lucide-brain
 seo:
   title: Core Concepts — Gem Team
-  description: Understand the mental model behind Gem Team: orchestrator, five-phase workflow, scoped handoffs, waves, and skills.
+  description: "Understand the mental model behind Gem Team: orchestrator, five-phase workflow, scoped handoffs, waves, and skills."
   ogTitle: Core Concepts — Gem Team
   ogDescription: Understand the mental model behind Gem Team.
 ---

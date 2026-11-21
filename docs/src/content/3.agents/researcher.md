@@ -1,12 +1,12 @@
 ---
 
 title: Researcher
-description: Codebase exploration with five budgeted modes: scan, deep, audit, trace, question.
+description: "Codebase exploration with five budgeted modes: scan, deep, audit, trace, question."
 navigation:
   icon: i-lucide-search
 seo:
   title: Researcher Agent — Gem Team
-  description: The gem-researcher explores codebases: patterns, relationships, architecture discovery across 5 modes.
+  description: "The gem-researcher explores codebases: patterns, relationships, architecture discovery across 5 modes."
   ogTitle: Researcher Agent — Gem Team
   ogDescription: The gem-researcher explores codebases across 5 modes.
 ---

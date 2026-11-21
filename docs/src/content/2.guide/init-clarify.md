@@ -6,7 +6,7 @@ navigation:
   icon: i-lucide-search
 seo:
   title: Init & Clarify — Gem Team
-  description: Phase 0: classify requests, assess risk, assign complexity, and route work to the right specialist.
+  description: "Phase 0: classify requests, assess risk, assign complexity, and route work to the right specialist."
   ogTitle: Init & Clarify — Gem Team
   ogDescription: Phase 0: classify requests and route work to the right specialist.
 ---

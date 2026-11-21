@@ -1,0 +1,210 @@
+plan_id: nuxt-seo-all-fronts-100
+status: pending
+tldr: |
+  Audit and activate every module shipped by the installed Nuxt SEO package,
+  reach Lighthouse SEO=100 and Accessibility=100, complete llms.txt and
+  schema.org AI/LLM artifacts, then verify and iterate until all gates pass.
+created_at: "2026-11-21"
+created_by: gem-planner
+revision: 1
+replan_count: 0
+planner_revision_used: false
+
+decisions:
+  - "Wave 1 pairs a read-only module audit with enabling the a11y audit level; implementation is gated on verified module coverage."
+  - "Verification and independent review run in parallel, followed by a remediate/re-verify loop until all gates pass."
+  - "quality.a11y_audit_level controls gem-browser-tester axe audit depth only; Lighthouse Accessibility=100 is measured independently and is never gated on the config value."
+
+assumptions:
+  - "Lighthouse and axe audits can run via npx against a local preview build without new permanent dev dependencies."
+  - "quality.a11y_audit_level is editable in the gem orchestrator config (enum none|basic|full) and can be set to 'full'."
+  - "nuxt-ai-ready bundled in @nuxtjs/seo 6.0.1 also emits llms.txt, colliding with nuxt-llms 0.3.2."
+
+tasks:
+  - id: T1
+    title: Audit module coverage and AI artifact state
+    description: Produce a verified gap list of every SEO and AI module and artifact the site currently exposes.
+    wave: 1
+    depends_on: []
+    agent: gem-researcher
+    exploration_mode: audit
+    status: pending
+    retries_used: 0
+    acceptance_criteria:
+      - "Verify a gap list enumerating all 9 modules shipped by @nuxtjs/seo 6.0.1 plus nuxt-llms, each marked active or inactive with config evidence."
+      - "Verify rendered llms.txt, llms-full.txt, robots.txt, sitemap.xml, and JSON-LD output are each confirmed present or absent with a route as evidence."
+      - "Verify the llms generator conflict (nuxt-ai-ready vs nuxt-llms) and the robotsTxt:false plus misnamed public/_robots.txt issue are documented with evidence."
+      - "Verify a baseline route list of all docs pages is captured and a named representative page list (homepage plus one page per content section) is recorded for use by T5 and T8."
+    handoff:
+      constraints:
+        - "Read-only: do not modify config or source files."
+        - "Verify against installed @nuxtjs/seo 6.0.1 docs, not assumed module names."
+      relevant_context:
+        - "nuxt.config.ts:3"
+        - "package.json:18"
+        - "node_modules/@nuxtjs/seo/README.md"
+      high_risk_signals: ["config_change", "cross_domain_impact"]
+      critic_signals: ["cross_domain_impact"]
+
+  - id: T2
+    title: Enable accessibility audit level
+    description: Set the gem quality a11y audit level so gem-browser-tester axe audits run at full depth.
+    wave: 1
+    depends_on: []
+    agent: gem-implementer
+    status: pending
+    retries_used: 0
+    acceptance_criteria:
+      - "Verify the gem quality a11y audit level is set to 'full' in the workspace-root config."
+      - "Verify the config change leaves every docs site source file unmodified."
+    handoff:
+      constraints:
+        - "Change only the gem orchestrator quality config."
+        - "Do not modify docs site source files."
+      relevant_context:
+        - "quality.a11y_audit_level"
+      high_risk_signals: ["config_change"]
+      critic_signals: []
+
+  - id: T3
+    title: Activate and configure all Nuxt SEO modules
+    description: Bring every installed SEO and AI module to an active, non-conflicting configured state.
+    wave: 2
+    depends_on: [T1]
+    agent: gem-implementer
+    status: pending
+    retries_used: 0
+    acceptance_criteria:
+      - "Verify every module on T1's verified module list (all modules shipped by @nuxtjs/seo 6.0.1 plus nuxt-llms) is enabled in nuxt.config.ts with no disabled or contradictory flags."
+      - "Verify a single unambiguous generator produces /llms.txt and /llms-full.txt with no duplicate conflicting output."
+      - "Verify /robots.txt is served with correct allow rules and a sitemap reference, with the misnamed static file resolved."
+      - "Verify site config, schema.org, og-image, link checker, AI-ready, and skew-protection are configured, and npm run build passes."
+    handoff:
+      constraints:
+        - "Own nuxt.config.ts only; do not edit page, component, or content files."
+        - "Use only module names documented by installed @nuxtjs/seo 6.0.1 plus nuxt-llms."
+      relevant_context:
+        - "nuxt.config.ts:122"
+        - "nuxt.config.ts:71"
+        - "public/_robots.txt"
+      high_risk_signals: ["config_change", "cross_domain_impact", "contract_change"]
+      critic_signals: ["cross_domain_impact"]
+
+  - id: T4
+    title: Reach accessibility and AI artifact targets across pages
+    description: Bring all pages to full accessibility and complete structured AI/LLM artifacts without changing docs meaning.
+    wave: 3
+    depends_on: [T2, T3]
+    agent: gem-implementer
+    status: pending
+    retries_used: 0
+    acceptance_criteria:
+      - "Verify Lighthouse Accessibility category scores 100 on representative pages."
+      - "Verify images have descriptive alt text, one logical H1 per page, ordered headings, sufficient contrast, keyboard focus, and labelled interactive elements."
+      - "Verify schema.org JSON-LD is complete on every page type and validates without errors."
+      - "Verify llms.txt and llms-full.txt are complete and ai-seo extractable structure is applied without altering existing docs meaning or navigation."
+      - "Verify npm run lint and npm run typecheck pass."
+    handoff:
+      constraints:
+        - "Own app/** and content/** only; do not edit nuxt.config.ts."
+        - "Preserve existing docs content meaning and navigation structure."
+        - "Apply modern-web-guidance before any HTML, CSS, or accessibility change."
+      relevant_context:
+        - "nuxt.config.ts:18"
+        - "app/app.vue"
+        - "content/1.getting-started"
+      high_risk_signals: ["cross_domain_impact"]
+      critic_signals: ["cross_domain_impact"]
+
+  - id: T5
+    title: Verify all acceptance gates
+    description: Independently measure every gate against a fresh preview build.
+    wave: 4
+    depends_on: [T3, T4]
+    agent: gem-browser-tester
+    status: pending
+    retries_used: 0
+    acceptance_criteria:
+      - "Verify Lighthouse SEO category equals 100 on representative pages."
+      - "Verify Lighthouse Accessibility category equals 100, measured independently of the a11y audit level config, and that gem-browser-tester axe audits run at depth 'full'."
+      - "Verify llms.txt, complete schema.org structured data, and full nuxt-seo module coverage are all present."
+      - "Verify npm run lint, npm run typecheck, and npm run build all pass."
+      - "Verify sitemap, robots.txt, canonical tags, and docs navigation show no regression versus the baseline route list."
+    handoff:
+      constraints:
+        - "Independent verification: do not modify code."
+        - "Test against a fresh preview build."
+      relevant_context:
+        - "nuxt.config.ts:18"
+        - "package.json:40"
+      high_risk_signals: ["cross_domain_impact"]
+      critic_signals: []
+
+  - id: T6
+    title: Independent cross-domain review
+    description: Review all config, content, and artifact changes for regressions and risk honesty.
+    wave: 4
+    depends_on: [T3, T4]
+    agent: gem-reviewer
+    status: pending
+    retries_used: 0
+    acceptance_criteria:
+      - "Verify a written finding set exists covering config, content, and cross-domain risk with zero unresolved high-severity regressions."
+      - "Verify no docs content or navigation regression is found by the reviewer."
+    handoff:
+      constraints:
+        - "Read-only review."
+        - "Focus on cross-domain regressions and risk honesty."
+      relevant_context:
+        - "nuxt.config.ts:3"
+        - "package.json:18"
+      high_risk_signals: ["cross_domain_impact"]
+      critic_signals: ["cross_domain_impact"]
+
+  - id: T7
+    title: Remediate failed gates
+    description: Resolve every gate failure surfaced by verification and review.
+    wave: 5
+    depends_on: [T5, T6]
+    agent: gem-implementer
+    status: pending
+    retries_used: 0
+    acceptance_criteria:
+      - "Verify every failed gate from the verification and review waves has a corresponding fix with evidence."
+      - "Verify no previously passing gate regressed after remediation."
+    handoff:
+      constraints:
+        - "Fix only gate failures reported by verification and review."
+        - "Do not expand scope."
+      relevant_context:
+        - "quality.a11y_audit_level"
+      high_risk_signals: ["cross_domain_impact"]
+      critic_signals: []
+
+  - id: T8
+    title: Reverify and iterate to all-green
+    description: Confirm every gate passes at once; on failure route findings to T7 through a bounded loop that escalates to the user if still red.
+    wave: 6
+    depends_on: [T7]
+    agent: gem-browser-tester
+    status: pending
+    retries_used: 0
+    acceptance_criteria:
+      - "Verify all gates pass simultaneously: SEO=100, Accessibility=100, AI/LLM artifacts complete, all modules active, lint/typecheck/build green, and no content or navigation regression."
+      - "Verify each failed iteration records its findings and routes them to T7 (gem-implementer) for remediation."
+      - "Verify escalation to the user occurs if any gate remains red after 3 iterations."
+    loop:
+      max_iterations: 3
+      on_failure_route_to: T7
+      remediator_agent: gem-implementer
+      record_each_iteration: true
+      on_cap_exhausted: escalate_to_user
+    handoff:
+      constraints:
+        - "Read-only verification; do not modify code."
+        - "Route failed-gate findings to T7 named remediator gem-implementer and record each iteration."
+        - "Stop after 3 iterations and escalate to the user if any gate remains red."
+      relevant_context:
+        - "nuxt.config.ts:18"
+      high_risk_signals: []
+      critic_signals: []

@@ -6,7 +6,7 @@ navigation:
   icon: i-lucide-command
 seo:
   title: Orchestrator Agent — Gem Team
-  description: The gem-orchestrator coordinates phases 0-4: classify, route, plan, execute, report.
+  description: "The gem-orchestrator coordinates phases 0-4: classify, route, plan, execute, report."
   ogTitle: Orchestrator Agent — Gem Team
   ogDescription: The gem-orchestrator coordinates phases 0-4.
 ---

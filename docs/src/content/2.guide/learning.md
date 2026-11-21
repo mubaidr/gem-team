@@ -6,7 +6,7 @@ navigation:
   icon: i-lucide-brain
 seo:
   title: Learning — Gem Team
-  description: How Gem Team learns from success: memory tiers, skill extraction, confidence-gated promotion.
+  description: "How Gem Team learns from success: memory tiers, skill extraction, confidence-gated promotion."
   ogTitle: Learning — Gem Team
   ogDescription: How Gem Team learns from success and extracts reusable skills.
 ---

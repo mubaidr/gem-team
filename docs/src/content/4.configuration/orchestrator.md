@@ -6,7 +6,7 @@ navigation:
   icon: i-lucide-command
 seo:
   title: Orchestrator Configuration — Gem Team
-  description: Workflow execution controls: concurrency, git integration, and workflow behavior settings.
+  description: "Workflow execution controls: concurrency, git integration, and workflow behavior settings."
   ogTitle: Orchestrator Configuration — Gem Team
   ogDescription: Workflow execution controls configuration.
 ---

@@ -6,7 +6,7 @@ navigation:
   icon: i-lucide-alert-triangle
 seo:
   title: Failure Handling — Gem Team
-  description: Failure classification and routing: needs_retry, fixable, regression, needs_replan, flaky, platform_specific, test_bug, blocked.
+  description: "Failure classification and routing: needs_retry, fixable, regression, needs_replan, flaky, platform_specific, test_bug, blocked."
   ogTitle: Failure Handling — Gem Team
   ogDescription: Failure classification and routing for reliable task execution.
 ---

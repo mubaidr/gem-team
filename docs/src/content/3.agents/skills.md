@@ -6,7 +6,7 @@ navigation:
   icon: i-lucide-package
 seo:
   title: Packaged Skills — Gem Team
-  description: Packaged skills reference: devops-guidelines and other reusable SKILL.md playbooks.
+  description: "Packaged skills reference: devops-guidelines and other reusable SKILL.md playbooks."
   ogTitle: Packaged Skills — Gem Team
   ogDescription: Packaged skills reference for Gem Team.
 ---

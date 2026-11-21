@@ -6,7 +6,7 @@ navigation:
   icon: i-lucide-code
 seo:
   title: Implementer Agent — Gem Team
-  description: The gem-implementer builds features in TDD cycles: red, green, refactor with SOLID principles.
+  description: "The gem-implementer builds features in TDD cycles: red, green, refactor with SOLID principles."
   ogTitle: Implementer Agent — Gem Team
   ogDescription: The gem-implementer builds features in TDD cycles.
 ---

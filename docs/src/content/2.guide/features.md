@@ -6,7 +6,7 @@ navigation:
   icon: i-lucide-sparkles
 seo:
   title: Features — Gem Team
-  description: Gem Team features: TDD by default, code review, security audits, cost-aware routing, resumable plans, model-agnostic.
+  description: "Gem Team features: TDD by default, code review, security audits, cost-aware routing, resumable plans, model-agnostic."
   ogTitle: Features — Gem Team
   ogDescription: Gem Team features: TDD by default, code review, security audits, cost-aware routing.
 ---

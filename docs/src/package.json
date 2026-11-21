@@ -20,7 +20,6 @@
     "@vueuse/core": "^15.0.0",
     "minimark": "^1.0.0",
     "nuxt": "^4.6.4",
-    "nuxt-llms": "0.3.2",
     "tailwindcss": "^4.3.5",
     "ufo": "^1.6.4",
     "unist-util-visit": "^5.2.0",

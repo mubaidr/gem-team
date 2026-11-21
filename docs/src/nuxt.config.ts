@@ -5,8 +5,7 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxt/ui',
     '@nuxt/content',
-    '@nuxtjs/seo',
-    'nuxt-llms'
+    '@nuxtjs/seo'
   ],
 
   app: {
@@ -35,7 +34,7 @@ export default defineNuxtConfig({
     }
   },
 
-  compatibilityDate: '2026-06-30',
+  compatibilityDate: '2026-11-11',
 
   nitro: {
     prerender: {
@@ -56,6 +55,11 @@ export default defineNuxtConfig({
     }
   },
 
+  // AI Ready stays active for markdown/MCP; nuxt-llms is the sole llms.txt generator.
+  aiReady: {
+    llmsFullTxt: true
+  },
+
   eslint: {
     config: {
       stylistic: {
@@ -69,63 +73,12 @@ export default defineNuxtConfig({
     provider: 'iconify'
   },
 
-  llms: {
-    domain: 'https://mubaidr.github.io/gem-team',
-    title: 'Gem Team',
-    description:
-      'Turn AI coding into an engineering process: agent definitions that enforce good software engineering.',
-    // Link to prerendered HTML routes; raw .md routes 404 during prerender.
-    contentRawMarkdown: { rewriteLLMSTxt: false },
-    full: {
-      title: 'Gem Team - Full Documentation',
-      description:
-        'Complete documentation for Gem Team: multi-agent orchestration with planning, implementation, review, debugging, and learning workflows.'
-    },
-    sections: [
-      {
-        title: 'Getting Started',
-        contentCollection: 'docs',
-        contentFilters: [
-          { field: 'path', operator: 'LIKE', value: '/getting-started%' }
-        ]
-      },
-      {
-        title: 'Guide',
-        contentCollection: 'docs',
-        contentFilters: [{ field: 'path', operator: 'LIKE', value: '/guide%' }]
-      },
-      {
-        title: 'Agents',
-        contentCollection: 'docs',
-        contentFilters: [
-          { field: 'path', operator: 'LIKE', value: '/agents%' }
-        ]
-      },
-      {
-        title: 'Configuration',
-        contentCollection: 'docs',
-        contentFilters: [
-          { field: 'path', operator: 'LIKE', value: '/configuration%' }
-        ]
-      },
-      {
-        title: 'Resources',
-        contentCollection: 'docs',
-        contentFilters: [
-          { field: 'path', operator: 'LIKE', value: '/resources%' }
-        ]
-      }
-    ]
+  linkChecker: {
+    enabled: true
   },
 
   ogImage: {
     zeroRuntime: true
-  },
-
-  // AI Ready stays active for markdown/MCP; nuxt-llms is the sole llms.txt generator.
-  aiReady: {
-    llmsTxt: false,
-    llmsFullTxt: false
   },
 
   robots: {
@@ -142,16 +95,12 @@ export default defineNuxtConfig({
     enabled: true
   },
 
-  linkChecker: {
+  // Omit sources so the module auto-discovers prerendered Nuxt Content routes.
+  sitemap: {
     enabled: true
   },
 
   skewProtection: {
-    enabled: true
-  },
-
-  // Omit sources so the module auto-discovers prerendered Nuxt Content routes.
-  sitemap: {
     enabled: true
   }
 })

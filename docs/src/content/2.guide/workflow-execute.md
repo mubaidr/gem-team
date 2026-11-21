@@ -6,7 +6,7 @@ navigation:
   icon: i-lucide-play-circle
 seo:
   title: Execute — Gem Team
-  description: Phase 3: run waves, delegate to specialists, verify results, and handle failures.
+  description: "Phase 3: run waves, delegate to specialists, verify results, and handle failures."
   ogTitle: Execute — Gem Team
   ogDescription: Phase 3: run waves and delegate to specialists.
 ---

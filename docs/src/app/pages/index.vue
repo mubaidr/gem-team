@@ -12,6 +12,33 @@ useSeoMeta({
     'Turn AI coding into an engineering process: classified, planned, implemented, reviewed, and learned — with TDD, code review, and scoped handoffs.'
 })
 
+const site = useSiteConfig()
+useSchemaOrg(
+  computed(() => {
+    const origin = `${site.url.replace(/\/$/, '')}/`
+    return [
+      {
+        '@type': 'Organization',
+        '@id': `${origin}#organization`,
+        'name': 'Gem Team',
+        'url': origin
+      },
+      {
+        '@type': 'SoftwareApplication',
+        '@id': `${origin}#software`,
+        'name': 'Gem Team',
+        'description':
+          'Turn AI coding into an engineering process with TDD, code review, and scoped agent handoffs.',
+        'applicationCategory': 'DeveloperApplication',
+        'operatingSystem': 'Any',
+        'url': origin,
+        'license': 'https://www.apache.org/licenses/LICENSE-2.0',
+        'publisher': { '@id': `${origin}#organization` }
+      }
+    ] as Record<string, unknown>[]
+  })
+)
+
 const phases = [
   {
     name: 'Classify',
@@ -152,11 +179,6 @@ const tools = [
 
 <template>
   <div>
-    <a
-      href="#main-content"
-      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-white focus:rounded focus:outline-none"
-    >Skip to main content</a>
-
     <UPageHero
       title="Turn AI coding into an engineering process."
       description="A coordinated team of specialist agents that classify, plan, implement, review, and learn from every task. TDD by default, independent code review on every change, scoped handoffs that cut token cost, and resumable plans you can come back to. One command installs it into any project."

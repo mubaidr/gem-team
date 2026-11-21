@@ -6,7 +6,7 @@ navigation:
   icon: i-lucide-clipboard-list
 seo:
   title: Plan — Gem Team
-  description: Phase 2: create bounded wave plans with milestones, routing, handoffs, risks, and acceptance criteria.
+  description: "Phase 2: create bounded wave plans with milestones, routing, handoffs, risks, and acceptance criteria."
   ogTitle: Plan — Gem Team
   ogDescription: Phase 2: create bounded wave plans with handoffs and acceptance criteria.
 ---

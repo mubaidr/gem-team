@@ -6,7 +6,7 @@ navigation:
   icon: i-lucide-git-branch
 seo:
   title: Reviewer Routing — Gem Team
-  description: Reviewer routing: review_mode, review_target, review_scope axes for standard, high, and critic reviews.
+  description: "Reviewer routing: review_mode, review_target, review_scope axes for standard, high, and critic reviews."
   ogTitle: Reviewer Routing — Gem Team
   ogDescription: Reviewer routing axes: mode, target, scope.
 ---

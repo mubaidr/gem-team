@@ -30,6 +30,19 @@ const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
 const title = page.value.seo?.title || page.value.title
 const description = page.value.seo?.description || page.value.description
 
+const site = useSiteConfig()
+useSchemaOrg(
+  computed(() =>
+    buildDocsSchemaGraph({
+      page: page.value,
+      navigation: navigation?.value as DocsNavItem[] | undefined,
+      path: route.path,
+      siteUrl: site.url,
+      description
+    })
+  )
+)
+
 useSeoMeta({
   title,
   ogTitle: title,
