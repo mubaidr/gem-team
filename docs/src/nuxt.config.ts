@@ -152,6 +152,8 @@ export default defineNuxtConfig({
 
   // Omit sources so the module auto-discovers prerendered Nuxt Content routes.
   sitemap: {
-    enabled: true
+    enabled: true,
+    // Prerender source lists the base URL itself; after baseURL stripping it is /gem-team.
+    exclude: [/^\/gem-team\/?$/]
   }
 })
