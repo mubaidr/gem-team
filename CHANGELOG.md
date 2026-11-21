@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.149.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.148.0...gem-team-v1.149.0) (2026-11-21)
+
+
+### 🧹 Housekeeping
+
+* restructure Nuxt SEO module configuration and LLM generation ([88fd583](https://github.com/mubaidr/gem-team/commit/88fd583ed6a27ef8ab6016d84a2039e8e3ca9f6c))
+* simplify sitemap configuration ([440dcfe](https://github.com/mubaidr/gem-team/commit/440dcfe05d913385b9015d88633ff2594a917b6e))
+* update project styling and configuration ([55ca40d](https://github.com/mubaidr/gem-team/commit/55ca40d62b873d7559f80627bfeff3bd0eea3313))
+* update UI colors and sitemap configuration ([ec6c8ab](https://github.com/mubaidr/gem-team/commit/ec6c8abe54d412fe9c98123cf8dc7582214fcac6))
+* update UI colors, accessibility and schema.org configuration ([f0bd6a4](https://github.com/mubaidr/gem-team/commit/f0bd6a46a3f89c3cd221bb0fc8de4c9a246b6779))
+
 ## [1.148.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.147.0...gem-team-v1.148.0) (2026-11-21)
 
 
