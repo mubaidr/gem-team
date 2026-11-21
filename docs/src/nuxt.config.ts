@@ -39,7 +39,8 @@ export default defineNuxtConfig({
 
   nitro: {
     prerender: {
-      routes: ['/'],
+      // Static Pages deploy has no Nitro server; emit sitemap.xml into .output/public.
+      routes: ['/', '/sitemap.xml'],
       crawlLinks: true
     }
   },
@@ -73,6 +74,8 @@ export default defineNuxtConfig({
     title: 'Gem Team',
     description:
       'Turn AI coding into an engineering process: agent definitions that enforce good software engineering.',
+    // Link to prerendered HTML routes; raw .md routes 404 during prerender.
+    contentRawMarkdown: { rewriteLLMSTxt: false },
     full: {
       title: 'Gem Team - Full Documentation',
       description:
@@ -119,16 +122,36 @@ export default defineNuxtConfig({
     zeroRuntime: true
   },
 
+  // AI Ready stays active for markdown/MCP; nuxt-llms is the sole llms.txt generator.
+  aiReady: {
+    llmsTxt: false,
+    llmsFullTxt: false
+  },
+
   robots: {
+    // Non-root baseURL prevents module generation; public/robots.txt is served statically.
     robotsTxt: false
+  },
+
+  schemaOrg: {
+    enabled: true,
+    defaults: true
   },
 
   seo: {
     enabled: true
   },
 
+  linkChecker: {
+    enabled: true
+  },
+
+  skewProtection: {
+    enabled: true
+  },
+
+  // Omit sources so the module auto-discovers prerendered Nuxt Content routes.
   sitemap: {
-    enabled: true,
-    sources: ['/api/_sitemap']
+    enabled: true
   }
 })

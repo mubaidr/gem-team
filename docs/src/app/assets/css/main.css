@@ -4,12 +4,28 @@
 @source "../../../content/**/*";
 
 @theme {
-  --font-sans: "IBM Plex Sans", sans-serif;
-  --font-mono: "IBM Plex Mono", monospace;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  .font-heading {
+    font-family: var(--font-heading);
+    letter-spacing: -0.02em;
+  }
+
+  body {
+    font-variant-numeric: tabular-nums;
+  }
 }
 
 :root {
-  --ui-radius: 0.625rem;
+  --ui-radius: 0.25rem;
 }
 
 @layer base {
