@@ -1,106 +1,106 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: [
-    '@nuxt/eslint',
-    '@nuxt/image',
-    '@nuxt/ui',
-    '@nuxt/content',
-    '@nuxtjs/seo'
+    "@nuxt/eslint",
+    "@nuxt/image",
+    "@nuxt/ui",
+    "@nuxt/content",
+    "@nuxtjs/seo",
   ],
 
   app: {
-    baseURL: '/gem-team/'
+    baseURL: "/gem-team/",
   },
 
-  css: ['~/assets/css/main.css'],
+  css: ["~/assets/css/main.css"],
 
   site: {
-    url: 'https://mubaidr.github.io',
-    name: 'Gem Team',
+    url: "https://mubaidr.github.io",
+    name: "Gem Team",
     description:
-      'Turn AI coding into an engineering process: agent definitions that enforce good software engineering.'
+      "Turn AI coding into an engineering process: agent definitions that enforce good software engineering.",
   },
 
   content: {
     build: {
       markdown: {
         toc: {
-          searchDepth: 1
-        }
-      }
+          searchDepth: 1,
+        },
+      },
     },
     experimental: {
-      sqliteConnector: 'native'
-    }
+      sqliteConnector: "native",
+    },
   },
 
-  compatibilityDate: '2026-11-11',
+  compatibilityDate: "2026-11-11",
 
   nitro: {
     prerender: {
       // Static Pages deploy has no Nitro server; emit sitemap.xml into .output/public.
-      routes: ['/', '/sitemap.xml'],
-      crawlLinks: true
-    }
+      routes: ["/", "/sitemap.xml"],
+      crawlLinks: true,
+    },
   },
 
   vite: {
     optimizeDeps: {
       include: [
-        '@unhead/schema-org/vue',
-        '@vue/devtools-core',
-        '@vue/devtools-kit',
-        '@vueuse/core'
-      ]
-    }
+        "@unhead/schema-org/vue",
+        "@vue/devtools-core",
+        "@vue/devtools-kit",
+        "@vueuse/core",
+      ],
+    },
   },
 
-  // AI Ready stays active for markdown/MCP; nuxt-llms is the sole llms.txt generator.
+  // AI Ready is the sole llms.txt/llms-full.txt generator and stays active for markdown/MCP.
   aiReady: {
-    llmsFullTxt: true
+    llmsFullTxt: true,
   },
 
   eslint: {
     config: {
       stylistic: {
-        commaDangle: 'never',
-        braceStyle: '1tbs'
-      }
-    }
+        commaDangle: "never",
+        braceStyle: "1tbs",
+      },
+    },
   },
 
   icon: {
-    provider: 'iconify'
+    provider: "iconify",
   },
 
   linkChecker: {
-    enabled: true
+    enabled: true,
   },
 
   ogImage: {
-    zeroRuntime: true
+    zeroRuntime: true,
   },
 
   robots: {
     // Non-root baseURL prevents module generation; public/robots.txt is served statically.
-    robotsTxt: false
+    robotsTxt: false,
   },
 
   schemaOrg: {
     enabled: true,
-    defaults: true
+    defaults: true,
   },
 
   seo: {
-    enabled: true
+    enabled: true,
   },
 
   // Omit sources so the module auto-discovers prerendered Nuxt Content routes.
   sitemap: {
-    enabled: true
+    enabled: true,
   },
 
   skewProtection: {
-    enabled: true
-  }
-})
+    enabled: true,
+  },
+});

@@ -41,7 +41,7 @@ quality:
 
   # Accessibility audit depth (used by gem-browser-tester)
   # none | basic | full
-  a11y_audit_level: none
+  a11y_audit_level: full
 
 # ═══════════════════════════════════════════════════════════
 # DEVOPS & DEPLOYMENT
