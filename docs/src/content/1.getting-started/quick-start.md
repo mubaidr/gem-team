@@ -1,9 +1,16 @@
 ---
+
 title: Quick Start
 description: Run your first Gem Team task in 5 minutes.
 navigation:
   icon: i-lucide-rocket
+seo:
+  title: Quick Start — Gem Team
+  description: Run your first Gem Team task in 5 minutes. Install, create a test task, and verify results.
+  ogTitle: Quick Start — Gem Team
+  ogDescription: Run your first Gem Team task in 5 minutes.
 ---
+
 
 ## 5-Minute Quick Start
 
@@ -99,6 +106,18 @@ rm test-task.md
 ls -la src/  # or your project structure
 ```
 
+## Verification Checklist
+
+| Check | Pass/Fail |
+|-------|-----------|
+| Gem Team installed via APM | ☐ |
+| Test task created | ☐ |
+| Orchestrator accepted the task | ☐ |
+| Test written first (Red phase) | ☐ |
+| Implementation added (Green phase) | ☐ |
+| Test passes | ☐ |
+| Structured status report shown | ☐ |
+
 ---
 
 ## What Just Happened?
@@ -151,5 +170,14 @@ The Orchestrator automatically:
 </div>
 
 ---
+
+## Troubleshooting
+
+| Problem | Cause | Fix |
+|---------|-------|-----|
+| "gem-orchestrator not found" | Gem Team not installed for this tool | Run `apm install mubaidr/gem-team --target <tool>` |
+| "plan_id not found" | Exact `plan_id` required; no fuzzy matching | Use the exact ID from original execution |
+| "No tests found" | TDD not triggered | Check acceptance criteria are testable |
+| "Review gate keeps failing" | Acceptance criteria don't match implementation | Align criteria before re-running |
 
 > **Tip**: The quick start uses the **fast path** (TRIVIAL/LOW complexity). For real features, you'll see the full workflow with planning, multiple agents, and quality gates. Continue to [First Steps](/getting-started/first-steps) for a complete example.

@@ -17,36 +17,36 @@ const phases = [
     name: 'Classify',
     agent: 'gem-orchestrator',
     description:
-      'Reads the task and routes it to the right specialist. Loads only the context the task needs, so sessions stay lean and cheap.',
-    output: 'task routing · context budget'
+      'Reads the task, picks the right specialist agent, and loads only the files the task needs. Keeps each session lean and cheap by ignoring unrelated code.',
+    output: 'task route · context file list'
   },
   {
     name: 'Plan',
     agent: 'gem-planner',
     description:
-      'Turns the task into a bounded wave plan: milestones, routing, handoffs, risks, and acceptance criteria. Cuts scope with YAGNI and KISS before any code is written.',
+      'Breaks the task into a bounded wave plan: milestones, routing, handoffs, risks, and acceptance criteria. Cuts scope with YAGNI and KISS before any code is written.',
     output: 'plan.yaml · acceptance criteria'
   },
   {
     name: 'Implement',
     agent: 'gem-implementer',
     description:
-      'Builds in TDD cycles - red, green, refactor. Applies SOLID, fail-fast, and least-surprise. Every major decision carries a one-line reason.',
-    output: 'tests green · reviewed diff'
+      'Builds in TDD cycles - write a failing test, make it pass, refactor. Applies fail-fast and least-surprise. Every major decision carries a one-line reason in the diff.',
+    output: 'green tests · reviewed diff'
   },
   {
     name: 'Review',
     agent: 'gem-reviewer',
     description:
-      'Independent review of plans, code, and decisions. Checks quality, security, and contracts before anything merges.',
+      'An independent reviewer checks quality, security, and contracts before anything merges. Blocks on broken tests or unverified claims.',
     output: 'review verdict · security audit'
   },
   {
     name: 'Learn',
     agent: 'gem-skill-creator',
     description:
-      'Packages what worked into reusable skills, so the team gets better with every session.',
-    output: 'reusable SKILL.md'
+      'Packages what worked into a reusable skill (SKILL.md) so the next session starts from proven patterns instead of blank files.',
+    output: 'SKILL.md skill file'
   }
 ]
 
@@ -54,42 +54,43 @@ const capabilities = [
   {
     title: 'TDD by default',
     description:
-      'Tests are written before code. Red, green, refactor, every cycle.',
+      'Every change starts with a failing test. Code is written only to make that test pass, then refactored. No test, no code.',
     icon: 'i-lucide-flask-conical'
   },
   {
     title: 'Code review on every change',
     description:
-      'An independent reviewer checks quality, security, and contracts before anything merges.',
+      'A separate reviewer agent checks quality, security, and contracts before anything merges. Broken tests or unverified claims block the change.',
     icon: 'i-lucide-scan-eye'
   },
   {
     title: 'Security audits',
     description:
-      'Targeted searches for vulnerabilities in code, configuration, and integrations.',
+      'Targeted checks for vulnerabilities in code, configuration, and integrations - hardcoded secrets, unsafe deserialization, and missing input validation.',
     icon: 'i-lucide-shield-check'
   },
   {
     title: 'Cost-aware routing',
     description:
-      'Model tiers and progressive context keep token spend down without losing signal.',
+      'Simple tasks use small models; complex ones escalate. Context is loaded in slices so you never pay for files the task does not touch.',
     icon: 'i-lucide-coins'
   },
   {
     title: 'Resumable plans',
     description:
-      'Persistent plan IDs let you pause and resume a session without losing context.',
+      'Each plan gets a persistent ID. Close the session and come back later - the agent resumes from the last milestone without rebuilding context.',
     icon: 'i-lucide-play'
   },
   {
     title: 'Model-agnostic',
     description:
-      'Hardened output contracts work across Copilot, Claude, Cursor, Codex, Gemini, and Windsurf.',
+      'Output contracts are hardened so the same plan works across Copilot, Claude, Cursor, Codex, Gemini, and Windsurf. Switch models without rewriting prompts.',
     icon: 'i-lucide-cpu'
   },
   {
     title: 'Anti-slop directives',
-    description: 'Agents refuse dead buttons, buzzwords, and template filler.',
+    description:
+      'Agents refuse dead buttons, buzzwords, and template filler. Every line of code must do something concrete.',
     icon: 'i-lucide-badge-check'
   }
 ]
@@ -98,7 +99,7 @@ const stats = {
   headline: [
     {
       value: 'Sub-$0.001',
-      label: 'typical API call on 100K+ token contexts'
+      label: 'typical API call on a 100K+ token context'
     },
     {
       value: '30x',
@@ -106,12 +107,35 @@ const stats = {
     }
   ],
   supporting: [
-    { value: '82.8M+', label: 'tokens' },
-    { value: '666', label: 'agent runs' },
-    { value: '~124K', label: 'avg. context/run' },
-    { value: '2-5s', label: 'typical latency' }
+    { value: '82.8M+', label: 'tokens processed' },
+    { value: '666', label: 'agent runs completed' },
+    { value: '~124K', label: 'average context per run' },
+    { value: '2-5s', label: 'typical response latency' }
   ]
 }
+
+const firstTasks = [
+  {
+    title: 'Write a plan for your task',
+    description: 'Describe what you want to build and get a plan.yaml with milestones, acceptance criteria, and a scope cut before any code is written.',
+    to: '/getting-started/installation'
+  },
+  {
+    title: 'Run TDD on a feature',
+    description: 'Start with a failing test, write code to make it pass, then refactor. No test, no code.',
+    to: '/getting-started/installation'
+  },
+  {
+    title: 'Review a change before it merges',
+    description: 'Submit a diff for an independent quality, security, and contract check. Broken tests block the change.',
+    to: '/getting-started/installation'
+  },
+  {
+    title: 'Save a reusable skill',
+    description: 'Turn a successful session into a SKILL.md so the next session starts from proven patterns instead of blank files.',
+    to: '/getting-started/installation'
+  }
+]
 
 const tools = [
   {
@@ -147,9 +171,14 @@ const tools = [
 
 <template>
   <div>
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-white focus:rounded focus:outline-none"
+    >Skip to main content</a>
+
     <UPageHero
       title="Turn AI coding into an engineering process."
-      description="Gem Team installs a team of specialist agents that plan, build, review, and learn. TDD, code reviews, and security checks run automatically. Every session gets a plan, tests, a review, and a record of what worked."
+      description="Install a team of specialist agents that classify, plan, implement, review, and learn from every task. Tests are written before code, a separate reviewer checks every change, and each session ends with a reusable skill. One command installs it into any project."
       :links="[
         {
           label: 'Install Gem Team',
@@ -213,14 +242,19 @@ const tools = [
       </template>
 
       <template #headline>
-        <UBadge color="success" variant="subtle" size="sm" class="mb-4">
+        <UBadge
+          color="success"
+          variant="subtle"
+          size="sm"
+          class="mb-4"
+        >
           Apache 2.0 · Open source · Works with any model
         </UBadge>
       </template>
     </UPageHero>
 
     <UPageSection
-      id="stats"
+      id="main-content"
       headline="Case Study"
       title="Stable plans. Warmer cache. Lower cost."
       align="center"
@@ -236,8 +270,7 @@ const tools = [
         >
           <span
             class="text-4xl font-semibold tracking-tight text-primary sm:text-5xl"
-          >{{ stat.value }}</span
-          >
+          >{{ stat.value }}</span>
           <p class="mt-3 text-sm leading-6 text-muted">
             {{ stat.label }}
           </p>
@@ -336,6 +369,35 @@ const tools = [
     </UPageSection>
 
     <UPageSection
+      id="first-tasks"
+      headline="Common first tasks"
+      title="What to try in your first session."
+      description="Pick one of these and run it through the pipeline."
+      :ui="{ container: 'border-t border-default/70' }"
+    >
+      <UPageGrid class="mt-14">
+        <UPageCard
+          v-for="(task, i) in firstTasks"
+          :key="i"
+          :title="task.title"
+          :description="task.description"
+        >
+          <template #footer>
+            <UButton
+              :to="task.to"
+              color="primary"
+              variant="link"
+              size="xs"
+              label="Try it"
+              trailing-icon="i-lucide-arrow-right"
+              :ui="{ base: 'px-0' }"
+            />
+          </template>
+        </UPageCard>
+      </UPageGrid>
+    </UPageSection>
+
+    <UPageSection
       id="tools"
       headline="Bring your own tools"
       title="Works with the tools you already use."
@@ -354,7 +416,10 @@ const tools = [
             body: 'px-4 py-3 flex items-center gap-3'
           }"
         >
-          <UIcon :name="tool.icon" class="size-5 shrink-0 text-muted" />
+          <UIcon
+            :name="tool.icon"
+            class="size-5 shrink-0 text-muted"
+          />
           <span class="text-sm font-medium">{{ tool.name }}</span>
         </UPageCard>
       </UPageGrid>

@@ -1,9 +1,16 @@
 ---
+
 title: Phase 1 — Route
 description: Route the classified request to the correct execution path.
 navigation:
   icon: i-lucide-git-branch
+seo:
+  title: Route — Gem Team
+  description: Phase 1: fast path vs full plan routing based on complexity and risk signals.
+  ogTitle: Route — Gem Team
+  ogDescription: Phase 1: route requests to fast path or full plan.
 ---
+
 
 ## Purpose
 
@@ -175,6 +182,32 @@ flowchart TD
     style J fill:#e8f5e9
     style K fill:#fff3e0
 ```
+
+---
+
+## Routing Examples
+
+| Scenario | Intent | Complexity | Route | Reason |
+|----------|--------|------------|-------|--------|
+| Fix typo in README | execute | TRIVIAL | Fast path | Single owner, bounded scope |
+| Extract validation helper | execute | LOW | Fast path | Single domain, clear criteria |
+| Add /api/users/search | execute | MEDIUM | Phase 2 Planner | Multi-file, risk signals |
+| Migrate auth to OAuth2 | execute | HIGH | Phase 2 Planner + Reviewer | High-risk, breaking change |
+| "How does caching work?" | research | LOW | gem-researcher → Phase 4 | Standalone research |
+| "Should we use Redis or DB?" | challenge | MEDIUM | gem-reviewer critic → Phase 4 | Decision review |
+| "Continue plan 20250115-xyz" | continue_plan | MEDIUM | Phase 3 | Resume existing plan |
+
+## Continue Plan: Decision Table
+
+| Feedback Type | Route | Example |
+|---------------|-------|---------|
+| "Continue" / "Resume" | Phase 3 | "Continue plan 20250115-xyz" |
+| "Add new task" | Phase 2 (`extend`) | "Extend plan 20250115-xyz with new feature" |
+| "Change wave order" | Phase 2 (`revise_waves`) | "Move review before implementation" |
+| "Update criteria" | Phase 2 (`revise_criteria`) | "Add performance benchmark requirement" |
+| "Change scope" | Phase 2 (`revise_scope`) | "Also update the mobile API" |
+
+**Ambiguous input** → Ask once for classification.
 
 ---
 

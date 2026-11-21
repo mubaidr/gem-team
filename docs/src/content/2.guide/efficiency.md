@@ -1,9 +1,16 @@
 ---
+
 title: Smart & Efficient
 description: Model routing, scoped handoffs, cache optimization, and proportional architecture.
 navigation:
   icon: i-lucide-zap
+seo:
+  title: Efficiency — Gem Team
+  description: Cost-aware routing, scoped handoffs, cache optimization, and progressive context for efficient agent execution.
+  ogTitle: Efficiency — Gem Team
+  ogDescription: Cost-aware routing, scoped handoffs, and cache optimization.
 ---
+
 
 ## Cost & Performance by Design
 
@@ -174,6 +181,36 @@ Only **stable, reusable, high-confidence** findings promoted:
 - [ ] Write specific acceptance criteria (enables fast path)
 - [ ] Avoid `discuss` intent for executable work (triggers full plan)
 - [ ] Reuse plan IDs for continued work (preserves cache)
+
+---
+
+## Concrete Cost Scenarios
+
+### Scenario: MEDIUM feature with 5 tasks
+
+| Approach | Tokens Sent | Approx Cost |
+|----------|-------------|-------------|
+| Direct chat (5 tasks, full history each) | ~750K | ~$0.11 |
+| Gem Team (scoped handoffs, 95% cached) | ~240K | ~$0.003 |
+
+### Scenario: HIGH feature with 8 tasks
+
+| Approach | Tokens Sent | Approx Cost |
+|----------|-------------|-------------|
+| Direct chat (8 tasks, full history each) | ~1.2M | ~$0.18 |
+| Gem Team (scoped handoffs, 99% cached) | ~320K | ~$0.001 |
+
+**Rule of thumb**: Gem Team cost scales with *new work*, not total conversation history.
+
+---
+
+## Checklist: Verify Your Cache Hits
+
+- [ ] Plan-constant fields come first in every delegation payload
+- [ ] Cluster-contiguous scheduling used for shared-context tasks
+- [ ] No per-task fields before stable fields (prefix corruption)
+- [ ] Resumed plans load from `plan.yaml`, not reconstructed from conversation
+- [ ] `shared_context` inlined once per cluster, not per task
 
 ---
 

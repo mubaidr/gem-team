@@ -1,9 +1,16 @@
 ---
+
 title: Model Routing
 description: Configurable two-tier model routing matching capability to task demands.
 navigation:
   icon: i-lucide-cpu
+seo:
+  title: Model Routing — Gem Team
+  description: Tier-based model selection: premium for planning/review, explore for implementation and testing.
+  ogTitle: Model Routing — Gem Team
+  ogDescription: Tier-based model selection for delegated agents.
 ---
+
 
 ## Configuration
 
@@ -16,7 +23,16 @@ model_routing:
     explore: "gpt-5.6-luna (openai)"
 ```
 
-**Orchestrator not routed** — uses session default.
+**Orchestrator not routed** — uses session default model. Enable in config to activate.
+
+## When to Use Model Routing
+
+| Scenario | Enable Routing? | Why |
+|----------|----------------|-----|
+| Multi-agent workflow with many calls | ✅ | Premium for reasoning, Explore for execution |
+| Single-task fast path | ❌ | Not needed; session default sufficient |
+| Cost-sensitive team project | ✅ | 55-60% savings on typical workflows |
+| Simple personal project | Optional | Single model may be simpler |
 
 ## Tier Assignments
 

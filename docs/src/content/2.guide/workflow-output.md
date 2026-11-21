@@ -1,9 +1,16 @@
 ---
+
 title: Phase 4 — Output
 description: Structured status reports, learnings promotion, and workflow completion.
 navigation:
   icon: i-lucide-check-circle
+seo:
+  title: Output — Gem Team
+  description: Phase 4: structured status reports, progress tracking, and learnings capture.
+  ogTitle: Output — Gem Team
+  ogDescription: Phase 4: structured status reports and learnings.
 ---
+
 
 ## Purpose
 
@@ -112,6 +119,122 @@ Next: Complete
 
 - [ ] Extend plan for CSV export feature (`?format=csv`)
 - [ ] New task: Add search analytics endpoint
+```
+
+---
+
+## Output Examples by Scenario
+
+### Scenario 1: Fast Path (TRIVIAL)
+
+```markdown
+## Execution Status
+
+Plan: `20250115-typo-fix` | Fix typo in README
+Progress: `1/1` tasks (100%)
+Waves: Wave 1 (1/1)
+Blocked: 0
+Next: Complete
+
+## Completed Tasks
+
+| Task ID | Agent | Wave | Criteria Met | Evidence |
+|---------|-------|------|--------------|----------|
+| fix-typo | gem-implementer | 1 | ✅ | N/A (fast path) |
+
+## Blocked Tasks
+
+*None*
+
+## Promoted Learnings
+
+*None (fast path, session memory only)*
+
+## Next Actions
+
+- [ ] New task (independent)
+```
+
+### Scenario 2: MEDIUM Plan Complete
+
+```markdown
+## Execution Status
+
+Plan: `20250115-user-search-api` | Add user search endpoint with filtering and pagination
+Progress: `5/5` tasks (100%)
+Waves: Wave 3 (2/2)
+Blocked: 0
+Next: Complete
+
+## Completed Tasks
+
+| Task ID | Agent | Wave | Criteria Met | Evidence |
+|---------|-------|------|--------------|----------|
+| research-api-patterns | gem-researcher | 1 | ✅ | wave-1/research-api-patterns/ |
+| implement-search | gem-implementer | 2 | ✅ | wave-2/implement-search/ |
+| write-search-tests | gem-implementer | 2 | ✅ | wave-2/write-search-tests/ |
+| integration-review | gem-reviewer | 3 | ✅ | wave-3/integration-review/ |
+| api-contract-test | gem-browser-tester | 3 | ✅ | wave-3/api-contract-test/ |
+
+## Blocked Tasks
+
+*None*
+
+## Promoted Learnings (confidence ≥ 0.95)
+
+| Finding | Confidence | Source Task | Memory Tier |
+|---------|------------|-------------|-------------|
+| Pagination helper pattern reusable across endpoints | 0.98 | implement-search | repo |
+| Zod query validation convention for search params | 0.96 | implement-search | repo |
+| Prisma case-insensitive search: contains + mode: 'insensitive' | 0.99 | research-api-patterns | repo |
+
+## Created Files
+
+| File | Purpose |
+|------|---------|
+| `src/api/users/search.ts` | Search endpoint implementation |
+| `tests/api/users/search.test.ts` | Comprehensive test suite |
+| `docs/plan/20250115-user-search-api/plan.yaml` | Persistent plan artifact |
+
+## Next Actions
+
+- [ ] Extend plan for CSV export feature (`?format=csv`)
+- [ ] New task: Add search analytics endpoint
+```
+
+### Scenario 3: Blocked Plan
+
+```markdown
+## Execution Status
+
+Plan: `20250115-deploy-staging` | Deploy to staging
+Progress: `3/5` tasks (60%)
+Waves: Wave 2 (2/3)
+Blocked: 1 | deploy-to-staging
+Next: Wave 3 (blocked)
+
+## Blocked Tasks
+
+| Task ID | Why Blocked | Waiting Time |
+|---------|-------------|--------------|
+| deploy-to-staging | Staging cluster unavailable | ~2 hours |
+
+## Completed Tasks
+
+| Task ID | Agent | Wave | Criteria Met | Evidence |
+|---------|-------|------|--------------|----------|
+| research-infra | gem-researcher | 1 | ✅ | wave-1/research-infra/ |
+| build-image | gem-devops | 2 | ✅ | wave-2/build-image/ |
+| smoke-tests | gem-devops | 2 | ✅ | wave-2/smoke-tests/ |
+
+## Promoted Learnings
+
+*None (plan not complete)*
+
+## Next Actions
+
+- [ ] Unblock staging cluster
+- [ ] Resume plan `20250115-deploy-staging`
 ```
 
 ---

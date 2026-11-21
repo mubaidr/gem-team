@@ -1,13 +1,31 @@
 ---
+
 title: DevOps
 description: Infrastructure, CI/CD, containers, deployments, health checks, rollback, mobile releases.
 navigation:
   icon: i-lucide-server
+seo:
+  title: DevOps Agent — Gem Team
+  description: The gem-devops handles infrastructure, CI/CD pipelines, deployment, health checks, and rollback.
+  ogTitle: DevOps Agent — Gem Team
+  ogDescription: The gem-devops handles infrastructure, CI/CD, and deployment.
 ---
+
 
 ## Role
 
-Handles infrastructure, deployment pipelines, container management, production operations, mobile releases.
+Handles infrastructure, deployment pipelines, container management, production operations, mobile releases. Enforces approval gates; production always requires approval unless explicitly disabled.
+
+## When to Delegate
+
+| Scenario | Delegate DevOps? | Why |
+|----------|-----------------|-----|
+| Deploy to staging/production | ✅ | Deployment strategy + health checks |
+| CI/CD pipeline setup | ✅ | PR → staging → smoke → production |
+| Rollback after failure | ✅ | Tested rollback procedures |
+| Health check / monitoring | ✅ | Endpoint verification, alerting |
+| Mobile release (TestFlight, Play Store) | ✅ | EAS/Fastlane, store submission |
+| Write application code | ❌ | Out of scope; use Implementer |
 
 ## Capabilities
 

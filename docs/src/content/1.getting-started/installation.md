@@ -1,9 +1,16 @@
 ---
+
 title: Installation
 description: Install Gem Team for your AI coding tool via APM or marketplace.
 navigation:
   icon: i-lucide-download
+seo:
+  title: Installation — Gem Team
+  description: Install Gem Team for VS Code Copilot, Claude Code, Cursor, Codex, Gemini, Windsurf, and OpenCode via APM.
+  ogTitle: Installation — Gem Team
+  ogDescription: Install Gem Team for your AI coding tool via APM or marketplace.
 ---
+
 
 ## Choose Your Installation Method
 
@@ -109,6 +116,32 @@ copilot plugin list | grep gem-team
 ```
 
 You should see `gem-team` listed with its version.
+
+### Verification Scenarios
+
+| Scenario | Expected Result |
+|----------|-----------------|
+| `apm list | grep gem-team` | Shows `gem-team` with version |
+| `copilot plugin list | grep gem-team` | Lists `gem-team` as active |
+| `/gem-orchestrator` command available | Orchestrator responds to requests |
+| `apm run check` | Package validation passes |
+
+### Tool-Specific Verification
+
+**Copilot (VS Code):**
+1. Open Command Palette (`Ctrl+Shift+P`)
+2. Search "Gem Team" — should show Orchestrator command
+3. Run: `copilot chat --agent gem-orchestrator "Hello"`
+
+**Claude Code:**
+1. Run `/plugin list` — should include `gem-team`
+2. Run: `/gem-orchestrator "Hello"`
+
+**Cursor:**
+1. Settings → Extensions → "Gem Team" should be installed
+2. Command Palette → "Gem Team: Orchestrator"
+
+If verification fails for any tool, restart the IDE/terminal and retry.
 
 ---
 

@@ -26,6 +26,12 @@
     @apply overflow-x-hidden bg-default text-default antialiased;
   }
 
+  .sr-only {
+    @apply absolute w-[1px] h-[1px] p-0 m-[-1px] overflow-hidden whitespace-nowrap border-0 whitespace-nowrap;
+    clip: rect(0, 0, 0, 0);
+    clip-path: inset(50%);
+  }
+
   ::selection {
     @apply bg-primary/25 text-highlighted;
   }

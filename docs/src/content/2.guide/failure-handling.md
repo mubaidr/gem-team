@@ -1,9 +1,16 @@
 ---
+
 title: Failure Handling
 description: How Gem Team classifies failures and routes them to the correct handler — no blind retries.
 navigation:
   icon: i-lucide-alert-triangle
+seo:
+  title: Failure Handling — Gem Team
+  description: Failure classification and routing: needs_retry, fixable, regression, needs_replan, flaky, platform_specific, test_bug, blocked.
+  ogTitle: Failure Handling — Gem Team
+  ogDescription: Failure classification and routing for reliable task execution.
 ---
+
 
 ## Philosophy
 
@@ -198,6 +205,95 @@ platform_evidence:
 - Why
 - What's needed to unblock
 - Estimated wait time (if known)
+
+---
+
+## Concrete Failure Scenarios
+
+### Scenario 1: Transient network failure (`needs_retry`)
+
+**Task**: Implement user search endpoint  
+**Failure**: `ECONNREFUSED` connecting to database on attempt 1
+
+**Handling**:
+```yaml
+# Retry payload
+retries_used: 1
+task_definition:
+  handoff:
+    relevant_context:
+      - "previous_attempt: error=ECONNREFUSED, attempt=1, timestamp=..."
+```
+
+- Orchestrator retries same task, unchanged scope (max 3x)
+- If all 3 fail → re-classify as `fixable` or `needs_replan`
+
+### Scenario 2: Regression in auth (`regression`)
+
+**Task**: Add search endpoint  
+**Failure**: Existing auth test breaks after refactor
+
+**Handling**:
+1. Debugger bisects to find the breaking commit
+2. Debugger hands root cause + fix recommendation to Implementer
+3. Implementer applies fix, verifies with original test suite
+
+### Scenario 3: Missing dependency (`needs_replan`)
+
+**Task**: Implement CSV export  
+**Failure**: Planner discovers no CSV library in dependencies
+
+**Handling**:
+1. Planner creates bounded replan (max 2)
+2. Baseline (objective + criteria) stays immutable
+3. New task added: "Add CSV library dependency"
+4. Replan reason recorded in `plan.yaml`
+
+### Scenario 4: Flaky test (`flaky`)
+
+**Task**: Browser test login flow  
+**Failure**: Timeout waiting for selector (attempt 1)
+
+**Handling**:
+- Same specialist re-runs once (attempt 2)
+- If attempt 2 passes → continue, record flaky evidence
+- If attempt 2 fails → block, escalate to user
+
+### Scenario 5: Defective test (`test_bug`)
+
+**Task**: Implement search endpoint  
+**Failure**: Test passes but checks wrong thing (mocks implementation detail)
+
+**Handling**:
+1. Debugger diagnoses the test itself as defective
+2. Implementer fixes the test to validate behavior, not implementation
+
+### Scenario 6: Platform-specific (`platform_specific`)
+
+**Task**: File path handling test  
+**Failure**: Passes on Linux, fails on macOS (path separator)
+
+**Handling**:
+- Specialist verifies affected criteria on macOS
+- Fix applied for cross-platform path handling
+
+### Scenario 7: Blocked (`blocked`)
+
+**Task**: Deploy to staging  
+**Failure**: Staging cluster unavailable
+
+**Handling**:
+- Orchestrator stops, preserves state
+- Notifies user: what's blocked, why, what's needed to unblock
+
+### Scenario 8: Escalate (`escalate`)
+
+**Task**: Architecture decision  
+**Failure**: Needs human approval for breaking change
+
+**Handling**:
+- Orchestrator stops, escalates to user
+- User reviews tradeoffs and responds
 
 ---
 

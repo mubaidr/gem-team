@@ -1,9 +1,16 @@
 ---
+
 title: Phase 3 — Execute
 description: Run waves, delegate to specialists, verify results, and persist state.
 navigation:
   icon: i-lucide-play-circle
+seo:
+  title: Execute — Gem Team
+  description: Phase 3: run waves, delegate to specialists, verify results, and handle failures.
+  ogTitle: Execute — Gem Team
+  ogDescription: Phase 3: run waves and delegate to specialists.
 ---
+
 
 ## Purpose
 
@@ -120,7 +127,7 @@ retries_used: 1
 
 ## Verification Gates
 
-### Automatic Review Trigger
+### Automatic Review Trigger (Per-Task)
 
 Reviewer invoked when **any** condition met:
 
@@ -149,6 +156,40 @@ handoff:
 ```
 
 **Reviewer evaluates what it's handed** — `plan`/`task`/`decision` reviews don't gather more; `code`/`config`/`integration` reviews read the target as subject.
+
+### Post-Wave Quality Gate
+
+Runs after all tasks in a wave complete and before persisting state / starting the next wave. Triggered when plan complexity is `MEDIUM` or `HIGH`, or any high-risk signal is present.
+
+`gem-reviewer` is invoked twice in parallel:
+
+| Review      | Target        | Scope     | Purpose                             |
+| ----------- | ------------- | --------- | ----------------------------------- |
+| Integration | `integration` | `changed` | Full test suite across wave outputs |
+| Code review | `code`        | `changed` | Review all modified files in wave   |
+
+`review_mode` follows risk/complexity:
+
+- `standard` — MEDIUM, no high-risk signals
+- `high` — HIGH complexity or high-risk signals
+- `critic` — `architecture`, `breaking_change`, `cross_domain_impact` signals
+
+Failure routing: `gem-debugger` → `gem-implementer` for test failures; owning specialist for code review findings. Next wave is blocked until the gate passes.
+
+### Final Plan-Wide Review Gate
+
+Runs after all waves complete and before Phase 4 output. Triggered when plan complexity is `MEDIUM` or `HIGH`, or any high-risk signal is present.
+
+`gem-reviewer` is invoked twice in parallel with `review_scope: full`:
+
+| Review      | Target        | Scope  | Purpose                                 |
+| ----------- | ------------- | ------ | --------------------------------------- |
+| Integration | `integration` | `full` | Full test suite across all plan outputs |
+| Code review | `code`        | `full` | Review all plan-modified files          |
+
+Plus a plan review: `review_target: plan`, `review_scope: full` to validate architectural coherence and acceptance criteria coverage across all waves.
+
+Failure routing: `gem-debugger` → `gem-implementer` for failures; planner for plan-level findings. Phase 4 output is blocked until the gate passes.
 
 ---
 
@@ -266,12 +307,115 @@ After **final success** (all waves complete):
 
 ---
 
+## Scheduling Example: Wave 2 with Two Implementer Tasks
+
+| Task | Agent | Files | Can Run Parallel? |
+|------|-------|-------|-------------------|
+| implement-search | gem-implementer | search.ts | Yes (with write-search-tests) |
+| write-search-tests | gem-implementer | search.test.ts | Yes (same agent, overlapping files) → **serialized** |
+
+**Result**: Both coalesced into one task, single invocation, one context copy.
+
+## Concurrency Math
+
+With `max_concurrent_agents: 2`:
+
+| Wave | Tasks | Parallel Slots Used | Wall-Clock |
+|------|-------|---------------------|------------|
+| Wave 1 | 1 researcher | 1 | 1 task duration |
+| Wave 2 | 2 implementers (coalesced to 1) | 1 | 1 task duration |
+| Wave 3 | 1 reviewer | 1 | 1 task duration |
+
+**Total**: 3 sequential waves = 3 task durations (no parallelism possible due to wave barriers).
+
+With `max_concurrent_agents: 4` and independent tasks in a wave:
+
+| Wave | Tasks | Parallel Slots Used | Wall-Clock |
+|------|-------|---------------------|------------|
+| Wave 1 | 2 researchers (independent) | 2 | 1 task duration |
+| Wave 2 | 2 implementers (different files) | 2 | 1 task duration |
+
+**Total**: 2 sequential waves = 2 task durations.
+
+## Post-Wave Quality Gate: Concrete Example
+
+Wave 2 completes (implement-search + write-search-tests). Plan complexity is MEDIUM with risk signal `api_change`.
+
+**gem-reviewer invoked twice in parallel**:
+
+| Review | Target | Scope | Mode | Purpose |
+|--------|--------|-------|------|---------|
+| Integration | `integration` | `changed` | `standard` | Full test suite across wave outputs |
+| Code review | `code` | `changed` | `standard` | Review all modified files in wave |
+
+**If integration review fails**: `gem-debugger` → `gem-implementer` for test failures. Wave 3 blocked until gate passes.
+
+**If code review fails**: Owning specialist addresses findings. Wave 3 blocked until gate passes.
+
+---
+
+## Final Plan-Wide Review Gate: Concrete Example
+
+All waves complete. Plan complexity MEDIUM, risk signal `api_change`.
+
+**gem-reviewer invoked twice in parallel** with `review_scope: full`:
+
+| Review | Target | Scope | Mode | Purpose |
+|--------|--------|-------|------|---------|
+| Integration | `integration` | `full` | `standard` | Full test suite across all plan outputs |
+| Code review | `code` | `full` | `standard` | Review all plan-modified files |
+
+**Plus plan review**: `review_target: plan`, `review_scope: full` — validates architectural coherence and acceptance criteria coverage across all waves.
+
+**If any review fails**: Phase 4 output blocked. Debugger/Implementer or Planner addresses findings, then gate re-runs.
+
+---
+
+## Evidence Handling Example
+
+**Implementer output (minimal)**:
+```yaml
+status: "completed"
+handoff:
+  implemented_files:
+    - "src/api/users/search.ts"
+  test_files:
+    - "tests/api/users/search.test.ts"
+  api_contract_path: "wave-3/implement-search/artifacts/api-contract.json"
+  test_results_path: "wave-3/implement-search/artifacts/test-results.xml"
+```
+
+**Next task's handoff.relevant_context**:
+```yaml
+relevant_context:
+  - "implement-search: handoff=wave-3/implement-search/handoff.yaml"
+  - "implement-search: test_results=wave-3/implement-search/artifacts/test-results.xml"
+```
+
+**Exception**: `shared_context` findings (consumed by ≥2 tasks) inlined verbatim, not referenced by path.
+
+---
+
+## Learning & Memory Promotion Example
+
+After final success for plan `20250115-user-search-api`:
+
+| Finding | Confidence | Source Task | Memory Tier |
+|---------|------------|-------------|-------------|
+| Pagination helper pattern reusable across endpoints | 0.98 | implement-search | repo |
+| Zod query validation convention for search params | 0.96 | implement-search | repo |
+| Prisma case-insensitive search: contains + mode: insensitive | 0.99 | research-api-patterns | repo |
+
+**Skill extraction**: If pagination pattern used in ≥2 tasks → gem-skill-creator packages `.apm/skills/api-pagination/SKILL.md`.
+
+---
+
 ## Key Rules
 
 1. **One wave loop** — Ordered waves, parallel within, clustered contiguously
 2. **Cache-lifetime payload order** — Plan-constant → cluster → per-task → per-attempt
 3. **Scoped delegation** — Each agent gets only what it needs
-4. **Verification gates** — Reviewer only when triggered, not routine
+4. **Verification gates** — Reviewer only when triggered, not routine. Post-wave and final plan-wide gates run by default based on risk/complexity.
 5. **Persist state before next wave** — `status.yaml` updated, evidence saved
 6. **Classify every result** — No blind retries, route to correct handler
 7. **Evidence by reference** — Artifacts in task paths, handoffs reference by path

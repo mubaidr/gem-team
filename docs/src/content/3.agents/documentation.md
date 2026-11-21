@@ -1,13 +1,31 @@
 ---
+
 title: Documentation
 description: Technical docs — READMEs, API docs, architecture diagrams, walkthroughs, PRD updates.
 navigation:
   icon: i-lucide-book-open
+seo:
+  title: Documentation Agent — Gem Team
+  description: The gem-documentation-writer creates technical docs, API docs, diagrams, and PRDs.
+  ogTitle: Documentation Agent — Gem Team
+  ogDescription: The gem-documentation-writer creates technical docs and API docs.
 ---
+
 
 ## Role
 
-Creates technical documentation. No buzzwords, no fabricated stats, runnable examples, diagrams as code.
+Creates technical documentation. No buzzwords, no fabricated stats, runnable examples, diagrams as code. Outputs are versioned with the implementation in the same PR.
+
+## When to Delegate
+
+| Scenario | Delegate Documentation? | Why |
+|----------|------------------------|-----|
+| API docs for new endpoint | ✅ | OpenAPI spec, integration examples |
+| Architecture diagram | ✅ | Mermaid source, ADR |
+| User guide / README | ✅ | Markdown, copy-paste examples |
+| PRD creation/update | ✅ | Structured requirements, YAML/Markdown |
+| Changelog update | ✅ | Versioned with implementation |
+| Write application code | ❌ | Out of scope; use Implementer |
 
 ## Types
 

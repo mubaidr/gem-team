@@ -9,6 +9,10 @@ export default defineNuxtConfig({
     'nuxt-llms'
   ],
 
+  app: {
+    baseURL: '/gem-team/'
+  },
+
   css: ['~/assets/css/main.css'],
 
   site: {
@@ -117,5 +121,14 @@ export default defineNuxtConfig({
 
   robots: {
     robotsTxt: false
+  },
+
+  seo: {
+    enabled: true
+  },
+
+  sitemap: {
+    enabled: true,
+    sources: ['/api/_sitemap']
   }
 })

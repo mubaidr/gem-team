@@ -1,9 +1,16 @@
 ---
+
 title: Workflow
 description: How Gem Team turns AI coding into a structured, reliable engineering process.
 navigation:
   icon: i-lucide-workflow
+seo:
+  title: Workflow — Gem Team
+  description: How Gem Team turns AI coding into a structured, reliable engineering process through five phases.
+  ogTitle: Workflow — Gem Team
+  ogDescription: How Gem Team turns AI coding into a structured engineering process.
 ---
+
 
 ## The Five-Phase Pipeline
 
@@ -82,8 +89,9 @@ flowchart LR
         F[Classify] --> G[Plan Waves]
         G --> H[Review Plan]
         H --> I[Execute Waves]
-        I --> J[Review Gates]
-        J --> K[Report + Learn]
+        I --> J[Post-Wave Gate]
+        J --> K[Final Plan-Wide Gate]
+        K --> L[Report + Learn]
     end
     
     style FastPath fill:#e8f5e9
@@ -105,6 +113,20 @@ flowchart LR
 - **MEDIUM/HIGH**: Persistent `docs/plan/{plan_id}/plan.yaml` with full state
 - **Resumption requires exact `plan_id`** — no fuzzy matching
 - **Continue/extend** preserves completed waves, adds new ones
+
+---
+
+## Concrete Workflow Example: User Search API (MEDIUM)
+
+| Phase | Agent | Action | Output |
+|-------|-------|--------|--------|
+| 0: Init & Clarify | Orchestrator | Classify: execute, MEDIUM, risk `api_change` | `plan_id`, complexity, risk signals |
+| 1: Route | Orchestrator | Route to Phase 2 (MEDIUM needs planning) | Route decision |
+| 2: Plan | gem-planner | Build 3-wave plan, self-check, review gate | `plan.yaml` |
+| 3: Execute | Multiple | Wave 1: Researcher; Wave 2: Implementer×2; Wave 3: Reviewer | Task outputs, artifacts |
+| 4: Output | Orchestrator | Status report, memory promotion, skill extraction | Structured report |
+
+**Total**: ~5 agent calls, persistent plan artifacts, resumable via `plan_id`.
 
 ---
 

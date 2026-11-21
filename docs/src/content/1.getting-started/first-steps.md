@@ -1,9 +1,16 @@
 ---
+
 title: First Steps Walkthrough
 description: Complete guided example — build a real feature with Gem Team.
 navigation:
   icon: i-lucide-footprints
+seo:
+  title: First Steps Walkthrough — Gem Team
+  description: Complete guided example — build a real user search API feature with Gem Team end to end.
+  ogTitle: First Steps Walkthrough — Gem Team
+  ogDescription: Build a real feature with Gem Team end to end.
 ---
+
 
 ## Build a Real Feature: User Search API
 
@@ -229,6 +236,63 @@ copilot chat --agent gem-orchestrator "Continue plan 20250115-user-search-api wi
 ```
 
 This demonstrates **resumable plans** — same `plan_id`, new wave added, previous work preserved.
+
+---
+
+## Anti-Patterns & Troubleshooting
+
+| Problem | Likely Cause | Fix |
+|---------|-------------|-----|
+| Plan never created | Task classified TRIVIAL/LOW; no persistent plan needed | Add high-risk signal or use `extend` for scope |
+| Specialist returns no code | TDD blocked — no test file created | Check acceptance criteria are testable |
+| Tests pass but code wrong | Tests too narrow; missing edge cases | Add boundary/error/empty-state tests |
+| Reviewer keeps flagging same issue | Acceptance criteria don't match implementation | Align criteria before re-running |
+| Cache miss on retry | Per-task field placed before stable field | Reorder: plan-constant → cluster → per-task → per-attempt |
+| `plan_id` not found | Fuzzy matching not supported | Use exact ID from original execution |
+
+## Before / After: Scoped Handoff
+
+**Before** (full history sent to Implementer — wasteful):
+```
+Context: entire conversation + all previous waves + repo file listing
+Task: implement search endpoint
+```
+**After** (Gem Team scoped handoff):
+```yaml
+plan_id: "20250115-user-search-api"
+task_id: "implement-search"
+handoff:
+  constraints: ["Follow API conventions", "Use Prisma"]
+  relevant_context:
+    - "research-api-patterns: patterns=REST, pagination=src/utils/pagination.ts"
+  plan_context:
+    architectural_boundaries: ["api layer"]
+    risk_decisions: ["stateless search"]
+```
+
+## Try It Yourself: Variations
+
+```bash
+# Variation 1: Add CSV export to existing search plan
+cat > extend-task.md << 'EOF'
+## Extend: Add CSV export
+
+Add `?format=csv` to the search endpoint that streams CSV download.
+Reuse the search logic, add CSV serializer.
+EOF
+
+copilot chat --agent gem-orchestrator "Extend plan 20250115-user-search-api with extend-task.md"
+
+# Variation 2: Add a new test dimension
+cat > new-test.md << 'EOF'
+## Task: Add performance test to search endpoint
+
+Add a performance test asserting results return within 200ms.
+Use the existing test file as base.
+EOF
+
+copilot chat --agent gem-orchestrator "Continue plan 20250115-user-search-api with new-test.md"
+```
 
 ---
 

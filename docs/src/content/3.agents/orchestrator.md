@@ -1,13 +1,28 @@
 ---
+
 title: Orchestrator
 description: Central coordinator — classifies, routes, delegates, tracks state, enforces gates.
 navigation:
   icon: i-lucide-command
+seo:
+  title: Orchestrator Agent — Gem Team
+  description: The gem-orchestrator coordinates phases 0-4: classify, route, plan, execute, report.
+  ogTitle: Orchestrator Agent — Gem Team
+  ogDescription: The gem-orchestrator coordinates phases 0-4.
 ---
+
 
 ## Role
 
-Entry point for every task. Coordinates Phase 0-4 workflow. **Never executes specialist work** — only classifies, routes, synthesizes, reports.
+Entry point for every task. Coordinates Phase 0-4 workflow. **Never executes specialist work** — only classifies, routes, synthesizes, reports. The Orchestrator is the engineering lead: it breaks down work, assigns specialists, checks quality, and learns.
+
+## When to Delegate
+
+| Scenario | Delegate Orchestrator? | Why |
+|----------|----------------------|-----|
+| Every new task | ✅ | Entry point; classifies and routes |
+| Continue existing plan | ✅ | Resumes via exact `plan_id` |
+| Direct implementation | ❌ | Never writes code; delegates to specialists |
 
 ## Responsibilities
 
@@ -16,7 +31,7 @@ Entry point for every task. Coordinates Phase 0-4 workflow. **Never executes spe
 | 0: Init | Parse request → `plan_id`, `intent`, provisional complexity, risk signals (evidence only) |
 | 1: Route | Fast path vs full plan, research/challenge paths, continue/extend |
 | 2: Plan | Delegate to Planner (MEDIUM/HIGH), self-check, Reviewer if triggered |
-| 3: Execute | Wave loop: schedule → delegate → gate → persist |
+| 3: Execute | Wave loop: schedule → delegate → gate → persist. Post-wave quality gate after each wave; final plan-wide review gate before Phase 4. |
 | 4: Output | Structured status, memory promotion, skill extraction |
 
 ## Key Behaviors

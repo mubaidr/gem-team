@@ -1,13 +1,30 @@
 ---
+
 title: Mobile Tester
 description: Mobile E2E testing — scope-selected with Detox, Maestro, Appium on iOS/Android simulators.
 navigation:
   icon: i-lucide-smartphone
+seo:
+  title: Mobile Tester Agent — Gem Team
+  description: The gem-mobile-tester performs iOS/Android E2E testing with Detox, Maestro, Appium.
+  ogTitle: Mobile Tester Agent — Gem Team
+  ogDescription: The gem-mobile-tester performs iOS/Android E2E testing.
 ---
+
 
 ## Role
 
-Runs scope-selected mobile E2E on simulators/devices. Tests platform-specific behavior.
+Runs scope-selected mobile E2E on simulators/devices. Tests platform-specific behavior (safe areas, keyboards, permissions, dark mode, haptics, etc.).
+
+## When to Delegate
+
+| Scenario | Delegate Mobile Tester? | Why |
+|----------|------------------------|-----|
+| New mobile feature | ✅ | Flow assertions on iOS/Android |
+| Platform-specific behavior | ✅ | Safe areas, VoiceOver, TalkBack, haptics |
+| Mobile release validation | ✅ | Pre-release E2E testing |
+| Offline / background sync | ✅ | Network conditioner, background states |
+| Pure web feature, no mobile | ❌ | Out of scope; use Browser Tester |
 
 ## Capabilities
 

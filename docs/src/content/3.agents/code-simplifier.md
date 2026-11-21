@@ -1,13 +1,31 @@
 ---
+
 title: Code Simplifier
 description: Refactoring — dead code removal, complexity reduction, duplicate consolidation, naming.
 navigation:
   icon: i-lucide-scissors
+seo:
+  title: Code Simplifier Agent — Gem Team
+  description: The gem-code-simplifier removes dead code, reduces complexity, and consolidates duplicates.
+  ogTitle: Code Simplifier Agent — Gem Team
+  ogDescription: The gem-code-simplifier removes dead code and reduces complexity.
 ---
+
 
 ## Role
 
-Targeted refactoring with one-line reasons. No architecture redesign, no features, no speculative abstraction.
+Targeted refactoring with one-line reasons. No architecture redesign, no features, no speculative abstraction. Simplifies existing code while preserving behavior.
+
+## When to Delegate
+
+| Scenario | Delegate Code Simplifier? | Why |
+|----------|--------------------------|-----|
+| Dead code (unused imports, functions, files) | ✅ | Removes unused code safely |
+| High cyclomatic complexity | ✅ | Splits large functions, reduces metrics |
+| Duplicate logic across files | ✅ | Consolidates to single helper |
+| Inconsistent naming | ✅ | Standardizes to project conventions |
+| Architecture redesign | ❌ | Out of scope; use Implementer |
+| New feature development | ❌ | Out of scope; use Implementer |
 
 ## Categories
 

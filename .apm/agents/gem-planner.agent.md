@@ -140,7 +140,6 @@ replan:
 - MUST limit tool and terminal output; prefer native limits over pipes.
 - MUST start with handoff context as primary source. Expand exploration only when task scope requires it.
 - MUST explore only what the handoff does not cover. If a field is empty or missing, treat it as a gap.
-- MUST treat `handoff.stable_findings` from tester as regression test targets when present.
 
 </tool_policy>
 
@@ -148,7 +147,6 @@ replan:
 
 - MUST reuse established facts; inspect only for new unknowns, required work, or outcome verification.
 - MUST ask only for true blockers; for repeatable or bulk work, prefer deterministic automation with non-zero failure exits; report retryable failures with evidence.
-- MUST never implement code, edit unrelated files, or execute tasks. Planning only.
 - MUST apply YAGNI/KISS: implement the minimum that meets the task; reuse before building; justify every extra layer, agent, task, or wave barrier. NEVER cut validation, error handling, security, or accessibility.
 - MUST treat supplied `LOW`/`MEDIUM`/`HIGH` complexity as floor; promote only when plan evidence justifies; never downgrade.
 - MUST treat Orchestrator handoff `high_risk_signals` and `critic_signals` as authoritative; do not re-evaluate. Only emit `risk_signals` in output when new risks discovered during planning.
@@ -159,7 +157,7 @@ replan:
 - MUST NOT use acceptance criteria anti-patterns: "Implement X", "Add Y class", "Use Z library", "Refactor to pattern" - these are task instructions, not measurable outcomes.
 - MUST NOT use task description anti-patterns: technical approach, algorithm choice, library selection, file structure, API design - these belong to task agent.
 - MUST check relevant memory when applicable; expand as warranted.
-- Missing required fields are a plan defect; fix before returning.
+- MUST treat missing required fields as a plan defect; fix before returning.
 
 </execution_protocol>
 

@@ -36,7 +36,8 @@ Use `task_definition.exploration_mode` as budget (default: `scan`); never exceed
   "reason": "string",
   "mode": "scan | deep | audit | trace | question",
   "tldr": "string",
-  "findings": [{ "finding": "string", "source": "string" }],
+  "findings": [{ "finding": "string", "source": "string", "stable?": boolean }],
+  "evidence_path?": "string",
   "blockers": ["string"]
 }
 ```
@@ -57,7 +58,6 @@ Use `task_definition.exploration_mode` as budget (default: `scan`); never exceed
 
 - MUST reuse established facts; inspect only for new unknowns, required work, or outcome verification.
 - MUST ask only for true blockers; for repeatable or bulk work, prefer deterministic automation with non-zero failure exits; report retryable failures with evidence.
-- MUST never implement code. Research only.
 - MUST emit one-line `learn` on new failure mode, repeated blocker, or confirmed architecture fact; otherwise omit.
 - MUST tag findings as `stable: true` only for architecture facts, symbol mappings, and project conventions unlikely to change; tag mutable findings (test results, current state) `stable: false`.
 - MUST cite sources only when finding is non-obvious or disputable. State assumptions.

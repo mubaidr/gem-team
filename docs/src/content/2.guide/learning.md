@@ -1,9 +1,16 @@
 ---
+
 title: Learns & Improves
 description: Three-tier memory, confidence-gated promotion, and skill extraction from successful patterns.
 navigation:
   icon: i-lucide-brain
+seo:
+  title: Learning — Gem Team
+  description: How Gem Team learns from success: memory tiers, skill extraction, confidence-gated promotion.
+  ogTitle: Learning — Gem Team
+  ogDescription: How Gem Team learns from success and extracts reusable skills.
 ---
+
 
 ## Continuous Learning Architecture
 
@@ -198,34 +205,4 @@ promoted_findings:
 
 ---
 
-## Configuration
-
-```yaml
-# .gem-team.yaml (future extension)
-learning:
-  promotion_confidence_threshold: 0.95
-  memory_ttl_days: 30
-  skill_extraction_min_usage: 2
-  auto_promote_repo: true
-  auto_promote_session: true
-```
-
----
-
-## Key Rules
-
-1. **Promote after success only** — Never during execution
-2. **Confidence gate at 0.95** — Prevents noise accumulation
-3. **Three tiers, different persistence** — Repo/Session/Global
-4. **Skills from patterns, not findings** — Workflow → SKILL.md
-5. **TTL prevents staleness** — 30-day expiry with refresh on use
-6. **Orchestrator manages promotion** — Agents don't write memory directly
-
----
-
-## Related Pages
-
-- [Core Concepts](/getting-started/concepts) — Memory tiers overview
-- [Workflow: Output](/guide/workflow-output) — Promotion in execution
-- [Skill Creator Agent](/agents/skill-creator) — Skill packaging
-- [Optimizations](/guide/optimizations) — Learning and cache principles
+## TTL & Cleanup

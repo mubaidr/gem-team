@@ -1,9 +1,16 @@
 ---
+
 title: Quality by Default
 description: Automatic TDD, risk-based reviews, security audits, and accessibility checks.
 navigation:
   icon: i-lucide-shield-check
+seo:
+  title: Quality by Default — Gem Team
+  description: Automatic TDD, risk-based reviews, security audits, and accessibility checks built into every task.
+  ogTitle: Quality by Default — Gem Team
+  ogDescription: Automatic TDD, risk-based reviews, security audits, and accessibility checks.
 ---
+
 
 ## Automatic Quality Gates
 
@@ -184,6 +191,20 @@ quality:
 3. **Security blocks** — No automated risk acceptance
 4. **Configurable depth** — a11y and visual regression via config
 5. **Simplification built-in** — Not a separate step, part of implementation
+6. **Wave-level gates** — Post-wave quality gate after each wave; final plan-wide review gate before Phase 4 output (MEDIUM/HIGH or any high-risk signal)
+
+---
+
+## Quality Anti-Patterns
+
+| Anti-Pattern | Why It Fails | Correct Approach |
+|--------------|-------------|------------------|
+| Skipping tests to move faster | Bugs surface later, cost more to fix | TDD: test first, always |
+| Reviewer bypassed for "simple" changes | Security/a11y gaps missed | Risk signals drive review automatically |
+| Accepting security risk in automated flow | Vulnerabilities ship to production | Security findings block until resolved |
+| Testing implementation, not behavior | Refactors break tests unnecessarily | Test behavior, assert outcomes |
+| Visual regression threshold too strict | False positives on dynamic content | Set threshold per-content type (0.99 design, 0.90 dynamic) |
+| a11y level `none` on user-facing UI | Excludes users with disabilities | Use `basic` minimum for UI work |
 
 ---
 

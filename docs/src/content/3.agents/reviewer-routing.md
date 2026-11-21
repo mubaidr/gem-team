@@ -1,9 +1,16 @@
 ---
+
 title: Reviewer Routing
 description: Three-axis review system (mode, target, scope) for precise quality, security, compliance reviews.
 navigation:
   icon: i-lucide-git-branch
+seo:
+  title: Reviewer Routing — Gem Team
+  description: Reviewer routing: review_mode, review_target, review_scope axes for standard, high, and critic reviews.
+  ogTitle: Reviewer Routing — Gem Team
+  ogDescription: Reviewer routing axes: mode, target, scope.
 ---
+
 
 ## Three Axes (Orthogonal)
 
@@ -50,6 +57,17 @@ navigation:
 ## Over-Engineering Pass
 
 Auto for `code`/`integration`: YAGNI, premature abstraction, unnecessary complexity, missing simplest solution.
+
+## When to Use Each Combination
+
+| Your Need | Mode | Target | Scope | Why |
+|-----------|------|--------|-------|-----|
+| Check criteria on changed files | standard | task | changed | Fast, focused |
+| Deep security analysis | high | code | affected | Includes dependencies |
+| Challenge architecture decision | critic | decision | full | Read-only, alternatives |
+| Full plan coherence | standard | plan | full | All waves, criteria coverage |
+
+---
 
 ## Definition
 

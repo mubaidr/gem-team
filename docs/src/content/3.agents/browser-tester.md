@@ -1,24 +1,42 @@
 ---
+
 title: Browser Tester
 description: E2E browser testing — UI flows, visual regression, accessibility, performance, contract testing.
 navigation:
   icon: i-lucide-monitor
+seo:
+  title: Browser Tester Agent — Gem Team
+  description: The gem-browser-tester performs UI/E2E testing: visual regression, accessibility, performance, and contract tests.
+  ogTitle: Browser Tester Agent — Gem Team
+  ogDescription: The gem-browser-tester performs UI/E2E testing.
 ---
 
 ## Role
 
-Validates browser/UI flows with conditional testing across visual, a11y, performance, network, contract dimensions.
+Validates browser/UI flows with conditional testing across visual, a11y, performance, network, and contract dimensions. Runs on demand or as part of a wave plan's quality gate.
+
+## When to Delegate
+
+| Scenario                           | Delegate Browser Tester? | Why                                |
+| ---------------------------------- | ------------------------ | ---------------------------------- |
+| New UI feature with screenshots    | ✅                       | Visual regression against baseline |
+| E2E user journey (login, checkout) | ✅                       | Flow assertions across pages       |
+| Accessibility audit required       | ✅                       | WCAG 2.2 AA checks                 |
+| API contract validation for UI     | ✅                       | Response matches OpenAPI schema    |
+| Performance budget check           | ✅                       | TTI, memory, frame rate thresholds |
+| Pure backend API change, no UI     | ❌                       | No browser interaction needed      |
+| Static content only                | ❌                       | No dynamic flows to test           |
 
 ## Test Dimensions
 
-| Dimension | What | Config |
-|-----------|------|--------|
-| Flow Assertions | User journeys, forms, navigation | Acceptance criteria |
-| Visual Regression | Screenshot vs baseline | `visual_regression_enabled`, threshold |
-| Accessibility | WCAG 2.2 AA | `a11y_audit_level` |
-| Performance | TTI, memory, frame rate, bundle | Criteria thresholds |
-| Network | API calls, timing, errors, caching | HAR capture |
-| Contract | API matches OpenAPI | Schema validation |
+| Dimension         | What                               | Config                                 |
+| ----------------- | ---------------------------------- | -------------------------------------- |
+| Flow Assertions   | User journeys, forms, navigation   | Acceptance criteria                    |
+| Visual Regression | Screenshot vs baseline             | `visual_regression_enabled`, threshold |
+| Accessibility     | WCAG 2.2 AA                        | `a11y_audit_level`                     |
+| Performance       | TTI, memory, frame rate, bundle    | Criteria thresholds                    |
+| Network           | API calls, timing, errors, caching | HAR capture                            |
+| Contract          | API matches OpenAPI                | Schema validation                      |
 
 ## Input
 

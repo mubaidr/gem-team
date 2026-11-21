@@ -1,9 +1,16 @@
 ---
+
 title: Works With Your Tools
 description: One workflow across Copilot, Claude, Cursor, Codex, Gemini, Windsurf, and OpenCode.
 navigation:
   icon: i-lucide-blocks
+seo:
+  title: Compatibility — Gem Team
+  description: Model and tool compatibility: Copilot, Claude Code, Cursor, Codex, Gemini, Windsurf, OpenCode.
+  ogTitle: Compatibility — Gem Team
+  ogDescription: Model and tool compatibility for Gem Team.
 ---
+
 
 ## Universal Agent Definitions
 
@@ -209,6 +216,42 @@ git add apm.yml apm.lock.yaml
 | Codex | AGENTS.md not loaded | Restart Codex session |
 | Gemini | Config not applied | Check `GEMINI.md` in project root |
 | Windsurf | Rules not active | Restart Windsurf |
+
+---
+
+## Tool-Specific Troubleshooting
+
+| Tool | Issue | Fix |
+|------|-------|-----|
+| Copilot | Agents not showing | Reload VS Code window |
+| Claude Code | Commands not found | `/reload-plugins` |
+| Cursor | Rules not applying | Restart Cursor |
+| OpenCode | Skills missing | `opencode plugin update mubaidr/gem-team` |
+| Codex | AGENTS.md not loaded | Restart Codex session |
+| Gemini | Config not applied | Check `GEMINI.md` in project root |
+| Windsurf | Rules not active | Restart Windsurf |
+
+## Multi-Tool Workflow Example
+
+```bash
+# Phase 0-1: Classify and route with Copilot
+copilot chat --agent gem-orchestrator "Classify: add user search endpoint"
+
+# Phase 2: Plan with Claude Code (strong reasoning)
+claude
+> /gem-planner Create wave plan for user search feature
+
+# Phase 3: Implement with Cursor (fast editing)
+# Cursor sees the same plan.yaml automatically
+
+# Phase 3-4: Review with Claude Code (strong analysis)
+claude
+> /gem-reviewer Review plan 20250115-user-search-api
+
+# All tools share: docs/plan/20250115-user-search-api/
+```
+
+**Plan artifacts are the source of truth** — not tool-specific state.
 
 ---
 

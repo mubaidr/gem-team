@@ -1,9 +1,16 @@
 ---
+
 title: Core Concepts
 description: Understand the mental model behind Gem Team's engineering workflow.
 navigation:
   icon: i-lucide-brain
+seo:
+  title: Core Concepts — Gem Team
+  description: Understand the mental model behind Gem Team: orchestrator, five-phase workflow, scoped handoffs, waves, and skills.
+  ogTitle: Core Concepts — Gem Team
+  ogDescription: Understand the mental model behind Gem Team.
 ---
+
 
 ## The Mental Model
 
@@ -178,6 +185,44 @@ Skills keep agent definitions focused while providing task-specific guidance.
 | **Waves** | Ordered barriers, parallel within |
 | **Failures** | Classified → routed to correct specialist |
 | **Skills** | Extracted from success, not designed upfront |
+
+---
+
+## Common Mistakes & Anti-Patterns
+
+| Mistake | Why It Fails | Correct Approach |
+|---------|-------------|------------------|
+| Inspecting repo during Phase 0 to "be sure" | Phase 0 is evidence-only; no repo inspection allowed | Use only supplied context and request |
+| Asking clarifying questions preemptively | Phase 0 asks only for true decision blockers | Ask once, only when blocked |
+| Lowering complexity to skip planning | Evidence may raise complexity; never lower | Let evidence drive the tier |
+| Reusing one `plan_id` for unrelated work | Plan identity ties state to one objective | New task = new `plan_id` |
+| Sending full history to every agent | Breaks cache, wastes tokens | Scoped handoffs with evidence by reference |
+| Retrying without classification | Blind retries hide root causes | Classify → route to correct handler |
+| Implementing without a failing test | TDD is mandatory for code tasks | Red → Green → Refactor |
+
+## Edge Cases
+
+| Situation | Handling |
+|-----------|----------|
+| `discuss` intent | Phase 4 direct answer, no plan, no delegation |
+| `research` standalone | gem-researcher → Phase 4; no plan unless promoted |
+| `challenge` intent | gem-reviewer critic mode → Phase 4; read-only |
+| `continue_plan` without valid `plan_id` | Block; request exact ID; no inference |
+| Missing acceptance criteria on MEDIUM task | Planner cannot emit plan; ask once for criteria |
+| High-risk signal on TRIVIAL task | Complexity raised to MEDIUM; persistent plan required |
+| Flaky test | Specialist re-runs once; second failure blocks |
+
+## Decision Table: Choose Your Path
+
+| Your Situation | Path | Example |
+|----------------|------|---------|
+| One-line bug fix, single file | Fast path (TRIVIAL) | "Fix typo in README.md" |
+| Small refactor, one domain | Fast path (LOW) | "Extract validation helper" |
+| New API endpoint, multiple files | Full plan (MEDIUM) | "Add /api/users/search" |
+| Architecture change, breaking change | Full plan (HIGH) | "Migrate auth to OAuth2" |
+| Research question, no code | Research path | "How does caching work?" |
+| Decision review, tradeoffs | Challenge path | "Should we use Redis or DB?" |
+| Continue existing work | Continue plan (exact `plan_id`) | "Resume plan 20250115-user-search" |
 
 ---
 

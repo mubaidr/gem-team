@@ -1,9 +1,16 @@
 ---
+
 title: Phase 0 — Init & Clarify
 description: Classify the request, assess risk, assign complexity, and clarify only decision blockers.
 navigation:
   icon: i-lucide-search
+seo:
+  title: Init & Clarify — Gem Team
+  description: Phase 0: classify requests, assess risk, assign complexity, and route work to the right specialist.
+  ogTitle: Init & Clarify — Gem Team
+  ogDescription: Phase 0: classify requests and route work to the right specialist.
 ---
+
 
 ## Purpose
 
@@ -110,8 +117,6 @@ topic: "Model routing strategy"
 question: "Should we use different models for planning vs implementation?"
 ```
 
----
-
 ## Output: Phase 0 State
 
 ```yaml
@@ -130,6 +135,32 @@ phase_0_state:
     - "Existing user model has name/email fields"
     - "Pagination helper available in src/utils/pagination.ts"
 ```
+
+## Concrete Classification Examples
+
+| Request | Intent | Complexity | Risk Signals | Path |
+|---------|--------|------------|--------------|------|
+| "Fix typo in README" | execute | TRIVIAL | none | Fast path |
+| "Extract validation helper" | execute | LOW | none | Fast path |
+| "Add /api/users/search endpoint" | execute | MEDIUM | api_change | Full plan |
+| "Migrate auth to OAuth2" | execute | HIGH | auth_change, breaking_change | Full plan + critic review |
+| "How does caching work?" | research | LOW | none | Researcher → Phase 4 |
+| "Should we use Redis or DB?" | challenge | MEDIUM | architecture | Reviewer critic → Phase 4 |
+| "Continue plan 20250115-user-search" | continue_plan | MEDIUM | existing plan | Phase 3 resume |
+
+---
+
+## Edge Cases
+
+| Situation | Handling |
+|-----------|----------|
+| `discuss` intent | Phase 4 direct answer, no plan, no delegation |
+| `research` standalone | gem-researcher → Phase 4; no plan unless promoted via `plan_follow_up` |
+| `challenge` intent | gem-reviewer critic mode → Phase 4; read-only decision review |
+| `continue_plan` without valid `plan_id` | Block; request exact ID; no fuzzy matching or inference |
+| Missing acceptance criteria on MEDIUM task | Planner cannot emit plan; ask once for criteria |
+| High-risk signal on TRIVIAL task | Complexity raised to MEDIUM; persistent plan required |
+| `extend` with no scope change | Treats as continue_plan (execution-only) → Phase 3 |
 
 ---
 

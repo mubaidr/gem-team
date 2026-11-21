@@ -1,9 +1,16 @@
 ---
+
 title: Overview
 description: Four pillars that make Gem Team an engineering-grade AI coding system.
 navigation:
   icon: i-lucide-sparkles
+seo:
+  title: Features — Gem Team
+  description: Gem Team features: TDD by default, code review, security audits, cost-aware routing, resumable plans, model-agnostic.
+  ogTitle: Features — Gem Team
+  ogDescription: Gem Team features: TDD by default, code review, security audits, cost-aware routing.
 ---
+
 
 ## The Four Pillars
 
@@ -49,6 +56,16 @@ flowchart LR
 
 [Read Quality Details →](/guide/quality)
 
+### Quality Scenario: Payment Endpoint (HIGH risk)
+
+| Phase | Quality Action | Trigger |
+|-------|---------------|---------|
+| Plan | Risk signals: `security_sensitive`, `data_flow_change` → HIGH review | Phase 0 |
+| Implement | TDD: success, decline, invalid card, webhook validation | Mandatory |
+| Review | Critic mode: PCI compliance, idempotency, logging, error handling | Risk signal |
+| Verify | Browser tester: payment flow E2E, visual regression on checkout | UI change |
+| Output | Security findings promoted to repo memory (confidence ≥ 0.95) | Final success |
+
 ---
 
 ## Smart & Efficient
@@ -61,6 +78,13 @@ flowchart LR
 - **Evidence by reference** — Logs, traces, screenshots in task artifacts; handoffs reference paths
 - **Proportional architecture** — YAGNI/KISS: smallest agent set, wave sequence, validation path
 - **Conditional learning** — Only stable, reusable findings promoted (confidence ≥ 0.95)
+
+### Efficiency Scenario: Multi-endpoint API (5 endpoints)
+
+| Approach | Tokens Sent | Approx Cost |
+|----------|-------------|-------------|
+| Direct chat (full history per task) | ~750K | ~$0.11 |
+| Gem Team (scoped handoffs, 95% cached) | ~240K | ~$0.003 |
 
 [Read Efficiency Details →](/guide/efficiency)
 
@@ -84,6 +108,22 @@ flowchart LR
 
 [Read Compatibility Details →](/guide/compatibility)
 
+### Multi-Tool Workflow Example
+
+```bash
+# Plan with Copilot (strong reasoning)
+copilot chat --agent gem-orchestrator "Plan the user search feature"
+
+# Implement with Cursor (fast editing)
+# Cursor sees the same plan.yaml automatically
+
+# Review with Claude Code (strong analysis)
+claude
+> /gem-reviewer Review plan 20250115-user-search-api
+
+# All tools share: docs/plan/20250115-user-search-api/
+```
+
 ---
 
 ## Learns & Improves
@@ -95,6 +135,14 @@ flowchart LR
 - **Skill extraction** — Reusable workflows packaged as `SKILL.md` playbooks
 - **Stable cache** — Structured handoffs maximize provider cache hit rates
 - **Batch optimization** — Related work coalesced to share context
+
+### Learning Scenario: Pagination Pattern
+
+1. Task 1: Implement search endpoint → discovers pagination helper pattern
+2. Task 2: Implement export endpoint → same pattern reused
+3. Pattern confidence ≥ 0.95 → promoted to repo memory
+4. Pattern packaged as `SKILL.md` by gem-skill-creator
+5. Future tasks load pattern automatically via memory injection
 
 [Read Learning Details →](/guide/learning)
 

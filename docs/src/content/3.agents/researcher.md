@@ -1,13 +1,30 @@
 ---
+
 title: Researcher
 description: Codebase exploration with five budgeted modes: scan, deep, audit, trace, question.
 navigation:
   icon: i-lucide-search
+seo:
+  title: Researcher Agent — Gem Team
+  description: The gem-researcher explores codebases: patterns, relationships, architecture discovery across 5 modes.
+  ogTitle: Researcher Agent — Gem Team
+  ogDescription: The gem-researcher explores codebases across 5 modes.
 ---
+
 
 ## Role
 
-Explores patterns, dependencies, architecture. Runs standalone or in wave plan under Planner budget.
+Explores patterns, dependencies, architecture. Runs standalone or in wave plan under Planner budget. Produces evidence-based findings with confidence scores; never implements code.
+
+## When to Delegate
+
+| Scenario | Delegate Researcher? | Why |
+|----------|---------------------|-----|
+| Codebase exploration (patterns, dependencies) | ✅ | Budgeted modes, evidence-based findings |
+| Standalone research question | ✅ | Direct answer with references |
+| Planning context discovery | ✅ | Provides shared_context for downstream tasks |
+| Architecture audit / compliance | ✅ | `audit` mode with evidence |
+| Implementation work | ❌ | Out of scope; use Implementer |
 
 ## Exploration Modes
 
