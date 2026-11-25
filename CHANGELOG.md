@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.149.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.148.0...gem-team-v1.149.0) (2026-11-25)
+
+
+### 🧹 Housekeeping
+
+* enable full accessibility audit and standardize configuration formatting ([b2275ab](https://github.com/mubaidr/gem-team/commit/b2275ab5aa6508c8a497381d1ec9003d4b01d5e8))
+* remove completed planning artifacts (T1-findings, T3-result, plan.yaml) ([0eb0b90](https://github.com/mubaidr/gem-team/commit/0eb0b900329cc4e0c221bab4f853ccd62a8c2083))
+* restructure Nuxt SEO module configuration and LLM generation ([88fd583](https://github.com/mubaidr/gem-team/commit/88fd583ed6a27ef8ab6016d84a2039e8e3ca9f6c))
+* simplify sitemap configuration ([440dcfe](https://github.com/mubaidr/gem-team/commit/440dcfe05d913385b9015d88633ff2594a917b6e))
+* strengthen acceptance criteria enforcement across agents ([edcbb35](https://github.com/mubaidr/gem-team/commit/edcbb359d6a804024170624a89b4fed9a1da1234))
+* update project styling and configuration ([55ca40d](https://github.com/mubaidr/gem-team/commit/55ca40d62b873d7559f80627bfeff3bd0eea3313))
+* update UI colors and sitemap configuration ([ec6c8ab](https://github.com/mubaidr/gem-team/commit/ec6c8abe54d412fe9c98123cf8dc7582214fcac6))
+* update UI colors, accessibility and schema.org configuration ([f0bd6a4](https://github.com/mubaidr/gem-team/commit/f0bd6a46a3f89c3cd221bb0fc8de4c9a246b6779))
+
 ## [1.148.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.147.0...gem-team-v1.148.0) (2026-11-21)
 
 
