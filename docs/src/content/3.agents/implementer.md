@@ -1,16 +1,14 @@
 ---
-
 title: Implementer
-description: TDD implementation — writes tests first, minimal implementation, verifies, leaves runnable checks.
+description: TDD implementation - writes tests first, minimal implementation, verifies, leaves runnable checks.
 navigation:
   icon: i-lucide-code
 seo:
-  title: Implementer Agent — Gem Team
+  title: Implementer Agent - Gem Team
   description: "The gem-implementer builds features in TDD cycles: red, green, refactor with SOLID principles."
-  ogTitle: Implementer Agent — Gem Team
+  ogTitle: Implementer Agent - Gem Team
   ogDescription: The gem-implementer builds features in TDD cycles.
 ---
-
 
 ## Role
 
@@ -18,13 +16,13 @@ Implements features, fixes, refactors using TDD. Bug fixes require Debugger diag
 
 ## When to Delegate
 
-| Scenario | Delegate Implementer? | Why |
-|----------|----------------------|-----|
-| New feature implementation | ✅ | TDD: Red → Green → Refactor |
-| Bug fix (after Debugger diagnosis) | ✅ | Receives root cause + fix recommendation |
-| Refactor (simple, behavior-preserving) | ✅ | Minimal diff, tests pass |
-| Root cause diagnosis | ❌ | Out of scope; use Debugger first |
-| Architecture redesign | ❌ | Out of scope; use Planner + Implementer |
+| Scenario                               | Delegate Implementer? | Why                                      |
+| -------------------------------------- | --------------------- | ---------------------------------------- |
+| New feature implementation             | ✅                    | TDD: Red → Green → Refactor              |
+| Bug fix (after Debugger diagnosis)     | ✅                    | Receives root cause + fix recommendation |
+| Refactor (simple, behavior-preserving) | ✅                    | Minimal diff, tests pass                 |
+| Root cause diagnosis                   | ❌                    | Out of scope; use Debugger first         |
+| Architecture redesign                  | ❌                    | Out of scope; use Planner + Implementer  |
 
 ## TDD Workflow (Mandatory)
 
@@ -60,7 +58,7 @@ handoff:
 
 ## Key Rules
 
-- TDD always — no implementation without failing test
+- TDD always - no implementation without failing test
 - Bug fixes: Debugger first, then Implementer
 - Shortest correct diff
 - One-line reason per decision
@@ -72,6 +70,6 @@ handoff:
 
 ## Related
 
-- [Debugger](/agents/debugger) — Bug diagnosis before implementation
-- [Code Simplifier](/agents/code-simplifier) — Complex refactoring
+- [Debugger](/agents/debugger) - Bug diagnosis before implementation
+- [Code Simplifier](/agents/code-simplifier) - Complex refactoring
 - [Workflow: Execute](/guide/workflow-execute)

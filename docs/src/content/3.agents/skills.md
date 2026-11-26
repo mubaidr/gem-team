@@ -1,16 +1,14 @@
 ---
-
 title: Packaged Skills
 description: Reusable SKILL.md playbooks compiled by APM, loaded for matching tasks.
 navigation:
   icon: i-lucide-package
 seo:
-  title: Packaged Skills — Gem Team
+  title: Packaged Skills - Gem Team
   description: "Packaged skills reference: devops-guidelines and other reusable SKILL.md playbooks."
-  ogTitle: Packaged Skills — Gem Team
+  ogTitle: Packaged Skills - Gem Team
   ogDescription: Packaged skills reference for Gem Team.
 ---
-
 
 ## What Are Skills
 
@@ -18,13 +16,13 @@ Standard `SKILL.md` playbooks in `.apm/skills/<skill-name>/` loaded automaticall
 
 ## When a Skill Is Created
 
-| Condition | Threshold |
-|-----------|-----------|
-| Usage count | ≥ 2 successful tasks |
-| Confidence | ≥ 0.95 |
-| Self-contained | Not task-specific, includes validation |
+| Condition              | Threshold                               |
+| ---------------------- | --------------------------------------- |
+| Usage count            | ≥ 2 successful tasks                    |
+| Confidence             | ≥ 0.95                                  |
+| Self-contained         | Not task-specific, includes validation  |
 | Progressive disclosure | Core in SKILL.md, extras in references/ |
-| No secrets | No private task data or workarounds |
+| No secrets             | No private task data or workarounds     |
 
 ## Current Skills
 

@@ -1,30 +1,28 @@
 ---
-
 title: Planner
 description: Builds minimal wave plans with ordered waves, routing, handoffs, risk gates.
 navigation:
   icon: i-lucide-clipboard-list
 seo:
-  title: Planner Agent — Gem Team
+  title: Planner Agent - Gem Team
   description: The gem-planner creates wave plans for MEDIUM/HIGH complexity tasks with handoffs and acceptance criteria.
-  ogTitle: Planner Agent — Gem Team
+  ogTitle: Planner Agent - Gem Team
   ogDescription: The gem-planner creates wave plans for MEDIUM/HIGH complexity tasks.
 ---
 
-
 ## Role
 
-Creates decision-complete wave plans for MEDIUM/HIGH work. **Never implements** — only plans. Produces ordered waves, scoped handoffs, task coalescing, and mechanical self-check.
+Creates decision-complete wave plans for MEDIUM/HIGH work. **Never implements** - only plans. Produces ordered waves, scoped handoffs, task coalescing, and mechanical self-check.
 
 ## When to Delegate
 
-| Scenario | Delegate Planner? | Why |
-|----------|------------------|-----|
-| MEDIUM/HIGH complexity task | ✅ | Persistent plan.yaml required |
-| Multi-task dependent work | ✅ | Ordered waves with dependencies |
-| High-risk feature needing review | ✅ | Review gate configuration |
-| TRIVIAL/LOW task | ❌ | Fast path, no planner needed |
-| Direct implementation | ❌ | Never implements; only plans |
+| Scenario                         | Delegate Planner? | Why                             |
+| -------------------------------- | ----------------- | ------------------------------- |
+| MEDIUM/HIGH complexity task      | ✅                | Persistent plan.yaml required   |
+| Multi-task dependent work        | ✅                | Ordered waves with dependencies |
+| High-risk feature needing review | ✅                | Review gate configuration       |
+| TRIVIAL/LOW task                 | ❌                | Fast path, no planner needed    |
+| Direct implementation            | ❌                | Never implements; only plans    |
 
 ## Input
 
@@ -32,9 +30,9 @@ Creates decision-complete wave plans for MEDIUM/HIGH work. **Never implements** 
 planning_context:
   task_clarifications: [...]
   relevant_context: [...]
-  baseline: {}      # replans: immutable
-  current_plan: {}  # replans: exact current
-  review_findings: []  # replans
+  baseline: {} # replans: immutable
+  current_plan: {} # replans: exact current
+  review_findings: [] # replans
 ```
 
 ## Output: Wave Plan

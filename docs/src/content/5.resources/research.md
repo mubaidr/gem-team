@@ -4,9 +4,9 @@ description: Evidence base for Gem Team design decisions, including prompt cachi
 navigation:
   icon: i-lucide-file-text
 seo:
-  title: Research & Benchmarks — Gem Team
+  title: Research & Benchmarks - Gem Team
   description: "Evidence base for Gem Team design decisions: prompt caching pricing, multi-agent vs single-agent benchmarks, TDD effectiveness, model routing, context reduction, and prefix caching research."
-  ogTitle: Research & Benchmarks — Gem Team
+  ogTitle: Research & Benchmarks - Gem Team
   ogDescription: Evidence base for Gem Team design decisions, with citations and URLs.
 ---
 
@@ -65,7 +65,7 @@ Source: [cloud.google.com/model-garden/pricing](https://cloud.google.com/model-g
 
 ### DeepSeek
 
-Could not verify current pricing — provider endpoints returned 403/401 blocks during research. No DeepSeek cache pricing figures are included in this page.
+Could not verify current pricing - provider endpoints returned 403/401 blocks during research. No DeepSeek cache pricing figures are included in this page.
 
 ## Multi-Agent vs Single-Agent Benchmarks
 
@@ -206,16 +206,16 @@ The following limitations should be considered when applying this research:
 
 ## Reference List
 
-1. OpenAI — Pricing. https://developers.openai.com/api/docs/pricing
-2. OpenAI — Prompt Caching Guide. https://developers.openai.com/api/docs/guides/prompt-caching
-3. Anthropic — Prompt Caching. https://platform.claude.com/docs/en/build-with-claude/prompt-caching
-4. Google Cloud — Model Garden Pricing. https://cloud.google.com/model-garden/pricing
-5. Google AI Studio — Caching. https://aistudio.google.com/docs/caching
-6. ProcPilot (IEEE IEMCON 2026). https://doi.org/10.1109/ieeeiemcon202670252.2026.11794666 — OpenAlex: https://openalex.org/W7238772809
+1. OpenAI - Pricing. https://developers.openai.com/api/docs/pricing
+2. OpenAI - Prompt Caching Guide. https://developers.openai.com/api/docs/guides/prompt-caching
+3. Anthropic - Prompt Caching. https://platform.claude.com/docs/en/build-with-claude/prompt-caching
+4. Google Cloud - Model Garden Pricing. https://cloud.google.com/model-garden/pricing
+5. Google AI Studio - Caching. https://aistudio.google.com/docs/caching
+6. ProcPilot (IEEE IEMCON 2026). https://doi.org/10.1109/ieeeiemcon202670252.2026.11794666 - OpenAlex: https://openalex.org/W7238772809
 7. MAFBench (arXiv:2602.03128). https://arxiv.org/abs/2602.03128
 8. MAS vs SAS benefits diminish (arXiv:2505.18286). https://arxiv.org/abs/2505.18286
 9. ChainSWE (EMNLP 2026). https://doi.org/10.18653/2026.emnlp-main.371
-10. TiCoder (IEEE TSE 2024). https://arxiv.org/abs/2404.10100 — https://doi.org/10.1109/TSE.2024.3428972
+10. TiCoder (IEEE TSE 2024). https://arxiv.org/abs/2404.10100 - https://doi.org/10.1109/TSE.2024.3428972
 11. RouteLLM (ICLR 2025). https://arxiv.org/abs/2406.18665
 12. Hybrid LLM (ICLR 2024). https://proceedings.iclr.cc/paper_files/paper/2024/hash/b47d93c99fa22ac0b377578af0a1f63a-Abstract-Conference.html
 13. UCCI (arXiv:2605.18796). https://arxiv.org/abs/2605.18796

@@ -4,9 +4,9 @@ description: Deployment strategies, approval gates, and rollback settings.
 navigation:
   icon: i-lucide-server
 seo:
-  title: DevOps Configuration — Gem Team
+  title: DevOps Configuration - Gem Team
   description: Deployment strategies, approval gates, and rollback settings configuration.
-  ogTitle: DevOps Configuration — Gem Team
+  ogTitle: DevOps Configuration - Gem Team
   ogDescription: Deployment strategies, approval gates, and rollback settings.
 ---
 
@@ -114,13 +114,13 @@ handoff:
 ## Key Rules
 
 1. **Production always requires approval** unless explicitly disabled
-2. **Blue-green/canary enable instant rollback** — Rolling is slower
-3. **Health checks mandatory** — No deployment without verification
-4. **Approval gates enforced by DevOps agent** — Not configurable at runtime
+2. **Blue-green/canary enable instant rollback** - Rolling is slower
+3. **Health checks mandatory** - No deployment without verification
+4. **Approval gates enforced by DevOps agent** - Not configurable at runtime
 
 ## Related Pages
 
-- [DevOps Agent](/agents/devops) — Infrastructure and deployment execution
-- [Workflow: Execute](/guide/workflow-execute) — DevOps in wave loop
-- [Resources: Operational Notes](/resources/operational-notes) — Production practices
-- [Configuration Overview](/configuration) — Full config reference
+- [DevOps Agent](/agents/devops) - Infrastructure and deployment execution
+- [Workflow: Execute](/guide/workflow-execute) - DevOps in wave loop
+- [Resources: Operational Notes](/resources/operational-notes) - Production practices
+- [Configuration Overview](/configuration) - Full config reference

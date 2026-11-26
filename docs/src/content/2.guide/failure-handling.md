@@ -1,37 +1,35 @@
 ---
-
 title: Failure Handling
-description: How Gem Team classifies failures and routes them to the correct handler — no blind retries.
+description: How Gem Team classifies failures and routes them to the correct handler - no blind retries.
 navigation:
   icon: i-lucide-alert-triangle
 seo:
-  title: Failure Handling — Gem Team
+  title: Failure Handling - Gem Team
   description: "Failure classification and routing: needs_retry, fixable, regression, needs_replan, flaky, platform_specific, test_bug, blocked."
-  ogTitle: Failure Handling — Gem Team
+  ogTitle: Failure Handling - Gem Team
   ogDescription: Failure classification and routing for reliable task execution.
 ---
 
-
 ## Philosophy
 
-**Every failure gets a specific classification** that determines the exact handler. No generic "retry" — each classification routes to the right specialist with the right evidence.
+**Every failure gets a specific classification** that determines the exact handler. No generic "retry" - each classification routes to the right specialist with the right evidence.
 
 ---
 
 ## Classification Taxonomy
 
-| Classification | Trigger | Handler | Max Retries |
-|----------------|---------|---------|-------------|
-| `needs_retry` | Transient (network, flaky test, rate limit) | Same task, same scope + evidence | 3 |
-| `fixable` | Code bug in implementation | Debugger → Implementer | — |
-| `regression` | Previously working, now broken | Debugger (bisect) → Implementer | — |
-| `new_failure` | New code, new failure | Debugger → Implementer | — |
-| `needs_replan` | Scope wrong, deps missed, architecture change | Planner (bounded replan) | 2 replans |
-| `flaky` | Intermittent, non-deterministic | Owning specialist re-runs once | 1 re-run |
-| `platform_specific` | Works on one platform, fails on another | Specialist verifies criteria | — |
-| `test_bug` | Test itself is defective | Debugger → Implementer | — |
-| `blocked` | External dependency unavailable | Stop path, escalate | — |
-| `escalate` | Needs human decision | Stop, escalate to user | — |
+| Classification      | Trigger                                       | Handler                          | Max Retries |
+| ------------------- | --------------------------------------------- | -------------------------------- | ----------- |
+| `needs_retry`       | Transient (network, flaky test, rate limit)   | Same task, same scope + evidence | 3           |
+| `fixable`           | Code bug in implementation                    | Debugger → Implementer           | -           |
+| `regression`        | Previously working, now broken                | Debugger (bisect) → Implementer  | -           |
+| `new_failure`       | New code, new failure                         | Debugger → Implementer           | -           |
+| `needs_replan`      | Scope wrong, deps missed, architecture change | Planner (bounded replan)         | 2 replans   |
+| `flaky`             | Intermittent, non-deterministic               | Owning specialist re-runs once   | 1 re-run    |
+| `platform_specific` | Works on one platform, fails on another       | Specialist verifies criteria     | -           |
+| `test_bug`          | Test itself is defective                      | Debugger → Implementer           | -           |
+| `blocked`           | External dependency unavailable               | Stop path, escalate              | -           |
+| `escalate`          | Needs human decision                          | Stop, escalate to user           | -           |
 
 ---
 
@@ -51,7 +49,7 @@ flowchart TD
     B -->|Test Wrong| K[test_bug]
     B -->|External| L[blocked]
     B -->|Human Needed| M[escalate]
-    
+
     C --> N[Retry Same Task + Evidence]
     E --> O[Debugger → Implementer]
     F --> P[Debugger Bisect → Implementer]
@@ -68,14 +66,15 @@ flowchart TD
 
 ## Handler Details
 
-### `needs_retry` — Transient Failures
+### `needs_retry` - Transient Failures
+
 **Triggers**: Network timeout, rate limit, flaky external service, temporary resource exhaustion
 
 **Handler**: Orchestrator retries **same task, unchanged scope**, with failure evidence attached.
 
 ```yaml
 # Retry payload adds:
-retries_used: 1  # Incremented first
+retries_used: 1 # Incremented first
 task_definition:
   handoff:
     relevant_context:
@@ -87,11 +86,12 @@ task_definition:
 
 ---
 
-### `fixable` / `regression` / `new_failure` — Code Bugs
+### `fixable` / `regression` / `new_failure` - Code Bugs
 
 **Route**: Debugger → Implementer (always in sequence)
 
 #### Debugger (`gem-debugger`)
+
 ```yaml
 # Receives:
 failure: "TypeError: Cannot read property 'email' of undefined"
@@ -105,6 +105,7 @@ evidence:
 **Output**: Root cause + minimal reproduction test + fix recommendation
 
 #### Implementer (`gem-implementer`)
+
 ```yaml
 # Receives debugger handoff:
 handoff:
@@ -120,22 +121,29 @@ handoff:
 
 ---
 
-### `needs_replan` — Scope/Architecture Issues
+### `needs_replan` - Scope/Architecture Issues
 
 **Triggers**: Missing dependencies, wrong task boundaries, architecture decision needed, contract changes discovered
 
 **Handler**: Planner with **bounded replan**
 
 **Replan Input**:
+
 ```yaml
-baseline: { plan_id, objective, acceptance_criteria }  # Immutable
-current_plan: { ... }  # Exact current plan
-review_findings: [     # If triggered by review
-  { finding: "API contract changed", severity: "high", task: "implement-search" }
-]
+baseline: { plan_id, objective, acceptance_criteria } # Immutable
+current_plan: { ... } # Exact current plan
+review_findings: # If triggered by review
+  [
+    {
+      finding: "API contract changed",
+      severity: "high",
+      task: "implement-search",
+    },
+  ]
 ```
 
 **Replan Constraints**:
+
 - Immutable baseline (objective + criteria never change)
 - Max 2 replans (default)
 - Must show measurable progress
@@ -144,15 +152,17 @@ review_findings: [     # If triggered by review
 
 ---
 
-### `flaky` — Intermittent Failures
+### `flaky` - Intermittent Failures
 
 **Handler**: Owning specialist re-runs **once** with same scope.
 
 **Outcome**:
+
 - All pass → Continue (record flaky evidence)
 - Any fail → Block, escalate
 
 **Evidence recorded**:
+
 ```yaml
 flaky_evidence:
   task_id: "browser-test-login"
@@ -165,7 +175,7 @@ flaky_evidence:
 
 ---
 
-### `platform_specific` — Platform Differences
+### `platform_specific` - Platform Differences
 
 **Handler**: Owning specialist verifies affected criteria on target platform.
 
@@ -182,11 +192,12 @@ platform_evidence:
 
 ---
 
-### `test_bug` — Defective Tests
+### `test_bug` - Defective Tests
 
 **Handler**: Debugger diagnoses test → Implementer fixes test.
 
 **Common patterns**:
+
 - Test assumes wrong initial state
 - Test uses flaky timing assertions
 - Test mocks incorrectly
@@ -194,13 +205,14 @@ platform_evidence:
 
 ---
 
-### `blocked` / `escalate` — Human Required
+### `blocked` / `escalate` - Human Required
 
 **Blocked**: External dependency (API down, approval pending, infrastructure not ready)
 
 **Escalate**: Architectural decision, security approval, budget, team decision
 
 **Both**: Stop current path, preserve state, notify user with:
+
 - What's blocked
 - Why
 - What's needed to unblock
@@ -216,6 +228,7 @@ platform_evidence:
 **Failure**: `ECONNREFUSED` connecting to database on attempt 1
 
 **Handling**:
+
 ```yaml
 # Retry payload
 retries_used: 1
@@ -234,6 +247,7 @@ task_definition:
 **Failure**: Existing auth test breaks after refactor
 
 **Handling**:
+
 1. Debugger bisects to find the breaking commit
 2. Debugger hands root cause + fix recommendation to Implementer
 3. Implementer applies fix, verifies with original test suite
@@ -244,6 +258,7 @@ task_definition:
 **Failure**: Planner discovers no CSV library in dependencies
 
 **Handling**:
+
 1. Planner creates bounded replan (max 2)
 2. Baseline (objective + criteria) stays immutable
 3. New task added: "Add CSV library dependency"
@@ -255,6 +270,7 @@ task_definition:
 **Failure**: Timeout waiting for selector (attempt 1)
 
 **Handling**:
+
 - Same specialist re-runs once (attempt 2)
 - If attempt 2 passes → continue, record flaky evidence
 - If attempt 2 fails → block, escalate to user
@@ -265,6 +281,7 @@ task_definition:
 **Failure**: Test passes but checks wrong thing (mocks implementation detail)
 
 **Handling**:
+
 1. Debugger diagnoses the test itself as defective
 2. Implementer fixes the test to validate behavior, not implementation
 
@@ -274,6 +291,7 @@ task_definition:
 **Failure**: Passes on Linux, fails on macOS (path separator)
 
 **Handling**:
+
 - Specialist verifies affected criteria on macOS
 - Fix applied for cross-platform path handling
 
@@ -283,6 +301,7 @@ task_definition:
 **Failure**: Staging cluster unavailable
 
 **Handling**:
+
 - Orchestrator stops, preserves state
 - Notifies user: what's blocked, why, what's needed to unblock
 
@@ -292,6 +311,7 @@ task_definition:
 **Failure**: Needs human approval for breaking change
 
 **Handling**:
+
 - Orchestrator stops, escalates to user
 - User reviews tradeoffs and responds
 
@@ -299,14 +319,14 @@ task_definition:
 
 ## Replan Guardrails (Details)
 
-| Guardrail | Enforcement |
-|-----------|-------------|
-| **Immutable baseline** | Objective + acceptance criteria stored separately, never modified |
-| **Max 2 replans** | Counter in `plan.yaml`; 3rd attempt → escalate |
-| **Lineage** | `revision` number, `replan_count`, `replan_reason` per revision |
-| **Measurable progress** | Must complete ≥1 new task or resolve ≥1 blocker |
-| **No scope creep** | New tasks only for discovered dependencies, not new features |
-| **Empty replan escalation** | If replan produces no task changes → escalate |
+| Guardrail                   | Enforcement                                                       |
+| --------------------------- | ----------------------------------------------------------------- |
+| **Immutable baseline**      | Objective + acceptance criteria stored separately, never modified |
+| **Max 2 replans**           | Counter in `plan.yaml`; 3rd attempt → escalate                    |
+| **Lineage**                 | `revision` number, `replan_count`, `replan_reason` per revision   |
+| **Measurable progress**     | Must complete ≥1 new task or resolve ≥1 blocker                   |
+| **No scope creep**          | New tasks only for discovered dependencies, not new features      |
+| **Empty replan escalation** | If replan produces no task changes → escalate                     |
 
 ---
 
@@ -339,32 +359,32 @@ failure_evidence:
 
 ## Quick Reference: What to Do When...
 
-| You See | Action |
-|---------|--------|
-| "Task failed, retrying..." | Wait — Orchestrator handles `needs_retry` automatically (max 3x) |
-| "Debugger analyzing..." | Normal — Debugger finding root cause before fix |
-| "Planner replanning..." | Normal — Scope/dependencies adjusted, max 2x |
-| "Blocked: waiting for approval" | Provide approval or unblock dependency |
-| "Escalated: decision needed" | You must decide — review tradeoffs and respond |
-| "Flaky test detected" | Specialist re-running once; if fails again, will block |
+| You See                         | Action                                                           |
+| ------------------------------- | ---------------------------------------------------------------- |
+| "Task failed, retrying..."      | Wait - Orchestrator handles `needs_retry` automatically (max 3x) |
+| "Debugger analyzing..."         | Normal - Debugger finding root cause before fix                  |
+| "Planner replanning..."         | Normal - Scope/dependencies adjusted, max 2x                     |
+| "Blocked: waiting for approval" | Provide approval or unblock dependency                           |
+| "Escalated: decision needed"    | You must decide - review tradeoffs and respond                   |
+| "Flaky test detected"           | Specialist re-running once; if fails again, will block           |
 
 ---
 
 ## Key Rules
 
-1. **No blind retries** — Every retry has classification + evidence
-2. **Debugger before Implementer** — Root cause first, then fix
-3. **Bounded replans** — Max 2, immutable baseline, measurable progress
-4. **Flaky = one re-run** — Not infinite retries
-5. **Platform-specific = verify criteria** — Not "works on my machine"
-6. **Test bugs = fix test** — Not "disable test"
-7. **Blocked/Escalate = human** — Orchestrator stops, preserves state, notifies
+1. **No blind retries** - Every retry has classification + evidence
+2. **Debugger before Implementer** - Root cause first, then fix
+3. **Bounded replans** - Max 2, immutable baseline, measurable progress
+4. **Flaky = one re-run** - Not infinite retries
+5. **Platform-specific = verify criteria** - Not "works on my machine"
+6. **Test bugs = fix test** - Not "disable test"
+7. **Blocked/Escalate = human** - Orchestrator stops, preserves state, notifies
 
 ---
 
 ## Related Pages
 
-- [Phase 3: Execute](/guide/workflow-execute) — Where failures are classified
-- [Phase 2: Plan](/guide/plan) — Replan guardrails
-- [Debugger Agent](/agents/debugger) — Root cause analysis capabilities
-- [First Steps](/getting-started/first-steps) — See failure handling in walkthrough
+- [Phase 3: Execute](/guide/workflow-execute) - Where failures are classified
+- [Phase 2: Plan](/guide/plan) - Replan guardrails
+- [Debugger Agent](/agents/debugger) - Root cause analysis capabilities
+- [First Steps](/getting-started/first-steps) - See failure handling in walkthrough

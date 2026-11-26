@@ -1,16 +1,14 @@
 ---
-
 title: Skill Creator
 description: Packages high-confidence patterns into reusable SKILL.md playbooks with scripts, references, assets.
 navigation:
   icon: i-lucide-package
 seo:
-  title: Skill Creator Agent — Gem Team
+  title: Skill Creator Agent - Gem Team
   description: The gem-skill-creator packages proven patterns into reusable SKILL.md playbooks.
-  ogTitle: Skill Creator Agent — Gem Team
+  ogTitle: Skill Creator Agent - Gem Team
   ogDescription: The gem-skill-creator packages proven patterns into reusable skills.
 ---
-
 
 ## Role
 
@@ -18,22 +16,22 @@ Extracts patterns from successful workflows into reusable `SKILL.md` playbooks. 
 
 ## When to Delegate
 
-| Scenario | Delegate Skill Creator? | Why |
-|----------|------------------------|-----|
-| Pattern used in ≥2 successful tasks | ✅ | Proven reuse justifies packaging |
-| Confidence ≥ 0.95 on a pattern | ✅ | High-certainty finding |
-| One-off task-specific workaround | ❌ | Not reusable; stays in session memory |
-| Speculative pattern (not validated) | ❌ | Below confidence threshold |
+| Scenario                            | Delegate Skill Creator? | Why                                   |
+| ----------------------------------- | ----------------------- | ------------------------------------- |
+| Pattern used in ≥2 successful tasks | ✅                      | Proven reuse justifies packaging      |
+| Confidence ≥ 0.95 on a pattern      | ✅                      | High-certainty finding                |
+| One-off task-specific workaround    | ❌                      | Not reusable; stays in session memory |
+| Speculative pattern (not validated) | ❌                      | Below confidence threshold            |
 
 ## Skill Criteria
 
-| Criterion | Requirement |
-|-----------|-------------|
-| Usage count | ≥ 2 successful tasks |
-| Confidence | ≥ 0.95 |
-| Self-contained | Not task-specific, includes validation |
+| Criterion              | Requirement                             |
+| ---------------------- | --------------------------------------- |
+| Usage count            | ≥ 2 successful tasks                    |
+| Confidence             | ≥ 0.95                                  |
+| Self-contained         | Not task-specific, includes validation  |
 | Progressive disclosure | Core in SKILL.md, extras in references/ |
-| No secrets | No private task data/workarounds |
+| No secrets             | No private task data/workarounds        |
 
 ## Input
 
@@ -45,7 +43,11 @@ acceptance_criteria:
   - "Reference to RFC"
 handoff:
   constraints: ["Based on 3+ tasks", "Confidence: 0.98"]
-  relevant_context: ["repo_memory: pagination_helper_reusable=true", "implement-search: files=..."]
+  relevant_context:
+    [
+      "repo_memory: pagination_helper_reusable=true",
+      "implement-search: files=...",
+    ]
 ```
 
 ## Output
@@ -55,7 +57,13 @@ status: "completed"
 handoff:
   skill_created: "api-pagination"
   skill_path: ".apm/skills/api-pagination/"
-  files: ["SKILL.md", "scripts/generate-pagination.ts", "references/pagination-rfc.md", "assets/pagination-flow.svg"]
+  files:
+    [
+      "SKILL.md",
+      "scripts/generate-pagination.ts",
+      "references/pagination-rfc.md",
+      "assets/pagination-flow.svg",
+    ]
 ```
 
 ## Skill Structure
@@ -83,5 +91,5 @@ handoff:
 
 ## Related
 
-- [Agents: Skills](/agents/skills) — Skills catalog
-- [Features: Learning](/guide/learning) — Skill extraction
+- [Agents: Skills](/agents/skills) - Skills catalog
+- [Features: Learning](/guide/learning) - Skill extraction

@@ -1,33 +1,32 @@
 ---
 
-title: Phase 1 — Route
+title: Phase 1 - Route
 description: Route the classified request to the correct execution path.
 navigation:
   icon: i-lucide-git-branch
 seo:
-  title: Route — Gem Team
+  title: Route - Gem Team
   description: "Phase 1: fast path vs full plan routing based on complexity and risk signals."
-  ogTitle: Route — Gem Team
+  ogTitle: Route - Gem Team
   ogDescription: Phase 1: route requests to fast path or full plan.
 ---
 
-
 ## Purpose
 
-Determine the execution path based on Phase 0 classification. No work happens here — only routing decisions.
+Determine the execution path based on Phase 0 classification. No work happens here - only routing decisions.
 
 ---
 
 ## Routing Table
 
-| Request State + Intent | Route To | Notes |
-|------------------------|----------|-------|
-| `discuss` (any) | **Phase 4** (direct answer) | No plan, no delegation |
-| `research` (standalone) | **gem-researcher** → Phase 4 | Read-only, correlation ID only |
-| `challenge` | **gem-reviewer** (critic mode) → Phase 4 | Read-only decision review |
-| `continue_plan` + execution-only | **Phase 3** | Resume existing plan |
-| `continue_plan` + scope/wave/criteria edits | **Phase 2** | Replan with edits |
-| `new_task` / valid `extend` | **Phase 2** (or fast path) | See eligibility below |
+| Request State + Intent                      | Route To                                 | Notes                          |
+| ------------------------------------------- | ---------------------------------------- | ------------------------------ |
+| `discuss` (any)                             | **Phase 4** (direct answer)              | No plan, no delegation         |
+| `research` (standalone)                     | **gem-researcher** → Phase 4             | Read-only, correlation ID only |
+| `challenge`                                 | **gem-reviewer** (critic mode) → Phase 4 | Read-only decision review      |
+| `continue_plan` + execution-only            | **Phase 3**                              | Resume existing plan           |
+| `continue_plan` + scope/wave/criteria edits | **Phase 2**                              | Replan with edits              |
+| `new_task` / valid `extend`                 | **Phase 2** (or fast path)               | See eligibility below          |
 
 ---
 
@@ -35,12 +34,12 @@ Determine the execution path based on Phase 0 classification. No work happens he
 
 For `new_task` or valid `extend`, the Orchestrator checks **all** criteria:
 
-| Criterion | Check | Why It Matters |
-|-----------|-------|----------------|
-| **Single owner** | One narrowest specialist completes end-to-end | No coordination overhead |
-| **Bounded scope** | One domain/file area | Predictable context |
-| **Clear acceptance criteria** | Explicit or trivially inferable | No investigation needed |
-| **No high-risk signals** | Zero matches from Phase 0 | No review gates needed |
+| Criterion                     | Check                                         | Why It Matters           |
+| ----------------------------- | --------------------------------------------- | ------------------------ |
+| **Single owner**              | One narrowest specialist completes end-to-end | No coordination overhead |
+| **Bounded scope**             | One domain/file area                          | Predictable context      |
+| **Clear acceptance criteria** | Explicit or trivially inferable               | No investigation needed  |
+| **No high-risk signals**      | Zero matches from Phase 0                     | No review gates needed   |
 
 **If ALL true** → Fast path: delegate directly to specialist, skip Planner & Reviewer.
 
@@ -109,19 +108,19 @@ gem-reviewer (review_mode: critic, review_target: decision, review_scope: full)
 Phase 4: Synthesize critic result + evidence + tradeoffs + decision needed
 ```
 
-**Critic mode is read-only** — evaluates assumptions, counterexamples, risks, alternatives, reversibility. Does not implement or mutate files.
+**Critic mode is read-only** - evaluates assumptions, counterexamples, risks, alternatives, reversibility. Does not implement or mutate files.
 
 ---
 
 ## Continue Plan: Execution vs Revision
 
-| Feedback Type | Route | Example |
-|---------------|-------|---------|
-| "Continue" / "Resume" | Phase 3 | "Continue plan 20261121-xyz" |
-| "Add new task" | Phase 2 (`extend`) | "Extend plan 20261121-xyz with new feature" |
-| "Change wave order" | Phase 2 (`revise_waves`) | "Move review before implementation" |
-| "Update criteria" | Phase 2 (`revise_criteria`) | "Add performance benchmark requirement" |
-| "Change scope" | Phase 2 (`revise_scope`) | "Also update the mobile API" |
+| Feedback Type         | Route                       | Example                                     |
+| --------------------- | --------------------------- | ------------------------------------------- |
+| "Continue" / "Resume" | Phase 3                     | "Continue plan 20261121-xyz"                |
+| "Add new task"        | Phase 2 (`extend`)          | "Extend plan 20261121-xyz with new feature" |
+| "Change wave order"   | Phase 2 (`revise_waves`)    | "Move review before implementation"         |
+| "Update criteria"     | Phase 2 (`revise_criteria`) | "Add performance benchmark requirement"     |
+| "Change scope"        | Phase 2 (`revise_scope`)    | "Also update the mobile API"                |
 
 **Ambiguous input** → Ask once for classification.
 
@@ -129,11 +128,11 @@ Phase 4: Synthesize critic result + evidence + tradeoffs + decision needed
 
 ## Missing/Invalid Plan ID
 
-| Scenario | Action |
-|----------|--------|
-| `continue_plan` without `plan_id` | Block, request exact ID |
-| `plan_id` not found | Block, request exact ID |
-| `plan_id` format invalid | Block, request valid format (`^[a-z0-9-]+$`) |
+| Scenario                          | Action                                       |
+| --------------------------------- | -------------------------------------------- |
+| `continue_plan` without `plan_id` | Block, request exact ID                      |
+| `plan_id` not found               | Block, request exact ID                      |
+| `plan_id` format invalid          | Block, request valid format (`^[a-z0-9-]+$`) |
 
 **Never infers, fuzzy-matches, or auto-loads plan IDs.**
 
@@ -146,12 +145,14 @@ No fuzzy matching, no inference. Continuation requires the exact `plan_id` from 
 ## Promotion: Fast Path → Persistent Plan
 
 Fast path work **auto-promotes** when continued execution needs:
+
 - Dependencies on other tasks
 - Shared state across tasks
 - Contract/risk changes
 - Durable evidence for reuse
 
 **On promotion:**
+
 1. Keep same `plan_id`
 2. Create `docs/plan/{plan_id}/plan.yaml`
 3. Preserve context, evidence, task owner, wave placement
@@ -175,7 +176,7 @@ flowchart TD
     B -->|new_task/extend| I{Fast Path Eligible?}
     I -->|Yes| J[Delegate Specialist → Phase 4]
     I -->|No| K[Phase 2: Planner]
-    
+
     style C fill:#e8f5e9
     style D fill:#e3f2fd
     style E fill:#fce4ec
@@ -187,25 +188,25 @@ flowchart TD
 
 ## Routing Examples
 
-| Scenario | Intent | Complexity | Route | Reason |
-|----------|--------|------------|-------|--------|
-| Fix typo in README | execute | TRIVIAL | Fast path | Single owner, bounded scope |
-| Extract validation helper | execute | LOW | Fast path | Single domain, clear criteria |
-| Add /api/users/search | execute | MEDIUM | Phase 2 Planner | Multi-file, risk signals |
-| Migrate auth to OAuth2 | execute | HIGH | Phase 2 Planner + Reviewer | High-risk, breaking change |
-| "How does caching work?" | research | LOW | gem-researcher → Phase 4 | Standalone research |
-| "Should we use Redis or DB?" | challenge | MEDIUM | gem-reviewer critic → Phase 4 | Decision review |
-| "Continue plan 20261121-xyz" | continue_plan | MEDIUM | Phase 3 | Resume existing plan |
+| Scenario                     | Intent        | Complexity | Route                         | Reason                        |
+| ---------------------------- | ------------- | ---------- | ----------------------------- | ----------------------------- |
+| Fix typo in README           | execute       | TRIVIAL    | Fast path                     | Single owner, bounded scope   |
+| Extract validation helper    | execute       | LOW        | Fast path                     | Single domain, clear criteria |
+| Add /api/users/search        | execute       | MEDIUM     | Phase 2 Planner               | Multi-file, risk signals      |
+| Migrate auth to OAuth2       | execute       | HIGH       | Phase 2 Planner + Reviewer    | High-risk, breaking change    |
+| "How does caching work?"     | research      | LOW        | gem-researcher → Phase 4      | Standalone research           |
+| "Should we use Redis or DB?" | challenge     | MEDIUM     | gem-reviewer critic → Phase 4 | Decision review               |
+| "Continue plan 20261121-xyz" | continue_plan | MEDIUM     | Phase 3                       | Resume existing plan          |
 
 ## Continue Plan: Decision Table
 
-| Feedback Type | Route | Example |
-|---------------|-------|---------|
-| "Continue" / "Resume" | Phase 3 | "Continue plan 20261121-xyz" |
-| "Add new task" | Phase 2 (`extend`) | "Extend plan 20261121-xyz with new feature" |
-| "Change wave order" | Phase 2 (`revise_waves`) | "Move review before implementation" |
-| "Update criteria" | Phase 2 (`revise_criteria`) | "Add performance benchmark requirement" |
-| "Change scope" | Phase 2 (`revise_scope`) | "Also update the mobile API" |
+| Feedback Type         | Route                       | Example                                     |
+| --------------------- | --------------------------- | ------------------------------------------- |
+| "Continue" / "Resume" | Phase 3                     | "Continue plan 20261121-xyz"                |
+| "Add new task"        | Phase 2 (`extend`)          | "Extend plan 20261121-xyz with new feature" |
+| "Change wave order"   | Phase 2 (`revise_waves`)    | "Move review before implementation"         |
+| "Update criteria"     | Phase 2 (`revise_criteria`) | "Add performance benchmark requirement"     |
+| "Change scope"        | Phase 2 (`revise_scope`)    | "Also update the mobile API"                |
 
 **Ambiguous input** → Ask once for classification.
 
@@ -213,15 +214,15 @@ flowchart TD
 
 ## Key Rules
 
-1. **No work in Phase 1** — Pure routing
-2. **Fast path = no Planner, no Reviewer** — Direct to specialist
-3. **Research = read-only** — No plan unless promoted
-4. **Challenge = critic review** — Read-only, decision-focused
-5. **Continue plan = exact ID required** — No inference
-6. **Promotion preserves everything** — No lost context
+1. **No work in Phase 1** - Pure routing
+2. **Fast path = no Planner, no Reviewer** - Direct to specialist
+3. **Research = read-only** - No plan unless promoted
+4. **Challenge = critic review** - Read-only, decision-focused
+5. **Continue plan = exact ID required** - No inference
+6. **Promotion preserves everything** - No lost context
 
 ---
 
 ## Next Phase
 
-→ [Phase 2: Plan](/guide/plan) — Wave planning, task coalescing, review gates
+→ [Phase 2: Plan](/guide/plan) - Wave planning, task coalescing, review gates

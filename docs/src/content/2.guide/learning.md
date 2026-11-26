@@ -1,16 +1,14 @@
 ---
-
 title: Learns & Improves
 description: Three-tier memory, confidence-gated promotion, and skill extraction from successful patterns.
 navigation:
   icon: i-lucide-brain
 seo:
-  title: Learning — Gem Team
+  title: Learning - Gem Team
   description: "How Gem Team learns from success: memory tiers, skill extraction, confidence-gated promotion."
-  ogTitle: Learning — Gem Team
+  ogTitle: Learning - Gem Team
   ogDescription: How Gem Team learns from success and extracts reusable skills.
 ---
-
 
 ## Continuous Learning Architecture
 
@@ -26,7 +24,7 @@ flowchart TD
     C --> G[Session Memory\n(Conversation)]
     C --> H[Global Memory\n(User)]
     D --> I[.apm/skills/\nSKILL.md + scripts]
-    
+
     style C fill:#e8f5e9
     style D fill:#e3f2fd
 ```
@@ -35,13 +33,13 @@ flowchart TD
 
 ## Three-Tier Memory
 
-| Tier | Scope | Persistence | What Gets Stored |
-|------|-------|-------------|------------------|
-| **Repo** | Workspace-scoped | With repository (Git) | Conventions, decisions, patterns, failure modes, architectural boundaries |
-| **Session** | Conversation-scoped | Until session ends | Task evidence, intermediate findings, transient context |
-| **Global** | User-scoped | Across all workspaces | Cross-project preferences, tool configurations, personal patterns |
+| Tier        | Scope               | Persistence           | What Gets Stored                                                          |
+| ----------- | ------------------- | --------------------- | ------------------------------------------------------------------------- |
+| **Repo**    | Workspace-scoped    | With repository (Git) | Conventions, decisions, patterns, failure modes, architectural boundaries |
+| **Session** | Conversation-scoped | Until session ends    | Task evidence, intermediate findings, transient context                   |
+| **Global**  | User-scoped         | Across all workspaces | Cross-project preferences, tool configurations, personal patterns         |
 
-> **Repo memory is committed to Git** — Team-shared, version-controlled, survives across sessions.
+> **Repo memory is committed to Git** - Team-shared, version-controlled, survives across sessions.
 
 ---
 
@@ -52,11 +50,11 @@ flowchart TD
 ```yaml
 # Evaluation criteria (ALL required)
 promotion_criteria:
-  - final_success: true              # All waves complete
-  - confidence: ">= 0.95"            # High certainty
-  - stable: true                     # Not task-specific, not speculative
-  - reusable: true                   # Applies beyond this task
-  - not_duplicate: true              # Not already in memory
+  - final_success: true # All waves complete
+  - confidence: ">= 0.95" # High certainty
+  - stable: true # Not task-specific, not speculative
+  - reusable: true # Applies beyond this task
+  - not_duplicate: true # Not already in memory
 ```
 
 > **Confidence gate at 0.95** prevents noise accumulation. Only high-certainty, validated patterns become reusable knowledge.
@@ -115,13 +113,13 @@ Successful Pattern (used in ≥2 tasks, high confidence)
 
 ### Skill Criteria
 
-| Criterion | Requirement |
-|-----------|-------------|
-| **Usage count** | ≥ 2 successful tasks |
-| **Confidence** | ≥ 0.95 |
-| **Self-contained** | Not task-specific, includes validation |
+| Criterion                  | Requirement                                      |
+| -------------------------- | ------------------------------------------------ |
+| **Usage count**            | ≥ 2 successful tasks                             |
+| **Confidence**             | ≥ 0.95                                           |
+| **Self-contained**         | Not task-specific, includes validation           |
 | **Progressive disclosure** | Core guidance in SKILL.md, extras in references/ |
-| **No secrets** | No private task data or one-off workarounds |
+| **No secrets**             | No private task data or one-off workarounds      |
 
 ### Example Skill Structure
 
@@ -183,11 +181,11 @@ promoted_findings:
 
 ## TTL & Cleanup
 
-| Tier | TTL | Cleanup |
-|------|-----|---------|
-| **Repo** | 30 days | Auto-expire; manual refresh on reuse |
-| **Session** | Session end | Cleared automatically |
-| **Global** | No auto-expire | User-managed |
+| Tier        | TTL            | Cleanup                              |
+| ----------- | -------------- | ------------------------------------ |
+| **Repo**    | 30 days        | Auto-expire; manual refresh on reuse |
+| **Session** | Session end    | Cleared automatically                |
+| **Global**  | No auto-expire | User-managed                         |
 
 **Stale prevention**: Memory entries accessed within TTL get refreshed. Unused entries expire.
 
@@ -195,10 +193,10 @@ promoted_findings:
 
 ## What Doesn't Get Promoted
 
-| Category | Reason |
-|----------|--------|
-| Task-specific paths | Not reusable (`wave-3/implement-search/...`) |
-| Transient assumptions | Not stable |
-| Low confidence (< 0.95) | Not reliable |
-| Speculative patterns | Not validated |
-| Duplicate findings | Already in memory |
+| Category                | Reason                                       |
+| ----------------------- | -------------------------------------------- |
+| Task-specific paths     | Not reusable (`wave-3/implement-search/...`) |
+| Transient assumptions   | Not stable                                   |
+| Low confidence (< 0.95) | Not reliable                                 |
+| Speculative patterns    | Not validated                                |
+| Duplicate findings      | Already in memory                            |

@@ -4,9 +4,9 @@ description: Tier-based model selection for delegated agents with provider examp
 navigation:
   icon: i-lucide-cpu
 seo:
-  title: Model Routing Configuration — Gem Team
+  title: Model Routing Configuration - Gem Team
   description: Tier-based model selection configuration for delegated agents with provider examples.
-  ogTitle: Model Routing Configuration — Gem Team
+  ogTitle: Model Routing Configuration - Gem Team
   ogDescription: Tier-based model selection configuration.
 ---
 
@@ -32,20 +32,20 @@ model_routing:
 
 ### Premium Tier (Reasoning-Heavy)
 
-- **Planner** — Wave planning, dependency validation, YAGNI/KISS
-- **Debugger** — Root cause analysis, regression bisection
-- **Reviewer** — Quality/security review, critic mode evaluation
+- **Planner** - Wave planning, dependency validation, YAGNI/KISS
+- **Debugger** - Root cause analysis, regression bisection
+- **Reviewer** - Quality/security review, critic mode evaluation
 
 ### Explore Tier (Fast Execution)
 
-- **Researcher** — Codebase exploration, pattern discovery
-- **Implementer** — TDD implementation, feature development
-- **Browser Tester** — UI/E2E testing, visual regression
-- **Mobile Tester** — iOS/Android E2E testing
-- **DevOps** — Infrastructure, CI/CD, deployment
-- **Documentation** — Tech docs, API docs, diagrams
-- **Skill Creator** — Pattern extraction, skill packaging
-- **Code Simplifier** — Refactoring, dead code removal
+- **Researcher** - Codebase exploration, pattern discovery
+- **Implementer** - TDD implementation, feature development
+- **Browser Tester** - UI/E2E testing, visual regression
+- **Mobile Tester** - iOS/Android E2E testing
+- **DevOps** - Infrastructure, CI/CD, deployment
+- **Documentation** - Tech docs, API docs, diagrams
+- **Skill Creator** - Pattern extraction, skill packaging
+- **Code Simplifier** - Refactoring, dead code removal
 
 ## Provider Examples
 
@@ -88,14 +88,14 @@ tiers:
 
 ## Key Rules
 
-1. **Orchestrator not routed** — Uses session default model
-2. **Tier semantics fixed** — Premium=reasoning, Explore=execution
-3. **Provider-agnostic** — Swap equivalent models freely
-4. **Optional** — Disabled by default (`enabled: false`)
-5. **Validates on startup** — Invalid models fail fast
+1. **Orchestrator not routed** - Uses session default model
+2. **Tier semantics fixed** - Premium=reasoning, Explore=execution
+3. **Provider-agnostic** - Swap equivalent models freely
+4. **Optional** - Disabled by default (`enabled: false`)
+5. **Validates on startup** - Invalid models fail fast
 
 ## Related Pages
 
-- [Model Routing (Agents)](/agents/model-routing) — Detailed tier rationale
-- [Orchestrator](/agents/orchestrator) — Who applies routing
-- [Configuration Overview](/configuration) — Full config reference
+- [Model Routing (Agents)](/agents/model-routing) - Detailed tier rationale
+- [Orchestrator](/agents/orchestrator) - Who applies routing
+- [Configuration Overview](/configuration) - Full config reference

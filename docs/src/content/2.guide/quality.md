@@ -4,15 +4,15 @@ description: Automatic TDD, risk-based reviews, security audits, and accessibili
 navigation:
   icon: i-lucide-shield-check
 seo:
-  title: Quality by Default — Gem Team
+  title: Quality by Default - Gem Team
   description: Automatic TDD, risk-based reviews, security audits, and accessibility checks built into every task.
-  ogTitle: Quality by Default — Gem Team
+  ogTitle: Quality by Default - Gem Team
   ogDescription: Automatic TDD, risk-based reviews, security audits, and accessibility checks.
 ---
 
 ## Automatic Quality Gates
 
-Quality isn't optional — it's built into every task execution.
+Quality isn't optional - it's built into every task execution.
 
 ```mermaid
 flowchart TD
@@ -51,14 +51,14 @@ Every implementation task follows **Red-Green-Refactor**:
 
 **Six test dimensions** validated:
 
-1. **Correctness** — Expected behavior
-2. **Contracts** — API schemas, types
-3. **Edge cases** — Boundaries, errors, empty states
-4. **Performance** — Latency, memory, bundle size
-5. **Security** — Input validation, auth, injection
-6. **Accessibility** — WCAG 2.2 AA (when UI involved)
+1. **Correctness** - Expected behavior
+2. **Contracts** - API schemas, types
+3. **Edge cases** - Boundaries, errors, empty states
+4. **Performance** - Latency, memory, bundle size
+5. **Security** - Input validation, auth, injection
+6. **Accessibility** - WCAG 2.2 AA (when UI involved)
 
-> **TDD is mandatory** — No implementation without a failing test first. The Implementer agent enforces this for every code task.
+> **TDD is mandatory** - No implementation without a failing test first. The Implementer agent enforces this for every code task.
 
 ---
 
@@ -96,7 +96,7 @@ shared_state: true
 cross_domain_impact: true
 ```
 
-> **Critic mode is read-only** — Evaluates assumptions, counterexamples, risks, alternatives, reversibility. Does not implement or mutate files. There is no standalone `gem-critic` agent.
+> **Critic mode is read-only** - Evaluates assumptions, counterexamples, risks, alternatives, reversibility. Does not implement or mutate files. There is no standalone `gem-critic` agent.
 
 ---
 
@@ -112,7 +112,7 @@ Security review runs automatically for:
 | Config changes       | Infrastructure, permissions, network |
 | Dependency updates   | Supply chain, vulnerabilities        |
 
-**Security findings block** until resolved — no "accept risk" in automated flow.
+**Security findings block** until resolved - no "accept risk" in automated flow.
 
 ---
 
@@ -152,11 +152,11 @@ quality:
 
 Applied automatically during implementation and review:
 
-- **YAGNI/KISS** — Smallest architecture that satisfies criteria
-- **Action-first answers** — Lead with what to do, not explanation
-- **Dead button detection** — UI elements with no handlers flagged
-- **External script patches** — Blocking issue (security risk)
-- **AI-slop comment removal** — No "this function does X" comments
+- **YAGNI/KISS** - Smallest architecture that satisfies criteria
+- **Action-first answers** - Lead with what to do, not explanation
+- **Dead button detection** - UI elements with no handlers flagged
+- **External script patches** - Blocking issue (security risk)
+- **AI-slop comment removal** - No "this function does X" comments
 
 ---
 
@@ -190,11 +190,11 @@ quality:
 
 ## Key Rules
 
-1. **TDD always** — No implementation without test first
-2. **Risk drives review** — Signals automatically route to correct intensity
-3. **Security blocks** — No automated risk acceptance
-4. **Configurable depth** — a11y and visual regression via config
-5. **Simplification built-in** — Not a separate step, part of implementation
+1. **TDD always** - No implementation without test first
+2. **Risk drives review** - Signals automatically route to correct intensity
+3. **Security blocks** - No automated risk acceptance
+4. **Configurable depth** - a11y and visual regression via config
+5. **Simplification built-in** - Not a separate step, part of implementation
 6. **Risk-scoped gates** - Read-only-only and documentation-only waves skip post-wave gates. Other MEDIUM/HIGH or high-risk work runs a post-wave gate and a final review. Each gate has at most two attempts, with state persisted before reviewers run.
 7. **Warning pass predicate** - A reviewer warning passes the gate only when no completion-blocking finding or blocker exists.
 8. **Independent task retries** - A task-level `needs_retry` allows at most three total task attempts and does not consume or reset the gate attempt counter.
@@ -219,7 +219,7 @@ quality:
 
 ## Related Pages
 
-- [Workflow: Execute](/guide/workflow-execute) — Where quality gates run
-- [Reviewer Agent](/agents/reviewer) — Review modes and targets
-- [Configuration](/configuration) — Quality settings
-- [First Steps](/getting-started/first-steps) — Quality in walkthrough
+- [Workflow: Execute](/guide/workflow-execute) - Where quality gates run
+- [Reviewer Agent](/agents/reviewer) - Review modes and targets
+- [Configuration](/configuration) - Quality settings
+- [First Steps](/getting-started/first-steps) - Quality in walkthrough

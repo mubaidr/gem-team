@@ -4,15 +4,15 @@ description: How Gem Team turns AI coding into a structured, reliable engineerin
 navigation:
   icon: i-lucide-workflow
 seo:
-  title: Workflow — Gem Team
+  title: Workflow - Gem Team
   description: How Gem Team turns AI coding into a structured, reliable engineering process through five phases.
-  ogTitle: Workflow — Gem Team
+  ogTitle: Workflow - Gem Team
   ogDescription: How Gem Team turns AI coding into a structured engineering process.
 ---
 
 ## The Five-Phase Pipeline
 
-Every task follows this structured pipeline — no exceptions, no shortcuts.
+Every task follows this structured pipeline - no exceptions, no shortcuts.
 
 ```mermaid
 flowchart TD
@@ -61,7 +61,7 @@ The Orchestrator **never writes code**. It classifies, plans, delegates, tracks 
 
 - Each wave **completes fully** before the next starts
 - Within a wave, independent tasks run **in parallel** (up to `max_concurrent_agents`)
-- Evidence flows forward via **scoped handoffs** — not full context
+- Evidence flows forward via **scoped handoffs** - not full context
 
 ### 4. Failures Are Classified, Not Retried Blindly
 
@@ -120,7 +120,7 @@ flowchart LR
 - **Every task gets a `plan_id`** (format: `YYYYMMDD-slug`)
 - **TRIVIAL/LOW**: ID used for correlation only
 - **MEDIUM/HIGH**: Persistent `docs/plan/{plan_id}/plan.yaml` with full state
-- **Resumption requires exact `plan_id`** — no fuzzy matching
+- **Resumption requires exact `plan_id`** - no fuzzy matching
 - **Continue/extend** preserves completed waves, adds new ones
 
 ---
@@ -191,7 +191,7 @@ flowchart LR
 
 ## Related Pages
 
-- [Core Concepts](/getting-started/concepts) — Mental model behind the workflow
-- [Agents Catalog](/agents) — Specialist capabilities
-- [First Steps Walkthrough](/getting-started/first-steps) — See workflow in action
-- [Optimizations](/guide/optimizations) — Cost and performance principles
+- [Core Concepts](/getting-started/concepts) - Mental model behind the workflow
+- [Agents Catalog](/agents) - Specialist capabilities
+- [First Steps Walkthrough](/getting-started/first-steps) - See workflow in action
+- [Optimizations](/guide/optimizations) - Cost and performance principles

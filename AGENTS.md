@@ -4,6 +4,8 @@
 
 Gem Team turns AI coding into an engineering process. It provides focused agent definitions and reusable skills that enforce good software engineering: optimizing cost, time, and quality.
 
+These are just agent definitions and system instructions - nothing complex, nothing hidden, no magic.
+
 ### Key Features
 
 - **Quality by Default**: TDD, code reviews, and security audits happen automatically
@@ -132,7 +134,7 @@ Gem Team maintains a public research & evidence base that documents the verifiab
 - Every claim must cite a verifiable source (paper, arXiv preprint, or provider documentation) with a URL
 - Do not fabricate statistics; attribute all numbers to their source
 - Include limitations and gaps where evidence is absent or unverified (e.g., DeepSeek pricing unverified, no risk-based vs uniform review study)
-- Use professional, evidence-based tone — no marketing fluff
+- Use professional, evidence-based tone - no marketing fluff
 - Update the navigation file (`.navigation.yml`) when adding new research pages
 - Cross-reference from README.md when adding high-impact proof points for promotion/reassurance
 

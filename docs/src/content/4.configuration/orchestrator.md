@@ -1,13 +1,12 @@
 ---
-
 title: Orchestrator Configuration
-description: Workflow execution controls — concurrency, git integration, and workflow behavior.
+description: Workflow execution controls - concurrency, git integration, and workflow behavior.
 navigation:
   icon: i-lucide-command
 seo:
-  title: Orchestrator Configuration — Gem Team
+  title: Orchestrator Configuration - Gem Team
   description: "Workflow execution controls: concurrency, git integration, and workflow behavior settings."
-  ogTitle: Orchestrator Configuration — Gem Team
+  ogTitle: Orchestrator Configuration - Gem Team
   ogDescription: Workflow execution controls configuration.
 ---
 
@@ -60,13 +59,13 @@ flowchart LR
 
 ## Key Rules
 
-1. **Max concurrency respected** — Never exceeds configured value
-2. **Retries count toward limit** — Each retry consumes a slot
-3. **Git commits are wave-level** — Not per-task
-4. **Failures don't commit** — Only gate passes trigger commits
+1. **Max concurrency respected** - Never exceeds configured value
+2. **Retries count toward limit** - Each retry consumes a slot
+3. **Git commits are wave-level** - Not per-task
+4. **Failures don't commit** - Only gate passes trigger commits
 
 ## Related Pages
 
-- [Orchestrator Agent](/agents/orchestrator) — Workflow coordination
-- [Workflow: Execute](/guide/workflow-execute) — Wave loop and concurrency
-- [Configuration Overview](/configuration) — Full config reference
+- [Orchestrator Agent](/agents/orchestrator) - Workflow coordination
+- [Workflow: Execute](/guide/workflow-execute) - Wave loop and concurrency
+- [Configuration Overview](/configuration) - Full config reference

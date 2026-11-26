@@ -1,16 +1,14 @@
 ---
-
 title: First Steps Walkthrough
-description: Complete guided example — build a real feature with Gem Team.
+description: Complete guided example - build a real feature with Gem Team.
 navigation:
   icon: i-lucide-footprints
 seo:
-  title: First Steps Walkthrough — Gem Team
-  description: Complete guided example — build a real user search API feature with Gem Team end to end.
-  ogTitle: First Steps Walkthrough — Gem Team
+  title: First Steps Walkthrough - Gem Team
+  description: Complete guided example - build a real user search API feature with Gem Team end to end.
+  ogTitle: First Steps Walkthrough - Gem Team
   ogDescription: Build a real feature with Gem Team end to end.
 ---
-
 
 ## Build a Real Feature: User Search API
 
@@ -22,7 +20,7 @@ This walkthrough shows the full Gem Team workflow by building a **user search en
 
 > **Task**: "Add a `/api/users/search` endpoint that supports filtering by name/email, pagination, and returns typed results. Follow existing API conventions."
 
-This is a **MEDIUM** complexity task — multiple files, dependencies, and quality requirements.
+This is a **MEDIUM** complexity task - multiple files, dependencies, and quality requirements.
 
 ---
 
@@ -63,6 +61,7 @@ claude
 ## Step 3: Watch the Workflow
 
 ### Phase 0: Init & Clarify (Automatic)
+
 ```
 📋 Classifying request...
    Intent: execute
@@ -72,11 +71,13 @@ claude
 ```
 
 ### Phase 1: Route
+
 ```
-🔀 Routing to Phase 2 (Planning) — MEDIUM complexity requires persistent plan
+🔀 Routing to Phase 2 (Planning) - MEDIUM complexity requires persistent plan
 ```
 
 ### Phase 2: Planning (gem-planner)
+
 ```
 📝 Creating wave plan...
 
@@ -94,6 +95,7 @@ Wave 5: [Browser Tester] API contract test (optional)
 ## Step 4: Wave Execution
 
 ### Wave 1: Research (gem-researcher)
+
 ```
 🔍 Exploring codebase...
    Found: src/api/conventions.md, src/models/user.ts, src/api/users.ts
@@ -102,6 +104,7 @@ Wave 5: [Browser Tester] API contract test (optional)
 ```
 
 ### Wave 2: Plan Validation (gem-planner)
+
 ```
 ✅ Mechanical self-check passed:
    - All tasks have owners
@@ -114,6 +117,7 @@ Wave 5: [Browser Tester] API contract test (optional)
 ```
 
 ### Wave 3: Implementation (gem-implementer)
+
 ```
 🔨 Implementing...
 
@@ -138,6 +142,7 @@ Task 3: Verify (Refactor)
 ```
 
 ### Wave 4: Integration Review (gem-reviewer)
+
 ```
 🔍 Reviewing integration...
    Target: src/api/users/search.ts + tests
@@ -207,14 +212,14 @@ curl "http://localhost:3000/api/users/search?q=john&page=1&limit=10"
 
 ## What You Learned
 
-| Concept | In This Example |
-|---------|-----------------|
-| **Complexity classification** | MEDIUM → persistent plan |
-| **Risk signals** | `api_change` triggered integration review |
-| **Scoped handoffs** | Researcher found conventions → passed to Implementer |
-| **Wave execution** | Ordered waves, parallel tasks within wave 3 |
-| **Failure classification** | None — but would route to Debugger if tests failed |
-| **Memory promotion** | Pagination pattern saved for reuse |
+| Concept                       | In This Example                                      |
+| ----------------------------- | ---------------------------------------------------- |
+| **Complexity classification** | MEDIUM → persistent plan                             |
+| **Risk signals**              | `api_change` triggered integration review            |
+| **Scoped handoffs**           | Researcher found conventions → passed to Implementer |
+| **Wave execution**            | Ordered waves, parallel tasks within wave 3          |
+| **Failure classification**    | None - but would route to Debugger if tests failed   |
+| **Memory promotion**          | Pagination pattern saved for reuse                   |
 
 ---
 
@@ -235,29 +240,32 @@ EOF
 copilot chat --agent gem-orchestrator "Continue plan 20261121-user-search-api with extend-task.md"
 ```
 
-This demonstrates **resumable plans** — same `plan_id`, new wave added, previous work preserved.
+This demonstrates **resumable plans** - same `plan_id`, new wave added, previous work preserved.
 
 ---
 
 ## Anti-Patterns & Troubleshooting
 
-| Problem | Likely Cause | Fix |
-|---------|-------------|-----|
-| Plan never created | Task classified TRIVIAL/LOW; no persistent plan needed | Add high-risk signal or use `extend` for scope |
-| Specialist returns no code | TDD blocked — no test file created | Check acceptance criteria are testable |
-| Tests pass but code wrong | Tests too narrow; missing edge cases | Add boundary/error/empty-state tests |
-| Reviewer keeps flagging same issue | Acceptance criteria don't match implementation | Align criteria before re-running |
-| Cache miss on retry | Per-task field placed before stable field | Reorder: plan-constant → cluster → per-task → per-attempt |
-| `plan_id` not found | Fuzzy matching not supported | Use exact ID from original execution |
+| Problem                            | Likely Cause                                           | Fix                                                       |
+| ---------------------------------- | ------------------------------------------------------ | --------------------------------------------------------- |
+| Plan never created                 | Task classified TRIVIAL/LOW; no persistent plan needed | Add high-risk signal or use `extend` for scope            |
+| Specialist returns no code         | TDD blocked - no test file created                     | Check acceptance criteria are testable                    |
+| Tests pass but code wrong          | Tests too narrow; missing edge cases                   | Add boundary/error/empty-state tests                      |
+| Reviewer keeps flagging same issue | Acceptance criteria don't match implementation         | Align criteria before re-running                          |
+| Cache miss on retry                | Per-task field placed before stable field              | Reorder: plan-constant → cluster → per-task → per-attempt |
+| `plan_id` not found                | Fuzzy matching not supported                           | Use exact ID from original execution                      |
 
 ## Before / After: Scoped Handoff
 
-**Before** (full history sent to Implementer — wasteful):
+**Before** (full history sent to Implementer - wasteful):
+
 ```
 Context: entire conversation + all previous waves + repo file listing
 Task: implement search endpoint
 ```
+
 **After** (Gem Team scoped handoff):
+
 ```yaml
 plan_id: "20261121-user-search-api"
 task_id: "implement-search"
@@ -298,13 +306,13 @@ copilot chat --agent gem-orchestrator "Continue plan 20261121-user-search-api wi
 
 ## Common Patterns You'll Use
 
-| Pattern | When | Example |
-|---------|------|---------|
-| **Fast path** | TRIVIAL/LOW, single file | Bug fixes, small refactors |
-| **Full plan** | MEDIUM/HIGH, multi-file | New features, architecture changes |
-| **Continue plan** | Add to existing work | Extend feature, fix follow-up |
-| **Research only** | Exploration, no code | "How does auth work?" |
-| **Challenge** | Decision review | "Should we use Redis or DB for cache?" |
+| Pattern           | When                     | Example                                |
+| ----------------- | ------------------------ | -------------------------------------- |
+| **Fast path**     | TRIVIAL/LOW, single file | Bug fixes, small refactors             |
+| **Full plan**     | MEDIUM/HIGH, multi-file  | New features, architecture changes     |
+| **Continue plan** | Add to existing work     | Extend feature, fix follow-up          |
+| **Research only** | Exploration, no code     | "How does auth work?"                  |
+| **Challenge**     | Decision review          | "Should we use Redis or DB for cache?" |
 
 ---
 
@@ -330,4 +338,4 @@ copilot chat --agent gem-orchestrator "Continue plan 20261121-user-search-api wi
 
 ---
 
-> **Key Takeaway**: Gem Team doesn't just "write code" — it follows an engineering process with planning, verification, and learning. The first run takes longer; subsequent runs on the same plan are faster due to cached context and promoted patterns.
+> **Key Takeaway**: Gem Team doesn't just "write code" - it follows an engineering process with planning, verification, and learning. The first run takes longer; subsequent runs on the same plan are faster due to cached context and promoted patterns.

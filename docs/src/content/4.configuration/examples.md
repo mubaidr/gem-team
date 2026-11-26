@@ -4,9 +4,9 @@ description: Annotated .gem-team.yaml configurations for common scenarios.
 navigation:
   icon: i-lucide-file-code
 seo:
-  title: Configuration Examples — Gem Team
+  title: Configuration Examples - Gem Team
   description: Annotated .gem-team.yaml configurations for team project, solo developer, and CI/CD scenarios.
-  ogTitle: Configuration Examples — Gem Team
+  ogTitle: Configuration Examples - Gem Team
   ogDescription: Annotated .gem-team.yaml configurations for common scenarios.
 ---
 
@@ -326,7 +326,7 @@ GEM_TEAM_CONFIG=.gem-team.production.yaml copilot chat --agent gem-orchestrator 
 
 ## Related Pages
 
-- [Configuration Overview](/configuration) — Full settings reference
-- [Model Routing](/configuration/model-routing) — Tier configuration
-- [Quality](/configuration/quality) — Visual regression and a11y
-- [DevOps](/configuration/devops) — Deployment and approval gates
+- [Configuration Overview](/configuration) - Full settings reference
+- [Model Routing](/configuration/model-routing) - Tier configuration
+- [Quality](/configuration/quality) - Visual regression and a11y
+- [DevOps](/configuration/devops) - Deployment and approval gates

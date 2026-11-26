@@ -4,6 +4,8 @@
 
 > Agent definitions that enforce good software engineering: optimizing cost, time, and quality.
 
+These are just agent definitions and system instructions - nothing complex, nothing hidden, no magic.
+
 <p align="center">
   <a href="https://mubaidr.github.io/gem-team/"><b>Visit Homepage</b></a>
 </p>
@@ -65,9 +67,9 @@ Every Gem Team feature is grounded in verifiable research, provider documentatio
 | Research finding                                                             | Gem Team feature                                                                                     | Source                                                    |
 | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
 | Cache read ≈ 0.1× input (90% discount) across providers                      | Scoped handoffs with cache-lifetime field order; shared context prefixes reused across turns         | OpenAI, Anthropic, Google caching docs                    |
-| MAS overhead up to 60× latency; benefits diminish as LLM capability improves | Risk-gated role allocation — specialists activated only when uncertainty justifies coordination cost | ProcPilot (IEEE IEMCON 2026), MAFBench (arXiv:2602.03128) |
-| +45.97% pass@1 with test-driven interactive generation                       | TDD by default — tests first, then implementation                                                    | TiCoder (IEEE TSE 2024)                                   |
-| >2× cost reduction without quality loss (model routing)                      | Premium/explore model routing — small models for execution, large for planning/review                | RouteLLM (ICLR 2025), UCCI (arXiv:2605.18796)             |
+| MAS overhead up to 60× latency; benefits diminish as LLM capability improves | Risk-gated role allocation - specialists activated only when uncertainty justifies coordination cost | ProcPilot (IEEE IEMCON 2026), MAFBench (arXiv:2602.03128) |
+| +45.97% pass@1 with test-driven interactive generation                       | TDD by default - tests first, then implementation                                                    | TiCoder (IEEE TSE 2024)                                   |
+| >2× cost reduction without quality loss (model routing)                      | Premium/explore model routing - small models for execution, large for planning/review                | RouteLLM (ICLR 2025), UCCI (arXiv:2605.18796)             |
 | JSON hand-offs beat narrative (0.96 vs 0.48 feasibility)                     | Evidence-by-reference via typed task-scoped artifact paths                                           | State Compression (arXiv:2607.18265)                      |
 | 41–80% API cost reduction from prefix caching                                | Cache-aware payload ordering and cluster-contiguous scheduling                                       | Don't Break the Cache (arXiv:2601.06007)                  |
 
@@ -259,7 +261,7 @@ Gem Team's design decisions are grounded in verifiable research, provider docume
 | Research Area                   | Key Finding                                                                                           | Relevance                                                                                                     |
 | ------------------------------- | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
 | **Prompt caching**              | Cache read ≈ 0.1× input rate (90% discount) across OpenAI, Anthropic, Google; write premium 1.25–2.5× | Supports long-lived shared context prefixes for multi-agent orchestration                                     |
-| **Multi-agent vs single-agent** | MAS benefits diminish as LLM capability improves; orchestration overhead up to 60× latency            | Justifies risk-gated role allocation — activate specialists only when uncertainty justifies coordination cost |
+| **Multi-agent vs single-agent** | MAS benefits diminish as LLM capability improves; orchestration overhead up to 60× latency            | Justifies risk-gated role allocation - activate specialists only when uncertainty justifies coordination cost |
 | **TDD effectiveness**           | TiCoder: +45.97% absolute pass@1 across 4 LLMs, 2 Python datasets                                     | Motivates test-first interactive code generation in the Implementer agent                                     |
 | **Model routing**               | RouteLLM: >2× cost reduction without quality loss; UCCI: 31% cost reduction (95% CI [27%, 35%])       | Informs premium/explore model routing between small and large models                                          |
 | **Context reduction**           | ReCAP: ~95% reduction in compaction/restoration latency; +19.8 to +41.2 accuracy points               | Supports context compaction and scoped handoff strategies                                                     |
@@ -270,7 +272,7 @@ See the full [Research & Benchmarks](/resources/research) page for all citations
 ## Learn More
 
 - [Documentation](https://mubaidr.github.io/gem-team/)
-- [Research & Benchmarks](/resources/research) — Evidence base for design decisions
+- [Research & Benchmarks](/resources/research) - Evidence base for design decisions
 - [Contributing](https://mubaidr.github.io/gem-team/5.resources/2.contributing.html)
 - [License](LICENSE)
 

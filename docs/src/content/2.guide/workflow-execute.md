@@ -1,13 +1,13 @@
 ---
 
-title: Phase 3 — Execute
+title: Phase 3 - Execute
 description: Run waves, delegate to specialists, verify results, and persist state.
 navigation:
   icon: i-lucide-play-circle
 seo:
-  title: Execute — Gem Team
+  title: Execute - Gem Team
   description: "Phase 3: run waves, delegate to specialists, verify results, and handle failures."
-  ogTitle: Execute — Gem Team
+  ogTitle: Execute - Gem Team
   ogDescription: Phase 3: run waves and delegate to specialists.
 ---
 
@@ -120,7 +120,7 @@ retries_used: 1
 | `gem-documentation-writer` | Docs, API docs, diagrams         | Target audience, format, scope                             |
 | `gem-code-simplifier`      | Refactoring, dead code removal   | Target files, preservation rules                           |
 
-**All delegation via Orchestrator** — never direct agent-to-agent.
+**All delegation via Orchestrator** - never direct agent-to-agent.
 
 ---
 
@@ -157,7 +157,7 @@ handoff:
     - "src/api/conventions.md"
 ```
 
-**Reviewer evaluates what it's handed** — `plan`/`task`/`decision` reviews don't gather more; `code`/`config`/`integration` reviews read the target as subject.
+**Reviewer evaluates what it's handed** - `plan`/`task`/`decision` reviews don't gather more; `code`/`config`/`integration` reviews read the target as subject.
 
 ### Post-Wave Quality Gate
 
@@ -176,9 +176,9 @@ For an eligible wave, run at most two parallel `gem-reviewer` tasks, never excee
 
 `review_mode` follows risk/complexity:
 
-- `standard` — MEDIUM, no high-risk signals
-- `high` — HIGH complexity or high-risk signals
-- `critic` — `architecture`, `breaking_change`, `cross_domain_impact` signals
+- `standard` - MEDIUM, no high-risk signals
+- `high` - HIGH complexity or high-risk signals
+- `critic` - `architecture`, `breaking_change`, `cross_domain_impact` signals
 
 The gate passes only when both required reviewers pass. A `warning` verdict passes only when the reviewer reports no completion-blocking finding or blocker. Reviewers collect every actionable finding in one pass rather than stopping at the first blocking finding.
 
@@ -469,17 +469,17 @@ After final success for plan `20261121-user-search-api`:
 
 ## Key Rules
 
-1. **One wave loop** — Ordered waves, parallel within, clustered contiguously
-2. **Cache-lifetime payload order** — Plan-constant → cluster → per-task → per-attempt
-3. **Scoped delegation** — Each agent gets only what it needs
-4. **Verification gates** — Reviewer only when triggered. Read-only-only and documentation-only waves skip post-wave gates; other MEDIUM/HIGH or high-risk work runs them. The final review runs at most two parallel code and integration reviewers, with a plan reviewer only for HIGH or critic-risk work.
-5. **Persist before gate** — Task and wave state, evidence, gate status, and the incremented gate attempt are persisted before reviewers run.
-6. **Classify every result** — No blind retries, route to correct handler
-7. **Evidence by reference** — Artifacts in task paths, handoffs reference by path
-8. **Learn after success** — Confidence-gated, stable findings only
+1. **One wave loop** - Ordered waves, parallel within, clustered contiguously
+2. **Cache-lifetime payload order** - Plan-constant → cluster → per-task → per-attempt
+3. **Scoped delegation** - Each agent gets only what it needs
+4. **Verification gates** - Reviewer only when triggered. Read-only-only and documentation-only waves skip post-wave gates; other MEDIUM/HIGH or high-risk work runs them. The final review runs at most two parallel code and integration reviewers, with a plan reviewer only for HIGH or critic-risk work.
+5. **Persist before gate** - Task and wave state, evidence, gate status, and the incremented gate attempt are persisted before reviewers run.
+6. **Classify every result** - No blind retries, route to correct handler
+7. **Evidence by reference** - Artifacts in task paths, handoffs reference by path
+8. **Learn after success** - Confidence-gated, stable findings only
 
 ---
 
 ## Next Phase
 
-→ [Phase 4: Output](/guide/workflow-output) — Status reports, learnings, memory promotion
+→ [Phase 4: Output](/guide/workflow-output) - Status reports, learnings, memory promotion

@@ -1,16 +1,14 @@
 ---
-
 title: Code Simplifier
-description: Refactoring — dead code removal, complexity reduction, duplicate consolidation, naming.
+description: Refactoring - dead code removal, complexity reduction, duplicate consolidation, naming.
 navigation:
   icon: i-lucide-scissors
 seo:
-  title: Code Simplifier Agent — Gem Team
+  title: Code Simplifier Agent - Gem Team
   description: The gem-code-simplifier removes dead code, reduces complexity, and consolidates duplicates.
-  ogTitle: Code Simplifier Agent — Gem Team
+  ogTitle: Code Simplifier Agent - Gem Team
   ogDescription: The gem-code-simplifier removes dead code and reduces complexity.
 ---
-
 
 ## Role
 
@@ -18,23 +16,23 @@ Targeted refactoring with one-line reasons. No architecture redesign, no feature
 
 ## When to Delegate
 
-| Scenario | Delegate Code Simplifier? | Why |
-|----------|--------------------------|-----|
-| Dead code (unused imports, functions, files) | ✅ | Removes unused code safely |
-| High cyclomatic complexity | ✅ | Splits large functions, reduces metrics |
-| Duplicate logic across files | ✅ | Consolidates to single helper |
-| Inconsistent naming | ✅ | Standardizes to project conventions |
-| Architecture redesign | ❌ | Out of scope; use Implementer |
-| New feature development | ❌ | Out of scope; use Implementer |
+| Scenario                                     | Delegate Code Simplifier? | Why                                     |
+| -------------------------------------------- | ------------------------- | --------------------------------------- |
+| Dead code (unused imports, functions, files) | ✅                        | Removes unused code safely              |
+| High cyclomatic complexity                   | ✅                        | Splits large functions, reduces metrics |
+| Duplicate logic across files                 | ✅                        | Consolidates to single helper           |
+| Inconsistent naming                          | ✅                        | Standardizes to project conventions     |
+| Architecture redesign                        | ❌                        | Out of scope; use Implementer           |
+| New feature development                      | ❌                        | Out of scope; use Implementer           |
 
 ## Categories
 
-| Category | Action | Validation |
-|----------|--------|------------|
-| Dead Code | Remove unused exports, functions, imports, files | Tests pass |
-| Complexity | Reduce cyclomatic, split large functions | Metrics improve |
-| Duplicates | Consolidate to helpers | Single source |
-| Naming | Improve clarity, consistency | Convention match |
+| Category   | Action                                           | Validation       |
+| ---------- | ------------------------------------------------ | ---------------- |
+| Dead Code  | Remove unused exports, functions, imports, files | Tests pass       |
+| Complexity | Reduce cyclomatic, split large functions         | Metrics improve  |
+| Duplicates | Consolidate to helpers                           | Single source    |
+| Naming     | Improve clarity, consistency                     | Convention match |
 
 ## Input
 
@@ -79,5 +77,5 @@ handoff:
 ## Related
 
 - [Implementer](/agents/implementer)
-- [Reviewer](/agents/reviewer) — Over-engineering pass
+- [Reviewer](/agents/reviewer) - Over-engineering pass
 - [Workflow: Execute](/guide/workflow-execute)

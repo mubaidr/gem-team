@@ -1,16 +1,14 @@
 ---
-
 title: DevOps
 description: Infrastructure, CI/CD, containers, deployments, health checks, rollback, mobile releases.
 navigation:
   icon: i-lucide-server
 seo:
-  title: DevOps Agent — Gem Team
+  title: DevOps Agent - Gem Team
   description: The gem-devops handles infrastructure, CI/CD pipelines, deployment, health checks, and rollback.
-  ogTitle: DevOps Agent — Gem Team
+  ogTitle: DevOps Agent - Gem Team
   ogDescription: The gem-devops handles infrastructure, CI/CD, and deployment.
 ---
-
 
 ## Role
 
@@ -18,37 +16,38 @@ Handles infrastructure, deployment pipelines, container management, production o
 
 ## When to Delegate
 
-| Scenario | Delegate DevOps? | Why |
-|----------|-----------------|-----|
-| Deploy to staging/production | ✅ | Deployment strategy + health checks |
-| CI/CD pipeline setup | ✅ | PR → staging → smoke → production |
-| Rollback after failure | ✅ | Tested rollback procedures |
-| Health check / monitoring | ✅ | Endpoint verification, alerting |
-| Mobile release (TestFlight, Play Store) | ✅ | EAS/Fastlane, store submission |
-| Write application code | ❌ | Out of scope; use Implementer |
+| Scenario                                | Delegate DevOps? | Why                                 |
+| --------------------------------------- | ---------------- | ----------------------------------- |
+| Deploy to staging/production            | ✅               | Deployment strategy + health checks |
+| CI/CD pipeline setup                    | ✅               | PR → staging → smoke → production   |
+| Rollback after failure                  | ✅               | Tested rollback procedures          |
+| Health check / monitoring               | ✅               | Endpoint verification, alerting     |
+| Mobile release (TestFlight, Play Store) | ✅               | EAS/Fastlane, store submission      |
+| Write application code                  | ❌               | Out of scope; use Implementer       |
 
 ## Capabilities
 
-| Area | Tasks |
-|------|-------|
-| Infrastructure | Dockerfiles, K8s, Terraform, cloud resources |
-| CI/CD | PR → staging → smoke → production with gates |
+| Area              | Tasks                                                 |
+| ----------------- | ----------------------------------------------------- |
+| Infrastructure    | Dockerfiles, K8s, Terraform, cloud resources          |
+| CI/CD             | PR → staging → smoke → production with gates          |
 | Health & Recovery | Endpoint verification, monitoring, alerting, rollback |
-| Mobile Release | EAS/Fastlane, TestFlight, Play Store, OTA |
+| Mobile Release    | EAS/Fastlane, TestFlight, Play Store, OTA             |
 
 ## Strategies
 
-| Strategy | Rollback | Use Case |
-|----------|----------|----------|
-| rolling | Medium | Stateless, zero-downtime |
-| blue_green | Instant | Critical, instant rollback |
-| canary | Fast | Risk mitigation, metrics |
+| Strategy   | Rollback | Use Case                   |
+| ---------- | -------- | -------------------------- |
+| rolling    | Medium   | Stateless, zero-downtime   |
+| blue_green | Instant  | Critical, instant rollback |
+| canary     | Fast     | Risk mitigation, metrics   |
 
 ## Input
 
 ```yaml
 objective: "Deploy user search API to staging"
-acceptance_criteria: ["Staging deploy", "Health checks", "Smoke tests", "Rollback tested"]
+acceptance_criteria:
+  ["Staging deploy", "Health checks", "Smoke tests", "Rollback tested"]
 handoff:
   constraints: ["Existing K8s", "Approval for prod", "Blue-green"]
   relevant_context: ["image=...", "cluster=staging"]

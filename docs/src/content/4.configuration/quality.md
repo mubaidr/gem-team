@@ -4,9 +4,9 @@ description: Visual regression, accessibility, and security gate settings.
 navigation:
   icon: i-lucide-shield-check
 seo:
-  title: Quality Configuration — Gem Team
+  title: Quality Configuration - Gem Team
   description: Visual regression, accessibility, and security gate settings configuration.
-  ogTitle: Quality Configuration — Gem Team
+  ogTitle: Quality Configuration - Gem Team
   ogDescription: Visual regression, accessibility, and security gate settings.
 ---
 
@@ -97,7 +97,7 @@ Security review triggers automatically via risk signals (not config):
 
 ## Related Pages
 
-- [Quality Features](/guide/quality) — Detailed quality gate behavior
-- [Browser Tester](/agents/browser-tester) — Visual regression and a11y execution
-- [Reviewer](/agents/reviewer) — Security review modes
-- [Configuration Overview](/configuration) — Full config reference
+- [Quality Features](/guide/quality) - Detailed quality gate behavior
+- [Browser Tester](/agents/browser-tester) - Visual regression and a11y execution
+- [Reviewer](/agents/reviewer) - Security review modes
+- [Configuration Overview](/configuration) - Full config reference

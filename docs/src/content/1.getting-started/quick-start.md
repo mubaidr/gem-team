@@ -4,12 +4,11 @@ description: Run your first Gem Team task in 5 minutes.
 navigation:
   icon: i-lucide-rocket
 seo:
-  title: Quick Start — Gem Team
+  title: Quick Start - Gem Team
   description: Install Gem Team, run your first task, and verify results in 5 minutes.
-  ogTitle: Quick Start — Gem Team
+  ogTitle: Quick Start - Gem Team
   ogDescription: Install Gem Team and run your first task.
 ---
-
 
 ## 5-Minute Quick Start
 
@@ -115,45 +114,45 @@ rm my-task.md
 
 ## What Just Happened?
 
-1. **Phase 0** — Orchestrator classified the task (TRIVIAL, fast path).
-2. **Phase 1** — Routed directly to the Implementer agent (no planner needed).
-3. **Phase 3** — Implementer wrote a failing test (Red), then minimal code to pass (Green), then verified (Refactor).
-4. **Phase 4** — Structured status report; findings promoted to session memory.
+1. **Phase 0** - Orchestrator classified the task (TRIVIAL, fast path).
+2. **Phase 1** - Routed directly to the Implementer agent (no planner needed).
+3. **Phase 3** - Implementer wrote a failing test (Red), then minimal code to pass (Green), then verified (Refactor).
+4. **Phase 4** - Structured status report; findings promoted to session memory.
 
-No persistent `plan.yaml` was created — TRIVIAL tasks use the fast path without plan artifacts.
+No persistent `plan.yaml` was created - TRIVIAL tasks use the fast path without plan artifacts.
 
 ---
 
 ## Common First Tasks
 
-| Type | Example |
-|------|---------|
-| New feature | "Add a `/api/users/search` endpoint with filtering and pagination" |
-| Bug fix | "Fix the off-by-one error in `src/utils/date.ts:42`" |
-| Refactor | "Extract validation logic from `api/users.ts` into a reusable module" |
-| Research | "Find all usages of the deprecated `legacyApi` and suggest replacements" |
-| Documentation | "Write API docs for the `/users` endpoints" |
+| Type          | Example                                                                  |
+| ------------- | ------------------------------------------------------------------------ |
+| New feature   | "Add a `/api/users/search` endpoint with filtering and pagination"       |
+| Bug fix       | "Fix the off-by-one error in `src/utils/date.ts:42`"                     |
+| Refactor      | "Extract validation logic from `api/users.ts` into a reusable module"    |
+| Research      | "Find all usages of the deprecated `legacyApi` and suggest replacements" |
+| Documentation | "Write API docs for the `/users` endpoints"                              |
 
 ---
 
 ## Next Steps
 
-| Want to... | Go to |
-|------------|-------|
+| Want to...                      | Go to                                                   |
+| ------------------------------- | ------------------------------------------------------- |
 | Build a real feature end-to-end | [First Steps Walkthrough](/getting-started/first-steps) |
-| Understand the mental model | [Core Concepts](/getting-started/concepts) |
-| Customize behavior | [Configuration](/configuration) |
-| Install for another tool | [Compatible Tools](/resources/compatible-tools) |
+| Understand the mental model     | [Core Concepts](/getting-started/concepts)              |
+| Customize behavior              | [Configuration](/configuration)                         |
+| Install for another tool        | [Compatible Tools](/resources/compatible-tools)         |
 
 ---
 
 ## Troubleshooting
 
-| Problem | Cause | Fix |
-|---------|-------|-----|
-| `gem-orchestrator not found` | Gem Team not installed for this tool | `apm install mubaidr/gem-team --target <tool>` |
-| `plan_id not found` | Exact `plan_id` required; no fuzzy matching | Use the exact ID from the original run |
-| No tests written | TDD not triggered | Check acceptance criteria are testable |
-| Review gate keeps failing | Criteria don't match implementation | Align criteria, then re-run |
+| Problem                      | Cause                                       | Fix                                            |
+| ---------------------------- | ------------------------------------------- | ---------------------------------------------- |
+| `gem-orchestrator not found` | Gem Team not installed for this tool        | `apm install mubaidr/gem-team --target <tool>` |
+| `plan_id not found`          | Exact `plan_id` required; no fuzzy matching | Use the exact ID from the original run         |
+| No tests written             | TDD not triggered                           | Check acceptance criteria are testable         |
+| Review gate keeps failing    | Criteria don't match implementation         | Align criteria, then re-run                    |
 
 > Tip: TRIVIAL tasks use the fast path (no planner, no persistent plan). Real features with multiple files or risk signals trigger the full MEDIUM/HIGH workflow. Continue to [First Steps](/getting-started/first-steps) for a complete example.

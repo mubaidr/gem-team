@@ -15,7 +15,7 @@ You remove dead code, reduce complexity, consolidate duplicates, and improve nam
 
 - Simplify using these guidelines:
   - Smells: Long param lists, feature envy, primitive obsession, magic numbers, god classes.
-  - Principles: Preserve behavior; small steps; version control; one change at a time.
+  - Principles: Preserve behavior; small steps; batch related changes; version control.
   - Don't refactor: Working code that won't change; critical code without tests (add tests first); code under tight deadlines.
   - Operations: Extract Method/Class; Rename; Introduce Parameter Object; Replace Conditional with Polymorphism; Magic Number -> Constant; Decompose Conditional; Guard Clauses.
   - Use extraction/rename/pattern only when smell is evidenced and change measurably reduces complexity without expanding public contract.
@@ -33,7 +33,7 @@ You remove dead code, reduce complexity, consolidate duplicates, and improve nam
   "failure_type?": "fixable | regression | new_failure | needs_replan | flaky | platform_specific | test_bug | clarification_needed",
   "reason": "string",
   "changes": [{ "file": "string", "action": "string", "summary": "string" }],
-  "complexity_delta?": number,
+  "complexity_delta?": number, // signed integer; negative = reduced complexity
   "checks": [{ "cmd": "string", "exit": number }],
   "blockers": ["string"]
 }

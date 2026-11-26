@@ -1,16 +1,14 @@
 ---
-
 title: Smart & Efficient
 description: Model routing, scoped handoffs, cache optimization, and proportional architecture.
 navigation:
   icon: i-lucide-zap
 seo:
-  title: Efficiency — Gem Team
+  title: Efficiency - Gem Team
   description: Cost-aware routing, scoped handoffs, cache optimization, and progressive context for efficient agent execution.
-  ogTitle: Efficiency — Gem Team
+  ogTitle: Efficiency - Gem Team
   ogDescription: Cost-aware routing, scoped handoffs, and cache optimization.
 ---
-
 
 ## Cost & Performance by Design
 
@@ -22,10 +20,10 @@ Every architectural decision optimizes for **token efficiency** and **execution 
 
 Two tiers match model strength to task complexity:
 
-| Tier | Agents | Purpose | Recommended Models |
-|------|--------|---------|-------------------|
-| **Premium** | Planner, Debugger, Reviewer | Reasoning-heavy: planning, diagnosis, challenge, verification | `gpt-5.6-sol`, `claude-4`, `gemini-2.5-pro` |
-| **Explore** | Researcher, Implementer, Browser Tester, Mobile Tester, DevOps, Documentation, Skill Creator, Code Simplifier | Fast exploration & bounded execution | `gpt-5.6-luna`, `claude-3.5-haiku`, `gemini-2.5-flash` |
+| Tier        | Agents                                                                                                        | Purpose                                                       | Recommended Models                                     |
+| ----------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------ |
+| **Premium** | Planner, Debugger, Reviewer                                                                                   | Reasoning-heavy: planning, diagnosis, challenge, verification | `gpt-5.6-sol`, `claude-4`, `gemini-2.5-pro`            |
+| **Explore** | Researcher, Implementer, Browser Tester, Mobile Tester, DevOps, Documentation, Skill Creator, Code Simplifier | Fast exploration & bounded execution                          | `gpt-5.6-luna`, `claude-3.5-haiku`, `gemini-2.5-flash` |
 
 ```yaml
 # .gem-team.yaml
@@ -36,13 +34,13 @@ model_routing:
     explore: "gpt-5.6-luna (openai)"
 ```
 
-> **Orchestrator not routed** — Uses session default model. Enable in config to activate. This is the single biggest cost optimization for multi-agent workflows.
+> **Orchestrator not routed** - Uses session default model. Enable in config to activate. This is the single biggest cost optimization for multi-agent workflows.
 
 ---
 
 ## Scoped Handoffs (The 80% Token Reduction)
 
-Each agent receives **only what it needs** — not full history.
+Each agent receives **only what it needs** - not full history.
 
 ```mermaid
 flowchart LR
@@ -50,7 +48,7 @@ flowchart LR
         A1[Full History] --> B1[Agent]
         B1 --> C1[Full History + Response] --> D1[Next Agent]
     end
-    
+
     subgraph GemTeam [Gem Team Scoped Handoff]
         A2[Plan Constant] --> B2[Task Handoff]
         A3[Cluster Shared] --> B2
@@ -59,7 +57,7 @@ flowchart LR
         B2 --> C2[Agent]
         C2 --> D2[Minimal Output + Artifact Paths]
     end
-    
+
     style GemTeam fill:#e8f5e9
 ```
 
@@ -96,39 +94,39 @@ retries_used: 1
 
 LLM providers cache **exact prompt prefixes**. Gem Team maximizes hits:
 
-| Technique | How It Works |
-|-----------|--------------|
-| **Stable system prompts** | Agent definitions don't change between tasks |
-| **Consistent handoff shape** | `task_definition` structure identical across waves |
-| **Cache-lifetime field order** | Retries diverge only in payload tail |
-| **Cluster-contiguous scheduling** | Shared-context tasks run back-to-back |
-| **Minimal churn** | Only new evidence appends; previous waves referenced |
+| Technique                         | How It Works                                         |
+| --------------------------------- | ---------------------------------------------------- |
+| **Stable system prompts**         | Agent definitions don't change between tasks         |
+| **Consistent handoff shape**      | `task_definition` structure identical across waves   |
+| **Cache-lifetime field order**    | Retries diverge only in payload tail                 |
+| **Cluster-contiguous scheduling** | Shared-context tasks run back-to-back                |
+| **Minimal churn**                 | Only new evidence appends; previous waves referenced |
 
 ### Observed Cache Performance (DeepSeek V4.1 Flash)
 
-| Metric | Value |
-|--------|-------|
-| Tokens processed | 82.8M+ across 666 runs |
-| Avg context/run | ~124K tokens |
+| Metric           | Value                                   |
+| ---------------- | --------------------------------------- |
+| Tokens processed | 82.8M+ across 666 runs                  |
+| Avg context/run  | ~124K tokens                            |
 | Typical API call | Sub-$0.001 (100K+ input, mostly cached) |
-| Typical latency | 2-5s for 100K-190K input |
+| Typical latency  | 2-5s for 100K-190K input                |
 
 ### Cost at Scale
 
 | Cache State | Cost per 150K Call |
-|-------------|---------------------|
-| 100% miss | $0.0225 |
-| 95% cached | ~$0.00153 |
-| 99% cached | ~$0.00067 |
-| 100% hit | $0.00045 |
+| ----------- | ------------------ |
+| 100% miss   | $0.0225            |
+| 95% cached  | ~$0.00153          |
+| 99% cached  | ~$0.00067          |
+| 100% hit    | $0.00045           |
 
-**30x cost difference** between miss and hit — that's what makes sub-penny runs possible.
+**30x cost difference** between miss and hit - that's what makes sub-penny runs possible.
 
 ---
 
 ## Evidence by Reference
 
-**Logs, traces, screenshots, reports stay in task artifacts** — handoffs return paths.
+**Logs, traces, screenshots, reports stay in task artifacts** - handoffs return paths.
 
 ```yaml
 # Agent output (minimal)
@@ -146,12 +144,12 @@ handoff:
 
 ## Proportional Architecture (YAGNI/KISS)
 
-| Decision | Principle |
-|----------|-----------|
-| Agent set | Smallest that satisfies criteria |
-| Wave sequence | Minimum ordered barriers |
-| Validation path | Least review that covers risk |
-| Context | Bounded to objective |
+| Decision        | Principle                        |
+| --------------- | -------------------------------- |
+| Agent set       | Smallest that satisfies criteria |
+| Wave sequence   | Minimum ordered barriers         |
+| Validation path | Least review that covers risk    |
+| Context         | Bounded to objective             |
 
 **Fewer agents = less context multiplied** = lower cost, faster execution.
 
@@ -161,13 +159,13 @@ handoff:
 
 Only **stable, reusable, high-confidence** findings promoted:
 
-| Promotion Criteria | Threshold |
-|-------------------|-----------|
-| Final success | All waves complete |
-| Confidence | ≥ 0.95 |
-| Stability | `stable: true` (not task-specific) |
-| Reusability | Applies beyond this task |
-| Non-duplication | Not already in memory |
+| Promotion Criteria | Threshold                          |
+| ------------------ | ---------------------------------- |
+| Final success      | All waves complete                 |
+| Confidence         | ≥ 0.95                             |
+| Stability          | `stable: true` (not task-specific) |
+| Reusability        | Applies beyond this task           |
+| Non-duplication    | Not already in memory              |
 
 **30-day TTL** prevents stale accumulation.
 
@@ -188,19 +186,19 @@ Only **stable, reusable, high-confidence** findings promoted:
 
 ### Scenario: MEDIUM feature with 5 tasks
 
-| Approach | Tokens Sent | Approx Cost |
-|----------|-------------|-------------|
-| Direct chat (5 tasks, full history each) | ~750K | ~$0.11 |
-| Gem Team (scoped handoffs, 95% cached) | ~240K | ~$0.003 |
+| Approach                                 | Tokens Sent | Approx Cost |
+| ---------------------------------------- | ----------- | ----------- |
+| Direct chat (5 tasks, full history each) | ~750K       | ~$0.11      |
+| Gem Team (scoped handoffs, 95% cached)   | ~240K       | ~$0.003     |
 
 ### Scenario: HIGH feature with 8 tasks
 
-| Approach | Tokens Sent | Approx Cost |
-|----------|-------------|-------------|
-| Direct chat (8 tasks, full history each) | ~1.2M | ~$0.18 |
-| Gem Team (scoped handoffs, 99% cached) | ~320K | ~$0.001 |
+| Approach                                 | Tokens Sent | Approx Cost |
+| ---------------------------------------- | ----------- | ----------- |
+| Direct chat (8 tasks, full history each) | ~1.2M       | ~$0.18      |
+| Gem Team (scoped handoffs, 99% cached)   | ~320K       | ~$0.001     |
 
-**Rule of thumb**: Gem Team cost scales with *new work*, not total conversation history.
+**Rule of thumb**: Gem Team cost scales with _new work_, not total conversation history.
 
 ---
 
@@ -216,7 +214,7 @@ Only **stable, reusable, high-confidence** findings promoted:
 
 ## Related Pages
 
-- [Model Routing Config](/configuration/model-routing) — Tier configuration
-- [Workflow: Execute](/guide/workflow-execute) — Where handoffs are constructed
-- [Core Concepts](/getting-started/concepts) — Memory tiers and handoffs
-- [Optimizations](/guide/optimizations) — Deep dive on cost principles
+- [Model Routing Config](/configuration/model-routing) - Tier configuration
+- [Workflow: Execute](/guide/workflow-execute) - Where handoffs are constructed
+- [Core Concepts](/getting-started/concepts) - Memory tiers and handoffs
+- [Optimizations](/guide/optimizations) - Deep dive on cost principles

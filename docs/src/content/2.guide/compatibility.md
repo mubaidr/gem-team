@@ -1,16 +1,14 @@
 ---
-
 title: Works With Your Tools
 description: One workflow across Copilot, Claude, Cursor, Codex, Gemini, Windsurf, and OpenCode.
 navigation:
   icon: i-lucide-blocks
 seo:
-  title: Compatibility — Gem Team
+  title: Compatibility - Gem Team
   description: "Model and tool compatibility: Copilot, Claude Code, Cursor, Codex, Gemini, Windsurf, OpenCode."
-  ogTitle: Compatibility — Gem Team
+  ogTitle: Compatibility - Gem Team
   ogDescription: Model and tool compatibility for Gem Team.
 ---
-
 
 ## Universal Agent Definitions
 
@@ -24,11 +22,11 @@ flowchart LR
         A3[gem-reviewer.agent.md]
         A4[...]
     end
-    
+
     subgraph APM [APM Compilation]
         B[apm install mubaidr/gem-team --target copilot,claude,cursor...]
     end
-    
+
     subgraph Targets [Tool-Specific Outputs]
         C1[.github/agents/]
         C2[.claude/agents/]
@@ -38,7 +36,7 @@ flowchart LR
         C6[GEMINI.md]
         C7[.windsurf/rules/]
     end
-    
+
     A1 --> B --> C1
     A1 --> B --> C2
     A1 --> B --> C3
@@ -52,17 +50,17 @@ flowchart LR
 
 ## Supported Targets
 
-| Target | Tool | Output Location | Notes |
-|--------|------|-----------------|-------|
-| `copilot` | VS Code Copilot / GitHub Copilot CLI | `.github/agents/`, `.github/instructions/`, `.github/prompts/`, VS Code MCP | Full support |
-| `claude` | Claude Code | `.claude/agents/`, `.claude/rules/`, commands, skills, hooks, MCP | Full support |
-| `cursor` | Cursor | `.cursor/agents/`, `.cursor/rules/`, skills, commands, hooks, MCP | Full support |
-| `opencode` | OpenCode | `.opencode/agents/`, commands, skills, MCP, compiled instructions | Full support |
-| `codex` | Codex CLI | `.codex/agents/`, `AGENTS.md`, Codex config | Full support |
-| `gemini` | Gemini CLI | `GEMINI.md`, skills/instructions, config | Full support |
-| `windsurf` | Windsurf / Cascade | `.windsurf/rules/`, skills, commands, hooks, MCP | Full support |
+| Target     | Tool                                 | Output Location                                                             | Notes        |
+| ---------- | ------------------------------------ | --------------------------------------------------------------------------- | ------------ |
+| `copilot`  | VS Code Copilot / GitHub Copilot CLI | `.github/agents/`, `.github/instructions/`, `.github/prompts/`, VS Code MCP | Full support |
+| `claude`   | Claude Code                          | `.claude/agents/`, `.claude/rules/`, commands, skills, hooks, MCP           | Full support |
+| `cursor`   | Cursor                               | `.cursor/agents/`, `.cursor/rules/`, skills, commands, hooks, MCP           | Full support |
+| `opencode` | OpenCode                             | `.opencode/agents/`, commands, skills, MCP, compiled instructions           | Full support |
+| `codex`    | Codex CLI                            | `.codex/agents/`, `AGENTS.md`, Codex config                                 | Full support |
+| `gemini`   | Gemini CLI                           | `GEMINI.md`, skills/instructions, config                                    | Full support |
+| `windsurf` | Windsurf / Cascade                   | `.windsurf/rules/`, skills, commands, hooks, MCP                            | Full support |
 
-> **APM compiles or skips unsupported primitives** for each target — no manual adaptation needed.
+> **APM compiles or skips unsupported primitives** for each target - no manual adaptation needed.
 >
 > :::tip[PRO TIP]
 > Install once with APM, use everywhere. The same `plan.yaml` works across all tools.
@@ -72,7 +70,8 @@ flowchart LR
 
 ## Installation Per Tool
 
-### Universal (APM) — Recommended
+### Universal (APM) - Recommended
+
 ```bash
 curl -sSL https://aka.ms/apm-unix | sh
 apm install mubaidr/gem-team --target copilot,claude,cursor,opencode,codex,gemini,windsurf
@@ -89,6 +88,7 @@ apm install mubaidr/gem-team --target copilot,claude,cursor,opencode,codex,gemin
 copilot plugin marketplace add mubaidr/gem-team
 copilot plugin install gem-team@gem-team
 ```
+
 </details>
 
 <details>
@@ -99,6 +99,7 @@ copilot plugin install gem-team@gem-team
 /plugin install gem-team@gem-team
 /reload-plugins
 ```
+
 </details>
 
 <details>
@@ -108,6 +109,7 @@ copilot plugin install gem-team@gem-team
 Settings → Extensions → Search "Gem Team" → Install
 # Or: Cmd+Shift+P → "Extensions: Install Extension" → "Gem Team"
 ```
+
 </details>
 
 <details>
@@ -116,6 +118,7 @@ Settings → Extensions → Search "Gem Team" → Install
 ```bash
 opencode plugin add mubaidr/gem-team
 ```
+
 </details>
 
 <details>
@@ -124,6 +127,7 @@ opencode plugin add mubaidr/gem-team
 ```bash
 codex plugin add mubaidr/gem-team
 ```
+
 </details>
 
 <details>
@@ -132,6 +136,7 @@ codex plugin add mubaidr/gem-team
 ```bash
 gemini plugin add mubaidr/gem-team
 ```
+
 </details>
 
 <details>
@@ -140,38 +145,39 @@ gemini plugin add mubaidr/gem-team
 ```
 Extensions panel → Search "Gem Team" → Install
 ```
+
 </details>
 
 ---
 
 ## What's Consistent Across Tools
 
-| Aspect | Consistency |
-|--------|-------------|
-| **Agent behavior** | Same YAML definitions → same capabilities |
-| **Workflow phases** | Init → Route → Plan → Execute → Output |
-| **Handoff format** | Same `task_definition.handoff` structure |
-| **Memory tiers** | Repo/Session/Global with same promotion rules |
-| **Failure classification** | Same taxonomy and routing |
-| **Plan persistence** | Same `docs/plan/{plan_id}/` structure |
+| Aspect                     | Consistency                                   |
+| -------------------------- | --------------------------------------------- |
+| **Agent behavior**         | Same YAML definitions → same capabilities     |
+| **Workflow phases**        | Init → Route → Plan → Execute → Output        |
+| **Handoff format**         | Same `task_definition.handoff` structure      |
+| **Memory tiers**           | Repo/Session/Global with same promotion rules |
+| **Failure classification** | Same taxonomy and routing                     |
+| **Plan persistence**       | Same `docs/plan/{plan_id}/` structure         |
 
 ---
 
 ## What Varies By Tool
 
-| Aspect | Variation |
-|--------|-----------|
-| **UI integration** | VS Code panel vs CLI vs chat |
-| **MCP servers** | Different MCP capabilities per tool |
-| **Hooks/commands** | Tool-specific automation |
-| **Skill format** | Native skill format per tool |
-| **Context window** | Tool's native context limits |
+| Aspect             | Variation                           |
+| ------------------ | ----------------------------------- |
+| **UI integration** | VS Code panel vs CLI vs chat        |
+| **MCP servers**    | Different MCP capabilities per tool |
+| **Hooks/commands** | Tool-specific automation            |
+| **Skill format**   | Native skill format per tool        |
+| **Context window** | Tool's native context limits        |
 
 ---
 
 ## Multi-Tool Workflows
 
-**Use different tools for different phases** — all share the same plan:
+**Use different tools for different phases** - all share the same plan:
 
 ```bash
 # Plan with Copilot (strong reasoning)
@@ -187,7 +193,7 @@ claude
 # All tools share: docs/plan/20261121-user-search-api/
 ```
 
-**Plan artifacts are the source of truth** — not tool-specific state.
+**Plan artifacts are the source of truth** - not tool-specific state.
 
 ---
 
@@ -201,35 +207,35 @@ apm install 'mubaidr/gem-team#gem-team-v1.2.3' --target copilot,claude,cursor
 git add apm.yml apm.lock.yaml
 ```
 
-**All team members get identical agent definitions** — no "works on my machine."
+**All team members get identical agent definitions** - no "works on my machine."
 
 ---
 
 ## Troubleshooting Per Tool
 
-| Tool | Common Issue | Fix |
-|------|--------------|-----|
-| Copilot | Agents not showing | Reload VS Code window (`Ctrl+Shift+P` → "Reload Window") |
-| Claude Code | Commands not found | `/reload-plugins` |
-| Cursor | Rules not applying | Restart Cursor |
-| OpenCode | Skills missing | `opencode plugin update mubaidr/gem-team` |
-| Codex | AGENTS.md not loaded | Restart Codex session |
-| Gemini | Config not applied | Check `GEMINI.md` in project root |
-| Windsurf | Rules not active | Restart Windsurf |
+| Tool        | Common Issue         | Fix                                                      |
+| ----------- | -------------------- | -------------------------------------------------------- |
+| Copilot     | Agents not showing   | Reload VS Code window (`Ctrl+Shift+P` → "Reload Window") |
+| Claude Code | Commands not found   | `/reload-plugins`                                        |
+| Cursor      | Rules not applying   | Restart Cursor                                           |
+| OpenCode    | Skills missing       | `opencode plugin update mubaidr/gem-team`                |
+| Codex       | AGENTS.md not loaded | Restart Codex session                                    |
+| Gemini      | Config not applied   | Check `GEMINI.md` in project root                        |
+| Windsurf    | Rules not active     | Restart Windsurf                                         |
 
 ---
 
 ## Tool-Specific Troubleshooting
 
-| Tool | Issue | Fix |
-|------|-------|-----|
-| Copilot | Agents not showing | Reload VS Code window |
-| Claude Code | Commands not found | `/reload-plugins` |
-| Cursor | Rules not applying | Restart Cursor |
-| OpenCode | Skills missing | `opencode plugin update mubaidr/gem-team` |
-| Codex | AGENTS.md not loaded | Restart Codex session |
-| Gemini | Config not applied | Check `GEMINI.md` in project root |
-| Windsurf | Rules not active | Restart Windsurf |
+| Tool        | Issue                | Fix                                       |
+| ----------- | -------------------- | ----------------------------------------- |
+| Copilot     | Agents not showing   | Reload VS Code window                     |
+| Claude Code | Commands not found   | `/reload-plugins`                         |
+| Cursor      | Rules not applying   | Restart Cursor                            |
+| OpenCode    | Skills missing       | `opencode plugin update mubaidr/gem-team` |
+| Codex       | AGENTS.md not loaded | Restart Codex session                     |
+| Gemini      | Config not applied   | Check `GEMINI.md` in project root         |
+| Windsurf    | Rules not active     | Restart Windsurf                          |
 
 ## Multi-Tool Workflow Example
 
@@ -251,23 +257,23 @@ claude
 # All tools share: docs/plan/20261121-user-search-api/
 ```
 
-**Plan artifacts are the source of truth** — not tool-specific state.
+**Plan artifacts are the source of truth** - not tool-specific state.
 
 ---
 
 ## Key Rules
 
-1. **One source of truth** — `.apm/agents/` definitions compiled for all targets
-2. **APM manages compatibility** — No manual per-tool configuration
-3. **Plan artifacts shared** — `docs/plan/` works across all tools
-4. **Pin versions for teams** — Commit `apm.lock.yaml` for reproducibility
-5. **Tool choice per phase** — Use best tool for each workflow phase
+1. **One source of truth** - `.apm/agents/` definitions compiled for all targets
+2. **APM manages compatibility** - No manual per-tool configuration
+3. **Plan artifacts shared** - `docs/plan/` works across all tools
+4. **Pin versions for teams** - Commit `apm.lock.yaml` for reproducibility
+5. **Tool choice per phase** - Use best tool for each workflow phase
 
 ---
 
 ## Related Pages
 
-- [Installation](/getting-started/installation) — Detailed per-tool setup
-- [Quick Start](/getting-started/quick-start) — First task with your tool
-- [Resources: Compatible Tools](/resources/compatible-tools) — Full target reference
-- [Local Development](/resources/local-development) — Building from source
+- [Installation](/getting-started/installation) - Detailed per-tool setup
+- [Quick Start](/getting-started/quick-start) - First task with your tool
+- [Resources: Compatible Tools](/resources/compatible-tools) - Full target reference
+- [Local Development](/resources/local-development) - Building from source

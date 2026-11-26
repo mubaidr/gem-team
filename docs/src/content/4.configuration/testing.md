@@ -4,9 +4,9 @@ description: Test execution behavior settings.
 navigation:
   icon: i-lucide-test-tube
 seo:
-  title: Testing Configuration — Gem Team
+  title: Testing Configuration - Gem Team
   description: Test execution behavior settings configuration for Gem Team.
-  ogTitle: Testing Configuration — Gem Team
+  ogTitle: Testing Configuration - Gem Team
   ogDescription: Test execution behavior settings configuration.
 ---
 
@@ -59,7 +59,7 @@ When `screenshot_on_failure: false`:
 
 ## Related Pages
 
-- [Browser Tester](/agents/browser-tester) — Screenshot capture in testing
-- [Mobile Tester](/agents/mobile-tester) — Mobile screenshot behavior
-- [Failure Handling](/guide/failure-handling) — Screenshots in failure evidence
-- [Configuration Overview](/configuration) — Full config reference
+- [Browser Tester](/agents/browser-tester) - Screenshot capture in testing
+- [Mobile Tester](/agents/mobile-tester) - Mobile screenshot behavior
+- [Failure Handling](/guide/failure-handling) - Screenshots in failure evidence
+- [Configuration Overview](/configuration) - Full config reference
