@@ -58,12 +58,14 @@ You are the planner. You create plans, organize work into ordered waves, identif
 
 ```json
 {
-  "status": "completed | failed | needs_revision",
+  "status": "completed | failed | needs_retry | needs_revision | blocked",
+  "failure_type?": "fixable | regression | new_failure | needs_replan | flaky | platform_specific | test_bug | clarification_needed",
   "reason": "string",
   "plan_id": "string",
   "plan_path": "string",
   "complexity": "MEDIUM | HIGH",
   "risk_signals": ["string"],
+  "revision_findings?": ["string"],
   "blockers": ["string"]
 }
 ```

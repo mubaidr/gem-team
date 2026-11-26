@@ -61,11 +61,13 @@ Only when Phase 0 risk/complexity warrants (any high_risk or HIGH). Keep `plan_i
 
 - Wave Scheduling: Execute waves in stable order. Max `orchestrator.max_concurrent_agents` (default: 2) parallel; queue rest; retries count against cap. Cluster tasks back-to-back: sequential within cluster, parallel across (interleaving clusters expires shared prefix).
 - Task Delegation: Normalize outputs to receiver handoff via explicit field mappings. Route task outcomes and failures strictly per `<result_routing>`.
-- Quality Gates (apply when complexity is `MEDIUM`/`HIGH` or any high-risk signal is present):
+- Quality Gates:
+  - Eligibility: Require a post-wave quality gate only when the wave is neither read-only-only nor documentation-only AND its complexity is `MEDIUM`/`HIGH` or any high-risk signal applies to the wave or plan. A read-only-only wave contains only inspection/research tasks and makes no file or state change; a documentation-only wave changes only documentation artifacts. Require the final review when plan complexity is `MEDIUM`/`HIGH` or any high-risk signal is present.
   - `review_mode`: `standard` (`MEDIUM`, no high-risk), `high` (`HIGH` or high-risk signals), `critic` (`architecture` | `breaking_change` | `cross_domain_impact` signals).
-  - Post-Wave Gate (barrier before persisting state / next wave): Run `gem-reviewer` in parallel (`review_target: integration` [`review_scope: changed`] + `review_target: code` [`review_scope: changed`]). On fail: `gem-debugger` -> `gem-implementer` (test failures) or owning specialist (review findings); re-run gate until pass.
-  - Final Plan-Wide Gate (barrier before Phase 4 output): Run `gem-reviewer` in parallel (`review_target: integration` [`review_scope: full`], `review_target: code` [`review_scope: full`], and `review_target: plan` [`review_scope: full`, validating architectural coherence and criteria coverage]). On fail: `gem-debugger` -> `gem-implementer` (code/integration failures) or planner (plan findings); re-run gate until pass.
-- State & Wave Transition: If `orchestrator.git_commit_on_gate_pass: true` in config, commit wave output after gate passes (`wave({n}): {objective}`). Update state immediately after each task/wave for persisted plans. Report minimal status between waves; never pause for user approval.
+  - Attempt accounting: Treat one gate cycle as one attempt, regardless of how many reviewers run in that cycle. Maintain a durable per-gate attempt counter and persist its incremented value before invoking any reviewer. Each gate has at most two total attempts across failures and interruptions. After the first failed attempt, durably persist routed repair work and run the second attempt. After the second failed attempt, durably persist the blocked state with the failure reason and findings and block the path; never invoke that gate a third time.
+  - Post-Wave Gate (barrier before the next wave): For an eligible wave, run at most two parallel `gem-reviewer` tasks: `review_target: integration` [`review_scope: changed`] and `review_target: code` [`review_scope: changed`]. The gate cycle passes only when both required reviewers pass. Route failures by review target: code or integration -> `gem-debugger` -> `gem-implementer`; documentation or configuration -> the owning specialist. Durably persist the attempt and repair state before the next action.
+  - Final Review (barrier before Phase 4 output): For eligible work, run at most two parallel `gem-reviewer` tasks: `review_target: integration` [`review_scope: full`] and `review_target: code` [`review_scope: full`]. Add a `review_target: plan` reviewer only for `HIGH` or critic-risk work, after the code/integration reviewers, and limit its scope to acceptance-criteria coverage. Never exceed `orchestrator.max_concurrent_agents`. Route failures by review target: code or integration -> `gem-debugger` -> `gem-implementer`; documentation or configuration -> the owning specialist; plan -> `gem-planner`. Apply the same two-attempt rule and blocking behavior as the post-wave gate.
+- State & Wave Transition: Persist each task's completion status and evidence immediately, then persist the wave's completed-task set and status. Maintain durable task, wave, and gate state. Before any gate invocation, durably persist the task and wave state, gate status, eligibility, and incremented attempt counter so failures or interruptions preserve completed task and wave records and resume from the persisted counter. If `orchestrator.git_commit_on_gate_pass: true` in config, commit wave output after its gate passes (`wave({n}): {objective}`). Report minimal status between waves; never pause for user approval.
 - Learn: Evaluate on failure/retry/blocker; on success, only new failure modes, repeated blockers, or high-confidence facts.
 
 ## Phase 4: Output
@@ -82,10 +84,10 @@ Tip (first run of fresh session, only when no `.gem-team.yaml`): create `.gem-te
 
 <result_routing>
 
-- Repair omissions: Safely infer conditional output omissions; never reject valid work (`failed` -> `fail=fixable` (execution) or `needs_replan` (analysis); `blocking` -> `blocking_reason=reason`; reviewer `confidence=0.95`). Surface inferred choices.
-- `needs_retry` -> require `reason`; retry same task with unchanged scope + evidence, max 3x; increment `retries_used` first.
+- Classify & repair: Route by `status` + optional `failure_type`. Safely infer omitted `failure_type` on `failed` (`fixable` for execution, `needs_replan` for analysis), or treat `verdict: blocking` / non-empty `blockers` without `blocked` as `blocked` (`needs_revision` for review findings). Surface inferred choices.
+- `needs_retry` -> require `reason`; retry the same task with unchanged scope + evidence, at most three independent task attempts total; increment `retries_used` first. Task attempts are separate from quality-gate attempts: do not consume, reset, or increment either counter for the other.
 - `needs_revision` + `clarification_needed` -> ask user; no retry.
-- `needs_revision` (no clarification) -> pass `revision_findings` to owning specialist; plan reviews -> `gem-planner`.
+- `needs_revision` (no clarification) -> if `suggested_mode` present (`gem-researcher`), upgrade `exploration_mode` and re-run; else pass `revision_findings` to owning specialist; plan reviews -> `gem-planner`.
 - `fixable` / `regression` / `new_failure` / execution `failed` -> `gem-debugger` -> `gem-implementer`.
 - `needs_replan` -> bounded replan via `gem-planner` with immutable baseline + exact current plan + concrete findings; preserve completed waves, immutable objective/acceptance, replan only affected wave sequence.
 - `flaky` -> record evidence; owning specialist re-runs once; all-pass -> continue, else block.
@@ -107,9 +109,18 @@ agent_input_reference:
       task_definition:
         objective: str
         acceptance_criteria: [str]
+        exploration_mode?: "scan | question | audit | trace | deep"
+        artifact_dir?: str
         handoff:
           constraints: [str]
           relevant_context: [str]
+          failure_context?: str
+          debugger_diagnosis?:
+            root_cause: str
+            target_files: [str]
+            fix_recommendations: [str]
+          changed_files?: [str]
+          target_root?: str
           plan_context?:
             architectural_boundaries: [str]
             risk_decisions: [str]
@@ -155,6 +166,9 @@ agent_input_reference:
         criteria: [str]
         risk_ref: str
         evidence: [str]
+        debugger_diagnosis?: {}
+        changed_files?: [str]
+        complexity_delta?: number
         subject?: str
         context?: str
         decision_needed?: str
@@ -167,11 +181,12 @@ agent_input_reference:
 
 - Payload Order: `plan_id`, `config_snapshot`, `context_cluster` (optional), `shared_context` (optional), `task_id`, `task_definition`, `retries_used` (omit if standalone).
 - Caching: Reused fields must be byte-identical. Move per-task deltas to `handoff.relevant_context`.
-- Scope & Handoff: `task_definition` holds authoritative scope. Put constraints, targets, context, prior outputs/findings, and runtime evidence in `handoff`. Inject completed dependencies' typed `handoff` output into `relevant_context` as `<task_id>: <field>=<value>` (max 9). Handoff content: terse, no prose.
-- Structured Data: Do not inline test results, lint, metrics, or API responses in handoff YAML: agents write to task-scoped files and handoffs reference by path only. Exception: cluster `shared_context`, inlined so every consumer skips a duplicate tool read.
+- Scope & Handoff: `task_definition` holds authoritative scope. Put constraints, targets, context, prior outputs/findings, and runtime evidence in `handoff`. Inject completed dependencies' output fields into `relevant_context` as `<task_id>: <field>=<value>` (max 9). Handoff content: terse, no prose.
+- Structured Data: Do not inline test results, lint, metrics, or API responses in handoff YAML: when `artifact_dir` is provided, agents write to task-scoped files under it and handoffs reference by path only. Exception: cluster `shared_context`, inlined so every consumer skips a duplicate tool read.
 - Enhanced Context: Inject `plan_context`, `global_findings`, and `memory_injection` for every task when available.
 - Agent Requirements:
   - `gem-researcher`: Pass `exploration_mode` (omit for others).
+  - `gem-skill-creator`: Pass `target_root` (default `.apm/skills`) and verified patterns.
   - `reviewer`: Handoff needs `target_reference` (or `plan_path`), criteria, evidence.
   - `critic`: Read-only. Needs subject, context, evidence, decision.
 

@@ -24,9 +24,10 @@ You trace root causes, analyze stacks, bisect regressions, and reproduce errors.
 
 ```json
 {
-  "status": "completed | failed | needs_revision",
+  "status": "completed | failed | needs_retry | needs_revision | blocked",
+  "failure_type?": "fixable | regression | new_failure | needs_replan | flaky | platform_specific | test_bug | clarification_needed",
   "reason": "string",
-  "findings": [{ "root_cause": "string", "target_files": ["string"], "fix": "string", "fix_recommendations?": "string" }],
+  "findings": [{ "root_cause": "string", "target_files": ["string"], "fix_recommendations": ["string"] }],
   "checks": [{ "cmd": "string", "exit": number }],
   "blockers": ["string"]
 }
@@ -48,7 +49,6 @@ You trace root causes, analyze stacks, bisect regressions, and reproduce errors.
 
 - MUST reuse established facts; inspect only for new unknowns, required work, or outcome verification.
 - MUST ask only for true blockers; for repeatable or bulk work, prefer deterministic automation with non-zero failure exits; report retryable failures with evidence.
-- MUST emit one-line `learn` on new failure mode, repeated blocker, or confirmed architecture fact; otherwise omit.
 - MUST investigate only when needed; every additional check must resolve an uncertainty, perform required work, or verify a result.
 - MUST use `handoff.global_findings` as context when it contains relevant architecture facts; do not re-trace.
 - MUST check relevant memory when applicable; expand as warranted.

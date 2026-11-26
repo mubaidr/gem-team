@@ -1,5 +1,4 @@
 ---
-
 title: Quality by Default
 description: Automatic TDD, risk-based reviews, security audits, and accessibility checks.
 navigation:
@@ -10,7 +9,6 @@ seo:
   ogTitle: Quality by Default — Gem Team
   ogDescription: Automatic TDD, risk-based reviews, security audits, and accessibility checks.
 ---
-
 
 ## Automatic Quality Gates
 
@@ -40,13 +38,14 @@ flowchart TD
 
 Every implementation task follows **Red-Green-Refactor**:
 
-| Phase | Action | Verification |
-|-------|--------|--------------|
-| **Red** | Write failing test first | Test fails as expected |
-| **Green** | Minimal implementation | Test passes |
-| **Refactor** | Clean up, optimize | All tests still pass |
+| Phase        | Action                   | Verification           |
+| ------------ | ------------------------ | ---------------------- |
+| **Red**      | Write failing test first | Test fails as expected |
+| **Green**    | Minimal implementation   | Test passes            |
+| **Refactor** | Clean up, optimize       | All tests still pass   |
 
 **Six test dimensions** validated:
+
 1. **Correctness** — Expected behavior
 2. **Contracts** — API schemas, types
 3. **Edge cases** — Boundaries, errors, empty states
@@ -62,11 +61,11 @@ Every implementation task follows **Red-Green-Refactor**:
 
 Not all code needs the same review intensity. Review routes by **risk signals**:
 
-| Review Mode | When Triggered | Intensity |
-|-------------|----------------|-----------|
-| **Standard** | Routine MEDIUM, explicit request | Changed files, criteria check |
-| **High** | HIGH complexity, high-risk signals | Affected files, deep analysis |
-| **Critic** | Architecture decisions, `architecture`/`breaking_change`/`cross_domain_impact` | Full scope, read-only, challenges assumptions |
+| Review Mode  | When Triggered                                                                 | Intensity                                     |
+| ------------ | ------------------------------------------------------------------------------ | --------------------------------------------- |
+| **Standard** | Routine MEDIUM, explicit request                                               | Changed files, criteria check                 |
+| **High**     | HIGH complexity, high-risk signals                                             | Affected files, deep analysis                 |
+| **Critic**   | Architecture decisions, `architecture`/`breaking_change`/`cross_domain_impact` | Full scope, read-only, challenges assumptions |
 
 ### Risk Signals That Trigger Review
 
@@ -100,13 +99,13 @@ cross_domain_impact: true
 
 Security review runs automatically for:
 
-| Trigger | Review Focus |
-|---------|--------------|
-| `auth_change` | Authentication/authorization logic |
-| `security_sensitive` | Crypto, secrets, PII handling |
-| `data_flow_change` | Data movement, storage, transmission |
-| Config changes | Infrastructure, permissions, network |
-| Dependency updates | Supply chain, vulnerabilities |
+| Trigger              | Review Focus                         |
+| -------------------- | ------------------------------------ |
+| `auth_change`        | Authentication/authorization logic   |
+| `security_sensitive` | Crypto, secrets, PII handling        |
+| `data_flow_change`   | Data movement, storage, transmission |
+| Config changes       | Infrastructure, permissions, network |
+| Dependency updates   | Supply chain, vulnerabilities        |
 
 **Security findings block** until resolved — no "accept risk" in automated flow.
 
@@ -117,14 +116,14 @@ Security review runs automatically for:
 ```yaml
 # .gem-team.yaml
 quality:
-  a11y_audit_level: basic  # none | basic | full
+  a11y_audit_level: basic # none | basic | full
 ```
 
-| Level | Checks |
-|-------|--------|
-| `none` | No a11y checks |
-| `basic` | Contrast (4.5:1), ARIA labels, focus indicators, touch targets (44pt/48dp) |
-| `full` | All basic + reduced motion, semantic HTML, screen reader testing, keyboard navigation |
+| Level   | Checks                                                                                |
+| ------- | ------------------------------------------------------------------------------------- |
+| `none`  | No a11y checks                                                                        |
+| `basic` | Contrast (4.5:1), ARIA labels, focus indicators, touch targets (44pt/48dp)            |
+| `full`  | All basic + reduced motion, semantic HTML, screen reader testing, keyboard navigation |
 
 ---
 
@@ -134,7 +133,7 @@ quality:
 # .gem-team.yaml
 quality:
   visual_regression_enabled: true
-  visual_diff_threshold: 0.95  # 0.0 - 1.0
+  visual_diff_threshold: 0.95 # 0.0 - 1.0
 ```
 
 - Captures screenshots on UI changes
@@ -163,7 +162,7 @@ Applied automatically during implementation and review:
 quality:
   visual_regression_enabled: false
   visual_diff_threshold: 0.95
-  a11y_audit_level: none  # none | basic | full
+  a11y_audit_level: none # none | basic | full
 ```
 
 **Task criteria and explicit requests take precedence** over config defaults.
@@ -174,13 +173,13 @@ quality:
 
 **Task**: "Add payment processing endpoint"
 
-| Phase | Quality Action |
-|-------|----------------|
-| **Plan** | Risk signals: `security_sensitive`, `data_flow_change` → HIGH review |
-| **Implement** | Tests first: success, decline, invalid card, webhook validation |
-| **Review** | Critic mode: PCI compliance, idempotency, logging, error handling |
-| **Verify** | Browser tester: payment flow E2E, visual regression on checkout |
-| **Output** | Security findings promoted to repo memory (confidence 0.98) |
+| Phase         | Quality Action                                                       |
+| ------------- | -------------------------------------------------------------------- |
+| **Plan**      | Risk signals: `security_sensitive`, `data_flow_change` → HIGH review |
+| **Implement** | Tests first: success, decline, invalid card, webhook validation      |
+| **Review**    | Critic mode: PCI compliance, idempotency, logging, error handling    |
+| **Verify**    | Browser tester: payment flow E2E, visual regression on checkout      |
+| **Output**    | Security findings promoted to repo memory (confidence 0.98)          |
 
 ---
 
@@ -191,20 +190,24 @@ quality:
 3. **Security blocks** — No automated risk acceptance
 4. **Configurable depth** — a11y and visual regression via config
 5. **Simplification built-in** — Not a separate step, part of implementation
-6. **Wave-level gates** — Post-wave quality gate after each wave; final plan-wide review gate before Phase 4 output (MEDIUM/HIGH or any high-risk signal)
+6. **Risk-scoped gates** - Read-only-only and documentation-only waves skip post-wave gates. Other MEDIUM/HIGH or high-risk work runs a post-wave gate and a final review. Each gate has at most two attempts, with state persisted before reviewers run.
+7. **Independent task retries** - A task-level `needs_retry` allows at most three total task attempts and does not consume or reset the gate attempt counter.
+8. **Batched review findings** - Reviewers collect every actionable finding in one pass; repair work is routed by review target and persisted before a second gate attempt.
+9. **Conditional plan review** - There is no routine post-execution plan review. A plan reviewer runs only for HIGH or critic-risk work and checks acceptance-criteria coverage.
+10. **Bounded final reviewers** - The final review runs at most two parallel code and integration reviewers, within `max_concurrent_agents`.
 
 ---
 
 ## Quality Anti-Patterns
 
-| Anti-Pattern | Why It Fails | Correct Approach |
-|--------------|-------------|------------------|
-| Skipping tests to move faster | Bugs surface later, cost more to fix | TDD: test first, always |
-| Reviewer bypassed for "simple" changes | Security/a11y gaps missed | Risk signals drive review automatically |
-| Accepting security risk in automated flow | Vulnerabilities ship to production | Security findings block until resolved |
-| Testing implementation, not behavior | Refactors break tests unnecessarily | Test behavior, assert outcomes |
-| Visual regression threshold too strict | False positives on dynamic content | Set threshold per-content type (0.99 design, 0.90 dynamic) |
-| a11y level `none` on user-facing UI | Excludes users with disabilities | Use `basic` minimum for UI work |
+| Anti-Pattern                              | Why It Fails                         | Correct Approach                                           |
+| ----------------------------------------- | ------------------------------------ | ---------------------------------------------------------- |
+| Skipping tests to move faster             | Bugs surface later, cost more to fix | TDD: test first, always                                    |
+| Reviewer bypassed for "simple" changes    | Security/a11y gaps missed            | Risk signals drive review automatically                    |
+| Accepting security risk in automated flow | Vulnerabilities ship to production   | Security findings block until resolved                     |
+| Testing implementation, not behavior      | Refactors break tests unnecessarily  | Test behavior, assert outcomes                             |
+| Visual regression threshold too strict    | False positives on dynamic content   | Set threshold per-content type (0.99 design, 0.90 dynamic) |
+| a11y level `none` on user-facing UI       | Excludes users with disabilities     | Use `basic` minimum for UI work                            |
 
 ---
 

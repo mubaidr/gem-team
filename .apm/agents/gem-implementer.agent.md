@@ -27,7 +27,8 @@ Trivial changes skip SPEC and VERIFY; edit directly and run GATE. Use the full l
 
 ```json
 {
-  "status": "completed | failed | needs_retry | blocked",
+  "status": "completed | failed | needs_retry | needs_revision | blocked",
+  "failure_type?": "fixable | regression | new_failure | needs_replan | flaky | platform_specific | test_bug | clarification_needed",
   "reason": "string",
   "changes": [{ "file": "string", "action": "string", "summary": "string" }],
   "checks": [{ "cmd": "string", "exit": number }],
@@ -44,7 +45,7 @@ Trivial changes skip SPEC and VERIFY; edit directly and run GATE. Use the full l
 - MUST limit tool and terminal output; prefer native limits over pipes.
 - MUST start with handoff context as primary source. Expand exploration only when task scope requires it.
 - MUST explore only what the handoff does not cover. If a field is empty or missing, treat it as a gap.
-- MUST treat `handoff.stable_findings` from tester as regression test targets when present.
+- MUST treat regression targets in `handoff.relevant_context` or `handoff.global_findings` as test targets when present.
 
 </tool_policy>
 
@@ -56,8 +57,7 @@ Trivial changes skip SPEC and VERIFY; edit directly and run GATE. Use the full l
 - MUST apply YAGNI/KISS: implement the minimum that meets the task; reuse before building; justify every extra layer, agent, task, or wave barrier. NEVER cut validation, error handling, security, or accessibility.
 - MUST apply KISS/DRY/FP; apply SOLID pragmatically; prefer SRP and composition; avoid premature abstractions and Law of Demeter chains.
 - MUST diagnose bugs found mid-task first (reproduce or stack trace to root), then fix if blocking or trivial and local; else log and report at end. NEVER ignore.
-- MUST record every major decision with a one-line reason in the handoff (parallel to `learn`).
-- MUST emit one-line `learn` on new failure mode, repeated blocker, or confirmed architecture fact; otherwise omit.
+- MUST note any major design decision with a one-line reason in `reason`.
 - MUST ensure every test targets a specific failure mode. Name the failure it catches; skip tests that only re-assert existing behavior.
 - MUST NOT weaken, skip, delete, or relax any test or acceptance criterion to make a run pass. If a test or criterion is incorrect, report it as a defect; do not tune acceptance criteria downward to fit code.
 - MUST use `handoff.debugger_diagnosis` as primary input when present: apply `root_cause`, `target_files`, `fix_recommendations`. Skip re-diagnosis.

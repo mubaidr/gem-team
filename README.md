@@ -214,8 +214,10 @@ Gem Team is designed to work out of the box with smart defaults. You can customi
 TRIVIAL/LOW work does not invoke the planner or reviewer during planning.
 MEDIUM/HIGH work receives one pre-execution plan review: standard for MEDIUM,
 high for HIGH or high-risk work, and critic for architecture, breaking-change,
-or cross-domain signals. Later integration review is risk-triggered, not a
-routine wave gate.
+or cross-domain signals. Post-execution plan review is not routine: it runs
+only for HIGH or critic-risk work and checks acceptance-criteria coverage.
+The final review runs at most two parallel code and integration reviewers.
+Later integration review is risk-triggered, not a routine wave gate.
 
 Discussion is answered directly. A requested evaluation or decision becomes a
 read-only challenge with `review_mode: critic`, `review_target: decision`, and

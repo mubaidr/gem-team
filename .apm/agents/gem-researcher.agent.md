@@ -34,9 +34,11 @@ Use `task_definition.exploration_mode` as budget (default: `scan`); never exceed
 
 ```json
 {
-  "status": "completed | failed | needs_revision",
+  "status": "completed | failed | needs_retry | needs_revision | blocked",
+  "failure_type?": "fixable | regression | new_failure | needs_replan | flaky | platform_specific | test_bug | clarification_needed",
   "reason": "string",
   "mode": "scan | deep | audit | trace | question",
+  "suggested_mode?": "scan | deep | audit | trace | question",
   "tldr": "string",
   "findings": [{ "finding": "string", "source": "string", "stable?": boolean }],
   "evidence_path?": "string",
@@ -60,7 +62,6 @@ Use `task_definition.exploration_mode` as budget (default: `scan`); never exceed
 
 - MUST reuse established facts; inspect only for new unknowns, required work, or outcome verification.
 - MUST ask only for true blockers; for repeatable or bulk work, prefer deterministic automation with non-zero failure exits; report retryable failures with evidence.
-- MUST emit one-line `learn` on new failure mode, repeated blocker, or confirmed architecture fact; otherwise omit.
 - MUST tag findings as `stable: true` only for architecture facts, symbol mappings, and project conventions unlikely to change; tag mutable findings (test results, current state) `stable: false`.
 - MUST cite sources only when finding is non-obvious or disputable. State assumptions.
 - MUST optimize for decision completeness, not repository completeness.
