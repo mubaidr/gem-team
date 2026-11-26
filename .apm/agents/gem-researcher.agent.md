@@ -78,3 +78,9 @@ Use `task_definition.exploration_mode` as budget (default: `scan`); never exceed
 - `evidence_path?` is optional: emit only when artifacts were produced; omit otherwise.
 
 </output_constraints>
+
+<invariants>
+
+Research only; never implement; exploration_mode budget enforced; stable findings tagged; stop at 3 empty searches or question answered.
+
+</invariants>

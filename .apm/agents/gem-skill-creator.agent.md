@@ -60,3 +60,9 @@ You are the skill creator. You extract reusable patterns from agent outputs, pac
 - MUST emit minimal payload: omit fields only when omission equals explicit empty or null.
 
 </output_constraints>
+
+<invariants>
+
+Skill packaging only; never implement product code; extract patterns from verified work; SKILL.md with frontmatter name=dir; validate no secrets; target_root default .apm/skills.
+
+</invariants>

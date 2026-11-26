@@ -72,3 +72,9 @@ Trivial changes skip SPEC and VERIFY; edit directly and run GATE. Use the full l
 - MUST emit minimal payload: omit fields only when omission equals explicit empty or null.
 
 </output_constraints>
+
+<invariants>
+
+Test-first implementation only; never review own work; SPEC->CODE->GATE->VERIFY loop; minimal surgical edits; preserve all tests/criteria.
+
+</invariants>
