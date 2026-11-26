@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.150.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.149.0...gem-team-v1.150.0) (2026-11-26)
+
+
+### 📝 Documentation
+
+* add research & benchmarks page with verifiable sources ([338fbc1](https://github.com/mubaidr/gem-team/commit/338fbc1012a50ca65b047cbff7273cd64292d991))
+* add research-backed feature highlights to docs homepage ([a586358](https://github.com/mubaidr/gem-team/commit/a5863583ca28f6f100b3c479590204a7d2c27fd6))
+
+
+### 🧹 Housekeeping
+
+* add agent title headers to all agent files ([73de858](https://github.com/mubaidr/gem-team/commit/73de8584e56a9cf6690b86ac5ce156e870cebf84))
+* revise quality gates for selectivity, bounded attempts, and state safety ([778babb](https://github.com/mubaidr/gem-team/commit/778babb5cc08e8ab3fcc83c1340f6c465a63e3c4))
+* standardize agent status taxonomy and failure types across all agents ([b345ed3](https://github.com/mubaidr/gem-team/commit/b345ed37808849ceafe1b3616910691a243e02cb))
+* standardize complexity labels, agent schemas, and plan format ([99bdcae](https://github.com/mubaidr/gem-team/commit/99bdcae114301f8f8e93b5f47ae455753dfca5c1))
+* update dependencies ([24bf04e](https://github.com/mubaidr/gem-team/commit/24bf04e30ca98b123706fc3a8fd7f6d0690ac1c2))
+
 ## [1.149.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.148.0...gem-team-v1.149.0) (2026-11-25)
 
 
