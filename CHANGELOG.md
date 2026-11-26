@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.152.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.151.0...gem-team-v1.152.0) (2026-11-26)
+
+
+### 🧹 Housekeeping
+
+* standardize tool policy for independent tool call execution across agents ([93a10bb](https://github.com/mubaidr/gem-team/commit/93a10bb93ee388b003e7dcba8df383c47758f9ab))
+
 ## [1.151.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.150.0...gem-team-v1.151.0) (2026-11-26)
 
 
