@@ -77,6 +77,45 @@ const phases = [
   }
 ]
 
+const researchHighlights = [
+  {
+    title: 'Prompt caching cuts API cost',
+    description:
+      'Cache read ≈ 0.1× input (90% discount) across OpenAI, Anthropic, and Google. Scoped handoffs reuse context prefixes across turns instead of re-sending full history.',
+    source: 'OpenAI · Anthropic · Google caching docs'
+  },
+  {
+    title: 'Risk-gated specialist allocation',
+    description:
+      'Multi-agent overhead can be 60× latency; MAS benefits diminish as LLM capability improves. Specialists activate only when uncertainty justifies coordination cost.',
+    source: 'ProcPilot (IEEE IEMCON 2026) · MAFBench (arXiv:2602.03128)'
+  },
+  {
+    title: 'TDD improves AI code generation',
+    description:
+      'Test-driven interactive generation improved pass@1 by +45.97% across 4 LLMs and 2 Python datasets. Every implementation starts with a failing test.',
+    source: 'TiCoder (IEEE TSE 2024)'
+  },
+  {
+    title: 'Model routing lowers cost',
+    description:
+      'RouteLLM: >2× cost reduction without quality loss; UCCI: 31% cost reduction (95% CI [27%, 35%]). Premium for planning/review, explore for execution.',
+    source: 'RouteLLM (ICLR 2025) · UCCI (arXiv:2605.18796)'
+  },
+  {
+    title: 'Structured hand-offs beat narrative',
+    description:
+      'JSON hand-off extraction achieves 0.96 feasibility vs narrative summarization at 0.48. Evidence travels by reference via typed artifact paths.',
+    source: 'State Compression (arXiv:2607.18265)'
+  },
+  {
+    title: 'Prefix caching reduces cost 41–80%',
+    description:
+      'Cache-aware payload ordering and cluster-contiguous scheduling keep shared context warm across multi-agent turns.',
+    source: 'Don\'t Break the Cache (arXiv:2601.06007)'
+  }
+]
+
 const capabilities = [
   {
     title: 'TDD by default',
@@ -322,6 +361,33 @@ const tools = [
           :icon="item.icon"
         />
       </UPageGrid>
+    </UPageSection>
+
+    <UPageSection
+      id="evidence"
+      headline="Research behind Gem Team"
+      title="Every feature is backed by evidence."
+      description="Design decisions cite verifiable research, provider docs, or published benchmarks — no fabricated statistics."
+      :ui="{ root: 'bg-muted/25 border-y border-default/70' }"
+    >
+      <UPageGrid class="mt-14">
+        <UPageFeature
+          v-for="item in researchHighlights"
+          :key="item.title"
+          :title="item.title"
+          :description="item.description + ' — ' + item.source"
+          icon="i-lucide-file-text"
+        />
+      </UPageGrid>
+      <div class="mt-8 text-center">
+        <UButton
+          to="/resources/research"
+          color="neutral"
+          variant="outline"
+          label="View full research & benchmarks"
+          trailing-icon="i-lucide-arrow-right"
+        />
+      </div>
     </UPageSection>
 
     <UPageSection
