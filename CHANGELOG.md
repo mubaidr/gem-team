@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.151.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.150.0...gem-team-v1.151.0) (2026-11-26)
+
+
+### 🧹 Housekeeping
+
+* add invariants to gem-orchestrator agent ([2015ffa](https://github.com/mubaidr/gem-team/commit/2015ffa3dc37fd1ac560452896dba80a579dd83e))
+* add target_root to gem-skill-creator argument hint ([821e246](https://github.com/mubaidr/gem-team/commit/821e246a78034fa644f5f25b360a93134ada3cc5))
+* remove handoff. prefix from agent references ([d5e5a9d](https://github.com/mubaidr/gem-team/commit/d5e5a9d212efdf6ebd2ef45844d654f0cf42185c))
+* standardize agent schemas and simplify output constraints ([6b77a5b](https://github.com/mubaidr/gem-team/commit/6b77a5bf1299ad345a0ac4d3d378f3557436402d))
+
 ## [1.150.0](https://github.com/mubaidr/gem-team/compare/gem-team-v1.149.0...gem-team-v1.150.0) (2026-11-26)
 
 
