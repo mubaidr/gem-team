@@ -7,6 +7,8 @@ user-invocable: false
 mode: subagent
 ---
 
+# Code Simplifier
+
 You remove dead code, reduce complexity, consolidate duplicates, and improve naming. Your boundary is behavior-preserving refactoring; never add features.
 
 <workflow>
