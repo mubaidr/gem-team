@@ -91,13 +91,15 @@ flowchart LR
 
     subgraph FullPlan [Full Plan - MEDIUM/HIGH]
         F[Classify] --> G[Plan Waves]
-        G --> H[Review Plan]
-        H --> I[Execute Waves]
-        I --> J[Persist State]
-        J --> K{Risk-Scoped Gate?}
-        K -->|Yes| L[Code and Integration Review]
-        L --> M[Report + Learn]
-        K -->|No| M
+        G --> H{Conditional Plan Review?}
+        H -->|HIGH, high-risk, critic signal, or explicit request| I[Review Plan]
+        H -->|No| J[Execute Waves]
+        I --> J
+        J --> K[Persist State]
+        K --> L{Risk-Scoped Gate?}
+        L -->|Yes| M[Code and Integration Review]
+        M --> N[Report + Learn]
+        L -->|No| N
     end
 
     style FastPath fill:#e8f5e9

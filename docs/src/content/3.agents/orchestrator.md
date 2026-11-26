@@ -30,8 +30,8 @@ Entry point for every task. Coordinates Phase 0-4 workflow. **Never executes spe
 |-------|--------|
 | 0: Init | Parse request → `plan_id`, `intent`, provisional complexity, risk signals (evidence only) |
 | 1: Route | Fast path vs full plan, research/challenge paths, continue/extend |
-| 2: Plan | Delegate to Planner (MEDIUM/HIGH), self-check, Reviewer if triggered |
-| 3: Execute | Wave loop: schedule -> delegate -> persist -> gate. Read-only-only and documentation-only waves skip post-wave gates; other MEDIUM/HIGH or high-risk work runs them. The final review runs at most two parallel code and integration reviewers, with a plan reviewer only for HIGH or critic-risk work. |
+| 2: Plan | Delegate to Planner (MEDIUM/HIGH), self-check, and select a pre-execution plan reviewer only for HIGH, high-risk, critic-signal, or explicitly requested work |
+| 3: Execute | Wave loop: schedule -> delegate -> persist -> gate. Read-only-only and documentation-only waves skip post-wave gates; other MEDIUM/HIGH or high-risk work runs them. Each gate has at most two attempts with durable state persisted before reviewer invocation. The final review runs at most two parallel code and integration reviewers, with a plan reviewer only for HIGH or critic-risk work. |
 | 4: Output | Structured status, memory promotion, skill extraction |
 
 ## Key Behaviors

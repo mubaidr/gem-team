@@ -23,13 +23,18 @@ flowchart TD
     E --> F[Implement - Green]
     F --> G[Verify - Refactor]
     D --> G
-    G --> H{Risk Signals?}
-    H -->|Yes| I[Route to Reviewer]
-    H -->|No| J[Continue]
-    I --> K[Review Gate Pass?]
-    K -->|Yes| J
-    K -->|No| L[Revision Required]
-    L --> F
+    G --> H[Persist Completed Work]
+    H --> I{Risk-Scoped Gate Eligible?}
+    I -->|No| J[Continue]
+    I -->|Yes| K[Persist Gate State and Increment Attempt]
+    K --> L[Invoke Reviewer]
+    L --> M[Review Gate Pass?]
+    M -->|Yes| J
+    M -->|No| N{Attempt Two?}
+    N -->|No| O[Route and Persist Repair After Attempt One]
+    O --> K
+    N -->|Yes| P[Persist Terminal Blocked State]
+    P --> Q[Stop Path]
 ```
 
 ---
@@ -191,10 +196,11 @@ quality:
 4. **Configurable depth** — a11y and visual regression via config
 5. **Simplification built-in** — Not a separate step, part of implementation
 6. **Risk-scoped gates** - Read-only-only and documentation-only waves skip post-wave gates. Other MEDIUM/HIGH or high-risk work runs a post-wave gate and a final review. Each gate has at most two attempts, with state persisted before reviewers run.
-7. **Independent task retries** - A task-level `needs_retry` allows at most three total task attempts and does not consume or reset the gate attempt counter.
-8. **Batched review findings** - Reviewers collect every actionable finding in one pass; repair work is routed by review target and persisted before a second gate attempt.
-9. **Conditional plan review** - There is no routine post-execution plan review. A plan reviewer runs only for HIGH or critic-risk work and checks acceptance-criteria coverage.
-10. **Bounded final reviewers** - The final review runs at most two parallel code and integration reviewers, within `max_concurrent_agents`.
+7. **Warning pass predicate** - A reviewer warning passes the gate only when no completion-blocking finding or blocker exists.
+8. **Independent task retries** - A task-level `needs_retry` allows at most three total task attempts and does not consume or reset the gate attempt counter.
+9. **Batched review findings** - Reviewers collect every actionable finding in one pass; repair work is routed by review target and persisted before a second gate attempt.
+10. **Conditional plan review** - Pre-execution plan review runs only for HIGH, high-risk, critic-signal, or explicitly requested work. There is no routine post-execution plan review; a plan reviewer runs only for HIGH or critic-risk work and checks acceptance-criteria coverage.
+11. **Bounded final reviewers** - The final review runs at most two parallel code and integration reviewers, within `max_concurrent_agents`.
 
 ---
 

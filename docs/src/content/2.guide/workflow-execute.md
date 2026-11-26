@@ -36,15 +36,15 @@ Load plan.yaml
          │                 task_id, task_definition,
          ▼                 handoff (cache-lifetime order)
 ┌────────────────__┐
-│  Gate & Accept   │──► Aggregate criteria
-│     Results      │     Invoke Reviewer if triggered
+│  Persist State   │──► Update status.yaml
+│   & Evidence     │     Track task and gate state
 └────────┬──────────┘
          │
          ▼
 ┌──────────────────┐
-│  Persist State   │──► Update plan.yaml / status.yaml
-│   & Evidence     │     Track retries_used
-└────────┬───────────┘
+│  Gate & Accept   │──► Persist eligible gate state
+│     Results      │     Delegate selected reviewer if eligible
+└────────┬──────────┘
          │
          ▼
    Next wave or Done
@@ -126,15 +126,18 @@ retries_used: 1
 
 ## Verification Gates
 
-### Automatic Review Trigger (Per-Task)
+### Orchestrator-Selected Review Mode
 
-Reviewer invoked when **any** condition met:
+The Orchestrator selects the review mode, target, scope, and gate eligibility.
+Reviewer invocation is not automatic for every task. A reviewer is delegated
+when the Orchestrator selects an eligible plan review, post-wave gate, or final
+review and provides the matching mode, target, scope, criteria, and evidence.
 
-- HIGH complexity
-- High-risk signals (`architecture`, `breaking_change`, `cross_domain_impact`)
-- Critic signals from Phase 0
-- Explicit review request
-- Insufficient/contradictory evidence
+Pre-execution plan review is eligible only when HIGH complexity, high-risk
+signals, critic signals, or an explicit review request is present. The
+Orchestrator selects `high` mode for HIGH/high-risk work, `critic` mode for
+architecture, breaking-change, or cross-domain signals, and `standard` mode for
+an explicit review request that has no risk-specific signal.
 
 ### Review Handoff
 
@@ -177,13 +180,14 @@ For an eligible wave, run at most two parallel `gem-reviewer` tasks, never excee
 - `high` — HIGH complexity or high-risk signals
 - `critic` — `architecture`, `breaking_change`, `cross_domain_impact` signals
 
-The gate passes only when both required reviewers pass. Reviewers collect every actionable finding in one pass rather than stopping at the first blocking finding.
+The gate passes only when both required reviewers pass. A `warning` verdict passes only when the reviewer reports no completion-blocking finding or blocker. Reviewers collect every actionable finding in one pass rather than stopping at the first blocking finding.
 
-Failure routing depends on the review target:
+Failure routing depends on the review target. The Orchestrator records both the
+repair target and the owner in the durable gate state:
 
-- `code` or `integration` -> `gem-debugger` -> `gem-implementer`
-- `documentation` or `configuration` -> the owning specialist
-- `plan` -> `gem-planner`
+- `code` or `integration` -> target matching the review target, owner `gem-debugger`, then `gem-implementer`
+- `documentation` or `configuration` -> target matching the review target, owner is the owning specialist
+- `plan` -> target `plan`, owner `gem-planner`
 
 The next wave is blocked until the gate passes or the gate is blocked after its final attempt.
 
@@ -240,6 +244,11 @@ docs/plan/{plan_id}/
 
 ### Status.yaml (Updated Each Wave)
 
+The mutable execution state is persisted at `docs/plan/{plan_id}/status.yaml`.
+Gate state is durable and survives interruption. Each gate record includes its
+identifier, attempt count, eligibility, status, findings, reason, and repair
+state.
+
 ```yaml
 plan_id: "20261121-user-search-api"
 current_wave: 2
@@ -254,6 +263,19 @@ pending_tasks:
     status: "in_progress"
     retries_used: 0
 blocked_tasks: []
+gates:
+  - gate_id: "wave-1-post-wave"
+    attempt_count: 1
+    eligibility: "eligible"
+    status: "failed"
+    findings:
+      - "Integration check failed: missing contract assertion"
+    reason: "Integration reviewer reported a completion-blocking finding"
+    repair_state:
+      state: "routed"
+      target: "integration"
+      owner: "gem-debugger"
+      task_id: "repair-wave-1-integration"
 ```
 
 ### Ephemeral Plans (TRIVIAL/LOW)
