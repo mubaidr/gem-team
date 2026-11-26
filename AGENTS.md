@@ -119,6 +119,23 @@ Keep each skill focused and progressively disclosed:
 - Do not include secrets, private task data, or one-off workarounds
 - Rebuild or repack with APM after source changes to validate generated targets
 
+### Research & Evidence Documentation
+
+Gem Team maintains a public research & evidence base that documents the verifiable sources behind design decisions:
+
+- **Location**: `docs/src/content/5.resources/research.md`
+- **Navigation entry**: Added to `.navigation.yml` under Resources with label "Research & Benchmarks" and link `/resources/research`
+- **Contents**: Prompt caching pricing (OpenAI, Anthropic, Google Gemini), multi-agent vs single-agent benchmarks (ProcPilot, MAFBench, ChainSWE), TDD effectiveness (TiCoder), model routing (RouteLLM, Hybrid LLM, UCCI), context reduction (ReCAP, State Compression), prefix caching research (Don't Break the Cache, KVFlow, Marconi), plus an explicit mapping of each finding to Gem Team implementation decisions
+
+**Guidelines for adding research**:
+
+- Every claim must cite a verifiable source (paper, arXiv preprint, or provider documentation) with a URL
+- Do not fabricate statistics; attribute all numbers to their source
+- Include limitations and gaps where evidence is absent or unverified (e.g., DeepSeek pricing unverified, no risk-based vs uniform review study)
+- Use professional, evidence-based tone — no marketing fluff
+- Update the navigation file (`.navigation.yml`) when adding new research pages
+- Cross-reference from README.md when adding high-impact proof points for promotion/reassurance
+
 ## Code Style Guidelines
 
 - **TypeScript**: Strict mode enabled
